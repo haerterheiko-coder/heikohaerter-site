@@ -278,3 +278,260 @@ p, li {
   max-width: none !important;
   width: 100% !important;
 }
+/* =========================================================
+   OPTION A — ULTRA PERFORMANCE ADD-ON
+   GPU Acceleration · Scroll-driven Animations · CLS-Killer
+   ========================================================= */
+
+/* 1) GPU ACCELERATION */
+.hh-accelerate,
+.fade-up,
+.hh-btn,
+.hh-card,
+.hh-hero-image img {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* 2) SCROLL-DRIVEN FADE-UP (CSS-only, Browser unterstützt es bereits) */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up {
+    view-timeline-name: fadeTimeline;
+    view-timeline-axis: block;
+    animation-timeline: fadeTimeline;
+    animation-name: fadeUpAnim;
+    animation-range: entry 10% cover 40%;
+    animation-fill-mode: both;
+  }
+
+  @keyframes fadeUpAnim {
+    0% { opacity: 0; transform: translateY(28px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* 3) CLS-KILLER */
+img, picture {
+  aspect-ratio: attr(width) / attr(height);
+}
+
+.hh-btn,
+.hh-chip,
+.hh-card,
+.hh-header {
+  contain: layout style paint;
+}
+
+/* 4) SMOOTH SCROLL + SNAP */
+html { scroll-behavior: smooth; }
+
+.hh-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+body {
+  scroll-snap-type: y proximity;
+}
+
+/* 5) LIGHTHOUSE BOOSTS */
+* { -webkit-tap-highlight-color: transparent; }
+a, button { touch-action: manipulation; }
+
+/* =========================================================
+   OPTION B — GOD-MODE UI ENHANCER PACK
+   Micro-Interactions · Glow States · Pulsing CTAs
+   ========================================================= */
+
+/* BUTTON MICRO-INTERACTION */
+.hh-btn:hover { transform: translateY(-3px) scale(1.02); }
+.hh-btn-primary:hover { filter: brightness(1.12); }
+
+/* CTA PULSE */
+@keyframes hhPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200,164,75,0.25); }
+  70% { transform: scale(1.02); box-shadow: 0 0 22px 10px rgba(200,164,75,0.15); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200,164,75,0); }
+}
+
+.hh-btn-primary[data-ctx="sticky"],
+#ctaFinal,
+.hero-cta {
+  animation: hhPulse 4s ease-in-out infinite;
+  animation-delay: 1.4s;
+}
+
+/* CARD HOVER */
+.hh-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgba(0,0,0,0.55);
+}
+
+/* MICRO TEXT HOVER */
+.hh-chip:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.22);
+}
+
+/* RIPPLE EFFECT (JS fügt .hh-ripple hinzu) */
+.hh-ripple {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: rgba(255,255,255,0.28);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: hhRipple .45s ease-out;
+  pointer-events: none;
+}
+@keyframes hhRipple {
+  to { opacity: 0; transform: translate(-50%, -50%) scale(8); }
+}
+
+/* MICRO-GLOW FOR ENTERING CARDS */
+.hh-glow {
+  box-shadow: 0 0 32px rgba(233,211,148,.35) !important;
+  transition: box-shadow .35s ease-out;
+}
+
+/* CLICK ANIMATION */
+.hh-click {
+  transform: scale(.96);
+  transition: transform .15s var(--ease);
+}
+
+/* =========================================================
+   OPTION C — COMPONENT LIBRARY
+   Ampel Engine · Steps Engine · Share Composer
+   ========================================================= */
+
+/* ------------------------------
+   AMPEL RESULT STYLES
+   ------------------------------ */
+.hh-ampel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hh-ampel-item {
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: flex-start;
+  gap: .8rem;
+  font-size: 1.05rem;
+}
+
+.hh-ampel-item.now {
+  background: rgba(255,68,68,0.12);
+  border-color: rgba(255,68,68,0.35);
+}
+
+.hh-ampel-item.next {
+  background: rgba(255,188,45,0.12);
+  border-color: rgba(255,188,45,0.35);
+}
+
+.hh-ampel-item.later {
+  background: rgba(108,255,108,0.12);
+  border-color: rgba(108,255,108,0.28);
+}
+
+/* ------------------------------
+   STEPS ENGINE
+   ------------------------------ */
+.hh-step {
+  display: none;
+  background: var(--surface);
+  padding: 1.4rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.hh-step.active {
+  display: block;
+  animation: fadeUpAnim .4s var(--ease);
+}
+
+.hh-progress-fill {
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  height: 10px;
+  border-radius: 99px;
+  transition: width .35s var(--ease);
+}
+
+/* ------------------------------
+   SHARE COMPOSER
+   ------------------------------ */
+.hh-share-box {
+  background: var(--surface);
+  padding: 1.2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.hh-share-box textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  padding: .9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.18);
+  resize: vertical;
+  color: var(--text);
+}
+
+.hh-share-seg-btn {
+  padding: .6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+}
+
+.hh-share-seg-btn.active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+  color: #111;
+}
+
+.hh-share-preview {
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 1rem;
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+/* ------------------------------
+   STICKY CTA
+   ------------------------------ */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  display: none;
+  justify-content: center;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 6px);
+  z-index: 90;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: opacity .25s var(--ease), transform .25s var(--ease);
+}
+
+@media (max-width: 979px) {
+  .sticky-cta { display: flex; }
+}
+
+.sticky-cta .inner {
+  background: rgba(5,8,22,.88);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: .55rem;
+  border-radius: 999px;
+  box-shadow: var(--elev-1);
+}
