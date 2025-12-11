@@ -33,6 +33,13 @@
 
 <link rel="preload" as="image"
   href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+  imagesrcset="
+    https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=480 480w,
+    https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=720 720w,
+    https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=900 900w,
+    https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200 1200w
+  "
+  imagesizes="(min-width: 1000px) 40vw, 92vw"
   fetchpriority="high">
 
 <style>
@@ -65,7 +72,7 @@ img,picture,svg,video{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
 @media(prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
 
 /* ===== LAYOUT ===== */
@@ -146,6 +153,12 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 .fade-up{opacity:0;transform:translateY(18px)}
 .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
 
+/* ===== A11y helper ===== */
+.visually-hidden{
+  position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);border:0;white-space:nowrap
+}
+
 /* ===== MOBILE ===== */
 @media (max-width:767.98px){
   .hero-micro{font-size:1rem}
@@ -210,7 +223,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 
         <picture>
           <img
-            src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+            src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200"
             alt="Weitergeben: 2 Minuten – anonym & ohne irgendetwas zu müssen"
             width="1200" height="900" loading="eager" fetchpriority="high" decoding="async">
         </picture>
@@ -232,7 +245,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         <p class="hero-micro" style="margin:.5rem 0 0">Du musst nichts erklären. Der Link macht die ganze Arbeit.</p>
       </div>
 
-      <!-- Empfänger-Nutzen (nahe am Share) -->
       <div class="premium-card">
         <h3 style="margin:0 0 .25rem">Was die empfohlene Person bekommt</h3>
         <ul class="hero-micro" style="padding-left:1.1rem;margin:.2rem 0 0">
@@ -242,7 +254,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         </ul>
       </div>
 
-      <!-- Kurz-Szenen (Kontext vor dem Share) -->
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
         <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Eltern:</strong> „Kein Abend opfern“ – der Link nimmt Druck raus.</p></div>
         <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Paare:</strong> In 2 Minuten sehen, was heute zählt – ohne Diskussion.</p></div>
@@ -256,12 +267,10 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
           <p class="hero-micro" style="margin:0 0 .6rem">Kopieren oder direkt per WhatsApp senden.</p>
         </div>
 
-        <!-- Zero-Risk Kernbotschaft -->
         <div class="premium-card zero-risk fade-up">
           <p class="hero-micro" style="margin:0"><strong>Wenn jemand keinen Vorteil hat → 25 € für dich. Fair & ohne Verpflichtung.</strong></p>
         </div>
 
-        <!-- Segment-Buttons (Choice Architecture) -->
         <div class="inline" style="margin-top:.4rem">
           <button class="btn seg-btn" data-seg="eltern">Eltern</button>
           <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
@@ -325,7 +334,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         <small class="hero-micro" style="display:block;margin-top:.6rem">Zählt ab: Erstgespräch – kein Abschluss nötig.</small>
       </div>
 
-      <!-- Was NICHT passiert, wenn du empfiehlst -->
       <div class="premium-card" style="border-left:4px solid var(--gold)">
         <h3 style="margin:0 0 .4rem;">Was NICHT passiert, wenn du empfiehlst</h3>
         <ul class="hero-micro" style="margin:0; padding-left:1.2rem;">
@@ -336,7 +344,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         </ul>
       </div>
 
-      <!-- Wann macht das Sinn? -->
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
         <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Eltern</strong> → „Will ich sicherstellen, dass wirklich alles passt?“</p></div>
         <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Paare</strong> → „Finanzen endlich gemeinsam klären?“</p></div>
@@ -395,7 +402,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         </ul>
       </div>
 
-      <!-- Mini-Szenen (NEU) -->
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
         <div class="story-card"><p class="hero-micro" style="margin:0">„Dani schickte den Link ihrer Schwester. 2 Minuten später: Ruhe. Kein Verkauf, kein Druck.“</p></div>
         <div class="story-card"><p class="hero-micro" style="margin:0">„Tom empfahl es einem Kollegen. 10 Minuten später: erster Überblick – dankbar.“</p></div>
@@ -462,13 +468,17 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   }else{els.forEach(el=>el.classList.add('visible'));}
 })();
 
-/* Sticky CTA – sichtbar ~180px, mobil */
+/* Sticky CTA – sichtbar ~180px, mobil + A11y aria-hidden */
 (function(){
   const el=document.getElementById('stickyCTA');
   const hero=document.querySelector('.hero');
   if(!el||!hero) return;
   if(innerWidth>=980) return;
-  const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0'};
+  const show=v=>{
+    el.style.transform=v?'translateY(0)':'translateY(100%)';
+    el.style.opacity=v?'1':'0';
+    el.setAttribute('aria-hidden', String(!v));
+  };
   if('IntersectionObserver'in window){
     new IntersectionObserver(ents=>ents.forEach(e=>show(!e.isIntersecting)),{threshold:.3}).observe(hero);
     addEventListener('scroll',()=>{ if(scrollY>180) show(true); },{passive:true});
@@ -544,7 +554,11 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   const preview = document.getElementById('waPreviewText');
 
   const KEY_REFID='hh_ref_rid_v2';
-  function randomId(len=10){ const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len); if(crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.random()*256; return Array.from(u,x=>a[x%a.length]).join(''); }
+  function randomId(len=10){
+    const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len);
+    if(crypto && crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.random()*256;
+    return Array.from(u,x=>a[x%a.length]).join('');
+  }
   function getRefId(){ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } }
   function sanitize(n){ return n ? n.replace(/[^a-z0-9]/gi,'').toLowerCase() : ''; }
 
@@ -585,12 +599,10 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   name?.addEventListener('input', ()=> setTextFrom(), {passive:true});
   area?.addEventListener('input', updateLinks, {passive:true});
 
-  // Segment Buttons
   document.querySelectorAll('.seg-btn').forEach(b=>{
     b.addEventListener('click', ()=>{ setTextFrom(b.getAttribute('data-seg')); window._bumpRefHalf?.(); });
   });
 
-  // Actions
   document.getElementById('readyMsg')?.addEventListener('click', ()=>{
     setTextFrom(); window._bumpRefHalf?.();
     const toast=document.createElement('div');
@@ -627,7 +639,6 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
     if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); window._bumpRefFull?.(); }catch(_){} }
   });
 
-  // Shortcuts
   document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); window._bumpRefHalf?.(); });
 })();
 </script>
