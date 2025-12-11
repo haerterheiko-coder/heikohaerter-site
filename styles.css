@@ -1,529 +1,171 @@
 /* ============================================================
-   ROOT TOKENS – Deep Black × Gold × Calm Ampel
+   WEITERGEBEN – GODMODE 2026 OPTIMIERUNGEN
 ============================================================ */
-:root {
-  /* Brand Colors */
-  --black: #05070E;
-  --black-soft: #0A0D17;
-  --white: #F7F7F7;
-  --gray: #9EA2AF;
-  --gray-soft: #C0C3CC;
 
-  --gold: #C8A44B;
-  --gold-soft: #E2C983;
-
-  /* Calm Ampel Colors */
-  --amp-green: #6AD38F;
-  --amp-yellow: #E9D574;
-  --amp-red: #E88B8B;
-
-  /* Glow */
-  --amp-glow: 0 0 18px rgba(255,255,255,0.22);
-
-  /* Radius Tokens */
-  --radius: 14px;
-  --radius-lg: 20px;
-  --radius-round: 999px;
-
-  /* Spacing System */
-  --space-xs: 6px;
-  --space-sm: 12px;
-  --space-md: 20px;
-  --space-lg: 32px;
-  --space-xl: 64px;
-
-  /* Motion */
-  --ease-breath: cubic-bezier(0.22, 1, 0.36, 1);
-  --transition: .45s var(--ease-breath);
-
-  /* Fade */
-  --fade-up: translateY(18px);
+/* ---------------------------------------------
+   1) HERO – zentrierter, ruhiger Einstieg
+--------------------------------------------- */
+.share-hero h1 {
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* ============================================================
-   GLOBAL BASE
-============================================================ */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background: var(--black);
-  color: var(--white);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  line-height: 1.6;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-* {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  box-sizing: border-box;
-}
-
-a {
-  color: inherit;
-}
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Headings Calm */
-h1,
-h2,
-h3 {
-  margin: 0 0 var(--space-sm) 0;
-  font-weight: 500; /* ruhiger, edler */
-}
-
-/* Sizes */
-h1 {
-  font-size: clamp(1.9rem, 4vw, 2.8rem);
-  line-height: 1.2;
-}
-
-h2 {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-}
-
-h3 {
+.share-hero .lead {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 1.2rem;
-}
-
-.stack > * + * {
-  margin-top: var(--space-md);
-}
-
-.center {
-  text-align: center;
-}
-
-.smallprint {
-  font-size: .9rem;
-  color: var(--gray);
-}
-
-/* Generic section spacing */
-.section {
-  padding: var(--space-lg) 0;
-}
-
-/* Skip-Link für Accessibility */
-.skip-link {
-  position: absolute;
-  left: -999px;
-  top: 0;
-  padding: var(--space-xs) var(--space-sm);
-  background: var(--gold);
-  color: #000;
-  z-index: 200;
-  text-decoration: none;
-  border-radius: 0 0 var(--radius) var(--radius);
-}
-.skip-link:focus {
-  left: 0;
-}
-
-/* Fade-up */
-.fade-up {
-  opacity: 0;
-  transform: var(--fade-up);
-  transition: opacity .6s var(--ease-breath), transform .6s var(--ease-breath);
-}
-.fade-up.visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* ============================================================
-   HEADER
-============================================================ */
-.header {
-  padding: var(--space-md) 0;
-  background: var(--black-soft);
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
-.header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.brand {
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  color: var(--white);
-}
-.brand-name {
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-.brand-claim {
-  font-size: .85rem;
-  color: var(--gray);
-}
-.brand-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: var(--radius-round);
-  background: var(--gold);
-  margin-bottom: 3px;
-}
-
-/* ============================================================
-   HERO SECTION
-============================================================ */
-.hero {
-  padding: var(--space-xl) 0 var(--space-lg);
-}
-
-.hero-grid {
-  display: grid;
-  gap: var(--space-lg);
-  grid-template-columns: minmax(0, 1fr) 420px;
-}
-@media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-}
-
-/* Rotating Hook */
-.rotating-hook {
-  color: var(--gray-soft);
-  font-size: 1rem;
-  min-height: 1.4em;
-  transition: opacity .26s var(--ease-breath);
-}
-
-.hero-title strong {
-  color: var(--gold);
-}
-
-.hero-sub {
-  font-size: 1.15rem;
-  color: var(--gray-soft);
   line-height: 1.55;
 }
 
-/* Hero Image */
-.hero-visual img {
-  width: 100%;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* ---------------------------------------------
+   2) HOW-IT-WORKS – Bessere Grid-Stabilität
+--------------------------------------------- */
+.personas-grid.narrow {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  text-align: center;
 }
 
-/* CTA */
-.hero-btn {
-  margin-top: var(--space-sm);
+.persona-card strong {
+  font-size: 1.3rem;
+  color: var(--gold);
+  display: block;
+  margin-bottom: var(--space-xs);
 }
 
-.microtrust {
-  font-size: .9rem;
-  color: var(--gray);
-  margin-top: var(--space-xs);
-}
-
-/* ============================================================
-   BUTTONS
-============================================================ */
-.btn {
-  display: inline-block;
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius);
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  border: none;
-  background: transparent;
-  color: inherit;
-}
-
-.btn-primary {
-  background: var(--gold);
-  color: #000;
-}
-.btn-primary:hover {
-  background: var(--gold-soft);
-}
-
-.link-quiet {
-  color: var(--gray-soft);
-  text-decoration: underline;
-  font-size: .95rem;
-}
-
-/* ============================================================
-   CATEGORY SECTION
-============================================================ */
-.lead {
-  color: var(--gray-soft);
-  font-size: 1.15rem;
+/* ---------------------------------------------
+   3) WHY IT‘S NOT WEIRD — ruhigerer Lead-Block
+--------------------------------------------- */
+#why-share .lead {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.2rem;
   line-height: 1.6;
 }
 
-/* Ampel Loop (iconic pulse) */
-.ampel-loop {
-  display: flex;
-  gap: var(--space-sm);
-  margin-top: var(--space-md);
-}
-
-.ampel-loop .dot {
-  width: 22px;
-  height: 22px;
-  border-radius: var(--radius-round);
-  opacity: .4;
-  animation: pulse 2.4s ease-in-out infinite;
-}
-
-.ampel-loop .dot:nth-child(2) {
-  animation-delay: .3s;
-}
-.ampel-loop .dot:nth-child(3) {
-  animation-delay: .6s;
-}
-
-.dot.green {
-  background: var(--amp-green);
-}
-.dot.yellow {
-  background: var(--amp-yellow);
-}
-.dot.red {
-  background: var(--amp-red);
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(.96);
-    opacity: .35;
-  }
-  50% {
-    transform: scale(1);
-    opacity: .55;
-  }
-  100% {
-    transform: scale(.96);
-    opacity: .35;
-  }
-}
-
-/* ============================================================
-   AMPSEL PREVIEW
-============================================================ */
-.preview-grid {
-  display: grid;
-  gap: var(--space-md);
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.preview-card {
-  padding: var(--space-md);
-  border-radius: var(--radius-lg);
-  background: var(--black-soft);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: var(--transition);
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-}
-.preview-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.22);
-}
-
-/* Calm Brand Borders */
-.preview-card.green {
-  border-color: rgba(106, 211, 143, 0.4);
-}
-.preview-card.yellow {
-  border-color: rgba(233, 213, 116, 0.4);
-}
-.preview-card.red {
-  border-color: rgba(232, 139, 139, 0.4);
-}
-
-/* ============================================================
-   PERSONAS / GENERIC CARDS
-============================================================ */
-.personas-grid {
-  display: grid;
-  gap: var(--space-md);
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.persona-card {
-  background: var(--black-soft);
-  padding: var(--space-md);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* Für weitergeben-How-it-works, engeres Grid */
-.personas-grid.narrow {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-/* ============================================================
-   SOCIAL PROOF
-============================================================ */
-.proof-list {
-  display: grid;
-  gap: var(--space-sm);
-}
-.proof {
-  font-size: 1.05rem;
+/* ---------------------------------------------
+   4) TEXT GENERATOR – besseres UX
+--------------------------------------------- */
+#generator label {
+  font-size: 1.1rem;
   color: var(--gray-soft);
-  border-left: 3px solid var(--gold);
-  padding-left: var(--space-sm);
 }
 
-/* ============================================================
-   SAFETY
-============================================================ */
-#safety h2 {
+#categorySelect {
+  width: 100%;
+  border-radius: var(--radius);
+  background: var(--black-soft);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white);
+  font-size: 1rem;
+  padding: var(--space-sm);
+  cursor: pointer;
+}
+
+#referralOutput {
+  width: 100%;
+  min-height: 160px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  background: var(--black-soft);
+  border: 1px solid rgba(255,255,255,0.1);
+  resize: vertical;
+  font-size: 1.05rem;
+  line-height: 1.55;
+
+  /* Deaktiviert Autokorrektur für Messenger-Texte */
+  spellcheck: false;
+  autocomplete: off;
+  autocorrect: off;
+  autocapitalize: off;
+}
+
+#copyReferral {
+  margin-top: var(--space-sm);
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* Persönlicher Link */
+#personalLinkInfo {
+  font-size: .95rem;
+  color: var(--gray-soft);
+  word-break: break-all;
+  margin-top: var(--space-xs);
+}
+
+/* ---------------------------------------------
+   5) DANKEMOMENT – schöner, ruhiger Block
+--------------------------------------------- */
+.thanks-block h2 {
+  margin-bottom: var(--space-sm);
+}
+
+.thanks-block .lead {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Cards im Dankemoment */
+.persona-card.center {
+  font-size: 1.1rem;
+}
+
+/* ---------------------------------------------
+   6) FAQ – lesbarer & ruhiger
+--------------------------------------------- */
+.faq-block .persona-card strong {
+  font-size: 1.15rem;
   color: var(--gold);
 }
 
-/* ============================================================
-   AMPSEL CHECK
-============================================================ */
-#ampel-check {
-  margin-top: var(--space-lg);
+.faq-block .persona-card {
+  line-height: 1.55;
 }
 
-#checkMount {
-  margin-top: var(--space-md);
-  padding: var(--space-md);
-  background: var(--black-soft);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+/* ---------------------------------------------
+   7) FINAL CTA – mehr Raum, mehr Fokus
+--------------------------------------------- */
+.final-share-cta h2 {
+  margin-bottom: var(--space-md);
 }
 
-/* Reveal Component */
-.ampel-reveal {
-  opacity: 0;
-  transform: scale(.92);
-  transition: .6s var(--ease-breath);
-  text-align: center;
-}
-.ampel-reveal.visible {
-  opacity: 1;
-  transform: scale(1);
+.final-share-cta .btn-primary {
+  padding: var(--space-sm) var(--space-xl);
+  font-size: 1.15rem;
 }
 
-.ampel-reveal .ampel-dot {
-  width: 26px;
-  height: 26px;
-  border-radius: var(--radius-round);
-  margin: 0 auto var(--space-xs);
-  box-shadow: var(--amp-glow);
-}
-
-.ampel-reveal.green {
-  color: var(--amp-green);
-}
-.ampel-reveal.yellow {
-  color: var(--amp-yellow);
-}
-.ampel-reveal.red {
-  color: var(--amp-red);
-}
-
-/* CTA-Container im Ergebnis (optional, falls du ihn nutzt) */
-.ampel-cta {
-  margin-top: var(--space-md);
-}
-
-/* ============================================================
-   WEITERGEBEN – SPEZIFISCH
-============================================================ */
-#generator textarea {
-  resize: vertical;
-}
-
-/* ============================================================
-   FOOTER
-============================================================ */
-.footer {
-  padding: var(--space-lg) 0;
-  background: #000;
-  text-align: center;
-  margin-top: var(--space-lg);
-}
-.footer a {
-  color: var(--gray-soft);
-  text-decoration: none;
-}
-.footer a:hover {
-  text-decoration: underline;
-}
-
-/* ============================================================
-   STICKY CTA
-============================================================ */
-.sticky-cta {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: -80px;
-  padding: var(--space-md);
-  background: var(--black-soft);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  transition: var(--transition);
-  z-index: 99;
-}
-.sticky-cta.visible {
-  bottom: 0;
-}
-
-.sticky-cta .btn-primary {
-  width: 100%;
-  text-align: center;
-}
-
-/* ============================================================
-   WHISPER CTA
-============================================================ */
-.whisper {
-  position: fixed;
-  left: 50%;
-  bottom: 160px;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.08);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius);
-  color: var(--gray-soft);
-  font-size: .9rem;
-  opacity: 0;
-  transition: var(--transition);
-  z-index: 99;
-}
-.whisper.visible {
-  opacity: 1;
-}
-
-/* ============================================================
-   RESPONSIVE TWEAKS
-============================================================ */
+/* ---------------------------------------------
+   8) MOBILE OPTIMIERUNGEN
+--------------------------------------------- */
 @media (max-width: 600px) {
-  h1 {
-    font-size: 1.65rem;
+
+  #generator label {
+    font-size: 1rem;
   }
-  h2 {
-    font-size: 1.4rem;
+
+  #referralOutput {
+    font-size: 1rem;
+    line-height: 1.45;
   }
-  .hero {
-    padding-top: var(--space-lg);
+
+  .persona-card.center {
+    font-size: 1rem;
   }
-  .hero-visual img {
-    margin-top: var(--space-md);
+
+  .proof {
+    font-size: 1rem;
+  }
+
+  #personalLinkInfo {
+    font-size: .85rem;
+  }
+
+  .final-share-cta .btn-primary {
+    font-size: 1.05rem;
   }
 }
