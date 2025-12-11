@@ -39,7 +39,6 @@
   })();
 
   const showToast = (message) => {
-    // Warum: einheitliches, nicht-blockierendes Feedback auf Action
     const base = $('#whisper');
     const t = document.createElement('div');
     t.className = 'whisper';
@@ -71,7 +70,6 @@
   /* ===== Base/init ======================================================= */
   function initNoJsAndYear() {
     document.documentElement.classList.remove('no-js');
-    // Warum: mehrfach gleiche ID im Markup → Attribut-Selector updatet alle
     $$('[id="yearNow"]').forEach((el) => (el.textContent = String(new Date().getFullYear())));
   }
 
@@ -96,6 +94,30 @@
       on(dot,'animationend',()=>dot.remove(),{ once:true });
     };
     $$('a.btn,button.btn,[data-ripple]').forEach(el => on(el,'click',create,{ passive:true }));
+  }
+
+  /* ===== Top progress bar (scroll position) ============================== */
+  function initTopProgress() {
+    if (prefersReduced) return;
+    let bar = $('.progress');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'progress';
+      const i = document.createElement('i');
+      bar.appendChild(i);
+      document.body.appendChild(bar);
+    }
+    const fill = bar.firstElementChild;
+    const update = () => {
+      const h = document.documentElement;
+      const max = (h.scrollHeight - h.clientHeight);
+      const pct = max > 0 ? (window.scrollY / max) : 0;
+      fill.style.transform = `scaleX(${Math.max(0, Math.min(1, pct))})`;
+    };
+    update();
+    let ticking = false;
+    on(window,'scroll',()=>{ if(!ticking){ requestAnimationFrame(()=>{ update(); ticking=false; }); ticking=true; } },{ passive:true });
+    on(window,'resize',()=> update());
   }
 
   /* ===== Sticky CTA ====================================================== */
@@ -217,7 +239,6 @@
     setPct(Number(store.getRaw(KEY_PCT,'0') || '0'));
     updateTiers();
 
-    // Hooks für Button-Clicks (Weitergeben)
     window._bumpRefHalf = function(){ const c=getC()+0.5; setC(c); updateTiers(); setPct(Math.min(100, c*10)); };
     window._bumpRefFull = function(){ const c=getC()+1;   setC(c); updateTiers(); setPct(Math.min(100, c*12)); };
   }
@@ -228,7 +249,6 @@
     const readyBtn = $('#readyMsg'), magicBtn = $('#magicLine'), addPersonal = $('#addPersonal'), nativeShare = $('#nativeShare'), shareFast = $('#shareFast');
     if (!area || !preview) return;
 
-    // Warum: Basis-URL robust (lokal/Prod) + Canonical erlaubt Domainwechsel ohne Code-Änderung
     const SHARE_BASE =
       $('link[rel="canonical"]')?.href ||
       document.currentScript?.dataset?.shareBase ||
@@ -286,12 +306,10 @@
       store.setRaw('hh.share.seg', seg || 'neutral');
     }
 
-    // init
     const defaultSeg = store.getRaw('hh.share.seg') || 'neutral';
     if (!area.value) setSeg(defaultSeg);
     updateLinks();
 
-    // events
     $$('.seg-btn,[data-seg]').forEach(b => on(b,'click',()=> setSeg(b.getAttribute('data-seg')) ));
     on(name,'input',()=> setSeg());
     on(area,'input',updateLinks);
@@ -389,7 +407,7 @@
     on(startBtn,'click',start);
     on(startHero,'click',e=>{ e.preventDefault(); start(); });
     on(ctaFinal,'click',e=>{
-      if (ctaFinal.closest('#final-cta')) return; // Warum: weitergeben.html hat eigenes CTA
+      if (ctaFinal.closest('#final-cta')) return;
       e.preventDefault(); start();
     });
     on(startShort,'click',e=>{
@@ -409,9 +427,7 @@
   }
 
   /* ===== Short Mode (Startseite) ======================================== */
-  function initReturnCTA() {
-    // reserved
-  }
+  function initReturnCTA() { /* reserved */ }
   function initShortMode() {
     const btn = $('#dfBtn');
     if (!btn) return;
@@ -448,8 +464,73 @@
       if (el) { el.setAttribute('tabindex','-1'); el.focus({ preventScroll:true }); }
     };
     on(window,'hashchange',focusHash);
-    // Wichtig: auch initial (Seitenaufruf mit #hash)
     focusHash();
+  }
+
+  /* ===== Word Swap (headline micro-animation) =========================== */
+  function initWordSwap() {
+    const root = $('.word-swap'); if (!root) return;
+    const words = $$('b', root); if (words.length < 2) return;
+    let i = 0;
+    words.forEach((w, idx) => w.classList.toggle('active', idx === 0));
+    if (prefersReduced) return;
+    setInterval(() => {
+      words[i].classList.remove('active');
+      i = (i + 1) % words.length;
+      words[i].classList.add('active');
+    }, 2200);
+  }
+
+  /* ===== Tilt (3D parallax on hero media) =============================== */
+  function initTilt() {
+    if (prefersReduced || !mm('(hover:hover)').matches) return;
+    $$('.tilt-wrap').forEach((wrap) => {
+      const target = $('img,video,canvas', wrap) || wrap;
+      const max = Number(wrap.getAttribute('data-tilt')) || 10;
+      const onMove = (e) => {
+        const r = wrap.getBoundingClientRect();
+        const cx = e.clientX - r.left, cy = e.clientY - r.top;
+        const rx = ((cy / r.height) - 0.5) * -max;
+        const ry = ((cx / r.width)  - 0.5) *  max;
+        target.style.transform = `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+      };
+      const reset = () => { target.style.transform = ''; };
+      on(wrap,'mousemove',onMove);
+      on(wrap,'mouseleave',reset);
+      on(wrap,'blur',reset);
+    });
+  }
+
+  /* ===== Magnet buttons (subtle attract) ================================ */
+  function initMagnet() {
+    if (prefersReduced || !mm('(hover:hover)').matches) return;
+    $$('[data-magnet]').forEach((el) => {
+      const strength = Number(el.getAttribute('data-magnet')) || 12;
+      let raf = null, tx = 0, ty = 0, targetX = 0, targetY = 0;
+      const ease = 0.18;
+
+      const update = () => {
+        tx += (targetX - tx) * ease;
+        ty += (targetY - ty) * ease;
+        el.style.transform = `translate(${tx}px, ${ty}px)`;
+        if (Math.abs(targetX - tx) > .1 || Math.abs(targetY - ty) > .1) raf = requestAnimationFrame(update);
+        else raf = null;
+      };
+      const move = (e) => {
+        const r = el.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top  + r.height/ 2);
+        targetX = (dx / (r.width/2))  * strength;
+        targetY = (dy / (r.height/2)) * strength;
+        if (!raf) raf = requestAnimationFrame(update);
+      };
+      const leave = () => { targetX = 0; targetY = 0; if (!raf) raf = requestAnimationFrame(update); };
+
+      on(el,'mousemove',move);
+      on(el,'mouseleave',leave);
+      on(el,'focus',leave);
+      on(el,'blur',leave);
+    });
   }
 
   /* ===== Public namespace (debug/hooks) ================================= */
@@ -466,6 +547,10 @@
     // Motion & micro-interactions
     initFadeInAnimations();
     initRipple();
+    initTopProgress();
+    initTilt();
+    initMagnet();
+    initWordSwap();
 
     // CTAs
     initStickyCTA();
@@ -494,5 +579,7 @@
     initReturnCTA();
   }
 
-  (document.readyState === 'loading') ? on(document,'DOMContentLoaded',init,{ once:true }) : init();
+  (document.readyState === 'loading')
+    ? on(document,'DOMContentLoaded',init,{ once:true })
+    : init();
 })();
