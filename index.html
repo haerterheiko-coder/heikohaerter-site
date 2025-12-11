@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <meta name="description" content="2 Minuten – zeigt sofort, was heute wichtig ist. Anonym, ohne Verkauf. Deine Wertschätzung zählt erst ab Erstgespräch. Zero-Risk: kein Vorteil → 25 €.">
-
   <title>2-Minuten-Ampel – zeigt sofort, was heute wichtig ist</title>
 
   <!-- ICONS -->
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <!-- CORE STYLES -->
+  <!-- CORE STYLES (aus deinem Design-System) -->
   <link rel="stylesheet" href="/styles/tokens.css">
   <link rel="stylesheet" href="/styles/base.css">
   <link rel="stylesheet" href="/styles/utilities.css">
@@ -26,17 +25,19 @@
 
   <!-- PAGE STYLE -->
   <link rel="stylesheet" href="/styles/pages/index.css">
-
+  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
 </head>
 
-<body>
+<body class="hh-bg">
 
 <header class="hh-header">
   <div class="hh-container hh-header-bar">
     <a href="/" class="hh-brand">
-      <span class="hh-brand-dot"></span>
+      <span class="hh-brand-dot" aria-hidden="true"></span>
       <span class="hh-brand-sub">Persönliche Finanzbegleitung</span>
     </a>
+    <!-- Optional: Kurzmodus-Button (ADHS-safe) -->
+    <button id="dfBtn" class="hh-btn hh-btn-ghost" aria-pressed="false" style="margin-left:auto">🔍 Kurzmodus</button>
   </div>
 </header>
 
@@ -45,12 +46,10 @@
   <!-- ============================= -->
   <!-- HERO SECTION                  -->
   <!-- ============================= -->
-
   <section class="hh-section fade-up hero" id="hero">
     <div class="hh-container hh-grid-hero">
 
       <div class="hh-stack hero-content">
-
         <p class="hh-micro intro-line">2 Minuten – ein Gefühl für heute. Anonym & ohne Verkauf.</p>
 
         <h1 class="hh-h1">
@@ -67,156 +66,223 @@
           ✨ Jetzt starten (2 Minuten)
         </a>
 
-        <div class="hh-card hh-story fade-up">
-          <p>
-            „Ich hätte das viel früher gebraucht. Ein kurzer Blick – und plötzlich ist wieder Ruhe im Kopf.“
-          </p>
+        <div class="hh-card hh-story fade-up" aria-live="polite">
+          <p>„Ich hätte das viel früher gebraucht. Ein kurzer Blick – und plötzlich ist wieder Ruhe im Kopf.“</p>
         </div>
-
       </div>
 
-      <!-- HERO IMAGE -->
-      <div class="hh-hero-image fade-up">
-        <img src="/assets/hero.webp" alt="2-Minuten-Ampel – sofort Klarheit" />
-      </div>
+      <!-- HERO IMAGE (CLS-safe via width/height) -->
+      <figure class="hh-hero-image fade-up">
+        <img src="/assets/hero.webp" alt="2-Minuten-Ampel – sofort Klarheit" width="1600" height="1200" />
+      </figure>
 
     </div>
   </section>
 
-
   <!-- ============================= -->
   <!-- 5 BEREICHE – ICON SECTION     -->
   <!-- ============================= -->
-
   <section class="hh-section fade-up">
     <div class="hh-container">
       <h2 class="hh-h2">Die 5 Bereiche, die sofort ein Gefühl geben</h2>
 
       <div class="hh-grid-auto" id="areasIcons">
-
-        <div class="icon-card icon fade-up">
-          <h3>Finanzbasis</h3>
-          <p class="hh-micro">Wie stabil ist heute deine Basis wirklich?</p>
-        </div>
-
-        <div class="icon-card icon fade-up">
-          <h3>Absicherung</h3>
-          <p class="hh-micro">Welche Risiken zählen heute wirklich?</p>
-        </div>
-
-        <div class="icon-card icon fade-up">
-          <h3>Rücklagen</h3>
-          <p class="hh-micro">Reicht’s, wenn heute etwas passiert?</p>
-        </div>
-
-        <div class="icon-card icon fade-up">
-          <h3>Zukunft</h3>
-          <p class="hh-micro">Wie sieht’s langfristig aus?</p>
-        </div>
-
-        <div class="icon-card icon fade-up">
-          <h3>Ruhegefühl</h3>
-          <p class="hh-micro">Was bringt dir heute wirklich Entspannung?</p>
-        </div>
-
+        <div class="icon-card icon fade-up"><h3>Finanzbasis</h3><p class="hh-micro">Wie stabil ist heute deine Basis wirklich?</p></div>
+        <div class="icon-card icon fade-up"><h3>Absicherung</h3><p class="hh-micro">Welche Risiken zählen heute wirklich?</p></div>
+        <div class="icon-card icon fade-up"><h3>Rücklagen</h3><p class="hh-micro">Reicht’s, wenn heute etwas passiert?</p></div>
+        <div class="icon-card icon fade-up"><h3>Zukunft</h3><p class="hh-micro">Wie sieht’s langfristig aus?</p></div>
+        <div class="icon-card icon fade-up"><h3>Ruhegefühl</h3><p class="hh-micro">Was bringt dir heute wirklich Entspannung?</p></div>
       </div>
     </div>
   </section>
-
 
   <!-- ============================= -->
   <!-- CHECK START                   -->
   <!-- ============================= -->
-
   <section class="hh-section fade-up" id="startCheck">
     <div class="hh-container hh-center">
-
       <h2 class="hh-h2">2-Minuten-Ampel starten</h2>
-      <p class="hh-micro">Wird danach anonym ausgewertet – keine Daten werden gespeichert.</p>
-
-      <a href="#check-steps" class="hh-btn hh-btn-primary" id="startCheckBtn">
-        🚦 Ampel starten
-      </a>
-
+      <p class="hh-micro">Wird danach anonym ausgewertet – es werden keine personenbezogenen Daten gespeichert.</p>
+      <a href="#ampel-check" class="hh-btn hh-btn-primary" id="startCheckBtn">🚦 Ampel starten</a>
     </div>
   </section>
-
 
   <!-- ============================= -->
   <!-- AMPEL ENGINE (STEPS)         -->
   <!-- ============================= -->
-
-  <section class="hh-section fade-up" id="check-steps">
+  <!-- Wichtig: KEINE doppelten IDs -->
+  <section class="hh-section fade-up" id="ampel-check">
     <div class="hh-container">
 
-      <div id="check-start" class="hh-center">
+      <div id="check-start" class="hh-center" aria-live="polite">
         <p class="hh-micro">Kurzer Blick. 3 Schritte. Sofort Orientierung.</p>
       </div>
 
-      <!-- Steps werden dynamisch per JS ein-/ausgeblendet -->
-      <div id="check-steps" class="steps-wrapper">
-
-        <div class="step" data-step="1">
-          <h3>Schritt 1</h3>
-          <button class="hh-btn" data-value="2">☑ Passt</button>
-          <button class="hh-btn" data-value="0">❓ Unsicher</button>
-          <button class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
+      <!-- Header/Progress -->
+      <div class="hh-stack" style="margin-block:.6rem 1rem">
+        <div class="hh-label" id="stepLabel">Schritt 1 von 3</div>
+        <div class="hh-micro" id="stepHint">Kurzer Eindruck reicht.</div>
+        <div class="hh-progress" style="width:100%;background:rgba(255,255,255,.08);border-radius:999px;height:10px;border:1px solid rgba(255,255,255,.12)">
+          <div id="progressBar" class="hh-progress-fill" style="width:0%"></div>
         </div>
-
-        <div class="step" data-step="2">
-          <h3>Schritt 2</h3>
-          <button class="hh-btn" data-value="2">☑ Passt</button>
-          <button class="hh-btn" data-value="0">❓ Unsicher</button>
-          <button class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
-        </div>
-
-        <div class="step" data-step="3">
-          <h3>Schritt 3</h3>
-          <button class="hh-btn" data-value="2">☑ Passt</button>
-          <button class="hh-btn" data-value="0">❓ Unsicher</button>
-          <button class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
-        </div>
-
       </div>
 
-      <div id="check-result" class="fade-up"></div>
+      <!-- Steps Wrapper -->
+      <div id="check-steps" class="steps-wrapper" role="group" aria-label="Ampel Schritte">
+        <div class="step" data-step="1">
+          <h3>Schritt 1</h3>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <button type="button" class="hh-btn" data-value="2">☑ Passt</button>
+            <button type="button" class="hh-btn" data-value="0">❓ Unsicher</button>
+            <button type="button" class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
+          </div>
+        </div>
+        <div class="step" data-step="2" style="display:none">
+          <h3>Schritt 2</h3>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <button type="button" class="hh-btn" data-value="2">☑ Passt</button>
+            <button type="button" class="hh-btn" data-value="0">❓ Unsicher</button>
+            <button type="button" class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
+          </div>
+        </div>
+        <div class="step" data-step="3" style="display:none">
+          <h3>Schritt 3</h3>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <button type="button" class="hh-btn" data-value="2">☑ Passt</button>
+            <button type="button" class="hh-btn" data-value="0">❓ Unsicher</button>
+            <button type="button" class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
+          </div>
+        </div>
+      </div>
 
+      <div id="check-result" class="fade-up" aria-live="polite" style="margin-top:1rem"></div>
     </div>
   </section>
-
 
   <!-- ============================= -->
   <!-- FINAL CTA                     -->
   <!-- ============================= -->
-
   <section class="hh-section fade-up" id="final-cta">
     <div class="hh-container hh-center" style="max-width:720px">
       <h2 class="hh-h2">Bereit, dein Gefühl für heute zu sortieren?</h2>
       <p class="hh-micro">Wenn’s dir nichts bringt → 25 €.</p>
-
-      <a href="#startCheck" class="hh-btn hh-btn-primary" id="ctaFinal">
-        ✨ Jetzt ansehen
-      </a>
+      <a href="#startCheck" class="hh-btn hh-btn-primary" id="ctaFinal">✨ Jetzt ansehen</a>
     </div>
   </section>
 
 </main>
 
-
 <footer class="hh-footer">
   <div class="hh-container">
-    © <span id="yearNow">2026</span> Heiko Haerter · 
-    <a href="/impressum">Impressum</a> · 
+    © <span id="yearNow">2026</span> Heiko Haerter ·
+    <a href="/impressum">Impressum</a> ·
     <a href="/datenschutz">Datenschutz</a>
   </div>
 </footer>
 
+<!-- STICKY CTA (Mobile) -->
+<div class="sticky-cta" id="stickyCTA" aria-hidden="true">
+  <div class="inner">
+    <a href="#startCheck" class="hh-btn hh-btn-primary" data-ctx="sticky" id="stickyCtaBtn">Termin sichern</a>
+  </div>
+</div>
 
 <!-- ============================= -->
-<!-- SCRIPTS                       -->
+<!-- INLINE SCRIPTS (gehärtet)     -->
 <!-- ============================= -->
+<script>
+/* ===== Core utils ===== */
+const $ = (s, p = document) => p.querySelector(s);
+const $$ = (s, p = document) => [...p.querySelectorAll(s)];
+const on = (el, t, fn, o) => el && el.addEventListener(t, fn, o);
+const off = (el, t, fn, o) => el && el.removeEventListener(t, fn, o);
+const raf = (cb) => (window.requestAnimationFrame || setTimeout)(cb);
+const safeStore = (()=>{try{const k="__t";localStorage.setItem(k,"1");localStorage.removeItem(k);return{
+  get(k){try{return localStorage.getItem(k)}catch{return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch{}},
+  del(k){try{localStorage.removeItem(k)}catch{}}
+}}catch{return{get:()=>null,set:()=>{},del:()=>{}}}})();
+const hasIO = "IntersectionObserver" in window;
+const hasClipboard = !!navigator.clipboard;
+const prefersReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isMobile = () => innerWidth < 980;
 
-<script type="module" src="/scripts/pages/index.js"></script>
+/* ===== FadeIn ===== */
+const FadeIn = (()=>{let io;function init(){const els=$$(".fade-up");
+  if(prefersReducedMotion||!hasIO){els.forEach(e=>e.classList.add("visible"));return;}
+  io=new IntersectionObserver(es=>{es.forEach(ent=>{if(ent.isIntersecting){ent.target.classList.add("visible");io.unobserve(ent.target);}})},{rootMargin:"0px 0px -10% 0px",threshold:0.12});
+  els.forEach(el=>io.observe(el));
+}function destroy(){io&&io.disconnect()}return{init,destroy}})();
 
+/* ===== Sticky CTA ===== */
+const StickyCTA = (()=>{let io,scrollRef;function show(el,v){raf(()=>{el.style.transform=v?"translateY(0)":"translateY(120%)";el.style.opacity=v?"1":"0";el.setAttribute("aria-hidden",String(!v));});}
+  function init(){const el=$("#stickyCTA"), hero=$("#hero"); if(!el||!hero||!isMobile()) return;
+    if(hasIO){io=new IntersectionObserver(([e])=>show(el,!e.isIntersecting),{threshold:.12});io.observe(hero);}
+    else{scrollRef=()=>show(el,scrollY>180);on(window,"scroll",scrollRef,{passive:true});scrollRef();}
+  }function destroy(){io&&io.disconnect();scrollRef&&off(window,"scroll",scrollRef,{passive:true})}
+  return{init,destroy}})();
+
+/* ===== Short Mode ===== */
+const ShortMode = (()=>{const KEY="hh_short_mode_v1";function init(){
+  const btn=$("#dfBtn"); if(!btn) return;
+  const keep=["hero","final-cta","stickyCTA","share","ampel-check"]; const sections=$$("main > section").filter(s=>!keep.includes(s.id));
+  const set=(on)=>{btn.setAttribute("aria-pressed",String(on));btn.textContent=on?"✅ Kurzmodus aktiv":"🔍 Kurzmodus";
+    sections.forEach(sec=>sec.style.display=on?"none":""); if(on) scrollTo({top:0,behavior:"smooth"}); safeStore.set(KEY,on?"1":"0");};
+  set(safeStore.get(KEY)==="1"); on(btn,"click",()=>set(!(btn.getAttribute("aria-pressed")==="true"))); window.setKurzmodus=set;
+}return{init}})();
+
+/* ===== Ampel Engine ===== */
+const Ampel = (()=>{let score=0,step=1;const max=3;
+  const els={start:$("#startCheckBtn"),heroStart:$("#startCheckHero"),finalStart:$("#ctaFinal"),shortBtn:$("#startShort"),
+    screen:$("#check-start"),wrap:$("#check-steps"),result:$("#check-result"),stepLabel:$("#stepLabel"),stepHint:$("#stepHint"),prog:$("#progressBar")};
+  function updateHeader(){els.stepLabel&&(els.stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`);
+    const pct=((Math.min(step-1,max-1))/(max-1))*100; els.prog&&(els.prog.style.width=pct+"%");
+    els.stepHint&&(els.stepHint.textContent= step===1?"Kurzer Eindruck reicht.": step===2?"Fast geschafft.":"Letzter Klick.");}
+  function showStep(n){$$("#check-steps .step").forEach(s=>s.style.display="none"); const el=$(`#check-steps .step[data-step="${n}"]`);
+    if(el) el.style.display="block"; updateHeader(); el&&el.scrollIntoView({behavior:"smooth"});}
+  function finish(){if(!els.wrap||!els.result) return; els.wrap.style.display="none"; els.result.style.display="block";
+    const wa="https://wa.me/4917660408380?text="; let html;
+    if(score<=4){html=`<div class="result-card result-red"><h3>🔴 Deine Ampel: Jetzt</h3><p>Ein Bereich ist heute wirklich wichtig.</p>
+      <a class="hh-btn hh-btn-primary" href="${wa}Kurz%2010%20Minuten%20sprechen%20wegen%20meiner%20Ampel%20(Rot)">💬 10 Minuten sprechen</a></div>`;}
+    else if(score<=7){html=`<div class="result-card result-yellow"><h3>🟡 Deine Ampel: Als Nächstes</h3><p>Einige Punkte brauchen Orientierung.</p>
+      <a class="hh-btn hh-btn-primary" href="${wa}Was%20sollte%20ich%20als%20Nächstes%20regeln%3F">🧭 Als Nächstes regeln</a></div>`;}
+    else {html=`<div class="result-card result-green"><h3>🟢 Deine Ampel: Später</h3><p>Alles wirkt stabil – evtl. Feinschliff.</p>
+      <a class="hh-btn hh-btn-primary" href="${wa}Gibt%20es%20noch%20Optimierungen%3F">✨ Noch smarter machen?</a></div>`;}
+    els.result.innerHTML=html; els.result.scrollIntoView({behavior:"smooth"});}
+  function startFlow(){els.screen&&(els.screen.style.display="none"); els.wrap&&(els.wrap.style.display="block");
+    els.result&&(els.result.style.display="none"); score=0; step=1; showStep(step);}
+  function init(){on(els.start,"click",startFlow);
+    on(els.heroStart,"click",(e)=>{e.preventDefault();startFlow();});
+    on(els.finalStart,"click",(e)=>{e.preventDefault();startFlow();});
+    on(els.shortBtn,"click",(e)=>{e.preventDefault();startFlow(); setTimeout(()=>{score+=2;step=2;showStep(step);},120);
+      setTimeout(()=>{score+=2;step=3;showStep(step);},260);});
+    const container=$("#check-steps");
+    on(container,"click",(ev)=>{const btn=ev.target.closest("#check-steps .step button"); if(!btn) return;
+      score+=Number(btn.dataset.value)||0; step++; if(step>max) finish(); else showStep(step);});
+  } return{init};})();
+
+/* ===== Dopamine UI ===== */
+const DopamineUI = (()=>{let glowIO;
+  function rippleHandler(e){const btn=e.target.closest("button, .hh-btn, .btn"); if(!btn) return;
+    const prev=btn.querySelector(".hh-ripple"); prev && prev.remove();
+    const r=document.createElement("span"); r.className="hh-ripple"; const rect=btn.getBoundingClientRect();
+    r.style.left=(e.clientX-rect.left)+"px"; r.style.top=(e.clientY-rect.top)+"px"; btn.appendChild(r); setTimeout(()=>r.remove(),450);}
+  function initGlow(){if(!hasIO) return; glowIO=new IntersectionObserver(es=>{es.forEach(ent=>{if(ent.isIntersecting){
+    ent.target.classList.add("hh-glow"); setTimeout(()=>ent.target.classList.remove("hh-glow"),900); glowIO.unobserve(ent.target);}})},{threshold:.4});
+    $$(".hh-card, .premium-card, .result-card").forEach(el=>glowIO.observe(el));}
+  function init(){on(document,"click",rippleHandler); initGlow();}
+  return{init}})();
+
+/* ===== Boot ===== */
+(function boot(){
+  try{FadeIn.init()}catch{}
+  try{StickyCTA.init()}catch{}
+  try{ShortMode.init()}catch{}
+  try{Ampel.init()}catch{}
+  try{DopamineUI.init()}catch{}
+  // Jahr setzen (why: kein Staging-Fehler)
+  const y=$("#yearNow"); if(y) y.textContent=String(new Date().getFullYear());
+})();
+</script>
 </body>
 </html>
