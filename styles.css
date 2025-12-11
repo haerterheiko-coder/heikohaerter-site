@@ -147,7 +147,7 @@ h3{ font-size:var(--fs-h3); }
 p,li{ margin:0 0 .6rem; font-size:var(--fs-body); color:var(--muted); }
 .hero-micro{ font-size:var(--fs-micro); color:var(--muted-soft); }
 
-/* Header */
+• Header */
 header{
   position:sticky; top:0; z-index:70;
   background:rgba(5,8,22,.92); border-bottom:1px solid var(--border-1);
