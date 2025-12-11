@@ -1,537 +1,692 @@
+<!-- /public/index.html -->
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+<title>2026 MASTER UI SYSTEM — Heiko Haerter</title>
+<meta name="color-scheme" content="dark only" />
+<style>
 /* =========================================================
    2026 MASTER UI SYSTEM – HEIKO HAERTER
    Ultra-Stable Layout · Mobile-First · Neuro-Optimized
+   (Hardened for production: CLS-safe, Motion-safe, @supports)
    ========================================================= */
+
+/* ------------------------------
+   0) LAYERING (lower specificity)
+   ------------------------------ */
+@layer tokens, base, components, utilities;
 
 /* ------------------------------
    1) ROOT TOKENS
    ------------------------------ */
-:root {
-  --bg: #05070E;
-  --bg-soft: #0A0F1E;
-  --surface: rgba(255,255,255,0.045);
-  --surface-soft: rgba(255,255,255,0.06);
-  --text: #F7F8FC;
-  --muted: #A8B1C5;
-  --muted-soft: #8F97AA;
-  --gold: #C8A44B;
-  --gold-soft: #E9D394;
-  --focus: #90C2FF;
+@layer tokens {
+  :root {
+    --bg: #05070E;
+    --bg-soft: #0A0F1E;
+    --surface: rgba(255,255,255,0.045);
+    --surface-soft: rgba(255,255,255,0.06);
+    --text: #F7F8FC;
+    --muted: #A8B1C5;
+    --muted-soft: #8F97AA;
+    --gold: #C8A44B;
+    --gold-soft: #E9D394;
+    --focus: #90C2FF;
 
-  --radius-xl: 34px;
-  --radius-lg: 24px;
-  --radius-md: 18px;
-  --radius-sm: 12px;
+    --radius-xl: 34px;
+    --radius-lg: 24px;
+    --radius-md: 18px;
+    --radius-sm: 12px;
 
-  --elev-1: 0 18px 40px rgba(0,0,0,0.35);
-  --elev-2: 0 30px 80px rgba(0,0,0,0.55);
+    --elev-1: 0 18px 40px rgba(0,0,0,0.35);
+    --elev-2: 0 30px 80px rgba(0,0,0,0.55);
 
-  --ease: cubic-bezier(.25,.46,.25,1);
-  --max-width: 1120px;
+    --ease: cubic-bezier(.25,.46,.25,1);
+    --max-width: 1120px;
 
-  --bg-glow-1: radial-gradient(circle at 15% -10%, rgba(200,164,75,0.22), transparent 55%);
-  --bg-glow-2: radial-gradient(circle at 85% 10%, rgba(120,150,255,0.18), transparent 60%);
+    --bg-glow-1: radial-gradient(circle at 15% -10%, rgba(200,164,75,0.22), transparent 55%);
+    --bg-glow-2: radial-gradient(circle at 85% 10%, rgba(120,150,255,0.18), transparent 60%);
 
-  color-scheme: dark;
+    color-scheme: dark;
+  }
 }
 
 /* ------------------------------
    2) BASE RESET
    ------------------------------ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@layer base {
+  *,
+  *::before,
+  *::after { box-sizing: border-box; }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  background: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
-  line-height: 1.6;
-}
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    line-height: 1.6;
+  }
 
-img, picture, svg {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+  /* CLS: reserve intrinsic size & avoid offscreen cost */
+  img, picture, svg, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    content-visibility: auto;             /* avoid layout cost offscreen */
+    contain-intrinsic-size: 300px 200px;  /* CLS fallback if no width/height */
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  a { color: inherit; text-decoration: none; }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-  border-radius: 8px;
+  a:focus-visible,
+  button:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  /* Motion safety */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+
+  /* High contrast preference (keeps brand gold intact) */
+  @media (prefers-contrast: more) {
+    :root { --surface: rgba(255,255,255,0.08); --surface-soft: rgba(255,255,255,0.12); }
+  }
 }
 
 /* ------------------------------
    3) TYPOGRAPHY
    ------------------------------ */
-.hh-h1 {
-  font-size: clamp(1.9rem, 4vw, 3rem);
-  font-weight: 700;
-  line-height: 1.15;
-  margin: 0 0 1rem;
-}
-
-.hh-h2 {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 700;
-  margin: 0 0 .8rem;
-}
-
-h3 {
-  font-size: clamp(1.12rem, 2vw, 1.3rem);
-  margin: 0 0 .5rem;
-  font-weight: 700;
-}
-
-p, li {
-  font-size: clamp(1rem, 1.1vw, 1.08rem);
-  color: var(--muted);
-}
-
-.hh-micro,
-.hh-label {
-  color: var(--muted-soft);
-  font-size: .92rem;
-  letter-spacing: .05em;
+@layer components {
+  .hh-h1 {
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+  }
+  .hh-h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin: 0 0 .8rem;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: clamp(1.12rem, 2vw, 1.3rem);
+    margin: 0 0 .5rem;
+    font-weight: 700;
+  }
+  p, li { font-size: clamp(1rem, 1.1vw, 1.08rem); color: var(--muted); }
+  .hh-micro, .hh-label { color: var(--muted-soft); font-size: .92rem; letter-spacing: .05em; }
 }
 
 /* ------------------------------
    4) LAYOUT SYSTEM
    ------------------------------ */
-.hh-container {
-  width: 100%;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: clamp(16px, 5vw, 32px);
-}
-
-.hh-section {
-  padding-block: clamp(36px, 7vw, 80px);
-}
-
-/* Grid */
-.hh-grid-auto {
-  display: grid;
-  gap: clamp(.8rem, 2vw, 1.4rem);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-}
-
-.hh-grid-hero {
-  display: grid;
-  gap: clamp(1.6rem, 3vw, 2.4rem);
-}
-@media (min-width: 1024px) {
-  .hh-grid-hero {
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
+@layer components {
+  .hh-container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: clamp(16px, 5vw, 32px);
   }
-}
+  .hh-section { padding-block: clamp(36px, 7vw, 80px); }
 
-/* Stack */
-.hh-stack {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(.6rem, 1.5vw, 1.1rem);
-}
-
-.hh-center {
-  text-align: center;
+  .hh-grid-auto {
+    display: grid;
+    gap: clamp(.8rem, 2vw, 1.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+  .hh-grid-hero {
+    display: grid;
+    gap: clamp(1.6rem, 3vw, 2.4rem);
+  }
+  @media (min-width: 1024px) {
+    .hh-grid-hero {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+    }
+  }
+  .hh-stack { display: flex; flex-direction: column; gap: clamp(.6rem, 1.5vw, 1.1rem); }
+  .hh-center { text-align: center; }
 }
 
 /* ------------------------------
    5) BUTTONS
    ------------------------------ */
-.hh-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: .9rem 1.4rem;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  font-weight: 800;
-  background: rgba(255,255,255,0.06);
-  color: var(--text);
-  transition: transform .18s var(--ease), box-shadow .18s var(--ease);
-  min-height: 48px;
-}
-
-.hh-btn:hover {
-  transform: translateY(-2px);
-}
-
-.hh-btn-primary {
-  background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-  color: #111;
-  box-shadow: 0 12px 28px rgba(200,164,75,0.35);
-}
-
-.hh-btn-primary:hover {
-  box-shadow: 0 18px 40px rgba(200,164,75,0.45);
-}
-
-.hh-btn-ghost {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.16);
-}
-
-/* Mobile buttons full width */
-@media (max-width: 768px) {
-  .hh-btn,
-  .hh-btn-primary,
+@layer components {
+  .hh-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .9rem 1.4rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-weight: 800;
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    transition: transform .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+    min-height: 48px;
+    position: relative; /* ripple */
+    isolation: isolate;
+  }
+  .hh-btn:hover { transform: translateY(-2px); }
+  .hh-btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+    color: #111;
+    box-shadow: 0 12px 28px rgba(200,164,75,0.35);
+  }
+  .hh-btn-primary:hover { box-shadow: 0 18px 40px rgba(200,164,75,0.45); filter: brightness(1.06); }
   .hh-btn-ghost {
-    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+  @media (max-width: 768px) {
+    .hh-btn, .hh-btn-primary, .hh-btn-ghost { width: 100%; }
   }
 }
 
 /* ------------------------------
    6) CARDS
    ------------------------------ */
-.hh-card {
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-md);
-  padding: 1rem 1.2rem;
-  box-shadow: var(--elev-1);
-}
-
-.hh-story,
-.hh-story-sm {
-  background: rgba(255,255,255,0.05);
-}
-
-.hh-benefit {
-  background: rgba(255,255,255,0.08);
-}
-
-.hh-zero {
-  border: 1px dashed rgba(233,211,148,0.45);
-  background: rgba(233,211,148,0.08);
+@layer components {
+  .hh-card {
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.2rem;
+    box-shadow: var(--elev-1);
+    transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+    will-change: transform;
+  }
+  .hh-story, .hh-story-sm { background: rgba(255,255,255,0.05); }
+  .hh-benefit { background: rgba(255,255,255,0.08); }
+  .hh-zero {
+    border: 1px dashed rgba(233,211,148,0.45);
+    background: rgba(233,211,148,0.08);
+  }
+  .hh-card:hover { transform: translateY(-4px); box-shadow: 0 22px 48px rgba(0,0,0,0.55); }
 }
 
 /* ------------------------------
-   7) HERO IMAGE
+   7) HERO IMAGE (CLS-safe via width/height)
    ------------------------------ */
-.hh-hero-image img {
-  width: 100%;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--elev-2);
+@layer components {
+  .hh-hero-image img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--elev-2);
+    background: var(--bg-soft);
+  }
 }
 
 /* ------------------------------
    8) FOOTER
    ------------------------------ */
-.hh-footer {
-  padding: 2rem 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  text-align: center;
-  background: rgba(5,8,22,0.95);
-}
-
-.hh-footer a {
-  text-decoration: underline;
+@layer components {
+  .hh-footer {
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    background: rgba(5,8,22,0.95);
+  }
+  .hh-footer a { text-decoration: underline; }
 }
 
 /* ------------------------------
-   9) ANIMATIONS
+   9) ANIMATIONS (guarded)
    ------------------------------ */
-.fade-up {
-  opacity: 0;
-  transform: translateY(18px);
-}
+@layer components {
+  .fade-up { opacity: 0; transform: translateY(18px); }
+  .fade-up.visible { opacity: 1; transform: none; transition: opacity .55s var(--ease), transform .55s var(--ease); }
 
-.fade-up.visible {
-  opacity: 1;
-  transform: none;
-  transition: opacity .55s var(--ease), transform .55s var(--ease);
+  /* View Timeline guarded */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up {
+        view-timeline-name: --fade;
+        view-timeline-axis: block;
+        animation-timeline: --fade;
+        animation-name: fadeUpAnim;
+        animation-range: entry 10% cover 40%;
+        animation-fill-mode: both;
+      }
+      @keyframes fadeUpAnim {
+        0% { opacity: 0; transform: translateY(28px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+    }
+  }
 }
 
 /* ------------------------------
    10) MOBILE SAFE AREAS
    ------------------------------ */
-@supports (padding: max(0px)) {
-  body {
-    padding-bottom: max(env(safe-area-inset-bottom), 0px);
+@layer components {
+  @supports (padding: max(0px)) {
+    body { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
   }
 }
 
 /* ------------------------------
-   11) WIX FIXES
+   11) WIX FIXES (scoped)
    ------------------------------ */
-[data-mesh-id],
-[data-mesh-id] * {
-  transform: none !important;
+@layer utilities {
+  [data-mesh-id],
+  [data-mesh-id] * { transform: none !important; }
+  [data-mesh-id] { max-width: none !important; width: 100% !important; }
 }
 
-[data-mesh-id] {
-  max-width: none !important;
-  width: 100% !important;
-}
 /* =========================================================
    OPTION A — ULTRA PERFORMANCE ADD-ON
-   GPU Acceleration · Scroll-driven Animations · CLS-Killer
    ========================================================= */
-
-/* 1) GPU ACCELERATION */
-.hh-accelerate,
-.fade-up,
-.hh-btn,
-.hh-card,
-.hh-hero-image img {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-}
-
-/* 2) SCROLL-DRIVEN FADE-UP (CSS-only, Browser unterstützt es bereits) */
-@media (prefers-reduced-motion: no-preference) {
-  .fade-up {
-    view-timeline-name: fadeTimeline;
-    view-timeline-axis: block;
-    animation-timeline: fadeTimeline;
-    animation-name: fadeUpAnim;
-    animation-range: entry 10% cover 40%;
-    animation-fill-mode: both;
+@layer utilities {
+  .hh-accelerate, .fade-up, .hh-btn, .hh-card, .hh-hero-image img {
+    will-change: transform, opacity;
+    transform: translateZ(0);
   }
 
-  @keyframes fadeUpAnim {
-    0% { opacity: 0; transform: translateY(28px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
+  html { scroll-behavior: smooth; }
+
+  /* Snap only on opt-in containers */
+  .snap-y { scroll-snap-type: y proximity; }
+  .snap-y .hh-section { scroll-snap-align: start; scroll-snap-stop: always; }
+
+  * { -webkit-tap-highlight-color: transparent; }
+  a, button { touch-action: manipulation; }
 }
-
-/* 3) CLS-KILLER */
-img, picture {
-  aspect-ratio: attr(width) / attr(height);
-}
-
-.hh-btn,
-.hh-chip,
-.hh-card,
-.hh-header {
-  contain: layout style paint;
-}
-
-/* 4) SMOOTH SCROLL + SNAP */
-html { scroll-behavior: smooth; }
-
-.hh-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-body {
-  scroll-snap-type: y proximity;
-}
-
-/* 5) LIGHTHOUSE BOOSTS */
-* { -webkit-tap-highlight-color: transparent; }
-a, button { touch-action: manipulation; }
 
 /* =========================================================
    OPTION B — GOD-MODE UI ENHANCER PACK
-   Micro-Interactions · Glow States · Pulsing CTAs
    ========================================================= */
+@layer utilities {
+  .hh-btn:hover { transform: translateY(-3px) scale(1.02); }
+  .hh-btn-primary:hover { filter: brightness(1.12); }
 
-/* BUTTON MICRO-INTERACTION */
-.hh-btn:hover { transform: translateY(-3px) scale(1.02); }
-.hh-btn-primary:hover { filter: brightness(1.12); }
+  @keyframes hhPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200,164,75,0.25); }
+    70% { transform: scale(1.02); box-shadow: 0 0 22px 10px rgba(200,164,75,0.15); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200,164,75,0); }
+  }
+  .hh-btn-primary[data-ctx="sticky"], #ctaFinal, .hero-cta {
+    animation: hhPulse 4s ease-in-out infinite;
+    animation-delay: 1.4s;
+  }
 
-/* CTA PULSE */
-@keyframes hhPulse {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200,164,75,0.25); }
-  70% { transform: scale(1.02); box-shadow: 0 0 22px 10px rgba(200,164,75,0.15); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200,164,75,0); }
-}
+  /* Ripple dot created by JS */
+  .hh-ripple {
+    position: absolute;
+    width: 18px; height: 18px;
+    background: rgba(255,255,255,0.28);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: hhRipple .45s ease-out forwards;
+    pointer-events: none;
+    inset: 0; /* allow positioning */
+  }
+  @keyframes hhRipple {
+    to { opacity: 0; transform: translate(-50%, -50%) scale(8); }
+  }
 
-.hh-btn-primary[data-ctx="sticky"],
-#ctaFinal,
-.hero-cta {
-  animation: hhPulse 4s ease-in-out infinite;
-  animation-delay: 1.4s;
-}
-
-/* CARD HOVER */
-.hh-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 48px rgba(0,0,0,0.55);
-}
-
-/* MICRO TEXT HOVER */
-.hh-chip:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.22);
-}
-
-/* RIPPLE EFFECT (JS fügt .hh-ripple hinzu) */
-.hh-ripple {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: rgba(255,255,255,0.28);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: hhRipple .45s ease-out;
-  pointer-events: none;
-}
-@keyframes hhRipple {
-  to { opacity: 0; transform: translate(-50%, -50%) scale(8); }
-}
-
-/* MICRO-GLOW FOR ENTERING CARDS */
-.hh-glow {
-  box-shadow: 0 0 32px rgba(233,211,148,.35) !important;
-  transition: box-shadow .35s ease-out;
-}
-
-/* CLICK ANIMATION */
-.hh-click {
-  transform: scale(.96);
-  transition: transform .15s var(--ease);
+  .hh-glow { box-shadow: 0 0 32px rgba(233,211,148,.35) !important; transition: box-shadow .35s ease-out; }
+  .hh-click { transform: scale(.96); transition: transform .15s var(--ease); }
 }
 
 /* =========================================================
    OPTION C — COMPONENT LIBRARY
-   Ampel Engine · Steps Engine · Share Composer
+   ========================================================= */
+@layer components {
+  /* Ampel */
+  .hh-ampel { display: flex; flex-direction: column; gap: 1rem; }
+  .hh-ampel-item {
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: .8rem;
+    font-size: 1.05rem;
+    background: var(--surface);
+  }
+  .hh-ampel-item.now   { background: rgba(255,68,68,0.12);  border-color: rgba(255,68,68,0.35); }
+  .hh-ampel-item.next  { background: rgba(255,188,45,0.12); border-color: rgba(255,188,45,0.35); }
+  .hh-ampel-item.later { background: rgba(108,255,108,0.12); border-color: rgba(108,255,108,0.28); }
+
+  /* Steps */
+  .hh-step {
+    display: none;
+    background: var(--surface);
+    padding: 1.4rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .hh-step.active { display: block; }
+  .hh-progress {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px;
+    height: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .hh-progress-fill {
+    background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+    height: 100%;
+    width: 0%;
+    border-radius: 99px;
+    transition: width .35s var(--ease);
+  }
+
+  /* Share Composer */
+  .hh-share-box {
+    background: var(--surface);
+    padding: 1.2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  }
+  .hh-share-box textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    padding: .9rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.18);
+    resize: vertical;
+    color: var(--text);
+    min-height: 110px;
+  }
+  .hh-share-seg {
+    display: flex; gap: .5rem; flex-wrap: wrap;
+  }
+  .hh-share-seg-btn {
+    padding: .6rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.05);
+    cursor: pointer;
+  }
+  .hh-share-seg-btn[aria-pressed="true"] {
+    background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+    color: #111;
+  }
+  .hh-share-preview {
+    background: rgba(255,255,255,0.05);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 1rem;
+    font-size: .95rem;
+    color: var(--muted);
+    min-height: 72px;
+  }
+
+  /* Sticky CTA (mobile) */
+  .sticky-cta {
+    position: fixed; left: 0; right: 0; bottom: 14px;
+    display: none;
+    justify-content: center;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 6px);
+    z-index: 90;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: opacity .25s var(--ease), transform .25s var(--ease);
+  }
+  @media (max-width: 979px) { .sticky-cta { display: flex; } }
+  .sticky-cta .inner {
+    background: rgba(5,8,22,.88);
+    border: 1px solid rgba(255,255,255,.08);
+    padding: .55rem;
+    border-radius: 999px;
+    box-shadow: var(--elev-1);
+  }
+  .sticky-cta.show { transform: translateY(0); opacity: 1; }
+}
+
+/* ------------------------------
+   12) DECORATIVE BACKGROUND
+   ------------------------------ */
+@layer utilities {
+  .hh-bg {
+    position: relative;
+  }
+  .hh-bg::before,
+  .hh-bg::after {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .hh-bg::before { background: var(--bg-glow-1); }
+  .hh-bg::after  { background: var(--bg-glow-2); }
+}
+</style>
+</head>
+<body class="hh-bg">
+
+  <!-- HERO -->
+  <header class="hh-section">
+    <div class="hh-container hh-grid-hero">
+      <div class="hh-stack fade-up">
+        <span class="hh-label">2026 Master UI System</span>
+        <h1 class="hh-h1">Ultra-Stable. Mobile-First. Neuro-Optimiert.</h1>
+        <p>Apple-Level Ruhe, Tesla-Fokus, Nike-Momentum. Ready für DVAG-konforme Premium-Pages & Funnels.</p>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+          <button class="hh-btn hh-btn-primary hero-cta" data-ripple>Jetzt Demo starten</button>
+          <button class="hh-btn hh-btn-ghost" data-ripple>Design-System ansehen</button>
+        </div>
+      </div>
+      <figure class="hh-hero-image fade-up">
+        <!-- CLS-safe: set width/height -->
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop"
+             alt="Premium UI Mock"
+             width="1600" height="1200" />
+      </figure>
+    </div>
+  </header>
+
+  <!-- BENEFITS -->
+  <section class="hh-section snap-item">
+    <div class="hh-container hh-grid-auto">
+      <div class="hh-card hh-benefit fade-up">
+        <h3>CLS-Killer</h3>
+        <p>Breitflächige CLS-Prävention via intrinsic size, Snap opt-in und reservierte Media-Slots.</p>
+      </div>
+      <div class="hh-card hh-benefit fade-up">
+        <h3>Motion-Safe</h3>
+        <p>View Timelines mit Fallback auf IntersectionObserver. Respektiert Reduced Motion.</p>
+      </div>
+      <div class="hh-card hh-benefit fade-up">
+        <h3>Perf Boost</h3>
+        <p>content-visibility, contain-intrinsic-size, GPU-Hints, minimal layout thrash.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMPEL -->
+  <section class="hh-section">
+    <div class="hh-container">
+      <h2 class="hh-h2 fade-up">Ampel-Resultate</h2>
+      <div class="hh-ampel">
+        <div class="hh-ampel-item now fade-up"><strong>Jetzt:</strong>&nbsp;Essentielle Lücken zuerst schließen.</div>
+        <div class="hh-ampel-item next fade-up"><strong>Als Nächstes:</strong>&nbsp;Liquidität konsolidieren.</div>
+        <div class="hh-ampel-item later fade-up"><strong>Später:</strong>&nbsp;Optimierung & Feinschliff.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS ENGINE -->
+  <section class="hh-section">
+    <div class="hh-container">
+      <h2 class="hh-h2 fade-up">3-Min-Mini-Check</h2>
+
+      <div class="hh-progress" aria-hidden="true"><div class="hh-progress-fill" id="progressFill"></div></div>
+
+      <form id="stepsForm" class="hh-stack" style="margin-top:1rem">
+        <div class="hh-step active" data-step="1">
+          <label class="hh-label">1/3 — Haushalt</label>
+          <input class="hh-card" type="text" name="haushalt" placeholder="z. B. 2 Erwachsene, 1 Kind" required />
+        </div>
+        <div class="hh-step" data-step="2">
+          <label class="hh-label">2/3 — Monatsrate Sparen (optional)</label>
+          <input class="hh-card" type="number" name="rate" placeholder="z. B. 300" min="0" step="50" />
+        </div>
+        <div class="hh-step" data-step="3">
+          <label class="hh-label">3/3 — Priorität</label>
+          <select class="hh-card" name="prio" required>
+            <option value="">Bitte wählen</option>
+            <option>Absicherung</option>
+            <option>Liquidität</option>
+            <option>Investment</option>
+          </select>
+        </div>
+
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+          <button type="button" class="hh-btn hh-btn-ghost" id="prevBtn" data-ripple>Zurück</button>
+          <button type="button" class="hh-btn hh-btn-primary" id="nextBtn" data-ripple>Weiter</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- SHARE COMPOSER -->
+  <section class="hh-section">
+    <div class="hh-container">
+      <h2 class="hh-h2 fade-up">Share Composer</h2>
+      <div class="hh-share-box fade-up">
+        <div class="hh-share-seg" role="group" aria-label="Zielgruppe wählen">
+          <button type="button" class="hh-share-seg-btn" data-seg="eltern" aria-pressed="true">Eltern</button>
+          <button type="button" class="hh-share-seg-btn" data-seg="paare" aria-pressed="false">Paare</button>
+          <button type="button" class="hh-share-seg-btn" data-seg="selbst" aria-pressed="false">Selbstständige</button>
+        </div>
+        <textarea id="shareText" placeholder="Kurzer, hilfreicher Nutzen-Text …"></textarea>
+        <div class="hh-share-preview" id="sharePreview">Vorschau erscheint hier …</div>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+          <button class="hh-btn hh-btn-primary" data-ripple>Text kopieren</button>
+          <button class="hh-btn hh-btn-ghost" data-ripple>Als Vorlage speichern</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="hh-footer">
+    <div class="hh-container hh-micro">© 2026 Heiko Haerter · Design System</div>
+  </footer>
+
+  <!-- STICKY CTA -->
+  <div class="sticky-cta" id="stickyCta" aria-hidden="true">
+    <div class="inner">
+      <button class="hh-btn hh-btn-primary" data-ctx="sticky" data-ripple id="ctaFinal">Termin sichern</button>
+    </div>
+  </div>
+
+<script>
+/* =========================================================
+   Minimal JS Enhancers (why: UX & a11y fallback for CSS-only)
    ========================================================= */
 
-/* ------------------------------
-   AMPEL RESULT STYLES
-   ------------------------------ */
-.hh-ampel {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+(() => {
+  // Fade-up fallback via IntersectionObserver
+  const io = ('IntersectionObserver' in window)
+    ? new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 })
+    : null;
 
-.hh-ampel-item {
-  padding: 1rem 1.2rem;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255,255,255,0.15);
-  display: flex;
-  align-items: flex-start;
-  gap: .8rem;
-  font-size: 1.05rem;
-}
+  document.querySelectorAll('.fade-up').forEach(el => io && io.observe(el));
 
-.hh-ampel-item.now {
-  background: rgba(255,68,68,0.12);
-  border-color: rgba(255,68,68,0.35);
-}
+  // Sticky CTA reveal after first viewport scroll
+  const sticky = document.getElementById('stickyCta');
+  let stickyShown = false;
+  const onScroll = () => {
+    if (stickyShown) return;
+    if (window.scrollY > window.innerHeight * 0.6) {
+      sticky.classList.add('show');
+      sticky.setAttribute('aria-hidden', 'false');
+      stickyShown = true;
+      window.removeEventListener('scroll', onScroll, { passive: true });
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-.hh-ampel-item.next {
-  background: rgba(255,188,45,0.12);
-  border-color: rgba(255,188,45,0.35);
-}
+  // Ripple (event-driven, cleans up automatically)
+  function createRipple(e) {
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const dot = document.createElement('span');
+    dot.className = 'hh-ripple';
+    dot.style.left = x + 'px';
+    dot.style.top = y + 'px';
+    btn.appendChild(dot);
+    dot.addEventListener('animationend', () => dot.remove());
+  }
+  document.querySelectorAll('[data-ripple]').forEach(b => b.addEventListener('click', createRipple));
 
-.hh-ampel-item.later {
-  background: rgba(108,255,108,0.12);
-  border-color: rgba(108,255,108,0.28);
-}
+  // Steps Engine
+  const form = document.getElementById('stepsForm');
+  const steps = Array.from(form.querySelectorAll('.hh-step'));
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const progressFill = document.getElementById('progressFill');
 
-/* ------------------------------
-   STEPS ENGINE
-   ------------------------------ */
-.hh-step {
-  display: none;
-  background: var(--surface);
-  padding: 1.4rem;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255,255,255,0.12);
-}
+  let idx = 0;
+  function setStep(i) {
+    idx = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach((s, k) => s.classList.toggle('active', k === idx));
+    const pct = Math.round(((idx + 1) / steps.length) * 100);
+    progressFill.style.width = pct + '%';
+    prevBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
+    nextBtn.textContent = (idx === steps.length - 1) ? 'Fertig' : 'Weiter';
+  }
+  setStep(0);
 
-.hh-step.active {
-  display: block;
-  animation: fadeUpAnim .4s var(--ease);
-}
+  nextBtn.addEventListener('click', () => {
+    if (idx < steps.length - 1) setStep(idx + 1);
+    else {
+      // simple completion pulse
+      progressFill.style.width = '100%';
+      document.getElementById('ctaFinal').focus();
+    }
+  });
+  prevBtn.addEventListener('click', () => setStep(idx - 1));
 
-.hh-progress-fill {
-  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
-  height: 10px;
-  border-radius: 99px;
-  transition: width .35s var(--ease);
-}
+  // Share Composer (simple persona-tone presets)
+  const segBtns = document.querySelectorAll('.hh-share-seg-btn');
+  const shareText = document.getElementById('shareText');
+  const sharePreview = document.getElementById('sharePreview');
 
-/* ------------------------------
-   SHARE COMPOSER
-   ------------------------------ */
-.hh-share-box {
-  background: var(--surface);
-  padding: 1.2rem;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255,255,255,0.15);
-  display: flex;
-  flex-direction: column;
-  gap: .8rem;
-}
+  const presets = {
+    eltern: 'Euer Familien-Plan auf einer Seite: In 90 Min. von „Hoffentlich passt alles“ zu „Wir haben’s im Griff“ — ohne Druck, Schritt für Schritt.',
+    paare:  'Geldfragen ohne Streit: Ein gemeinsamer Plan, der Entscheidungen leicht macht. Klar. Transparent. Umsetzbar.',
+    selbst: 'Wie lange trägt dein Geschäft dich? Finde es in 3 Min. heraus — schließe die Lücken gezielt und bleib liquid.'
+  };
 
-.hh-share-box textarea {
-  width: 100%;
-  background: rgba(255,255,255,0.05);
-  padding: .9rem;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255,255,255,0.18);
-  resize: vertical;
-  color: var(--text);
-}
+  function setSeg(seg) {
+    segBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.seg === seg)));
+    shareText.value = presets[seg] || '';
+    sharePreview.textContent = presets[seg] || 'Vorschau erscheint hier …';
+  }
+  segBtns.forEach(b => b.addEventListener('click', () => setSeg(b.dataset.seg)));
+  setSeg('eltern');
 
-.hh-share-seg-btn {
-  padding: .6rem 1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.05);
-  cursor: pointer;
-}
-
-.hh-share-seg-btn.active {
-  background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-  color: #111;
-}
-
-.hh-share-preview {
-  background: rgba(255,255,255,0.05);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255,255,255,0.18);
-  padding: 1rem;
-  font-size: .95rem;
-  color: var(--muted);
-}
-
-/* ------------------------------
-   STICKY CTA
-   ------------------------------ */
-.sticky-cta {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 14px;
-  display: none;
-  justify-content: center;
-  padding-bottom: calc(env(safe-area-inset-bottom) + 6px);
-  z-index: 90;
-  transform: translateY(100%);
-  opacity: 0;
-  transition: opacity .25s var(--ease), transform .25s var(--ease);
-}
-
-@media (max-width: 979px) {
-  .sticky-cta { display: flex; }
-}
-
-.sticky-cta .inner {
-  background: rgba(5,8,22,.88);
-  border: 1px solid rgba(255,255,255,.08);
-  padding: .55rem;
-  border-radius: 999px;
-  box-shadow: var(--elev-1);
-}
+  shareText.addEventListener('input', () => {
+    sharePreview.textContent = shareText.value.trim() || 'Vorschau erscheint hier …';
+  });
+})();
+</script>
+</body>
+</html>
