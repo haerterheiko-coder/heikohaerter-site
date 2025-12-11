@@ -1,0 +1,61 @@
+{
+  "liveMetrics": {
+    "today": 18,
+    "week": 74,
+    "lastUsedMinutesAgo": 3
+  },
+
+  "slotAvailability": {
+    "month": "März",
+    "slots": 9
+  },
+
+  "ampelStats": {
+    "green": 42,
+    "yellow": 27,
+    "red": 19
+  },
+
+  "testimonials": [
+    {
+      "avatar": "👨‍👩‍👧 Eltern, 34 & 36",
+      "text": "„22:47 – Kinder schlafen. Wir wollten nur wissen, ob wir heute etwas offen haben. Die Ampel hat uns in 2 Minuten beruhigt.“"
+    },
+    {
+      "avatar": "💬 Paar, 31",
+      "text": "„Wir hatten Angst, etwas Wichtiges zu übersehen. Die Ampel hat uns sofort gezeigt: Jetzt · Als Nächstes · Später. Ohne Verkauf.“"
+    },
+    {
+      "avatar": "💼 Selbstständig, 38",
+      "text": "„Ich wollte nur kurz checken, wie verwundbar ich bin. Es war klarer als jede Beratung, die ich je hatte.“"
+    },
+    {
+      "avatar": "👩 Alleinerziehend, 33",
+      "text": "„Ich habe mich nie getraut, mich um Finanzen zu kümmern. Die Ampel war das erste Mal, dass es sich leicht angefühlt hat.“"
+    },
+    {
+      "avatar": "🧑‍🔧 Handwerker, 29",
+      "text": "„Ich habe keine Zeit für Papierkram. Das hier dauerte 2 Minuten – und ich wusste sofort, wo ich stehe.“"
+    },
+    {
+      "avatar": "👨 IT-Lead, 41",
+      "text": "„Kein Verkauf, kein Druck, kein Datenabgriff. Einfach ein ehrlicher Überblick. Genau sowas habe ich gesucht.“"
+    }
+  ],
+
+  "referral": {
+    "neutral": [
+      "Hey, kurzer 2-Minuten-Blick – zeigt dir anonym, ob heute etwas für dich wichtig ist. Wenn’s nichts bringt: 25 €. {{URL}}",
+      "Falls du dieses „ich müsste mal…“-Gefühl kennst: Hier bekommst du in 2 Minuten Klarheit. {{URL}}"
+    ],
+    "eltern": [
+      "Kurz für Eltern (2 Min): zeigt anonym, ob für heute etwas ansteht – ohne Verkauf. {{URL}}"
+    ],
+    "paare": [
+      "2-Minuten-Status: zeigt euch sofort, ob ihr etwas überseht – komplett anonym. {{URL}}"
+    ],
+    "selbst": [
+      "Für Selbstständige: 2 Minuten – zeigt, wie verwundbar dein Alltag gerade wäre. {{URL}}"
+    ]
+  }
+}
