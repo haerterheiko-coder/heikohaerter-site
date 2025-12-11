@@ -1,226 +1,271 @@
+<!-- /index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0b0f14">
-  <meta name="description" content="In 2 Minuten sehen, wo du gerade stehst – anonym, ruhig, ohne Druck. Für den Alltag gebaut.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0b0f14" />
   <title>In 2 Minuten sehen, wo du gerade stehst – Ruhige Finanz-Ampel</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Ein kurzer Blick, der dir zeigt, wo du gerade stehst – anonym, ruhig, ohne Druck. Für Familien, Selbstständige und Angestellte. Ohne Vorbereitung. Für den Alltag gebaut." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- 🔧 Upgrade 1: Micro-Commitment Loader -->
+  <div id="micro-loader" class="micro-loader" role="status" aria-live="polite">
+    <div class="micro-loader-box">
+      <div class="micro-loader-dot" aria-hidden="true"></div>
+      <p class="micro-loader-text">Seite ist bereit – du entscheidest</p>
+    </div>
+  </div>
+
   <a class="skip-link" href="#main">Zum Inhalt</a>
 
-  <!-- Decision Anchor Bar (appears after 180px via JS) -->
-  <div id="decision-anchor" class="decision-anchor" hidden>
-    🔒 100% anonym · kein Verkauf · 25 € wenn’s dir nichts bringt
+  <!-- Decision Anchor + Micro-Proof Loop -->
+  <div id="decision-anchor" class="decision-anchor" role="note" aria-live="polite">
+    <span class="lock" aria-hidden="true">🔒</span> 100% anonym · kein Verkauf · 25 € wenn’s dir nichts bringt ·
+    <span id="micro-proof" class="micro-proof">keine Vorbereitung notwendig</span>
   </div>
 
-  <!-- Sticky Bottom CTA (appears after 30% scroll via JS) -->
-  <div id="sticky-cta" class="sticky-cta" hidden>
-    <button class="btn-primary" type="button" data-track="cta_sticky" aria-controls="quiz">👉 Kurz-Check starten</button>
+  <!-- Sticky CTA -->
+  <div id="sticky-cta" class="sticky-cta" aria-hidden="true">
+    <div class="inner">
+      <button class="btn-primary tap-scale" data-target="#quiz" data-track="cta_sticky">👉 Kurz-Check starten</button>
+    </div>
   </div>
 
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="./">
-        <span class="dot" aria-hidden="true"></span>
-        <span class="name">Ruhige Finanz-Ampel</span>
-        <span class="tag">für den Alltag gebaut</span>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="wrap header-bar">
+      <a class="brand" href="/" aria-label="Startseite">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span class="brand-name">Ruhige Finanz-Ampel</span>
+        <span class="brand-tag">für den Alltag gebaut</span>
       </a>
+      <nav class="head-nav" aria-label="Hauptnavigation">
+        <a href="#quiz">Kurz-Check</a>
+        <a href="#story">Warum & wie</a>
+        <a href="#klaviyo-form-anchor">Weiter</a>
+      </nav>
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <!-- HERO -->
-    <section class="hero">
-      <div class="wrap">
-        <h1>In 2 Minuten sehen, wo du gerade stehst – ohne Druck, ohne Aufwand.</h1>
-        <p class="sub">Ein kurzer Check, der dir zeigt, wo du Geld liegen lassen könntest – anonym &amp; in deinem Tempo.</p>
+    <section class="hero section fade-up" aria-labelledby="hero-title">
+      <div class="wrap hero-wrap">
+        <div>
+          <p class="hero-hook" aria-live="polite">
+            <span id="hero-rotator">Keine Zeit?</span>
+          </p>
+          <h1 id="hero-title">In 2 Minuten sehen, wo du gerade stehst – ohne Druck, ohne Aufwand.</h1>
+          <p class="sub">Ein kurzer Blick, der dir zeigt, wo du Geld liegen lassen könntest – anonym & in deinem Tempo.</p>
 
-        <!-- Ampel (JS animiert rot → gelb → grün) -->
-        <div class="ampel" aria-label="Ampel-Status" role="img">
-          <span class="lamp red" aria-hidden="true"></span>
-          <span class="lamp yellow" aria-hidden="true"></span>
-          <span class="lamp green" aria-hidden="true"></span>
-        </div>
+          <!-- Ampel -->
+          <div class="ampel" aria-label="Ampel-Status" role="img">
+            <span class="ampel-light ampel-red" aria-hidden="true"></span>
+            <span class="ampel-light ampel-yellow" aria-hidden="true"></span>
+            <span class="ampel-light ampel-green" aria-hidden="true"></span>
+          </div>
 
-        <p class="social-line">⭐ Wird von vielen Familien &amp; Selbstständigen genutzt</p>
+          <p class="social-line" aria-live="polite">⭐ Wird von vielen Familien & Selbstständigen genutzt</p>
 
-        <div class="hero-ctas">
-          <button class="btn-primary" type="button" data-track="cta_start" data-target="#quiz" aria-controls="quiz">
-            Jetzt Kurz-Check starten
-          </button>
-          <a href="#story" class="btn-plain">Erst in Ruhe lesen</a>
+          <div class="hero-ctas">
+            <button class="btn-primary tap-scale" data-track="cta_start" data-target="#quiz">Jetzt Kurz-Check starten</button>
+            <a href="#story" class="btn">Erst in Ruhe lesen</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Neuro-UX Systems -->
-    <section class="neuro">
+    <!-- Neuro-UX -->
+    <section class="section neuro fade-up" aria-label="Vertrauenssignale">
       <div class="wrap">
-        <!-- Dynamic Proof Bars (structure only) -->
-        <div class="proof-bars" aria-label="Vertrauenswerte">
-          <div class="bar">
-            <div class="bar-top"><span>Vertrauen</span><strong>98 %</strong></div>
-            <div class="bar-track" data-value="98"><span class="bar-fill"></span></div>
+        <div class="proof" role="list">
+          <div class="proof-item" role="listitem">
+            <div class="proof-top"><span>Vertrauen</span><strong>98 %</strong></div>
+            <div class="proof-bar" data-value="98" aria-label="Vertrauen 98 Prozent"><span></span></div>
           </div>
-          <div class="bar">
-            <div class="bar-top"><span>Ruhe im Kopf</span><strong>92 %</strong></div>
-            <div class="bar-track" data-value="92"><span class="bar-fill"></span></div>
+          <div class="proof-item" role="listitem">
+            <div class="proof-top"><span>Ruhe im Kopf</span><strong>92 %</strong></div>
+            <div class="proof-bar" data-value="92" aria-label="Ruhe im Kopf 92 Prozent"><span></span></div>
           </div>
-          <div class="bar">
-            <div class="bar-top"><span>Empfohlen</span><strong>91 %</strong></div>
-            <div class="bar-track" data-value="91"><span class="bar-fill"></span></div>
+          <div class="proof-item" role="listitem">
+            <div class="proof-top"><span>Empfohlen</span><strong>91 %</strong></div>
+            <div class="proof-bar" data-value="91" aria-label="Empfohlen 91 Prozent"><span></span></div>
           </div>
         </div>
 
-        <!-- Live Social Feed container -->
-        <div id="live-feed" class="live-feed" aria-live="polite"></div>
+        <div class="live-feed" aria-live="polite">
+          <ul id="live-messages">
+            <li>„Sandra (31) hat gerade ihre Ampel gemacht.“</li>
+            <li>„Leon (27) spart 420 € im Jahr.“</li>
+            <li>„Heute schon viele Menschen sortiert.“</li>
+          </ul>
+        </div>
 
-        <!-- Micro Testimonials -->
-        <ul class="testimonials">
-          <li>„Dachte nicht, dass das so entspannt geht.“ – Lisa, 29</li>
-          <li>„Endlich mal durchgesehen, ohne Stress.“ – Jan, 37</li>
-          <li>„Wir haben jetzt viel mehr Überblick im Alltag.“ – Miriam &amp; Paul</li>
-        </ul>
+        <div class="micro-t" aria-label="Stimmen">
+          <figure class="micro">
+            <blockquote>„Dachte nicht, dass das so entspannt geht.“</blockquote>
+            <figcaption>– Lisa, 29</figcaption>
+          </figure>
+          <figure class="micro">
+            <blockquote>„Endlich Ruhe im Kopf – wir wissen, was heute wichtig ist.“</blockquote>
+            <figcaption>– Jan, 37</figcaption>
+          </figure>
+          <figure class="micro">
+            <blockquote>„Wir haben jetzt viel mehr Überblick im Alltag.“</blockquote>
+            <figcaption>– Miriam &amp; Paul</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
-    <!-- Story Section -->
-    <section id="story" class="story">
+    <!-- Story -->
+    <section id="story" class="section fade-up">
       <div class="wrap">
         <h2>„Warum kümmern sich so viele nicht darum?“</h2>
-        <ul class="reasons">
-          <li>zu viel Papier</li>
-          <li>schlechtes Gewissen</li>
-          <li>Angst, etwas zu entscheiden</li>
-          <li>nie die Zeit gefunden</li>
-          <li>fühlt sich größer an, als es ist</li>
+        <ul class="story-grid" role="list">
+          <li class="story-card" role="listitem">zu viel Papier</li>
+          <li class="story-card" role="listitem">schlechtes Gewissen</li>
+          <li class="story-card" role="listitem">Angst, etwas zu entscheiden</li>
+          <li class="story-card" role="listitem">nie die Zeit gefunden</li>
+          <li class="story-card" role="listitem">fühlt sich größer an, als es ist</li>
         </ul>
         <p class="solution">Der 2-Minuten-Check nimmt den ersten Druck raus.</p>
-        <p class="assist">Wir schauen gemeinsam drauf, Schritt für Schritt. Du musst nichts vorbereiten. Ziel: ruhiger Kopf, Geld im Griff, heute sehen, wo du stehst.</p>
+        <p class="assist">Wir schauen gemeinsam drauf – Schritt für Schritt. Du musst nichts vorbereiten. Ziel: ruhiger Kopf, Geld im Griff, heute sehen, wo du stehst.</p>
       </div>
     </section>
 
-    <!-- Persona System -->
-    <section class="personas">
+    <!-- Personas -->
+    <section class="section personas fade-up" aria-labelledby="personas-title">
       <div class="wrap">
-        <h2>Wähle, was zu dir passt</h2>
+        <h2 id="personas-title">Wähle, was zu dir passt</h2>
         <div class="persona-grid">
-          <button class="persona-card"
-                  type="button"
-                  data-headline="Mehr Überblick im Familienalltag – ohne Papierkram."
-                  data-subline="In Ruhe durchgehen, nicht mehr raten müssen."
-                  data-testimonial-group="familie"
-                  data-ref-group="pfad-familie">
-            <span class="persona-title">Ich bin Familie</span>
-            <span class="persona-copy">ruhiger Kopf, Alltag sortieren</span>
+          <button class="persona-card" type="button"
+            data-key="familie"
+            data-headline="Mehr Überblick im Familienalltag – ohne Papierkram."
+            data-subline="In Ruhe durchgehen, nicht mehr raten müssen."
+            data-testimonial-group="familie"
+            data-ref-group="pfad-familie">
+            <h3>Ich bin Familie</h3>
+            <p class="persona-points">ruhiger Kopf · Alltag sortieren</p>
           </button>
 
-          <button class="persona-card"
-                  type="button"
-                  data-headline="Passt dein Risiko zu deinem echten Alltag?"
-                  data-subline="Heute sehen, wo du stehst – anonym."
-                  data-testimonial-group="selbststaendig"
-                  data-ref-group="pfad-selbststaendig">
-            <span class="persona-title">Ich bin Selbstständig</span>
-            <span class="persona-copy">Einnahmen schwanken? ruhig prüfen</span>
+          <button class="persona-card" type="button"
+            data-key="selbststaendig"
+            data-headline="Passt dein Risiko zu deinem echten Alltag?"
+            data-subline="Heute sehen, wo du stehst – anonym."
+            data-testimonial-group="selbststaendig"
+            data-ref-group="pfad-selbststaendig">
+            <h3>Ich bin Selbstständig</h3>
+            <p class="persona-points">Einnahmen schwanken? ruhig prüfen</p>
           </button>
 
-          <button class="persona-card"
-                  type="button"
-                  data-headline="Einmal durchsortieren, damit es sich besser anfühlt."
-                  data-subline="Schritt für Schritt, ohne Druck."
-                  data-testimonial-group="angestellt"
-                  data-ref-group="pfad-angestellt">
-            <span class="persona-title">Ich bin Angestellt</span>
-            <span class="persona-copy">heute sehen, was offen ist</span>
+          <button class="persona-card" type="button"
+            data-key="angestellt"
+            data-headline="Einmal durchsortieren, damit es sich besser anfühlt."
+            data-subline="Schritt für Schritt, ohne Druck."
+            data-testimonial-group="angestellt"
+            data-ref-group="pfad-angestellt">
+            <h3>Ich bin Angestellt</h3>
+            <p class="persona-points">heute sehen, was offen ist</p>
           </button>
         </div>
+        <p id="persona-copy" class="persona-copy" aria-live="polite"></p>
       </div>
     </section>
 
-    <!-- QUIZ WIZARD 2026 (structure) -->
-    <section id="quiz" class="quiz" aria-labelledby="quiz-title">
+    <!-- QUIZ -->
+    <section id="quiz" class="section fade-up" aria-labelledby="quiz-title">
       <div class="wrap">
         <h2 id="quiz-title">Kurz-Check</h2>
 
-        <div class="progress" aria-hidden="true">
-          <div class="track"></div>
-          <div class="bar" data-progress="0"></div>
-          <div class="text"><span data-step>1</span>/3</div>
+        <!-- 🔧 Upgrade 2: Soft-Permission -->
+        <p class="soft-permission" id="soft-permission" aria-live="polite">
+          Es dauert nur 2&nbsp;Minuten. Du kannst jederzeit abbrechen.
+        </p>
+
+        <div class="progress" aria-hidden="false" aria-label="Fortschritt">
+          <div class="progress-track"></div>
+          <div class="progress-bar" data-progress role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+          <div class="progress-text"><span data-step>1</span>/3 · <span id="progress-tick">Los geht’s</span></div>
         </div>
 
-        <!-- Frage 1 -->
-        <section class="quiz-step" data-step="1" aria-label="Frage 1">
+        <!-- Step 1 -->
+        <div class="quiz-step" data-step="1">
           <h3>Wie fühlt sich dein Kontostand meistens an?</h3>
-          <div class="answers" role="group" aria-label="Antworten zu Frage 1">
-            <button class="pill" type="button" data-value="okay-knapp">okay, aber oft knapp</button>
-            <button class="pill" type="button" data-value="chaotisch">chaotisch / keine Ahnung</button>
-            <button class="pill" type="button" data-value="passt">passt meistens</button>
+          <div class="answers" role="group" aria-label="Kontostand Gefühl">
+            <button class="answer" data-value="gelb">okay, aber oft knapp</button>
+            <button class="answer" data-value="rot">chaotisch / keine Ahnung</button>
+            <button class="answer" data-value="gruen">passt meistens</button>
           </div>
-        </section>
+        </div>
 
-        <!-- Frage 2 -->
-        <section class="quiz-step" data-step="2" hidden aria-label="Frage 2">
+        <!-- Step 2 -->
+        <div class="quiz-step" data-step="2" hidden>
           <h3>Wie schnell findest du wichtige Unterlagen?</h3>
-          <div class="answers" role="group" aria-label="Antworten zu Frage 2">
-            <button class="pill" type="button" data-value="ewig">dauert ewig</button>
-            <button class="pill" type="button" data-value="manchmal">manchmal</button>
-            <button class="pill" type="button" data-value="direkt">finde ich direkt</button>
+          <div class="answers" role="group" aria-label="Unterlagen finden">
+            <button class="answer" data-value="rot">dauert ewig</button>
+            <button class="answer" data-value="gelb">manchmal</button>
+            <button class="answer" data-value="gruen">finde ich direkt</button>
           </div>
-        </section>
+        </div>
 
-        <!-- Frage 3 -->
-        <section class="quiz-step" data-step="3" hidden aria-label="Frage 3">
+        <!-- Step 3 -->
+        <div class="quiz-step" data-step="3" hidden>
           <h3>Wie sicher fühlst du dich, falls etwas passiert?</h3>
-          <div class="answers" role="group" aria-label="Antworten zu Frage 3">
-            <button class="pill" type="button" data-value="wuerde-treffen">würde uns treffen</button>
-            <button class="pill" type="button" data-value="teilweise">teilweise geregelt</button>
-            <button class="pill" type="button" data-value="stabil">fühlt sich stabil an</button>
+          <div class="answers" role="group" aria-label="Sicherheit Gefühl">
+            <button class="answer" data-value="rot">würde uns treffen</button>
+            <button class="answer" data-value="gelb">teilweise geregelt</button>
+            <button class="answer" data-value="gruen">fühlt sich stabil an</button>
           </div>
-        </section>
+        </div>
 
-        <!-- Result-Screen Placeholder -->
-        <section id="quiz-result" class="quiz-result" hidden aria-live="polite">
-          <h3 class="result-title">Deine Ampel</h3>
-          <div class="ampel result-ampel" aria-label="Ergebnis-Ampel" role="img">
-            <span class="lamp red" aria-hidden="true"></span>
-            <span class="lamp yellow" aria-hidden="true"></span>
-            <span class="lamp green" aria-hidden="true"></span>
+        <!-- Result -->
+        <div id="quiz-result" class="result-card fade-up" hidden aria-live="polite">
+          <div class="result-head">
+            <h3 id="quiz-result-title" tabindex="-1">Deine Ampel</h3>
+            <span id="persona-badge" class="persona-badge" hidden>—</span>
           </div>
-          <p class="result-note">einmal sauber sortieren – in Ruhe durchgehen</p>
-          <div id="slot-generator" class="slot-generator" aria-live="polite"></div>
+
+          <div class="ampel result-ampel" aria-label="Ergebnis Ampel" role="img">
+            <span class="ampel-light ampel-red" data-lamp="rot" aria-hidden="true"></span>
+            <span class="ampel-light ampel-yellow" data-lamp="gelb" aria-hidden="true"></span>
+            <span class="ampel-light ampel-green" data-lamp="gruen" aria-hidden="true"></span>
+          </div>
+
+          <p id="quiz-result-text" class="result-text">einmal sauber sortieren – in Ruhe durchgehen</p>
+
+          <div id="quiz-slots" class="slots" aria-label="freie Zeiten"></div>
+
           <div class="result-ctas">
-            <button class="btn-primary" type="button" data-track="cta_start_again">Nochmal starten</button>
-            <a href="#klaviyo-form-anchor" class="btn-plain">in Ruhe fortsetzen</a>
+            <button class="btn-primary tap-scale" data-track="cta_again" id="quiz-again">Nochmal starten</button>
+            <a href="#klaviyo-form-anchor" class="btn">in Ruhe fortsetzen</a>
           </div>
-        </section>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer / Contact -->
-  <footer class="site-footer">
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
     <div class="wrap">
       <nav class="foot-nav" aria-label="Fußnavigation">
         <a href="#quiz">Kurz-Check</a>
-        <a href="#story">Warum &amp; wie</a>
+        <a href="#story">Warum & wie</a>
         <a href="#klaviyo-form-anchor">Weiter</a>
       </nav>
       <p class="foot-copy">© <span data-year></span> Ruhige Finanz-Ampel · Für den Alltag gebaut</p>
     </div>
   </footer>
 
-  <!-- KLAVIYO INTEGRATION -->
+  <!-- Klaviyo -->
   <div id="klaviyo-form-anchor"></div>
   <script id="klaviyo-loader" type="application/json">
     { "company_id": "YOUR_KLAVIYO_ID" }
   </script>
 
-  <!-- File References -->
   <script defer src="app.js"></script>
 </body>
 </html>
