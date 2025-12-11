@@ -1,365 +1,228 @@
-// /public/app.js
-/* =========================================================
-   HEIKO HAERTER – 2026 ULTRA MASTER APP.JS (Hardened v3)
-   Neuro-Optimized · Zero-Jank · Wix-/SSR-Safe · A11y-Aware
-   ========================================================= */
-(() => {
-  'use strict';
+/* ========================================================================
+   File: /styles.css
+   HEIKO HAERTER — 2026 UI SYSTEM (Refined)
+   Mobile-first • Accessible • Performance-first
+   ======================================================================== */
+@layer tokens, base, components, utilities;
 
-  /* -----------------------------
-     0) CORE UTILS (why: stability)
-  ----------------------------- */
-  /** @template {Element} T */ const $  = (s, p = document) => /** @type {T|null} */(p.querySelector(s));
-  /** @template {Element} T */ const $$ = (s, p = document) => /** @type {T[]} */([...p.querySelectorAll(s)]);
-  const on  = (el, t, fn, o) => el && el.addEventListener(t, fn, o);
-  const off = (el, t, fn, o) => el && el.removeEventListener(t, fn, o);
-  const raf = (cb) => (window.requestAnimationFrame || setTimeout)(cb);
+/* TOKENS */
+@layer tokens {
+  :root {
+    /* Palette */
+    --bg: #05070E;
+    --bg-soft: #0A0F1E;
+    --surface: rgba(255,255,255,0.045);
+    --surface-soft: rgba(255,255,255,0.07);
+    --text: #F7F8FC;
+    --muted: #A9B2C6;
+    --muted-soft: #8F97AA;
+    --gold: #C8A44B;
+    --gold-soft: #E9D394;
+    --ok: #6BDB91;
+    --warn: #FFBC2D;
+    --danger: #FF5858;
+    --focus: #90C2FF;
 
-  const safeStore = (() => {
-    try { const k = '__t'; localStorage.setItem(k,'1'); localStorage.removeItem(k);
-      return {
-        get(k){ try { return localStorage.getItem(k); } catch { return null; } },
-        set(k,v){ try { localStorage.setItem(k,v); } catch {} },
-        del(k){ try { localStorage.removeItem(k); } catch {} },
-      };
-    } catch {
-      const mem = new Map();
-      return { get:k=>mem.get(k)??null, set:(k,v)=>void mem.set(k,v), del:k=>void mem.delete(k) };
-    }
-  })();
+    /* Type scale */
+    --fs-h1: clamp(2rem, 5.5vw, 3.25rem);
+    --fs-h2: clamp(1.6rem, 3.5vw, 2.2rem);
+    --fs-h3: clamp(1.12rem, 2.2vw, 1.35rem);
+    --fs-body: clamp(1rem, 1.15vw, 1.08rem);
+    --fs-micro: .92rem;
 
-  const safeCrypto = (() => {
-    const g = (typeof globalThis !== 'undefined' ? globalThis : window);
-    return (g.crypto && g.crypto.getRandomValues) ? g.crypto : null;
-  })();
+    /* Spacing (4/8/12/16/24/32) */
+    --s-1: .25rem; /* 4 */
+    --s-2: .5rem;  /* 8 */
+    --s-3: .75rem; /* 12 */
+    --s-4: 1rem;   /* 16 */
+    --s-5: 1.5rem; /* 24 */
+    --s-6: 2rem;   /* 32 */
+    --section-y: clamp(40px, 8vw, 96px);
 
-  function randId(n = 12) {
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    if (safeCrypto) {
-      const arr = new Uint8Array(n); safeCrypto.getRandomValues(arr);
-      return [...arr].map(x => chars[x % chars.length]).join('');
-    }
-    let o=''; for (let i=0;i<n;i++) o += chars[(Math.random()*chars.length)|0]; return o;
+    /* Layout */
+    --max-w: 1120px;
+    --wrap-x: clamp(16px, 5vw, 32px);
+
+    /* Radii */
+    --r-xl: 34px;
+    --r-lg: 24px;
+    --r-md: 18px;
+    --r-sm: 12px;
+
+    /* Elevation */
+    --elev-1: 0 18px 40px rgba(0,0,0,0.35);
+    --elev-2: 0 30px 80px rgba(0,0,0,0.55);
+
+    /* Motion */
+    --ease: cubic-bezier(.22,.61,.36,1);
+
+    /* Glows */
+    --bg-glow-1: radial-gradient(circle at 12% -10%, rgba(200,164,75,0.22), transparent 55%);
+    --bg-glow-2: radial-gradient(circle at 88% 12%, rgba(120,150,255,0.18), transparent 60%);
+
+    color-scheme: dark;
   }
-
-  const hasIO = 'IntersectionObserver' in window;
-  const hasClipboard = !!navigator.clipboard;
-  const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = () => innerWidth < 980;
-
-  /* =========================================================
-     1) FADE-IN ENGINE (why: smooth, motion-safe)
-  ========================================================= */
-  const FadeIn = (() => {
-    let io;
-    function init() {
-      const els = $$('.fade-up');
-      if (prefersReducedMotion || !hasIO) { els.forEach(e=>e.classList.add('visible')); return; }
-      io = new IntersectionObserver((entries) => {
-        entries.forEach(ent => {
-          if (ent.isIntersecting) { ent.target.classList.add('visible'); io.unobserve(ent.target); }
-        });
-      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
-      els.forEach(el => io.observe(el));
-    }
-    function destroy(){ io && io.disconnect(); io = undefined; }
-    return { init, destroy };
-  })();
-
-  /* =========================================================
-     2) STICKY CTA (why: unobtrusive prompt, mobile-only)
-  ========================================================= */
-  const StickyCTA = (() => {
-    let io, onScrollRef;
-    function show(el, v){ raf(()=>{ el.style.transform = v?'translateY(0)':'translateY(120%)'; el.style.opacity = v?'1':'0'; el.setAttribute('aria-hidden', String(!v)); }); }
-    function init() {
-      // support both ID spellings found in markup
-      const el = $('#stickyCTA') || $('#stickyCta');
-      const hero = $('.hero');
-      if (!el || !hero || !isMobile()) return;
-      if (hasIO) {
-        io = new IntersectionObserver(([ent]) => show(el, !ent.isIntersecting), { threshold: 0.12 });
-        io.observe(hero);
-      } else {
-        onScrollRef = () => show(el, scrollY > 180);
-        on(window,'scroll',onScrollRef,{ passive:true }); onScrollRef();
-      }
-    }
-    function destroy(){ io && io.disconnect(); io = undefined; onScrollRef && off(window,'scroll',onScrollRef,{ passive:true }); onScrollRef = undefined; }
-    return { init, destroy };
-  })();
-
-  /* =========================================================
-     3) SHORT MODE (why: ADHS/cognitive-load friendly view)
-  ========================================================= */
-  const ShortMode = (() => {
-    const KEY = 'hh_short_mode_v1';
-    function init() {
-      const btn = $('#dfBtn'); if (!btn) return;
-      const keep = ['hero','final-cta','stickyCTA','stickyCta','share','ampel-check'];
-      const sections = $$('main > section').filter(s => !keep.includes(s.id));
-      const set = (onState) => {
-        btn.setAttribute('aria-pressed', String(onState));
-        btn.textContent = onState ? '✅ Kurzmodus aktiv' : '🔍 Kurzmodus';
-        sections.forEach(sec => sec.style.display = onState ? 'none' : '');
-        if (onState) scrollTo({ top:0, behavior:'smooth' });
-        safeStore.set(KEY, onState ? '1' : '0');
-      };
-      set(safeStore.get(KEY) === '1');
-      on(btn,'click',()=> set(!(btn.getAttribute('aria-pressed')==='true')));
-      window.setKurzmodus = set; // optional hook
-    }
-    return { init };
-  })();
-
-  /* =========================================================
-     4) SHARE ENGINE (why: frictionless referral, zero-pressure)
-  ========================================================= */
-  const ShareEngine = (() => {
-    const KEY = 'hh_ref_rid_v3';
-    let rid;
-    const sanitize = (v) => (v ? v.replace(/[^a-z0-9]/gi,'').toLowerCase() : '');
-    const getRid = () => { if (!rid) rid = safeStore.get(KEY) || (safeStore.set(KEY, randId()), safeStore.get(KEY)); return rid; };
-
-    function buildURL(nameInput){
-      const base = location.origin || 'https://heikohaerter.com'; // why: SSR/file:// guard
-      const u = new URL(base); const id = getRid();
-      u.searchParams.set('utm_source','weitergeben');
-      u.searchParams.set('utm_medium','share');
-      u.searchParams.set('utm_campaign','check');
-      u.searchParams.set('rid', id);
-      const alias = sanitize((nameInput?.value || '').trim());
-      if (alias) u.searchParams.set('ref', `${alias}.${id.slice(0,5)}`);
-      return u.toString();
-    }
-    const detectSeg = (nameInput) => {
-      const raw = (nameInput?.value || '').toLowerCase();
-      if (/papa|mama|eltern|vater|mutter/.test(raw)) return 'eltern';
-      if (/chef|kolleg|team|büro/.test(raw)) return 'kollegen';
-      if (/freund|kumpel|buddy/.test(raw)) return 'freunde';
-      if (/selbstständig|selbständig|freelance/.test(raw)) return 'selbst';
-      if (/partner|ehefrau|ehemann/.test(raw)) return 'partner';
-      return 'neutral';
-    };
-    const loadVariants = (area) => { try { return JSON.parse(area.dataset.variants || '{}'); } catch { return { neutral: [] }; } };
-    const pick = (variants, seg) => { const pool = variants[seg] || variants.neutral || []; return pool[(Math.random()*pool.length)|0] || ''; };
-    const plain = (val) => (val || '').replace(/\n+/g,' ').trim();
-    const ensureURL = (t, url) => /\bhttps?:\/\//.test(t) ? t : `${t} ${url}`;
-
-    function init(){
-      const nameInput = $('#refName');
-      const area = $('#refText');
-      const wa = $('#waShare');
-      const mail = $('#mailShare');
-      const copy = $('#copyBtn');
-      const preview = $('#waPreviewText');
-      const readyBtn = $('#readyMsg');
-      const magicBtn = $('#magicLine');
-      const addPersonalBtn = $('#addPersonal');
-      if (!area || !wa || !mail || !copy || !preview) return;
-
-      const variants = loadVariants(area);
-      const update = () => {
-        const url = buildURL(nameInput);
-        if (!area.value) {
-          const seg = detectSeg(nameInput);
-          area.value = (pick(variants, seg) || '').replace(/{{URL}}/g, url);
-        }
-        const t = ensureURL(plain(area.value), url);
-        wa.href = 'https://wa.me/?text=' + encodeURIComponent(t);
-        mail.href = 'mailto:?subject=Kurzer%20Blick&body=' + encodeURIComponent(t);
-        preview.textContent = t.length <= 180 ? t : t.slice(0, t.lastIndexOf(' ', 180)) + '…';
-      };
-
-      let tId; const debounced = () => { clearTimeout(tId); tId = setTimeout(update, 80); };
-      update();
-      $$('.seg-btn').forEach(b => on(b,'click',()=>{ const url=buildURL(nameInput); const txt=(pick(variants,b.dataset.seg)||'').replace(/{{URL}}/g,url); if (txt){ area.value=txt; debounced(); } }));
-      on(nameInput,'input',debounced); on(area,'input',debounced);
-
-      on(readyBtn,'click',()=>{ update(); toast('Fertiger Text eingefügt ✔️'); });
-      on(magicBtn,'click',()=>{ const line='Hey, hab das gerade gesehen – dachte sofort an dich.'; const cur=(area.value||'').trim(); area.value = cur ? `${line}\n\n${cur}` : `${line}\n\n${buildURL(nameInput)}`; debounced(); });
-      on(addPersonalBtn,'click',()=>{ const alias=(nameInput?.value||'').trim()||'Hey'; area.value += `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`; debounced(); });
-
-      on(copy,'click', async () => {
-        const url = buildURL(nameInput);
-        const text = ensureURL(area.value, url);
-        try {
-          if (hasClipboard) { await navigator.clipboard.writeText(text); }
-          else { area.select(); document.execCommand('copy'); }
-          toast('Kopiert ✔️');
-        } catch { toast('Konnte nicht kopieren'); }
-      });
-    }
-
-    function toast(msg){
-      const w = document.createElement('div');
-      w.className = 'whisper';
-      w.textContent = msg;
-      Object.assign(w.style, {
-        position:'fixed', left:'18px', bottom:'18px',
-        background:'rgba(11,15,22,.92)', border:'1px solid rgba(255,255,255,.14)',
-        padding:'.6rem .8rem', borderRadius:'14px', opacity:'0', transform:'translateY(8px)',
-        transition:'opacity .25s, transform .25s', zIndex: 99999
-      });
-      document.body.appendChild(w);
-      raf(()=>{ w.style.opacity='1'; w.style.transform='translateY(0)'; });
-      setTimeout(()=> w.remove(), 2200);
-    }
-
-    return { init };
-  })();
-
-  /* =========================================================
-     5) AMPEL ENGINE (why: instant orientation)
-  ========================================================= */
-  const Ampel = (() => {
-    let score = 0, step = 1; const max = 3;
-    const els = {
-      start: $('#startCheckBtn'),
-      heroStart: $('#startCheckHero'),
-      finalStart: $('#ctaFinal'),
-      shortBtn: $('#startShort'),
-      screen: $('#check-start'),
-      wrap: $('#check-steps'),
-      result: $('#check-result'),
-      stepLabel: $('#stepLabel'),
-      stepHint: $('#stepHint'),
-      prog: $('#progressBar')
-    };
-
-    function updateHeader(){
-      els.stepLabel && (els.stepLabel.textContent = `Schritt ${Math.min(step,max)} von ${max}`);
-      const pct = ((Math.min(step-1, max-1)) / (max-1)) * 100;
-      els.prog && (els.prog.style.width = pct + '%');
-      if (els.stepHint) els.stepHint.textContent = step===1 ? 'Kurzer Eindruck reicht.' : step===2 ? 'Fast geschafft.' : 'Letzter Klick.';
-    }
-
-    function showStep(n){
-      $$('#check-steps .step').forEach(s => (s.style.display = 'none'));
-      const el = $(`#check-steps .step[data-step="${n}"]`);
-      if (el) el.style.display = 'block';
-      updateHeader();
-      el?.scrollIntoView({ behavior:'smooth' });
-    }
-
-    function finish(){
-      if (!els.wrap || !els.result) return;
-      els.wrap.style.display = 'none';
-      els.result.style.display = 'block';
-      const wa = 'https://wa.me/4917660408380?text=';
-      let html;
-      if (score <= 4) {
-        html = `
-        <div class="result-card result-red">
-          <h3>🔴 Deine Ampel: Jetzt</h3>
-          <p>Ein Bereich ist heute wirklich wichtig.</p>
-          <a class="hh-btn hh-btn-primary" href="${wa}Kurz%2010%20Minuten%20sprechen%20wegen%20meiner%20Ampel%20(Rot)">💬 10 Minuten sprechen</a>
-        </div>`;
-      } else if (score <= 7) {
-        html = `
-        <div class="result-card result-yellow">
-          <h3>🟡 Deine Ampel: Als Nächstes</h3>
-          <p>Einige Punkte brauchen Orientierung.</p>
-          <a class="hh-btn hh-btn-primary" href="${wa}Was%20sollte%20ich%20als%20N%C3%A4chstes%20regeln%3F">🧭 Als Nächstes regeln</a>
-        </div>`;
-      } else {
-        html = `
-        <div class="result-card result-green">
-          <h3>🟢 Deine Ampel: Später</h3>
-          <p>Alles wirkt stabil – evtl. Feinschliff.</p>
-          <a class="hh-btn hh-btn-primary" href="${wa}Gibt%20es%20noch%20Optimierungen%3F">✨ Noch smarter machen?</a>
-        </div>`;
-      }
-      els.result.innerHTML = html;
-      els.result.scrollIntoView({ behavior:'smooth' });
-    }
-
-    function startFlow(){
-      if (els.screen) els.screen.style.display = 'none';
-      if (els.wrap) els.wrap.style.display = 'block';
-      if (els.result) els.result.style.display = 'none';
-      score = 0; step = 1; showStep(step);
-    }
-
-    function init(){
-      on(els.start,'click',startFlow);
-      on(els.heroStart,'click',e=>{ e.preventDefault(); startFlow(); });
-      on(els.finalStart,'click',e=>{ e.preventDefault(); startFlow(); });
-      on(els.shortBtn,'click',e=>{ e.preventDefault(); startFlow(); setTimeout(()=>{ score+=2; step=2; showStep(step); },120); setTimeout(()=>{ score+=2; step=3; showStep(step); },260); });
-      const container = $('#check-steps');
-      on(container,'click',(ev)=>{ const btn = ev.target.closest('#check-steps .step button'); if (!btn) return;
-        score += Number(btn.dataset.value) || 0; step++; (step>max) ? finish() : showStep(step);
-      });
-    }
-    return { init };
-  })();
-
-  /* =========================================================
-     6) DOPAMIN UI (why: gentle delight, no overwhelm)
-  ========================================================= */
-  const DopamineUI = (() => {
-    let glowIO, intervalId;
-    function rippleHandler(e){
-      const btn = e.target.closest('button, .hh-btn, .btn'); if (!btn) return;
-      const prev = btn.querySelector('.hh-ripple'); prev && prev.remove(); // why: avoid stacking
-      const r = document.createElement('span'); r.className='hh-ripple';
-      const rect = btn.getBoundingClientRect();
-      r.style.left = (e.clientX - rect.left) + 'px';
-      r.style.top  = (e.clientY - rect.top)  + 'px';
-      btn.appendChild(r); setTimeout(()=>r.remove(), 450);
-    }
-    function initRipple(){ on(document,'click',rippleHandler); }
-    function initGlow(){
-      if (!hasIO) return;
-      glowIO = new IntersectionObserver((entries)=>{
-        entries.forEach(ent=>{
-          if (ent.isIntersecting){
-            ent.target.classList.add('hh-glow');
-            setTimeout(()=> ent.target.classList.remove('hh-glow'), 900);
-            glowIO.unobserve(ent.target);
-          }
-        });
-      }, { threshold: .4 });
-      $$('.hh-card, .premium-card, .result-card').forEach(el=> glowIO.observe(el));
-    }
-    function initWhisper(){
-      const box = $('#whisper'); if (!box) return;
-      const msgs = ['🟢 5 Sekunden – jemand fühlt sich sicherer.','🟡 Kleiner Klick, große Wirkung.','🔵 2 Minuten – mehr Überblick.','✨ Jemand sortiert gleich seinen Tag.'];
-      const show = () => {
-        const txt = msgs[(Math.random()*msgs.length)|0];
-        box.textContent = txt; box.style.opacity='1'; box.style.transform='translateY(0)';
-        setTimeout(()=>{ box.style.opacity='0'; box.style.transform='translateY(8px)'; }, 2800);
-      };
-      setTimeout(show, 2000);
-      intervalId = setInterval(show, 15000);
-    }
-    function destroy(){
-      off(document,'click',rippleHandler);
-      glowIO && glowIO.disconnect(); glowIO = undefined;
-      intervalId && clearInterval(intervalId); intervalId = undefined;
-    }
-    function init(){ initRipple(); initGlow(); initWhisper(); }
-    return { init, destroy };
-  })();
-
-  /* =========================================================
-     7) BOOT (why: DOM-ready, idempotent)
-  ========================================================= */
-  const boot = () => {
-    try { FadeIn.init(); } catch {}
-    try { StickyCTA.init(); } catch {}
-    try { ShortMode.init(); } catch {}
-    try { ShareEngine.init(); } catch {}
-    try { Ampel.init(); } catch {}
-    try { DopamineUI.init(); } catch {}
-  };
-
-  if (document.readyState === 'loading') {
-    on(document, 'DOMContentLoaded', boot, { once:true }); // why: ensure DOM present
-  } else {
-    boot();
+  @media (prefers-contrast: more) {
+    :root { --surface: rgba(255,255,255,0.08); --surface-soft: rgba(255,255,255,0.12) }
   }
+}
 
-  // optional cleanup on SPA navigations/pagehide
-  on(window, 'pagehide', () => { try { FadeIn.destroy?.(); } catch {} try { StickyCTA.destroy?.(); } catch {} try { DopamineUI.destroy?.(); } catch {} }, { once:true });
-})();
+/* BASE */
+@layer base {
+  *,:before,:after { box-sizing: border-box }
+  html, body {
+    margin: 0; padding: 0; overflow-x: hidden;
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+    line-height: 1.6; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+  }
+  img,picture,svg,video { display:block; max-width:100%; height:auto; content-visibility:auto; contain-intrinsic-size:1200px 800px }
+  a { color: inherit; text-decoration: none }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px;
+  }
+  ::selection { background: rgba(233,211,148,.25) }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important }
+  }
+}
+
+/* TYPOGRAPHY */
+@layer components {
+  .hh-h1 { font-size: var(--fs-h1); font-weight: 800; line-height: 1.12; margin: 0 0 1rem; letter-spacing: -.01em }
+  .hh-h2 { font-size: var(--fs-h2); font-weight: 800; line-height: 1.2;  margin: 0 0 .9rem; letter-spacing: -.01em }
+  h3     { font-size: var(--fs-h3); font-weight: 700; margin: 0 0 .6rem }
+  p, li  { font-size: var(--fs-body); color: var(--muted) }
+  .hh-micro,.hh-label { color: var(--muted-soft); font-size: var(--fs-micro); letter-spacing: .04em }
+}
+
+/* LAYOUT */
+@layer components {
+  .hh-container { width:100%; max-width: var(--max-w); margin-inline:auto; padding-inline: var(--wrap-x) }
+  .hh-section   { padding-block: var(--section-y) }
+  .hh-grid-auto { display:grid; gap: clamp(.8rem,2vw,1.4rem); grid-template-columns: repeat(auto-fit, minmax(min(100%,260px),1fr)) }
+  .hh-grid-hero { display:grid; gap: clamp(1.2rem, 3vw, 2.4rem) }
+  @media (min-width:1024px) { .hh-grid-hero { grid-template-columns: 1.1fr .9fr; align-items: center } }
+  .hh-stack     { display:flex; flex-direction:column; gap: clamp(.6rem, 1.6vw, 1.2rem) }
+  .hh-center    { text-align:center }
+}
+
+/* BUTTONS */
+@layer components {
+  .hh-btn {
+    display:inline-flex; gap:.55rem; align-items:center; justify-content:center;
+    min-height:48px; padding:.9rem 1.4rem; border-radius:999px; border:1px solid transparent;
+    cursor:pointer; font-weight:800; background:rgba(255,255,255,0.06); color:var(--text);
+    transition: transform .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+    position:relative; isolation:isolate; -webkit-tap-highlight-color: transparent;
+  }
+  .hh-btn:hover  { transform: translateY(-2px) }
+  .hh-btn:active { transform: translateY(0) scale(.98) }
+  .hh-btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold-soft)); color:#111; box-shadow: 0 12px 28px rgba(200,164,75,0.35) }
+  .hh-btn-primary:hover { box-shadow: 0 18px 40px rgba(200,164,75,0.45); filter: brightness(1.06) }
+  .hh-btn-ghost { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16) }
+  @media (max-width:768px){ .hh-btn,.hh-btn-primary,.hh-btn-ghost { width:100% } }
+}
+
+/* CARDS */
+@layer components {
+  .hh-card { background: var(--surface); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem; box-shadow: var(--elev-1); transition: transform .18s var(--ease), box-shadow .18s var(--ease) }
+  .hh-card:hover { transform: translateY(-4px); box-shadow: 0 22px 48px rgba(0,0,0,0.55) }
+  .hh-benefit { background: rgba(255,255,255,0.08) }
+  .hh-zero { border: 1px dashed rgba(233,211,148,0.45); background: rgba(233,211,148,0.08) }
+}
+
+/* MEDIA */
+@layer components {
+  .hh-hero-image img { width: 100%; border-radius: var(--r-lg); box-shadow: var(--elev-2); background: var(--bg-soft); aspect-ratio: 4/3; object-fit: cover }
+}
+
+/* FOOTER */
+@layer components {
+  .hh-footer { padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(5,8,22,0.95) }
+  .hh-footer a { text-decoration: underline }
+}
+
+/* SHARE */
+@layer components {
+  .hh-share-box { display:grid; gap:.8rem; background: var(--surface); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem }
+  .hh-share-seg { display:flex; flex-wrap:wrap; gap:.5rem }
+  .hh-share-seg-btn { padding:.5rem .9rem; border-radius:999px; border:1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.04); color:var(--text); cursor:pointer; transition: transform .15s var(--ease), background .15s var(--ease) }
+  .hh-share-seg-btn[aria-pressed="true"] { background: rgba(233,211,148,0.12); border-color: rgba(233,211,148,0.45) }
+  #shareText { width:100%; min-height:110px; background: var(--surface-soft); color: var(--text); border:1px solid rgba(255,255,255,0.16); border-radius: var(--r-sm); padding:.8rem 1rem; resize:vertical }
+  .hh-share-preview { padding:.9rem 1rem; border-radius: var(--r-sm); background: rgba(255,255,255,0.05); border:1px dashed rgba(255,255,255,0.16); min-height:56px }
+}
+
+/* PROOF */
+@layer components {
+  .trust { display:grid; gap:.8rem; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)) }
+  .trust .item { background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding:.9rem 1rem }
+  .proof-quotes { display:grid; gap:.8rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)) }
+  .quote { background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem }
+}
+
+/* PROGRESS & STEPS */
+@layer components {
+  .hh-progress { width:100%; background: rgba(255,255,255,0.08); border-radius:99px; height:10px; overflow:hidden; border:1px solid rgba(255,255,255,0.12) }
+  .hh-progress-fill { background: linear-gradient(90deg, var(--gold), var(--gold-soft)); height:100%; width:0%; border-radius:99px; transition: width .35s var(--ease) }
+  .hh-step { display:none; background: var(--surface); padding: 1.1rem 1.2rem; border-radius: var(--r-md); border:1px solid rgba(255,255,255,0.12) }
+  .hh-step.active { display:block }
+  .hh-ampel { display:flex; flex-direction:column; gap:1rem }
+  .hh-ampel-item { padding:1rem 1.2rem; border-radius: var(--r-md); border:1px solid rgba(255,255,255,0.15); display:flex; align-items:flex-start; gap:.8rem; font-size:1.05rem; background: var(--surface) }
+  .hh-ampel-item.now   { background: rgba(255,88,88,0.12);  border-color: rgba(255,88,88,0.35) }
+  .hh-ampel-item.next  { background: rgba(255,188,45,0.12); border-color: rgba(255,188,45,0.35) }
+  .hh-ampel-item.later { background: rgba(108,255,108,0.12); border-color: rgba(108,255,108,0.28) }
+}
+
+/* FAQ */
+@layer components {
+  .faq { display:grid; gap:.8rem }
+  .faq details { background: var(--surface); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding:.6rem .9rem }
+  .faq summary { cursor:pointer; font-weight:700; outline:none }
+  .faq p { margin:.4rem 0 0 }
+}
+
+/* ANIMATIONS */
+@layer components {
+  .fade-up { opacity:0; transform: translateY(18px) }
+  .fade-up.visible { opacity:1; transform:none; transition: opacity .55s var(--ease), transform .55s var(--ease) }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up { view-timeline-name: --fade; view-timeline-axis: block; animation-timeline: --fade; animation-name: fadeUp; animation-range: entry 10% cover 40%; animation-fill-mode: both }
+      @keyframes fadeUp { from { opacity:0; transform: translateY(28px) } to { opacity:1; transform: translateY(0) } }
+    }
+  }
+}
+
+/* STICKY CTA */
+@layer components {
+  .sticky-cta { position:fixed; left:0; right:0; bottom:14px; display:none; justify-content:center; padding-bottom: calc(env(safe-area-inset-bottom) + 6px); z-index:90; transform: translateY(100%); opacity:0; transition: opacity .25s var(--ease), transform .25s var(--ease) }
+  @media (max-width:979px){ .sticky-cta { display:flex } }
+  .sticky-cta .inner { background: rgba(5,8,22,.88); border:1px solid rgba(255,255,255,.08); padding:.55rem; border-radius:999px; box-shadow: var(--elev-1) }
+  .sticky-cta.show { transform: translateY(0); opacity:1 }
+}
+
+/* UTILITIES */
+@layer utilities {
+  html { scroll-behavior:smooth }
+  .hh-accelerate,.fade-up,.hh-btn,.hh-card,.hh-hero-image img { will-change: transform, opacity; transform: translateZ(0) }
+  a,button { touch-action: manipulation; -webkit-tap-highlight-color: transparent }
+  .hh-bg { position:relative }
+  .hh-bg::before,.hh-bg::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:-1 }
+  .hh-bg::before { background: var(--bg-glow-1) }
+  .hh-bg::after  { background: var(--bg-glow-2) }
+}
+
+/* MICRO (subtle) */
+@layer utilities {
+  .hh-btn:hover { transform: translateY(-3px) scale(1.02) }
+  .hh-btn-primary:hover { filter: brightness(1.08) }
+  .hh-ripple { position:absolute; width:18px; height:18px; background: rgba(255,255,255,0.28); border-radius:50%; transform: translate(-50%,-50%); animation: hhRipple .45s ease-out forwards; pointer-events:none; inset:0 }
+  @keyframes hhRipple { to { opacity:0; transform: translate(-50%,-50%) scale(8) } }
+}
+
+/* SAFE AREAS */
+@layer components { @supports(padding:max(0px)) { body { padding-bottom: max(env(safe-area-inset-bottom), 0px) } } }
+
+/* WIX FIX */
+@layer utilities { [data-mesh-id],[data-mesh-id] * { transform:none!important } [data-mesh-id] { max-width:none!important; width:100%!important } }
