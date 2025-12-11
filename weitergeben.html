@@ -58,7 +58,11 @@
   --fs-h1:clamp(2rem,3.2vw,3.1rem);
   --fs-h2:clamp(1.6rem,2.4vw,2.2rem);
   --fs-h3:clamp(1.05rem,1.6vw,1.25rem);
-  --fs-body:clamp(1rem,1.1vw,1.08rem);--fs-micro:.95rem;
+  --fs-body:clamp(1rem,1.1vw,1.08rem);--fs-micro:.95rem);
+
+  --aurora-1: conic-gradient(from 180deg at 30% 15%, rgba(120,160,255,.22), transparent 55%);
+  --aurora-2: conic-gradient(from 0deg at 70% 10%, rgba(200,164,75,.18), transparent 60%);
+  --noise: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".04"/></svg>');
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{width:100%;overflow-x:hidden}
@@ -66,8 +70,18 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
   margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
   background:var(--glow1),var(--glow2),linear-gradient(180deg,#04050A,#02040A 60%);color:var(--text);
-  -webkit-font-smoothing:antialiased;line-height:1.4;hyphens:auto;word-break:normal;
+  -webkit-font-smoothing:antialiased;line-height:1.4;hyphens:auto;word-break:normal;position:relative;
 }
+@media (prefers-reduced-motion:no-preference){
+  body::before{
+    content:""; position:fixed; inset:-20vmax; z-index:-1; pointer-events:none; opacity:.9;
+    background:var(--aurora-1),var(--aurora-2); filter:blur(40px) saturate(110%);
+    animation: aurora 18s linear infinite;
+  }
+  @keyframes aurora { to { transform: rotate(360deg) } }
+}
+body::after{content:""; position:fixed; inset:0; pointer-events:none; z-index:0; background-image:var(--noise); background-size:120px 120px; opacity:.55;}
+
 img,picture,svg,video{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
@@ -83,7 +97,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offs
 .inline{display:flex;flex-wrap:wrap;gap:.6rem}
 
 /* ===== TYPE ===== */
-h1,h2,h3{margin:0 0 .9rem;font-weight:700;letter-spacing:-.01em;word-break:normal}
+h1,h2,h3{margin:0 0 .9rem;font-weight:800;letter-spacing:-.01em;word-break:normal}
 h1{font-size:var(--fs-h1);line-height:1.12}
 h2{font-size:var(--fs-h2)}
 h3{font-size:var(--fs-h3)}
@@ -92,47 +106,56 @@ p,li{font-size:var(--fs-body);color:var(--muted)}
 hr.divider{border:0;height:18px;margin:3rem 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent)}
 
 /* ===== HEADER ===== */
-header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
+header{position:sticky;top:0;z-index:60;backdrop-filter:saturate(120%) blur(10px);background:linear-gradient(180deg,rgba(8,10,18,.88),rgba(8,10,18,.72));border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
 .header-inner{max-width:var(--container);margin:0 auto;padding:.85rem var(--gutter);display:flex;align-items:center;justify-content:space-between;min-height:60px}
 .brand{display:flex;flex-direction:column;gap:.18rem}
 .brand-top{display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.02rem}
 .brand-dot{width:.9rem;height:.9rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold-soft),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
 .brand-sub{font-size:.72rem;letter-spacing:.18em;color:var(--muted-soft);text-transform:uppercase}
 
+/* ===== TOP PROGRESS ===== */
+.progress{position:fixed; top:0; left:0; right:0; height:3px; z-index:75; pointer-events:none; background:linear-gradient(90deg, rgba(255,255,255,.08), transparent 18%); clip-path:inset(0 100% 0 0)}
+.progress > i{display:block; height:100%; width:100%; background:linear-gradient(90deg,var(--gold),var(--gold-soft)); transform-origin:left center; transform:scaleX(0)}
+
 /* ===== BUTTONS ===== */
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.95rem 1.5rem;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease);background:rgba(255,255,255,.06);color:var(--text);white-space:normal}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.95rem 1.5rem;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease),filter .18s var(--ease);background:rgba(255,255,255,.06);color:var(--text);white-space:normal;-webkit-tap-highlight-color:transparent}
 .btn:hover{transform:translateY(-1px)}
 .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
+.btn-primary:hover{box-shadow:0 18px 40px rgba(200,164,75,.4);filter:brightness(1.04)}
 .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
 .btn.small{padding:.6rem 1rem;min-height:44px}
 @media (max-width:767.98px){ .btn,.btn-primary,.btn-ghost{width:100%} }
 @keyframes pulse{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(0) scale(1.02)}}
 .pulse{animation:pulse 1600ms ease-in-out 1}
 
-/* ===== FORMS (NEU) ===== */
+/* ===== FORMS ===== */
 input, textarea{
-  width:100%;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.16);
-  color:var(--text);
-  padding:.8rem 1rem;
-  border-radius:12px;
-  font:inherit;
+  width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);color:var(--text);
+  padding:.8rem 1rem;border-radius:12px;font:inherit
 }
 input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
 
 /* ===== CARDS ===== */
-.premium-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1rem 1.1rem;box-shadow:var(--elev-1)}
-.story-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.9rem 1rem}
+.premium-card{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1rem 1.1rem;box-shadow:var(--elev-1)}
+.story-card{position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.9rem 1rem}
 .zero-risk{border:1px dashed rgba(233,211,148,.45);background:rgba(233,211,148,.06)}
 .quote{margin:.7rem 0 0;padding:.6rem .75rem;border-left:4px solid var(--gold);background:rgba(255,255,255,.05);border-radius:10px;font-style:italic;color:var(--text)}
+.premium-card::after,.story-card::after{content:"";position:absolute;inset:-200% -50% auto -50%;height:60%;transform:rotate(12deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);opacity:0;transition:opacity .25s var(--ease)}
+.premium-card:hover::after,.story-card:hover::after{opacity:1;animation:shine 1.2s var(--ease)}
+@keyframes shine {to{transform:translateX(160%) rotate(12deg)}}
 
 /* ===== HERO ===== */
 .hero{padding-top:5.2rem;padding-bottom:2.4rem}
 .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
 @media (min-width:1000px){ .hero-grid{grid-template-columns:1.2fr .8fr;align-items:center} }
 .hero-media picture{border-radius:24px;overflow:hidden}
-.hero-media img{width:100%;border-radius:24px;box-shadow:var(--elev-2);object-fit:cover;object-position:center top}
+.hero-media img{width:100%;border-radius:24px;box-shadow:var(--elev-2);object-fit:cover;object-position:center top;will-change:transform}
+.tilt-wrap{transform-style:preserve-3d}
+
+/* ===== WORD SWAP (Headline) ===== */
+.word-swap{ display:inline-block; position:relative; min-width:8.4ch }
+.word-swap b{ position:absolute; left:0; top:0; opacity:0; transform:translateY(12px) scale(.98); will-change:transform,opacity }
+.word-swap b.active{ opacity:1; transform:none; transition:opacity .6s var(--ease), transform .6s var(--ease) }
 
 /* ===== REWARD MINI STRIP ===== */
 .reward-hero{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:.6rem;border-radius:18px;box-shadow:var(--elev-1);margin-top:.6rem}
@@ -166,10 +189,7 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
 .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
 
 /* ===== A11y helper ===== */
-.visually-hidden{
-  position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
-  clip:rect(0 0 0 0);clip-path:inset(50%);border:0;white-space:nowrap
-}
+.visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);border:0;white-space:nowrap}
 
 /* ===== MOBILE ===== */
 @media (max-width:767.98px){
@@ -182,6 +202,9 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
 
 <body>
 <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
+
+<!-- Top Scroll Progress -->
+<div class="progress" aria-hidden="true"><i id="progressTop"></i></div>
 
 <header id="header">
   <div class="header-inner">
@@ -200,7 +223,15 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
       <div class="stack">
         <p class="hero-micro" style="margin:0 0 .4rem;">10 Sekunden – du gibst nur einen Link weiter. Der Rest passiert automatisch.</p>
 
-        <h1 id="hero-title" style="margin-top:.1rem">Fast jeder kennt dieses „Ich müsste mal…“ – du kannst heute jemandem Ruhe geben.</h1>
+        <h1 id="hero-title" style="margin-top:.1rem">
+          Fast jeder kennt dieses „Ich müsste mal…“ – du kannst heute jemandem
+          <span class="word-swap" aria-live="polite">
+            <b class="active">Ruhe geben</b>
+            <b>Klarheit schicken</b>
+            <b>Druck rausnehmen</b>
+            <b>sofort helfen</b>
+          </span>.
+        </h1>
 
         <ul class="hero-micro" style="margin:.2rem 0 0; padding-left:1.05rem">
           <li>2 Minuten – zeigt sofort, was heute wichtig ist</li>
@@ -214,7 +245,7 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
           <p class="hero-micro" style="margin:0"><strong>Die empfohlene Person sieht in 2 Minuten anonym ihre Ampel – kein Verkauf, keine Unterlagen, kein Risiko.</strong></p>
         </div>
 
-        <a id="shareFast" href="#share" class="btn btn-primary pulse"
+        <a id="shareFast" href="#share" class="btn btn-primary pulse" data-magnet
            data-cta-variants='["✨ In 7 Sekunden weitergeben","💬 Per WhatsApp senden","🤝 Heute jemandem helfen"]'>
           ✨ In 7 Sekunden weitergeben
         </a>
@@ -222,7 +253,7 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
         <p class="hero-micro quote">„Danke, dass du mir das geschickt hast – ich hätte das schon viel früher gebraucht.“</p>
       </div>
 
-      <div class="hero-media stack">
+      <div class="hero-media stack tilt-wrap" id="tiltWrap" aria-hidden="true">
         <div class="reward-hero" aria-label="Wertschätzungsstufen kompakt" id="rewardGlow" data-glow-once>
           <h3 style="margin:0 0 .2rem">Deine Wertschätzungen</h3>
           <div class="reward-hero-grid">
@@ -234,7 +265,7 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
         </div>
 
         <picture>
-          <img
+          <img id="tiltImg"
             src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200"
             alt="Weitergeben: 2 Minuten – anonym & ohne irgendetwas zu müssen"
             width="1200" height="900" loading="eager" fetchpriority="high" decoding="async">
@@ -284,12 +315,12 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
         </div>
 
         <div class="inline" style="margin-top:.4rem">
-          <button class="btn seg-btn" data-seg="eltern">Eltern</button>
-          <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
-          <button class="btn seg-btn" data-seg="freunde">Freunde</button>
-          <button class="btn seg-btn" data-seg="selbst">Selbstständige</button>
-          <button class="btn seg-btn" data-seg="partner">Partner</button>
-          <button class="btn seg-btn" data-seg="neutral">Für alle</button>
+          <button class="btn seg-btn" data-seg="eltern" data-magnet>Eltern</button>
+          <button class="btn seg-btn" data-seg="kollegen" data-magnet>Kolleg:innen</button>
+          <button class="btn seg-btn" data-seg="freunde" data-magnet>Freunde</button>
+          <button class="btn seg-btn" data-seg="selbst" data-magnet>Selbstständige</button>
+          <button class="btn seg-btn" data-seg="partner" data-magnet>Partner</button>
+          <button class="btn seg-btn" data-seg="neutral" data-magnet>Für alle</button>
         </div>
 
         <label for="refName" style="display:block;font-size:.92rem;color:#DDE3F4;margin:.6rem 0 .35rem">Dein Vorname (optional):</label>
@@ -323,8 +354,8 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
           }'></textarea>
 
         <div class="inline">
-          <button type="button" id="readyMsg" class="btn btn-primary">✨ Fertigen Text übernehmen</button>
-          <button type="button" id="magicLine" class="btn">+ Beliebten Start-Satz einfügen</button>
+          <button type="button" id="readyMsg" class="btn btn-primary" data-magnet>✨ Fertigen Text übernehmen</button>
+          <button type="button" id="magicLine" class="btn" data-magnet>+ Beliebten Start-Satz einfügen</button>
         </div>
 
         <div class="premium-card" style="margin-top:.6rem">
@@ -333,14 +364,14 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
         </div>
 
         <p class="hero-micro">Tipp: Eine persönliche Zeile wirkt besser.
-          <button type="button" id="addPersonal" class="btn" style="padding:.4rem .7rem;margin-left:.4rem">+ Persönliche Zeile</button>
+          <button type="button" id="addPersonal" class="btn" style="padding:.4rem .7rem;margin-left:.4rem" data-magnet>+ Persönliche Zeile</button>
         </p>
 
         <div class="inline">
-          <button class="btn btn-ghost" id="copyBtn">📋 Text kopieren</button>
-          <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener">💬 WhatsApp</a>
-          <button class="btn btn-ghost" id="nativeShare" type="button">📲 System-Teilen</button>
-          <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer%20Blick&body=">✉️ Mail</a>
+          <button class="btn btn-ghost" id="copyBtn" data-magnet>📋 Text kopieren</button>
+          <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener" data-magnet>💬 WhatsApp</a>
+          <button class="btn btn-ghost" id="nativeShare" type="button" data-magnet>📲 System-Teilen</button>
+          <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer%20Blick&body=" data-magnet>✉️ Mail</a>
         </div>
 
         <small class="hero-micro" style="display:block;margin-top:.6rem">Zählt ab: Erstgespräch – kein Abschluss nötig.</small>
@@ -363,14 +394,14 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
       </div>
 
       <div style="text-align:center">
-        <a href="#share" class="btn btn-primary">✨ Weitergeben</a>
+        <a href="#share" class="btn btn-primary" data-magnet>✨ Weitergeben</a>
       </div>
     </div>
   </section>
 
   <hr class="divider" aria-hidden="true">
 
-  <!-- ============== REWARDS + VIP + MOTIVATION (NEU) ============== -->
+  <!-- ============== REWARDS + VIP + MOTIVATION ============== -->
   <section class="section fade-up" id="rewards" aria-labelledby="r-title">
     <div class="wrap stack">
       <h2 id="r-title">Deine Wertschätzungen – Sammeln macht’s noch besser</h2>
@@ -436,7 +467,7 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
     <div class="wrap" style="text-align:center;max-width:720px">
       <h2 style="margin-bottom:1rem">Bereit, jemandem heute wirklich zu helfen?</h2>
       <p style="color:var(--muted);margin-bottom:1.1rem;font-size:1.05rem">Wenn jemand keinen Vorteil hat → 25 € für dich. Fair & ohne Verpflichtung.</p>
-      <a href="#share" class="btn btn-primary" id="ctaFinal">🤝 Hilf heute 1 Person – 10 Sek.</a>
+      <a href="#share" class="btn btn-primary" id="ctaFinal" data-magnet>🤝 Hilf heute 1 Person – 10 Sek.</a>
     </div>
   </section>
 </main>
@@ -450,13 +481,13 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
 
 <!-- Sticky CTA -->
 <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
-  <div class="inner"><a href="#share" class="btn btn-primary" id="stickyBtn">💬 Mit WhatsApp weitergeben</a></div>
+  <div class="inner"><a href="#share" class="btn btn-primary" id="stickyBtn" data-magnet>💬 Mit WhatsApp weitergeben</a></div>
 </div>
 
 <!-- Whisper -->
 <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand hat morgen ein Gefühl für heute.</div>
 
-<!-- ===== JS: LOGGER (NEU) ===== -->
+<!-- ===== JS: LOGGER ===== -->
 <script>
 /* Warum: Events puffern, UI bleibt flüssig; bei Voll → ältere verwerfen. */
 (function(){
@@ -476,7 +507,7 @@ input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
 })();
 </script>
 
-<!-- ===== JS: CORE ===== -->
+<!-- ===== JS: CORE & FX ===== -->
 <script>
 document.documentElement.classList.remove('no-js');
 document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
@@ -490,6 +521,14 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
     const io=new IntersectionObserver(ents=>ents.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
     els.forEach(el=>io.observe(el));
   }else{els.forEach(el=>el.classList.add('visible'));}
+})();
+
+/* Top Scroll progress (eigenes ID) */
+(function(){
+  const bar=document.getElementById('progressTop'); if(!bar) return;
+  const max=()=>Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const onScroll=()=>{ const p=Math.min(1, scrollY / max()); bar.style.transform=`scaleX(${p})`; };
+  addEventListener('scroll', onScroll, {passive:true}); addEventListener('resize', onScroll, {passive:true}); onScroll();
 })();
 
 /* Sticky CTA – sichtbar ~180px, mobil + A11y aria-hidden */
@@ -541,6 +580,41 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   let i=0; setInterval(()=>{ i=(i+1)%variants.length; btn.textContent=variants[i]; btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'),800); }, 4000);
   btn.addEventListener('click', ()=> Log.log('cta:shareFast'), {passive:true});
 })();
+
+/* Kinetic Headline (Word swap) */
+(function(){
+  const box=document.querySelector('.word-swap'); if(!box) return;
+  const words=[...box.querySelectorAll('b')]; if(words.length<2) return;
+  let i=0; setInterval(()=>{ words[i].classList.remove('active'); i=(i+1)%words.length; words[i].classList.add('active'); }, 2200);
+})();
+
+/* Magnetic buttons (Desktop/Hover only) */
+(function(){
+  if(matchMedia('(hover:hover)').matches===false) return;
+  const els=[...document.querySelectorAll('[data-magnet]')];
+  const damp=18;
+  function move(e){
+    const r=this.getBoundingClientRect();
+    const x=e.clientX - (r.left + r.width/2);
+    const y=e.clientY - (r.top + r.height/2);
+    this.style.transform = `translate(${x/damp}px, ${y/damp}px)`;
+  }
+  function leave(){ this.style.transform='translate(0,0)'; }
+  els.forEach(el=>{ el.addEventListener('pointermove', move); el.addEventListener('pointerleave', leave); });
+})();
+
+/* 3D Tilt im Hero-Bild */
+(function(){
+  const wrap=document.getElementById('tiltWrap'); const img=document.getElementById('tiltImg');
+  if(!wrap || !img || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  wrap.addEventListener('pointermove', (e)=>{
+    const r=wrap.getBoundingClientRect();
+    const rx = ((e.clientY - r.top) / r.height - .5) * -8;
+    const ry = ((e.clientX - r.left) / r.width - .5) * 10;
+    img.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px)`;
+  });
+  wrap.addEventListener('pointerleave', ()=> img.style.transform='');
+})();
 </script>
 
 <!-- ===== JS: MOTIVATION & SHARE ===== -->
@@ -573,7 +647,7 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   window._bumpRefFull = function(){ const c=refCount()+1;   setRefCount(c); updateTiers(); setPct(Math.min(100, c*12)); Log.log('ref:bump:full'); };
 })();
 
-/* Share composer + Segmente */
+/* Share composer + Segmente + Micro-Confetti */
 (function(){
   const name = document.getElementById('refName');
   const area = document.getElementById('refText');
@@ -637,10 +711,27 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   document.getElementById('magicLine')?.addEventListener('click', ()=>{ const line='Hey, hab das gerade gesehen – dachte sofort an dich.'; const cur=(area.value||'').trim(); area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL(); updateLinks(); window._bumpRefHalf?.(); Log.log('share:magic-line'); });
   document.getElementById('addPersonal')?.addEventListener('click', ()=>{ const alias=(name?.value||'').trim()||'Hey'; area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`; updateLinks(); window._bumpRefHalf?.(); Log.log('share:add-personal'); });
 
-  document.getElementById('copyBtn')?.addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(ensureURL(area.value)); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); } window._bumpRefHalf?.(); Log.log('share:copy'); });
-  document.getElementById('waShare')?.addEventListener('click', ()=>{ window._bumpRefFull?.(); Log.log('share:wa'); }, {passive:true});
-  document.getElementById('mailShare')?.addEventListener('click', ()=>{ window._bumpRefFull?.(); Log.log('share:mail'); }, {passive:true});
-  document.getElementById('nativeShare')?.addEventListener('click', async ()=>{ const t=ensureURL(area.value); const url=buildURL(); if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); window._bumpRefFull?.(); Log.log('share:native'); }catch(_){} } });
+  /* Micro-confetti util */
+  function confettiFrom(el){
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const r=el.getBoundingClientRect(); const cx=r.left+r.width/2, cy=r.top+r.height/2+scrollY;
+    for(let i=0;i<16;i++){
+      const s=document.createElement('i');
+      Object.assign(s.style,{position:'absolute', left:cx+'px', top:cy+'px', width:'6px', height:'10px',
+        background:`hsl(${(i*36)%360} 80% 60%)`, borderRadius:'2px', pointerEvents:'none', zIndex:71,
+        transform:`translate(-50%,-50%) rotate(${Math.random()*360}deg)`,
+        opacity:'1', transition:'transform 700ms var(--ease), opacity 700ms var(--ease)'});
+      document.body.appendChild(s);
+      const dx=(Math.random()-.5)*140, dy=(Math.random()-.9)*200;
+      requestAnimationFrame(()=>{ s.style.transform=`translate(${dx}px, ${dy}px) rotate(${Math.random()*720}deg)`; s.style.opacity='0'; });
+      setTimeout(()=>s.remove(),720);
+    }
+  }
+
+  document.getElementById('copyBtn')?.addEventListener('click', async (e)=>{ try{ await navigator.clipboard.writeText(ensureURL(area.value)); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); } window._bumpRefHalf?.(); confettiFrom(e.currentTarget); Log.log('share:copy'); });
+  document.getElementById('waShare')?.addEventListener('click', (e)=>{ window._bumpRefFull?.(); confettiFrom(e.currentTarget); Log.log('share:wa'); }, {passive:true});
+  document.getElementById('mailShare')?.addEventListener('click', (e)=>{ window._bumpRefFull?.(); confettiFrom(e.currentTarget); Log.log('share:mail'); }, {passive:true});
+  document.getElementById('nativeShare')?.addEventListener('click', async (e)=>{ const t=ensureURL(area.value); const url=buildURL(); if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); window._bumpRefFull?.(); confettiFrom(e.currentTarget); Log.log('share:native'); }catch(_){} } });
 
   document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); window._bumpRefHalf?.(); Log.log('share:fast'); }, {passive:true});
 })();
