@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="de" class="no-js" translate="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>Weitergeben – in 7 Sekunden jemandem Ruhe schenken | Heiko Haerter</title>
+  <meta name="description"
+        content="Empfiehl anonym den 2-Minuten-Finanzblick. Null Druck, null Verkauf. Eltern, Paare & Selbstständige bekommen sofort Klarheit – du musst nichts erklären." />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://heikohaerter.com/weitergeben" />
+
+  <!-- OG -->
+  <meta property="og:title" content="In 7 Sekunden weitergeben – anonym & ohne Verkauf" />
+  <meta property="og:description" content="Nur ein Link: jemand sieht in 2 Minuten, ob heute etwas Wichtiges fehlt. Null Druck. Null Verpflichtung." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
+  <meta property="og:url" content="https://heikohaerter.com/weitergeben" />
+
+  <style>
+    :root{
+      --bg:#05070E;--bg2:#0A0F1E;
+      --text:#F7F8FC;--muted:#A8B1C5;--soft:#8F97AA;
+      --gold:#C8A44B;--gold2:#E9D394;
+      --radius:18px;--ease:cubic-bezier(.25,.46,.25,1);
+    }
+
+    body{
+      margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+      background:linear-gradient(180deg,#04050A,#02040A);
+      color:var(--text);-webkit-font-smoothing:antialiased;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    /* Layout */
+    .section{padding:clamp(32px,6vw,72px) 0}
+    .container{max-width:920px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
+    .stack{display:flex;flex-direction:column;gap:clamp(.6rem,1.6vw,1rem)}
+    .grid{display:grid;gap:clamp(.6rem,1.4vw,1rem)}
+
+    /* Cards */
+    .card{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:var(--radius);
+      padding:1rem 1.2rem;
+      box-shadow:0 20px 42px rgba(0,0,0,.35);
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:.9rem 1.3rem;
+      border-radius:999px;border:1px solid transparent;
+      background:rgba(255,255,255,.06);color:var(--text);
+      font-weight:700;cursor:pointer;transition:.2s var(--ease);
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#111;box-shadow:0 14px 32px rgba(200,164,75,.35);
+    }
+    .btn-primary:hover{transform:translateY(-2px)}
+
+    @media(max-width:767px){ .btn{width:100%} }
+
+    /* Text */
+    h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.01em}
+    h1{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.15}
+    h2{font-size:clamp(1.5rem,3vw,2.2rem)}
+    h3{font-size:clamp(1.18rem,2vw,1.35rem)}
+    p{margin:0;color:var(--muted);font-size:clamp(1rem,1.2vw,1.08rem)}
+
+    .chip{
+      display:inline-flex;align-items:center;gap:.4rem;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:999px;padding:.45rem .85rem;
+      font-size:.92rem;color:var(--soft)
+    }
+
+    .textarea{
+      width:100%;min-height:150px;border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background:#0E1423;color:var(--text);
+      font:inherit;padding:1rem;resize:vertical;
+    }
+    .input{
+      width:100%;border-radius:var(--radius);
+      background:#0E1423;color:var(--text);
+      border:1px solid rgba(255,255,255,.12);
+      font:inherit;padding:.85rem 1rem;
+    }
+
+    /* Fade */
+    .fade-up{opacity:0;transform:translateY(18px);transition:.5s var(--ease)}
+    .visible{opacity:1;transform:none}
+
+    /* Sticky CTA mobile */
+    .sticky {display:none}
+    @media(max-width:1023px){
+      .sticky {
+        display:flex;position:fixed;bottom:18px;left:0;right:0;justify-content:center;
+        transform:translateY(100%);opacity:0;z-index:50;
+        transition:.25s var(--ease);
+      }
+      .sticky .inner{
+        background:rgba(10,14,22,.97);
+        padding:.55rem;border-radius:999px;
+        border:1px solid rgba(233,211,148,.28);
+        box-shadow:0 12px 38px rgba(0,0,0,.55)
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="section fade-up" id="hero">
+      <div class="container stack">
+        <h1>In 7 Sekunden jemandem Ruhe schenken.</h1>
+        <p>Du musst nichts erklären. Der Link zeigt anonym in 2 Minuten, ob heute etwas Wichtiges fehlt – ohne Unterlagen, ohne Verkauf.</p>
+
+        <div class="card">
+          <p><strong>Zero-Risk:</strong> Bringt es der Person nichts → 25 €.</p>
+        </div>
+
+        <a href="#share" class="btn btn-primary">✨ Text zum Weitergeben öffnen</a>
+
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:1rem">
+          <span class="chip">👨‍👩‍👧 Eltern</span>
+          <span class="chip">💼 Selbstständige</span>
+          <span class="chip">🤝 Kolleg:innen</span>
+          <span class="chip">❤️ Partner</span>
+          <span class="chip">🧑‍🤝‍🧑 Freunde</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section fade-up">
+      <div class="container stack">
+        <h2>Warum Weitergeben so gut wirkt</h2>
+
+        <div class="card">
+          <h3>1 · Keine Peinlichkeit</h3>
+          <p>Niemand landet in einem Verkaufsgespräch. Alles bleibt anonym.</p>
+        </div>
+
+        <div class="card">
+          <h3>2 · Sofortiger Nutzen</h3>
+          <p>Die Person sieht in 2 Minuten: Jetzt · Als Nächstes · Später.</p>
+        </div>
+
+        <div class="card">
+          <h3>3 · Du hilfst ohne Aufwand</h3>
+          <p>Ein Satz + ein Link → jemand hat morgen Übersicht.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHARE -->
+    <section class="section fade-up" id="share">
+      <div class="container stack">
+        <h2>Text zum Weitergeben</h2>
+        <p>Einfach kopieren oder per WhatsApp senden.</p>
+
+        <label for="name">Dein Vorname (optional):</label>
+        <input id="name" class="input" placeholder="z. B. Alex / Dani – Chef" />
+
+        <label for="msg">Nachricht</label>
+        <textarea id="msg" class="textarea" data-variants='{
+          "neutral":[
+            "Hey, hab das gesehen – dachte sofort an dich. 2 Minuten zeigen dir anonym, ob heute etwas Wichtiges fehlt. {{URL}}",
+            "Falls du dieses „Ich müsste mal…“ kennst: Hier siehst du es sofort – anonym & ohne Verkauf. {{URL}}"
+          ],
+          "eltern":[
+            "Kurz für Eltern (2 Min): zeigt, ob bei Klinik/Zahn/Haftung etwas fehlt – völlig anonym. {{URL}}"
+          ],
+          "kollegen":[
+            "Für die To-do-Liste: 2 Min Blick – ohne Tarif-Chaos, ohne Verkauf. {{URL}}"
+          ],
+          "freunde":[
+            "Hey, dachte an dich – kurzer Blick (2 Min), null Druck, einfach hilfreich. {{URL}}"
+          ],
+          "selbst":[
+            "Für Selbstständige: kurz checken, ob Absicherung & Rücklagen halten – anonym & ohne Verkauf. {{URL}}"
+          ],
+          "partner":[
+            "Magst du in 2 Min schauen, ob alles passt? Anonym – zeigt sofort, was wichtig ist. {{URL}}"
+          ]
+        }'></textarea>
+
+        <button id="gen" class="btn btn-primary">✨ Text generieren</button>
+
+        <div class="card">
+          <strong>Vorschau:</strong>
+          <p id="preview">Wird erstellt…</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+          <button id="copy" class="btn">📋 Kopieren</button>
+          <a id="wa" class="btn btn-primary" href="#" target="_blank">💬 WhatsApp</a>
+          <a id="mail" class="btn" href="#">✉️ E-Mail</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky mobile CTA -->
+  <div class="sticky" id="sticky">
+    <div class="inner">
+      <a href="#share" class="btn btn-primary">✨ Weitergeben</a>
+    </div>
+  </div>
+
+  <footer class="section" style="text-align:center">
+    <div class="container">
+      © <span id="year"></span> Heiko Haerter · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a>
+      <p class="muted">Privates Dankeschön – unabhängig von Organisationen.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const fadeEls=[...document.querySelectorAll(".fade-up")];
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("visible"); io.unobserve(e.target); }});
+    },{threshold:.15});
+    fadeEls.forEach(el=>io.observe(el));
+
+    const sticky=document.getElementById("sticky");
+    const hero=document.getElementById("hero");
+    new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        sticky.style.transform = e.isIntersecting ? "translateY(100%)" : "translateY(0)";
+        sticky.style.opacity   = e.isIntersecting ? "0" : "1";
+      });
+    },{threshold:.1}).observe(hero);
+
+    // Share Logic
+    const area=document.getElementById("msg");
+    const name=document.getElementById("name");
+    const preview=document.getElementById("preview");
+    const wa=document.getElementById("wa");
+    const mail=document.getElementById("mail");
+
+    function buildURL(){
+      const base=new URL("https://heikohaerter.com");
+      base.searchParams.set("utm_source","weitergeben");
+      base.searchParams.set("utm_medium","share");
+      return base.toString();
+    }
+    function variants(){
+      try{ return JSON.parse(area.dataset.variants); }catch(e){ return {neutral:["{{URL}}"]}; }
+    }
+    function pick(seg){
+      const sets=variants();
+      const pool=sets[seg] || sets["neutral"];
+      return pool[Math.floor(Math.random()*pool.length)];
+    }
+    function detectSeg(){
+      const raw=(name.value||"").toLowerCase();
+      if(/(papa|mama|eltern|kind)/.test(raw)) return "eltern";
+      if(/(chef|kolleg|team)/.test(raw)) return "kollegen";
+      if(/(freund|kumpel|bff)/.test(raw)) return "freunde";
+      if(/(selbst|freelance)/.test(raw)) return "selbst";
+      if(/(partner|ehe)/.test(raw)) return "partner";
+      return "neutral";
+    }
+    function generate(){
+      const url=buildURL();
+      const seg=detectSeg();
+      const msg=pick(seg).replace("{{URL}}",url);
+      area.value=msg;
+      preview.textContent=msg;
+      wa.href="https://wa.me/?text="+encodeURIComponent(msg);
+      mail.href="mailto:?subject=Kurzer Blick&body="+encodeURIComponent(msg);
+    }
+    document.getElementById("gen").onclick=generate;
+    document.getElementById("copy").onclick=()=>navigator.clipboard.writeText(area.value);
+  </script>
+
+</body>
+</html>
