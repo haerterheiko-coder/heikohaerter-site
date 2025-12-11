@@ -1,188 +1,240 @@
-<!DOCTYPE html> <html lang="de" translate="no"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /> <meta name="color-scheme" content="dark light" /> <meta name="format-detection" content="telephone=no" /> <meta name="theme-color" content="#0b0f14" /> <title>Weitergeben – ruhig, klar, zero-pressure</title> <meta name="description" content="Weitergeben – ohne etwas erklären zu müssen. Die Ampel spricht für dich. 2 Minuten. anonym. kein Verkauf. Für Freunde, Familie, Kollegen. Ruhig. Klar. Zero-pressure." /> <link rel="icon" href="/favicon.ico" /> <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> <link rel="manifest" href="/site.webmanifest" /> <meta property="og:title" content="Weitergeben – ohne etwas erklären zu müssen." /> <meta property="og:description" content="Die Ampel spricht für dich. 2 Minuten. anonym. kein Verkauf." /> <meta property="og:type" content="website" /> <meta property="og:locale" content="de_DE" /> </head> <body> <a class="skip-link" href="#main">Zum Inhalt springen</a> <header class="site-header" role="banner"> <div class="wrap header-bar"> <a class="brand" href="/" aria-label="Startseite"> <span class="brand-dot" aria-hidden="true"></span> <span class="brand-name">Ruhige Finanz-Ampel</span> <span class="brand-tag">anonym · Klarheit · kein Verkauf</span> </a> <nav class="site-nav" aria-label="Hauptnavigation"> <ul> <li><a href="/#quiz" class="nav-link">Finanz-Check</a></li> <li><a href="#referral-engine" class="nav-link">Weitergeben</a></li> <li><a href="#contact" class="nav-link">Kontakt</a></li> </ul> </nav> </div> </header> <main id="main"> <!-- ========================================================= 1) HERO ========================================================== --> <section id="hero" class="hero section" aria-labelledby="hero-title"> <div class="wrap hero-wrap"> <h1 id="hero-title">Weitergeben – ohne etwas erklären zu müssen.</h1> <p class="subhead">Die Ampel spricht für dich. 2 Minuten. anonym. kein Verkauf.</p>
-    <div class="hero-benefits">
-      <span class="chip">ruhig</span>
-      <span class="chip">einfach</span>
-      <span class="chip">zero-pressure</span>
-      <span class="chip">Klarheit</span>
-      <span class="chip">Vorteil: 25 € Garantie</span>
+<!-- =======================================================================
+/weitergeben.html  (fix: richtige Asset-Pfade, sauberes Markup)
+======================================================================= -->
+<!DOCTYPE html>
+<html lang="de" translate="no" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="theme-color" content="#0b0f14" />
+  <title>Weitergeben – ruhig, klar, zero-pressure</title>
+  <meta name="description" content="Weitergeben – ohne etwas erklären zu müssen. Die Ampel spricht für dich. 2 Minuten. anonym. kein Verkauf. Für Freunde, Familie, Kollegen. Ruhig. Klar. Zero-pressure." />
+  <meta property="og:title" content="Weitergeben – ohne etwas erklären zu müssen." />
+  <meta property="og:description" content="Die Ampel spricht für dich. 2 Minuten. anonym. kein Verkauf." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <!-- fix: richtiger Pfad -->
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header" role="banner">
+    <div class="wrap header-bar">
+      <a class="brand" href="/" aria-label="Startseite">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span class="brand-name">Ruhige Finanz-Ampel</span>
+        <span class="brand-tag">anonym · Klarheit · kein Verkauf</span>
+      </a>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="/#quiz" class="nav-link">Finanz-Check</a></li>
+          <li><a href="#referral-engine" class="nav-link">Weitergeben</a></li>
+          <li><a href="#contact" class="nav-link">Kontakt</a></li>
+        </ul>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- Decision Anchor (appears on scroll via CSS/JS in app.js if needed) -->
-<div class="decision-anchor" id="decision-anchor" role="note" aria-live="polite">
-  🔒 100 % anonym · Kein Verkauf · 25 € Garantie
-</div>
-
-<!-- Sticky CTA -->
-<div class="sticky-cta" id="sticky-cta" aria-hidden="true">
-  <button class="btn btn-primary tap-scale" data-target="#referral-engine">
-    👉 Jetzt ruhig weitergeben
-  </button>
-</div>
-
-<!-- =========================================================
-     2) REFERRAL ENGINE 2026 — HTML ONLY
-========================================================== -->
-<section id="referral-engine" class="section referral-engine" aria-labelledby="ref2-title">
-  <div class="wrap">
-    <h2 id="ref2-title">In 2 Minuten weitergeben</h2>
-    <p class="context-line">Für Freunde, Familie, Kollegen. <strong>anonym</strong>, mit <strong>Klarheit</strong>, <strong>kein Verkauf</strong>. Du gibst nur den Link. Ruhe entsteht von selbst.</p>
-
-    <!-- Zielgruppe wählen -->
-    <fieldset class="ref2-group" aria-labelledby="ref2-ziel-label">
-      <legend id="ref2-ziel-label">Zielgruppe wählen</legend>
-      <div class="btn-row">
-        <button type="button" class="btn tap-scale ref2-seg" data-seg="freund" aria-pressed="false">Freund</button>
-        <button type="button" class="btn tap-scale ref2-seg" data-seg="familie" aria-pressed="false">Familie</button>
-        <button type="button" class="btn tap-scale ref2-seg" data-seg="kollege" aria-pressed="false">Kollege</button>
-        <button type="button" class="btn tap-scale ref2-seg" data-seg="selbststaendig" aria-pressed="false">Selbstständig</button>
-      </div>
-    </fieldset>
-
-    <!-- Tonalität wählen -->
-    <fieldset class="ref2-group" aria-labelledby="ref2-tone-label">
-      <legend id="ref2-tone-label">Tonalität wählen</legend>
-      <div class="btn-row">
-        <button type="button" class="btn tap-scale ref2-tone" data-tone="locker" aria-pressed="true">locker</button>
-        <button type="button" class="btn tap-scale ref2-tone" data-tone="kurz" aria-pressed="false">kurz</button>
-        <button type="button" class="btn tap-scale ref2-tone" data-tone="ergebnisorientiert" aria-pressed="false">ergebnisorientiert</button>
-        <button type="button" class="btn tap-scale ref2-tone" data-tone="familie" aria-pressed="false">familie</button>
-        <button type="button" class="btn tap-scale ref2-tone" data-tone="selbstständig" aria-pressed="false">selbstständig</button>
-      </div>
-    </fieldset>
-
-    <!-- Optionaler Name -->
-    <div class="ref2-field">
-      <label for="ref2-name">Optionaler Name</label>
-      <input id="ref2-name" name="ref2-name" inputmode="text" autocomplete="given-name" placeholder="Vorname für persönlichen Touch">
-      <p class="hint">Optional. Erhöht Nähe. Alles bleibt <strong>anonym</strong>.</p>
-    </div>
-
-    <!-- WhatsApp Preview Bubble -->
-    <div class="wa-preview" role="region" aria-labelledby="wa-prev-title">
-      <h3 id="wa-prev-title">WhatsApp Preview</h3>
-
-      <div class="wa-bubble">
-        <div class="wa-meta">
-          <span class="wa-name">Kontakt</span>
-          <span class="wa-time" aria-live="polite">jetzt</span>
-        </div>
-        <div class="wa-msg">
-          <p id="ref2-message">Hey 👋 ich hab grad den Finanz-Check von Heiko gemacht. Ging super fix und war richtig hilfreich. Schau mal rein – sind nur 2 Minuten: {{URL}}</p>
-        </div>
-        <div class="wa-typing" aria-hidden="true">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <main id="main">
+    <!-- =========================================================
+         1) HERO
+    ========================================================== -->
+    <section id="hero" class="hero section" aria-labelledby="hero-title">
+      <div class="wrap hero-wrap">
+        <h1 id="hero-title">Weitergeben – ohne etwas erklären zu müssen.</h1>
+        <p class="subhead">Die Ampel spricht für dich. 2 Minuten. anonym. kein Verkauf.</p>
+        <div class="hero-benefits">
+          <span class="chip">ruhig</span>
+          <span class="chip">einfach</span>
+          <span class="chip">zero-pressure</span>
+          <span class="chip">Klarheit</span>
+          <span class="chip">Vorteil: 25 € Garantie</span>
         </div>
       </div>
+    </section>
 
-      <div class="actions">
-        <button class="btn btn-secondary" id="ref2-copy">📋 Text kopieren</button>
-        <button class="btn btn-primary tap-scale" id="ref2-share">💬 WhatsApp teilen</button>
-      </div>
-
-      <p class="privacy-note">Zero-pressure: <strong>anonym</strong>, <strong>kein Verkauf</strong>, <strong>2 Minuten</strong>. <strong>Vorteil</strong> für beide: mehr <strong>Klarheit</strong>.</p>
+    <!-- Decision Anchor -->
+    <div class="decision-anchor" id="decision-anchor" role="note" aria-live="polite">
+      🔒 100 % anonym · Kein Verkauf · 25 € Garantie
     </div>
-  </div>
-</section>
 
-<!-- =========================================================
-     3) WHATSAPP TEMPLATES (REQUIRED, EXACT WORDING)
-========================================================== -->
-<script type="application/json" id="ref2-templates">
-{
-  "Locker": "„Hey 👋 ich hab grad den Finanz-Check von Heiko gemacht. Ging super fix und war richtig hilfreich. Schau mal rein – sind nur 2 Minuten: {{URL}}“",
-  "Kurz": "„Kurzer Tipp: 2-Minuten-Finanz-Ampel 👉 {{URL}}“",
-  "Ergebnisorientiert": "„Ich war echt überrascht, wie viel Klarheit man in 2 Minuten bekommt 😅 anonym & ohne Verkauf: {{URL}}“",
-  "Familie": "„Hab direkt an euch gedacht: kurze Eltern-Ampel, zeigt in 2 Min, ob was Wichtiges fehlt 👉 {{URL}}“",
-  "Selbstständig": "„Für Selbstständige wie dich: 2-Minuten-Check, ob alles passt – anonym & klar 👉 {{URL}}“"
-}
-</script>
-
-<!-- =========================================================
-     4) NEURO-UX ELEMENTS
-========================================================== -->
-<section class="section neuro" aria-labelledby="neuro-title">
-  <div class="wrap">
-    <h2 id="neuro-title">Sicher weitergeben – ruhig & ohne Druck</h2>
-
-    <!-- Dynamic Proof Bars -->
-    <div class="proof">
-      <div class="proof-item">
-        <div class="proof-top"><span>Vertrauen</span><strong>98 %</strong></div>
-        <div class="proof-bar" data-value="98"><span></span></div>
-      </div>
-      <div class="proof-item">
-        <div class="proof-top"><span>Klarheit</span><strong>92 %</strong></div>
-        <div class="proof-bar" data-value="92"><span></span></div>
-      </div>
-      <div class="proof-item">
-        <div class="proof-top"><span>Empfehlung</span><strong>91 %</strong></div>
-        <div class="proof-bar" data-value="91"><span></span></div>
+    <!-- Sticky CTA -->
+    <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+      <div class="inner">
+        <button class="btn btn-primary tap-scale" data-target="#referral-engine">
+          👉 Jetzt ruhig weitergeben
+        </button>
       </div>
     </div>
 
-    <!-- Live Social Proof Feed -->
-    <div class="live-feed" aria-live="polite" aria-atomic="true">
-      <ul id="live-messages">
-        <li>„Sandra (31) hat gerade ihre Ampel gemacht.“</li>
-        <li>„Leon (27) spart 420 € im Jahr.“</li>
-        <li>„Heute schon 18 Menschen Klarheit gewonnen.“</li>
-      </ul>
-    </div>
+    <!-- =========================================================
+         2) REFERRAL ENGINE 2026 — HTML ONLY
+    ========================================================== -->
+    <section id="referral-engine" class="section referral-engine" aria-labelledby="ref2-title">
+      <div class="wrap">
+        <h2 id="ref2-title">In 2 Minuten weitergeben</h2>
+        <p class="context-line">Für Freunde, Familie, Kollegen. <strong>anonym</strong>, mit <strong>Klarheit</strong>, <strong>kein Verkauf</strong>. Du gibst nur den Link. Ruhe entsteht von selbst.</p>
 
-    <!-- Micro-Testimonials -->
-    <div class="micro-t">
-      <figure class="micro">
-        <blockquote>„Hätte nie gedacht, dass 2 Minuten so viel Ruhe bringen.“</blockquote>
-        <figcaption>– Lisa, 29</figcaption>
-      </figure>
-      <figure class="micro">
-        <blockquote>„Endlich Ruhe im Kopf – wir wissen, was heute wichtig ist.“</blockquote>
-        <figcaption>– Jan, 37</figcaption>
-      </figure>
-      <figure class="micro">
-        <blockquote>„Wir sparen 420 € im Jahr und fühlen uns sicherer.“</blockquote>
-        <figcaption>– Miriam &amp; Paul</figcaption>
-      </figure>
-    </div>
+        <!-- Zielgruppe wählen -->
+        <fieldset class="ref2-group" aria-labelledby="ref2-ziel-label">
+          <legend id="ref2-ziel-label">Zielgruppe wählen</legend>
+          <div class="btn-row">
+            <button type="button" class="btn tap-scale ref2-seg" data-seg="freund" aria-pressed="false">Freund</button>
+            <button type="button" class="btn tap-scale ref2-seg" data-seg="familie" aria-pressed="false">Familie</button>
+            <button type="button" class="btn tap-scale ref2-seg" data-seg="kollege" aria-pressed="false">Kollege</button>
+            <button type="button" class="btn tap-scale ref2-seg" data-seg="selbststaendig" aria-pressed="false">Selbstständig</button>
+          </div>
+        </fieldset>
 
-    <!-- Storyblock -->
-    <article class="storyblock">
-      <h3>Warum deine Empfehlung wichtig ist</h3>
-      <p>Viele schieben das Thema. Alltag. Mental Load. Unsicherheit. Mit deinem Link bekommen sie in <strong>2 Minuten</strong> ein ruhiges Bild.</p>
-      <ul class="bullets">
-        <li><strong>anonym</strong> – niemand muss etwas preisgeben</li>
-        <li><strong>Klarheit</strong> – Ampel zeigt Rot · Gelb · Grün</li>
-        <li><strong>kein Verkauf</strong> – zero-pressure, nur ein Blick</li>
-        <li><strong>Vorteil</strong> – schneller Start, mehr Ruhe</li>
-      </ul>
-      <p>Du hilfst, ohne zu diskutieren. Die Ampel erklärt sich selbst. Das ist ruhig, einfach, erwachsen.</p>
-    </article>
-  </div>
-</section>
+        <!-- Tonalität wählen -->
+        <fieldset class="ref2-group" aria-labelledby="ref2-tone-label">
+          <legend id="ref2-tone-label">Tonalität wählen</legend>
+          <div class="btn-row">
+            <button type="button" class="btn tap-scale ref2-tone" data-tone="locker" aria-pressed="true">locker</button>
+            <button type="button" class="btn tap-scale ref2-tone" data-tone="kurz" aria-pressed="false">kurz</button>
+            <button type="button" class="btn tap-scale ref2-tone" data-tone="ergebnisorientiert" aria-pressed="false">ergebnisorientiert</button>
+            <button type="button" class="btn tap-scale ref2-tone" data-tone="familie" aria-pressed="false">familie</button>
+            <button type="button" class="btn tap-scale ref2-tone" data-tone="selbstständig" aria-pressed="false">selbstständig</button>
+          </div>
+        </fieldset>
 
-<!-- =========================================================
-     5) BOTTOM NAV (same as index)
-========================================================== -->
-<nav class="bottom-nav" aria-label="Untere Navigation">
-  <a href="/" class="nav-item" aria-label="Home">🏠 <span>Home</span></a>
-  <a href="/#quiz" class="nav-item" aria-label="Finanzcheck">🚦 <span>Finanzcheck</span></a>
-  <a href="#referral-engine" class="nav-item" aria-label="Weitergeben">💬 <span>Weitergeben</span></a>
-  <a href="#contact" class="nav-item" aria-label="Kontakt">📞 <span>Kontakt</span></a>
-</nav>
+        <!-- Optionaler Name -->
+        <div class="ref2-field">
+          <label for="ref2-name">Optionaler Name</label>
+          <input id="ref2-name" name="ref2-name" inputmode="text" autocomplete="given-name" placeholder="Vorname für persönlichen Touch">
+          <p class="hint">Optional. Erhöht Nähe. Alles bleibt <strong>anonym</strong>.</p>
+        </div>
 
-<!-- Minimal Contact Footer -->
-<section id="contact" class="contact">
-  <div class="wrap">
-    <h2>Kontakt – kurz & ruhig</h2>
-    <p>Wenn Fragen sind: kurzer Austausch. <strong>kein Verkauf</strong>.</p>
-    <ul class="contact-list">
-      <li><a href="mailto:hi@example.com">hi@example.com</a></li>
-      <li><a href="tel:+490000000000">+49 000 0000000</a></li>
-    </ul>
-    <p class="legal">© <span data-year></span> Ruhige Finanz-Ampel · Impressum · Datenschutz</p>
-  </div>
-</section>
+        <!-- WhatsApp Preview Bubble -->
+        <div class="wa-preview" role="region" aria-labelledby="wa-prev-title">
+          <h3 id="wa-prev-title">WhatsApp Preview</h3>
 
-</main> <link rel="stylesheet" href="styles.css" /> <script defer src="app.js"></script> </body> </html>
+          <div class="wa-bubble">
+            <div class="wa-meta">
+              <span class="wa-name">Kontakt</span>
+              <span class="wa-time" aria-live="polite">jetzt</span>
+            </div>
+            <div class="wa-msg">
+              <p id="ref2-message">Hey 👋 ich hab grad den Finanz-Check von Heiko gemacht. Ging super fix und war richtig hilfreich. Schau mal rein – sind nur 2 Minuten: {{URL}}</p>
+            </div>
+            <div class="wa-typing" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-secondary" id="ref2-copy">📋 Text kopieren</button>
+            <button class="btn btn-primary tap-scale" id="ref2-share">💬 WhatsApp teilen</button>
+          </div>
+
+          <p class="privacy-note">Zero-pressure: <strong>anonym</strong>, <strong>kein Verkauf</strong>, <strong>2 Minuten</strong>. <strong>Vorteil</strong> für beide: mehr <strong>Klarheit</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3) WHATSAPP TEMPLATES (REQUIRED, EXACT WORDING)
+    ========================================================== -->
+    <script type="application/json" id="ref2-templates">
+    {
+      "Locker": "„Hey 👋 ich hab grad den Finanz-Check von Heiko gemacht. Ging super fix und war richtig hilfreich. Schau mal rein – sind nur 2 Minuten: {{URL}}“",
+      "Kurz": "„Kurzer Tipp: 2-Minuten-Finanz-Ampel 👉 {{URL}}“",
+      "Ergebnisorientiert": "„Ich war echt überrascht, wie viel Klarheit man in 2 Minuten bekommt 😅 anonym & ohne Verkauf: {{URL}}“",
+      "Familie": "„Hab direkt an euch gedacht: kurze Eltern-Ampel, zeigt in 2 Min, ob was Wichtiges fehlt 👉 {{URL}}“",
+      "Selbstständig": "„Für Selbstständige wie dich: 2-Minuten-Check, ob alles passt – anonym & klar 👉 {{URL}}“"
+    }
+    </script>
+
+    <!-- =========================================================
+         4) NEURO-UX ELEMENTS
+    ========================================================== -->
+    <section class="section neuro" aria-labelledby="neuro-title">
+      <div class="wrap">
+        <h2 id="neuro-title">Sicher weitergeben – ruhig & ohne Druck</h2>
+
+        <div class="proof">
+          <div class="proof-item">
+            <div class="proof-top"><span>Vertrauen</span><strong>98 %</strong></div>
+            <div class="proof-bar" data-value="98"><span></span></div>
+          </div>
+          <div class="proof-item">
+            <div class="proof-top"><span>Klarheit</span><strong>92 %</strong></div>
+            <div class="proof-bar" data-value="92"><span></span></div>
+          </div>
+          <div class="proof-item">
+            <div class="proof-top"><span>Empfehlung</span><strong>91 %</strong></div>
+            <div class="proof-bar" data-value="91"><span></span></div>
+          </div>
+        </div>
+
+        <div class="live-feed" aria-live="polite" aria-atomic="true">
+          <ul id="live-messages">
+            <li>„Sandra (31) hat gerade ihre Ampel gemacht.“</li>
+            <li>„Leon (27) spart 420 € im Jahr.“</li>
+            <li>„Heute schon 18 Menschen Klarheit gewonnen.“</li>
+          </ul>
+        </div>
+
+        <div class="micro-t">
+          <figure class="micro">
+            <blockquote>„Hätte nie gedacht, dass 2 Minuten so viel Ruhe bringen.“</blockquote>
+            <figcaption>– Lisa, 29</figcaption>
+          </figure>
+          <figure class="micro">
+            <blockquote>„Endlich Ruhe im Kopf – wir wissen, was heute wichtig ist.“</blockquote>
+            <figcaption>– Jan, 37</figcaption>
+          </figure>
+          <figure class="micro">
+            <blockquote>„Wir sparen 420 € im Jahr und fühlen uns sicherer.“</blockquote>
+            <figcaption>– Miriam &amp; Paul</figcaption>
+          </figure>
+        </div>
+
+        <article class="storyblock">
+          <h3>Warum deine Empfehlung wichtig ist</h3>
+          <p>Viele schieben das Thema. Alltag. Mental Load. Unsicherheit. Mit deinem Link bekommen sie in <strong>2 Minuten</strong> ein ruhiges Bild.</p>
+          <ul class="bullets">
+            <li><strong>anonym</strong> – niemand muss etwas preisgeben</li>
+            <li><strong>Klarheit</strong> – Ampel zeigt Rot · Gelb · Grün</li>
+            <li><strong>kein Verkauf</strong> – zero-pressure, nur ein Blick</li>
+            <li><strong>Vorteil</strong> – schneller Start, mehr Ruhe</li>
+          </ul>
+          <p>Du hilfst, ohne zu diskutieren. Die Ampel erklärt sich selbst. Das ist ruhig, einfach, erwachsen.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5) BOTTOM NAV
+    ========================================================== -->
+    <nav class="bottom-nav" aria-label="Untere Navigation">
+      <a href="/" class="nav-item" aria-label="Home">🏠 <span>Home</span></a>
+      <a href="/#quiz" class="nav-item" aria-label="Finanzcheck">🚦 <span>Finanzcheck</span></a>
+      <a href="#referral-engine" class="nav-item" aria-label="Weitergeben">💬 <span>Weitergeben</span></a>
+      <a href="#contact" class="nav-item" aria-label="Kontakt">📞 <span>Kontakt</span></a>
+    </nav>
+
+    <!-- Minimal Contact Footer -->
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <h2>Kontakt – kurz & ruhig</h2>
+        <p>Wenn Fragen sind: kurzer Austausch. <strong>kein Verkauf</strong>.</p>
+        <ul class="contact-list">
+          <li><a href="mailto:hi@example.com">hi@example.com</a></li>
+          <li><a href="tel:+490000000000">+49 000 0000000</a></li>
+        </ul>
+        <p class="legal">© <span data-year></span> Ruhige Finanz-Ampel · Impressum · Datenschutz</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- fix: richtige JS-Datei und Position -->
+  <script defer src="assets/app.js"></script>
+</body>
+</html>
