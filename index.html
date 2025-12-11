@@ -1,768 +1,222 @@
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="2 Minuten – zeigt sofort, was heute wichtig ist. Anonym, ohne Verkauf. Deine Wertschätzung zählt erst ab Erstgespräch. Zero-Risk: kein Vorteil → 25 €.">
 
-  <title>2 Minuten – zeigt sofort, was heute wichtig ist.</title>
-  <meta name="description" content="Ruhiger 2-Minuten-Blick: zeigt, was heute ansteht – anonym, ohne Unterlagen, ohne Verkauf." />
-  <link rel="canonical" href="https://heikohaerter.com" />
+  <title>2-Minuten-Ampel – zeigt sofort, was heute wichtig ist</title>
 
-  <!-- Open Graph -->
-  <meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung" />
-  <meta property="og:title" content="2 Minuten – zeigt sofort, was heute wichtig ist." />
-  <meta property="og:description" content="Ein kurzer Blick: sofort sehen, ob heute etwas Wichtiges fehlt – anonym & ohne Verpflichtung." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://heikohaerter.com" />
-  <meta property="og:locale" content="de_DE" />
-  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <!-- ICONS -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <!-- Favicons -->
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-  <meta name="theme-color" content="#05070E" />
+  <!-- CORE STYLES -->
+  <link rel="stylesheet" href="/styles/tokens.css">
+  <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="/styles/utilities.css">
 
-  <!-- Preconnect -->
-  <link rel="preconnect" href="https://static.wixstatic.com" crossorigin />
-  <link rel="preconnect" href="https://wa.me" crossorigin />
+  <!-- COMPONENTS -->
+  <link rel="stylesheet" href="/styles/components/buttons.css">
+  <link rel="stylesheet" href="/styles/components/cards.css">
+  <link rel="stylesheet" href="/styles/components/layout.css">
+  <link rel="stylesheet" href="/styles/components/hero.css">
+  <link rel="stylesheet" href="/styles/components/ampel.css">
 
-  <!-- LCP Preload -->
-  <link
-    rel="preload"
-    as="image"
-    href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
-    imagesrcset="
-      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=480 480w,
-      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=720 720w,
-      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=900 900w,
-      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200 1200w
-    "
-    imagesizes="(min-width: 1024px) 52vw, 92vw"
-    fetchpriority="high"
-  />
+  <!-- PAGE STYLE -->
+  <link rel="stylesheet" href="/styles/pages/index.css">
 
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
-  </script>
-
-  <style>
-    /* ====== Core / Tokens ====== */
-    :root{
-      --bg:#05070E; --bg-soft:#0A0F1E;
-      --surface:rgba(255,255,255,.045); --surface-soft:rgba(255,255,255,.06);
-      --text:#F7F8FC; --muted:#A8B1C5; --muted-soft:#8F97AA;
-      --gold:#C8A44B; --gold-soft:#E9D394;
-      --focus:#90C2FF;
-      --radius-xl:34px; --radius-lg:24px; --radius-md:18px; --radius-sm:12px;
-      --elev-1:0 18px 40px rgba(0,0,0,.35); --elev-2:0 30px 80px rgba(0,0,0,.55);
-      --ease:cubic-bezier(.25,.46,.25,1);
-      --bg-glow-1:radial-gradient(circle at 15% -10%,rgba(200,164,75,.22),transparent 55%);
-      --bg-glow-2:radial-gradient(circle at 85% 10%,rgba(120,150,255,.18),transparent 60%);
-    }
-    html,body{height:auto;overflow-x:hidden}
-    *,*::before,*::after{box-sizing:border-box}
-
-    /* ===== Mobile-first Readability & Overflow ===== */
-    html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-    body{
-      margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
-      background:var(--bg-glow-1),var(--bg-glow-2),linear-gradient(180deg,#04050A,#02040A 60%);
-      color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.4; /* 1.35–1.45 */
-      hyphens:auto;
-    }
-    /* Crucial: avoid broken words in headlines; keep chips safe */
-    h1,h2,h3, .chip, .btn { word-break:normal; overflow-wrap:break-word; }
-
-    a{color:inherit;text-decoration:none}
-    a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
-
-    img,picture,svg,video{display:block;max-width:100%;height:auto}
-
-    @media (prefers-reduced-motion:reduce){
-      *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-    }
-
-    /* ====== Layout primitives ====== */
-    .section{padding:clamp(32px,6vw,72px) 0}
-    .container{max-width:1120px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
-    .grid{display:grid;gap:clamp(.6rem,2.2vw,1.2rem)}
-    .stack{display:flex;flex-direction:column;gap:clamp(.45rem,1.8vw,.9rem)}
-    .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
-
-    /* ====== Type scale ====== */
-    h1,h2,h3{margin:0 0 .9rem;font-weight:700;letter-spacing:-.01em}
-    h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.12}
-    h2{font-size:clamp(1.6rem,3vw,2.2rem)}
-    h3{font-size:clamp(1.12rem,2vw,1.28rem)}
-    p{margin:0 0 .6rem;font-size:clamp(1rem,1.2vw,1.08rem);color:var(--muted)}
-    .hero-micro{font-size:clamp(.95rem,1.1vw,1rem);color:var(--muted-soft)}
-    .system-tagline{margin-top:.6rem;font-size:.98rem;color:var(--muted-soft);max-width:620px}
-
-    /* ====== Buttons ====== */
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:clamp(.9rem,1.2vw,1rem) clamp(1.2rem,2vw,1.7rem);
-         border-radius:999px;border:1px solid transparent;cursor:pointer;min-height:48px;font-weight:800;transition:transform .18s var(--ease),box-shadow .18s var(--ease);background:rgba(255,255,255,.06);color:var(--text)}
-    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
-    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 18px 40px rgba(200,164,75,.40)}
-    .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
-    .btn.small{min-height:44px;padding:.6rem 1rem;font-weight:700}
-    @media (max-width:767px){ .btn, .btn-primary, .btn-ghost{width:100%} } /* full-width on mobile */
-
-    /* ====== Cards / Modules ====== */
-    .card,.premium-card,.share{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:var(--elev-1)}
-    .card{padding:1rem 1.1rem}
-    .premium-card{padding:1.05rem 1.15rem}
-    .story-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.95rem 1.05rem}
-    .safety-card{border-left:4px solid var(--gold)}
-    .tg-card{margin-top:.8rem}
-    .story-grid{display:grid;gap:1rem;margin:1.1rem 0;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
-    .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
-
-    /* ====== Chips ====== */
-    .chip{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:999px;padding:.4rem .7rem;font-size:.92rem;color:var(--muted-soft)}
-    .bar{display:flex;flex-wrap:wrap;gap:.6rem}
-
-    /* ====== Header ====== */
-    header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
-    .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:.85rem 0}
-    .brand{display:flex;flex-direction:column;gap:.18rem}
-    .brand-top{display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.02rem}
-    .brand-dot{width:.9rem;height:.9rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold-soft),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
-
-    /* ====== Hero ====== */
-    .hero{padding-top:clamp(28px,4vw,64px);padding-bottom:clamp(16px,2.5vw,28px)}
-    .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
-    @media (min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center} }
-
-    /* ====== Sticky CTA (Mobile) ====== */
-    .sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
-    .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
-    @media (max-width:1023px){ .sticky-cta{display:flex} }
-    @supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
-
-    /* ====== Fade-in ====== */
-    .fade-up{opacity:0;transform:translateY(18px)}
-    .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
-
-    /* ====== Result Farben ====== */
-    .result-red{background:#2b1111;border:1px solid #c85151}
-    .result-yellow{background:#2b2b11;border:1px solid #d6c45a}
-    .result-green{background:#0f1b12;border:1px solid #55b76b}
-
-    /* ====== Minor utilities ====== */
-    .visually-hidden{position:absolute;inset:auto auto auto -9999px}
-  </style>
 </head>
+
 <body>
-  <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
 
-  <header>
-    <div class="container header-bar">
-      <a href="#hero" class="brand" aria-label="Startseite">
-        <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
-        <span class="hero-micro" style="letter-spacing:.08em;text-transform:uppercase">Persönliche Finanzbegleitung</span>
-      </a>
-      <button class="btn" id="dfBtn" aria-pressed="false" title="Nur das Wichtigste anzeigen">🔍 Kurzmodus</button>
-    </div>
-  </header>
-
-  <main id="main">
-    <!-- ===== SLIDE 1: HERO ===== -->
-    <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="stack">
-          <!-- Microline (exakt) -->
-          <p class="hero-micro" style="text-transform:uppercase;letter-spacing:.14em;opacity:.9">
-            2 Minuten. 3 Fragen. Deine Finanz-Ampel: Grün, Gelb oder Rot.
-          </p>
-
-          <!-- H1 (exakt) -->
-          <h1 id="hero-title">In 2 Minuten sehen, ob heute bei deinen Finanzen etwas Wichtiges fehlt.</h1>
-
-          <!-- System-Satz (exakt) -->
-          <p class="hero-micro system-tagline">
-            Der Check ist der Einstieg in ein ruhiges Finanzsystem, das dir zeigt, was heute wichtig ist – ohne Papierkram, ohne Verkauf.
-          </p>
-
-          <!-- Short-Pain (exakt) -->
-          <p class="hero-micro">
-            Kein Überblick bei Einkommen, Gesundheit, Haftung, Zukunft, Familie? Die Ampel sortiert das – anonym & ohne Druck.
-          </p>
-
-          <!-- Dopamin-Element (exakt) -->
-          <div class="premium-card">
-            <p class="hero-micro" style="margin:0"><strong>80 % fühlen sich nach 2 Minuten ruhiger.</strong></p>
-          </div>
-
-          <!-- Trust Chips (exakt) -->
-          <div class="bar">
-            <span class="chip">⭐ <strong>4,9</strong> | 250+ Menschen</span>
-            <span class="chip">Eltern · Paare · Selbstständige</span>
-            <span class="chip">Kein Verkauf · 100 % anonym</span>
-          </div>
-
-          <!-- CTAs -->
-          <div class="stack">
-            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">⚡ „2-Minuten-Check starten“</a>
-            <button class="btn btn-ghost" id="previewToggle" type="button">Ergebnis-Vorschau ansehen</button>
-            <small class="hero-micro">Anonym · keine Daten · kein Verkauf</small>
-          </div>
-
-          <!-- Ergebnis-Vorschau (togglable, nur UI – keine neuen Texte) -->
-          <div id="heroPreview" class="grid auto-grid" style="display:none">
-            <div class="result-card result-green">
-              <h3>🟢 Ampel-Beispiel</h3>
-              <p class="hero-micro">Passt für heute · Als Nächstes: ruhig planen.</p>
-            </div>
-            <div class="result-card result-yellow">
-              <h3>🟡 Ampel-Beispiel</h3>
-              <p class="hero-micro">Bald wichtig · Als Nächstes angehen.</p>
-            </div>
-            <div class="result-card result-red">
-              <h3>🔴 Ampel-Beispiel</h3>
-              <p class="hero-micro">Heute wichtig · Kurz priorisieren.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="stack">
-          <picture>
-            <img
-              src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200"
-              alt="2-Minuten-Check ohne Papierkram"
-              width="1200" height="900" loading="eager" fetchpriority="high" decoding="async" />
-          </picture>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SLIDE 2: ZIELGRUPPEN + SZENEN ===== -->
-    <section id="zielgruppen-szenen" class="section fade-up" aria-labelledby="tg-h">
-      <div class="container stack">
-        <!-- Premium-Trigger-Card (exakt) -->
-        <div class="premium-card" aria-labelledby="tg-h">
-          <h2 id="tg-h" style="margin:0 0 .35rem">Das hilft dir, wenn du …</h2>
-          <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.2rem">
-            <li>• keine Zeit hast, dich zu kümmern</li>
-            <li>• keine Lust auf Verkaufsrunden hast</li>
-            <li>• dir unsicher bist, ob heute etwas fehlt</li>
-            <li>• dich bei Finanzen überfordert fühlst</li>
-            <li>• einfach wissen willst: Was ist jetzt wichtig?</li>
-          </ul>
-        </div>
-
-        <!-- 3 Mini-Szenen (exakt) -->
-        <div class="story-grid" aria-label="Mini-Szenen">
-          <div class="story-card">
-            <p class="hero-micro"><strong>👨‍👩‍👧 Szene Eltern:</strong><br>
-              „22:47 – Kinder schlafen. Wieder dieses Gefühl: ‚Wir müssten das mal klären…‘ Die Ampel zeigt dir sofort, was heute wirklich wichtig ist.“</p>
-          </div>
-          <div class="story-card">
-            <p class="hero-micro"><strong>💬 Szene Paare:</strong><br>
-              „Ihr wollt Entscheidungen nicht blind treffen? Die Ampel zeigt klar: Jetzt · Als Nächstes · Später.“</p>
-          </div>
-          <div class="story-card">
-            <p class="hero-micro"><strong>💼 Szene Selbstständige:</strong><br>
-              „Ausfall wäre ein echtes Risiko. Die Ampel zeigt dir in 2 Minuten, wo du heute verwundbar bist.“</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SLIDE 3: PROZESS ===== -->
-    <section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
-      <div class="container">
-        <h2 id="prozess-h">So läuft der Check</h2>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:.8rem">
-          <div class="premium-card"><h3>Kurz antworten (ca. 2 Minuten)</h3></div>
-          <div class="premium-card"><h3>Deine Ampel sehen</h3></div>
-          <div class="premium-card">
-            <h3>In Ruhe entscheiden</h3>
-            <p class="hero-micro" style="margin-top:.4rem">
-              Du entscheidest in Ruhe, ob du etwas ändern möchtest oder einfach nur Klarheit mitnimmst.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SLIDE 4: SICHERHEIT (Was NICHT passiert) ===== -->
-    <section id="sicherheit" class="section fade-up" aria-labelledby="safe-h">
-      <div class="container">
-        <h2 id="safe-h">Was NICHT passiert</h2>
-        <div class="premium-card safety-card">
-          <ul class="hero-micro" style="margin:0;padding-left:1.2rem">
-            <li>❌ Kein Verkauf</li>
-            <li>🚫 Keine Datenweitergabe</li>
-            <li>📞 Kein Überraschungsanruf</li>
-            <li>💸 Kein Nachteil, wenn du nichts machst</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SLIDE 5: VORHER–NACHHER + RISIKO-STORY ===== -->
-    <section id="before-after" class="section fade-up" aria-labelledby="ba-h">
-      <div class="container">
-        <h2 id="ba-h">Vorher – Nachher</h2>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin-top:.8rem">
-          <div class="card">
-            <h3>Vorher</h3>
-            <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
-              <li>„Ich hoffe, dass alles passt…“</li>
-              <li>„Ich weiß nicht, wo ich anfangen soll.“</li>
-              <li>„Ich schiebe es vor mir her.“</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Nachher</h3>
-            <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
-              <li>„Ich weiß, was heute wichtig ist.“</li>
-              <li>„Ich habe Klarheit – ohne Verkauf.“</li>
-              <li>„Ich fühle mich sicherer.“</li>
-            </ul>
-          </div>
-        </div>
-        <!-- Risiko-Story (Zero-Risk Hinweis – ohne neue Texte) -->
-        <div class="premium-card" style="margin-top:1.1rem">
-          <p class="hero-micro" style="margin:0"><strong>Zero-Risk:</strong> Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SLIDE 6: WER ICH BIN + SOCIAL PROOF + FAQ + FINAL-CTA ===== -->
-    <section id="ethos-social" class="section fade-up" aria-labelledby="ethos-h">
-      <div class="container stack">
-        <h2 id="ethos-h">Wer ich bin</h2>
-        <!-- Ethos-Box (exakt) -->
-        <div class="premium-card">
-          <p class="hero-micro" style="margin:0">
-            „Ich bin Heiko. Ich habe diese Ampel gebaut, weil ich selbst diese 2-Stunden-Beratungen gehasst habe Voller Tarife, Jargon und Verkaufsdruck.
-            Heute dauert Orientierung 2 Minuten – ruhig, verständlich und ohne Verkauf.“
-          </p>
-        </div>
-
-        <!-- Social Proof: 3 Mini-Stories (nutzen bestehende Szenen-Zitate; keine neuen Texte) -->
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
-          <div class="story-card">
-            <p class="hero-micro"><strong>Eltern</strong><br>
-              „22:47 – Kinder schlafen. Wieder dieses Gefühl: ‚Wir müssten das mal klären…‘ Die Ampel zeigt dir sofort, was heute wirklich wichtig ist.“</p>
-          </div>
-          <div class="story-card">
-            <p class="hero-micro"><strong>Paare</strong><br>
-              „Ihr wollt Entscheidungen nicht blind treffen? Die Ampel zeigt klar: Jetzt · Als Nächstes · Später.“</p>
-          </div>
-          <div class="story-card">
-            <p class="hero-micro"><strong>Selbstständige</strong><br>
-              „Ausfall wäre ein echtes Risiko. Die Ampel zeigt dir in 2 Minuten, wo du heute verwundbar bist.“</p>
-          </div>
-        </div>
-
-        <!-- FAQ (Struktur ohne neue Texte) -->
-        <details class="premium-card">
-          <summary style="cursor:pointer;font-weight:700">FAQ</summary>
-          <p class="hero-micro" style="margin-top:.4rem">—</p>
-        </details>
-
-        <!-- Final CTA -->
-        <div style="text-align:center;max-width:720px;margin-inline:auto">
-          <h2>In 2 Minuten weniger Unsicherheit. Starte jetzt.</h2>
-          <a href="#ampel-check" class="btn btn-primary" id="ctaFinal">⚡ Jetzt starten</a>
-          <p class="hero-micro" style="margin-top:.6rem;">Anonym · Keine Daten · Kein Verkauf</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 2-MINUTEN-CHECK (bestehend; unverändert inhaltlich) ===== -->
-    <section id="ampel-check" class="section fade-up">
-      <div class="container" style="max-width:720px">
-        <div class="stack" id="check-start">
-          <h2>Dein 2-Minuten-Check</h2>
-          <p class="hero-micro">3 kurze Fragen → sofort deine Ampel.</p>
-          <a class="btn btn-primary" id="startCheckBtn">⚡ Jetzt starten</a>
-          <small class="hero-micro" style="opacity:.8">Wenig Zeit? Der <em>Kurzmodus</em> taucht später nochmal auf.</small>
-        </div>
-
-        <div id="check-steps" style="display:none;margin-top:1.2rem">
-          <div class="premium-card" style="margin-bottom:.8rem">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
-              <strong id="stepLabel">Schritt 1 von 3</strong>
-              <span class="hero-micro" id="stepHint">Kurzer Eindruck reicht.</span>
-            </div>
-            <div class="bar" style="width:100%;height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.12)">
-              <span id="progressBar" style="display:block;height:10px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));transition:width .35s var(--ease)"></span>
-            </div>
-          </div>
-
-          <div class="premium-card step" data-step="1" style="display:none">
-            <h3>1 · Wenn du 6 Monate ausfallen würdest – wie sicher wäre euer Einkommen?</h3>
-            <div class="stack">
-              <button class="btn small" data-value="1">Wir hätten ein echtes Problem</button>
-              <button class="btn small" data-value="2">Wir würden klarkommen, aber es wäre eng</button>
-              <button class="btn small" data-value="3">Wir wären stabil abgesichert</button>
-            </div>
-          </div>
-
-          <div class="premium-card step" data-step="2" style="display:none">
-            <h3>2 · Wie gut findest du wichtige Unterlagen, wenn du sie brauchst?</h3>
-            <div class="stack">
-              <button class="btn small" data-value="1">Ich suche lange / finde nichts</button>
-              <button class="btn small" data-value="2">Finde das Meiste direkt</button>
-              <button class="btn small" data-value="3">Finde alles, was ich brauche</button>
-            </div>
-          </div>
-
-          <div class="premium-card step" data-step="3" style="display:none">
-            <h3>3 · „Wie wohl fühlst du dich beim Thema Zukunft &amp; Alter?“</h3>
-            <div class="stack">
-              <button class="btn small" data-value="1">Gar nicht / unsicher</button>
-              <button class="btn small" data-value="2">Teilweise – nicht sicher</button>
-              <button class="btn small" data-value="3">Fühlt sich gut an</button>
-            </div>
-          </div>
-        </div>
-
-        <div id="check-result" style="display:none;margin-top:1.4rem"></div>
-
-        <div class="premium-card" style="margin-top:1.2rem">
-          <h3 style="margin:.1rem 0 .45rem;font-size:1.02rem;">Wenig Zeit?</h3>
-          <p class="hero-micro" style="margin-top:.1rem">12-Sekunden-Kurzmodus: Gefühl für <em>Jetzt · Als Nächstes · Später</em> – ohne Details.</p>
-          <a href="#ampel-check" class="btn btn-ghost" id="startShort">⏱️ Kurzmodus starten</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SHARE (bestehend) ===== -->
-    <section class="section fade-up" id="share" aria-labelledby="share-title">
-      <div class="container">
-        <h2 id="share-title">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
-        <p class="hero-micro">Der Link übernimmt alles: Die Person sieht anonym die Ampel – ohne Unterlagen und ohne Verkauf.</p>
-        <div class="premium-card" style="border:1px dashed rgba(233,211,148,.45);background:rgba(233,211,148,.08);margin:.8rem 0 1rem">
-          <p class="hero-micro" style="margin:0"><strong>Zero-Risk:</strong> Wenn’s der Person nichts bringt, gibt’s <strong>25 €</strong>.</p>
-        </div>
-
-        <!-- Buttons Segmente -->
-        <div class="bar" style="margin:.4rem 0 0">
-          <button class="btn seg-btn" data-seg="eltern">Eltern</button>
-          <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
-          <button class="btn seg-btn" data-seg="freunde">Freunde</button>
-          <button class="btn seg-btn" data-seg="selbst">Selbstständige</button>
-          <button class="btn seg-btn" data-seg="partner">Partner</button>
-          <button class="btn seg-btn" data-seg="neutral">Für alle</button>
-        </div>
-
-        <!-- Composer (unverändert; gekürzt nicht) -->
-        <div class="share stack" id="shareBox" style="margin-top:1rem">
-          <h3 style="margin:.2rem 0 .25rem">Text zum Weitergeben</h3>
-          <p class="hero-micro" style="margin:0 0 .6rem">Kopieren oder direkt per WhatsApp senden.</p>
-
-          <label for="refName" class="hero-micro" style="font-size:.92rem;color:#DDE3F4">Dein Vorname (optional):</label>
-          <input id="refName" name="ref" placeholder="z. B. Alex (Papa) / Dani – Chef" />
-
-          <textarea rows="6" id="refText" inputmode="text" spellcheck="false"
-            data-variants='{
-              "neutral":[
-                "Hey, hab das gerade gesehen – dachte sofort an dich. 2 Minuten – zeigt, ob heute etwas für dich offen ist. Wenn’s dir nichts bringt: 25 €. {{URL}}",
-                "Eine neutrale Einschätzung: anonym & ohne Verpflichtung. Du siehst gleich, wie es für heute wirkt. {{URL}}",
-                "Falls du dieses „Ich müsste mich mal kümmern…“ kennst – hier bekommst du in 2 Min ein Gefühl für heute. {{URL}}"
-              ],
-              "eltern":[
-                "Kurz für Eltern (2 Min): zeigt, ob heute etwas offen ist – ohne Verkauf. Wenn’s nichts bringt: 25 €. {{URL}}",
-                "Anonym sehen, ob für die Familie heute etwas ansteht – ohne Druck. {{URL}}"
-              ],
-              "kollegen":[
-                "2-Minuten-Blick für die To-do-Liste: zeigt dir, ob heute etwas offen ist – ohne Tarifkram. {{URL}}",
-                "Nutze ich selbst als kurzen Blick ohne Aufwand. Vielleicht hilft’s dir auch. {{URL}}"
-              ],
-              "freunde":[
-                "Hey, kurzer Blick (2 Min), komplett anonym – zeigt dir, was heute wichtig sein könnte. {{URL}}",
-                "Hab das gesehen & dachte an dich – null Druck, einfach hilfreich. {{URL}}"
-              ],
-              "selbst":[
-                "Für Selbstständige: kurzer 2-Minuten-Blick, ob gerade etwas ansteht – ohne Verkauf. {{URL}}"
-              ],
-              "partner":[
-                "Magst du kurz schauen (2 Min), ob für heute etwas ansteht? {{URL}}"
-              ]
-            }'
-          ></textarea>
-
-          <div class="bar">
-            <button type="button" id="readyMsg" class="btn btn-primary">✨ Fertigen Text übernehmen</button>
-            <button type="button" id="magicLine" class="btn">+ Beliebten Start-Satz einfügen</button>
-          </div>
-
-          <div class="premium-card">
-            <strong style="display:block;font-size:.85rem;color:var(--muted-soft);margin-bottom:.3rem">WhatsApp-Vorschau</strong>
-            <div id="waPreviewText" class="hero-micro">Wird erstellt…</div>
-          </div>
-
-          <p class="hero-micro">
-            Tipp: Eine persönliche Zeile wirkt immer besser.
-            <button type="button" id="addPersonal" class="btn" style="padding:.4rem .7rem">+ Persönliche Zeile</button>
-          </p>
-
-          <div class="bar">
-            <button class="btn btn-ghost" id="copyBtn">📋 Text kopieren</button>
-            <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener">💬 WhatsApp</a>
-            <button class="btn btn-ghost" id="nativeShare" type="button">📲 System-Teilen</button>
-            <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer%20Blick&body=">✉️ Mail</a>
-          </div>
-          <small class="hero-micro">Zählt ab: Erstgespräch – kein Abschluss nötig.</small>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer role="contentinfo">
-    <div class="container" style="text-align:center">
-      <div style="margin-bottom:.6rem">© <span id="yearNow">2026</span> Heiko Haerter – Persönliche Finanzbegleitung · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></div>
-      <div class="hero-micro">Privates Dankeschön – unabhängig von Organisationen. Keine DVAG-Aktion.</div>
-    </div>
-  </footer>
-
-  <!-- Sticky Mobile CTA -->
-  <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
-    <div class="inner"><a href="#ampel-check" class="btn btn-primary" data-ctx="sticky">⚡ 2-Minuten-Check</a></div>
+<header class="hh-header">
+  <div class="hh-container hh-header-bar">
+    <a href="/" class="hh-brand">
+      <span class="hh-brand-dot"></span>
+      <span class="hh-brand-sub">Persönliche Finanzbegleitung</span>
+    </a>
   </div>
+</header>
 
-  <!-- Whisper CTA -->
-  <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand weiß morgen, was ansteht.</div>
+<main id="main">
 
-  <script>
-    document.documentElement.classList.remove('no-js');
-    document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
+  <!-- ============================= -->
+  <!-- HERO SECTION                  -->
+  <!-- ============================= -->
 
-    /* Fade-in */
-    (function(){
-      const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const els=[...document.querySelectorAll('.fade-up')];
-      if(pref){els.forEach(el=>el.classList.add('visible'));return;}
-      if('IntersectionObserver'in window){
-        const io=new IntersectionObserver(ents=>ents.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
-        els.forEach(el=>io.observe(el));
-      }else{els.forEach(el=>el.classList.add('visible'));}
-    })();
+  <section class="hh-section fade-up hero" id="hero">
+    <div class="hh-container hh-grid-hero">
 
-    /* Sticky CTA – früher triggern (scrollY > 200) + Fallback, nur Mobile/Tablet */
-    (function(){
-      const el=document.getElementById('stickyCTA');
-      const hero=document.querySelector('.hero');
-      if(!el||!hero) return;
-      if(innerWidth>=1024) return;
-      const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0'};
-      if('IntersectionObserver'in window){
-        const io=new IntersectionObserver(ents=>ents.forEach(e=>show(!e.isIntersecting)),{threshold:.35});
-        io.observe(hero);
-        addEventListener('scroll',()=>{ if(scrollY>200) show(true); },{passive:true}); // earlier trigger
-      }else{
-        addEventListener('scroll',()=>show(scrollY>200),{passive:true});
-      }
-    })();
+      <div class="hh-stack hero-content">
 
-    /* Kurzmodus (hide non-core slides) */
-    (function(){
-      const btn=document.getElementById('dfBtn');
-      const keep=new Set(['hero','ethos-social','stickyCTA','share','ampel-check']);
-      const nodes=[...document.querySelectorAll('main > section')].filter(s=>!keep.has(s.id));
-      const set=(on)=>{
-        btn.setAttribute('aria-pressed',on?'true':'false');
-        btn.textContent=on?'✅ Kurzmodus aktiv':'🔍 Kurzmodus';
-        nodes.forEach(n=>n.style.display=on?'none':'');
-        if(on) window.scrollTo({top:0,behavior:'smooth'});
-      };
-      btn.addEventListener('click',()=>set(btn.getAttribute('aria-pressed')!=='true'));
-      window.setKurzmodus=set;
-    })();
+        <p class="hh-micro intro-line">2 Minuten – ein Gefühl für heute. Anonym & ohne Verkauf.</p>
 
-    /* Ergebnis-Vorschau Toggle (Sekundär-CTA) */
-    (function(){
-      const btn=document.getElementById('previewToggle');
-      const box=document.getElementById('heroPreview');
-      if(btn && box){
-        btn.addEventListener('click',()=>{ box.style.display=box.style.display==='none'?'grid':'none'; });
-      }
-    })();
+        <h1 class="hh-h1">
+          Deine 2-Minuten-Ampel: zeigt sofort, was heute wichtig ist.
+        </h1>
 
-    /* Share composer (bestehend) */
-    (function(){
-      const name = document.getElementById('refName');
-      const area = document.getElementById('refText');
-      const wa   = document.getElementById('waShare');
-      const mail = document.getElementById('mailShare');
-      const copy = document.getElementById('copyBtn');
-      const preview = document.getElementById('waPreviewText');
+        <ul class="hero-benefits">
+          <li>🟢 Sofortiges Gefühl für: Jetzt · Als Nächstes · Später</li>
+          <li>🟢 100 % anonym · kein Verkauf · kein Login</li>
+          <li>🟢 Kein Vorteil → 25 € (Zero-Risk)</li>
+        </ul>
 
-      const KEY_REFID='hh_ref_rid_v1';
-      function randomId(len=10){ const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len); if(crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.random()*256; return Array.from(u,x=>a[x%a.length]).join(''); }
-      function getRefId(){ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } }
-      function sanitize(n){ return n ? n.replace(/[^a-z0-9]/gi,'').toLowerCase() : ''; }
+        <a href="#startCheck" class="hh-btn hh-btn-primary hero-cta" id="startCheckHero">
+          ✨ Jetzt starten (2 Minuten)
+        </a>
 
-      function buildURL(){
-        const base=new URL('https://heikohaerter.com');
-        base.searchParams.set('utm_source','weitergeben');
-        base.searchParams.set('utm_medium','share');
-        base.searchParams.set('utm_campaign','check');
-        const rid=getRefId(); base.searchParams.set('rid', rid);
-        const alias=sanitize((name?.value||'').trim());
-        if(alias) base.searchParams.set('ref', alias+'.'+rid.slice(0,5));
-        return base.toString();
-      }
-      function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
-      function detectSeg(){
-        const raw=(name?.value||'').toLowerCase();
-        if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
-        if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
-        if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
-        if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
-        if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
-        return 'neutral';
-      }
-      function pick(seg){ const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; const i=Math.floor(Math.random()*pool.length); return pool[i]; }
-      function ensureURL(text){ return /\bhttps?:\/\/\S+/i.test(text) ? text : (text.trim()+' '+buildURL()); }
-      function setTextFrom(seg){ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); }
-      function plain(){ return (area.value||'').replace(/\n+/g,' ').trim(); }
-      function updateLinks(){
-        const t=ensureURL(plain());
-        wa.href='https://wa.me/?text='+encodeURIComponent(t);
-        mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t);
-        preview.textContent = t.length<=190 ? t : t.substring(0,t.lastIndexOf(' ',190))+'…';
-      }
+        <div class="hh-card hh-story fade-up">
+          <p>
+            „Ich hätte das viel früher gebraucht. Ein kurzer Blick – und plötzlich ist wieder Ruhe im Kopf.“
+          </p>
+        </div>
 
-      if(area && !area.value){ setTextFrom('neutral'); } updateLinks();
+      </div>
 
-      document.querySelectorAll('[data-seg]').forEach(b=> b.addEventListener('click', ()=> setTextFrom(b.getAttribute('data-seg')) ));
-      name?.addEventListener('input', ()=> setTextFrom() );
-      area?.addEventListener('input', updateLinks );
+      <!-- HERO IMAGE -->
+      <div class="hh-hero-image fade-up">
+        <img src="/assets/hero.webp" alt="2-Minuten-Ampel – sofort Klarheit" />
+      </div>
 
-      document.getElementById('readyMsg')?.addEventListener('click', ()=>{
-        setTextFrom();
-        const toast=document.createElement('div');
-        toast.textContent='Fertiger Text eingefügt ✔️';
-        toast.className='whisper';
-        toast.style.cssText=document.getElementById('whisper').style.cssText;
-        document.body.appendChild(toast);
-        setTimeout(()=>{ toast.style.opacity='1'; toast.style.transform='translateY(0)'; },10);
-        setTimeout(()=>toast.remove(),2000);
-      });
-      document.getElementById('magicLine')?.addEventListener('click', ()=>{
-        const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
-        const cur=(area.value||'').trim();
-        area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
-        updateLinks();
-      });
-      document.getElementById('addPersonal')?.addEventListener('click', ()=>{
-        const alias=(name?.value||'').trim()||'Hey';
-        area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
-        updateLinks();
-      });
-      document.getElementById('copyBtn')?.addEventListener('click', async ()=>{
-        try{ await navigator.clipboard.writeText(ensureURL(area.value)); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
-      });
-      document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
-        const t=plain(); const url=buildURL();
-        if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); }catch(_){} }
-      });
-    })();
+    </div>
+  </section>
 
-    /* Ampel-Check – Ergebnisse */
-    (function() {
-      let step=1, score=0;
-      const max=3;
-      const startBtn=document.getElementById('startCheckBtn');
-      const stepsWrap=document.getElementById('check-steps');
-      const resultBox=document.getElementById('check-result');
-      const stepLabel=document.getElementById('stepLabel');
-      const progress=document.getElementById('progressBar');
-      const stepHint=document.getElementById('stepHint');
 
-      function updateHead(){
-        stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`;
-        const pct = ((Math.min(step-1,max-1))/(max-1))*100;
-        progress.style.width = (max===1?100:pct)+'%';
-        stepHint.textContent= step===1?'Kurzer Eindruck reicht.': step===2?'Fast geschafft.':'Letzter Klick.';
-      }
-      function showStep(n){
-        document.querySelectorAll('#check-steps .step').forEach(s=>s.style.display='none');
-        const t=document.querySelector(`#check-steps .step[data-step="${n}"]`);
-        if(t){ t.style.display='block'; t.scrollIntoView({behavior:'smooth',block:'start'}); }
-        updateHead();
-      }
+  <!-- ============================= -->
+  <!-- 5 BEREICHE – ICON SECTION     -->
+  <!-- ============================= -->
 
-      function renderCTA(color){
-        const wa='https://wa.me/4917660408380?text=';
-        if(color==='red') return `<div class="stack" style="text-align:center">
-          <a href="${wa}Kurz%2010%20Minuten%20sprechen" class="btn btn-primary">💬 Kurz sprechen – 10 Minuten</a>
-          <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">🛟 Frage senden</a></div>`;
-        if(color==='yellow') return `<div class="stack" style="text-align:center">
-          <a href="${wa}Als%20N%C3%A4chstes%20angehen" class="btn btn-primary">🧭 Als Nächstes angehen</a>
-          <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">💬 Frage senden</a></div>`;
-        return `<div class="stack" style="text-align:center">
-          <a href="${wa}Smarter%20machen%3F" class="btn btn-primary">✨ Smarter machen?</a>
-          <a href="#share" class="btn btn-ghost">🔗 Weitergeben</a></div>`;
-      }
-      function finish(){
-        stepsWrap.style.display='none';
-        resultBox.style.display='block';
-        let html='';
-        if(score<=4){
-          html=`<div class="result-card result-red">
-            <h3>🔴 Heute wichtig</h3>
-            <p>Mindestens ein Bereich braucht heute deine Aufmerksamkeit.</p>
-            ${renderCTA('red')}
-          </div>`;
-        } else if(score<=7){
-          html=`<div class="result-card result-yellow">
-            <h3>🟡 Bald wichtig</h3>
-            <p>Ein paar Dinge stehen bald an.</p>
-            ${renderCTA('yellow')}
-          </div>`;
-        } else {
-          html=`<div class="result-card result-green">
-            <h3>🟢 Passt für heute</h3>
-            <p>Für heute wirkt alles entspannt.</p>
-            ${renderCTA('green')}
-          </div>`;
-        }
-        html+=`<p class="hero-micro" style="margin-top:.8rem;opacity:.85">Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>`;
-        resultBox.innerHTML=html;
-        resultBox.scrollIntoView({behavior:'smooth',block:'start'});
-      }
-      function start(){
-        document.getElementById('check-start').style.display='none';
-        stepsWrap.style.display='block';
-        resultBox.style.display='none';
-        step=1; score=0; showStep(step);
-      }
+  <section class="hh-section fade-up">
+    <div class="hh-container">
+      <h2 class="hh-h2">Die 5 Bereiche, die sofort ein Gefühl geben</h2>
 
-      document.getElementById('startCheckHero')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
-      document.getElementById('ctaFinal')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
-      startBtn?.addEventListener('click',start);
+      <div class="hh-grid-auto" id="areasIcons">
 
-      document.getElementById('startShort')?.addEventListener('click',e=>{
-        e.preventDefault(); start();
-        setTimeout(()=>{ score+=2; step=2; showStep(step); },150);
-        setTimeout(()=>{ score+=2; step=3; showStep(step); },350);
-      });
+        <div class="icon-card icon fade-up">
+          <h3>Finanzbasis</h3>
+          <p class="hh-micro">Wie stabil ist heute deine Basis wirklich?</p>
+        </div>
 
-      document.querySelectorAll('#check-steps .step').forEach(s=>{
-        s.querySelectorAll('button').forEach(btn=>{
-          btn.addEventListener('click', ()=>{
-            score += Number(btn.getAttribute('data-value'))||0;
-            step++;
-            if(step>3) finish(); else showStep(step);
-          });
-        });
-      });
-    })();
-  </script>
+        <div class="icon-card icon fade-up">
+          <h3>Absicherung</h3>
+          <p class="hh-micro">Welche Risiken zählen heute wirklich?</p>
+        </div>
+
+        <div class="icon-card icon fade-up">
+          <h3>Rücklagen</h3>
+          <p class="hh-micro">Reicht’s, wenn heute etwas passiert?</p>
+        </div>
+
+        <div class="icon-card icon fade-up">
+          <h3>Zukunft</h3>
+          <p class="hh-micro">Wie sieht’s langfristig aus?</p>
+        </div>
+
+        <div class="icon-card icon fade-up">
+          <h3>Ruhegefühl</h3>
+          <p class="hh-micro">Was bringt dir heute wirklich Entspannung?</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================= -->
+  <!-- CHECK START                   -->
+  <!-- ============================= -->
+
+  <section class="hh-section fade-up" id="startCheck">
+    <div class="hh-container hh-center">
+
+      <h2 class="hh-h2">2-Minuten-Ampel starten</h2>
+      <p class="hh-micro">Wird danach anonym ausgewertet – keine Daten werden gespeichert.</p>
+
+      <a href="#check-steps" class="hh-btn hh-btn-primary" id="startCheckBtn">
+        🚦 Ampel starten
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ============================= -->
+  <!-- AMPEL ENGINE (STEPS)         -->
+  <!-- ============================= -->
+
+  <section class="hh-section fade-up" id="check-steps">
+    <div class="hh-container">
+
+      <div id="check-start" class="hh-center">
+        <p class="hh-micro">Kurzer Blick. 3 Schritte. Sofort Orientierung.</p>
+      </div>
+
+      <!-- Steps werden dynamisch per JS ein-/ausgeblendet -->
+      <div id="check-steps" class="steps-wrapper">
+
+        <div class="step" data-step="1">
+          <h3>Schritt 1</h3>
+          <button class="hh-btn" data-value="2">☑ Passt</button>
+          <button class="hh-btn" data-value="0">❓ Unsicher</button>
+          <button class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
+        </div>
+
+        <div class="step" data-step="2">
+          <h3>Schritt 2</h3>
+          <button class="hh-btn" data-value="2">☑ Passt</button>
+          <button class="hh-btn" data-value="0">❓ Unsicher</button>
+          <button class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
+        </div>
+
+        <div class="step" data-step="3">
+          <h3>Schritt 3</h3>
+          <button class="hh-btn" data-value="2">☑ Passt</button>
+          <button class="hh-btn" data-value="0">❓ Unsicher</button>
+          <button class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
+        </div>
+
+      </div>
+
+      <div id="check-result" class="fade-up"></div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================= -->
+  <!-- FINAL CTA                     -->
+  <!-- ============================= -->
+
+  <section class="hh-section fade-up" id="final-cta">
+    <div class="hh-container hh-center" style="max-width:720px">
+      <h2 class="hh-h2">Bereit, dein Gefühl für heute zu sortieren?</h2>
+      <p class="hh-micro">Wenn’s dir nichts bringt → 25 €.</p>
+
+      <a href="#startCheck" class="hh-btn hh-btn-primary" id="ctaFinal">
+        ✨ Jetzt ansehen
+      </a>
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="hh-footer">
+  <div class="hh-container">
+    © <span id="yearNow">2026</span> Heiko Haerter · 
+    <a href="/impressum">Impressum</a> · 
+    <a href="/datenschutz">Datenschutz</a>
+  </div>
+</footer>
+
+
+<!-- ============================= -->
+<!-- SCRIPTS                       -->
+<!-- ============================= -->
+
+<script type="module" src="/scripts/pages/index.js"></script>
+
 </body>
 </html>
