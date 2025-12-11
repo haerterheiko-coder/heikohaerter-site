@@ -2,69 +2,44 @@
 <html lang="de" class="no-js" translate="no">
 <head>
   <!-- =========================================
-       META / SEO / BRANDING – GODMODE 2026
+       META / SEO / BRANDING
   ========================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#05070E" />
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow" />
 
-  <title>Der ruhige Finanz-Kompass – 2 Minuten Ruhe, bevor der Alltag dich wieder einholt</title>
-
+  <title>In 2 Minuten wissen, ob heute alles gut ist · Ruhiger Finanz-Kompass</title>
+  
   <meta name="description"
-        content="Ein kurzer Blick. Zwei ruhige Minuten. Die 2-Minuten-Ampel zeigt anonym, wie stabil dein Alltag heute wirkt – ohne Daten, ohne Verkauf. Für Eltern, Paare & Selbstständige." />
+        content="Die 2-Minuten-Ampel zeigt dir anonym, wie stabil dein Alltag heute ist – und ob du etwas übersiehst. Ohne Daten. Ohne Verkauf. Ein Moment Ruhe, bevor der Alltag weiterläuft." />
 
   <link rel="canonical" href="https://heikohaerter.com" />
 
   <!-- SOCIAL / OG -->
-  <meta property="og:title" content="Der ruhige Finanz-Kompass – 2-Minuten-Ampel" />
+  <meta property="og:title" content="Die 2-Minuten-Ampel – Ein Moment Ruhe für deinen Alltag" />
   <meta property="og:description"
-        content="2 Minuten Ruhe – bevor der Alltag dich wieder einholt. Die 2-Minuten-Ampel zeigt anonym, wie stabil dein Alltag wirkt – ohne Daten, ohne Verkauf." />
+        content="In 2 Minuten sehen, ob heute alles gut ist. Anonym. Ohne Verkauf. Der ruhige Finanz-Kompass." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://heikohaerter.com" />
   <meta property="og:image"
         content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
   <meta property="og:locale" content="de_DE" />
 
-  <!-- TOUCH ICONS -->
+  <!-- ICONS -->
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="/styles.css" />
 
-  <!-- PRELOAD PORTRAIT -->
+  <!-- PRELOAD BRAND PORTRAIT -->
   <link rel="preload" as="image"
         href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
-        fetchpriority="high">
+        fetchpriority="high" />
 
-  <!-- STRUCTURED DATA – PERSON -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Heiko Haerter",
-    "jobTitle": "Ruhiger Finanz-Kompass",
-    "url": "https://heikohaerter.com",
-    "image": "https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Robert-Bosch-Str. 1",
-      "addressLocality": "Rutesheim",
-      "postalCode": "71277",
-      "addressCountry": "DE"
-    },
-    "sameAs": [
-      "https://www.instagram.com/heiko.haerter.coach/",
-      "https://www.linkedin.com/in/heiko-haerter-3755b2260/",
-      "https://www.xing.com/profile/Heiko_Haerter3",
-      "https://beacons.ai/heiko.haerter"
-    ]
-  }
-  </script>
-
-  <!-- STRUCTURED DATA – FAQ -->
+  <!-- FAQ STRUCTURED DATA -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -75,15 +50,15 @@
         "name": "Kostet die 2-Minuten-Ampel etwas?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nein. Die Ampel ist anonym, kostenlos und ohne Verkauf. Du wirst nicht angerufen und musst nichts abschließen."
+          "text": "Nein. Die Ampel ist anonym, kostenlos und ohne Verkauf."
         }
       },
       {
         "@type": "Question",
-        "name": "Werden meine Daten gespeichert?",
+        "name": "Werden Daten gespeichert?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nein. Es werden keine persönlichen Daten abgefragt, gespeichert oder weitergegeben. Alles bleibt anonym."
+          "text": "Nein. Es werden keine persönlichen Daten abgefragt oder gespeichert."
         }
       }
     ]
@@ -104,7 +79,7 @@
     <a class="brand" href="/">
       <span class="brand-dot"></span>
       <span class="brand-name">Heiko Haerter</span>
-      <span class="brand-claim">Der ruhige Finanz-Kompass</span>
+      <span class="brand-claim">Ruhiger Finanz-Kompass</span>
     </a>
   </div>
 </header>
@@ -112,192 +87,209 @@
 <main id="main">
 
 <!-- =========================================
-     HERO – Netflix Cold Open
+     HERO – Signature Moment
 ========================================== -->
 <section id="hero" class="section hero fade-up">
   <div class="container hero-grid">
 
-    <div class="hero-text stack">
+    <div class="stack">
 
+      <!-- Rotierender TikTok-Hook -->
       <p class="rotating-hook" id="rotatingHook"></p>
 
       <h1 class="hero-title">
-        Wenn du abends im Bett liegst und kurz denkst:<br>
-        <strong>Hoffentlich übersehe ich nichts Wichtiges …</strong>
+        In 2 Minuten weißt du, ob du heute gut aufgestellt bist.
       </h1>
 
       <p class="hero-sub">
-        Ein kurzer Blick. Zwei ruhige Minuten.<br>
-        Die Ampel zeigt anonym, wie stabil dein Alltag heute wirkt – ohne Daten, ohne Verkauf.
+        Die Finanz-Ampel zeigt dir anonym, wie stabil dein Alltag heute ist –
+        und ob du etwas übersiehst.<br>
+        Ohne Vorbereitung. Ohne Unterlagen. Ohne Verkauf.
       </p>
 
+      <p class="microtrust">Ein Moment Ruhe – bevor der Alltag weiterläuft.</p>
+
       <a href="#ampel-check" class="btn btn-primary hero-btn">
-        ⚡ Jetzt die 2-Minuten-Ampel starten
+        ⚡ Ampel starten
       </a>
 
-      <p class="microtrust">Anonym · Keine Daten · Kein Druck</p>
+      <p class="microtrust">Anonym · Kein Verkauf · Jederzeit abbrechen</p>
+
     </div>
 
     <div class="hero-visual">
       <img src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
-           alt="Heiko Haerter – Der ruhige Finanz-Kompass"
-           width="900" height="900" loading="eager">
+           alt="Heiko Haerter – Ruhiger Finanz-Kompass" />
     </div>
 
   </div>
 </section>
 
-<!-- =========================================
-     CATEGORY
-========================================== -->
-<section id="category" class="section fade-up">
-  <div class="container stack center">
-
-    <h2>Der ruhige Finanz-Kompass</h2>
-
-    <p class="lead center">
-      Viele Menschen hoffen, nichts Wichtiges zu übersehen –<br>
-      aber ihnen fehlt Zeit, Kopf oder Ordnung.<br>
-      Die 2-Minuten-Ampel zeigt dir anonym, wie stabil dein Alltag heute wirkt.
-    </p>
-
-    <div class="ampel-loop">
-      <span class="dot green"></span>
-      <span class="dot yellow"></span>
-      <span class="dot red"></span>
-    </div>
-
+<!-- Distributed Social Proof -->
+<section class="section fade-up">
+  <div class="container">
+    <p class="proof">„22:47 Uhr. Die Kinder schlafen. Die Ampel hat uns beruhigt.“</p>
   </div>
 </section>
 
 <!-- =========================================
-     AMPSEL PREVIEW
+     WHY THE AMPEL WORKS (Neuropsychologie)
 ========================================== -->
-<section id="preview" class="section fade-up">
+<section class="section fade-up">
   <div class="container stack">
 
-    <h2>So sieht deine Ampel aus</h2>
+    <h2>Dein Gehirn braucht Orientierung – nicht mehr Informationen.</h2>
 
-    <div class="grid preview-grid">
+    <p class="lead">
+      80 % der Menschen wissen nicht, ob ihre Absicherung im Ernstfall trägt.
+      Doch Stress entsteht selten durch fehlendes Wissen –
+      sondern durch fehlende Orientierung.<br>
+      Die Ampel gibt dir diese Orientierung in 2 Minuten.
+    </p>
 
-      <div class="preview-card green">
-        <h3>🟢 Grün</h3>
-        <p>Für heute wirkt alles stabil. Du kannst entspannt weitermachen.</p>
+    <div class="personas-grid narrow">
+      <div class="persona-card center">🔍 Risiko klar sehen</div>
+      <div class="persona-card center">🧠 Kopf entlasten</div>
+      <div class="persona-card center">🌿 Sicherheit spüren</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section fade-up">
+  <div class="container">
+    <p class="proof">„Ich wollte nur kurz wissen, ob irgendwo eine Lücke ist.“</p>
+  </div>
+</section>
+
+<!-- =========================================
+     HOW IT WORKS – 3 Schritte
+========================================== -->
+<section class="section fade-up">
+  <div class="container stack">
+
+    <h2>So bekommst du Klarheit – ohne Stress und ohne Vorbereitung.</h2>
+
+    <div class="personas-grid">
+      <div class="persona-card center">
+        <strong>1. Drei kurze Fragen</strong><br>
+        Neutral, anonym, verständlich – selbst wenn dein Kopf voll ist.
       </div>
-
-      <div class="preview-card yellow">
-        <h3>🟡 Gelb</h3>
-        <p>Bald wichtig – aber heute kein Stress.</p>
+      <div class="persona-card center">
+        <strong>2. Deine Ampel</strong><br>
+        Grün · Gelb · Rot – sofort klar, was heute wichtig ist.
       </div>
-
-      <div class="preview-card red">
-        <h3>🔴 Rot</h3>
-        <p>Heute wichtig – ruhig, klar, ohne Druck.</p>
+      <div class="persona-card center">
+        <strong>3. Ruhe & nächste Schritte</strong><br>
+        Wenn du möchtest, klären wir später, was die Ampel sichtbar macht – in Ruhe und ohne Druck.
       </div>
-
     </div>
 
     <a href="#ampel-check" class="btn btn-primary center">
-      2-Minuten-Ampel testen
+      ⚡ Jetzt starten
     </a>
 
   </div>
 </section>
 
-<!-- =========================================
-     FÜR WEN?
-========================================== -->
-<section id="fuer-wen" class="section fade-up">
-  <div class="container stack">
-
-    <h2>Für wen ist das?</h2>
-
-    <div class="grid personas-grid">
-
-      <div class="persona-card">
-        <p><strong>👨‍👩‍👧 Eltern</strong><br>
-        Wenn die Kids schlafen und du kurz denkst: Hoffentlich ist alles geregelt …</p>
-        <a href="#ampel-check" class="link-quiet">2 ruhige Minuten holen</a>
-      </div>
-
-      <div class="persona-card">
-        <p><strong>💬 Paare</strong><br>
-        Wenn alles gleichzeitig wichtig wirkt – und ihr nicht wisst, womit ihr anfangen sollt …</p>
-        <a href="#ampel-check" class="link-quiet">2 ruhige Minuten holen</a>
-      </div>
-
-      <div class="persona-card">
-        <p><strong>💼 Selbstständige</strong><br>
-        Wenn dein Alltag komplett an dir hängt – und du dich fragst, ob das halten würde …</p>
-        <a href="#ampel-check" class="link-quiet">2 ruhige Minuten holen</a>
-      </div>
-
-    </div>
+<section class="section fade-up">
+  <div class="container">
+    <p class="proof">„Das war das erste Mal, dass Finanzen leicht waren.“</p>
   </div>
 </section>
 
 <!-- =========================================
-     SOCIAL PROOF
+     TARGET GROUPS
 ========================================== -->
-<section id="social-proof" class="section fade-up">
+<section class="section fade-up">
   <div class="container stack">
 
-    <h2>Was Menschen danach sagen</h2>
+    <h2>Für wen die Ampel besonders hilfreich ist</h2>
 
-    <div class="proof-list">
+    <p class="lead center">Viele unterschiedliche Situationen – ein klarer Weg zu Ruhe.</p>
 
-      <p class="proof">
-        „22:47 Uhr. Die Kinder schlafen. Die Ampel hat uns in 2 Minuten beruhigt.“
-      </p>
+    <div class="personas-grid">
 
-      <p class="proof">
-        „Ich wollte nur kurz wissen, ob wir etwas übersehen.“
-      </p>
+      <div class="persona-card">
+        <strong>👨‍👩‍👧 Eltern</strong><br>
+        Wenn du manchmal hoffst, nichts Wichtiges zu übersehen.
+        <br><br>
+        <a class="link-quiet" href="#ampel-check">Ampel starten</a>
+      </div>
 
-      <p class="proof">
-        „Das war das erste Mal, dass Finanzen sich leicht angefühlt haben.“
-      </p>
+      <div class="persona-card">
+        <strong>💼 Selbstständige</strong><br>
+        Wenn dein Einkommen und Alltag komplett an dir hängen.
+        <br><br>
+        <a class="link-quiet" href="#ampel-check">Ampel starten</a>
+      </div>
+
+      <div class="persona-card">
+        <strong>💕 Paare</strong><br>
+        Wenn ihr wissen wollt, ob eure Absicherung wirklich trägt.
+        <br><br>
+        <a class="link-quiet" href="#ampel-check">Ampel starten</a>
+      </div>
 
     </div>
 
   </div>
 </section>
 
+<section class="section fade-up">
+  <div class="container">
+    <p class="proof">„Endlich mal ohne Verkaufsdruck.“</p>
+  </div>
+</section>
+
 <!-- =========================================
-     SAFETY
+     TRANSFORMATION – BEFORE / AFTER
 ========================================== -->
-<section id="safety" class="section fade-up">
+<section class="section fade-up">
   <div class="container stack">
 
-    <h2>Kein Verkauf. Keine Daten. Keine Verpflichtung.</h2>
+    <h2>Wie fühlt sich Klarheit an?</h2>
 
-    <p class="lead">
-      Du wirst nicht angerufen.<br>
-      Du musst nichts vorbereiten.<br>
-      Du sollst zuerst in Ruhe spüren, ob dir diese Ampel hilft.
-    </p>
+    <div class="preview-grid">
+
+      <div class="preview-card">
+        <h3>Vorher</h3>
+        <p>❌ Viele offene Fragen</p>
+        <p>❌ Verträge überall verteilt</p>
+        <p>❌ Bauchgefühl statt Struktur</p>
+        <p>❌ „Ich hoffe, es passt schon.“</p>
+        <p>❌ Mental Load & Unsicherheit</p>
+      </div>
+
+      <div class="preview-card">
+        <h3>Nachher</h3>
+        <p>✔ Eine klare Ampel</p>
+        <p>✔ Orientierung in Sekunden</p>
+        <p>✔ Struktur statt Stress</p>
+        <p>✔ Ein ruhiger Kopf</p>
+        <p>✔ Sicherheit für den Alltag</p>
+        <p><em>Und plötzlich fühlt sich alles leichter an.</em></p>
+      </div>
+
+    </div>
 
   </div>
 </section>
 
 <!-- =========================================
-     ABOUT
+     ABOUT HEIKO
 ========================================== -->
-<section id="about" class="section fade-up">
+<section class="section fade-up">
   <div class="container stack">
 
-    <h2>Warum es diese Ampel gibt</h2>
+    <h2>Ich weiß, wie sich Unsicherheit anfühlt. Darum habe ich die Ampel gebaut.</h2>
 
     <p class="lead">
-      Ich bin Heiko.<br>
-      Ich wollte etwas schaffen, das jeder versteht – selbst wenn der Kopf voll ist.<br>
-      Zu viele Menschen hoffen, nichts Wichtiges zu übersehen.<br>
-      Die Ampel gibt ihnen in 2 Minuten einen ruhigen Überblick – bevor der Alltag sie wieder einholt.
-    </p>
-
-    <p class="smallprint">
-      Im Hintergrund steht die ganzheitliche Struktur der Deutschen Vermögensberatung.<br>
-      Aber die ersten 2 Minuten gehören nur dir.
+      Finanzen sollen nicht belasten. Sie sollen Orientierung geben – selbst, wenn der Kopf voll ist.<br><br>
+      Ich habe die Ampel gebaut, weil niemand Menschen wirklich erklärt, was wichtig ist – aber jeder Ruhe verdient.<br><br>
+      Darum bekommst du zuerst Klarheit. Ohne Unterlagen. Ohne Vorbereitung. Ohne Druck.<br>
+      Wenn du danach mehr Sicherheit willst, klären wir gemeinsam, was wichtig ist –
+      mit der Struktur der Deutschen Vermögensberatung im Hintergrund.
     </p>
 
   </div>
@@ -306,14 +298,18 @@
 <!-- =========================================
      FINAL CTA
 ========================================== -->
-<section id="final-cta" class="section fade-up">
-  <div class="container stack center">
+<section class="section fade-up">
+  <div class="container center stack">
 
-    <h2>Bereit für 2 ruhige Minuten?</h2>
+    <h2>Gönn dir 2 Minuten Ruhe.</h2>
 
     <a href="#ampel-check" class="btn btn-primary">
-      ⚡ Die Ampel starten
+      ⚡ Ampel starten
     </a>
+
+    <p class="microtrust">
+      Anonym · Keine Daten · Kein Verkauf · Jederzeit abbrechen
+    </p>
 
   </div>
 </section>
@@ -337,12 +333,11 @@
 ========================================== -->
 <footer class="footer">
   <div class="container footer-inner">
-    <p>© 2026 Heiko Haerter – Der ruhige Finanz-Kompass</p>
+    <p>© 2026 Heiko Haerter – Ruhiger Finanz-Kompass</p>
     <p>
+      <a href="/weitergeben">Weitergeben</a> ·
       <a href="/impressum">Impressum</a> ·
       <a href="/datenschutz">Datenschutz</a> ·
-      <a href="https://www.instagram.com/heiko.haerter.coach/">Instagram</a> ·
-      <a href="https://www.linkedin.com/in/heiko-haerter-3755b2260/">LinkedIn</a> ·
       <a href="mailto:heiko.haerter@dvag.de">E-Mail</a>
     </p>
   </div>
@@ -350,14 +345,14 @@
 
 <!-- Sticky CTA -->
 <div class="sticky-cta" id="stickyCTA">
-  <a href="#ampel-check" class="btn btn-primary">⚡ 2-Minuten-Ampel</a>
+  <a href="#ampel-check" class="btn btn-primary">⚡ Ampel starten</a>
 </div>
 
 <!-- Whisper CTA -->
 <div class="whisper" id="whisper"></div>
 
 <!-- JS -->
-<script src="/app.js"></script>
+<script defer src="/app.js"></script>
 
 </body>
 </html>
