@@ -1,501 +1,310 @@
-<!-- =======================================================================
-index.html  (Startseite)  —  nutzt assets/styles.css & assets/app.js
-Projekt-Pages-sichere, rein relative Pfade
-======================================================================= -->
 <!DOCTYPE html>
 <html lang="de" translate="no" class="no-js">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="theme-color" content="#0b0f14" />
-  <title>Ruhige Finanz-Ampel – 2-Minuten-Check</title>
-  <meta name="description" content="Finanz-Ampel: anonym, klar, ohne Verkauf. In 2 Minuten bekommst du ein Gefühl: Rot · Gelb · Grün." />
-  <!-- keine führenden / , damit es unter /heikohaerter-site/ funktioniert -->
-  <link rel="icon" href="favicon.ico" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
-<!-- WICHTIG: Root-Pfad, kein assets/ -->
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#0b0f14">
+
+  <title>In 2 Minuten sehen, wo du heute stehst – Ruhige Finanz-Ampel</title>
+  <meta name="description" content="In 2 Minuten wissen, ob du heute mehr Klarheit, Sicherheit und Geld hast. Anonym, ohne Verkauf, sofort Ergebnis. Ruhige Finanz-Ampel.">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
+
 <body>
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-  <header class="site-header" role="banner">
-    <div class="wrap header-bar">
-      <a class="brand" href="index.html" aria-label="Startseite">
-        <span class="brand-dot" aria-hidden="true"></span>
-        <span class="brand-name">Ruhige Finanz-Ampel</span>
-        <span class="brand-tag">anonym · Klarheit · kein Verkauf</span>
+<!-- =========================================================
+     1) HEADER
+========================================================= -->
+<header class="site-header">
+  <div class="wrap header-bar">
+    <a class="brand" href="index.html">
+      <span class="brand-dot"></span>
+      <span class="brand-name">Ruhige Finanz-Ampel</span>
+      <span class="brand-tag">anonym · Klarheit · kein Verkauf</span>
+    </a>
+  </div>
+</header>
+
+<!-- =========================================================
+     DECISION ANCHOR (scroll-triggered, initially hidden)
+========================================================= -->
+<div id="decision-anchor" class="decision-anchor" aria-live="polite">
+  🔒 100 % anonym · Kein Verkauf · 25 € Garantie
+</div>
+
+<!-- =========================================================
+     STICKY CTA (mobile, scroll-triggered)
+========================================================= -->
+<div id="sticky-cta" class="sticky-cta" aria-hidden="true">
+  <div class="inner">
+    <button class="btn btn-primary tap-scale" data-target="#quiz" data-track="cta_sticky">
+      👉 Finanz-Check starten und Klarheit gewinnen
+    </button>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- =========================================================
+     2) HERO
+========================================================= -->
+<section id="hero" class="hero section fade-up">
+  <div class="wrap hero-wrap">
+
+    <h1 id="hero-headline">
+      In 2 Minuten wissen, ob du heute mehr Klarheit, Sicherheit und Geld hast.
+    </h1>
+
+    <p id="hero-subheadline" class="hero-sub">
+      2-Fragen-Ampel · anonym · kein Verkauf · sofort Ergebnis
+    </p>
+
+    <!-- Ampel Animation -->
+    <div class="ampel" aria-label="Finanz-Ampel">
+      <span class="ampel-light ampel-red"></span>
+      <span class="ampel-light ampel-yellow"></span>
+      <span class="ampel-light ampel-green"></span>
+    </div>
+
+    <p class="social-proof">⭐ 4,9 / 250+ Menschen</p>
+
+    <div class="hero-ctas">
+      <button id="hero-cta" class="btn btn-primary tap-scale" data-track="cta_start_check" data-target="#quiz">
+        Jetzt 2-Minuten-Check starten
+      </button>
+      <button class="btn btn-secondary calm" data-action="open-preview">
+        Erst in Ruhe anschauen
+      </button>
+    </div>
+
+    <p class="tone-note">
+      Ruhig, klar und ohne Druck. <span class="auto-key">anonym</span>, mehr <span class="auto-key">Ruhe</span>,
+      echte <span class="auto-key">Klarheit</span>. <span class="auto-key">Vorteil</span>: 0 Risiko – <span class="auto-key">2 Minuten</span>.
+    </p>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     3) NEURO-UX — PROOF BARS, LIVE FEED, MICRO TESTIMONIALS
+========================================================= -->
+<section id="neuro" class="section neuro wrap">
+
+  <!-- Proof Bars -->
+  <div class="proof">
+    <div class="proof-item fade-up">
+      <div class="proof-top"><span>Vertrauen</span><strong>98 %</strong></div>
+      <div class="proof-bar" data-value="98"><span></span></div>
+    </div>
+    <div class="proof-item fade-up">
+      <div class="proof-top"><span>Klarheit</span><strong>92 %</strong></div>
+      <div class="proof-bar" data-value="92"><span></span></div>
+    </div>
+    <div class="proof-item fade-up">
+      <div class="proof-top"><span>Empfehlung</span><strong>91 %</strong></div>
+      <div class="proof-bar" data-value="91"><span></span></div>
+    </div>
+  </div>
+
+  <!-- Live Social Proof -->
+  <div class="live-feed" aria-live="polite" aria-atomic="true">
+    <ul id="live-messages">
+      <li>„Sandra (31) hat gerade ihre Ampel gemacht.“</li>
+      <li>„Leon (27) spart 420 € im Jahr.“</li>
+      <li>„Heute schon 18 Menschen mehr Klarheit gewonnen.“</li>
+    </ul>
+  </div>
+
+  <!-- Micro Testimonials -->
+  <div class="micro-t">
+    <figure class="micro fade-up">
+      <blockquote>„Hätte nie gedacht, dass 2 Minuten so viel Ruhe bringen.“</blockquote>
+      <figcaption>– Lisa, 29</figcaption>
+    </figure>
+    <figure class="micro fade-up">
+      <blockquote>„Endlich Ruhe im Kopf – wir wissen, was heute wichtig ist.“</blockquote>
+      <figcaption>– Jan, 37</figcaption>
+    </figure>
+    <figure class="micro fade-up">
+      <blockquote>„Wir sparen 420 € im Jahr und fühlen uns sicherer.“</blockquote>
+      <figcaption>– Miriam &amp; Paul</figcaption>
+    </figure>
+  </div>
+
+  <!-- Storyblock -->
+  <article class="storyblock fade-up">
+    <h2>Warum tun sich so viele damit schwer?</h2>
+    <ul class="bullets">
+      <li>Zu viel Alltag, Kopf voll.</li>
+      <li>Unsicherheit: „Mache ich es richtig?“</li>
+      <li>Fachsprache nervt.</li>
+      <li>Man schiebt Entscheidungen weg.</li>
+    </ul>
+    <p>
+      Die Finanz-Ampel ist ein kleines <strong>Ruhe-System</strong>.
+      Zwei Fragen. Ampel an. <span class="auto-key">Klarheit</span> in <span class="auto-key">2 Minuten</span>.
+      <span class="auto-key">anonym</span>, <span class="auto-key">kein Verkauf</span>, 0 Druck.
+    </p>
+  </article>
+
+</section>
+
+<!-- =========================================================
+     4) PERSONA SYSTEM (text-swappable)
+========================================================= -->
+<section id="personas" class="personas section">
+  <div class="wrap">
+    <h2>Für wen fühlt sich das richtig an?</h2>
+
+    <div class="persona-grid">
+
+      <button class="persona-card" data-persona="familie"
+              data-headline="In 2 Minuten sehen, ob eure Familie heute gut aufgestellt wirkt."
+              data-subheadline="Finanz-Ampel für Eltern – anonym, ruhig, kein Verkauf.">
+        <h3>Familie</h3>
+        <p>Wenig Zeit, viel Verantwortung. Die Ampel bringt Ruhe rein.</p>
+      </button>
+
+      <button class="persona-card" data-persona="selbststaendig"
+              data-headline="In 2 Minuten sehen, wie verwundbar dein Einkommen heute wäre."
+              data-subheadline="Finanz-Ampel für Selbstständige – klar, anonym, ohne Druck.">
+        <h3>Selbstständig</h3>
+        <p>Schwankende Einnahmen? Ausfall wäre kritisch? Ampel zeigt das sofort.</p>
+      </button>
+
+      <button class="persona-card" data-persona="angestellt"
+              data-headline="In 2 Minuten sehen, ob du heute entspannt in die Zukunft schauen kannst."
+              data-subheadline="Finanz-Ampel für Angestellte – ruhig, verständlich, kein Verkauf.">
+        <h3>Angestellt</h3>
+        <p>Viel los im Job. Privat soll es einfach sein.</p>
+      </button>
+
+    </div>
+
+    <p class="persona-note">Alltagssprache 2026. Keine Fachbegriffe. Zero-Pressure.</p>
+  </div>
+</section>
+
+<!-- =========================================================
+     5) QUIZ WIZARD 2026
+========================================================= -->
+<section id="quiz" class="quiz section">
+  <div class="wrap">
+    <h2>Der 2-Fragen-Check</h2>
+    <p class="quiz-tag">ADHS-freundlich · große Buttons · 2 Minuten</p>
+
+    <!-- Progress -->
+    <div class="progress">
+      <div class="progress-track"></div>
+      <div class="progress-bar" data-progress></div>
+      <div class="progress-text"><span data-step>1</span>/3</div>
+    </div>
+
+    <!-- Step 1 -->
+    <section class="quiz-step fade-up" data-step="1">
+      <h3>Wenn du 6 Monate ausfallen würdest – wie sicher wäre euer Einkommen?</h3>
+      <div class="answers">
+        <button class="btn tap-scale answer" data-value="rot">Keine Ahnung</button>
+        <button class="btn tap-scale answer" data-value="gelb">Unsicher</button>
+        <button class="btn tap-scale answer" data-value="gruen">Passt</button>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="quiz-step fade-up" data-step="2" hidden>
+      <h3>Findest du wichtige Unterlagen schnell, wenn du sie brauchst?</h3>
+      <div class="answers">
+        <button class="btn tap-scale answer" data-value="rot">Keine Ahnung</button>
+        <button class="btn tap-scale answer" data-value="gelb">Unsicher</button>
+        <button class="btn tap-scale answer" data-value="gruen">Passt</button>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="quiz-step fade-up" data-step="3" hidden>
+      <h3>Fühlst du dich bei Zukunft &amp; Alter sicher?</h3>
+      <div class="answers">
+        <button class="btn tap-scale answer" data-value="rot">Keine Ahnung</button>
+        <button class="btn tap-scale answer" data-value="gelb">Unsicher</button>
+        <button class="btn tap-scale answer" data-value="gruen">Passt</button>
+      </div>
+    </section>
+
+    <!-- Result -->
+    <section id="quiz-result" class="quiz-result pop-in" hidden aria-live="polite">
+      <h3 id="quiz-result-title"></h3>
+      <p id="quiz-result-text"></p>
+      <div id="quiz-slots" class="slots"></div>
+
+      <div class="result-ctas">
+        <a href="weitergeben.html#referral-engine" class="btn btn-secondary">Weitergeben</a>
+        <a href="#contact" class="btn btn-primary tap-scale" data-track="cta_book_15">
+          15-Minuten-Check buchen
+        </a>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     6) REFERRAL TEASER
+========================================================= -->
+<section id="referral-teaser" class="referral-teaser section fade-up">
+  <div class="wrap">
+    <h2>Weitergeben – ohne etwas erklären zu müssen</h2>
+    <p>
+      Link senden. Die Person sieht ihre Ampel in <span class="auto-key">2 Minuten</span> – 
+      <span class="auto-key">anonym</span>, <span class="auto-key">kein Verkauf</span>. 
+      Ruhig & ohne Druck.
+    </p>
+
+    <div class="card">
+      <p>Beliebte Nachricht:</p>
+      <p class="referral-preview">
+        „Hab das gesehen und an dich gedacht – kurzer 2-Minuten-Blick, der zeigt, ob heute etwas offen ist:
+        <span class="referral-url-placeholder">{{URL}}</span>“
+      </p>
+      <a href="weitergeben.html#referral-engine" class="btn btn-primary tap-scale">
+        Mehr Möglichkeiten zum Weitergeben
       </a>
-      <nav class="site-nav" aria-label="Hauptnavigation">
-        <ul>
-          <li><a href="index.html#quiz" class="nav-link">Finanz-Check</a></li>
-          <li><a href="weitergeben.html#referral-engine" class="nav-link">Weitergeben</a></li>
-          <li><a href="index.html#contact" class="nav-link">Kontakt</a></li>
-        </ul>
-      </nav>
     </div>
-  </header>
+  </div>
+</section>
 
-  <main id="main">
-    <!-- HERO -->
-    <section id="hero" class="hero section" aria-labelledby="hero-title">
-      <div class="wrap hero-wrap">
-        <div>
-          <h1 id="hero-title">Ruhig Klarheit holen – in 2 Minuten.</h1>
-          <p class="hero-micro">Anonym. Kein Verkauf. Du siehst sofort: Rot · Gelb · Grün.</p>
+<!-- =========================================================
+     7) BOTTOM NAV
+========================================================= -->
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="bottom-nav-item is-active" data-target="#hero">🏠 <span>Home</span></button>
+  <button class="bottom-nav-item" data-target="#quiz">🚦 <span>Finanzcheck</span></button>
+  <button class="bottom-nav-item" data-href="weitergeben.html">💬 <span>Weitergeben</span></button>
+  <button class="bottom-nav-item" data-target="#contact">📞 <span>Kontakt</span></button>
+</nav>
 
-          <div class="ampel" aria-label="Ampel">
-            <span class="ampel-light ampel-red" aria-hidden="true"></span>
-            <span class="ampel-light ampel-yellow" aria-hidden="true"></span>
-            <span class="ampel-light ampel-green" aria-hidden="true"></span>
-          </div>
+<!-- =========================================================
+     8) CONTACT
+========================================================= -->
+<section id="contact" class="contact section">
+  <div class="wrap">
+    <h2>Kontakt – kurz & ruhig</h2>
+    <p>Wenn du magst: kurzer Austausch. <span class="auto-key">kein Verkauf</span>, einfach in Ruhe.</p>
+    <ul class="contact-list">
+      <li><a href="mailto:hi@example.com">hi@example.com</a></li>
+      <li><a href="tel:+490000000000">+49 000 0000000</a></li>
+    </ul>
+    <p class="legal">© <span data-year></span> Ruhige Finanz-Ampel · Impressum · Datenschutz</p>
+  </div>
+</section>
 
-          <p class="social-proof" aria-live="polite">⭐ 4,9 / 250+ Menschen</p>
+</main>
 
-          <div class="hero-ctas">
-            <button id="hero-cta" class="btn btn-primary tap-scale" data-track="cta_start_check" data-target="#quiz">Jetzt 2-Minuten-Check starten</button>
-            <button class="btn btn-secondary calm" data-action="open-preview">Erst in Ruhe anschauen</button>
-          </div>
-
-          <p class="tone-note">
-            Wie eine Netflix-Doku für Finanzen: ruhig, klar, ohne Druck.
-            <span class="auto-key">anonym</span>, mehr <span class="auto-key">Ruhe</span>, echte <span class="auto-key">Klarheit</span>. <span class="auto-key">Vorteil</span>: 0 Risiko.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Decision Anchor Bar -->
-    <div class="decision-anchor" id="decision-anchor" role="note" aria-live="polite">
-      🔒 100 % anonym · Kein Verkauf · 25 € Garantie
-    </div>
-
-    <!-- Sticky CTA -->
-    <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
-      <div class="inner">
-        <button class="btn btn-primary tap-scale" data-track="cta_sticky" data-target="#quiz">
-          👉 Finanz-Check starten und Klarheit gewinnen
-        </button>
-      </div>
-    </div>
-
-    <!-- 2) NEURO-UX SYSTEME -->
-    <section id="neuro-ux" class="neuro wrap">
-      <div class="proof">
-        <div class="proof-item">
-          <div class="proof-top"><span>Vertrauen</span><strong>98 %</strong></div>
-          <div class="proof-bar" data-value="98"><span></span></div>
-        </div>
-        <div class="proof-item">
-          <div class="proof-top"><span>Klarheit</span><strong>92 %</strong></div>
-          <div class="proof-bar" data-value="92"><span></span></div>
-        </div>
-        <div class="proof-item">
-          <div class="proof-top"><span>Empfehlung</span><strong>91 %</strong></div>
-          <div class="proof-bar" data-value="91"><span></span></div>
-        </div>
-      </div>
-
-      <div class="live-feed" aria-live="polite" aria-atomic="true">
-        <ul id="live-messages">
-          <li>„Sandra (31) hat gerade ihre Ampel gemacht.“</li>
-          <li>„Leon (27) spart 420 € im Jahr.“</li>
-          <li>„Heute schon 18 Menschen Klarheit gewonnen.“</li>
-        </ul>
-      </div>
-
-      <div class="micro-t" aria-label="Kurzstimmen">
-        <figure class="micro">
-          <blockquote>„Hätte nie gedacht, dass 2 Minuten so viel Ruhe bringen.“</blockquote>
-          <figcaption>– Lisa, 29</figcaption>
-        </figure>
-        <figure class="micro">
-          <blockquote>„Endlich Ruhe im Kopf – wir wissen, was heute wichtig ist.“</blockquote>
-          <figcaption>– Jan, 37</figcaption>
-        </figure>
-        <figure class="micro">
-          <blockquote>„Wir sparen 420 € im Jahr und fühlen uns sicherer.“</blockquote>
-          <figcaption>– Miriam &amp; Paul</figcaption>
-        </figure>
-      </div>
-
-      <article class="storyblock">
-        <h2>Warum tun sich so viele damit schwer?</h2>
-        <ul class="bullets">
-          <li>Mental Load: Alltag läuft über. Kopf voll.</li>
-          <li>Unsicherheit: „Mache ich es richtig?“</li>
-          <li>Fachsprache: zu viel Kauderwelsch.</li>
-          <li>Stress: Entscheidungen werden geschoben.</li>
-        </ul>
-        <p>
-          Die Finanz-Ampel ist ein kleines <strong>Ruhe-System</strong>. Zwei Fragen. Ampel an. Du siehst sofort: Rot, Gelb oder Grün.
-          Ohne Datenformulare, <span class="auto-key">anonym</span>, <span class="auto-key">kein Verkauf</span>.
-          Du nimmst <span class="auto-key">Klarheit</span> mit – in <span class="auto-key">2 Minuten</span>.
-        </p>
-      </article>
-    </section>
-
-    <!-- 3) PERSONA SYSTEM -->
-    <section id="personas" class="personas" aria-labelledby="personas-title">
-      <div class="wrap">
-        <h2 id="personas-title">Für wen fühlt sich das richtig an?</h2>
-
-        <div class="persona-grid">
-          <article class="persona-card" tabindex="0">
-            <h3>Familie</h3>
-            <p>Wenig Zeit. Viel Verantwortung. Mental Load hoch. Geld bleibt liegen? Die Ampel bringt Ruhe rein.</p>
-            <ul class="persona-points">
-              <li>Schneller Blick am Abend</li>
-              <li>Klar: Jetzt · Als Nächstes · Später</li>
-              <li>Ohne Papierkram, <span class="auto-key">anonym</span></li>
-            </ul>
-          </article>
-
-          <article class="persona-card" tabindex="0">
-            <h3>Selbstständig</h3>
-            <p>Unsicherheit bei Ausfall? Einnahmen schwanken? Zwei Fragen zeigen, wo heute Risiko lauert.</p>
-            <ul class="persona-points">
-              <li>0 Druck, <span class="auto-key">kein Verkauf</span></li>
-              <li>Schnell sortieren, dann weiter</li>
-              <li><span class="auto-key">Vorteil</span>: klare Priorität</li>
-            </ul>
-          </article>
-
-          <article class="persona-card" tabindex="0">
-            <h3>Angestellt</h3>
-            <p>Viel los im Job. Privat soll es einfach sein. Die Ampel zeigt, ob heute etwas fehlt – zero-pressure.</p>
-            <ul class="persona-points">
-              <li>2 Klicks, Ergebnis da</li>
-              <li>Mehr <span class="auto-key">Klarheit</span> im Alltag</li>
-              <li>Alles bleibt <span class="auto-key">anonym</span></li>
-            </ul>
-          </article>
-        </div>
-
-        <p class="persona-note">Wortwahl 2026: alltagstauglich, kurz, ohne Fachchinesisch.</p>
-      </div>
-    </section>
-
-    <!-- 4) QUIZ WIZARD -->
-    <section id="quiz" class="quiz" aria-labelledby="quiz-title">
-      <div class="wrap">
-        <h2 id="quiz-title">Der 2-Fragen-Check</h2>
-        <p class="quiz-tag">ADHS-freundlich · große Buttons · 2 Minuten</p>
-
-        <div class="progress" aria-label="Fortschritt">
-          <div class="progress-track" aria-hidden="true"></div>
-          <div class="progress-bar" style="width:0%" data-progress></div>
-          <div class="progress-text" aria-live="polite"><span data-step>1</span>/3</div>
-        </div>
-
-        <section class="quiz-step" data-step="1" aria-labelledby="q1">
-          <h3 id="q1">Wenn du 6 Monate ausfallen würdest – wie sicher wäre euer Einkommen?</h3>
-          <div class="answers">
-            <button class="btn tap-scale answer" data-value="rot">Keine Ahnung</button>
-            <button class="btn tap-scale answer" data-value="gelb">Unsicher</button>
-            <button class="btn tap-scale answer" data-value="gruen">Passt</button>
-          </div>
-        </section>
-
-        <section class="quiz-step" data-step="2" aria-labelledby="q2" hidden>
-          <h3 id="q2">Findest du wichtige Unterlagen fix, wenn du sie brauchst?</h3>
-          <div class="answers">
-            <button class="btn tap-scale answer" data-value="rot">Keine Ahnung</button>
-            <button class="btn tap-scale answer" data-value="gelb">Unsicher</button>
-            <button class="btn tap-scale answer" data-value="gruen">Passt</button>
-          </div>
-        </section>
-
-        <section class="quiz-step" data-step="3" aria-labelledby="q3" hidden>
-          <h3 id="q3">Fühlst du dich bei Zukunft &amp; Alter sicher?</h3>
-          <div class="answers">
-            <button class="btn tap-scale answer" data-value="rot">Keine Ahnung</button>
-            <button class="btn tap-scale answer" data-value="gelb">Unsicher</button>
-            <button class="btn tap-scale answer" data-value="gruen">Passt</button>
-          </div>
-        </section>
-
-        <section class="quiz-result" id="quiz-result" hidden aria-live="polite">
-          <h3 id="quiz-result-title">Ergebnis</h3>
-          <p id="quiz-result-text"></p>
-
-          <div id="quiz-slots" class="slots"></div>
-
-          <div class="result-ctas">
-            <a href="weitergeben.html#referral-engine" class="btn btn-secondary">Weitergeben</a>
-            <a href="index.html#contact" class="btn btn-primary tap-scale" data-track="cta_book_15">15-Minuten-Check buchen</a>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <!-- REFERRAL TEASER -->
-    <section id="referral" class="referral" aria-labelledby="ref-title">
-      <div class="wrap">
-        <h2 id="ref-title">Weitergeben – ganz ohne Erklären</h2>
-        <p>Link senden. Die Person sieht die Ampel selbst – <span class="auto-key">anonym</span>, <span class="auto-key">kein Verkauf</span>. In <span class="auto-key">2 Minuten</span> ist ein Gefühl da.</p>
-        <ul class="ref-list">
-          <li>Ruhig starten. Kein Druck.</li>
-          <li>Kurztext zum Kopieren ist dabei.</li>
-          <li><span class="auto-key">Vorteil</span>: 25 € Garantie, falls es nicht hilft.</li>
-        </ul>
-        <div class="ref-cta">
-          <a href="weitergeben.html#referral-engine" class="btn btn-primary tap-scale">Text anzeigen</a>
-          <a href="index.html#quiz" class="btn btn-secondary">Erst Klarheit holen</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- BOTTOM NAV -->
-    <nav class="bottom-nav" aria-label="Untere Navigation">
-      <a href="index.html#hero" class="nav-item" aria-label="Home">🏠 <span>Home</span></a>
-      <a href="index.html#quiz" class="nav-item" aria-label="Finanzcheck">🚦 <span>Finanzcheck</span></a>
-      <a href="weitergeben.html#referral-engine" class="nav-item" aria-label="Weitergeben">💬 <span>Weitergeben</span></a>
-      <a href="index.html#contact" class="nav-item" aria-label="Kontakt">📞 <span>Kontakt</span></a>
-    </nav>
-
-    <!-- CONTACT -->
-    <section id="contact" class="contact">
-      <div class="wrap">
-        <h2>Kontakt – kurz & ruhig</h2>
-        <p>Kurzer Austausch? Schreib eine Nachricht. Kein Druck, <span class="auto-key">kein Verkauf</span>.</p>
-        <ul class="contact-list">
-          <li><a href="mailto:hi@example.com">hi@example.com</a></li>
-          <li><a href="tel:+490000000000">+49 000 0000000</a></li>
-        </ul>
-        <p class="legal">© <span data-year></span> Ruhige Finanz-Ampel · Impressum · Datenschutz</p>
-      </div>
-    </section>
-  </main>
-
-<!-- WICHTIG: Root-Pfad, kein assets/ -->
-  <script defer src="app.js"></script>
-</body>
-</html>
-
-<!-- =======================================================================
-weitergeben.html  —  projektpfad-sichere, rein relative Links
-======================================================================= -->
-<!DOCTYPE html>
-<html lang="de" translate="no" class="no-js">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="theme-color" content="#0b0f14" />
-  <title>Weitergeben – ruhig, klar, zero-pressure</title>
-  <meta name="description" content="Weitergeben – ohne etwas erklären zu müssen. Die Ampel spricht für dich. 2 Minuten. anonym. kein Verkauf. Für Freunde, Familie, Kollegen. Ruhig. Klar. Zero-pressure." />
-  <meta property="og:title" content="Weitergeben – ohne etwas erklären zu müssen." />
-  <meta property="og:description" content="Die Ampel spricht für dich. 2 Minuten. anonym. kein Verkauf." />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="de_DE" />
-  <link rel="icon" href="favicon.ico" />
-  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="assets/styles.css" />
-</head>
-<body>
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
-
-  <header class="site-header" role="banner">
-    <div class="wrap header-bar">
-      <a class="brand" href="index.html" aria-label="Startseite">
-        <span class="brand-dot" aria-hidden="true"></span>
-        <span class="brand-name">Ruhige Finanz-Ampel</span>
-        <span class="brand-tag">anonym · Klarheit · kein Verkauf</span>
-      </a>
-      <nav class="site-nav" aria-label="Hauptnavigation">
-        <ul>
-          <li><a href="index.html#quiz" class="nav-link">Finanz-Check</a></li>
-          <li><a href="#referral-engine" class="nav-link">Weitergeben</a></li>
-          <li><a href="#contact" class="nav-link">Kontakt</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
-    <!-- HERO -->
-    <section id="hero" class="hero section" aria-labelledby="hero-title">
-      <div class="wrap hero-wrap">
-        <h1 id="hero-title">Weitergeben – ohne etwas erklären zu müssen.</h1>
-        <p class="subhead">Die Ampel spricht für dich. 2 Minuten. anonym. kein Verkauf.</p>
-        <div class="hero-benefits">
-          <span class="chip">ruhig</span>
-          <span class="chip">einfach</span>
-          <span class="chip">zero-pressure</span>
-          <span class="chip">Klarheit</span>
-          <span class="chip">Vorteil: 25 € Garantie</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Decision Anchor -->
-    <div class="decision-anchor" id="decision-anchor" role="note" aria-live="polite">
-      🔒 100 % anonym · Kein Verkauf · 25 € Garantie
-    </div>
-
-    <!-- Sticky CTA -->
-    <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
-      <div class="inner">
-        <button class="btn btn-primary tap-scale" data-target="#referral-engine">
-          👉 Jetzt ruhig weitergeben
-        </button>
-      </div>
-    </div>
-
-    <!-- REFERRAL ENGINE -->
-    <section id="referral-engine" class="section referral-engine" aria-labelledby="ref2-title">
-      <div class="wrap">
-        <h2 id="ref2-title">In 2 Minuten weitergeben</h2>
-        <p class="context-line">Für Freunde, Familie, Kollegen. <strong>anonym</strong>, mit <strong>Klarheit</strong>, <strong>kein Verkauf</strong>.</p>
-
-        <fieldset class="ref2-group" aria-labelledby="ref2-ziel-label">
-          <legend id="ref2-ziel-label">Zielgruppe wählen</legend>
-          <div class="btn-row">
-            <button type="button" class="btn tap-scale ref2-seg" data-seg="freund" aria-pressed="false">Freund</button>
-            <button type="button" class="btn tap-scale ref2-seg" data-seg="familie" aria-pressed="false">Familie</button>
-            <button type="button" class="btn tap-scale ref2-seg" data-seg="kollege" aria-pressed="false">Kollege</button>
-            <button type="button" class="btn tap-scale ref2-seg" data-seg="selbststaendig" aria-pressed="false">Selbstständig</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="ref2-group" aria-labelledby="ref2-tone-label">
-          <legend id="ref2-tone-label">Tonalität wählen</legend>
-          <div class="btn-row">
-            <button type="button" class="btn tap-scale ref2-tone" data-tone="locker" aria-pressed="true">locker</button>
-            <button type="button" class="btn tap-scale ref2-tone" data-tone="kurz" aria-pressed="false">kurz</button>
-            <button type="button" class="btn tap-scale ref2-tone" data-tone="ergebnisorientiert" aria-pressed="false">ergebnisorientiert</button>
-            <button type="button" class="btn tap-scale ref2-tone" data-tone="familie" aria-pressed="false">familie</button>
-            <button type="button" class="btn tap-scale ref2-tone" data-tone="selbstständig" aria-pressed="false">selbstständig</button>
-          </div>
-        </fieldset>
-
-        <div class="ref2-field">
-          <label for="ref2-name">Optionaler Name</label>
-          <input id="ref2-name" name="ref2-name" inputmode="text" autocomplete="given-name" placeholder="Vorname für persönlichen Touch">
-          <p class="hint">Optional. Erhöht Nähe. Alles bleibt <strong>anonym</strong>.</p>
-        </div>
-
-        <div class="wa-preview" role="region" aria-labelledby="wa-prev-title">
-          <h3 id="wa-prev-title">WhatsApp Preview</h3>
-          <div class="wa-bubble">
-            <div class="wa-meta">
-              <span class="wa-name">Kontakt</span>
-              <span class="wa-time" aria-live="polite">jetzt</span>
-            </div>
-            <div class="wa-msg">
-              <p id="ref2-message">Hey 👋 ich hab grad den Finanz-Check von Heiko gemacht. Ging super fix und war richtig hilfreich. Schau mal rein – sind nur 2 Minuten: {{URL}}</p>
-            </div>
-            <div class="wa-typing" aria-hidden="true">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            </div>
-          </div>
-
-          <div class="actions">
-            <button class="btn btn-secondary" id="ref2-copy">📋 Text kopieren</button>
-            <button class="btn btn-primary tap-scale" id="ref2-share">💬 WhatsApp teilen</button>
-          </div>
-
-          <p class="privacy-note">Zero-pressure: <strong>anonym</strong>, <strong>kein Verkauf</strong>, <strong>2 Minuten</strong>. <strong>Vorteil</strong> für beide: mehr <strong>Klarheit</strong>.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- TEMPLATES -->
-    <script type="application/json" id="ref2-templates">
-    {
-      "Locker": "„Hey 👋 ich hab grad den Finanz-Check von Heiko gemacht. Ging super fix und war richtig hilfreich. Schau mal rein – sind nur 2 Minuten: {{URL}}“",
-      "Kurz": "„Kurzer Tipp: 2-Minuten-Finanz-Ampel 👉 {{URL}}“",
-      "Ergebnisorientiert": "„Ich war echt überrascht, wie viel Klarheit man in 2 Minuten bekommt 😅 anonym & ohne Verkauf: {{URL}}“",
-      "Familie": "„Hab direkt an euch gedacht: kurze Eltern-Ampel, zeigt in 2 Min, ob was Wichtiges fehlt 👉 {{URL}}“",
-      "Selbstständig": "„Für Selbstständige wie dich: 2-Minuten-Check, ob alles passt – anonym & klar 👉 {{URL}}“"
-    }
-    </script>
-
-    <!-- NEURO-UX ELEMENTS -->
-    <section class="section neuro" aria-labelledby="neuro-title">
-      <div class="wrap">
-        <h2 id="neuro-title">Sicher weitergeben – ruhig & ohne Druck</h2>
-
-        <div class="proof">
-          <div class="proof-item">
-            <div class="proof-top"><span>Vertrauen</span><strong>98 %</strong></div>
-            <div class="proof-bar" data-value="98"><span></span></div>
-          </div>
-          <div class="proof-item">
-            <div class="proof-top"><span>Klarheit</span><strong>92 %</strong></div>
-            <div class="proof-bar" data-value="92"><span></span></div>
-          </div>
-          <div class="proof-item">
-            <div class="proof-top"><span>Empfehlung</span><strong>91 %</strong></div>
-            <div class="proof-bar" data-value="91"><span></span></div>
-          </div>
-        </div>
-
-        <div class="live-feed" aria-live="polite" aria-atomic="true">
-          <ul id="live-messages">
-            <li>„Sandra (31) hat gerade ihre Ampel gemacht.“</li>
-            <li>„Leon (27) spart 420 € im Jahr.“</li>
-            <li>„Heute schon 18 Menschen Klarheit gewonnen.“</li>
-          </ul>
-        </div>
-
-        <div class="micro-t">
-          <figure class="micro">
-            <blockquote>„Hätte nie gedacht, dass 2 Minuten so viel Ruhe bringen.“</blockquote>
-            <figcaption>– Lisa, 29</figcaption>
-          </figure>
-          <figure class="micro">
-            <blockquote>„Endlich Ruhe im Kopf – wir wissen, was heute wichtig ist.“</blockquote>
-            <figcaption>– Jan, 37</figcaption>
-          </figure>
-          <figure class="micro">
-            <blockquote>„Wir sparen 420 € im Jahr und fühlen uns sicherer.“</blockquote>
-            <figcaption>– Miriam &amp; Paul</figcaption>
-          </figure>
-        </div>
-
-        <article class="storyblock">
-          <h3>Warum deine Empfehlung wichtig ist</h3>
-          <p>Viele schieben das Thema. Alltag. Mental Load. Unsicherheit. Mit deinem Link bekommen sie in <strong>2 Minuten</strong> ein ruhiges Bild.</p>
-          <ul class="bullets">
-            <li><strong>anonym</strong> – niemand muss etwas preisgeben</li>
-            <li><strong>Klarheit</strong> – Ampel zeigt Rot · Gelb · Grün</li>
-            <li><strong>kein Verkauf</strong> – zero-pressure, nur ein Blick</li>
-            <li><strong>Vorteil</strong> – schneller Start, mehr Ruhe</li>
-          </ul>
-          <p>Du hilfst, ohne zu diskutieren. Die Ampel erklärt sich selbst. Das ist ruhig, einfach, erwachsen.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- BOTTOM NAV -->
-    <nav class="bottom-nav" aria-label="Untere Navigation">
-      <a href="index.html" class="nav-item" aria-label="Home">🏠 <span>Home</span></a>
-      <a href="index.html#quiz" class="nav-item" aria-label="Finanzcheck">🚦 <span>Finanzcheck</span></a>
-      <a href="#referral-engine" class="nav-item" aria-label="Weitergeben">💬 <span>Weitergeben</span></a>
-      <a href="#contact" class="nav-item" aria-label="Kontakt">📞 <span>Kontakt</span></a>
-    </nav>
-
-    <!-- CONTACT -->
-    <section id="contact" class="contact">
-      <div class="wrap">
-        <h2>Kontakt – kurz & ruhig</h2>
-        <p>Wenn Fragen sind: kurzer Austausch. <strong>kein Verkauf</strong>.</p>
-        <ul class="contact-list">
-          <li><a href="mailto:hi@example.com">hi@example.com</a></li>
-          <li><a href="tel:+490000000000">+49 000 0000000</a></li>
-        </ul>
-        <p class="legal">© <span data-year></span> Ruhige Finanz-Ampel · Impressum · Datenschutz</p>
-      </div>
-    </section>
-  </main>
-
-  <script defer src="assets/app.js"></script>
+<script defer src="app.js"></script>
 </body>
 </html>
