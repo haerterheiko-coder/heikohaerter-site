@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
+  <!-- =========================================================
+       META / SEO / BRANDING
+  ========================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#05070E" />
+  <meta name="robots" content="index, follow" />
 
-  <title>Weitergeben – 2-Minuten-Ampel · Ruhiger Finanz-Kompass</title>
+  <title>Weitergeben – Ein ruhiger Moment für jemanden, der dir wichtig ist</title>
 
   <meta name="description"
-        content="Wenn dir die 2-Minuten-Ampel Ruhe gegeben hat – kannst du sie weitergeben. Nicht verkaufen. Entlasten. Menschen helfen, nichts Wichtiges zu übersehen.">
+        content="Wenn die 2-Minuten-Ampel dir Ruhe gegeben hat – kannst du sie jemandem weitergeben. Nicht verkaufen. Entlasten. Ein ruhiger Moment, ohne Druck, anonym und kostenlos." />
 
   <link rel="canonical" href="https://heikohaerter.com/weitergeben" />
 
   <!-- OG -->
   <meta property="og:title" content="Weitergeben – Ruhiger Finanz-Kompass" />
-  <meta property="og:description" content="Gib jemandem 2 Minuten Ruhe – anonym, ohne Daten, ohne Druck." />
+  <meta property="og:description"
+        content="Gib jemandem 2 Minuten Ruhe – anonym, ohne Daten, ohne Druck." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://heikohaerter.com/weitergeben" />
-  <meta property="og:image"
-        content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
+  <meta property="og:image" content="https://heikohaerter.com/assets/og-ampel.png" />
   <meta property="og:locale" content="de_DE" />
+
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Prefetch Ampel -->
+  <link rel="prefetch" href="/" as="document">
 
   <!-- FAQ Schema -->
   <script type="application/ld+json">
@@ -69,17 +79,17 @@
 
 <main id="main">
 
-<!-- ============================================================
+<!-- =========================================================
      HERO – WHY SHARE?
-============================================================ -->
+========================================================= -->
 <section class="section fade-up share-hero">
   <div class="container stack center">
 
-    <h1>Wenn dir die Ampel Ruhe gegeben hat –<br>kannst du sie weitergeben.</h1>
+    <h1>Wenn dir die Ampel Ruhe gegeben hat – gib sie weiter.</h1>
 
     <p class="lead">
       Viele Menschen hoffen heimlich, nichts Wichtiges zu übersehen.<br>
-      Dein Link kann jemandem gerade wirklich Last abnehmen.
+      Ein kleiner Hinweis von dir kann jemandem heute Last abnehmen.
     </p>
 
     <p class="microtrust">Anonym · Kein Verkauf · Kein Druck</p>
@@ -90,45 +100,52 @@
   </div>
 </section>
 
-<!-- ============================================================
+<!-- Distributed Proof -->
+<section class="section fade-up">
+  <div class="container">
+    <p class="proof">„Ich hätte nicht gedacht, dass so ein kleiner Link so viel Ruhe bringt.“</p>
+  </div>
+</section>
+
+<!-- =========================================================
      HOW IT WORKS
-============================================================ -->
+========================================================= -->
 <section class="section fade-up">
   <div class="container stack center">
 
-    <h2>Wie es funktioniert</h2>
+    <h2>Wie du jemandem 2 Minuten Ruhe schenkst</h2>
 
     <div class="personas-grid narrow">
       <div class="persona-card center">
-        <strong>1.</strong>
-        Wähle einen Text aus, der zu deiner Person passt.
+        <strong>1.</strong><br>
+        Wähle eine Nachricht aus, die zu dir passt.
       </div>
       <div class="persona-card center">
-        <strong>2.</strong>
+        <strong>2.</strong><br>
         Dein persönlicher Link wird automatisch eingefügt.
       </div>
       <div class="persona-card center">
-        <strong>3.</strong>
-        Schick ihn jemandem, der gerade viel im Kopf hat.
+        <strong>3.</strong><br>
+        Schicke sie jemandem, der gerade viel im Kopf hat.
       </div>
     </div>
 
     <p class="microtrust">
-      Wenn’s nix für sie ist – ignorieren sie’s einfach.
+      Wenn’s nichts für sie ist – ignorieren sie’s einfach.
     </p>
 
   </div>
 </section>
 
-<!-- ============================================================
+<!-- =========================================================
      WHY IT'S NOT WEIRD
-============================================================ -->
+========================================================= -->
 <section id="why-share" class="section fade-up">
   <div class="container stack center">
 
     <h2>Weitergeben ≠ Verkaufen.</h2>
     <p class="lead">
-      Du gibst nicht etwas weiter, das verkauft –<br>
+      Du gibst niemandem einen Tipp für ein Produkt –<br>
       du gibst jemandem <strong>2 Minuten weniger Stress.</strong><br>
       Anonym. Ohne Daten. Ohne Druck.
     </p>
@@ -136,9 +153,9 @@
   </div>
 </section>
 
-<!-- ============================================================
+<!-- =========================================================
      TEXT GENERATOR
-============================================================ -->
+========================================================= -->
 <section id="generator" class="section fade-up">
   <div class="container stack">
 
@@ -155,7 +172,8 @@
       <option value="skeptiker">Skeptiker</option>
     </select>
 
-    <textarea id="referralOutput" rows="6"></textarea>
+    <textarea id="referralOutput" rows="6"
+      spellcheck="false" autocorrect="off" autocomplete="off" autocapitalize="off"></textarea>
 
     <button id="copyReferral" class="btn btn-primary">
       📋 Text kopieren
@@ -163,28 +181,30 @@
 
     <p class="microtrust" id="personalLinkInfo"></p>
 
-    <!-- ============================================================
-         QR CODE BLOCK (NEU)
-    ============================================================ -->
-    <div class="qr-block">
-      <h3>QR-Code erstellen</h3>
-      <p>Ideal für Sticker, Visitenkarten oder Events.</p>
-
-      <button id="generateQR" class="btn btn-primary">QR-Code für meinen Link erstellen</button>
-
-      <div id="qrCodeContainer" class="qr-container"></div>
-
-      <button id="downloadQR" class="btn btn-primary" style="display:none;">
-        QR-Code als PNG herunterladen
-      </button>
+    <!-- SHARE-BUTTONS -->
+    <div class="share-buttons" style="margin-top:20px; text-align:center;">
+      <button onclick="shareWhatsApp()" class="btn btn-primary">WhatsApp teilen</button>
+      <button onclick="shareLink()" class="btn" style="margin-left:10px;">Link kopieren</button>
     </div>
+
+    <!-- QR CODE BLOCK -->
+    <div id="qrBlock" class="persona-card center" style="margin-top:30px;">
+      <h3>QR-Code zum Weitergeben</h3>
+      <canvas id="qrCanvas" width="220" height="220" style="margin-top:15px;"></canvas>
+      <p class="microtrust">Ideal für Screenshot oder Weiterleitung.</p>
+    </div>
+
+    <!-- MICRO-REWARD FEEDBACK -->
+    <p id="shareFeedback" class="microtrust" style="opacity:0; transition:0.4s;">
+      Du hast heute 1 Person entlastet. 💛
+    </p>
 
   </div>
 </section>
 
-<!-- ============================================================
-     DANKEMOMENT
-============================================================ -->
+<!-- =========================================================
+     THANK YOU MOMENT
+========================================================= -->
 <section class="section fade-up thanks-block">
   <div class="container stack center">
 
@@ -205,9 +225,9 @@
   </div>
 </section>
 
-<!-- ============================================================
-     SOCIAL PROOF (MICRO)
-============================================================ -->
+<!-- =========================================================
+     SOCIAL PROOF
+========================================================= -->
 <section class="section fade-up">
   <div class="container stack">
 
@@ -222,9 +242,9 @@
   </div>
 </section>
 
-<!-- ============================================================
-     FAQ BLOCK
-============================================================ -->
+<!-- =========================================================
+     FAQ
+========================================================= -->
 <section class="section fade-up faq-block">
   <div class="container stack">
 
@@ -248,9 +268,9 @@
   </div>
 </section>
 
-<!-- ============================================================
+<!-- =========================================================
      FINAL CTA
-============================================================ -->
+========================================================= -->
 <section class="section fade-up final-share-cta">
   <div class="container center stack">
 
@@ -276,9 +296,53 @@
   </div>
 </footer>
 
-<!-- Scripts -->
+<!-- JS -->
 <script defer src="/app.js"></script>
 <script defer src="/referral.js"></script>
+
+<script>
+/* =========================================================
+   PREMIUM SHARE FEATURES
+========================================================= */
+
+function shareWhatsApp() {
+  const text = encodeURIComponent(document.getElementById("referralOutput").value);
+  window.open(`https://wa.me/?text=${text}`, "_blank");
+  showShareFeedback();
+}
+
+function shareLink() {
+  navigator.clipboard.writeText(document.getElementById("referralOutput").value);
+  showShareFeedback();
+}
+
+/* MICRO-REWARD */
+function showShareFeedback() {
+  const el = document.getElementById("shareFeedback");
+  el.style.opacity = 1;
+  setTimeout(() => el.style.opacity = 0, 3000);
+}
+
+/* QR-CODE */
+function generateQR(url) {
+  const canvas = document.getElementById("qrCanvas");
+  const ctx = canvas.getContext("2d");
+
+  // Minimalistische QR-API
+  fetch(`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(url)}`)
+    .then(res => res.blob())
+    .then(blob => {
+      const img = new Image();
+      img.onload = () => ctx.drawImage(img, 0, 0, 220, 220);
+      img.src = URL.createObjectURL(blob);
+    });
+}
+
+/* Init after personal URL created */
+setTimeout(() => {
+  if (window.personalURL) generateQR(window.personalURL);
+}, 500);
+</script>
 
 </body>
 </html>
