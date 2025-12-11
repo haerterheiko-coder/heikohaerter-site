@@ -28,9 +28,7 @@
   <link rel="stylesheet" href="/styles.css" />
 
   <!-- Preload Hero Image -->
-  <link rel="preload"
-        as="image"
-        href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
+  <link rel="preload" as="image" href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
 
   <!-- Structured Data Person -->
   <script type="application/ld+json">
@@ -106,7 +104,6 @@
       <span class="brand-claim">Persönliche Finanzbegleitung</span>
     </a>
 
-    <!-- Kurzmodus schaltet auf das absolute Minimum (Hero + Check + Trust + Weitergeben) -->
     <button id="modeToggle" class="btn btn-ghost small" type="button">
       Kurzmodus
     </button>
@@ -124,8 +121,11 @@
       <!-- TEXT -->
       <div class="hero-text stack">
         <!-- Rotierender TikTok-Hook (via app.js) -->
-        <p class="hero-micro rotating-hook" id="rotatingHook">
-          2 Minuten. 3 Fragen. Deine Ampel für heute.
+        <p
+          class="hero-micro rotating-hook"
+          id="rotatingHook"
+          data-default="2 Minuten. 3 Fragen. Deine Ampel für heute.">
+          Lade…
         </p>
 
         <h1 id="hero-title" class="hero-title">
@@ -155,7 +155,7 @@
           Ergebnis-Vorschau ansehen
         </button>
 
-        <!-- Ampel-Preview (state-change: Unklarheit → Klarheit) -->
+        <!-- Ampel-Preview -->
         <div id="heroPreview" class="preview-grid" hidden>
           <div class="preview-card preview-green">
             <h3>🟢 Beispiel</h3>
@@ -174,12 +174,13 @@
 
       <!-- VISUAL -->
       <div class="hero-visual">
-        <img src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
-             alt="Heiko Haerter – ruhiger 2-Minuten-Blick auf deinen Alltag"
-             width="900"
-             height="900"
-             loading="eager"
-             decoding="async" />
+        <img
+          src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+          alt="Heiko Haerter – ruhiger 2-Minuten-Blick auf deinen Alltag"
+          width="900"
+          height="900"
+          loading="eager"
+          decoding="async" />
       </div>
 
     </div>
@@ -249,11 +250,16 @@
       <div class="grid auto-grid">
         <div class="card">
           <h3>Aktivität</h3>
-          <p id="liveActivityText">Heute bereits – Menschen mit einem ruhigen Blick gestartet.</p>
+          <p
+            id="liveActivityText"
+            data-prefix="Heute bereits"
+            data-suffix="Menschen haben einen ruhigen Blick gestartet.">
+            Wird geladen…
+          </p>
         </div>
         <div class="card">
           <h3>Freie Begleitungs-Slots</h3>
-          <p>Aktuell freie Slots im <span id="slotMonth">Monat</span>: <strong id="slotCount">–</strong></p>
+          <p>Aktuell freie Slots im <span id="slotMonth" data-placeholder="diesen Monat">diesen Monat</span>: <strong id="slotCount">–</strong></p>
           <p class="hero-micro">Angaben werden regelmäßig aktualisiert.</p>
         </div>
       </div>
@@ -514,9 +520,9 @@
   </div>
 </div>
 
-<!-- Whisper CTA – wird von app.js befüllt -->
-<div class="whisper" id="whisper" aria-live="polite">
-  <!-- z. B.: 🟢 Vor 3 Minuten: Jemand hat den 2-Minuten-Check gemacht. -->
+<!-- Whisper CTA – Fallback + Live-Region -->
+<div class="whisper" id="whisper" aria-live="polite" role="status">
+  🟢 Gerade eben: jemand hat den 2-Minuten-Check genutzt.
 </div>
 
 <!-- App Logic -->
