@@ -11,26 +11,26 @@
   <title>2-Minuten-Ampel – sofort sehen, was heute zählt</title>
 
   <!-- ICONS -->
-  <link rel="icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="./favicon.ico">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 
   <!-- CORE STYLES -->
-  <link rel="stylesheet" href="/styles/tokens.css">
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/utilities.css">
+  <link rel="stylesheet" href="./styles/tokens.css">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/utilities.css">
 
   <!-- COMPONENTS -->
-  <link rel="stylesheet" href="/styles/components/buttons.css">
-  <link rel="stylesheet" href="/styles/components/cards.css">
-  <link rel="stylesheet" href="/styles/components/layout.css">
-  <link rel="stylesheet" href="/styles/components/hero.css">
-  <link rel="stylesheet" href="/styles/components/ampel.css">
+  <link rel="stylesheet" href="./styles/components/buttons.css">
+  <link rel="stylesheet" href="./styles/components/cards.css">
+  <link rel="stylesheet" href="./styles/components/layout.css">
+  <link rel="stylesheet" href="./styles/components/hero.css">
+  <link rel="stylesheet" href="./styles/components/ampel.css">
 
   <!-- PAGE STYLE -->
-  <link rel="stylesheet" href="/styles/pages/index.css">
+  <link rel="stylesheet" href="./styles/pages/index.css">
 
   <!-- Performance: Hero Preload (CLS-safe) -->
-  <link rel="preload" as="image" href="/assets/hero.webp" imagesrcset="/assets/hero.webp 1600w" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/hero.webp" imagesrcset="./assets/hero.webp 1600w" fetchpriority="high">
 
   <script type="application/ld+json">
   {
@@ -48,7 +48,7 @@
 
 <header class="hh-header">
   <div class="hh-container hh-header-bar">
-    <a href="/" class="hh-brand" aria-label="Startseite">
+    <a href="./" class="hh-brand" aria-label="Startseite">
       <span class="hh-brand-dot" aria-hidden="true"></span>
       <span class="hh-brand-sub">Ruhige Finanzbegleitung</span>
     </a>
@@ -85,7 +85,7 @@
       </div>
 
       <figure class="hh-hero-image fade-up">
-        <img src="/assets/hero.webp" alt="2-Minuten-Ampel – sofort Klarheit" width="1600" height="1200" loading="eager" fetchpriority="high" decoding="async" />
+        <img src="./assets/hero.webp" alt="2-Minuten-Ampel – sofort Klarheit" width="1600" height="1200" loading="eager" fetchpriority="high" decoding="async" />
       </figure>
 
     </div>
@@ -177,8 +177,8 @@
 <footer class="hh-footer" role="contentinfo">
   <div class="hh-container">
     © <span id="yearNow">2026</span> Heiko Haerter ·
-    <a href="/impressum">Impressum</a> ·
-    <a href="/datenschutz">Datenschutz</a>
+    <a href="./impressum">Impressum</a> ·
+    <a href="./datenschutz">Datenschutz</a>
   </div>
 </footer>
 
@@ -264,7 +264,7 @@ const Ampel = (()=>{ let score=0, step=1; const max=3;
     } else if(score<=7){
       html=`<div class="result-card result-yellow"><h3>🟡 Deine Ampel: Als Nächstes</h3><p>Einige Punkte brauchen Orientierung.</p><a class="hh-btn hh-btn-primary" href="${wa}Was%20ist%20als%20N%C3%A4chstes%20sinnvoll%3F%20(Ampel%20Gelb)">🧭 Nächsten Schritt klären</a></div>`;
     } else {
-      html=`<div class="result-card result-green"><h3>🟢 Deine Ampel: Später</h3><p>Es wirkt stabil. Feinschliff möglich.</p><a class="hh-btn hh-btn-primary" href="${wa}Gibt%20es%20Feinschliff%3F%20(Ampel%20Gr%C3%BCn)">✨ Feinschliff ansehen</a></div>`;
+      html=`<div class="result-card result-green"><h3>🟢 Deine Ampel: Später</h3><p>Es wirkt stabil. Feinschliff möglich.</p><a class="hh-btn hh-btn-primary" href="${wa}Gibt%20 es%20Feinschliff%3F%20(Ampel%20Gr%C3%BCn)">✨ Feinschliff ansehen</a></div>`;
     }
     els.result.innerHTML = html; els.result.scrollIntoView({behavior:"smooth"});
   }
