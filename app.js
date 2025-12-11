@@ -436,3 +436,173 @@ function randomId(len = 12) {
   });
 
 })();
+/* =========================================================
+   OPTION A — ULTRA PERFORMANCE JS ADD-ON
+   Scroll-sync · GPU-hints · No-jank stabilizer
+   ========================================================= */
+
+/* 1) FORCE GPU SMOOTHNESS ON KEY ELEMENTS */
+QSA(".hh-btn, .hh-card, .fade-up, .result-card").forEach(el => {
+  el.style.willChange = "transform, opacity";
+});
+
+/* 2) SCROLL TICK (requestAnimationFrame instead of scroll) */
+(function smoothScrollTick() {
+  let lastY = window.scrollY;
+
+  function tick() {
+    const y = window.scrollY;
+
+    // Skip work when nothing moves
+    if (y !== lastY) {
+      document.body.dataset.scrollY = y;
+      lastY = y;
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+/* =========================================================
+   OPTION B — GOD-MODE UI ENHANCER
+   Micro-interactions · Dopamine pulses · Tap ripples
+   ========================================================= */
+
+/* 1) TAP RIPPLE EFFECT FOR ALL BUTTONS */
+document.addEventListener("click", e => {
+  const btn = e.target.closest("button, .hh-btn, .hh-btn-primary, .btn");
+  if (!btn) return;
+
+  const span = document.createElement("span");
+  span.className = "hh-ripple";
+  const rect = btn.getBoundingClientRect();
+
+  span.style.left = (e.clientX - rect.left) + "px";
+  span.style.top = (e.clientY - rect.top) + "px";
+
+  btn.appendChild(span);
+  setTimeout(() => span.remove(), 450);
+});
+
+/* 2) MICRO-DOPAMIN: APPEARING CARDS GET MINI GLOW */
+(function microGlow() {
+  if (!("IntersectionObserver" in window)) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(ent => {
+      if (ent.isIntersecting) {
+        ent.target.classList.add("hh-glow");
+        setTimeout(() => ent.target.classList.remove("hh-glow"), 900);
+        io.unobserve(ent.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  QSA(".hh-card, .icon-card, .premium-card, .result-card")
+    .forEach(el => io.observe(el));
+})();
+
+/* 3) CONFIDENCE SNAP – Klick auf Step-Button erzeugt Motion */
+QSA("#check-steps .step button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    btn.classList.add("hh-click");
+    setTimeout(() => btn.classList.remove("hh-click"), 300);
+  });
+});
+
+/* 4) WHISPER CTA – Random friendly nudges */
+(function whisper() {
+  const box = QS("#whisper");
+  if (!box) return;
+
+  const messages = [
+    "🟢 5 Sekunden – jemand fühlt sich sicherer.",
+    "🟡 Jemand sortiert gerade seinen Tag.",
+    "🔵 Kleiner Klick, großes Gefühl.",
+    "✨ 2 Minuten – mehr Übersicht als gedacht."
+  ];
+
+  function show() {
+    const m = messages[Math.floor(Math.random() * messages.length)];
+    box.textContent = m;
+
+    box.style.opacity = "1";
+    box.style.transform = "translateY(0)";
+
+    setTimeout(() => {
+      box.style.opacity = "0";
+      box.style.transform = "translateY(10px)";
+    }, 3200);
+  }
+
+  setTimeout(show, 2200);
+  setInterval(show, 15000);
+})();
+.hh-ripple {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: rgba(255,255,255,0.28);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: hhRipple .45s ease-out;
+  pointer-events: none;
+}
+
+@keyframes hhRipple {
+  to { opacity: 0; transform: translate(-50%, -50%) scale(8); }
+}
+
+.hh-glow {
+  box-shadow: 0 0 32px rgba(233,211,148,.35) !important;
+  transition: box-shadow .35s ease-out;
+}
+
+.hh-click {
+  transform: scale(.96);
+}
+/* =========================================================
+   OPTION C — COMPONENT LIBRARY LOGIC
+   Ampel · Steps · Share Composer Enhancer
+   ========================================================= */
+
+/* 1) ANIMATE STEP TRANSITION */
+function hhAnimateStep(el) {
+  el.classList.add("hh-step-anim");
+  setTimeout(() => el.classList.remove("hh-step-anim"), 450);
+}
+
+QSA("#check-steps .step").forEach(step => {
+  step.addEventListener("transitionend", () => hhAnimateStep(step));
+});
+
+/* 2) AMP-RESULT FADE IN */
+(function resultFade() {
+  const el = QS("#check-result");
+  if (!el) return;
+  const mo = new MutationObserver(() => {
+    el.classList.add("visible");
+  });
+  mo.observe(el, { childList: true });
+})();
+
+/* 3) SHARE COMPOSER — Highlight active segment */
+QSA("[data-seg]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    QSA("[data-seg]").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  });
+});
+
+/* 4) SHARE LINKS VALIDATION */
+(function safeShare() {
+  const wa = QS("#waShare");
+  const mail = QS("#mailShare");
+
+  setInterval(() => {
+    if (!wa.href.includes("http")) wa.href = "https://wa.me/?text=";
+    if (!mail.href.includes("mailto:")) mail.href = "mailto:?subject=Hallo";
+  }, 5000);
+})();
+.hh-step-anim {
+  animation: fadeUpAnim .45s var(--ease);
+}
