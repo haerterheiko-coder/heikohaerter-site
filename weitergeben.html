@@ -109,6 +109,18 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 @keyframes pulse{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(0) scale(1.02)}}
 .pulse{animation:pulse 1600ms ease-in-out 1}
 
+/* ===== FORMS (NEU) ===== */
+input, textarea{
+  width:100%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);
+  color:var(--text);
+  padding:.8rem 1rem;
+  border-radius:12px;
+  font:inherit;
+}
+input::placeholder, textarea::placeholder{ color:#DDE3F4; opacity:.85; }
+
 /* ===== CARDS ===== */
 .premium-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1rem 1.1rem;box-shadow:var(--elev-1)}
 .story-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.9rem 1rem}
@@ -352,6 +364,56 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 
       <div style="text-align:center">
         <a href="#share" class="btn btn-primary">✨ Weitergeben</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- ============== REWARDS + VIP + MOTIVATION (NEU) ============== -->
+  <section class="section fade-up" id="rewards" aria-labelledby="r-title">
+    <div class="wrap stack">
+      <h2 id="r-title">Deine Wertschätzungen – Sammeln macht’s noch besser</h2>
+
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:.9rem">
+        <article class="premium-card" aria-describedby="r25desc">
+          <h3 style="margin:0 0 .2rem">1× → 25 € = kleiner Luxus</h3>
+          <p id="r25desc" class="hero-micro" style="margin:0">Zählt ab Erstgespräch.</p>
+        </article>
+        <article class="premium-card" aria-describedby="r50desc">
+          <h3 style="margin:0 0 .2rem">3× → 50 € + Extra</h3>
+          <p id="r50desc" class="hero-micro" style="margin:0">Spürbarer Gewinn – plus kleine Überraschung.</p>
+        </article>
+        <article class="premium-card" aria-describedby="r150desc">
+          <h3 style="margin:0 0 .2rem">5× → 150 € = echtes Upgrade</h3>
+          <p id="r150desc" class="hero-micro" style="margin:0">Einfach gut.</p>
+        </article>
+      </div>
+
+      <div>
+        <h3 style="margin:.8rem 0 .4rem">10× → VIP-Erlebnis (du entscheidest)</h3>
+        <div class="slider" id="vipSlider" aria-label="VIP-Erlebnis Highlights">
+          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_d56ea9b3d9314d1abb26324412dffe81~mv2.png" alt="VIP: Konzert"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_506ae19443064d949800ba1db5957184~mv2.png" alt="VIP: Day-Spa & Massage für 2"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_038389a8dd2644fe9741e60585908181~mv2.png" alt="VIP: Fußball-Lounge"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_6193ac7b30f4471ea277ab6bbfe3d690~mv2.png" alt="VIP: du entscheidest"></div>
+        </div>
+        <div class="slider-controls">
+          <button type="button" id="vipPrev" aria-label="VIP vorheriges Bild" aria-controls="vipSlider">‹</button>
+          <button type="button" id="vipNext" aria-label="VIP nächstes Bild" aria-controls="vipSlider">›</button>
+        </div>
+      </div>
+
+      <div class="premium-card">
+        <h3 style="margin:0 0 .4rem">Dein Motivationsstand</h3>
+        <div class="level" aria-label="Motivationsstand"><span id="levelBar"></span></div>
+        <p id="rewardMsg" class="hero-micro" style="margin:.6rem 0 0">Der Balken ist nur dein Fortschritt. Die echten Belohnungen gelten ab Erstgespräch – unabhängig vom Balken.</p>
+        <ul class="tiers hero-micro" id="tierList" style="list-style:none;padding:0;margin-top:.8rem">
+          <li><span>25 €</span><div class="bar"><i data-goal="1"></i></div></li>
+          <li><span>50 € + Extra</span><div class="bar"><i data-goal="3"></i></div></li>
+          <li><span>150 €</span><div class="bar"><i data-goal="5"></i></div></li>
+          <li><span>VIP</span><div class="bar"><i data-goal="10"></i></div></li>
+        </ul>
       </div>
     </div>
   </section>
