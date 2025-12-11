@@ -1,139 +1,293 @@
-<!-- /weitergeben.html -->
 <!DOCTYPE html>
-<html lang="de" class="no-js" translate="no">
+<html lang="de" class="no-js">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="2-Minuten-Finanz-Check weitergeben – anonym, ohne Verkauf, sofort Ergebnis.">
-  <title>Weitergeben – Finanz-Check</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Weitergeben – 2-Minuten-Ampel | Heiko Haerter</title>
+  <meta name="description" content="Einfach weitergeben – anonym, ohne Verkauf, ohne Erklärbedarf. Der Link übernimmt alles.">
 
-<header class="hero surface fade-up" id="hero">
-  <div class="wrap hero-wrap">
-    <div class="hero-text">
-      <h1>Weitergeben – ohne etwas erklären zu müssen</h1>
-      <p class="subhead">Die Ampel spricht für dich. Schnell, anonym, kein Verkauf – einfach den Link teilen.</p>
-    </div>
+  <link rel="canonical" href="https://heikohaerter.com/weitergeben">
+  <link rel="stylesheet" href="/styles.css">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="2-Minuten-Ampel weitergeben">
+  <meta property="og:description" content="Ein kurzer Blick – 2 Minuten – anonym. Der Link übernimmt alles.">
+  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
+</head>
+
+<body>
+<a href="#main" class="visually-hidden">Zum Inhalt springen</a>
+
+<header class="header">
+  <div class="container header-flex">
+    <a href="/" class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">Heiko Haerter</span>
+      <span class="brand-claim">Persönliche Finanzbegleitung</span>
+    </a>
   </div>
 </header>
 
-<section class="referral-section fade-up">
-  <div class="wrap">
-    <h2>So funktioniert’s</h2>
-    <div class="stack">
-      <p>1️⃣ Die Person klickt auf den Link.</p>
-      <p>2️⃣ Der 2-Minuten-Check läuft anonym.</p>
-      <p>3️⃣ Sie sieht sofort ihre Finanz-Ampel – ohne Druck, ohne Verkauf.</p>
-    </div>
-  </div>
-</section>
+<main id="main">
 
-<section class="fade-up">
-  <div class="wrap">
-    <h2>Fertige Texte zum Weitergeben</h2>
+<!-- ============================================================
+     HERO – SOCIAL CURRENCY MOMENT
+============================================================ -->
+<section class="section hero fade-up">
+  <div class="container stack center">
 
-    <div class="referral-box surface">
-      <h3>Super kurz & locker</h3>
-      <textarea readonly class="referral-txt">
-Hey 👋 kurzer Tipp: Hab gerade einen 2-Minuten-Finanz-Check gemacht. War mega entspannt & ohne Verkauf. Falls du auch mal schauen willst: {{URL}}
-      </textarea>
-      <button class="btn btn-secondary copy-btn tap-scale" data-copy="0">Kopieren</button>
-    </div>
+    <p class="hero-micro" style="opacity:.85;">
+      TikTok Hook:
+      <span class="rotating-hook" id="rotatingHook">Viele kennen dieses Gefühl …</span>
+    </p>
 
-    <div class="referral-box surface">
-      <h3>Für Eltern</h3>
-      <textarea readonly class="referral-txt">
-Hab sofort an euch gedacht: Das ist so ein Eltern-Check für Absicherung & Verträge. Dauert 2 Minuten, anonym – zeigt sofort, ob etwas Wichtiges fehlt: {{URL}}
-      </textarea>
-      <button class="btn btn-secondary copy-btn tap-scale" data-copy="1">Kopieren</button>
-    </div>
+    <h1>Weitergeben – ohne erklären zu müssen</h1>
 
-    <div class="referral-box surface">
-      <h3>Für Selbstständige</h3>
-      <textarea readonly class="referral-txt">
-Für Selbstständige echt stark: Kurzer Geld-Check, ob Rücklagen & Absicherung zu deinem Risiko passen. Ohne Bla bla, einfach ehrlich: {{URL}}
-      </textarea>
-      <button class="btn btn-secondary copy-btn tap-scale" data-copy="2">Kopieren</button>
-    </div>
+    <p class="hero-sub">
+      Manche Menschen sind froh, wenn jemand kurz an sie denkt.
+      Du musst nichts erklären – der Link übernimmt alles:
+      anonym · ohne Daten · ohne Verkauf.
+    </p>
 
-    <div class="referral-box surface">
-      <h3>Nach deinem Gespräch</h3>
-      <textarea readonly class="referral-txt">
-Ich war gerade bei Heiko – war null Verkaufs-Show, eher wie gemeinsam aufräumen. Vielleicht hilft dir der Check auch: {{URL}}
-      </textarea>
-      <button class="btn btn-secondary copy-btn tap-scale" data-copy="3">Kopieren</button>
+    <div class="premium-card" style="margin-top:1rem;">
+      <p class="hero-micro" style="margin:0;">
+        <strong>Live:</strong> In den letzten 24 Stunden haben <span id="liveCount">–</span> Menschen die Ampel weitergegeben.
+      </p>
     </div>
 
   </div>
 </section>
 
-<section class="live-feed-section fade-up">
-  <div class="wrap">
-    <h2>Gerade weitergegeben</h2>
-    <div id="referral-live" class="live-feed" aria-live="polite"></div>
+
+<!-- ============================================================
+     SECTION – WARUM WEITERGEBEN FUNKTIONIERT
+============================================================ -->
+<section class="section fade-up">
+  <div class="container stack">
+
+    <h2>Warum Weitergeben wirkt</h2>
+
+    <div class="grid auto-grid">
+      <div class="card">
+        <h3>1 · Du hilfst jemandem sofort</h3>
+        <p>Es kostet 2 Minuten – und vielleicht nimmt es jemandem heute Sorgen.</p>
+      </div>
+      <div class="card">
+        <h3>2 · Kein Verkaufs-Vibe</h3>
+        <p>Der Link ist anonym. Niemand denkt, du würdest etwas „vermitteln“.</p>
+      </div>
+      <div class="card">
+        <h3>3 · Zero-Risk Prinzip</h3>
+        <p>Wenn’s der Person nichts bringt → 25 € Dankeschön. Kein Haken.</p>
+      </div>
+    </div>
+
+    <div class="premium-card safety-card">
+      <p class="hero-micro" style="margin:0;">
+        ❗ Wichtig: Du gibst niemandes Daten weiter.  
+        Niemand wird angerufen. Niemand bekommt Werbung.
+      </p>
+    </div>
+
   </div>
 </section>
 
-<footer class="footer surface fade-up" id="termin">
-  <div class="wrap">
-    <h3>Finanz-Check für Freunde & Familie</h3>
-    <p>Alles anonym. Kein Verkauf. Ehrlich & entspannt.</p>
-    <a href="index.html#quiz" class="btn btn-primary tap-scale">Jetzt weitergeben</a>
 
-    <div class="footer-meta">
-      <p>© <span data-year></span> Heiko Härter – Finanzbegleitung</p>
-      <p><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+<!-- ============================================================
+     SECTION – MINI-SZENEN (SOCIAL PROOF)
+============================================================ -->
+<section class="section fade-up">
+  <div class="container stack">
+
+    <h2>Kurze Szenen – Menschen wie du</h2>
+
+    <div class="story-grid">
+      <div class="story-card">
+        <p class="hero-micro">
+          „Hab’s meiner Schwester geschickt – sie hat zwei kleine Kinder und kaum Zeit.“
+        </p>
+      </div>
+      <div class="story-card">
+        <p class="hero-micro">
+          „Kollege war unsicher wegen einem Vertrag – nach 2 Minuten wusste er’s.“
+        </p>
+      </div>
+      <div class="story-card">
+        <p class="hero-micro">
+          „Für meinen Partner – wollte ihm Druck ersparen. Der Check war neutral.“
+        </p>
+      </div>
     </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION – TEXT-GENERATOR
+============================================================ -->
+<section class="section fade-up">
+  <div class="container stack">
+
+    <h2>Dein Text zum Weitergeben</h2>
+    <p class="hero-micro">WhatsApp · SMS · Instagram · Messenger</p>
+
+    <div class="bar" style="margin-bottom:1rem;">
+      <button class="btn seg-btn" data-seg="neutral">Für alle</button>
+      <button class="btn seg-btn" data-seg="eltern">Eltern</button>
+      <button class="btn seg-btn" data-seg="paare">Paare</button>
+      <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
+      <button class="btn seg-btn" data-seg="selbst">Selbstständige</button>
+      <button class="btn seg-btn" data-seg="freunde">Freunde</button>
+    </div>
+
+    <label class="hero-micro" for="refName">Dein Vorname (optional):</label>
+    <input id="refName" class="input" placeholder="z. B. Alex, Dani, Chris">
+
+    <textarea id="refText" rows="6" data-variants='{
+      "neutral":[
+        "Hey, kurzer Blick (2 Min), komplett anonym – zeigt dir, was heute wichtig ist. Falls es dir nichts bringt: 25 €. {{URL}}",
+        "Kurzer 2-Minuten-Screen – anonym, ohne Verkauf. Hilft vielen, einen Überblick zu bekommen. {{URL}}"
+      ],
+      "eltern":[
+        "Kurz für Eltern: 2 Min – zeigt sofort, ob heute etwas offen ist. Ohne Unterlagen. {{URL}}",
+        "Wenn du gerade viel um die Ohren hast: das hier gibt schnell Klarheit. {{URL}}"
+      ],
+      "paare":[
+        "Für Paare, die nichts übersehen wollen – 2 Minuten, anonym. {{URL}}",
+        "Ihr wollt sicher sein, dass nichts Wichtiges ansteht? Kurz reinschauen. {{URL}}"
+      ],
+      "kollegen":[
+        "Für Kolleg:innen: 2-Minuten-Blick – kein Tarifkram, nur klare Ampel. {{URL}}"
+      ],
+      "selbst":[
+        "Für Selbstständige: 2 Min, anonym – zeigt, ob du heute verwundbar bist. {{URL}}"
+      ],
+      "freunde":[
+        "Hey, dachte an dich – 2 Minuten, anonym. Vielleicht nimmt es dir heute Druck. {{URL}}"
+      ]
+    }'></textarea>
+
+    <button class="btn btn-primary" id="readyMsg">✨ Text generieren</button>
+
+    <div class="premium-card" style="margin-top:1rem;">
+      <h3 style="margin-top:0;">Vorschau</h3>
+      <p id="previewOutput" class="hero-micro">Wird erstellt…</p>
+    </div>
+
+    <div class="bar">
+      <button class="btn btn-ghost" id="copyBtn">📋 Kopieren</button>
+      <a id="waShare" class="btn btn-primary" href="#" target="_blank">💬 WhatsApp</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION – ZUSATZ: SOCIAL CURRENCY EXPLAINER
+============================================================ -->
+<section class="section fade-up">
+  <div class="container stack center">
+    <h2>Warum das Weitergeben wirkt</h2>
+    <p class="hero-micro" style="max-width:540px;">
+      Menschen teilen Dinge, die ihnen selbst ein gutes Gefühl geben:
+      „Ich hab an dich gedacht.“  
+      Das ist kein Verkauf – es ist Fürsorge.
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FINAL CTA
+============================================================ -->
+<section class="section fade-up">
+  <div class="container center stack">
+    <h2>Willst du selbst kurz schauen?</h2>
+    <a href="/#ampel-check" class="btn btn-primary">⚡ 2-Minuten-Check starten</a>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p>© 2026 Heiko Haerter – Persönliche Finanzbegleitung</p>
+    <p>
+      <a href="/impressum">Impressum</a> ·
+      <a href="/datenschutz">Datenschutz</a> ·
+      <a href="https://www.instagram.com/heiko.haerter.coach/">Instagram</a> ·
+      <a href="https://www.linkedin.com/in/heiko-haerter-3755b2260/">LinkedIn</a>
+    </p>
   </div>
 </footer>
 
+
+<!-- ============================================================
+     REFERRAL LOGIC – GODMODE 2026
+============================================================ -->
 <script>
-(()=>{
+document.addEventListener("DOMContentLoaded", () => {
+  
+  // Live count (Fake für Demo – kannst du später via API befüllen)
+  document.getElementById("liveCount").textContent =
+    Math.floor(Math.random() * 38) + 12;
 
-const $=(s,r=document)=>r.querySelector(s),
-      $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  // URL Builder
+  function buildURL() {
+    const base = new URL("https://heikohaerter.com");
+    base.searchParams.set("utm_source", "weitergeben");
+    base.searchParams.set("utm_medium", "referral");
+    base.searchParams.set("utm_campaign", "ampel");
 
-document.documentElement.classList.remove("no-js");
+    // Random short rid
+    const id = Math.random().toString(36).substring(2, 8);
+    base.searchParams.set("rid", id);
+    return base.toString();
+  }
 
-function year(){ $$("[data-year]").forEach(n=>n.textContent=new Date().getFullYear()); }
+  const refName = document.getElementById("refName");
+  const refText = document.getElementById("refText");
+  const preview = document.getElementById("previewOutput");
+  const waShare = document.getElementById("waShare");
 
-function live(){
- const box=$("#referral-live"); if(!box)return;
- const items=[
-   "„Anna (34) hat den Check weitergegeben.“",
-   "„Tim (29) hat gerade gestartet – anonym.“",
-   "„Mara (41) hat den Link an eine Freundin gesendet.“"
- ];
- let i=0,paused=false;
- box.textContent=items[0];
- const rot=setInterval(()=>{if(!paused){i=(i+1)%items.length;box.textContent=items[i]}},3200);
- ["mouseenter","focusin"].forEach(ev=>box.addEventListener(ev,()=>paused=true));
- ["mouseleave","focusout"].forEach(ev=>box.addEventListener(ev,()=>paused=false));
- addEventListener("pagehide",()=>clearInterval(rot));
-}
+  function generateText(segment = "neutral") {
+    const variants = JSON.parse(refText.dataset.variants);
+    const pool = variants[segment] || variants.neutral;
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    const name = refName.value.trim();
 
-function copyBtns(){
- const txts=$$(".referral-txt");
- $$(".copy-btn").forEach(btn=>{
-   btn.addEventListener("click",()=>{
-     const t=txts[btn.dataset.copy];
-     t.select(); t.setSelectionRange(0,99999);
-     navigator.clipboard.writeText(t.value);
-     btn.textContent="Kopiert ✓";
-     setTimeout(()=>btn.textContent="Kopieren",1500);
-   });
- });
-}
+    let text = pick.replace(/\{\{URL\}\}/g, buildURL());
+    if (name) text = `${name}, ${text}`;
 
-document.addEventListener("DOMContentLoaded",()=>{
- year();
- live();
- copyBtns();
+    preview.textContent = text;
+    waShare.href = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  }
+
+  // Default
+  generateText();
+
+  // Segment Buttons
+  document.querySelectorAll(".seg-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      generateText(btn.dataset.seg);
+    });
+  });
+
+  // Manual generate
+  document.getElementById("readyMsg").addEventListener("click", () => {
+    generateText();
+  });
+
+  // Copy
+  document.getElementById("copyBtn").addEventListener("click", () => {
+    navigator.clipboard.writeText(preview.textContent);
+  });
+
 });
-
-})();
 </script>
 
 </body>
