@@ -1,250 +1,284 @@
+// /public/app.js
 /* =========================================================
-   HEIKO HAERTER – 2026 MASTER APP.JS
-   Ultra-Stable Scripts · Wix Safe · Neuro-Optimized Patterns
+   HEIKO HAERTER – 2026 ULTRA MASTER APP.JS (Hardened v2)
+   Neuro-Optimized · Zero-Jank · Wix-/SSR-Safe · A11y-Aware
    ========================================================= */
 
-/* -----------------------------------------
-   UTILITIES
------------------------------------------ */
+/* -----------------------------
+   0) CORE UTILS
+----------------------------- */
+/** @template {Element} T */
+const $ = (s, p = document) => /** @type {T|null} */(p.querySelector(s));
+/** @template {Element} T */
+const $$ = (s, p = document) => /** @type {T[]} */([...p.querySelectorAll(s)]);
 
-const QS = (sel, p = document) => p.querySelector(sel);
-const QSA = (sel, p = document) => [...p.querySelectorAll(sel)];
+/** Minimal event helpers (why: consistent cleanup) */
+const on = (el, type, fn, opts) => el && el.addEventListener(type, fn, opts);
+const off = (el, type, fn, opts) => el && el.removeEventListener(type, fn, opts);
 
-const safeLS = {
-  get(key) {
-    try { return localStorage.getItem(key); }
-    catch (_) { return null; }
-  },
-  set(key, val) {
-    try { localStorage.setItem(key, val); }
-    catch (_) { }
+/** rAF helper (why: batch DOM writes) */
+const raf = (cb) => (window.requestAnimationFrame || setTimeout)(cb);
+
+/** Safe localStorage (why: Safari ITP / private mode) */
+const safeStore = (() => {
+  try { const k = "__t"; localStorage.setItem(k, "1"); localStorage.removeItem(k);
+    return {
+      get(k){ try { return localStorage.getItem(k); } catch { return null; } },
+      set(k,v){ try { localStorage.setItem(k, v); } catch {} },
+      del(k){ try { localStorage.removeItem(k); } catch {} }
+    };
+  } catch {
+    const mem = new Map();
+    return {
+      get: (k) => mem.get(k) ?? null,
+      set: (k, v) => void mem.set(k, v),
+      del: (k) => void mem.delete(k)
+    };
   }
-};
+})();
 
-function randomId(len = 12) {
+/** Safe crypto (why: older iOS/Wix iframes) */
+const safeCrypto = (() => {
+  const g = (typeof globalThis !== "undefined" ? globalThis : window);
+  return g.crypto && g.crypto.getRandomValues ? g.crypto : null;
+})();
+
+/** Stable random id */
+function randId(n = 12) {
   const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-  let out = "";
-  const arr = new Uint8Array(len);
-  crypto.getRandomValues(arr);
-  arr.forEach(x => out += chars[x % chars.length]);
-  return out;
+  if (safeCrypto) {
+    const arr = new Uint8Array(n);
+    safeCrypto.getRandomValues(arr);
+    return [...arr].map(x => chars[x % chars.length]).join("");
+  }
+  // Fallback (non-crypto; why: SSR/legacy)
+  let o = "";
+  for (let i=0;i<n;i++) o += chars[(Math.random()*chars.length)|0];
+  return o;
 }
 
-/* -----------------------------------------
-   1) FADE-IN OBSERVER
------------------------------------------ */
+/** Small helpers */
+const hasIO = "IntersectionObserver" in window;
+const hasClipboard = !!navigator.clipboard;
+const prefersReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isMobile = () => innerWidth < 980;
 
-(function setupFadeIn() {
-  const els = QSA(".fade-up");
-  if (!("IntersectionObserver" in window)) {
-    els.forEach(e => e.classList.add("visible"));
-    return;
+/* =========================================================
+   1) FADE-IN ENGINE (Ultra Smooth + Reduced-Motion Safe)
+   ========================================================= */
+const FadeIn = (() => {
+  let io;
+  function init() {
+    const els = $$(".fade-up");
+    if (prefersReducedMotion || !hasIO) { els.forEach(e => e.classList.add("visible")); return; }
+    io = new IntersectionObserver((entries) => {
+      entries.forEach(ent => {
+        if (ent.isIntersecting) {
+          ent.target.classList.add("visible");
+          io.unobserve(ent.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+    els.forEach(el => io.observe(el));
   }
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(ent => {
-      if (ent.isIntersecting) {
-        ent.target.classList.add("visible");
-        io.unobserve(ent.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  els.forEach(el => io.observe(el));
+  function destroy() { if (io) { io.disconnect(); io = undefined; } }
+  return { init, destroy };
 })();
 
-/* -----------------------------------------
-   2) STICKY CTA (mobile)
------------------------------------------ */
+/* =========================================================
+   2) STICKY CTA (Mobile Only; IO + Scroll Fallback)
+   ========================================================= */
+const StickyCTA = (() => {
+  let io, onScrollRef;
+  function show(el, v) {
+    // why: avoid layout thrash by batching
+    raf(() => {
+      el.style.transform = v ? "translateY(0)" : "translateY(120%)";
+      el.style.opacity = v ? "1" : "0";
+      el.setAttribute("aria-hidden", String(!v));
+    });
+  }
+  function init() {
+    const el = $("#stickyCTA");
+    const hero = $(".hero");
+    if (!el || !hero || !isMobile()) return;
 
-(function stickyCTA() {
-  const cta = QS("#stickyCTA");
-  const hero = QS("#hero");
+    if (hasIO) {
+      io = new IntersectionObserver(([ent]) => show(el, !ent.isIntersecting), { threshold: 0.12 });
+      io.observe(hero);
+    } else {
+      onScrollRef = () => show(el, scrollY > 180);
+      on(window, "scroll", onScrollRef, { passive: true });
+      onScrollRef();
+    }
+  }
+  function destroy() {
+    if (io) { io.disconnect(); io = undefined; }
+    if (onScrollRef) off(window, "scroll", onScrollRef, { passive: true });
+  }
+  return { init, destroy };
+})();
 
-  if (!cta || !hero) return;
-  if (window.innerWidth >= 1024) return; // Desktop: off
+/* =========================================================
+   3) SHORT MODE (ADHS-SAFE MODE)
+   ========================================================= */
+const ShortMode = (() => {
+  const KEY = "hh_short_mode_v1";
+  function init() {
+    const btn = $("#dfBtn");
+    if (!btn) return;
+    const keep = ["hero", "final-cta", "stickyCTA", "share", "ampel-check"];
+    const sections = $$("main > section").filter(s => !keep.includes(s.id));
 
-  const show = (v) => {
-    cta.style.transform = v ? "translateY(0)" : "translateY(120%)";
-    cta.style.opacity = v ? "1" : "0";
+    const set = (onState) => {
+      btn.setAttribute("aria-pressed", String(onState));
+      btn.textContent = onState ? "✅ Kurzmodus aktiv" : "🔍 Kurzmodus";
+      sections.forEach(sec => sec.style.display = onState ? "none" : "");
+      if (onState) scrollTo({ top: 0, behavior: "smooth" });
+      safeStore.set(KEY, onState ? "1" : "0");
+    };
+
+    // restore previous state
+    set(safeStore.get(KEY) === "1");
+
+    on(btn, "click", () => {
+      const active = btn.getAttribute("aria-pressed") === "true";
+      set(!active);
+    });
+
+    // public hook if needed
+    window.setKurzmodus = set;
+  }
+  return { init };
+})();
+
+/* =========================================================
+   4) SHARE ENGINE (WhatsApp • Mail • Copy • Segments)
+   ========================================================= */
+const ShareEngine = (() => {
+  const KEY = "hh_ref_rid_v3";
+  let rid;
+
+  /** url-safe name alias */
+  const sanitize = (v) => (v ? v.replace(/[^a-z0-9]/gi, "").toLowerCase() : "");
+
+  const getRid = () => {
+    if (!rid) rid = safeStore.get(KEY) || (safeStore.set(KEY, randId()), safeStore.get(KEY));
+    return rid;
   };
 
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(([e]) => {
-      show(!e.isIntersecting);
-    }, { threshold: 0.05 }).observe(hero);
-  } else {
-    window.addEventListener("scroll", () => {
-      show(window.scrollY > 450);
-    }, { passive: true });
-  }
-})();
+  function buildURL(nameInput) {
+    const base = "https://heikohaerter.com";
+    const u = new URL(base);
+    const id = getRid();
 
-/* -----------------------------------------
-   3) KURZMODUS (ADHS-SAFE MODE)
------------------------------------------ */
+    u.searchParams.set("utm_source", "weitergeben");
+    u.searchParams.set("utm_medium", "share");
+    u.searchParams.set("utm_campaign", "check");
+    u.searchParams.set("rid", id);
 
-(function shortMode() {
-  const btn = QS("#dfBtn");
-  if (!btn) return;
-
-  const keepIDs = ["hero", "final-cta", "stickyCTA", "share", "ampel-check"];
-  const sections = QSA("main > section").filter(s => !keepIDs.includes(s.id));
-
-  function set(on) {
-    btn.setAttribute("aria-pressed", on ? "true" : "false");
-    btn.textContent = on ? "✅ Kurzmodus aktiv" : "🔍 Kurzmodus";
-
-    sections.forEach(sec => sec.style.display = on ? "none" : "");
-
-    if (on) window.scrollTo({ top: 0, behavior: "smooth" });
+    const alias = sanitize((nameInput?.value || "").trim());
+    if (alias) u.searchParams.set("ref", `${alias}.${id.slice(0,5)}`);
+    return u.toString();
   }
 
-  btn.addEventListener("click", () => {
-    const active = btn.getAttribute("aria-pressed") === "true";
-    set(!active);
-  });
-
-  window.setKurzmodus = set; // global access
-})();
-
-/* -----------------------------------------
-   4) 5-BEREICHE ICONS – MICRO-REWARD
------------------------------------------ */
-
-(function areaGlow() {
-  const wrap = QS("#areasIcons");
-  if (!wrap) return;
-  const items = QSA(".icon", wrap);
-
-  if (!("IntersectionObserver" in window)) return;
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.boxShadow = "0 0 22px rgba(233,211,148,.28)";
-        setTimeout(() => e.target.style.boxShadow = "none", 900);
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.7 });
-
-  items.forEach(i => io.observe(i));
-})();
-
-/* -----------------------------------------
-   5) REFERRAL SHARE SYSTEM
-   (Whatsapp • Copy • Email • Magic-Line)
------------------------------------------ */
-
-(function shareEngine() {
-
-  const refInput = QS("#refName");
-  const textArea = QS("#refText");
-  const waBtn = QS("#waShare");
-  const mailBtn = QS("#mailShare");
-  const copyBtn = QS("#copyBtn");
-  const preview = QS("#waPreviewText");
-  const readyBtn = QS("#readyMsg");
-  const magicBtn = QS("#magicLine");
-  const addPersonalBtn = QS("#addPersonal");
-
-  const KEY = "hh_ref_rid_v1";
-
-  function getRefId() {
-    return safeLS.get(KEY) || (safeLS.set(KEY, randomId()), safeLS.get(KEY));
-  }
-
-  function sanitize(val) {
-    return val ? val.replace(/[^a-z0-9]/gi, "").toLowerCase() : "";
-  }
-
-  function buildURL() {
-    const url = new URL("https://heikohaerter.com");
-    url.searchParams.set("utm_source", "weitergeben");
-    url.searchParams.set("utm_medium", "share");
-    url.searchParams.set("utm_campaign", "check");
-
-    const rid = getRefId();
-    url.searchParams.set("rid", rid);
-
-    const alias = sanitize((refInput?.value || "").trim());
-    if (alias) {
-      url.searchParams.set("ref", `${alias}.${rid.slice(0, 5)}`);
-    }
-
-    return url.toString();
-  }
-
-  function detectSegment() {
-    const raw = (refInput?.value || "").toLowerCase();
+  const detectSeg = (nameInput) => {
+    const raw = (nameInput?.value || "").toLowerCase();
     if (/papa|mama|eltern|vater|mutter/.test(raw)) return "eltern";
     if (/chef|kolleg|team|büro/.test(raw)) return "kollegen";
     if (/freund|kumpel|buddy/.test(raw)) return "freunde";
-    if (/selbständig|selbstständig|freelance/.test(raw)) return "selbst";
+    if (/selbstständig|selbständig|freelance/.test(raw)) return "selbst";
     if (/partner|ehefrau|ehemann/.test(raw)) return "partner";
     return "neutral";
+  };
+
+  const loadVariants = (area) => {
+    try { return JSON.parse(area.dataset.variants || "{}"); }
+    catch { return { neutral: [] }; }
+  };
+
+  const pick = (variants, seg) => {
+    const pool = variants[seg] || variants.neutral || [];
+    return pool[(Math.random() * pool.length) | 0] || "";
+  };
+
+  const plain = (val) => (val || "").replace(/\n+/g, " ").trim();
+  const ensureURL = (t, url) => /\bhttps?:\/\//.test(t) ? t : `${t} ${url}`;
+
+  function init() {
+    const nameInput = $("#refName");
+    const area = $("#refText");
+    const wa = $("#waShare");
+    const mail = $("#mailShare");
+    const copy = $("#copyBtn");
+    const preview = $("#waPreviewText");
+
+    const readyBtn = $("#readyMsg");
+    const magicBtn = $("#magicLine");
+    const addPersonalBtn = $("#addPersonal");
+
+    if (!area || !wa || !mail || !copy || !preview) return;
+
+    const variants = loadVariants(area);
+
+    const update = () => {
+      const url = buildURL(nameInput);
+      // fill if empty
+      if (!area.value) {
+        const seg = detectSeg(nameInput);
+        area.value = (pick(variants, seg) || "").replace(/{{URL}}/g, url);
+      }
+      const t = ensureURL(plain(area.value), url);
+      wa.href = "https://wa.me/?text=" + encodeURIComponent(t);
+      mail.href = "mailto:?subject=Kurzer%20Blick&body=" + encodeURIComponent(t);
+      preview.textContent = t.length <= 180 ? t : t.slice(0, t.lastIndexOf(" ", 180)) + "…";
+    };
+
+    // Debounce typing
+    let tId;
+    const debouncedUpdate = () => { clearTimeout(tId); tId = setTimeout(update, 80); };
+
+    // init once
+    update();
+
+    $$(".seg-btn").forEach(b => on(b, "click", () => {
+      const url = buildURL(nameInput);
+      const txt = (pick(variants, b.dataset.seg) || "").replace(/{{URL}}/g, url);
+      if (txt) { area.value = txt; debouncedUpdate(); }
+    }));
+
+    on(nameInput, "input", debouncedUpdate);
+    on(area, "input", debouncedUpdate);
+
+    on(readyBtn, "click", () => { update(); toast("Fertiger Text eingefügt ✔️"); });
+    on(magicBtn, "click", () => {
+      const line = "Hey, hab das gerade gesehen – dachte sofort an dich.";
+      const cur = (area.value || "").trim();
+      area.value = cur ? `${line}\n\n${cur}` : `${line}\n\n${buildURL(nameInput)}`;
+      debouncedUpdate();
+    });
+    on(addPersonalBtn, "click", () => {
+      const alias = (nameInput?.value || "").trim() || "Hey";
+      area.value += `\n\n${alias.split(" ")[0]}, dachte an dich, weil …`;
+      debouncedUpdate();
+    });
+
+    on(copy, "click", async () => {
+      const url = buildURL(nameInput);
+      const text = ensureURL(area.value, url);
+      try {
+        if (hasClipboard) await navigator.clipboard.writeText(text);
+        else { area.select(); document.execCommand("copy"); }
+        toast("Kopiert ✔️");
+      } catch { toast("Konnte nicht kopieren"); }
+    });
   }
 
-  function loadVariants() {
-    try { return JSON.parse(textArea.dataset.variants); }
-    catch (_) { return { neutral: [] }; }
-  }
-
-  function pick(seg) {
-    const all = loadVariants();
-    const pool = all[seg] || all.neutral || [];
-    const i = Math.floor(Math.random() * pool.length);
-    return pool[i] || "";
-  }
-
-  function fillTemplate(seg) {
-    const tmpl = pick(seg || detectSegment());
-    if (!tmpl) return;
-
-    textArea.value = tmpl.replace(/{{URL}}/g, buildURL());
-    updatePreview();
-  }
-
-  function plain() {
-    return (textArea.value || "").replace(/\n+/g, " ").trim();
-  }
-
-  function ensureURL(t) {
-    return /\bhttps?:\/\//.test(t) ? t : t + " " + buildURL();
-  }
-
-  function updatePreview() {
-    const txt = ensureURL(plain());
-    waBtn.href = "https://wa.me/?text=" + encodeURIComponent(txt);
-    mailBtn.href =
-      "mailto:?subject=" +
-      encodeURIComponent("Kurzer Blick") +
-      "&body=" +
-      encodeURIComponent(txt);
-
-    preview.textContent =
-      txt.length <= 180 ? txt : txt.slice(0, txt.lastIndexOf(" ", 180)) + "…";
-  }
-
-  /* INIT */
-  if (textArea && !textArea.value) fillTemplate("neutral");
-  updatePreview();
-
-  /* EVENTS */
-  QSA("[data-seg]").forEach(b =>
-    b.addEventListener("click", () => fillTemplate(b.dataset.seg))
-  );
-
-  refInput?.addEventListener("input", () => fillTemplate());
-
-  textArea?.addEventListener("input", updatePreview);
-
-  readyBtn?.addEventListener("click", () => {
-    fillTemplate();
-    const toast = document.createElement("div");
-    toast.className = "whisper";
-    toast.textContent = "Fertiger Text eingefügt ✔️";
-    Object.assign(toast.style, {
+  function toast(msg) {
+    const w = document.createElement("div");
+    w.className = "whisper";
+    w.textContent = msg;
+    Object.assign(w.style, {
       position: "fixed",
       left: "18px",
       bottom: "18px",
@@ -253,356 +287,214 @@ function randomId(len = 12) {
       padding: ".6rem .8rem",
       borderRadius: "14px",
       opacity: "0",
+      transform: "translateY(8px)",
       transition: "opacity .25s, transform .25s",
-      transform: "translateY(10px)",
-      zIndex: "9999"
+      zIndex: 99999
     });
-    document.body.appendChild(toast);
-    setTimeout(() => {
-      toast.style.opacity = "1";
-      toast.style.transform = "translateY(0)";
-    }, 10);
-    setTimeout(() => toast.remove(), 2000);
-  });
+    document.body.appendChild(w);
+    raf(() => { w.style.opacity = "1"; w.style.transform = "translateY(0)"; });
+    setTimeout(() => w.remove(), 2200);
+  }
 
-  magicBtn?.addEventListener("click", () => {
-    const line = "Hey, hab das gerade gesehen – dachte sofort an dich.";
-    const cur = (textArea.value || "").trim();
-    textArea.value = cur ? line + "\n\n" + cur : line + "\n\n" + buildURL();
-    updatePreview();
-  });
-
-  addPersonalBtn?.addEventListener("click", () => {
-    const alias = (refInput?.value || "").trim() || "Hey";
-    textArea.value += `\n\n${alias.split(" ")[0]}, dachte an dich, weil …`;
-    updatePreview();
-  });
-
-  copyBtn?.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(ensureURL(textArea.value));
-    } catch (_) {
-      textArea.select();
-      document.execCommand("copy");
-    }
-  });
+  return { init };
 })();
 
-/* -----------------------------------------
-   6) AMPEL-CHECK ENGINE
------------------------------------------ */
-
-(function ampelCheck() {
-  let step = 1;
-  let score = 0;
+/* =========================================================
+   5) AMPEL ENGINE (Steps → Score → Result)
+   ========================================================= */
+const Ampel = (() => {
+  let score = 0, step = 1;
   const max = 3;
 
-  const startScreen = QS("#check-start");
-  const stepsWrap = QS("#check-steps");
-  const resultBox = QS("#check-result");
-
-  const stepLabel = QS("#stepLabel");
-  const stepHint = QS("#stepHint");
-  const progress = QS("#progressBar");
-
-  const startBtn = QS("#startCheckBtn");
-  const heroStart = QS("#startCheckHero");
-  const finalStart = QS("#ctaFinal");
-  const shortBtn = QS("#startShort");
+  const els = {
+    start: $("#startCheckBtn"),
+    heroStart: $("#startCheckHero"),
+    finalStart: $("#ctaFinal"),
+    shortBtn: $("#startShort"),
+    screen: $("#check-start"),
+    wrap: $("#check-steps"),
+    result: $("#check-result"),
+    stepLabel: $("#stepLabel"),
+    stepHint: $("#stepHint"),
+    prog: $("#progressBar")
+  };
 
   function updateHeader() {
-    stepLabel.textContent = `Schritt ${Math.min(step, max)} von ${max}`;
+    els.stepLabel && (els.stepLabel.textContent = `Schritt ${Math.min(step, max)} von ${max}`);
     const pct = ((Math.min(step - 1, max - 1)) / (max - 1)) * 100;
-    progress.style.width = (max === 1 ? 100 : pct) + "%";
-
-    stepHint.textContent =
-      step === 1 ? "Kurzer Eindruck reicht."
-      : step === 2 ? "Fast geschafft."
-      : "Letzter Klick.";
+    els.prog && (els.prog.style.width = pct + "%");
+    if (els.stepHint) {
+      els.stepHint.textContent = step === 1 ? "Kurzer Eindruck reicht."
+        : step === 2 ? "Fast geschafft."
+        : "Letzter Klick.";
+    }
   }
 
   function showStep(n) {
-    QSA("#check-steps .step").forEach(s => s.style.display = "none");
-    const el = QS(`#check-steps .step[data-step="${n}"]`);
-    if (el) {
-      el.style.display = "block";
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    $$("#check-steps .step").forEach(s => (s.style.display = "none"));
+    const el = $(`#check-steps .step[data-step="${n}"]`);
+    if (el) el.style.display = "block";
     updateHeader();
-  }
-
-  function renderCTA(color) {
-    const wa = "https://wa.me/4917660408380?text=";
-
-    if (color === "red")
-      return `
-        <div class="hh-stack hh-center">
-          <a href="${wa}Kurz%2010%20Minuten%20sprechen%20wegen%20meiner%20Ampel%20(Rot)"
-             class="hh-btn hh-btn-primary">💬 10 Minuten sprechen – sofort Ruhe</a>
-          <a href="${wa}Ich%20brauche%20einen%20kurzen%20Check%20(Rot)"
-             class="hh-btn hh-btn-ghost">🛟 Kurzen Check anfragen</a>
-        </div>`;
-
-    if (color === "yellow")
-      return `
-        <div class="hh-stack hh-center">
-          <a href="${wa}Was%20sollte%20ich%20als%20Nächstes%20regeln%3F%20(Gelb)"
-             class="hh-btn hh-btn-primary">🧭 Als Nächstes entspannt regeln</a>
-          <a href="${wa}Kurze%20Frage%20zu%20meinem%20Gelb-Ergebnis"
-             class="hh-btn hh-btn-ghost">💬 Rückfrage senden</a>
-        </div>`;
-
-    return `
-      <div class="hh-stack hh-center">
-        <a href="${wa}Gibt%20es%20noch%20smarte%20Optimierungen%3F%20(Grün)"
-           class="hh-btn hh-btn-primary">✨ Noch smarter machen?</a>
-        <a href="#share" class="hh-btn hh-btn-ghost">🔗 Weitergeben</a>
-      </div>`;
+    el?.scrollIntoView({ behavior: "smooth" });
   }
 
   function finish() {
-    stepsWrap.style.display = "none";
-    resultBox.style.display = "block";
+    if (!els.wrap || !els.result) return;
+    els.wrap.style.display = "none";
+    els.result.style.display = "block";
 
-    let color = "green";
-    let html = "";
-
+    const wa = "https://wa.me/4917660408380?text=";
+    let html;
     if (score <= 4) {
-      color = "red";
       html = `
-        <div class="result-card result-red">
-          <h3>🔴 Deine Ampel: Jetzt</h3>
-          <p>Mindestens ein Bereich ist heute wichtig – gut, dass du es siehst.</p>
-          ${renderCTA("red")}
-        </div>`;
+      <div class="result-card result-red">
+        <h3>🔴 Deine Ampel: Jetzt</h3>
+        <p>Ein Bereich ist heute wirklich wichtig.</p>
+        <a class="hh-btn hh-btn-primary"
+           href="${wa}Kurz%2010%20Minuten%20sprechen%20wegen%20meiner%20Ampel%20(Rot)">💬 10 Minuten sprechen</a>
+      </div>`;
     } else if (score <= 7) {
-      color = "yellow";
       html = `
-        <div class="result-card result-yellow">
-          <h3>🟡 Deine Ampel: Als Nächstes</h3>
-          <p>Ein paar Punkte brauchen Orientierung.</p>
-          ${renderCTA("yellow")}
-        </div>`;
+      <div class="result-card result-yellow">
+        <h3>🟡 Deine Ampel: Als Nächstes</h3>
+        <p>Einige Punkte brauchen Orientierung.</p>
+        <a class="hh-btn hh-btn-primary"
+           href="${wa}Was%20sollte%20ich%20als%20Nächstes%20regeln%3F">🧭 Als Nächstes regeln</a>
+      </div>`;
     } else {
       html = `
-        <div class="result-card result-green">
-          <h3>🟢 Deine Ampel: Später</h3>
-          <p>Die wichtigsten Punkte wirken stabil – ggf. Feinschliff.</p>
-          ${renderCTA("green")}
-        </div>`;
+      <div class="result-card result-green">
+        <h3>🟢 Deine Ampel: Später</h3>
+        <p>Alles wirkt stabil – evtl. Feinschliff.</p>
+        <a class="hh-btn hh-btn-primary"
+           href="${wa}Gibt%20es%20noch%20Optimierungen%3F">✨ Noch smarter machen?</a>
+      </div>`;
     }
-
-    html += `<p class="hh-micro" style="margin-top:.8rem;opacity:.85">Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>`;
-
-    resultBox.innerHTML = html;
-    resultBox.scrollIntoView({ behavior: "smooth" });
+    els.result.innerHTML = html;
+    els.result.scrollIntoView({ behavior: "smooth" });
   }
 
-  function start() {
-    startScreen.style.display = "none";
-    stepsWrap.style.display = "block";
-    resultBox.style.display = "none";
-
-    score = 0;
-    step = 1;
-
-    showStep(step);
+  function startFlow() {
+    if (els.screen) els.screen.style.display = "none";
+    if (els.wrap) els.wrap.style.display = "block";
+    if (els.result) els.result.style.display = "none";
+    score = 0; step = 1; showStep(step);
   }
 
-  /* MAIN BUTTON EVENTS */
-  startBtn?.addEventListener("click", start);
-  heroStart?.addEventListener("click", (e) => { e.preventDefault(); start(); });
-  finalStart?.addEventListener("click", (e) => { e.preventDefault(); start(); });
+  function init() {
+    on(els.start, "click", startFlow);
+    on(els.heroStart, "click", (e) => { e.preventDefault(); startFlow(); });
+    on(els.finalStart, "click", (e) => { e.preventDefault(); startFlow(); });
 
-  /* SHORT MODE */
-  shortBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    start();
+    on(els.shortBtn, "click", (e) => {
+      e.preventDefault();
+      startFlow();
+      setTimeout(() => { score += 2; step = 2; showStep(step); }, 120);
+      setTimeout(() => { score += 2; step = 3; showStep(step); }, 260);
+    });
 
-    setTimeout(() => { score += 2; step = 2; showStep(step); }, 120);
-    setTimeout(() => { score += 2; step = 3; showStep(step); }, 260);
-  });
+    // Delegate for step buttons
+    const container = $("#check-steps");
+    on(container, "click", (ev) => {
+      const btn = ev.target.closest("#check-steps .step button");
+      if (!btn) return;
+      score += Number(btn.dataset.value) || 0;
+      step++;
+      if (step > max) finish();
+      else showStep(step);
+    });
+  }
 
-  /* STEP BUTTONS */
-  QSA("#check-steps .step").forEach(stepEl => {
-    QSA("button", stepEl).forEach(btn => {
-      btn.addEventListener("click", () => {
-        score += Number(btn.dataset.value) || 0;
-        step++;
-        if (step > max) finish();
-        else showStep(step);
+  return { init };
+})();
+
+/* =========================================================
+   6) DOPAMIN UI (Ripple · Micro-Glow · Whisper)
+   ========================================================= */
+const DopamineUI = (() => {
+  let glowIO, intervalId;
+
+  function rippleHandler(e) {
+    const btn = e.target.closest("button, .hh-btn, .btn");
+    if (!btn) return;
+    // why: prevent ripple stacking if user spam-clicks
+    const prev = btn.querySelector(".hh-ripple");
+    if (prev) prev.remove();
+
+    const r = document.createElement("span");
+    r.className = "hh-ripple";
+    const rect = btn.getBoundingClientRect();
+    r.style.left = (e.clientX - rect.left) + "px";
+    r.style.top  = (e.clientY - rect.top)  + "px";
+    btn.appendChild(r);
+    setTimeout(() => r.remove(), 450);
+  }
+
+  function initRipple() {
+    on(document, "click", rippleHandler);
+  }
+
+  function initGlow() {
+    if (!hasIO) return;
+    glowIO = new IntersectionObserver((entries) => {
+      entries.forEach(ent => {
+        if (ent.isIntersecting) {
+          ent.target.classList.add("hh-glow");
+          setTimeout(() => ent.target.classList.remove("hh-glow"), 900);
+          glowIO.unobserve(ent.target);
+        }
       });
-    });
-  });
+    }, { threshold: 0.4 });
 
-})();
-/* =========================================================
-   OPTION A — ULTRA PERFORMANCE JS ADD-ON
-   Scroll-sync · GPU-hints · No-jank stabilizer
-   ========================================================= */
-
-/* 1) FORCE GPU SMOOTHNESS ON KEY ELEMENTS */
-QSA(".hh-btn, .hh-card, .fade-up, .result-card").forEach(el => {
-  el.style.willChange = "transform, opacity";
-});
-
-/* 2) SCROLL TICK (requestAnimationFrame instead of scroll) */
-(function smoothScrollTick() {
-  let lastY = window.scrollY;
-
-  function tick() {
-    const y = window.scrollY;
-
-    // Skip work when nothing moves
-    if (y !== lastY) {
-      document.body.dataset.scrollY = y;
-      lastY = y;
-    }
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-})();
-/* =========================================================
-   OPTION B — GOD-MODE UI ENHANCER
-   Micro-interactions · Dopamine pulses · Tap ripples
-   ========================================================= */
-
-/* 1) TAP RIPPLE EFFECT FOR ALL BUTTONS */
-document.addEventListener("click", e => {
-  const btn = e.target.closest("button, .hh-btn, .hh-btn-primary, .btn");
-  if (!btn) return;
-
-  const span = document.createElement("span");
-  span.className = "hh-ripple";
-  const rect = btn.getBoundingClientRect();
-
-  span.style.left = (e.clientX - rect.left) + "px";
-  span.style.top = (e.clientY - rect.top) + "px";
-
-  btn.appendChild(span);
-  setTimeout(() => span.remove(), 450);
-});
-
-/* 2) MICRO-DOPAMIN: APPEARING CARDS GET MINI GLOW */
-(function microGlow() {
-  if (!("IntersectionObserver" in window)) return;
-
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(ent => {
-      if (ent.isIntersecting) {
-        ent.target.classList.add("hh-glow");
-        setTimeout(() => ent.target.classList.remove("hh-glow"), 900);
-        io.unobserve(ent.target);
-      }
-    });
-  }, { threshold: 0.4 });
-
-  QSA(".hh-card, .icon-card, .premium-card, .result-card")
-    .forEach(el => io.observe(el));
-})();
-
-/* 3) CONFIDENCE SNAP – Klick auf Step-Button erzeugt Motion */
-QSA("#check-steps .step button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    btn.classList.add("hh-click");
-    setTimeout(() => btn.classList.remove("hh-click"), 300);
-  });
-});
-
-/* 4) WHISPER CTA – Random friendly nudges */
-(function whisper() {
-  const box = QS("#whisper");
-  if (!box) return;
-
-  const messages = [
-    "🟢 5 Sekunden – jemand fühlt sich sicherer.",
-    "🟡 Jemand sortiert gerade seinen Tag.",
-    "🔵 Kleiner Klick, großes Gefühl.",
-    "✨ 2 Minuten – mehr Übersicht als gedacht."
-  ];
-
-  function show() {
-    const m = messages[Math.floor(Math.random() * messages.length)];
-    box.textContent = m;
-
-    box.style.opacity = "1";
-    box.style.transform = "translateY(0)";
-
-    setTimeout(() => {
-      box.style.opacity = "0";
-      box.style.transform = "translateY(10px)";
-    }, 3200);
+    $$(".hh-card, .premium-card, .result-card").forEach(el => glowIO.observe(el));
   }
 
-  setTimeout(show, 2200);
-  setInterval(show, 15000);
+  function initWhisper() {
+    const box = $("#whisper");
+    if (!box) return;
+    const msgs = [
+      "🟢 5 Sekunden – jemand fühlt sich sicherer.",
+      "🟡 Kleiner Klick, große Wirkung.",
+      "🔵 2 Minuten – mehr Überblick.",
+      "✨ Jemand sortiert gleich seinen Tag."
+    ];
+    const show = () => {
+      const txt = msgs[(Math.random() * msgs.length) | 0];
+      box.textContent = txt;
+      box.style.opacity = "1";
+      box.style.transform = "translateY(0)";
+      setTimeout(() => {
+        box.style.opacity = "0";
+        box.style.transform = "translateY(8px)";
+      }, 2800);
+    };
+    setTimeout(show, 2000);
+    intervalId = setInterval(show, 15000);
+  }
+
+  function destroy() {
+    off(document, "click", rippleHandler);
+    if (glowIO) { glowIO.disconnect(); glowIO = undefined; }
+    if (intervalId) { clearInterval(intervalId); intervalId = undefined; }
+  }
+
+  function init() {
+    initRipple();
+    initGlow();
+    initWhisper();
+  }
+
+  return { init, destroy };
 })();
-.hh-ripple {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: rgba(255,255,255,0.28);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: hhRipple .45s ease-out;
-  pointer-events: none;
-}
 
-@keyframes hhRipple {
-  to { opacity: 0; transform: translate(-50%, -50%) scale(8); }
-}
-
-.hh-glow {
-  box-shadow: 0 0 32px rgba(233,211,148,.35) !important;
-  transition: box-shadow .35s ease-out;
-}
-
-.hh-click {
-  transform: scale(.96);
-}
 /* =========================================================
-   OPTION C — COMPONENT LIBRARY LOGIC
-   Ampel · Steps · Share Composer Enhancer
+   7) BOOT (idempotent)
    ========================================================= */
-
-/* 1) ANIMATE STEP TRANSITION */
-function hhAnimateStep(el) {
-  el.classList.add("hh-step-anim");
-  setTimeout(() => el.classList.remove("hh-step-anim"), 450);
-}
-
-QSA("#check-steps .step").forEach(step => {
-  step.addEventListener("transitionend", () => hhAnimateStep(step));
-});
-
-/* 2) AMP-RESULT FADE IN */
-(function resultFade() {
-  const el = QS("#check-result");
-  if (!el) return;
-  const mo = new MutationObserver(() => {
-    el.classList.add("visible");
-  });
-  mo.observe(el, { childList: true });
+(function boot() {
+  try { FadeIn.init(); } catch {}
+  try { StickyCTA.init(); } catch {}
+  try { ShortMode.init(); } catch {}
+  try { ShareEngine.init(); } catch {}
+  try { Ampel.init(); } catch {}
+  try { DopamineUI.init(); } catch {}
 })();
-
-/* 3) SHARE COMPOSER — Highlight active segment */
-QSA("[data-seg]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    QSA("[data-seg]").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  });
-});
-
-/* 4) SHARE LINKS VALIDATION */
-(function safeShare() {
-  const wa = QS("#waShare");
-  const mail = QS("#mailShare");
-
-  setInterval(() => {
-    if (!wa.href.includes("http")) wa.href = "https://wa.me/?text=";
-    if (!mail.href.includes("mailto:")) mail.href = "mailto:?subject=Hallo";
-  }, 5000);
-})();
-.hh-step-anim {
-  animation: fadeUpAnim .45s var(--ease);
-}
