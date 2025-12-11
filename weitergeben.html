@@ -345,64 +345,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
       </div>
 
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
-        <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Eltern</strong> → „Will ich sicherstellen, dass wirklich alles passt?“</p></div>
-        <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Paare</strong> → „Finanzen endlich gemeinsam klären?“</p></div>
-        <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Selbstständige</strong> → „Ausfall wäre ein Risiko – kurz checken?“</p></div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- ============== REWARDS ============== -->
-  <section class="section fade-up" id="rewards" aria-labelledby="r-title">
-    <div class="wrap stack">
-      <h2 id="r-title">Deine Wertschätzungen – Sammeln macht’s noch besser</h2>
-
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:.9rem">
-        <article class="premium-card" aria-describedby="r25desc">
-          <h3 style="margin:0 0 .2rem">1× → 25 € = kleiner Luxus</h3>
-          <p id="r25desc" class="hero-micro" style="margin:0">Zählt ab Erstgespräch.</p>
-        </article>
-        <article class="premium-card" aria-describedby="r50desc">
-          <h3 style="margin:0 0 .2rem">3× → 50 € + Extra</h3>
-          <p id="r50desc" class="hero-micro" style="margin:0">Spürbarer Gewinn – plus kleine Überraschung.</p>
-        </article>
-        <article class="premium-card" aria-describedby="r150desc">
-          <h3 style="margin:0 0 .2rem">5× → 150 € = echtes Upgrade</h3>
-          <p id="r150desc" class="hero-micro" style="margin:0">Einfach gut.</p>
-        </article>
-      </div>
-
-      <!-- VIP Slider -->
-      <div>
-        <h3 style="margin:.8rem 0 .4rem">10× → VIP-Erlebnis (du entscheidest)</h3>
-        <div class="slider" id="vipSlider" aria-label="VIP-Erlebnis Highlights">
-          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_d56ea9b3d9314d1abb26324412dffe81~mv2.png" alt="VIP: Konzert"></div>
-          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_506ae19443064d949800ba1db5957184~mv2.png" alt="VIP: Day-Spa & Massage für 2"></div>
-          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_038389a8dd2644fe9741e60585908181~mv2.png" alt="VIP: Fußball-Lounge"></div>
-          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_6193ac7b30f4471ea277ab6bbfe3d690~mv2.png" alt="VIP: du entscheidest"></div>
-        </div>
-        <div class="slider-controls">
-          <button type="button" id="vipPrev" aria-label="VIP vorheriges Bild" aria-controls="vipSlider">‹</button>
-          <button type="button" id="vipNext" aria-label="VIP nächstes Bild" aria-controls="vipSlider">›</button>
-        </div>
-      </div>
-
-      <!-- Motivation -->
-      <div class="premium-card">
-        <h3 style="margin:0 0 .4rem">Dein Motivationsstand</h3>
-        <div class="level" aria-label="Motivationsstand"><span id="levelBar"></span></div>
-        <p id="rewardMsg" class="hero-micro" style="margin:.6rem 0 0">Der Balken ist nur dein Fortschritt. Die echten Belohnungen gelten ab Erstgespräch – unabhängig vom Balken.</p>
-        <ul class="tiers hero-micro" id="tierList" style="list-style:none;padding:0;margin-top:.8rem">
-          <li><span>25 €</span><div class="bar"><i data-goal="1"></i></div></li>
-          <li><span>50 € + Extra</span><div class="bar"><i data-goal="3"></i></div></li>
-          <li><span>150 €</span><div class="bar"><i data-goal="5"></i></div></li>
-          <li><span>VIP</span><div class="bar"><i data-goal="10"></i></div></li>
-        </ul>
-      </div>
-
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
         <div class="story-card"><p class="hero-micro" style="margin:0">„Dani schickte den Link ihrer Schwester. 2 Minuten später: Ruhe. Kein Verkauf, kein Druck.“</p></div>
         <div class="story-card"><p class="hero-micro" style="margin:0">„Tom empfahl es einem Kollegen. 10 Minuten später: erster Überblick – dankbar.“</p></div>
         <div class="story-card"><p class="hero-micro" style="margin:0">„Maria sendete an 3 Kontakte → 50 € + Extra – und alle fühlten sich sicherer.“</p></div>
@@ -452,6 +394,26 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 <!-- Whisper -->
 <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand hat morgen ein Gefühl für heute.</div>
 
+<!-- ===== JS: LOGGER (NEU) ===== -->
+<script>
+/* Warum: Events puffern, UI bleibt flüssig; bei Voll → ältere verwerfen. */
+(function(){
+  class BoundedQueue {
+    constructor(capacity, policy="drop-old"){ if(!(capacity>0)) throw new Error("capacity>0"); this.c=capacity; this.p=policy; this.b=[]; }
+    enqueue(x){ if(this.b.length<this.c){ this.b.push(x); return true; } if(this.p==="drop-old"){ this.b.shift(); this.b.push(x); return true; } return false; }
+    dequeue(){ return this.b.shift(); }
+    isEmpty(){ return this.b.length===0; }
+  }
+  const S={ q:new BoundedQueue(300,"drop-old"), dropped:0, run:false, id:null, sink:(l)=>console.log(l) };
+  function start(){ if(S.run) return; S.run=true; S.id=setInterval(()=>{ let k=0; while(!S.q.isEmpty() && k<60){ const l=S.q.dequeue(); if(l) S.sink(l); k++; } }, 60); }
+  function init(o){ if(o?.capacity||o?.policy) S.q=new BoundedQueue(o.capacity??300,o.policy??"drop-old"); if(o?.sink) S.sink=o.sink; start(); }
+  function log(msg){ const ok=S.q.enqueue(`[LOG ${new Date().toISOString()}] ${msg}`); if(!ok) S.dropped++; }
+  function droppedCount(){ return S.dropped; }
+  function stop(){ if(S.id){ clearInterval(S.id); S.id=null; } S.run=false; }
+  window.Log={ init, log, droppedCount, stop }; init();
+})();
+</script>
+
 <!-- ===== JS: CORE ===== -->
 <script>
 document.documentElement.classList.remove('no-js');
@@ -478,6 +440,7 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
     el.style.transform=v?'translateY(0)':'translateY(100%)';
     el.style.opacity=v?'1':'0';
     el.setAttribute('aria-hidden', String(!v));
+    if(v) Log.log('sticky:show');
   };
   if('IntersectionObserver'in window){
     new IntersectionObserver(ents=>ents.forEach(e=>show(!e.isIntersecting)),{threshold:.3}).observe(hero);
@@ -490,8 +453,8 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
 /* VIP Slider controls */
 (function(){
   const wrap=document.getElementById('vipSlider'); if(!wrap) return;
-  document.getElementById('vipPrev')?.addEventListener('click',()=>wrap.scrollBy({left:-wrap.clientWidth*.9,behavior:'smooth'}));
-  document.getElementById('vipNext')?.addEventListener('click',()=>wrap.scrollBy({left: wrap.clientWidth*.9,behavior:'smooth'}));
+  document.getElementById('vipPrev')?.addEventListener('click',()=>{ wrap.scrollBy({left:-wrap.clientWidth*.9,behavior:'smooth'}); Log.log('vip:prev'); }, {passive:true});
+  document.getElementById('vipNext')?.addEventListener('click',()=>{ wrap.scrollBy({left: wrap.clientWidth*.9,behavior:'smooth'}); Log.log('vip:next'); }, {passive:true});
 })();
 
 /* Whisper once */
@@ -500,7 +463,10 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   try{
     if(sessionStorage.getItem(KEY)) return;
     const w=document.getElementById('whisper'); if(!w) return;
-    setTimeout(()=>{ w.style.opacity='1'; w.style.transform='translateY(0)'; setTimeout(()=>{ w.style.opacity='0'; w.style.transform='translateY(10px)'; }, 4200); sessionStorage.setItem(KEY,'1'); }, 16000);
+    setTimeout(()=>{ w.style.opacity='1'; w.style.transform='translateY(0)'; Log.log('whisper:show');
+      setTimeout(()=>{ w.style.opacity='0'; w.style.transform='translateY(10px)'; }, 4200);
+      sessionStorage.setItem(KEY,'1');
+    }, 16000);
   }catch(_){}
 })();
 
@@ -511,6 +477,7 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   let variants=[]; try{ variants=JSON.parse(btn.getAttribute('data-cta-variants')); }catch(_){}
   if(!variants?.length) return;
   let i=0; setInterval(()=>{ i=(i+1)%variants.length; btn.textContent=variants[i]; btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'),800); }, 4000);
+  btn.addEventListener('click', ()=> Log.log('cta:shareFast'), {passive:true});
 })();
 </script>
 
@@ -540,8 +507,8 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   try{ setPct(Number(localStorage.getItem(KEY_PCT)||'0')); }catch(_){ setPct(0); }
   updateTiers();
 
-  window._bumpRefHalf = function(){ const c=refCount()+0.5; setRefCount(c); updateTiers(); setPct(Math.min(100, c*10)); };
-  window._bumpRefFull = function(){ const c=refCount()+1;   setRefCount(c); updateTiers(); setPct(Math.min(100, c*12)); };
+  window._bumpRefHalf = function(){ const c=refCount()+0.5; setRefCount(c); updateTiers(); setPct(Math.min(100, c*10)); Log.log('ref:bump:half'); };
+  window._bumpRefFull = function(){ const c=refCount()+1;   setRefCount(c); updateTiers(); setPct(Math.min(100, c*12)); Log.log('ref:bump:full'); };
 })();
 
 /* Share composer + Segmente */
@@ -552,6 +519,7 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   const mail = document.getElementById('mailShare');
   const copy = document.getElementById('copyBtn');
   const preview = document.getElementById('waPreviewText');
+  if(!area || !wa || !mail || !preview) return;
 
   const KEY_REFID='hh_ref_rid_v2';
   function randomId(len=10){
@@ -596,50 +564,23 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
 
   if(area && !area.value){ setTextFrom('neutral'); } updateLinks();
 
-  name?.addEventListener('input', ()=> setTextFrom(), {passive:true});
-  area?.addEventListener('input', updateLinks, {passive:true});
+  name?.addEventListener('input', ()=> { setTextFrom(); Log.log('share:name-input'); }, {passive:true});
+  area?.addEventListener('input', ()=> { updateLinks(); Log.log('share:text-edit'); }, {passive:true});
 
   document.querySelectorAll('.seg-btn').forEach(b=>{
-    b.addEventListener('click', ()=>{ setTextFrom(b.getAttribute('data-seg')); window._bumpRefHalf?.(); });
+    b.addEventListener('click', ()=>{ const seg=b.getAttribute('data-seg'); setTextFrom(seg); window._bumpRefHalf?.(); Log.log(`share:seg:${seg}`); }, {passive:true});
   });
 
-  document.getElementById('readyMsg')?.addEventListener('click', ()=>{
-    setTextFrom(); window._bumpRefHalf?.();
-    const toast=document.createElement('div');
-    toast.textContent='Fertiger Text eingefügt ✔️';
-    toast.className='whisper';
-    toast.style.cssText=document.getElementById('whisper').style.cssText;
-    document.body.appendChild(toast);
-    setTimeout(()=>{ toast.style.opacity='1'; toast.style.transform='translateY(0)'; },10);
-    setTimeout(()=>toast.remove(),1800);
-  });
+  document.getElementById('readyMsg')?.addEventListener('click', ()=>{ setTextFrom(); window._bumpRefHalf?.(); Log.log('share:ready-text'); });
+  document.getElementById('magicLine')?.addEventListener('click', ()=>{ const line='Hey, hab das gerade gesehen – dachte sofort an dich.'; const cur=(area.value||'').trim(); area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL(); updateLinks(); window._bumpRefHalf?.(); Log.log('share:magic-line'); });
+  document.getElementById('addPersonal')?.addEventListener('click', ()=>{ const alias=(name?.value||'').trim()||'Hey'; area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`; updateLinks(); window._bumpRefHalf?.(); Log.log('share:add-personal'); });
 
-  document.getElementById('magicLine')?.addEventListener('click', ()=>{
-    const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
-    const cur=(area.value||'').trim();
-    area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
-    updateLinks(); window._bumpRefHalf?.();
-  });
+  document.getElementById('copyBtn')?.addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(ensureURL(area.value)); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); } window._bumpRefHalf?.(); Log.log('share:copy'); });
+  document.getElementById('waShare')?.addEventListener('click', ()=>{ window._bumpRefFull?.(); Log.log('share:wa'); }, {passive:true});
+  document.getElementById('mailShare')?.addEventListener('click', ()=>{ window._bumpRefFull?.(); Log.log('share:mail'); }, {passive:true});
+  document.getElementById('nativeShare')?.addEventListener('click', async ()=>{ const t=ensureURL(area.value); const url=buildURL(); if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); window._bumpRefFull?.(); Log.log('share:native'); }catch(_){} } });
 
-  document.getElementById('addPersonal')?.addEventListener('click', ()=>{
-    const alias=(name?.value||'').trim()||'Hey';
-    area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
-    updateLinks(); window._bumpRefHalf?.();
-  });
-
-  document.getElementById('copyBtn')?.addEventListener('click', async ()=>{
-    try{ await navigator.clipboard.writeText(ensureURL(area.value)); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
-    window._bumpRefHalf?.();
-  });
-
-  document.getElementById('waShare')?.addEventListener('click', ()=> window._bumpRefFull?.());
-  document.getElementById('mailShare')?.addEventListener('click', ()=> window._bumpRefFull?.());
-  document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
-    const t=ensureURL(area.value); const url=buildURL();
-    if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); window._bumpRefFull?.(); }catch(_){} }
-  });
-
-  document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); window._bumpRefHalf?.(); });
+  document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); window._bumpRefHalf?.(); Log.log('share:fast'); }, {passive:true});
 })();
 </script>
 </body>
