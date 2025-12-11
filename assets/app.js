@@ -117,7 +117,7 @@
     update();
     let ticking = false;
     on(window,'scroll',()=>{ if(!ticking){ requestAnimationFrame(()=>{ update(); ticking=false; }); ticking=true; } },{ passive:true });
-    on(window,'resize',()=> update());
+    on(window,'resize',()=> update(), { passive:true });
   }
 
   /* ===== Sticky CTA ====================================================== */
@@ -143,7 +143,7 @@
       }
     };
     attach();
-    on(window,'resize',()=> { if (isDesktop()) show(false); });
+    on(window,'resize',()=> { if (isDesktop()) show(false); }, { passive:true });
   }
 
   function initStickyPulse() {
@@ -173,8 +173,8 @@
     const btn = $('#shareFast');
     if (!btn || prefersReduced) return;
     let variants=[];
-    try { variants = JSON.parse(btn.getAttribute('data-cta-variants') || '[]'); } catch {}
-    if (!variants.length) return;
+    try { variants = JSON.parse(btn.getAttribute('data-cta-variants') || '[]'); } catch { variants = []; }
+    if (!Array.isArray(variants) || !variants.length) return;
     let i=0;
     setInterval(()=>{ i=(i+1)%variants.length; btn.textContent=variants[i]; btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'),800); }, 4000);
   }
@@ -189,14 +189,14 @@
         const target = document.getElementById(id.slice(1));
         if (!target) return;
         setTimeout(()=>{ target.setAttribute('tabindex','-1'); target.focus({ preventScroll:true }); }, 250);
-      }, { passive:true });
+      }, { passive:true, once:false });
     });
   }
 
   function initVipSlider() {
     const wrap = $('#vipSlider'); if (!wrap) return;
-    on($('#vipPrev'),'click',()=> wrap.scrollBy({ left:-wrap.clientWidth*.9, behavior:'smooth' }));
-    on($('#vipNext'),'click',()=> wrap.scrollBy({ left: wrap.clientWidth*.9, behavior:'smooth' }));
+    on($('#vipPrev'),'click',()=> wrap.scrollBy({ left:-wrap.clientWidth*.9, behavior:'smooth' }), { passive:true });
+    on($('#vipNext'),'click',()=> wrap.scrollBy({ left: wrap.clientWidth*.9, behavior:'smooth' }), { passive:true });
   }
 
   /* ===== Reward Glow ===================================================== */
@@ -278,8 +278,8 @@
 
     const variants = (()=>{ try { return JSON.parse(area.getAttribute('data-variants')||'{}'); } catch { return {neutral:[]}; } })();
     const pick = (seg) => { const pool = variants[seg] || variants.neutral || []; return pool[(Math.random()*pool.length)|0] || ''; };
-    
-    // FIXED: Segment = "kolleg:innen"
+
+    // FIXED: Segment = "kolleg:innen" (Buttons können "kollegen" liefern)
     const detectSeg = () => {
       const raw=(name?.value||'').toLowerCase();
       if (/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
@@ -303,11 +303,13 @@
       preview.textContent = t.length<=190 ? t : t.substring(0, t.lastIndexOf(' ',190)) + '…';
     }
     function setSeg(seg){
-      const tmpl = pick(seg || detectSeg());
+      // normalisiere evtl. "kollegen" -> "kolleg:innen"
+      const wanted = (seg === 'kollegen') ? 'kolleg:innen' : (seg || detectSeg());
+      const tmpl = pick(wanted);
       if (!tmpl) { area.value = buildURL(); updateLinks(); return; }
       area.value = tmpl.replace(/\{\{URL\}\}/g, buildURL());
       updateLinks();
-      store.setRaw('hh.share.seg', seg || 'neutral');
+      store.setRaw('hh.share.seg', wanted || 'neutral');
     }
 
     const defaultSeg = store.getRaw('hh.share.seg') || 'neutral';
@@ -331,8 +333,9 @@
       } catch { showToast('Konnte nicht kopieren'); }
     });
 
-    on($('#waShare'),'click',()=> window._bumpRefFull?.());
-    on($('#mailShare'),'click',()=> window._bumpRefFull?.());
+    on(wa,'click', ()=> window._bumpRefFull?.(), { passive:true });
+    on(mail,'click',()=> window._bumpRefFull?.(), { passive:true });
+
     on(nativeShare,'click', async ()=>{
       const t = ensureURL(area.value); const url = buildURL();
       if (navigator.share && !prefersReduced) {
@@ -418,7 +421,7 @@
     };
 
     on(startBtn,'click',start);
-    on(startHero,'click',e=>{ e.preventDefault(); start(); });
+    on(startHero,'click',e=>{ e.preventDefault(); start(); }, { once:true });
     on(ctaFinal,'click',e=>{
       if (ctaFinal.closest('#final-cta')) return;
       e.preventDefault(); start();
@@ -483,7 +486,7 @@
       const el = document.getElementById(location.hash.slice(1));
       if (el) { el.setAttribute('tabindex','-1'); el.focus({ preventScroll:true }); }
     };
-    on(window,'hashchange',focusHash);
+    on(window,'hashchange',focusHash, { passive:true });
     focusHash();
   }
 
@@ -594,7 +597,8 @@
 
     // Share (both pages)
     initShareEngine();
-    // FIX: Entfernt – initReturnCTA() existiert nicht
+
+    // ⚠️ Do not re-add: initReturnCTA() – existiert nicht und bricht sonst alles ab.
   }
 
   (document.readyState === 'loading')
