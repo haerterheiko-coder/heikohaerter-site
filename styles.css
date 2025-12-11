@@ -366,6 +366,248 @@ p, li {
   width: 100% !important;
 }
 
-/* ------------------------------
-   END OF FILE
-   ------------------------------ */
+/* =========================================================
+   OPTION A — ULTRA PERFORMANCE ADD-ON
+   GPU acceleration · Scroll-driven animations · CLS-Killer
+   ========================================================= */
+
+/* 1) GPU ACCELERATION */
+.hh-accelerate,
+.fade-up,
+.hh-btn,
+.hh-card,
+.hh-hero-image img {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* 2) LAZY-FADE: Scroll-driven visibility (CSS only) */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up {
+    view-timeline-name: fadeTimeline;
+    view-timeline-axis: block;
+    animation-timeline: fadeTimeline;
+    animation-name: fadeUpAnim;
+    animation-range: entry 10% cover 40%;
+    animation-fill-mode: both;
+  }
+
+  @keyframes fadeUpAnim {
+    0% { opacity: 0; transform: translateY(28px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* 3) CLS-KILLER (prevents layout shifts) */
+img,
+picture {
+  aspect-ratio: attr(width) / attr(height);
+}
+
+.hh-btn,
+.hh-chip,
+.hh-card,
+.hh-header {
+  contain: layout style paint;
+}
+
+/* 4) SMOOTH SCROLL + SNAP (TikTok-like section navigation) */
+html {
+  scroll-behavior: smooth;
+}
+
+.hh-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+body {
+  scroll-snap-type: y proximity;
+}
+
+/* 5) LIGHTHOUSE 100/100 BOOSTS */
+:root {
+  color-scheme: dark light;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+/* =========================================================
+   OPTION B — GOD-MODE UI ENHANCER PACK
+   Micro-interactions · Glow states · Pulsing CTAs
+   ========================================================= */
+
+/* 1) BUTTON MICRO-INTERACTIONS */
+.hh-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.hh-btn-primary:hover {
+  filter: brightness(1.12);
+}
+
+/* 2) GLOW EFFECT FOR IMPORTANT ACTIONS */
+.hh-btn-primary {
+  box-shadow:
+    0 0 0 0 rgba(200,164,75,0.38),
+    0 12px 28px rgba(200,164,75,0.35);
+  transition: box-shadow .25s var(--ease);
+}
+
+.hh-btn-primary:hover {
+  box-shadow:
+    0 0 18px 6px rgba(200,164,75,0.35),
+    0 18px 42px rgba(200,164,75,0.55);
+}
+
+/* 3) CARD HOVER ENHANCEMENTS */
+.hh-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgba(0,0,0,0.55);
+}
+
+/* 4) TIKTOK STYLE CONTENT SNAPPING */
+@media (max-width: 780px) {
+  .hh-section {
+    scroll-snap-align: start;
+    padding-block: 60px;
+  }
+}
+
+/* 5) SUBTLE CTA PULSE (high-trust, not annoying) */
+@keyframes hhPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200,164,75,0.25); }
+  70% { transform: scale(1.02); box-shadow: 0 0 22px 10px rgba(200,164,75,0.15); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(200,164,75,0); }
+}
+
+.hh-btn-primary[data-ctx="sticky"],
+#ctaFinal,
+.hero-cta {
+  animation: hhPulse 4s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* 6) MICRO-TEXT HOVER */
+.hh-chip:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.22);
+}
+
+/* =========================================================
+   OPTION C — FULL COMPONENT LIBRARY
+   Ampel Engine · Steps Engine · Share Composer UI
+   ========================================================= */
+
+/* -----------------------------------
+   AMPEL RESULT ENGINE
+----------------------------------- */
+
+.hh-ampel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hh-ampel-item {
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.15);
+  font-size: 1.05rem;
+  display: flex;
+  align-items: flex-start;
+  gap: .8rem;
+}
+
+.hh-ampel-item.now {
+  background: rgba(255,68,68,0.12);
+  border-color: rgba(255,68,68,0.35);
+}
+
+.hh-ampel-item.next {
+  background: rgba(255,188,45,0.12);
+  border-color: rgba(255,188,45,0.35);
+}
+
+.hh-ampel-item.later {
+  background: rgba(108,255,108,0.12);
+  border-color: rgba(108,255,108,0.28);
+}
+
+/* -----------------------------------
+   STEPS ENGINE
+----------------------------------- */
+
+.hh-step {
+  display: none;
+  background: var(--surface);
+  padding: 1.4rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.hh-step.active {
+  display: block;
+  animation: fadeUpAnim .4s var(--ease);
+}
+
+.hh-progress-fill {
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+  height: 10px;
+  border-radius: 99px;
+  transition: width .35s var(--ease);
+}
+
+/* -----------------------------------
+   SHARE COMPOSER
+----------------------------------- */
+
+.hh-share-box {
+  background: var(--surface);
+  padding: 1.2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.hh-share-box textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  padding: .9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.18);
+  resize: vertical;
+  color: var(--text);
+}
+
+.hh-share-seg-btn {
+  padding: .6rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+}
+
+.hh-share-seg-btn.active {
+  background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+  color: #111;
+}
+
+.hh-share-preview {
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 1rem;
+  font-size: .95rem;
+  color: var(--muted);
+}
+
