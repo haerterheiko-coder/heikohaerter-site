@@ -1,293 +1,775 @@
+<!-- ===============================
+= = = = = weitergeben.html = = = =
+================================ -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark" />
-  <meta name="format-detection" content="telephone=no" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
-  <title>Weitergeben – in 7 Sekunden jemandem Ruhe schenken | Heiko Haerter</title>
-  <meta name="description"
-        content="Empfiehl anonym den 2-Minuten-Finanzblick. Null Druck, null Verkauf. Eltern, Paare & Selbstständige bekommen sofort Klarheit – du musst nichts erklären." />
+<title>2 Minuten – zeigt sofort, was heute wichtig ist.</title>
+<meta name="description" content="Kennst du jemanden mit „Ich müsste mal…“? Link weitergeben → 2 Minuten – zeigt sofort, was heute wichtig ist. Kein Verkauf. Deine Wertschätzung (25–150 € oder VIP) zählt ab Erstgespräch. Zero-Risk: kein Vorteil → 25 €.">
+<link rel="canonical" href="https://heikohaerter.com/weitergeben.html">
 
-  <!-- Canonical -->
-  <link rel="canonical" href="https://heikohaerter.com/weitergeben" />
+<meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung">
+<meta property="og:title" content="2 Minuten – zeigt sofort, was heute wichtig ist.">
+<meta property="og:description" content="Ein kurzer Blick, der sofort zeigt, wo man steht. Anonym & ohne irgendetwas zu müssen. Deine Wertschätzung zählt ab Erstgespräch.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://heikohaerter.com/weitergeben.html">
+<meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
 
-  <!-- OG -->
-  <meta property="og:title" content="In 7 Sekunden weitergeben – anonym & ohne Verkauf" />
-  <meta property="og:description" content="Nur ein Link: jemand sieht in 2 Minuten, ob heute etwas Wichtiges fehlt. Null Druck. Null Verpflichtung." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
-  <meta property="og:url" content="https://heikohaerter.com/weitergeben" />
+<!-- Favicons (relative for GitHub Pages) -->
+<link rel="icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#05070E">
 
-  <style>
-    :root{
-      --bg:#05070E;--bg2:#0A0F1E;
-      --text:#F7F8FC;--muted:#A8B1C5;--soft:#8F97AA;
-      --gold:#C8A44B;--gold2:#E9D394;
-      --radius:18px;--ease:cubic-bezier(.25,.46,.25,1);
-    }
+<link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
+<link rel="preconnect" href="https://wa.me" crossorigin>
 
-    body{
-      margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
-      background:linear-gradient(180deg,#04050A,#02040A);
-      color:var(--text);-webkit-font-smoothing:antialiased;
-    }
+<link rel="preload" as="image"
+  href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+  fetchpriority="high">
 
-    a{text-decoration:none;color:inherit}
+<link rel="stylesheet" href="styles.css">
 
-    /* Layout */
-    .section{padding:clamp(32px,6vw,72px) 0}
-    .container{max-width:920px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
-    .stack{display:flex;flex-direction:column;gap:clamp(.6rem,1.6vw,1rem)}
-    .grid{display:grid;gap:clamp(.6rem,1.4vw,1rem)}
+<style>
+/* GLOBAL / TOKENS */
+html,body{overflow-x:hidden;width:100%}
+*,*:before,*:after{box-sizing:border-box}
+*{word-break:break-word}
+.btn, a.btn{white-space:normal}
+.stack *, .premium-card *, .story-card *, .hero-micro { overflow-wrap: break-word; word-break: break-word; }
+.btn { white-space: normal !important; }
+img,picture,svg,video{display:block;max-width:100%;height:auto}
+:root{
+  --bg:#05070E;--bg-soft:#0A0F1E;
+  --bg-glow-1:radial-gradient(circle at 15% -10%,rgba(200,164,75,.22),transparent 55%);
+  --bg-glow-2:radial-gradient(circle at 85% 10%,rgba(120,150,255,.18),transparent 60%);
+  --surface:rgba(255,255,255,.045);--surface-soft:rgba(255,255,255,.06);
+  --text:#F7F8FC;--muted:#A8B1C5;--muted-soft:#8F97AA;
+  --gold:#C8A44B;--gold-soft:#E9D394;
+  --warn:#2b1111;--warn-border:#dbad49;--warn-glow:rgba(219,173,73,.25);
+  --radius-xl:34px;--radius-lg:24px;--radius-md:18px;
+  --elev-1:0 18px 40px rgba(0,0,0,.35);--elev-2:0 30px 80px rgba(0,0,0,.55);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  --ease:cubic-bezier(.25,.46,.25,1);--focus:#90C2FF;
+  --container-max:1120px;
+  --gutter:clamp(1rem,4vw,2rem);
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--font);background:var(--bg-glow-1),var(--bg-glow-2),linear-gradient(180deg,#04050A,#02040A 60%);
+  color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.65
+}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
 
-    /* Cards */
-    .card{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:var(--radius);
-      padding:1rem 1.2rem;
-      box-shadow:0 20px 42px rgba(0,0,0,.35);
-    }
+/* LAYOUT */
+.wrap{max-width:var(--container-max);margin-inline:auto;padding-inline:var(--gutter)}
+.section{padding-block:56px}
+@media (max-width:767.98px){ .section{padding-block:40px} }
+.stack{display:flex;flex-direction:column;gap:clamp(.6rem,1.8vw,1rem)}
+.inline{display:flex;flex-wrap:wrap;gap:.6rem}
 
-    /* Buttons */
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:.9rem 1.3rem;
-      border-radius:999px;border:1px solid transparent;
-      background:rgba(255,255,255,.06);color:var(--text);
-      font-weight:700;cursor:pointer;transition:.2s var(--ease);
-    }
-    .btn-primary{
-      background:linear-gradient(135deg,var(--gold),var(--gold2));
-      color:#111;box-shadow:0 14px 32px rgba(200,164,75,.35);
-    }
-    .btn-primary:hover{transform:translateY(-2px)}
+/* TYPE */
+h1,h2,h3{margin:0 0 .9rem;font-weight:700;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,3.2vw,3.1rem);line-height:1.1}
+h2{font-size:clamp(1.6rem,2.4vw,2.2rem)}
+h3{font-size:clamp(1.05rem,1.6vw,1.25rem)}
+p,li{font-size:clamp(1rem,1.1vw,1.08rem);color:var(--muted)}
+.hero-micro{font-size:.95rem;color:var(--muted-soft)}
+hr.divider{border:0;height:18px;margin:3rem 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent)}
+.gold-identity{display:flex;gap:.35rem;margin-bottom:1.1rem}
+.gold-identity span{height:2px;border-radius:999px;background:linear-gradient(90deg,var(--gold),var(--gold-soft))}
+.gold-identity span:nth-child(1){width:30px}
+.gold-identity span:nth-child(2){width:20px;opacity:.7}
+.gold-identity span:nth-child(3){width:12px;opacity:.55}
 
-    @media(max-width:767px){ .btn{width:100%} }
+/* HEADER */
+header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
+.header-inner{max-width:var(--container-max);margin:0 auto;padding:.85rem var(--gutter);display:flex;align-items:center;justify-content:space-between;min-height:60px}
+.brand{display:flex;flex-direction:column;gap:.18rem}
+.brand-top{display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.02rem}
+.brand-dot{width:.9rem;height:.9rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold-soft),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
+.brand-sub{font-size:.72rem;letter-spacing:.18em;color:var(--muted-soft);text-transform:uppercase}
 
-    /* Text */
-    h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.01em}
-    h1{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.15}
-    h2{font-size:clamp(1.5rem,3vw,2.2rem)}
-    h3{font-size:clamp(1.18rem,2vw,1.35rem)}
-    p{margin:0;color:var(--muted);font-size:clamp(1rem,1.2vw,1.08rem)}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.95rem 1.5rem;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease);background:rgba(255,255,255,.06);color:var(--text)}
+.btn:where(:hover){transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+.btn.small{padding:.6rem 1rem;min-height:44px}
+@media (max-width:767.98px){ .btn,.btn-primary{width:100%} }
+.btn-primary.glow-soft{animation:softGlow 1600ms ease-out}
+@keyframes softGlow{
+  0%{box-shadow:0 0 0 rgba(233,211,148,0)}
+  40%{box-shadow:0 0 22px rgba(233,211,148,.35)}
+  100%{box-shadow:0 0 0 rgba(233,211,148,0)}
+}
 
-    .chip{
-      display:inline-flex;align-items:center;gap:.4rem;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.15);
-      border-radius:999px;padding:.45rem .85rem;
-      font-size:.92rem;color:var(--soft)
-    }
+/* MODULES */
+.premium-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1rem 1.1rem;box-shadow:var(--elev-1)}
+.warn-card{background:var(--warn);border:1px solid var(--warn-border);box-shadow:0 10px 32px var(--warn-glow);border-radius:18px;padding:1rem 1.1rem}
+.story-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.9rem 1rem}
+.zero-risk{border:1px dashed rgba(233,211,148,.45);background:rgba(233,211,148,.06)}
+.quote{margin:.7rem 0 0;padding:.6rem .75rem;border-left:4px solid var(--gold);background:rgba(255,255,255,.05);border-radius:10px;font-style:italic;color:var(--text)}
+.ref-scenarios{display:grid;gap:.9rem;margin:1.2rem 0}
+.ref-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:.9rem 1rem}
+.ref-safety{margin-top:1.4rem;border-left:4px solid var(--gold)}
+.heiko-ethos{margin-top:2rem;opacity:.92}
 
-    .textarea{
-      width:100%;min-height:150px;border-radius:var(--radius);
-      border:1px solid rgba(255,255,255,.12);
-      background:#0E1423;color:var(--text);
-      font:inherit;padding:1rem;resize:vertical;
-    }
-    .input{
-      width:100%;border-radius:var(--radius);
-      background:#0E1423;color:var(--text);
-      border:1px solid rgba(255,255,255,.12);
-      font:inherit;padding:.85rem 1rem;
-    }
+/* HERO */
+.hero{padding-top:5.2rem;padding-bottom:2.4rem}
+.hero-grid{display:grid;gap:clamp(1.4rem,3.2vw,3.2rem)}
+@media (min-width:1000px){ .hero-grid{grid-template-columns:1.2fr .8fr;align-items:center} }
+.hero-media picture{border-radius:34px;overflow:hidden;background:radial-gradient(ellipse at 30% 20%, rgba(233,211,148,.06), transparent 55%), rgba(255,255,255,.02)}
+.hero-media img{width:100%;border-radius:34px;box-shadow:var(--elev-2);object-fit:cover;object-position:center top}
+@media (min-width:1000px){ .hero-media img{ aspect-ratio:16/10; } }
+.hero-fat{padding:1.05rem 1.8rem;font-weight:900;box-shadow:0 18px 44px rgba(200,164,75,.38);border-radius:999px}
 
-    /* Fade */
-    .fade-up{opacity:0;transform:translateY(18px);transition:.5s var(--ease)}
-    .visible{opacity:1;transform:none}
+/* REWARD MINI-BANNER */
+.reward-hero{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:.6rem;border-radius:18px;box-shadow:var(--elev-1);margin-top:.6rem}
+.reward-hero h3{font-size:1rem;margin:0 0 .2rem}
+.reward-hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.4rem}
+.rh-item{text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);padding:.45rem .35rem;border-radius:12px;font-size:.8rem}
+.rh-item span{display:block;font-weight:900;color:#111;background:linear-gradient(135deg,var(--gold),var(--gold-soft));border-radius:10px;padding:.15rem .4rem;margin:0 auto .25rem;width:fit-content;font-size:.78rem}
+.rh-vip{border:1px solid rgba(233,211,148,.25);background:rgba(233,211,148,.08)}
 
-    /* Sticky CTA mobile */
-    .sticky {display:none}
-    @media(max-width:1023px){
-      .sticky {
-        display:flex;position:fixed;bottom:18px;left:0;right:0;justify-content:center;
-        transform:translateY(100%);opacity:0;z-index:50;
-        transition:.25s var(--ease);
-      }
-      .sticky .inner{
-        background:rgba(10,14,22,.97);
-        padding:.55rem;border-radius:999px;
-        border:1px solid rgba(233,211,148,.28);
-        box-shadow:0 12px 38px rgba(0,0,0,.55)
-      }
-    }
-  </style>
+/* GENERIC GRID */
+.grid{display:grid;gap:1rem}
+.grid.cols-auto{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.story-vn{grid-template-columns:repeat(2,1fr)}
+@media (max-width:767.98px){ .story-vn{grid-template-columns:1fr} }
+.story-vn .card{background:var(--surface-soft);border:.5px solid rgba(255,255,255,.12);border-radius:20px;padding:1rem;display:flex;flex-direction:column;align-items:center;text-align:center}
+
+/* SLIDER */
+.slider{display:flex;gap:.6rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.6rem;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.04)}
+.slide{flex:0 0 82%;max-width:82%;scroll-snap-align:center;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0c1222}
+.slide img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.slider-controls{display:flex;gap:.6rem;justify-content:center;margin-top:.6rem}
+.slider button{padding:.5rem .8rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--text)}
+
+/* SHARE BOX */
+.share{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);border-radius:34px;padding:1.1rem;box-shadow:var(--elev-1);margin-top:1.1rem}
+.share textarea{width:100%;min-height:140px;resize:vertical;border:1px solid rgba(255,255,255,.12);background:#0E1423;color:var(--text);border-radius:16px;padding:.8rem;font:inherit}
+.share input{width:100%;border:1px solid rgba(255,255,255,.12);background:#0E1423;color:var(--text);border-radius:14px;padding:.7rem .85rem;font:inherit;margin:0 0 .7rem}
+.share .bar{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.7rem}
+.preview{margin-top:.55rem;padding:.6rem .75rem;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);font-size:.92rem;line-height:1.35}
+.preview strong{display:block;font-size:.8rem;color:var(--muted-soft);margin-bottom:.3rem}
+
+/* MOTIVATION */
+.level{height:10px;width:100%;background:rgba(255,255,255,.08);border-radius:999px;margin-top:.6rem;overflow:hidden}
+.level span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));border-radius:999px;transition:width .35s var(--ease)}
+.tiers{margin-top:1rem}
+.tiers li{display:grid;grid-template-columns:96px 1fr;gap:.6rem;align-items:center;margin:.45rem 0}
+.tiers .bar{height:8px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.tiers .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));transition:width .35s var(--ease)}
+
+/* FX / CTA */
+.fade-up{opacity:0;transform:translateY(18px)}
+.fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+@keyframes glow{0%{box-shadow:0 0 0 rgba(233,211,148,0)}40%{box-shadow:0 0 22px rgba(233,211,148,.45)}100%{box-shadow:0 0 0 rgba(233,211,148,0)}}
+.btn-glow{animation:glow 1200ms ease}
+
+.whisper{position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)}
+.whisper.show{opacity:1;transform:none}
+
+/* Sticky CTA / Return */
+.sticky-cta{position:fixed;left:0;right:0;bottom:14px;z-index:60;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:opacity .25s var(--ease),transform .25s var(--ease); padding-bottom:calc(env(safe-area-inset-bottom) + 6px)}
+.sticky-cta .inner{background:rgba(5,8,22,.88);border:1px solid rgba(255,255,255,.08);padding:.55rem;border-radius:999px;box-shadow:var(--elev-1)}
+@media (max-width:979.98px){ .sticky-cta{display:flex} }
+.return-cta{position:fixed;right:18px;top:18px;z-index:59;display:none}
+@media (min-width:980px){ .return-cta{display:block} }
+
+/* MOBILE POLISH */
+@media (max-width:767.98px){
+  .hero-micro{font-size:1rem}
+  .premium-card,.warn-card{padding:1rem .9rem}
+  .reward-hero-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
 </head>
 
 <body>
+<a href="#main" class="skip">Zum Inhalt springen</a>
 
-  <main>
-
-    <!-- HERO -->
-    <section class="section fade-up" id="hero">
-      <div class="container stack">
-        <h1>In 7 Sekunden jemandem Ruhe schenken.</h1>
-        <p>Du musst nichts erklären. Der Link zeigt anonym in 2 Minuten, ob heute etwas Wichtiges fehlt – ohne Unterlagen, ohne Verkauf.</p>
-
-        <div class="card">
-          <p><strong>Zero-Risk:</strong> Bringt es der Person nichts → 25 €.</p>
-        </div>
-
-        <a href="#share" class="btn btn-primary">✨ Text zum Weitergeben öffnen</a>
-
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:1rem">
-          <span class="chip">👨‍👩‍👧 Eltern</span>
-          <span class="chip">💼 Selbstständige</span>
-          <span class="chip">🤝 Kolleg:innen</span>
-          <span class="chip">❤️ Partner</span>
-          <span class="chip">🧑‍🤝‍🧑 Freunde</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY -->
-    <section class="section fade-up">
-      <div class="container stack">
-        <h2>Warum Weitergeben so gut wirkt</h2>
-
-        <div class="card">
-          <h3>1 · Keine Peinlichkeit</h3>
-          <p>Niemand landet in einem Verkaufsgespräch. Alles bleibt anonym.</p>
-        </div>
-
-        <div class="card">
-          <h3>2 · Sofortiger Nutzen</h3>
-          <p>Die Person sieht in 2 Minuten: Jetzt · Als Nächstes · Später.</p>
-        </div>
-
-        <div class="card">
-          <h3>3 · Du hilfst ohne Aufwand</h3>
-          <p>Ein Satz + ein Link → jemand hat morgen Übersicht.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SHARE -->
-    <section class="section fade-up" id="share">
-      <div class="container stack">
-        <h2>Text zum Weitergeben</h2>
-        <p>Einfach kopieren oder per WhatsApp senden.</p>
-
-        <label for="name">Dein Vorname (optional):</label>
-        <input id="name" class="input" placeholder="z. B. Alex / Dani – Chef" />
-
-        <label for="msg">Nachricht</label>
-        <textarea id="msg" class="textarea" data-variants='{
-          "neutral":[
-            "Hey, hab das gesehen – dachte sofort an dich. 2 Minuten zeigen dir anonym, ob heute etwas Wichtiges fehlt. {{URL}}",
-            "Falls du dieses „Ich müsste mal…“ kennst: Hier siehst du es sofort – anonym & ohne Verkauf. {{URL}}"
-          ],
-          "eltern":[
-            "Kurz für Eltern (2 Min): zeigt, ob bei Klinik/Zahn/Haftung etwas fehlt – völlig anonym. {{URL}}"
-          ],
-          "kollegen":[
-            "Für die To-do-Liste: 2 Min Blick – ohne Tarif-Chaos, ohne Verkauf. {{URL}}"
-          ],
-          "freunde":[
-            "Hey, dachte an dich – kurzer Blick (2 Min), null Druck, einfach hilfreich. {{URL}}"
-          ],
-          "selbst":[
-            "Für Selbstständige: kurz checken, ob Absicherung & Rücklagen halten – anonym & ohne Verkauf. {{URL}}"
-          ],
-          "partner":[
-            "Magst du in 2 Min schauen, ob alles passt? Anonym – zeigt sofort, was wichtig ist. {{URL}}"
-          ]
-        }'></textarea>
-
-        <button id="gen" class="btn btn-primary">✨ Text generieren</button>
-
-        <div class="card">
-          <strong>Vorschau:</strong>
-          <p id="preview">Wird erstellt…</p>
-        </div>
-
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
-          <button id="copy" class="btn">📋 Kopieren</button>
-          <a id="wa" class="btn btn-primary" href="#" target="_blank">💬 WhatsApp</a>
-          <a id="mail" class="btn" href="#">✉️ E-Mail</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Sticky mobile CTA -->
-  <div class="sticky" id="sticky">
-    <div class="inner">
-      <a href="#share" class="btn btn-primary">✨ Weitergeben</a>
-    </div>
+<header id="header">
+  <div class="header-inner">
+    <a href="index.html" class="brand" aria-label="Startseite">
+      <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
+      <span class="brand-sub">Persönliche Finanzbegleitung</span>
+    </a>
   </div>
+</header>
 
-  <footer class="section" style="text-align:center">
-    <div class="container">
-      © <span id="year"></span> Heiko Haerter · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a>
-      <p class="muted">Privates Dankeschön – unabhängig von Organisationen.</p>
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero section fade-up" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="stack">
+        <div class="gold-identity" aria-hidden="true"><span></span><span></span><span></span></div>
+
+        <p class="hero-micro" style="margin:0 0 .4rem;">10 Sekunden – du gibst nur einen Link weiter. Der Rest passiert automatisch.</p>
+
+        <h1 id="hero-title" style="margin-top:.1rem">Fast jeder kennt dieses „Ich müsste mal…“ — du kannst heute jemandem Ruhe geben.</h1>
+
+        <div class="story-card fade-up">
+          <p class="hero-micro">„Danke, dass du mir das geschickt hast – ich hätte das schon viel früher gebraucht.“</p>
+        </div>
+
+        <ul class="hero-micro" style="margin:.2rem 0 0; padding-left:1.05rem">
+          <li>2 Minuten – zeigt sofort, was heute wichtig ist</li>
+          <li>100 % anonym · kein Verkauf</li>
+          <li>Kein Vorteil → 25 € (Zero-Risk)</li>
+        </ul>
+        <p class="hero-micro" style="margin-top:.4rem;">Wenn du dich in einem Punkt wiederfindest, ist der 2-Minuten-Blick genau richtig.</p>
+
+        <div class="premium-card fade-up">
+          <h3 style="margin:0 0 .25rem">Was die empfohlene Person bekommt</h3>
+          <ul class="hero-micro" style="padding-left:1.1rem;margin:.2rem 0 0">
+            <li>🟢 2-Minuten-Ampel → sofort ein Gefühl für heute</li>
+            <li>🟢 anonym & ohne Verkauf</li>
+            <li>🟢 zeigt: Jetzt · Als Nächstes · Später</li>
+          </ul>
+        </div>
+
+        <a id="shareFast" href="#share" class="btn btn-primary hero-fat btn-glow"
+           data-cta-variants='["✨ In 7 Sekunden weitergeben","💬 Per WhatsApp schicken","🤝 Heute jemandem helfen"]'>
+          ✨ In 7 Sekunden weitergeben
+        </a>
+
+        <div class="grid cols-auto fade-up" style="margin-top:.5rem">
+          <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Eltern:</strong> Wenn du jemanden kennst, der mit Kindern wenig Zeit hat – der Link nimmt Druck raus.</p></div>
+          <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Kolleg:innen:</strong> 2 Minuten zeigen, ob etwas fehlt – ohne Papierkram.</p></div>
+          <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Freunde:</strong> Völlig anonym, null Druck – einfach schnell ein Gefühl für heute.</p></div>
+          <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Selbstständige:</strong> Kurz schauen, wie es heute aussieht – bei Rücklagen und Co. – ohne Verkauf.</p></div>
+        </div>
+      </div>
+
+      <div class="hero-media stack">
+        <div class="reward-hero" aria-label="Wertschätzungsstufen kompakt" id="rewardGlow" data-glow-once>
+          <h3 style="margin:0 0 .2rem">Deine Wertschätzungen</h3>
+          <div class="reward-hero-grid">
+            <div class="rh-item"><span>1×</span><p style="margin:.1rem 0 0">25 €</p></div>
+            <div class="rh-item"><span>3×</span><p style="margin:.1rem 0 0">50 € + Extra</p></div>
+            <div class="rh-item"><span>5×</span><p style="margin:.1rem 0 0">150 €</p></div>
+            <div class="rh-item rh-vip"><span>10×</span><p style="margin:.1rem 0 0">VIP</p></div>
+          </div>
+        </div>
+
+        <picture>
+          <img
+            src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+            srcset="
+              https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=480 480w,
+              https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=720 720w,
+              https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1024 1024w,
+              https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200 1200w
+            "
+            sizes="(min-width: 1000px) 52vw, 92vw"
+            alt="Weitergeben: 2 Minuten – anonym & ohne irgendetwas zu müssen"
+            width="1200" height="900" loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+      </div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+  <!-- Anleitung + Share -->
+  <section class="section fade-up" aria-labelledby="s-title">
+    <div class="wrap stack">
+      <div class="story-card fade-up">
+        <p class="hero-micro" style="margin:0">Manchmal reicht ein kurzer Link, um jemandem echten Stress zu nehmen. 10 Sekunden für dich – Ruhe für jemand anderen.</p>
+      </div>
 
-    const fadeEls=[...document.querySelectorAll(".fade-up")];
-    const io=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("visible"); io.unobserve(e.target); }});
-    },{threshold:.15});
-    fadeEls.forEach(el=>io.observe(el));
+      <div class="premium-card">
+        <h3 id="s-title" style="margin:.2rem 0 .25rem">So geht’s in 10 Sekunden</h3>
+        <ol class="hero-micro" style="margin:.2rem 0 0; padding-left:1.2rem">
+          <li>Deinen Vornamen eintragen</li>
+          <li>„✨ Fertigen Text übernehmen“ klicken</li>
+          <li>WhatsApp senden → fertig</li>
+        </ol>
+      </div>
 
-    const sticky=document.getElementById("sticky");
-    const hero=document.getElementById("hero");
-    new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        sticky.style.transform = e.isIntersecting ? "translateY(100%)" : "translateY(0)";
-        sticky.style.opacity   = e.isIntersecting ? "0" : "1";
+      <div class="premium-card fade-up">
+        <h3 style="margin:.2rem 0 .4rem">Was die empfohlene Person bekommt</h3>
+        <ul class="hero-micro" style="padding-left:1.1rem; margin:0">
+          <li>🟢 2-Minuten-Ampel → sofort ein Gefühl für heute</li>
+          <li>🟢 anonym & ohne Verkauf</li>
+          <li>🟢 zeigt: Jetzt · Als Nächstes · Später</li>
+        </ul>
+      </div>
+
+      <div class="ref-scenarios">
+        <div class="ref-card">
+          <strong>Für Eltern:</strong>
+          <p class="hero-micro">„Kannst du kurz schauen, ob bei uns alles passt?“ → 2 Min. ein Gefühl für heute.</p>
+        </div>
+        <div class="ref-card">
+          <strong>Für Freund:innen:</strong>
+          <p class="hero-micro">„Hey, dachte an dich – das zeigt dir anonym, ob etwas Wichtiges fehlt.“</p>
+        </div>
+        <div class="ref-card">
+          <strong>Für Kolleg:innen:</strong>
+          <p class="hero-micro">„Kurz schauen, ohne Papierkram.“ – ideal für Büro-Mentalität.</p>
+        </div>
+      </div>
+
+      <div class="share stack" role="region" aria-labelledby="share-h" id="share">
+        <div class="stack">
+          <h3 id="share-h" style="margin:.2rem 0 .25rem">Text zum Weitergeben</h3>
+          <p class="hero-micro" style="margin:0 0 .6rem">Kopieren oder direkt per WhatsApp senden.</p>
+        </div>
+
+        <div class="premium-card zero-risk fade-up">
+          <p class="hero-micro" style="margin:0"><strong>Zero-Risk:</strong> Kein Vorteil → 25 €.</p>
+        </div>
+
+        <label for="refName" style="display:block;font-size:.92rem;color:#DDE3F4;margin:.6rem 0 .35rem">Dein Vorname (für Zuordnung):</label>
+        <input id="refName" name="ref" inputmode="text" autocapitalize="words" autocomplete="nickname given-name" placeholder="z. B. Alex (Papa) / Dani – Chef">
+
+        <textarea rows="6" id="refText" inputmode="text" spellcheck="false"
+          data-variants='{
+            "neutral":[
+              "Hey, hab das gerade gesehen – dachte sofort an dich. 2 Minuten – zeigt sofort, ob heute etwas Wichtiges fehlt. Kein Vorteil → 25 €. {{URL}}",
+              "Eine faire Einschätzung: anonym & ohne irgendetwas zu müssen. Du siehst gleich, wo du stehst. {{URL}}",
+              "Falls du dieses „Ich müsste mal…“ kennst: hier siehst du in 2 Min, ob alles gut ist. {{URL}}"
+            ],
+            "eltern":[
+              "Kurz für Eltern (2 Min): zeigt, ob bei Klinik/Zahn/Haftung etwas fehlt – ohne Verkauf. Kein Vorteil → 25 €. {{URL}}",
+              "Anonym schauen, ob alles Wichtige sitzt – ohne Druck. {{URL}}"
+            ],
+            "kollegen":[
+              "2-Min-Blick für die To-do-Liste: sofort sehen, ob etwas fehlt – ohne Papierkram. {{URL}}",
+              "Nutze ich selbst als kurzen Blick ohne Aufwand. Vielleicht hilft’s dir auch. {{URL}}"
+            ],
+            "freunde":[
+              "Hey, kurzer Blick (2 Min), völlig anonym – sagt dir, was heute wichtig ist. {{URL}}",
+              "Hab das gesehen & dachte an dich – null Druck, einfach hilfreich. {{URL}}"
+            ],
+            "selbst":[
+              "Für Selbstständige: kurz schauen (2 Min), wie es heute aussieht – bei Rücklagen und Co. – ohne Verkauf. {{URL}}"
+            ],
+            "partner":[
+              "Magst du in 2 Min schauen, ob alles passt? Anonym – zeigt sofort, was wichtig ist. {{URL}}"
+            ]
+          }'></textarea>
+
+        <div class="inline">
+          <button type="button" id="readyMsg" class="btn btn-primary">✨ Fertigen Text übernehmen</button>
+          <button type="button" id="magicLine" class="btn">+ Beliebten Start-Satz einfügen</button>
+        </div>
+
+        <div class="preview" id="waPreview" aria-live="polite">
+          <strong>WhatsApp-Vorschau</strong>
+          <div id="waPreviewText">Wird erstellt…</div>
+        </div>
+
+        <p class="hero-micro" id="helperTip">Tipp: Eine persönliche Zeile wirkt besser. <button type="button" id="addPersonal" class="btn" style="padding:.4rem .7rem;margin-left:.4rem">+ Persönliche Zeile</button></p>
+
+        <div class="inline">
+          <button class="btn btn-ghost" id="copyBtn">📋 Text kopieren</button>
+          <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <button class="btn btn-ghost" id="nativeShare" type="button">📲 System-Teilen</button>
+          <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer%20Blick&body=">✉️ Mail</a>
+        </div>
+
+        <small style="display:block;margin-top:.6rem">Zählt ab: Erstgespräch – kein Abschluss nötig.</small>
+      </div>
+
+      <div class="ref-safety premium-card">
+        <h3 style="margin:0 0 .4rem;">Wichtig für die empfohlene Person</h3>
+        <ul class="hero-micro" style="margin:0; padding-left:1.2rem;">
+          <li>100 % anonym</li>
+          <li>kein Verkauf, kein Spam</li>
+          <li>keine Weitergabe der Daten</li>
+          <li>kein Risiko: kein Vorteil → 25 €</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- WHY -->
+  <section class="section fade-up" aria-labelledby="why-title">
+    <div class="wrap stack">
+      <div class="gold-identity" aria-hidden="true"><span></span><span></span><span></span></div>
+      <h2 id="why-title">Warum es die 2-Minuten-Ampel gibt – und was ich beruflich mache</h2>
+
+      <div class="premium-card">
+        <h3 style="margin:0 0 .3rem">Meine Rolle</h3>
+        <p class="hero-micro" style="margin:.2rem 0 0"><strong>Ich bin Finanzbegleiter – kein Verkäufer.</strong> Seit über 10 Jahren helfe ich Menschen, ein sicheres Gefühl und Orientierung zu bekommen – klar, ruhig, verständlich. Wir gehen das gemeinsam durch – ruhig und ohne Druck – langfristig und ohne Verkaufsdruck.</p>
+      </div>
+
+      <div class="premium-card">
+        <h3 style="margin:0 0 .3rem">Warum ich das mache</h3>
+        <p class="hero-micro" style="margin:.2rem 0 0">Die meisten haben kein Zeit-, sondern ein Komplexitätsproblem. Deshalb habe ich die 2-Minuten-Ampel gebaut: damit jeder sofort sieht, ob heute etwas Wichtiges fehlt – ohne Unterlagen, ohne Druck, ohne Verkauf.</p>
+        <p class="hero-micro" style="margin:.2rem 0 0">Mein Ziel: dir Ruhe geben. Du gehst raus und weißt, was <em>jetzt</em> wichtig ist, was <em>als nächstes</em> dran ist – und was getrost <em>später</em> kann.</p>
+      </div>
+
+      <div class="premium-card">
+        <h3 style="margin:0 0 .3rem">Was passiert nach den 2 Minuten?</h3>
+        <p class="hero-micro" style="margin:.2rem 0 0">Wenn du willst, schauen wir in 10 Minuten gemeinsam, was wichtig ist – entspannt, ohne Papierkram. Du bekommst ein Gefühl für Jetzt · Als Nächstes · Später und entscheidest selbst, ob du etwas ändern möchtest. Ich begleite dich, dränge nichts auf.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- REWARDS -->
+  <section class="section fade-up" id="rewards" aria-labelledby="r-title">
+    <div class="wrap stack">
+      <div class="gold-identity" aria-hidden="true"><span></span><span></span><span></span></div>
+      <h2 id="r-title">Deine Wertschätzungen – Sammeln macht’s noch besser</h2>
+
+      <div class="grid cols-auto" style="margin-top:.9rem">
+        <article class="premium-card" aria-describedby="r25desc">
+          <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_95146082527f4efcba1ad4c44951536a~mv2.png" alt="25 € – kleiner Luxus" style="border-radius:12px">
+          <h3 style="margin:.6rem 0 .2rem">1× → 25 €</h3>
+          <p id="r25desc" class="hero-micro">Für Kaffee, Essen oder etwas Schönes im Alltag. <em>Zählt ab Erstgespräch.</em></p>
+        </article>
+        <article class="premium-card" aria-describedby="r50desc">
+          <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_475ea5422e9041189cf68faffebee3d1~mv2.png" alt="50 € + Extra – spürbarer Gewinn" style="border-radius:12px">
+          <h3 style="margin:.6rem 0 .2rem">3× → 50 € + Extra</h3>
+          <p id="r50desc" class="hero-micro">Ein spürbarer Gewinn – plus kleine Überraschung. <em>Kein Abschluss nötig.</em></p>
+        </article>
+        <article class="premium-card" aria-describedby="r150desc">
+          <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_97bb79e83fad48bea4468b75977119cd~mv2.png" alt="150 € – echtes Upgrade" style="border-radius:12px">
+          <h3 style="margin:.6rem 0 .2rem">5× → 150 €</h3>
+          <p id="r150desc" class="hero-micro">Steuerlich sauber für mich – ein echtes Upgrade für dich.</p>
+        </article>
+      </div>
+
+      <div>
+        <h3 style="margin:.8rem 0 .4rem">10× → VIP-Erlebnis (du wählst)</h3>
+        <p class="hero-micro" style="margin:.2rem 0 .6rem">Kein Standard-Gutschein – <strong>ein Abend, der hängen bleibt</strong>. Du wählst selbst.</p>
+        <div class="slider" id="vipSlider" aria-label="VIP-Erlebnis Highlights">
+          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_d56ea9b3d9314d1abb26324412dffe81~mv2.png" alt="VIP: z. B. Konzert deiner Wahl"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_506ae19443064d949800ba1db5957184~mv2.png" alt="VIP: Day-Spa & Massage für 2"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_038389a8dd2644fe9741e60585908181~mv2.png" alt="VIP: Fußball-Lounge"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_6193ac7b30f4471ea277ab6bbfe3d690~mv2.png" alt="VIP: du entscheidest"></div>
+        </div>
+        <div class="slider-controls">
+          <button type="button" id="vipPrev" aria-label="VIP vorheriges Bild" aria-controls="vipSlider">‹</button>
+          <button type="button" id="vipNext" aria-label="VIP nächstes Bild" aria-controls="vipSlider">›</button>
+        </div>
+      </div>
+
+      <div class="premium-card">
+        <h3 style="margin:0 0 .4rem">Dein Motivationsstand</h3>
+        <p id="rewardMsg" class="hero-micro" style="margin:.2rem 0">0 % – echte Belohnungs-Stufen gelten ab Erstgespräch (unabhängig vom Balken).</p>
+        <div class="level" aria-label="Motivationsstand"><span id="levelBar"></span></div>
+        <ul class="tiers hero-micro" id="tierList" style="list-style:none;padding:0;margin-top:.8rem">
+          <li><span>25 €</span><div class="bar"><i data-goal="1"></i></div></li>
+          <li><span>50 € + Extra</span><div class="bar"><i data-goal="3"></i></div></li>
+          <li><span>150 €</span><div class="bar"><i data-goal="5"></i></div></li>
+          <li><span>VIP</span><div class="bar"><i data-goal="10"></i></div></li>
+        </ul>
+
+        <div class="grid story-vn fade-up" style="margin-top:1.2rem">
+          <div class="card">
+            <strong>Vorher</strong>
+            <p class="hero-micro" style="margin:.35rem 0 0">„Ich hoffe, dass alles passt…“</p>
+          </div>
+        </div>
+        <div class="grid story-vn fade-up" style="margin-top:.6rem">
+          <div class="card">
+            <strong>Nachher</strong>
+            <p class="hero-micro" style="margin:.35rem 0 0">„Ich weiß, was heute wichtig ist.“</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center">
+        <a href="#share" class="btn btn-primary">✨ Weitergeben</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fade-up" aria-label="Heiko Ethos">
+    <div class="wrap">
+      <div class="heiko-ethos premium-card">
+        <p class="hero-micro" style="margin:0;">
+          Ich bin Heiko. Ich begleite Menschen dabei, in Ruhe zu sehen, was heute wichtig ist – ohne Verkaufsdruck.
+          Die 2-Minuten-Ampel habe ich gebaut, weil ich die üblichen 2-Stunden-Beratungen selbst gehasst habe.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- FINAL CTA -->
+  <section class="section fade-up" id="final-cta">
+    <div class="wrap" style="text-align:center;max-width:720px">
+      <div class="gold-identity" aria-hidden="true" style="margin-left:auto;margin-right:auto"><span></span><span></span><span></span></div>
+      <h2 style="margin-bottom:1rem">Bereit, jemandem heute wirklich zu helfen?</h2>
+      <p style="color:var(--muted);margin-bottom:1.1rem;font-size:1.05rem">Ein kurzer Blick, der sofort zeigt, wo man steht – anonym, ohne irgendetwas zu müssen, ohne Kaufdruck.</p>
+      <a href="#share" class="btn btn-primary" id="ctaFinal">🤝 Hilf heute 1 Person – 10 Sek.</a>
+      <p class="hero-micro" style="margin-top:.6rem">Viele senden an <strong>2 Personen</strong> – das wirkt am besten.</p>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo">
+  <div class="wrap" style="text-align:center">
+    <div style="margin-bottom:.6rem">© <span id="yearNow">2026</span> Heiko Haerter – Persönliche Finanzbegleitung · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>
+    <div class="hero-micro">Wertschätzungen erfolgen privat durch mich – unabhängig von Organisationen. Keine verbandliche Aktion.</div>
+  </div>
+</footer>
+
+<!-- Sticky CTA -->
+<div class="sticky-cta" id="stickyCTA">
+  <div class="inner">
+    <a href="#share" class="btn btn-primary" id="stickyBtn">💬 Mit WhatsApp weitergeben</a>
+  </div>
+</div>
+
+<!-- Desktop Return-CTA -->
+<div class="return-cta" id="returnCta"><a href="#share" class="btn">↗ Weitergeben</a></div>
+
+<!-- Whisper CTA -->
+<div class="whisper" id="whisper" role="status" aria-live="polite">🟡 10 Sekunden – jemand hat morgen ein Gefühl für heute.</div>
+
+<script>
+document.documentElement.classList.remove('no-js');
+document.querySelectorAll('#yearNow').forEach(el=> el.textContent = new Date().getFullYear());
+
+(function critical(){
+  const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sticky = document.getElementById('stickyCTA');
+  const heroSection = document.querySelector('.hero');
+
+  if ('IntersectionObserver' in window && innerWidth < 980) {
+    const io = new IntersectionObserver(ents=>{
+      ents.forEach(e=>{
+        const show = !e.isIntersecting;
+        sticky.style.transform = show ? 'translateY(0)' : 'translateY(100%)';
+        sticky.style.opacity   = show ? '1' : '0';
       });
-    },{threshold:.1}).observe(hero);
+    },{threshold:.20});
+    heroSection && io.observe(heroSection);
+  } else if (innerWidth < 980) {
+    sticky.style.transform='translateY(0)'; sticky.style.opacity='1';
+  }
 
-    // Share Logic
-    const area=document.getElementById("msg");
-    const name=document.getElementById("name");
-    const preview=document.getElementById("preview");
-    const wa=document.getElementById("wa");
-    const mail=document.getElementById("mail");
+  (function(){
+    const r=document.getElementById('returnCta'); if(!r) return;
+    if(innerWidth<980) { r.style.display='none'; return; }
+    const on=()=>{ r.style.opacity = scrollY>260 ? '1' : '0'; r.style.pointerEvents = scrollY>260 ? 'auto' : 'none'; };
+    r.style.opacity='0'; on(); addEventListener('scroll', on, {passive:true});
+  })();
 
-    function buildURL(){
-      const base=new URL("https://heikohaerter.com");
-      base.searchParams.set("utm_source","weitergeben");
-      base.searchParams.set("utm_medium","share");
-      return base.toString();
-    }
-    function variants(){
-      try{ return JSON.parse(area.dataset.variants); }catch(e){ return {neutral:["{{URL}}"]}; }
-    }
-    function pick(seg){
-      const sets=variants();
-      const pool=sets[seg] || sets["neutral"];
-      return pool[Math.floor(Math.random()*pool.length)];
-    }
-    function detectSeg(){
-      const raw=(name.value||"").toLowerCase();
-      if(/(papa|mama|eltern|kind)/.test(raw)) return "eltern";
-      if(/(chef|kolleg|team)/.test(raw)) return "kollegen";
-      if(/(freund|kumpel|bff)/.test(raw)) return "freunde";
-      if(/(selbst|freelance)/.test(raw)) return "selbst";
-      if(/(partner|ehe)/.test(raw)) return "partner";
-      return "neutral";
-    }
-    function generate(){
-      const url=buildURL();
-      const seg=detectSeg();
-      const msg=pick(seg).replace("{{URL}}",url);
-      area.value=msg;
-      preview.textContent=msg;
-      wa.href="https://wa.me/?text="+encodeURIComponent(msg);
-      mail.href="mailto:?subject=Kurzer Blick&body="+encodeURIComponent(msg);
-    }
-    document.getElementById("gen").onclick=generate;
-    document.getElementById("copy").onclick=()=>navigator.clipboard.writeText(area.value);
-  </script>
+  document.querySelectorAll('a[href="#share"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      const t=document.getElementById('share'); if(!t) return;
+      const y=t.getBoundingClientRect().top + scrollY - 80;
+      scrollTo({top:y, behavior: prefersReduce ? 'auto':'smooth'});
+    });
+  });
+})();
 
+(function nonCritical(){
+  const prefersReduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(!prefersReduce && 'IntersectionObserver' in window){
+    const fades=[...document.querySelectorAll('.fade-up')];
+    const io=new IntersectionObserver(ents=>ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }),{threshold:.12, rootMargin:'0px 0px -10% 0px'});
+    fades.forEach(el=>io.observe(el));
+  } else { document.querySelectorAll('.fade-up').forEach(el=>el.classList.add('visible')); }
+
+  (function glowOnShare(){
+    const share = document.getElementById('share');
+    const rewardGlow = document.getElementById('rewardGlow');
+    if(!prefersReduce && 'IntersectionObserver' in window && share && rewardGlow){
+      const io=new IntersectionObserver(ents=>ents.forEach(e=>{
+        if(e.isIntersecting){ rewardGlow.classList.add('btn-glow'); setTimeout(()=>rewardGlow.classList.remove('btn-glow'),1300); }
+      }),{threshold:.25});
+      io.observe(share);
+    }
+  })();
+
+  (function slider(){
+    const wrap=document.getElementById('vipSlider'); if(!wrap) return;
+    document.getElementById('vipPrev')?.addEventListener('click',()=>wrap.scrollBy({left:-wrap.clientWidth*.9,behavior:'smooth'}));
+    document.getElementById('vipNext')?.addEventListener('click',()=>wrap.scrollBy({left: wrap.clientWidth*.9,behavior:'smooth'}));
+  })();
+
+  (function whisper(){
+    const KEY='hh_whisper_seen_v3';
+    try{
+      if(sessionStorage.getItem(KEY)) return;
+      const w=document.getElementById('whisper'); if(!w) return;
+      setTimeout(()=>{ w.classList.add('show'); setTimeout(()=>w.classList.remove('show'), 4200); sessionStorage.setItem(KEY,'1'); }, 16000);
+    }catch(_){}
+  })();
+
+  (function rotateCTA(){
+    if(prefersReduce) return;
+    const btn=document.getElementById('shareFast'); if(!btn) return;
+    let variants=[]; try{ variants=JSON.parse(btn.getAttribute('data-cta-variants')); }catch(_){}
+    if(!variants?.length) return;
+    let i=0; setInterval(()=>{ i=(i+1)%variants.length; btn.textContent=variants[i]; }, 3800);
+  })();
+
+  (function pulseSticky(){
+    const el=document.getElementById('stickyCTA'); if(!el || innerWidth>=980) return;
+    setInterval(()=>{ el.animate([{transform:'translateY(0) scale(1)'},{transform:'translateY(0) scale(1.01)'},{transform:'translateY(0) scale(1)'}],{duration:700}); }, 12000);
+  })();
+
+  window.track = function(evt,data){ window.dataLayer=window.dataLayer||[]; window.dataLayer.push({event:evt,...(data||{})}); };
+})();
+
+(function(){
+  const KEY_REFCOUNT='hh_ref_count_v1';
+  const KEY_PCT='hh_motivation_pct_v3';
+  const levelBar=document.getElementById('levelBar');
+  const rewardMsg=document.getElementById('rewardMsg');
+
+  function getRefCount(){ try{ return Number(localStorage.getItem(KEY_REFCOUNT)||'0')||0; }catch(_){ return 0; } }
+  function setPct(v){
+    v=Math.max(0,Math.min(100,Math.round(v)));
+    if(levelBar) levelBar.style.width=v+'%';
+    if(rewardMsg) rewardMsg.textContent=v+' % – echte Belohnungs-Stufen gelten ab Erstgespräch (unabhängig vom Balken).';
+    try{ localStorage.setItem(KEY_PCT,String(v)); }catch(_){}
+  }
+  function updateTiers(){
+    const c=getRefCount();
+    document.querySelectorAll('#tierList i').forEach(i=>{
+      const goal=Number(i.getAttribute('data-goal')||'1');
+      const pct=Math.max(0, Math.min(100, Math.round((c/goal)*100)));
+      i.style.width=pct+'%';
+    });
+  }
+  try{ setPct(Number(localStorage.getItem(KEY_PCT)||'0')); }catch(_){ setPct(0); }
+  updateTiers();
+
+  window._bumpRefHalf = function(){ try{ const c=getRefCount()+0.5; localStorage.setItem(KEY_REFCOUNT,String(c)); updateTiers(); setPct(Math.min(100, c*6)); }catch(_){} }
+  window._bumpRefFull = function(){ try{ const c=getRefCount()+1;  localStorage.setItem(KEY_REFCOUNT,String(c)); updateTiers(); setPct(Math.min(100, c*10)); }catch(_){} }
+})();
+
+(function(){
+  const name = document.getElementById('refName');
+  const area = document.getElementById('refText');
+  const wa   = document.getElementById('waShare');
+  const mail = document.getElementById('mailShare');
+  const copy = document.getElementById('copyBtn');
+  const preview = document.getElementById('waPreviewText');
+
+  const KEY_REFID='hh_ref_rid_v1';
+  function randomId(len=10){ const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len); if(crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.random()*256; return Array.from(u,x=>a[x%a.length]).join(''); }
+  function getRefId(){ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } }
+  function sanitize(n){ return n ? n.replace(/[^a-z0-9]/gi,'').toLowerCase() : ''; }
+
+  function buildURL(){
+    const base=new URL('https://heikohaerter.com');
+    base.searchParams.set('utm_source','weitergeben');
+    base.searchParams.set('utm_medium','share');
+    base.searchParams.set('utm_campaign','check');
+    const rid=getRefId();
+    base.searchParams.set('rid', rid);
+    const alias=sanitize((name?.value||'').trim());
+    if(alias) base.searchParams.set('ref', alias+'.'+rid.slice(0,5));
+    return base.toString();
+  }
+
+  function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
+  function detectSeg(){
+    const raw=(name?.value||'').toLowerCase();
+    if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
+    if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
+    if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
+    if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
+    if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
+    return 'neutral';
+  }
+  function pick(seg){
+    const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return '';
+    const i=Math.floor(Math.random()*pool.length); return pool[i];
+  }
+
+  function ensureUrl(t){ return /\bhttps?:\/\/\S+/i.test(t) ? t : (t + ' ' + buildURL()); }
+  function setTextFrom(seg){
+    const tmpl=pick(seg||detectSeg()); if(!tmpl) return;
+    area.value = tmpl.replace(/\{\{URL\}\}/g, buildURL());
+    updateLinks();
+  }
+  function plain(){ return (area.value||'').replace(/\n+/g,' ').trim(); }
+  function text(){ return ensureUrl(plain()); }
+
+  function updateLinks(){
+    const t=text();
+    const waURL='https://wa.me/?text='+encodeURIComponent(t);
+    if(wa) wa.href=waURL;
+    if(mail) mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t);
+    if(preview) preview.textContent = t.length<=190 ? t : t.substring(0,t.lastIndexOf(' ',190))+'…';
+  }
+
+  if(area && !area.value){ setTextFrom('neutral'); } updateLinks();
+
+  name?.addEventListener('input', ()=>{ setTextFrom(); });
+  area?.addEventListener('input', ()=>{ updateLinks(); });
+
+  document.getElementById('readyMsg')?.addEventListener('click', ()=>{
+    setTextFrom(); window._bumpRefHalf?.();
+    const toast=document.createElement('div'); toast.textContent='Fertiger Text eingefügt ✔️'; toast.className='whisper show'; document.body.appendChild(toast); setTimeout(()=>toast.remove(),1800);
+    const waBtn=document.getElementById('waShare'); if(waBtn){ waBtn.classList.add('glow-soft'); setTimeout(()=>waBtn.classList.remove('glow-soft'),1600); }
+  });
+
+  document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); window._bumpRefHalf?.(); });
+
+  document.getElementById('magicLine')?.addEventListener('click', ()=>{
+    const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
+    const cur=(area.value||'').trim();
+    area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
+    updateLinks(); window._bumpRefHalf?.();
+  });
+
+  document.getElementById('addPersonal')?.addEventListener('click', ()=>{
+    const alias=(name?.value||'').trim()||'Hey';
+    area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
+    updateLinks(); window._bumpRefHalf?.();
+  });
+
+  document.getElementById('copyBtn')?.addEventListener('click', async ()=>{
+    try{ await navigator.clipboard.writeText(text()); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
+    window._bumpRefHalf?.();
+  });
+  document.getElementById('waShare')?.addEventListener('click', ()=> window._bumpRefFull?.());
+  document.getElementById('mailShare')?.addEventListener('click', ()=> window._bumpRefFull?.());
+  document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
+    const t=text(); const url=buildURL();
+    if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); window._bumpRefFull?.(); }catch(_){} }
+  });
+})();
+</script>
+
+<script src="app.js" defer></script>
 </body>
 </html>
+
+<!-- ==========================
+= = = = = styles.css = = = =
+========================== -->
+/* Optional: Platz für zusätzliche Styles. Die HTML-Dateien sind eigenständig. */
+/* GitHub Pages lädt diese Datei relativ (styles.css). */
+
+<!-- ========================
+= = = = = app.js = = = =
+======================== -->
+// Optional: Platz für zusätzliche JS-Logik. Die Seiten funktionieren ohne diese Datei.
+// GitHub Pages lädt diese Datei relativ (app.js).
