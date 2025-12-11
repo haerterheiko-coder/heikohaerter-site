@@ -1,11 +1,20 @@
 /* ============================================================
-   referral.js – Godmode 2026
+   referral.js – PREMIUM ULTIMATE VERSION (Godmode 2026)
    Universelles Weitergabe-System für alle Seiten
    Heiko Haerter – Ruhiger Finanz-Kompass
 ============================================================ */
 
 /* ------------------------------------------------------------
-   1) Variants: Weitergabe-Texte (NEU: Handwerks- & Direkt-Tonalität)
+   0) DOM Ready – verhindert Race Conditions
+------------------------------------------------------------ */
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof updateReferralText === "function" && selectEl) {
+    updateReferralText();
+  }
+});
+
+/* ------------------------------------------------------------
+   1) Varianten – inkl. Handwerk & Direkt (optimiert)
 ------------------------------------------------------------ */
 const referralVariants = {
   neutral: [
@@ -40,51 +49,60 @@ const referralVariants = {
     `Ich weiß, du magst sowas normal nicht – aber das hier ist komplett neutral: {{URL}}`
   ],
 
+  /* PREMIUM: Schärfere Handwerks-Texte */
   handwerk: [
-    `60 Sekunden Arbeitgeber-Check – anonym. Zeigt, wo im Betrieb heute Stabilität fehlt: {{URL}}`,
-    `Falls du gerade Mitarbeiter suchst oder Abläufe klären willst: Das hier zeigt die echten Stellschrauben: {{URL}}`,
-    `Kurzer Check für Inhaber/HR im Handwerk – extrem hilfreich & ohne Verpflichtung: {{URL}}`
+    `60-Sekunden-Arbeitgeber-Check – anonym. Zeigt sofort, wo heute Stabilität fehlt: {{URL}}`,
+    `Falls du Abläufe klären oder Mitarbeiter halten willst: Der Check zeigt die echten Stellschrauben – ohne Verkauf: {{URL}}`,
+    `Kurz, klar, anonym. Für Inhaber & HR im Handwerk – echte Orientierung statt Papierkram: {{URL}}`
   ],
 
+  /* PREMIUM: Direkt-Tonalität optimiert */
   direkt: [
     `Das könnte dir wirklich helfen – dauert 2 Minuten: {{URL}}`,
     `Ein kurzer Check, der sofort Klarheit bringt: {{URL}}`,
-    `Wenn du heute nur eine Sache machst – dann das hier: {{URL}}`
+    `Wenn du heute kurz Orientierung willst – das hier ist leicht & anonym: {{URL}}`
   ]
 };
 
 
 /* ------------------------------------------------------------
-   2) DOM ELEMENTS (werden automatisch nur verwendet, wenn vorhanden)
+   2) DOM Elemente
 ------------------------------------------------------------ */
-const selectEl = document.getElementById("categorySelect");
-const outputEl = document.getElementById("referralOutput");
-const copyBtnEl = document.getElementById("copyReferral");
-const linkInfoEl = document.getElementById("personalLinkInfo");
+const selectEl      = document.getElementById("categorySelect");
+const outputEl      = document.getElementById("referralOutput");
+const copyBtnEl     = document.getElementById("copyReferral");
+const linkInfoEl    = document.getElementById("personalLinkInfo");
 
-const qrCanvas = document.getElementById("qrCanvas");
+const qrCanvas      = document.getElementById("qrCanvas");
 const shareFeedback = document.getElementById("shareFeedback");
 
 
 /* ------------------------------------------------------------
-   3) Referral-Parameter erkennen (?ref=XYZ)
+   3) Referral-URL – erkennt automatisch Handwerker-Seiten
 ------------------------------------------------------------ */
 function getReferralParam() {
   const params = new URLSearchParams(window.location.search);
   const ref = params.get("ref");
 
+  // Automatische Basiserkennung
+  let base =
+    window.location.pathname.includes("arbeitgeber-architektur")
+      ? "https://heikohaerter.com/arbeitgeber-architektur"
+      : "https://heikohaerter.com";
+
   if (ref && ref.trim() !== "") {
-    return `https://heikohaerter.com/?ref=${encodeURIComponent(ref)}`;
+    return `${base}?ref=${encodeURIComponent(ref)}`;
   }
-  return `https://heikohaerter.com`;
+
+  return base;
 }
 
 const personalURL = getReferralParam();
-window.personalURL = personalURL; // zentral wichtig für QR & Sharing
+window.personalURL = personalURL; // universal verfügbar
 
 
 /* ------------------------------------------------------------
-   4) Update Text bei Auswahl
+   4) Textgenerator
 ------------------------------------------------------------ */
 function updateReferralText() {
   if (!selectEl || !outputEl) return;
@@ -92,7 +110,11 @@ function updateReferralText() {
   const type = selectEl.value || "neutral";
   const variants = referralVariants[type];
 
-  if (!variants || variants.length === 0) return;
+  // Fallback wenn Kategorie fehlt
+  if (!variants || variants.length === 0) {
+    outputEl.value = personalURL;
+    return;
+  }
 
   const chosen = variants[Math.floor(Math.random() * variants.length)];
   const finalText = chosen.replace("{{URL}}", personalURL);
@@ -100,12 +122,10 @@ function updateReferralText() {
   outputEl.value = finalText;
 
   if (linkInfoEl) {
-    linkInfoEl.textContent = `Dein persönlicher Link: ${personalURL}`;
+    linkInfoEl.textContent = `Dein persönlicher, anonymer Weitergabe-Link: ${personalURL}`;
   }
 }
 
-
-// Sofort initialisieren, wenn möglich
 if (selectEl) {
   selectEl.addEventListener("change", updateReferralText);
   updateReferralText();
@@ -113,18 +133,23 @@ if (selectEl) {
 
 
 /* ------------------------------------------------------------
-   5) Copy-to-Clipboard
+   5) Copy to Clipboard (Premium + iOS Fallback)
 ------------------------------------------------------------ */
 if (copyBtnEl) {
   copyBtnEl.addEventListener("click", async () => {
+    const val = outputEl?.value?.trim();
+    if (!val) return;
+
     try {
-      const val = outputEl?.value?.trim();
-      if (!val) return;
-
-      await navigator.clipboard.writeText(val);
-
-      showFeedback("✔️ Kopiert!");
-    } catch (e) {
+      if (!navigator.clipboard) {
+        /* iOS Fallback */
+        outputEl.select();
+        document.execCommand("copy");
+      } else {
+        await navigator.clipboard.writeText(val);
+      }
+      showFeedback("✔️ Text kopiert!");
+    } catch {
       alert("Konnte nicht kopieren – bitte manuell markieren.");
     }
   });
@@ -141,7 +166,7 @@ function shareWhatsApp() {
   const encoded = encodeURIComponent(val);
   window.open(`https://wa.me/?text=${encoded}`, "_blank");
 
-  showFeedback("📨 Geteilt!");
+  showFeedback("📨 WhatsApp gesendet!");
 }
 
 
@@ -156,7 +181,7 @@ function shareLinkOnly() {
 
 
 /* ------------------------------------------------------------
-   8) Micro-Reward Feedback
+   8) Microreward (Dopamin-Boost)
 ------------------------------------------------------------ */
 function showFeedback(text = "Erledigt!") {
   if (!shareFeedback) return;
@@ -171,7 +196,7 @@ function showFeedback(text = "Erledigt!") {
 
 
 /* ------------------------------------------------------------
-   9) QR-Code Generator (lokal in <canvas>)
+   9) QR-Code Generator – DSGVO-freundlich + Anti-Cache
 ------------------------------------------------------------ */
 function generateQR(url) {
   if (!qrCanvas) return;
@@ -179,29 +204,30 @@ function generateQR(url) {
   const ctx = qrCanvas.getContext("2d");
   ctx.clearRect(0, 0, qrCanvas.width, qrCanvas.height);
 
-  // DSGVO-freundlicher: API empfängt NUR anonymisierten Link
   const safeURL = encodeURIComponent(url);
+  const noCache = Date.now(); // verhindert QR-Caching
 
-  fetch(`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${safeURL}`)
+  fetch(`https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${safeURL}&_=${noCache}`)
     .then(r => r.blob())
     .then(blob => {
       const img = new Image();
-      img.onload = () => ctx.drawImage(img, 0, 0, qrCanvas.width, qrCanvas.height);
+      img.onload = () => {
+        ctx.imageSmoothingEnabled = true; // PREMIUM
+        ctx.drawImage(img, 0, 0, qrCanvas.width, qrCanvas.height);
+      };
       img.src = URL.createObjectURL(blob);
     });
 }
 
-// Erzeuge QR nur, wenn Canvas existiert (z. B. auf Weitergeben-Seite)
 if (qrCanvas) {
   generateQR(personalURL);
 }
 
 
 /* ------------------------------------------------------------
-   10) Export functions globally (falls andere Seiten sie brauchen)
+   10) Export global
 ------------------------------------------------------------ */
-window.shareWhatsApp = shareWhatsApp;
-window.shareLinkOnly = shareLinkOnly;
+window.shareWhatsApp     = shareWhatsApp;
+window.shareLinkOnly     = shareLinkOnly;
 window.updateReferralText = updateReferralText;
-window.generateQR = generateQR;
-
+window.generateQR         = generateQR;
