@@ -1,301 +1,285 @@
 /* ============================================================
-   GODMODE APP.JS – 2-Minuten-Ampel (wissenschaftlich optimiert)
-   Heiko Haerter – Ruhiger Finanz-Kompass
+   app.js · Godmode 2026
+   Multi-Page Intelligence für alle Seiten:
+   – Startseite (2-Minuten-Ampel)
+   – Weitergeben
+   – Arbeitgeber-Architektur
+   – Sticky CTA
+   – Whisper CTA
+   – Smooth Hooks
+   – Check Mounts
 ============================================================ */
 
+
 /* ------------------------------------------------------------
-   1) Rotierende Hooks (TikTok-Style, mit „Breathing“-Fade)
+   0) PAGE HELPERS
 ------------------------------------------------------------ */
-const hooks = [
-  "Wenn du manchmal denkst: Hoffentlich übersehe ich nichts Wichtiges …",
-  "Ein kurzer Blick – bevor der Alltag dich wieder einholt.",
-  "2 Minuten Ruhe – bevor alles wieder weiterläuft.",
-  "Die meisten übersehen Wichtiges, ohne es zu merken.",
-  "Ein Moment für dich – bevor du wieder funktionierst."
-];
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
 
-let hookIndex = 0;
-const hookEl = document.getElementById("rotatingHook");
+function exists(sel) {
+  return document.querySelector(sel) !== null;
+}
 
-function rotateHook() {
-  if (!hookEl) return;
+document.addEventListener("DOMContentLoaded", () => {
+  if (exists("#rotatingHook")) initRotatingHook();
+  initStickyCTA();
+  initWhisperCTA();
+  initScrollHeader();
+  mountChecks();
+});
 
-  // Sanfter Fade-out
-  if (hookEl.animate) {
-    hookEl.animate(
-      [{ opacity: 1 }, { opacity: 0 }],
-      { duration: 260, easing: "cubic-bezier(0.22,1,0.36,1)" }
-    );
-  }
-  setTimeout(() => {
-    hookEl.textContent = hooks[hookIndex];
-    hookIndex = (hookIndex + 1) % hooks.length;
 
-    // Sanfter Fade-in
-    if (hookEl.animate) {
-      hookEl.animate(
-        [{ opacity: 0 }, { opacity: 1 }],
-        { duration: 260, easing: "cubic-bezier(0.22,1,0.36,1)" }
-      );
+/* ------------------------------------------------------------
+   1) ROTIERENDER MICRO-HOOK (Startseite)
+------------------------------------------------------------ */
+function initRotatingHook() {
+  const el = $("#rotatingHook");
+  if (!el) return;
+
+  const hooks = [
+    "Wenn du manchmal hoffst, einfach nichts zu übersehen …",
+    "Ein kurzer Blick – bevor der Alltag weiterläuft.",
+    "2 Minuten. 3 Fragen. Deine Ampel.",
+    "Ein Moment Ruhe für deinen Kopf.",
+    "Die einfachste Entscheidung des Tages.",
+    "Wenn dein Kopf voll ist – aber du trotzdem sicher sein willst."
+  ];
+
+  let i = 0;
+  el.textContent = hooks[0];
+
+  setInterval(() => {
+    i = (i + 1) % hooks.length;
+    el.style.opacity = 0;
+
+    setTimeout(() => {
+      el.textContent = hooks[i];
+      el.style.opacity = 1;
+    }, 350);
+  }, 3600);
+}
+
+
+/* ------------------------------------------------------------
+   2) STICKY CTA (nur Mobil)
+------------------------------------------------------------ */
+function initStickyCTA() {
+  const cta = $("#stickyCTA");
+  if (!cta) return;
+
+  function toggle() {
+    if (window.scrollY > 420) {
+      cta.classList.add("visible");
     } else {
-      hookEl.style.opacity = 1;
+      cta.classList.remove("visible");
     }
-  }, 260);
+  }
+
+  toggle();
+  window.addEventListener("scroll", toggle);
 }
 
-if (hookEl) {
-  rotateHook();
-  setInterval(rotateHook, 4200);
-}
 
 /* ------------------------------------------------------------
-   2) Scroll Reveal – fade-up Sections
+   3) WHISPER CTA (ultra subtle)
 ------------------------------------------------------------ */
-const fadeUps = document.querySelectorAll(".fade-up");
+function initWhisperCTA() {
+  const el = $("#whisper");
+  if (!el) return;
 
-function onScrollReveal() {
-  const trigger = window.innerHeight * 0.88;
-  fadeUps.forEach((el) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < trigger && !el.classList.contains("visible")) {
-      el.classList.add("visible");
+  const messages = [
+    "Ein kurzer Moment Ruhe?",
+    "Nur 2 Minuten – anonym.",
+    "Ein Blick sagt mehr als ein Stapel Ordner.",
+    "Klarheit beginnt mit einem Klick.",
+  ];
+
+  let shown = false;
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 600 && !shown) {
+      shown = true;
+      el.textContent = messages[Math.floor(Math.random() * messages.length)];
+      el.style.opacity = 1;
+
+      setTimeout(() => {
+        el.style.opacity = 0;
+      }, 3500);
     }
   });
 }
 
-window.addEventListener("scroll", onScrollReveal);
-onScrollReveal();
 
 /* ------------------------------------------------------------
-   3) Sticky CTA (Mobile / Scroll > 400px)
+   4) HEADER SCROLL STATE
 ------------------------------------------------------------ */
-const stickyCTA = document.getElementById("stickyCTA");
+function initScrollHeader() {
+  const header = $(".header");
+  if (!header) return;
 
-function handleStickyCTA() {
-  if (!stickyCTA) return;
-  if (window.scrollY > 400) {
-    stickyCTA.classList.add("visible");
+  function update() {
+    header.classList.toggle("scrolled", window.scrollY > 40);
+  }
+
+  update();
+  window.addEventListener("scroll", update);
+}
+
+
+/* ------------------------------------------------------------
+   5) CHECK SYSTEM (Ampel + Arbeitgeber)
+------------------------------------------------------------ */
+
+/* ----------- Ampel-Check (Startseite) ----------- */
+function mountAmpelCheck() {
+  const mount = $("#checkMount");
+  if (!mount) return;
+
+  mount.innerHTML = `
+    <div class="stack">
+      <p><strong>Frage 1:</strong> Wie sicher fühlst du dich heute, falls etwas passieren würde?</p>
+      <select id="ampel_q1">
+        <option value="">Bitte wählen…</option>
+        <option value="green">Ich wäre stabil aufgestellt</option>
+        <option value="yellow">Unsicher / kommt drauf an</option>
+        <option value="red">Wahrscheinlich gar nicht</option>
+      </select>
+
+      <p><strong>Frage 2:</strong> Wie klar ist dir, was im Ernstfall wirklich zählt?</p>
+      <select id="ampel_q2">
+        <option value="">Bitte wählen…</option>
+        <option value="green">Sehr klar</option>
+        <option value="yellow">Mittel</option>
+        <option value="red">Eher unklar</option>
+      </select>
+
+      <p><strong>Frage 3:</strong> Wie geordnet fühlst du deinen aktuellen Stand?</p>
+      <select id="ampel_q3">
+        <option value="">Bitte wählen…</option>
+        <option value="green">Gut strukturiert</option>
+        <option value="yellow">Teilweise chaotisch</option>
+        <option value="red">Gar nicht strukturiert</option>
+      </select>
+
+      <button class="btn btn-primary" id="ampel_submit">Ergebnis anzeigen</button>
+
+      <div id="ampel_result" class="stack" style="margin-top:20px;"></div>
+    </div>
+  `;
+
+  $("#ampel_submit").addEventListener("click", () => {
+    const values = [
+      $("#ampel_q1").value,
+      $("#ampel_q2").value,
+      $("#ampel_q3").value,
+    ];
+
+    if (values.includes("")) {
+      $("#ampel_result").innerHTML = `<p class="microtrust">Bitte alle Fragen beantworten.</p>`;
+      return;
+    }
+
+    const score = values.filter((v) => v === "red").length
+      ? "red"
+      : values.filter((v) => v === "yellow").length
+      ? "yellow"
+      : "green";
+
+    const resultMap = {
+      green: "Dein Alltag wirkt heute stabil. 🟢",
+      yellow: "Einige Bereiche wirken unsicher – ein kurzer Blick könnte beruhigen. 🟡",
+      red: "Dein Alltag wirkt heute fragil – hier entsteht echter Handlungsdruck. 🔴",
+    };
+
+    $("#ampel_result").innerHTML = `
+      <p><strong>${resultMap[score]}</strong></p>
+      <p class="microtrust">Wenn du willst, klären wir später, was die Ampel sichtbar macht – ohne Druck.</p>
+    `;
+  });
+}
+
+
+/* ----------- Arbeitgeber-Check (Handwerkerseite) ----------- */
+function mountArbeitgeberCheck() {
+  const mount = $("#checkMount");
+  if (!mount) return;
+
+  mount.innerHTML = `
+    <div class="stack">
+      <p><strong>Frage 1:</strong> Wie stabil empfindest du deine aktuelle Team-Struktur?</p>
+      <select id="ag_q1">
+        <option value="">Bitte wählen…</option>
+        <option value="green">Stabil</option>
+        <option value="yellow">Teilweise stabil</option>
+        <option value="red">Instabil / wechselhaft</option>
+      </select>
+
+      <p><strong>Frage 2:</strong> Wie klar und dokumentiert sind eure Prozesse?</p>
+      <select id="ag_q2">
+        <option value="">Bitte wählen…</option>
+        <option value="green">Klar & dokumentiert</option>
+        <option value="yellow">Teilweise dokumentiert</option>
+        <option value="red">Kaum dokumentiert</option>
+      </select>
+
+      <p><strong>Frage 3:</strong> Wie sicher fühlst du dich hinsichtlich Arbeitgeber-Pflichten (bAV, Haftung)?</p>
+      <select id="ag_q3">
+        <option value="">Bitte wählen…</option>
+        <option value="green">Sehr sicher</option>
+        <option value="yellow">Unsicher</option>
+        <option value="red">Gefährlich unsicher</option>
+      </select>
+
+      <button class="btn btn-primary" id="ag_submit">Ergebnis anzeigen</button>
+
+      <div id="ag_result" class="stack" style="margin-top:20px;"></div>
+    </div>
+  `;
+
+  $("#ag_submit").addEventListener("click", () => {
+    const values = [
+      $("#ag_q1").value,
+      $("#ag_q2").value,
+      $("#ag_q3").value,
+    ];
+
+    if (values.includes("")) {
+      $("#ag_result").innerHTML = `<p class="microtrust">Bitte alle Fragen beantworten.</p>`;
+      return;
+    }
+
+    const score =
+      values.filter((v) => v === "red").length
+        ? "red"
+        : values.filter((v) => v === "yellow").length
+        ? "yellow"
+        : "green";
+
+    const resultMap = {
+      green: "Ihr Betrieb wirkt stabil organisiert. 🟢",
+      yellow: "Einige Bereiche bremsen Stabilität & Sicherheit. 🟡",
+      red: "Stabile Arbeitgeber-Strukturen fehlen – hier entsteht echter Handlungsdruck. 🔴",
+    };
+
+    $("#ag_result").innerHTML = `
+      <p><strong>${resultMap[score]}</strong></p>
+      <p class="microtrust">Die 3 Fragen stammen aus über 250 Arbeitgeber-Projekten im Handwerk.</p>
+    `;
+  });
+}
+
+
+/* ------------------------------------------------------------
+   6) AUTO-MOUNT CHECKS (intelligent)
+------------------------------------------------------------ */
+function mountChecks() {
+  const mount = $("#checkMount");
+  if (!mount) return;
+
+  if (window.location.pathname.includes("arbeitgeber-architektur")) {
+    mountArbeitgeberCheck();
   } else {
-    stickyCTA.classList.remove("visible");
+    mountAmpelCheck();
   }
-}
-
-window.addEventListener("scroll", handleStickyCTA);
-
-/* ------------------------------------------------------------
-   4) Whisper CTA – flüstert einmalig
------------------------------------------------------------- */
-const whisper = document.getElementById("whisper");
-let whisperShown = false;
-
-function showWhisper() {
-  if (!whisper || whisperShown) return;
-  if (window.scrollY <= 550) return;
-
-  whisper.textContent = "Die Ampel dauert nur 2 Minuten.";
-  whisper.classList.add("visible");
-  whisperShown = true;
-
-  // Sanfte Einblendung
-  if (whisper.animate) {
-    whisper.animate(
-      [
-        { opacity: 0, transform: "translateY(12px)" },
-        { opacity: 0.85, offset: 0.7 },
-        { opacity: 1, transform: "translateY(0)" }
-      ],
-      { duration: 650, easing: "cubic-bezier(0.22,1,0.36,1)" }
-    );
-  }
-
-  setTimeout(() => {
-    whisper.classList.remove("visible");
-  }, 4200);
-}
-window.addEventListener("scroll", showWhisper);
-
-/* ------------------------------------------------------------
-   5) AMPSEL – 2-Minuten-Check (3 Fragen, Score, Ergebnis)
------------------------------------------------------------- */
-const checkMount = document.getElementById("checkMount");
-
-const ampelState = {
-  step: 0,
-  score: 0
-};
-
-if (checkMount) {
-  renderStep1();
-}
-
-/* -----------------------------
-   Helper: State Reset
------------------------------ */
-function resetAmpelState() {
-  ampelState.step = 0;
-  ampelState.score = 0;
-}
-
-/* -----------------------------
-   Frage 1 – Loss Aversion
------------------------------ */
-function renderStep1() {
-  if (!checkMount) return;
-  resetAmpelState();
-  ampelState.step = 1;
-
-  checkMount.innerHTML = `
-    <h3>1/3</h3>
-    <p><strong>Wenn du heute ausfallen würdest – wie sicher wäre euer Alltag wirklich?</strong></p>
-
-    <div class="ampel-options">
-      <button class="btn btn-primary" type="button" onclick="nextStep(3)">Sehr sicher</button>
-      <button class="btn btn-primary" type="button" onclick="nextStep(2)">Eher sicher</button>
-      <button class="btn btn-primary" type="button" onclick="nextStep(1)">Unsicher</button>
-    </div>
-  `;
-}
-
-/* -----------------------------
-   Frage 2 – Orientierung / Ordnung
------------------------------ */
-function renderStep2() {
-  if (!checkMount) return;
-  checkMount.innerHTML = `
-    <h3>2/3</h3>
-    <p><strong>Wie schnell findest du wichtige Unterlagen, wenn du sie brauchst?</strong></p>
-
-    <div class="ampel-options">
-      <button class="btn btn-primary" type="button" onclick="nextStep(3)">Sofort</button>
-      <button class="btn btn-primary" type="button" onclick="nextStep(2)">Geht so</button>
-      <button class="btn btn-primary" type="button" onclick="nextStep(1)">Dauert lange</button>
-    </div>
-  `;
-}
-
-/* -----------------------------
-   Frage 3 – Zukunftssicherheit
------------------------------ */
-function renderStep3() {
-  if (!checkMount) return;
-  checkMount.innerHTML = `
-    <h3>3/3</h3>
-    <p><strong>Wie sicher fühlst du dich, wenn du an später denkst?</strong></p>
-
-    <div class="ampel-options">
-      <button class="btn btn-primary" type="button" onclick="finishStep(3)">Sehr sicher</button>
-      <button class="btn btn-primary" type="button" onclick="finishStep(2)">Teilweise sicher</button>
-      <button class="btn btn-primary" type="button" onclick="finishStep(1)">Unsicher</button>
-    </div>
-  `;
-}
-
-/* ------------------------------------------------------------
-   Step Navigation
------------------------------------------------------------- */
-function nextStep(val) {
-  ampelState.score += val;
-
-  if (ampelState.step === 1) {
-    ampelState.step = 2;
-    renderStep2();
-  } else if (ampelState.step === 2) {
-    ampelState.step = 3;
-    renderStep3();
-  }
-}
-
-function finishStep(val) {
-  ampelState.score += val;
-  showResult(ampelState.score);
-}
-
-/* ------------------------------------------------------------
-   Ergebnis berechnen + anzeigen (Ampel + CTA + Restart)
------------------------------------------------------------- */
-function showResult(score) {
-  if (!checkMount) return;
-
-  let color = "green";
-  let title = "Für heute wirkt alles stabil.";
-  let text =
-    "Du kannst entspannt weitermachen – ohne etwas im Hinterkopf zu haben.";
-  let ctaHtml = `
-    <a href="/weitergeben" class="btn btn-primary ampel-cta">
-      Weitergeben – vielleicht hilft’s jemandem.
-    </a>
-    <p class="ampel-microcopy">
-      Viele nutzen die Ampel, um jemandem im Alltag kurz Ruhe zu geben.
-    </p>
-  `;
-
-  if (score <= 6) {
-    color = "red";
-    title = "Heute wichtig.";
-    text =
-      "Ein Bereich braucht Aufmerksamkeit – ruhig, klar und ohne Druck.";
-    ctaHtml = `
-      <a href="mailto:heiko.haerter@dvag.de?subject=2-Minuten-Ampel%20–%20Rot"
-         class="btn btn-primary ampel-cta">
-        Kurz 10 Minuten sprechen
-      </a>
-      <p class="ampel-microcopy">
-        Ruhig, ohne Druck. Nur ein sanfter Blick auf das, was heute wichtig ist.
-      </p>
-    `;
-  } else if (score <= 9) {
-    color = "yellow";
-    title = "Bald wichtig.";
-    text =
-      "Ein paar Dinge stehen an – aber du musst heute nichts entscheiden.";
-    ctaHtml = `
-      <a href="mailto:heiko.haerter@dvag.de?subject=2-Minuten-Ampel%20–%20Gelb"
-         class="btn btn-primary ampel-cta">
-        Als Nächstes sortieren
-      </a>
-      <p class="ampel-microcopy">
-        Ein paar Dinge stehen an – ohne Stress. Ich helfe dir gern beim Sortieren.
-      </p>
-    `;
-  }
-
-  checkMount.innerHTML = `
-    <div class="ampel-reveal ${color}">
-      <div class="ampel-dot"></div>
-      <h3>${title}</h3>
-      <p>${text}</p>
-      ${ctaHtml}
-      <button class="btn btn-primary ampel-restart" type="button" onclick="resetAmpel()">
-        Nochmal testen
-      </button>
-    </div>
-  `;
-
-  // Cinematic Reveal (mit kleinem Delay)
-  const revealEl = document.querySelector(".ampel-reveal");
-  if (revealEl) {
-    setTimeout(() => {
-      revealEl.classList.add("visible");
-
-      // Optionaler „Breath“-Pulse
-      if (revealEl.animate) {
-        revealEl.animate(
-          [
-            { transform: "scale(.96)", opacity: 0 },
-            { transform: "scale(1.02)", opacity: 1 },
-            { transform: "scale(1)", opacity: 1 }
-          ],
-          { duration: 620, easing: "cubic-bezier(0.22,1,0.36,1)" }
-        );
-      }
-    }, 60);
-  }
-}
-
-/* ------------------------------------------------------------
-   Restart-Funktion für die Ampel
------------------------------------------------------------- */
-function resetAmpel() {
-  resetAmpelState();
-  renderStep1();
 }
