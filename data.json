@@ -1,9 +1,25 @@
 {
+  "config_version": "1.0.0",
+
+  "feature_flags": {
+    "enable_whisper": true,
+    "enable_qr": true,
+    "enable_cases": true,
+    "enable_employer_page": true,
+    "enable_ampel_page": true
+  },
+
   "brand": {
     "name": "Heiko Haerter",
     "claim_general": "Ruhiger Finanz-Kompass",
     "claim_employer": "Arbeitgeber-Architektur Bau & Handwerk",
     "email": "heiko.haerter@dvag.de",
+
+    "domains": {
+      "primary": "https://heikohaerter.com",
+      "cdn": "https://heikohaerter.com/assets"
+    },
+
     "year": "2026"
   },
 
@@ -15,47 +31,56 @@
     "datenschutz": "/datenschutz"
   },
 
+  "micro_hooks": {
+    "emotional": [
+      "Wenn du manchmal hoffst, einfach nichts zu übersehen …",
+      "Ein kurzer Blick – bevor der Alltag weiterläuft.",
+      "Ein Moment Ruhe für deinen Kopf."
+    ],
+    "rational": [
+      "2 Minuten. 3 Fragen. Deine Ampel.",
+      "Wenn dein Kopf voll ist – aber du trotzdem sicher sein willst.",
+      "Die einfachste Entscheidung des Tages."
+    ]
+  },
+
   "social_proof": {
     "startseite": [
-      "22:47 Uhr. Die Kinder schlafen. Die Ampel hat uns beruhigt.",
-      "Ich wollte nur kurz wissen, ob irgendwo eine Lücke ist.",
-      "Das war das erste Mal, dass Finanzen leicht waren.",
-      "Endlich mal ohne Verkaufsdruck.",
-      "Ich hab das in 2 Minuten verstanden – das hatte ich noch nie."
+      { "text": "22:47 Uhr. Die Kinder schlafen. Die Ampel hat uns beruhigt.", "tag": "emotional" },
+      { "text": "Ich wollte nur kurz wissen, ob irgendwo eine Lücke ist.", "tag": "neutral" },
+      { "text": "Das war das erste Mal, dass Finanzen leicht waren.", "tag": "emotional" },
+      { "text": "Endlich mal ohne Verkaufsdruck.", "tag": "trust" },
+      { "text": "Ich hab das in 2 Minuten verstanden – das hatte ich noch nie.", "tag": "activation" }
     ],
+
     "weitergeben": [
-      "Ich hätte nicht gedacht, dass so ein kleiner Link so viel Ruhe bringt.",
-      "Hab's weitergegeben – kam total gut an.",
-      "Meine Schwester meinte: 'Das hat mir gerade gefehlt.'",
-      "Mein Kollege: 'Das war das erste Mal, dass Finanzen leicht waren.'"
+      { "text": "Ich hätte nicht gedacht, dass so ein kleiner Link so viel Ruhe bringt.", "tag": "emotional" },
+      { "text": "Hab's weitergegeben – kam total gut an.", "tag": "activation" },
+      { "text": "Meine Schwester meinte: 'Das hat mir gerade gefehlt.'", "tag": "emotional" },
+      { "text": "Mein Kollege: 'Das war das erste Mal, dass Finanzen leicht waren.'", "tag": "trust" }
     ],
+
     "arbeitgeber": [
       {
         "branche": "Tiefbau · 35 Mitarbeiter",
         "vorher": "3 Kündigungen pro Jahr.",
-        "nachher": "klare Einführung der Benefits, ruhiger Informationsprozess, stabilere Teams."
+        "nachher": "klare Einführung der Benefits, ruhiger Informationsprozess, stabilere Teams.",
+        "tag": "stability"
       },
       {
         "branche": "SHK · 18 Mitarbeiter",
         "vorher": "Onboarding chaotisch.",
-        "nachher": "feste Abläufe, klare Zuständigkeiten, stärkere Bindung."
+        "nachher": "feste Abläufe, klare Zuständigkeiten, stärkere Bindung.",
+        "tag": "process"
       },
       {
         "branche": "Elektro · 50 Mitarbeiter",
         "vorher": "Unsicherheit wegen bAV-Haftung.",
-        "nachher": "geprüfte Prozesse, klare Dokumentation, sichere Abläufe."
+        "nachher": "geprüfte Prozesse, klare Dokumentation, sichere Abläufe.",
+        "tag": "risk"
       }
     ]
   },
-
-  "micro_hooks": [
-    "Wenn du manchmal hoffst, einfach nichts zu übersehen …",
-    "Ein kurzer Blick – bevor der Alltag weiterläuft.",
-    "2 Minuten. 3 Fragen. Deine Ampel.",
-    "Ein Moment Ruhe für deinen Kopf.",
-    "Die einfachste Entscheidung des Tages.",
-    "Wenn dein Kopf voll ist – aber du trotzdem sicher sein willst."
-  ],
 
   "referral_variants": {
     "neutral": [
@@ -96,78 +121,105 @@
     ]
   },
 
-  "check_ampel": {
-    "questions": [
-      {
-        "id": "q1",
-        "text": "Wie sicher fühlst du dich heute, falls etwas passieren würde?",
-        "options": {
-          "green": "Ich wäre stabil aufgestellt",
-          "yellow": "Unsicher, kommt drauf an",
-          "red": "Wahrscheinlich gar nicht"
+  "checks": {
+    "ampel": {
+      "scoring": {
+        "green": 0,
+        "yellow": 1,
+        "red": 2,
+        "thresholds": {
+          "green": 0,
+          "yellow": 2,
+          "red": 4
         }
       },
-      {
-        "id": "q2",
-        "text": "Wie klar ist dir, was im Ernstfall wirklich zählt?",
-        "options": {
-          "green": "Sehr klar",
-          "yellow": "Mittel",
-          "red": "Eher unklar"
-        }
-      },
-      {
-        "id": "q3",
-        "text": "Wie geordnet fühlst du deinen aktuellen Stand?",
-        "options": {
-          "green": "Gut strukturiert",
-          "yellow": "Teilweise chaotisch",
-          "red": "Nicht strukturiert"
-        }
-      }
-    ],
-    "results": {
-      "green": "Dein Alltag wirkt heute stabil. 🟢",
-      "yellow": "Einige Bereiche wirken unsicher – ein kurzer Blick könnte beruhigen. 🟡",
-      "red": "Dein Alltag wirkt fragil – hier entsteht echter Handlungsdruck. 🔴"
-    }
-  },
 
-  "check_arbeitgeber": {
-    "questions": [
-      {
-        "id": "ag1",
-        "text": "Wie stabil empfindest du eure Team-Struktur?",
-        "options": {
-          "green": "Stabil",
-          "yellow": "Teilweise stabil",
-          "red": "Instabil / wechselhaft"
+      "questions": [
+        {
+          "id": "q1",
+          "text": "Wie sicher fühlst du dich heute, falls etwas passieren würde?",
+          "options": {
+            "green": "Ich wäre stabil aufgestellt",
+            "yellow": "Unsicher / kommt drauf an",
+            "red": "Wahrscheinlich gar nicht"
+          }
+        },
+        {
+          "id": "q2",
+          "text": "Wie klar ist dir, was im Ernstfall wirklich zählt?",
+          "options": {
+            "green": "Sehr klar",
+            "yellow": "Mittel",
+            "red": "Eher unklar"
+          }
+        },
+        {
+          "id": "q3",
+          "text": "Wie geordnet fühlst du deinen aktuellen Stand?",
+          "options": {
+            "green": "Gut strukturiert",
+            "yellow": "Teilweise chaotisch",
+            "red": "Nicht strukturiert"
+          }
         }
-      },
-      {
-        "id": "ag2",
-        "text": "Wie klar und dokumentiert sind eure Abläufe?",
-        "options": {
-          "green": "Klar & dokumentiert",
-          "yellow": "Teilweise dokumentiert",
-          "red": "Kaum dokumentiert"
-        }
-      },
-      {
-        "id": "ag3",
-        "text": "Wie sicher fühlst du dich hinsichtlich Arbeitgeber-Pflichten (bAV, Haftung)?",
-        "options": {
-          "green": "Sehr sicher",
-          "yellow": "Unsicher",
-          "red": "Gefährlich unsicher"
-        }
+      ],
+
+      "results": {
+        "green": "Dein Alltag wirkt heute stabil. 🟢",
+        "yellow": "Einige Bereiche wirken unsicher – ein kurzer Blick könnte beruhigen. 🟡",
+        "red": "Dein Alltag wirkt fragil – hier entsteht echter Handlungsdruck. 🔴"
       }
-    ],
-    "results": {
-      "green": "Ihr Betrieb wirkt stabil organisiert. 🟢",
-      "yellow": "Einige Bereiche bremsen Stabilität & Sicherheit. 🟡",
-      "red": "Stabile Arbeitgeber-Strukturen fehlen – echter Handlungsdruck. 🔴"
     },
-    "meta_note": "Die 3 Fragen stammen aus über 250 Arbeitgeber-Projekten im Handwerk."
+
+    "arbeitgeber": {
+      "scoring": {
+        "green": 0,
+        "yellow": 1,
+        "red": 2,
+        "thresholds": {
+          "green": 0,
+          "yellow": 2,
+          "red": 4
+        }
+      },
+
+      "questions": [
+        {
+          "id": "ag1",
+          "text": "Wie stabil empfindest du eure Team-Struktur?",
+          "options": {
+            "green": "Stabil",
+            "yellow": "Teilweise stabil",
+            "red": "Instabil / wechselhaft"
+          }
+        },
+        {
+          "id": "ag2",
+          "text": "Wie klar und dokumentiert sind eure Abläufe?",
+          "options": {
+            "green": "Klar & dokumentiert",
+            "yellow": "Teilweise dokumentiert",
+            "red": "Kaum dokumentiert"
+          }
+        },
+        {
+          "id": "ag3",
+          "text": "Wie sicher fühlst du dich hinsichtlich Arbeitgeber-Pflichten (bAV, Haftung)?",
+          "options": {
+            "green": "Sehr sicher",
+            "yellow": "Unsicher",
+            "red": "Gefährlich unsicher"
+          }
+        }
+      ],
+
+      "results": {
+        "green": "Ihr Betrieb wirkt stabil organisiert. 🟢",
+        "yellow": "Einige Bereiche bremsen Stabilität & Sicherheit. 🟡",
+        "red": "Stabile Arbeitgeber-Strukturen fehlen – echter Handlungsdruck. 🔴"
+      },
+
+      "meta_note": "Die 3 Fragen stammen aus über 250 Arbeitgeber-Projekten im Handwerk."
+    }
   }
 }
