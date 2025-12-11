@@ -1,306 +1,375 @@
-<!-- /index.html -->
-<!DOCTYPE html>
+<!-- /public/index.html -->
+<!doctype html>
 <html lang="de" class="no-js" translate="no">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="dark">
-  <meta name="description" content="2 Minuten. Ein kurzer Blick zeigt dir sofort, was heute wichtig ist. Anonym, ohne Druck. Du entscheidest in Ruhe. Zero-Risk: kein Vorteil → 25 €.">
-  <meta name="theme-color" content="#05070E">
-  <link rel="canonical" href="https://heikohaerter.com/">
-  <title>2-Minuten-Ampel – sofort sehen, was heute zählt</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+  <title>2026 Master UI – ruhig, klar, schnell</title>
+  <meta name="description" content="Kurz ansehen. Sofort Orientierung. Ruhige UI für Seiten, die nicht nerven.">
+  <meta name="color-scheme" content="dark only" />
+  <meta name="theme-color" content="#05070E" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
 
-  <!-- Icons -->
-  <link rel="icon" href="./favicon.ico">
-  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <!-- Performance hints for hero image -->
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="dns-prefetch" href="//images.unsplash.com">
+  <link rel="preload" as="image"
+        href="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop"
+        imagesrcset="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop 1600w"
+        fetchpriority="high">
 
-  <!-- Styles (eine Datei, cache-busted) -->
-  <link rel="stylesheet" href="./styles.css?v=3">
-
-  <!-- Performance: Hero Preload (nur anpassen, wenn Pfad existiert) -->
-  <link rel="preload" as="image" href="./assets/hero.webp" imagesrcset="./assets/hero.webp 1600w" fetchpriority="high">
-
-  <!-- Optional: externes JS (falls vorhanden) -->
-  <script src="./app.js?v=3" defer></script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebSite",
-    "name":"Heiko Haerter – Ruhige Finanzbegleitung",
-    "url":"https://heikohaerter.com/"
-  }
-  </script>
-  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+  <!-- JS-ready flag (CLS-safe) -->
+  <script>document.documentElement.classList.replace('no-js','js');</script>
   <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
-</head>
 
+  <style>
+  /* =========================================================
+     2026 MASTER UI SYSTEM — Ultra-stable · Mobile-first · Neuro-light
+     ========================================================= */
+  @layer tokens, base, components, utilities;
+
+  /* 1) ROOT TOKENS */
+  @layer tokens {
+    :root {
+      --bg:#05070E;--bg-soft:#0A0F1E;--surface:rgba(255,255,255,0.045);--surface-soft:rgba(255,255,255,0.06);
+      --text:#F7F8FC;--muted:#A8B1C5;--muted-soft:#8F97AA;--gold:#C8A44B;--gold-soft:#E9D394;--focus:#90C2FF;
+      --radius-xl:34px;--radius-lg:24px;--radius-md:18px;--radius-sm:12px;
+      --elev-1:0 18px 40px rgba(0,0,0,0.35);--elev-2:0 30px 80px rgba(0,0,0,0.55);
+      --ease:cubic-bezier(.25,.46,.25,1);--max-width:1120px;
+      --bg-glow-1:radial-gradient(circle at 15% -10%, rgba(200,164,75,0.22), transparent 55%);
+      --bg-glow-2:radial-gradient(circle at 85% 10%, rgba(120,150,255,0.18), transparent 60%);
+      color-scheme:dark;
+    }
+  }
+
+  /* 2) BASE */
+  @layer base {
+    *,:before,:after{box-sizing:border-box}
+    html,body{margin:0;padding:0;overflow-x:hidden;background:var(--bg);color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;line-height:1.6}
+    /* CLS: reserve media size + avoid offscreen work */
+    img,picture,svg,video{max-width:100%;height:auto;display:block;content-visibility:auto;contain-intrinsic-size:300px 200px}
+    a{color:inherit;text-decoration:none}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:8px}
+    @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+    @media (prefers-contrast: more){:root{--surface:rgba(255,255,255,0.08);--surface-soft:rgba(255,255,255,0.12)}}
+  }
+
+  /* 3) TYPE */
+  @layer components {
+    .hh-h1{font-size:clamp(1.9rem,4vw,3rem);font-weight:700;line-height:1.15;margin:0 0 1rem;letter-spacing:-.01em}
+    .hh-h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin:0 0 .8rem;letter-spacing:-.01em}
+    h3{font-size:clamp(1.12rem,2vw,1.3rem);margin:0 0 .5rem;font-weight:700}
+    p,li{font-size:clamp(1rem,1.1vw,1.08rem);color:var(--muted)}
+    .hh-micro,.hh-label{color:var(--muted-soft);font-size:.92rem;letter-spacing:.05em}
+  }
+
+  /* 4) LAYOUT */
+  @layer components {
+    .hh-container{width:100%;max-width:var(--max-width);margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
+    .hh-section{padding-block:clamp(36px,7vw,80px)}
+    .hh-grid-auto{display:grid;gap:clamp(.8rem,2vw,1.4rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+    .hh-grid-hero{display:grid;gap:clamp(1.6rem,3vw,2.4rem)}
+    @media (min-width:1024px){.hh-grid-hero{grid-template-columns:1.1fr .9fr;align-items:center}}
+    .hh-stack{display:flex;flex-direction:column;gap:clamp(.6rem,1.5vw,1.1rem)}
+    .hh-center{text-align:center}
+  }
+
+  /* 5) BUTTONS */
+  @layer components {
+    .hh-btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.4rem;border-radius:999px;border:1px solid transparent;cursor:pointer;font-weight:800;background:rgba(255,255,255,0.06);color:var(--text);transition:transform .18s var(--ease),box-shadow .18s var(--ease),filter .18s var(--ease);min-height:48px;position:relative;isolation:isolate}
+    .hh-btn:hover{transform:translateY(-2px)}
+    .hh-btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#111;box-shadow:0 12px 28px rgba(200,164,75,0.35)}
+    .hh-btn-primary:hover{box-shadow:0 18px 40px rgba(200,164,75,0.45);filter:brightness(1.06)}
+    .hh-btn-ghost{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16)}
+    @media (max-width:768px){.hh-btn,.hh-btn-primary,.hh-btn-ghost{width:100%}}
+  }
+
+  /* 6) CARDS */
+  @layer components {
+    .hh-card{background:var(--surface);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-md);padding:1rem 1.2rem;box-shadow:var(--elev-1);transition:transform .18s var(--ease),box-shadow .18s var(--ease);will-change:transform}
+    .hh-story,.hh-story-sm{background:rgba(255,255,255,0.05)}
+    .hh-benefit{background:rgba(255,255,255,0.08)}
+    .hh-zero{border:1px dashed rgba(233,211,148,0.45);background:rgba(233,211,148,0.08)}
+    .hh-card:hover{transform:translateY(-4px);box-shadow:0 22px 48px rgba(0,0,0,0.55)}
+  }
+
+  /* 7) HERO IMG */
+  @layer components {.hh-hero-image img{width:100%;border-radius:var(--radius-lg);box-shadow:var(--elev-2);background:var(--bg-soft)}}
+
+  /* 8) FOOTER */
+  @layer components {.hh-footer{padding:2rem 0;border-top:1px solid rgba(255,255,255,0.1);text-align:center;background:rgba(5,8,22,0.95)}.hh-footer a{text-decoration:underline}}
+
+  /* 9) ANIMATIONS */
+  @layer components {
+    .fade-up{opacity:0;transform:translateY(18px)}
+    .fade-up.visible{opacity:1;transform:none;transition:opacity .55s var(--ease),transform .55s var(--ease)}
+    @supports (animation-timeline: view()){
+      @media (prefers-reduced-motion: no-preference){
+        .fade-up{view-timeline-name:--fade;view-timeline-axis:block;animation-timeline:--fade;animation-name:fadeUpAnim;animation-range:entry 10% cover 40%;animation-fill-mode:both}
+        @keyframes fadeUpAnim{0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)}}
+      }
+    }
+  }
+
+  /* 10) SAFE AREAS */
+  @layer components {@supports(padding:max(0px)){body{padding-bottom:max(env(safe-area-inset-bottom),0px)}}}
+
+  /* 11) WIX FIX */
+  @layer utilities {[data-mesh-id],[data-mesh-id] *{transform:none!important}[data-mesh-id]{max-width:none!important;width:100%!important}}
+
+  /* OPTION A — PERFORMANCE */
+  @layer utilities {
+    .hh-accelerate,.fade-up,.hh-btn,.hh-card,.hh-hero-image img{will-change:transform,opacity;transform:translateZ(0)}
+    html{scroll-behavior:smooth}
+    .snap-y{scroll-snap-type:y proximity}.snap-y .hh-section{scroll-snap-align:start;scroll-snap-stop:always}
+    *{-webkit-tap-highlight-color:transparent}a,button{touch-action:manipulation}
+  }
+
+  /* OPTION B — MICRO DOPAMIN */
+  @layer utilities {
+    .hh-btn:hover{transform:translateY(-3px) scale(1.02)}
+    .hh-btn-primary:hover{filter:brightness(1.12)}
+    @keyframes hhPulse{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0.25)}70%{transform:scale(1.02);box-shadow:0 0 22px 10px rgba(200,164,75,0.15)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0)}
+    }
+    .hh-btn-primary[data-ctx="sticky"],#ctaFinal,.hero-cta{animation:hhPulse 4s ease-in-out infinite;animation-delay:1.4s}
+    .hh-ripple{position:absolute;width:18px;height:18px;background:rgba(255,255,255,0.28);border-radius:50%;transform:translate(-50%,-50%);animation:hhRipple .45s ease-out forwards;pointer-events:none;inset:0}
+    @keyframes hhRipple{to{opacity:0;transform:translate(-50%,-50%) scale(8)}}
+    .hh-glow{box-shadow:0 0 32px rgba(233,211,148,.35)!important;transition:box-shadow .35s ease-out}
+    .hh-click{transform:scale(.96);transition:transform .15s var(--ease)}
+  }
+
+  /* OPTION C — COMPONENTS */
+  @layer components {
+    .hh-ampel{display:flex;flex-direction:column;gap:1rem}
+    .hh-ampel-item{padding:1rem 1.2rem;border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:flex-start;gap:.8rem;font-size:1.05rem;background:var(--surface)}
+    .hh-ampel-item.now{background:rgba(255,68,68,0.12);border-color:rgba(255,68,68,0.35)}
+    .hh-ampel-item.next{background:rgba(255,188,45,0.12);border-color:rgba(255,188,45,0.35)}
+    .hh-ampel-item.later{background:rgba(108,255,108,0.12);border-color:rgba(108,255,108,0.28)}
+    .hh-step{display:none;background:var(--surface);padding:1.4rem;border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.12)}
+    .hh-step.active{display:block}
+    .hh-progress{width:100%;background:rgba(255,255,255,0.08);border-radius:99px;height:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.12)}
+    .hh-progress-fill{background:linear-gradient(90deg,var(--gold),var(--gold-soft));height:100%;width:0%;border-radius:99px;transition:width .35s var(--ease)}
+    .sticky-cta{position:fixed;left:0;right:0;bottom:14px;display:none;justify-content:center;padding-bottom:calc(env(safe-area-inset-bottom) + 6px);z-index:90;transform:translateY(100%);opacity:0;transition:opacity .25s var(--ease),transform .25s var(--ease)}
+    @media (max-width:979px){.sticky-cta{display:flex}}
+    .sticky-cta .inner{background:rgba(5,8,22,.88);border:1px solid rgba(255,255,255,.08);padding:.55rem;border-radius:999px;box-shadow:var(--elev-1)}
+    .sticky-cta.show{transform:translateY(0);opacity:1}
+  }
+
+  /* DECORATIVE BG */
+  @layer utilities {.hh-bg{position:relative}.hh-bg::before,.hh-bg::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1}.hh-bg::before{background:var(--bg-glow-1)}.hh-bg::after{background:var(--bg-glow-2)}}
+  </style>
+</head>
 <body class="hh-bg">
 
-<header class="hh-header">
-  <div class="hh-container hh-header-bar">
-    <a href="./" class="hh-brand" aria-label="Startseite">
-      <span class="hh-brand-dot" aria-hidden="true"></span>
-      <span class="hh-brand-sub">Ruhige Finanzbegleitung</span>
-    </a>
-    <button id="dfBtn" class="hh-btn hh-btn-ghost" aria-pressed="false" style="margin-left:auto">🔍 Kurzmodus</button>
-  </div>
-</header>
-
-<main id="main">
-
   <!-- HERO -->
-  <section class="hh-section fade-up hero" id="hero" aria-labelledby="hero-title">
+  <header class="hh-section" role="banner">
     <div class="hh-container hh-grid-hero">
-
-      <div class="hh-stack hero-content">
-        <p class="hh-micro intro-line">2 Minuten. Anonym. Ohne Druck. In Ruhe entscheiden.</p>
-
-        <h1 id="hero-title" class="hh-h1">
-          Deine 2-Minuten-Ampel. Zeigt sofort, was heute zählt.
-        </h1>
-
-        <ul class="hero-benefits" aria-label="Kurz & klar">
-          <li>🟢 Jetzt · Als Nächstes · Später – sofort sichtbar</li>
-          <li>🟢 100 % anonym · kein Verkauf · kein Login</li>
-          <li>🟢 Kein Vorteil → 25 € (Zero-Risk)</li>
-        </ul>
-
-        <a href="#startCheck" class="hh-btn hh-btn-primary hero-cta" id="startCheckHero">
-          ✨ Jetzt ansehen (2 Minuten)
-        </a>
-
-        <div class="hh-card hh-story fade-up" aria-live="polite">
-          <p>„22:47. Kinder schlafen. Ein Blick – und der Kopf wird ruhig.“</p>
+      <div class="hh-stack fade-up">
+        <span class="hh-label">Klar sehen. In Ruhe entscheiden.</span>
+        <h1 class="hh-h1">Stabil. Schnell. Ruhig.</h1>
+        <p>Ein kurzer Blick zeigt dir sofort, was zählt. Ohne Druck. In deinem Tempo.</p>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+          <button class="hh-btn hh-btn-primary hero-cta" data-ripple type="button">Kurz ansehen</button>
+          <button class="hh-btn hh-btn-ghost" data-ripple type="button">System öffnen</button>
         </div>
       </div>
-
       <figure class="hh-hero-image fade-up">
-        <img src="./assets/hero.webp" alt="2-Minuten-Ampel – sofort Klarheit" width="1600" height="1200" loading="eager" fetchpriority="high" decoding="async" />
+        <img
+          src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop"
+          alt="Ruhige, klare Oberfläche. Fokus ohne Ablenkung."
+          width="1600" height="1200" loading="eager" decoding="async" fetchpriority="high" />
       </figure>
+    </div>
+  </header>
 
+  <!-- BENEFITS -->
+  <section class="hh-section snap-item" aria-labelledby="b-title">
+    <div class="hh-container hh-grid-auto">
+      <h2 id="b-title" class="hh-h2 fade-up" style="grid-column:1/-1">Warum es sich ruhig anfühlt</h2>
+      <div class="hh-card hh-benefit fade-up">
+        <h3>Kein Wackeln</h3>
+        <p>Nichts springt. Bilder haben festen Platz. Ruhiges Scrollen.</p>
+      </div>
+      <div class="hh-card hh-benefit fade-up">
+        <h3>Sanfte Bewegung</h3>
+        <p>Dezente Effekte. Respektiert „Bewegung reduzieren“. Immer angenehm.</p>
+      </div>
+      <div class="hh-card hh-benefit fade-up">
+        <h3>Schnelles Laden</h3>
+        <p>Kurz warten, dann sofort sehen. Fix. Klar. Einfach.</p>
+      </div>
     </div>
   </section>
 
-  <!-- 5 BEREICHE -->
-  <section class="hh-section fade-up" aria-labelledby="areas-title">
+  <!-- AMPEL -->
+  <section class="hh-section" aria-labelledby="a-title">
     <div class="hh-container">
-      <h2 class="hh-h2" id="areas-title">Fünf Bereiche. Ein Gefühl für heute.</h2>
-
-      <div class="hh-grid-auto" id="areasIcons">
-        <div class="icon-card icon fade-up"><h3>Finanzbasis</h3><p class="hh-micro">Wie stabil fühlt es sich heute an?</p></div>
-        <div class="icon-card icon fade-up"><h3>Sicherheit</h3><p class="hh-micro">Welche Punkte zählen heute wirklich?</p></div>
-        <div class="icon-card icon fade-up"><h3>Rücklagen</h3><p class="hh-micro">Reicht es für Unerwartetes?</p></div>
-        <div class="icon-card icon fade-up"><h3>Zukunft</h3><p class="hh-micro">Was wäre der nächste sinnvolle Schritt?</p></div>
-        <div class="icon-card icon fade-up"><h3>Ruhegefühl</h3><p class="hh-micro">Was bringt dir heute spürbar Entspannung?</p></div>
+      <h2 class="hh-h2 fade-up" id="a-title">Dein Gefühl: Jetzt · Als Nächstes · Später</h2>
+      <div class="hh-ampel" role="list">
+        <div class="hh-ampel-item now fade-up" role="listitem"><strong>Jetzt:</strong>&nbsp;Wichtige Punkte zuerst. Ohne Hektik.</div>
+        <div class="hh-ampel-item next fade-up" role="listitem"><strong>Als Nächstes:</strong>&nbsp;Geldpolster sortieren. Schritt für Schritt.</div>
+        <div class="hh-ampel-item later fade-up" role="listitem"><strong>Später:</strong>&nbsp;Feinschliff, wenn es passt.</div>
       </div>
     </div>
   </section>
 
-  <!-- CHECK START -->
-  <section class="hh-section fade-up" id="startCheck" aria-labelledby="start-title">
-    <div class="hh-container hh-center">
-      <h2 class="hh-h2" id="start-title">2-Minuten-Ampel starten</h2>
-      <p class="hh-micro">Anonym. Keine Unterlagen. Du entscheidest komplett selbst.</p>
-      <a href="#ampel-check" class="hh-btn hh-btn-primary" id="startCheckBtn">🚦 Ampel starten</a>
-    </div>
-  </section>
-
-  <!-- AMPEL ENGINE -->
-  <section class="hh-section fade-up" id="ampel-check" aria-labelledby="ampel-title">
+  <!-- STEPS ENGINE -->
+  <section class="hh-section" aria-labelledby="s-title">
     <div class="hh-container">
+      <h2 class="hh-h2 fade-up" id="s-title">Mini-Check (2–3 Minuten)</h2>
 
-      <div id="check-start" class="hh-center" aria-live="polite">
-        <h2 class="hh-h2" id="ampel-title" style="margin:0 0 .4rem">Mini-Check</h2>
-        <p class="hh-micro">Kurzer Blick. Drei Schritte. Sofort Orientierung.</p>
-      </div>
+      <div class="hh-progress" aria-hidden="true"><div class="hh-progress-fill" id="progressFill"></div></div>
 
-      <div class="hh-stack" style="margin-block:.6rem 1rem">
-        <div class="hh-label" id="stepLabel">Schritt 1 von 3</div>
-        <div class="hh-micro" id="stepHint">Kurzer Eindruck reicht.</div>
-        <div class="hh-progress" style="width:100%;background:rgba(255,255,255,.08);border-radius:999px;height:10px;border:1px solid rgba(255,255,255,.12)">
-          <div id="progressBar" class="hh-progress-fill" style="width:0%"></div>
+      <form id="stepsForm" class="hh-stack" style="margin-top:1rem" novalidate>
+        <div class="hh-step active" data-step="1">
+          <label class="hh-label" for="i-haushalt">1/3 — Haushalt</label>
+          <input id="i-haushalt" class="hh-card" type="text" name="haushalt" placeholder="z. B. 2 Erwachsene, 1 Kind" required />
         </div>
-      </div>
+        <div class="hh-step" data-step="2">
+          <label class="hh-label" for="i-rate">2/3 — Monatsrate Sparen (optional)</label>
+          <input id="i-rate" class="hh-card" type="number" inputmode="numeric" name="rate" placeholder="z. B. 300" min="0" step="50" />
+        </div>
+        <div class="hh-step" data-step="3">
+          <label class="hh-label" for="i-prio">3/3 — Priorität</label>
+          <select id="i-prio" class="hh-card" name="prio" required>
+            <option value="">Bitte wählen</option>
+            <option>Sicherheit</option>
+            <option>Geldpolster</option>
+            <option>Sparen</option>
+          </select>
+        </div>
 
-      <div id="check-steps" class="steps-wrapper" role="group" aria-label="Ampel Schritte">
-        <div class="step" data-step="1">
-          <h3>Schritt 1</h3>
-          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-            <button type="button" class="hh-btn" data-value="2">☑ Passt</button>
-            <button type="button" class="hh-btn" data-value="0">❓ Unsicher</button>
-            <button type="button" class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
-          </div>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+          <button type="button" class="hh-btn hh-btn-ghost" id="prevBtn" data-ripple>Zurück</button>
+          <button type="button" class="hh-btn hh-btn-primary" id="nextBtn" data-ripple>Weiter</button>
         </div>
-        <div class="step" data-step="2" style="display:none">
-          <h3>Schritt 2</h3>
-          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-            <button type="button" class="hh-btn" data-value="2">☑ Passt</button>
-            <button type="button" class="hh-btn" data-value="0">❓ Unsicher</button>
-            <button type="button" class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
-          </div>
-        </div>
-        <div class="step" data-step="3" style="display:none">
-          <h3>Schritt 3</h3>
-          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
-            <button type="button" class="hh-btn" data-value="2">☑ Passt</button>
-            <button type="button" class="hh-btn" data-value="0">❓ Unsicher</button>
-            <button type="button" class="hh-btn" data-value="1">⚠ Könnte wichtig sein</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="check-result" class="fade-up" aria-live="polite" style="margin-top:1rem"></div>
+      </form>
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <section class="hh-section fade-up" id="final-cta" aria-labelledby="final-title">
-    <div class="hh-container hh-center" style="max-width:720px">
-      <h2 class="hh-h2" id="final-title">Kurz sortieren. In Ruhe entscheiden.</h2>
-      <p class="hh-micro">Kein Druck. Kein Nachfassen. Kein Vorteil → 25 €.</p>
-      <a href="#startCheck" class="hh-btn hh-btn-primary" id="ctaFinal">✨ Jetzt ansehen</a>
+  <!-- SHARE COMPOSER -->
+  <section class="hh-section" aria-labelledby="sh-title">
+    <div class="hh-container">
+      <h2 class="hh-h2 fade-up" id="sh-title">Weitergeben (WhatsApp-Ton)</h2>
+      <div class="hh-share-box fade-up">
+        <div class="hh-share-seg" role="group" aria-label="Zielgruppe wählen">
+          <button type="button" class="hh-share-seg-btn" data-seg="eltern" aria-pressed="true">Eltern</button>
+          <button type="button" class="hh-share-seg-btn" data-seg="paare" aria-pressed="false">Paare</button>
+          <button type="button" class="hh-share-seg-btn" data-seg="selbst" aria-pressed="false">Selbstständige</button>
+        </div>
+        <label class="hh-label" for="shareText">Kurztext</label>
+        <textarea id="shareText" placeholder="Kurz, anonym, ohne Druck …" aria-describedby="sharePreview"></textarea>
+        <div class="hh-share-preview" id="sharePreview" aria-live="polite">Vorschau erscheint hier …</div>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+          <button class="hh-btn hh-btn-primary" data-ripple type="button">Text kopieren</button>
+          <button class="hh-btn hh-btn-ghost" data-ripple type="button">Als Vorlage speichern</button>
+        </div>
+      </div>
     </div>
   </section>
 
-</main>
+  <!-- FOOTER -->
+  <footer class="hh-footer" role="contentinfo">
+    <div class="hh-container hh-micro">© 2026 Heiko Haerter · Design System</div>
+  </footer>
 
-<footer class="hh-footer" role="contentinfo">
-  <div class="hh-container">
-    © <span id="yearNow">2026</span> Heiko Haerter ·
-    <a href="./impressum">Impressum</a> ·
-    <a href="./datenschutz">Datenschutz</a>
+  <!-- STICKY CTA -->
+  <div class="sticky-cta" id="stickyCta" aria-hidden="true">
+    <div class="inner">
+      <button class="hh-btn hh-btn-primary" data-ctx="sticky" data-ripple id="ctaFinal" type="button">Kurz ansehen</button>
+    </div>
   </div>
-</footer>
 
-<!-- STICKY CTA (Mobile) -->
-<div class="sticky-cta" id="stickyCTA" aria-hidden="true">
-  <div class="inner">
-    <a href="#startCheck" class="hh-btn hh-btn-primary" data-ctx="sticky" id="stickyCtaBtn">Kurz ansehen</a>
-  </div>
-</div>
-
-<!-- INLINE SCRIPTS (gehärtet) -->
 <script>
-/* why: Zero-deps, ruhige UX */
-const $ = (s, p = document) => p.querySelector(s);
-const $$ = (s, p = document) => [...p.querySelectorAll(s)];
-const on = (el, t, fn, o) => el && el.addEventListener(t, fn, o);
-const off = (el, t, fn, o) => el && el.removeEventListener(t, fn, o);
-const raf = (cb) => (window.requestAnimationFrame || setTimeout)(cb);
+/* Minimal JS Enhancers (why: ruhige UX, klare Fallbacks) */
+(() => {
+  // fade-up IO (why: cheap, cleans after first view)
+  const io = ('IntersectionObserver' in window)
+    ? new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 })
+    : null;
+  document.querySelectorAll('.fade-up').forEach(el => io && io.observe(el));
 
-const safeStore = (()=>{try{const k="__t";localStorage.setItem(k,"1");localStorage.removeItem(k);return{
-  get(k){try{return localStorage.getItem(k)}catch{return null}},
-  set(k,v){try{localStorage.setItem(k,v)}catch{}},
-  del(k){try{localStorage.removeItem(k)}catch{}}
-}}catch{return{get:()=>null,set:()=>{},del:()=>{}}}})();
-
-const hasIO = "IntersectionObserver" in window;
-const prefersReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const isMobile = () => innerWidth < 980;
-
-/* FadeIn */
-const FadeIn = (()=>{let io;
-  function init(){
-    const els=$$(".fade-up");
-    if(prefersReducedMotion || !hasIO){ els.forEach(e=>e.classList.add("visible")); return; }
-    io=new IntersectionObserver(es=>{es.forEach(ent=>{ if(ent.isIntersecting){ ent.target.classList.add("visible"); io.unobserve(ent.target); }})},{rootMargin:"0px 0px -10% 0px",threshold:0.12});
-    els.forEach(el=>io.observe(el));
-  }
-  function destroy(){ io && io.disconnect(); }
-  return { init, destroy };
-})();
-
-/* Sticky CTA (mobile) */
-const StickyCTA = (()=>{let io, scrollRef;
-  function show(el, v){ raf(()=>{ el.style.transform=v?"translateY(0)":"translateY(120%)"; el.style.opacity=v?"1":"0"; el.setAttribute("aria-hidden", String(!v)); }); }
-  function init(){
-    const el=$("#stickyCTA"), hero=$("#hero"); if(!el||!hero||!isMobile()) return;
-    if(hasIO){ io=new IntersectionObserver(([e])=>show(el, !e.isIntersecting), {threshold:.12}); io.observe(hero); }
-    else { scrollRef = () => show(el, scrollY>180); on(window,"scroll",scrollRef,{passive:true}); scrollRef(); }
-  }
-  function destroy(){ io && io.disconnect(); scrollRef && off(window,"scroll",scrollRef,{passive:true}); }
-  return { init, destroy };
-})();
-
-/* Short Mode */
-const ShortMode = (()=>{ const KEY="hh_short_mode_v1";
-  function init(){
-    const btn=$("#dfBtn"); if(!btn) return;
-    const keep=["hero","final-cta","stickyCTA","share","ampel-check"];
-    const sections=$$("main > section").filter(s=>!keep.includes(s.id));
-    const set=(on)=>{ btn.setAttribute("aria-pressed", String(on)); btn.textContent = on ? "✅ Kurzmodus aktiv" : "🔍 Kurzmodus";
-      sections.forEach(sec=>sec.style.display = on ? "none" : ""); if(on) scrollTo({top:0,behavior:"smooth"}); safeStore.set(KEY, on ? "1" : "0"); };
-    set(safeStore.get(KEY)==="1"); on(btn,"click",()=> set(!(btn.getAttribute("aria-pressed")==="true")));
-  }
-  return { init };
-})();
-
-/* Ampel Engine */
-const Ampel = (()=>{ let score=0, step=1; const max=3;
-  const els={ start:$("#startCheckBtn"), heroStart:$("#startCheckHero"), finalStart:$("#ctaFinal"), shortBtn:$("#startShort"),
-    screen:$("#check-start"), wrap:$("#check-steps"), result:$("#check-result"), stepLabel:$("#stepLabel"), stepHint:$("#stepHint"), prog:$("#progressBar") };
-
-  function updateHeader(){ els.stepLabel && (els.stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`);
-    const pct=((Math.min(step-1,max-1))/(max-1))*100; els.prog && (els.prog.style.width=pct+"%");
-    els.stepHint && (els.stepHint.textContent = step===1 ? "Kurzer Eindruck reicht." : step===2 ? "Fast geschafft." : "Letzter Klick."); }
-
-  function showStep(n){ $$("#check-steps .step").forEach(s=>s.style.display="none"); const el=$(`#check-steps .step[data-step="${n}"]`);
-    if(el) el.style.display="block"; updateHeader(); el && el.scrollIntoView({behavior:"smooth"}); }
-
-  function finish(){ if(!els.wrap||!els.result) return;
-    els.wrap.style.display="none"; els.result.style.display="block";
-    const wa="https://wa.me/4917660408380?text=";
-    let html;
-    if(score<=4){
-      html=`<div class="result-card result-red"><h3>🔴 Deine Ampel: Jetzt</h3><p>Ein Bereich ist heute wichtig.</p><a class="hh-btn hh-btn-primary" href="${wa}Kurz%2010%20Minuten%20sprechen%3F%20(Ampel%20Rot)">💬 Kurz sprechen</a></div>`;
-    } else if(score<=7){
-      html=`<div class="result-card result-yellow"><h3>🟡 Deine Ampel: Als Nächstes</h3><p>Einige Punkte brauchen Orientierung.</p><a class="hh-btn hh-btn-primary" href="${wa}Was%20ist%20als%20N%C3%A4chstes%20sinnvoll%3F%20(Ampel%20Gelb)">🧭 Nächsten Schritt klären</a></div>`;
-    } else {
-      /* fix: entfernt falsches Space in der URL-Codierung */
-      html=`<div class="result-card result-green"><h3>🟢 Deine Ampel: Später</h3><p>Es wirkt stabil. Feinschliff möglich.</p><a class="hh-btn hh-btn-primary" href="${wa}Gibt%20es%20Feinschliff%3F%20(Ampel%20Gr%C3%BCn)">✨ Feinschliff ansehen</a></div>`;
+  // Sticky CTA (first viewport scroll)
+  const sticky = document.getElementById('stickyCta');
+  let stickyShown = false;
+  const onScroll = () => {
+    if (stickyShown) return;
+    if (window.scrollY > window.innerHeight * 0.6) {
+      sticky.classList.add('show');
+      sticky.setAttribute('aria-hidden', 'false');
+      stickyShown = true;
+      window.removeEventListener('scroll', onScroll, { passive: true });
     }
-    els.result.innerHTML = html; els.result.scrollIntoView({behavior:"smooth"});
-  }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  function startFlow(){ els.screen && (els.screen.style.display="none"); els.wrap && (els.wrap.style.display="block"); els.result && (els.result.style.display="none"); score=0; step=1; showStep(step); }
-
-  function init(){
-    on(els.start,"click",startFlow);
-    on(els.heroStart,"click",(e)=>{e.preventDefault();startFlow();});
-    on(els.finalStart,"click",(e)=>{e.preventDefault();startFlow();});
-    on(els.shortBtn,"click",(e)=>{e.preventDefault();startFlow(); setTimeout(()=>{score+=2;step=2;showStep(step);},120); setTimeout(()=>{score+=2;step=3;showStep(step);},260);});
-    const container=$("#check-steps");
-    on(container,"click",(ev)=>{ const btn=ev.target.closest("#check-steps .step button"); if(!btn) return;
-      score += Number(btn.dataset.value) || 0; step++; if(step>max) finish(); else showStep(step); });
+  // Ripple (event-driven, auto cleanup)
+  function createRipple(e) {
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const dot = document.createElement('span');
+    dot.className = 'hh-ripple';
+    dot.style.left = x + 'px';
+    dot.style.top  = y + 'px';
+    btn.appendChild(dot);
+    dot.addEventListener('animationend', () => dot.remove());
   }
-  return { init };
-})();
+  document.querySelectorAll('[data-ripple]').forEach(b => b.addEventListener('click', createRipple));
 
-/* Dopamine UI (gentle) */
-const DopamineUI = (()=>{ let glowIO;
-  function rippleHandler(e){ const btn=e.target.closest("button, .hh-btn, .btn"); if(!btn) return;
-    const prev=btn.querySelector(".hh-ripple"); prev && prev.remove();
-    const r=document.createElement("span"); r.className="hh-ripple";
-    const rect=btn.getBoundingClientRect(); r.style.left=(e.clientX-rect.left)+"px"; r.style.top=(e.clientY-rect.top)+"px";
-    btn.appendChild(r); setTimeout(()=>r.remove(),450);
-  }
-  function initGlow(){ if(!("IntersectionObserver" in window)) return;
-    glowIO=new IntersectionObserver(es=>{ es.forEach(ent=>{ if(ent.isIntersecting){ ent.target.classList.add("hh-glow"); setTimeout(()=>ent.target.classList.remove("hh-glow"),900); glowIO.unobserve(ent.target); }})},{threshold:.4});
-    $$(".hh-card, .premium-card, .result-card").forEach(el=>glowIO.observe(el));
-  }
-  function init(){ on(document,"click",rippleHandler); initGlow(); }
-  return { init };
-})();
+  // Steps Engine
+  const form = document.getElementById('stepsForm');
+  const steps = Array.from(form.querySelectorAll('.hh-step'));
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const progressFill = document.getElementById('progressFill');
 
-/* Boot */
-(function boot(){
-  try{FadeIn.init()}catch{}
-  try{StickyCTA.init()}catch{}
-  try{ShortMode.init()}catch{}
-  try{Ampel.init()}catch{}
-  try{DopamineUI.init()}catch{}
-  const y=$("#yearNow"); if(y) y.textContent=String(new Date().getFullYear());
+  let idx = 0;
+  function setStep(i) {
+    idx = Math.max(0, Math.min(steps.length - 1, i));
+    steps.forEach((s, k) => s.classList.toggle('active', k === idx));
+    const pct = Math.round(((idx + 1) / steps.length) * 100);
+    progressFill.style.width = pct + '%';
+    prevBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
+    nextBtn.textContent = (idx === steps.length - 1) ? 'Fertig' : 'Weiter';
+  }
+  setStep(0);
+
+  nextBtn.addEventListener('click', () => {
+    if (idx < steps.length - 1) { setStep(idx + 1); return; }
+    progressFill.style.width = '100%';
+    document.getElementById('ctaFinal')?.focus();
+  });
+  prevBtn.addEventListener('click', () => setStep(idx - 1));
+
+  // Share Composer
+  const segBtns = document.querySelectorAll('.hh-share-seg-btn');
+  const shareText = document.getElementById('shareText');
+  const sharePreview = document.getElementById('sharePreview');
+
+  const presets = {
+    eltern: 'Hey, dachte an euch. Kurz & anonym. 2 Minuten geben ein Gefühl für heute – ohne Druck.',
+    paare:  'Hey, kurzer Blick für uns zwei. Zeigt sofort „Jetzt · Als Nächstes · Später“. Anonym.',
+    selbst: 'Hey, 2 Minuten Check. Siehst in Ruhe, wo du stehst. Ohne Nachfassen.'
+  };
+
+  function setSeg(seg) {
+    segBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.seg === seg)));
+    shareText.value = presets[seg] || '';
+    sharePreview.textContent = presets[seg] || 'Vorschau erscheint hier …';
+  }
+  segBtns.forEach(b => b.addEventListener('click', () => setSeg(b.dataset.seg)));
+  setSeg('eltern');
+
+  shareText.addEventListener('input', () => {
+    sharePreview.textContent = shareText.value.trim() || 'Vorschau erscheint hier …';
+  });
 })();
 </script>
 </body>
