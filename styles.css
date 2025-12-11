@@ -244,5 +244,5 @@ label{ color:#DDE3F4; font-size:.92rem; }
 /* ===================== UTILITIES ===================== */
 html{ scroll-behavior:smooth; }
 
-/* Optional subtle pulse for attention (used via JS only) */
+/* Optional subtle pulse (opt-in via JS when visible) */
 @keyframes hhPulse { 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.02); } }
