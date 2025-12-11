@@ -1,575 +1,348 @@
-<!doctype html>
-<html lang="de">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
-<title>Heiko Haerter – Ruhige Finanzbegleitung</title>
-<meta name="description" content="Klarheit, Vertrauen, Ruhe. Persönliche Finanzbegleitung ohne Druck – in deinem Tempo." />
-<meta name="color-scheme" content="dark only" />
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop" imagesrcset="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop 1600w" />
-<style>
-/* ==========================================================================
-   HEIKO HAERTER — 2026 UI SYSTEM (Mobile-first, CLS-safe, Motion-safe)
-   ========================================================================== */
+/* ========================================================================
+   File: /styles.css
+   HEIKO HAERTER — 2026 UI SYSTEM
+   Mobile-first • Accessible • Performance-first • Vanilla CSS
+   ======================================================================== */
+
+/* Layers keep specificity sane */
 @layer tokens, base, components, utilities;
-/* TOKENS /
+
+/* =========================
+   TOKENS
+   ========================= */
 @layer tokens {
-:root {
-/ Palette */
---bg: #05070E;
---bg-soft: #0A0F1E;
---surface: rgba(255,255,255,0.045);
---surface-soft: rgba(255,255,255,0.06);
---text: #F7F8FC;
---muted: #A8B1C5;
---muted-soft: #8F97AA;
---gold: #C8A44B;
---gold-soft: #E9D394;
---ok: #6BDB91;
---warn: #FFBC2D;
---danger: #FF5858;
---focus: #90C2FF;
-/* Type scale */
---fs-h1: clamp(2rem, 5.5vw, 3.25rem);
---fs-h2: clamp(1.6rem, 3.5vw, 2.2rem);
---fs-h3: clamp(1.12rem, 2.2vw, 1.35rem);
---fs-body: clamp(1rem, 1.2vw, 1.08rem);
---fs-micro: .92rem;
+  :root {
+    /* Palette */
+    --bg: #05070E;
+    --bg-soft: #0A0F1E;
+    --surface: rgba(255,255,255,0.045);
+    --surface-soft: rgba(255,255,255,0.07);
+    --text: #F7F8FC;
+    --muted: #A9B2C6;
+    --muted-soft: #8F97AA;
+    --gold: #C8A44B;
+    --gold-soft: #E9D394;
+    --ok: #6BDB91;
+    --warn: #FFBC2D;
+    --danger: #FF5858;
+    --focus: #90C2FF;
 
-/* Layout */
---max-w: 1120px;
---wrap-x: clamp(16px, 5vw, 32px);
---section-y: clamp(40px, 8vw, 96px);
+    /* Type scale (Refactoring UI: clear steps) */
+    --fs-h1: clamp(2rem, 5.5vw, 3.25rem);
+    --fs-h2: clamp(1.6rem, 3.5vw, 2.2rem);
+    --fs-h3: clamp(1.12rem, 2.2vw, 1.35rem);
+    --fs-body: clamp(1rem, 1.15vw, 1.08rem);
+    --fs-micro: .92rem;
 
-/* Radii */
---r-xl: 34px;
---r-lg: 24px;
---r-md: 18px;
---r-sm: 12px;
+    /* Spacing (4/8/12/16/24/32 system, expressed in rem) */
+    --s-1: 0.25rem;  /* 4px */
+    --s-2: 0.5rem;   /* 8px */
+    --s-3: 0.75rem;  /* 12px */
+    --s-4: 1rem;     /* 16px */
+    --s-5: 1.5rem;   /* 24px */
+    --s-6: 2rem;     /* 32px */
+    --s-7: clamp(2.5rem, 6vw, 3.5rem); /* 40–56px */
 
-/* Elevation */
---elev-1: 0 18px 40px rgba(0,0,0,0.35);
---elev-2: 0 30px 80px rgba(0,0,0,0.55);
+    /* Layout */
+    --max-w: 1120px;
+    --wrap-x: clamp(16px, 5vw, 32px);
+    --section-y: clamp(40px, 8vw, 96px);
 
-/* Motion */
---ease: cubic-bezier(.25,.46,.25,1);
+    /* Radii */
+    --r-xl: 34px;
+    --r-lg: 24px;
+    --r-md: 18px;
+    --r-sm: 12px;
 
-/* Decorative glows */
---bg-glow-1: radial-gradient(circle at 12% -10%, rgba(200,164,75,0.22), transparent 55%);
---bg-glow-2: radial-gradient(circle at 88% 12%, rgba(120,150,255,0.18), transparent 60%);
+    /* Elevation */
+    --elev-1: 0 18px 40px rgba(0,0,0,0.35);
+    --elev-2: 0 30px 80px rgba(0,0,0,0.55);
 
-color-scheme: dark;
+    /* Motion */
+    --ease: cubic-bezier(.25,.46,.25,1);
+    --ease-soft: cubic-bezier(.22,.61,.36,1);
 
+    /* Decorative glows */
+    --bg-glow-1: radial-gradient(circle at 12% -10%, rgba(200,164,75,0.22), transparent 55%);
+    --bg-glow-2: radial-gradient(circle at 88% 12%, rgba(120,150,255,0.18), transparent 60%);
+
+    color-scheme: dark;
+  }
+
+  @media (prefers-contrast: more) {
+    :root {
+      --surface: rgba(255,255,255,0.08);
+      --surface-soft: rgba(255,255,255,0.12);
+    }
+  }
 }
-}
-/* BASE */
+
+/* =========================
+   BASE
+   ========================= */
 @layer base {
-*,:before,:after { box-sizing: border-box }
-html, body {
-margin: 0; padding: 0; overflow-x: hidden;
-background: var(--bg); color: var(--text);
-font-family: -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
-line-height: 1.6; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+  *,:before,:after { box-sizing: border-box }
+
+  html, body {
+    margin: 0; padding: 0; overflow-x: hidden;
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+    line-height: 1.6; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+  }
+
+  img,picture,svg,video {
+    display: block; max-width: 100%; height: auto;
+    content-visibility: auto; contain-intrinsic-size: 1200px 800px;
+  }
+
+  a { color: inherit; text-decoration: none }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px;
+  }
+
+  ::selection { background: rgba(233,211,148,.25) }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important }
+  }
 }
-img,picture,svg,video { display: block; max-width: 100%; height: auto; content-visibility: auto; contain-intrinsic-size: 1200px 800px }
-a { color: inherit; text-decoration: none }
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px;
-}
-::selection { background: rgba(233,211,148,.25) }
-@media (prefers-reduced-motion: reduce) {
-* { animation: none !important; transition: none !important; scroll-behavior: auto !important }
-}
-@media (prefers-contrast: more) {
-:root { --surface: rgba(255,255,255,0.08); --surface-soft: rgba(255,255,255,0.12) }
-}
-}
-/* TYPOGRAPHY */
+
+/* =========================
+   TYPOGRAPHY
+   ========================= */
 @layer components {
-.hh-h1 { font-size: var(--fs-h1); font-weight: 800; line-height: 1.12; margin: 0 0 1rem; letter-spacing: -.01em }
-.hh-h2 { font-size: var(--fs-h2); font-weight: 800; line-height: 1.2; margin: 0 0 .9rem; letter-spacing: -.01em }
-h3 { font-size: var(--fs-h3); font-weight: 700; margin: 0 0 .6rem }
-p, li { font-size: var(--fs-body); color: var(--muted) }
-.hh-micro,.hh-label { color: var(--muted-soft); font-size: var(--fs-micro); letter-spacing: .04em; text-transform: none }
+  .hh-h1 { font-size: var(--fs-h1); font-weight: 800; line-height: 1.12; margin: 0 0 1rem; letter-spacing: -.01em }
+  .hh-h2 { font-size: var(--fs-h2); font-weight: 800; line-height: 1.2;  margin: 0 0 .9rem; letter-spacing: -.01em }
+  h3      { font-size: var(--fs-h3); font-weight: 700; margin: 0 0 .6rem }
+  p, li   { font-size: var(--fs-body); color: var(--muted) }
+  .hh-micro,.hh-label { color: var(--muted-soft); font-size: var(--fs-micro); letter-spacing: .04em }
 }
-/* LAYOUT */
+
+/* =========================
+   LAYOUT
+   ========================= */
 @layer components {
-.wrap, .hh-container { width: 100%; max-width: var(--max-w); margin-inline: auto; padding-inline: var(--wrap-x) }
-.section, .hh-section { padding-block: var(--section-y) }
-.grid-auto, .hh-grid-auto { display: grid; gap: clamp(.8rem, 2vw, 1.4rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) }
-.grid-hero, .hh-grid-hero { display: grid; gap: clamp(1.2rem, 3vw, 2.4rem) }
-@media (min-width: 1024px) { .grid-hero, .hh-grid-hero { grid-template-columns: 1.1fr .9fr; align-items: center } }
-.stack, .hh-stack { display: flex; flex-direction: column; gap: clamp(.6rem, 1.6vw, 1.2rem) }
-.center, .hh-center { text-align: center }
+  .wrap,.hh-container { width: 100%; max-width: var(--max-w); margin-inline: auto; padding-inline: var(--wrap-x) }
+  .section,.hh-section { padding-block: var(--section-y) }
+
+  .grid-auto,.hh-grid-auto {
+    display: grid;
+    gap: clamp(.8rem, 2vw, 1.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
+
+  .grid-hero,.hh-grid-hero { display: grid; gap: clamp(1.2rem, 3vw, 2.4rem) }
+  @media (min-width: 1024px) { .grid-hero,.hh-grid-hero { grid-template-columns: 1.1fr .9fr; align-items: center } }
+
+  .stack,.hh-stack { display: flex; flex-direction: column; gap: clamp(.6rem, 1.6vw, 1.2rem) }
+  .center,.hh-center { text-align: center }
 }
-/* BUTTONS */
+
+/* =========================
+   BUTTONS
+   ========================= */
 @layer components {
-.hh-btn { display:inline-flex; gap:.55rem; align-items:center; justify-content:center; min-height:48px; padding:.9rem 1.4rem; border-radius:999px; border:1px solid transparent; cursor:pointer; font-weight:800; background:rgba(255,255,255,0.06); color:var(--text); transition: transform .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease); position:relative; isolation:isolate }
-.hh-btn:hover { transform: translateY(-2px) }
-.hh-btn:active { transform: translateY(0) scale(.98) }
-.hh-btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold-soft)); color: #111; box-shadow: 0 12px 28px rgba(200,164,75,0.35) }
-.hh-btn-primary:hover { box-shadow: 0 18px 40px rgba(200,164,75,0.45); filter: brightness(1.06) }
-.hh-btn-ghost { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16) }
-@media (max-width: 768px) { .hh-btn,.hh-btn-primary,.hh-btn-ghost { width: 100% } }
+  .hh-btn {
+    display:inline-flex; gap:.55rem; align-items:center; justify-content:center;
+    min-height:48px; padding:.9rem 1.4rem; border-radius:999px; border:1px solid transparent;
+    cursor:pointer; font-weight:800; background:rgba(255,255,255,0.06); color:var(--text);
+    transition: transform .18s var(--ease-soft), box-shadow .18s var(--ease-soft), filter .18s var(--ease-soft);
+    position:relative; isolation:isolate; -webkit-tap-highlight-color: transparent;
+  }
+  .hh-btn:hover  { transform: translateY(-2px) }
+  .hh-btn:active { transform: translateY(0) scale(.98) }
+
+  .hh-btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+    color: #111; box-shadow: 0 12px 28px rgba(200,164,75,0.35);
+  }
+  .hh-btn-primary:hover { box-shadow: 0 18px 40px rgba(200,164,75,0.45); filter: brightness(1.06) }
+
+  .hh-btn-ghost {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+
+  @media (max-width: 768px) { .hh-btn,.hh-btn-primary,.hh-btn-ghost { width: 100% } }
 }
-/* CARDS & SURFACES */
+
+/* =========================
+   CARDS & SURFACES
+   ========================= */
 @layer components {
-.card, .hh-card { background: var(--surface); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem; box-shadow: var(--elev-1); transition: transform .18s var(--ease), box-shadow .18s var(--ease) }
-.hh-card:hover { transform: translateY(-4px); box-shadow: 0 22px 48px rgba(0,0,0,0.55) }
-.hh-benefit { background: rgba(255,255,255,0.08) }
-.hh-story, .hh-story-sm { background: rgba(255,255,255,0.05) }
-.hh-zero { border: 1px dashed rgba(233,211,148,0.45); background: rgba(233,211,148,0.08) }
+  .card,.hh-card {
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--r-md);
+    padding: var(--s-4) calc(var(--s-4) + .2rem);
+    box-shadow: var(--elev-1);
+    transition: transform .18s var(--ease-soft), box-shadow .18s var(--ease-soft);
+  }
+  .hh-card:hover { transform: translateY(-4px); box-shadow: 0 22px 48px rgba(0,0,0,0.55) }
+  .hh-benefit { background: rgba(255,255,255,0.08) }
+  .hh-story,.hh-story-sm { background: rgba(255,255,255,0.05) }
+  .hh-zero { border: 1px dashed rgba(233,211,148,0.45); background: rgba(233,211,148,0.08) }
 }
-/* HERO IMAGE */
+
+/* =========================
+   MEDIA / HERO
+   ========================= */
 @layer components {
-.hh-hero-image img { width: 100%; border-radius: var(--r-lg); box-shadow: var(--elev-2); background: var(--bg-soft); aspect-ratio: 4 / 3; object-fit: cover }
+  .hh-hero-image img {
+    width: 100%; border-radius: var(--r-lg); box-shadow: var(--elev-2);
+    background: var(--bg-soft); aspect-ratio: 4 / 3; object-fit: cover;
+  }
 }
-/* FOOTER */
+
+/* =========================
+   FOOTER
+   ========================= */
 @layer components {
-.hh-footer { padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(5,8,22,0.95) }
-.hh-footer a { text-decoration: underline }
+  .hh-footer { padding: var(--s-6) 0; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(5,8,22,0.95) }
+  .hh-footer a { text-decoration: underline }
 }
-/* SHARE BOX */
+
+/* =========================
+   SHARE BOX
+   ========================= */
 @layer components {
-.hh-share-box { display: grid; gap: .8rem; background: var(--surface); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem }
-.hh-share-seg { display: flex; flex-wrap: wrap; gap: .5rem }
-.hh-share-seg-btn { padding: .5rem .9rem; border-radius: 999px; border:1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.04); color: var(--text); cursor: pointer; transition: transform .15s var(--ease), background .15s var(--ease) }
-.hh-share-seg-btn[aria-pressed="true"] { background: rgba(233,211,148,0.12); border-color: rgba(233,211,148,0.45) }
-#shareText { width: 100%; min-height: 110px; background: var(--surface-soft); color: var(--text); border: 1px solid rgba(255,255,255,0.16); border-radius: var(--r-sm); padding: .8rem 1rem; resize: vertical }
-.hh-share-preview { padding: .9rem 1rem; border-radius: var(--r-sm); background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.16); min-height: 56px }
+  .hh-share-box { display: grid; gap: .8rem; background: var(--surface); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem }
+  .hh-share-seg { display: flex; flex-wrap: wrap; gap: .5rem }
+  .hh-share-seg-btn {
+    padding: .5rem .9rem; border-radius: 999px; border:1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.04); color: var(--text); cursor: pointer;
+    transition: transform .15s var(--ease-soft), background .15s var(--ease-soft);
+  }
+  .hh-share-seg-btn[aria-pressed="true"] { background: rgba(233,211,148,0.12); border-color: rgba(233,211,148,0.45) }
+  #shareText {
+    width: 100%; min-height: 110px; background: var(--surface-soft); color: var(--text);
+    border: 1px solid rgba(255,255,255,0.16); border-radius: var(--r-sm); padding: .8rem 1rem; resize: vertical;
+  }
+  .hh-share-preview { padding: .9rem 1rem; border-radius: var(--r-sm); background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.16); min-height: 56px }
 }
-/* PROOF / TRUST */
+
+/* =========================
+   PROOF / TRUST
+   ========================= */
 @layer components {
-.trust { display:grid; gap:.8rem; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)) }
-.trust .item { background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: .9rem 1rem }
-.proof-quotes { display:grid; gap:.8rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)) }
-.quote { background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem }
+  .trust { display:grid; gap:.8rem; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)) }
+  .trust .item { background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: .9rem 1rem }
+  .proof-quotes { display:grid; gap:.8rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)) }
+  .quote { background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem }
 }
-/* PROGRESS & STEPS */
+
+/* =========================
+   PROGRESS & STEPS
+   ========================= */
 @layer components {
-.hh-progress { width: 100%; background: rgba(255,255,255,0.08); border-radius: 99px; height: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12) }
-.hh-progress-fill { background: linear-gradient(90deg, var(--gold), var(--gold-soft)); height: 100%; width: 0%; border-radius: 99px; transition: width .35s var(--ease) }
-.hh-step { display: none; background: var(--surface); padding: 1.1rem 1.2rem; border-radius: var(--r-md); border: 1px solid rgba(255,255,255,0.12) }
-.hh-step.active { display: block }
-.hh-ampel { display: flex; flex-direction: column; gap: 1rem }
-.hh-ampel-item { padding: 1rem 1.2rem; border-radius: var(--r-md); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: flex-start; gap: .8rem; font-size: 1.05rem; background: var(--surface) }
-.hh-ampel-item.now { background: rgba(255,88,88,0.12); border-color: rgba(255,88,88,0.35) }
-.hh-ampel-item.next { background: rgba(255,188,45,0.12); border-color: rgba(255,188,45,0.35) }
-.hh-ampel-item.later { background: rgba(108,255,108,0.12); border-color: rgba(108,255,108,0.28) }
+  .hh-progress { width: 100%; background: rgba(255,255,255,0.08); border-radius: 99px; height: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12) }
+  .hh-progress-fill { background: linear-gradient(90deg, var(--gold), var(--gold-soft)); height: 100%; width: 0%; border-radius: 99px; transition: width .35s var(--ease-soft) }
+  .hh-step { display: none; background: var(--surface); padding: 1.1rem 1.2rem; border-radius: var(--r-md); border: 1px solid rgba(255,255,255,0.12) }
+  .hh-step.active { display: block }
+
+  .hh-ampel { display: flex; flex-direction: column; gap: 1rem }
+  .hh-ampel-item {
+    padding: 1rem 1.2rem; border-radius: var(--r-md);
+    border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: flex-start; gap: .8rem;
+    font-size: 1.05rem; background: var(--surface)
+  }
+  .hh-ampel-item.now   { background: rgba(255,88,88,0.12);  border-color: rgba(255,88,88,0.35) }
+  .hh-ampel-item.next  { background: rgba(255,188,45,0.12); border-color: rgba(255,188,45,0.35) }
+  .hh-ampel-item.later { background: rgba(108,255,108,0.12); border-color: rgba(108,255,108,0.28) }
 }
-/* FAQ */
+
+/* =========================
+   FAQ
+   ========================= */
 @layer components {
-.faq { display:grid; gap:.8rem }
-.faq details { background: var(--surface); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding:.6rem .9rem }
-.faq summary { cursor: pointer; font-weight: 700; outline: none }
-.faq p { margin:.4rem 0 0 }
+  .faq { display:grid; gap:.8rem }
+  .faq details { background: var(--surface); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding:.6rem .9rem }
+  .faq summary { cursor: pointer; font-weight: 700; outline: none }
+  .faq p { margin:.4rem 0 0 }
 }
-/* ANIMATIONS */
+
+/* =========================
+   ANIMATIONS
+   ========================= */
 @layer components {
-.fade-up { opacity: 0; transform: translateY(18px) }
-.fade-up.visible { opacity: 1; transform: none; transition: opacity .55s var(--ease), transform .55s var(--ease) }
-@supports (animation-timeline: view()) {
-@media (prefers-reduced-motion: no-preference) {
-.fade-up { view-timeline-name: --fade; view-timeline-axis: block; animation-timeline: --fade; animation-name: fadeUp; animation-range: entry 10% cover 40%; animation-fill-mode: both }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(28px) } to { opacity: 1; transform: translateY(0) } }
+  .fade-up { opacity: 0; transform: translateY(18px) }
+  .fade-up.visible { opacity: 1; transform: none; transition: opacity .55s var(--ease-soft), transform .55s var(--ease-soft) }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up {
+        view-timeline-name: --fade; view-timeline-axis: block;
+        animation-timeline: --fade; animation-name: fadeUp;
+        animation-range: entry 10% cover 40%; animation-fill-mode: both;
+      }
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(28px) } to { opacity: 1; transform: translateY(0) } }
+    }
+  }
 }
-}
-}
-/* STICKY CTA (mobile only) */
+
+/* =========================
+   STICKY CTA (mobile)
+   ========================= */
 @layer components {
-.sticky-cta { position: fixed; left: 0; right: 0; bottom: 14px; display: none; justify-content: center; padding-bottom: calc(env(safe-area-inset-bottom) + 6px); z-index: 90; transform: translateY(100%); opacity: 0; transition: opacity .25s var(--ease), transform .25s var(--ease) }
-@media (max-width: 979px) { .sticky-cta { display: flex } }
-.sticky-cta .inner { background: rgba(5,8,22,.88); border:1px solid rgba(255,255,255,.08); padding: .55rem; border-radius: 999px; box-shadow: var(--elev-1) }
-.sticky-cta.show { transform: translateY(0); opacity: 1 }
+  .sticky-cta {
+    position: fixed; left: 0; right: 0; bottom: 14px; display: none; justify-content: center;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 6px); z-index: 90;
+    transform: translateY(100%); opacity: 0;
+    transition: opacity .25s var(--ease-soft), transform .25s var(--ease-soft);
+  }
+  @media (max-width: 979px) { .sticky-cta { display: flex } }
+  .sticky-cta .inner { background: rgba(5,8,22,.88); border:1px solid rgba(255,255,255,.08); padding: .55rem; border-radius: 999px; box-shadow: var(--elev-1) }
+  .sticky-cta.show { transform: translateY(0); opacity: 1 }
 }
-/* UTILITIES */
+
+/* =========================
+   UTILITIES
+   ========================= */
 @layer utilities {
-html { scroll-behavior: smooth }
-.hh-accelerate,.fade-up,.hh-btn,.hh-card,.hh-hero-image img { will-change: transform, opacity; transform: translateZ(0) }
-.snap-y { scroll-snap-type: y proximity } .snap-y .section, .snap-y .hh-section { scroll-snap-align: start; scroll-snap-stop: always }
+  html { scroll-behavior: smooth }
+  .hh-accelerate,.fade-up,.hh-btn,.hh-card,.hh-hero-image img { will-change: transform, opacity; transform: translateZ(0) }
+  .snap-y { scroll-snap-type: y proximity }
+  .snap-y .section,.snap-y .hh-section { scroll-snap-align: start; scroll-snap-stop: always }
 
+  a,button { touch-action: manipulation; -webkit-tap-highlight-color: transparent }
 
-{ -webkit-tap-highlight-color: transparent } a,button { touch-action: manipulation }
-.hh-bg { position: relative }
-.hh-bg::before,.hh-bg::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:-1 }
-.hh-bg::before { background: var(--bg-glow-1) } .hh-bg::after { background: var(--bg-glow-2) }
+  .hh-bg { position: relative }
+  .hh-bg::before,.hh-bg::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:-1 }
+  .hh-bg::before { background: var(--bg-glow-1) }
+  .hh-bg::after  { background: var(--bg-glow-2) }
 }
 
-
-/* MICRO DOPAMIN */
+/* =========================
+   MICRO INTERACTIONS (subtle)
+   ========================= */
 @layer utilities {
-.hh-btn:hover { transform: translateY(-3px) scale(1.02) }
-.hh-btn-primary:hover { filter: brightness(1.12) }
-@keyframes hhPulse { 0%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0.25)} 70%{transform:scale(1.02);box-shadow:0 0 22px 10px rgba(200,164,75,0.15)} 100%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0)} }
-.hero-cta,[data-ctx="sticky"] { animation: hhPulse 4s ease-in-out infinite; animation-delay: 1.4s }
-.hh-ripple { position: absolute; width: 18px; height: 18px; background: rgba(255,255,255,0.28); border-radius: 50%; transform: translate(-50%,-50%); animation: hhRipple .45s ease-out forwards; pointer-events: none; inset:0 }
-@keyframes hhRipple { to { opacity: 0; transform: translate(-50%,-50%) scale(8) } }
+  .hh-btn:hover { transform: translateY(-3px) scale(1.02) }
+  .hh-btn-primary:hover { filter: brightness(1.08) }
+
+  /* Ripple */
+  .hh-ripple {
+    position: absolute; width: 18px; height: 18px; background: rgba(255,255,255,0.28);
+    border-radius: 50%; transform: translate(-50%,-50%); animation: hhRipple .45s ease-out forwards;
+    pointer-events: none; inset:0;
+  }
+  @keyframes hhRipple { to { opacity: 0; transform: translate(-50%,-50%) scale(8) } }
+
+  /* Soft pulse only on key CTAs, reduced intensity */
+  @keyframes hhPulse { 0%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0.18)} 60%{transform:scale(1.01);box-shadow:0 0 18px 8px rgba(200,164,75,0.12)} 100%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0)} }
+  .hero-cta,[data-ctx="sticky"] { animation: hhPulse 6s ease-in-out infinite; animation-delay: 1.4s }
 }
-/* SAFE AREAS */
-@layer components { @supports(padding:max(0px)) { body { padding-bottom: max(env(safe-area-inset-bottom), 0px) } } }
-/* WIX FIX */
-@layer utilities { [data-mesh-id],[data-mesh-id] * { transform:none!important } [data-mesh-id] { max-width:none!important; width:100%!important } }
-</style>
-</head>
-<body class="hh-bg">
-  <!-- HERO -->
-  <header class="hh-section" id="hero" aria-label="Einführung">
-    <div class="hh-container hh-grid-hero">
-      <div class="hh-stack fade-up">
-        <span class="hh-label">Klar sehen. In Ruhe entscheiden.</span>
-        <h1 class="hh-h1">Stabil. Schnell. Ruhig.</h1>
-        <p>Ein kurzer Blick zeigt dir sofort, was zählt. Ohne Druck. In deinem Tempo.</p>
-        <nav aria-label="Primäre Aktionen" style="display:flex; gap:.6rem; flex-wrap:wrap">
-          <a href="#problem" class="hh-btn hh-btn-primary hero-cta" data-ripple aria-describedby="usp">Kurz ansehen</a>
-          <a href="#angebot" class="hh-btn hh-btn-ghost" data-ripple>System öffnen</a>
-        </nav>
-        <span id="usp" class="hh-micro">Anonym · Kein Verkauf · Zero-Risk</span>
-      </div>
-      <figure class="hh-hero-image fade-up">
-        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop"
-             alt="Ruhige Oberfläche, klare Finanzübersicht"
-             width="1600" height="1200" />
-      </figure>
-    </div>
-  </header>
-  <!-- PROBLEM -->
-  <section class="hh-section" id="problem" aria-labelledby="sec-problem">
-    <div class="hh-container">
-      <h2 class="hh-h2 fade-up" id="sec-problem">Das Problem – zu viel Lärm, zu wenig Klarheit</h2>
-      <div class="hh-container grid-auto" style="padding:0">
-        <div class="hh-card hh-benefit fade-up"><h3>Kein Wackeln</h3><p>Nichts springt. Bilder haben festen Platz. Ruhiges Scrollen.</p></div>
-        <div class="hh-card hh-benefit fade-up"><h3>Sanfte Bewegung</h3><p>Dezente Effekte, respektiert „Bewegung reduzieren“.</p></div>
-        <div class="hh-card hh-benefit fade-up"><h3>Schnelles Laden</h3><p>Kurze Wege, sofort Orientierung. Fix. Klar. Einfach.</p></div>
-      </div>
-    </div>
-  </section>
-  <!-- LÖSUNG -->
-  <section class="hh-section" id="loesung" aria-labelledby="sec-loesung">
-    <div class="hh-container hh-grid-hero">
-      <div class="hh-stack fade-up">
-        <h2 class="hh-h2" id="sec-loesung">Die Lösung – dein ruhiger Mini-Check</h2>
-        <p>In 2–3 Minuten siehst du: <strong>Jetzt · Als Nächstes · Später</strong>. Ohne Nachfassen, ohne Verkauf.</p>
-        <div class="hh-ampel">
-          <div class="hh-ampel-item now fade-up"><strong>Jetzt:</strong>&nbsp;Wichtige Punkte zuerst. Ohne Hektik.</div>
-          <div class="hh-ampel-item next fade-up"><strong>Als Nächstes:</strong>&nbsp;Geldpolster sortieren. Schritt für Schritt.</div>
-          <div class="hh-ampel-item later fade-up"><strong>Später:</strong>&nbsp;Feinschliff, wenn es passt.</div>
-        </div>
-      </div>
-      <div class="hh-stack fade-up">
-        <div class="hh-progress" aria-hidden="true"><div class="hh-progress-fill" id="progressFill"></div></div>
-    <form id="stepsForm" class="hh-stack" style="margin-top:1rem" novalidate aria-label="Mini-Check Formular">
-      <div class="hh-step active" data-step="1">
-        <label class="hh-label" for="f-haushalt">1/3 — Haushalt</label>
-        <input id="f-haushalt" class="hh-card" type="text" name="haushalt" placeholder="z. B. 2 Erwachsene, 1 Kind" required inputmode="text" autocomplete="off" />
-      </div>
-      <div class="hh-step" data-step="2">
-        <label class="hh-label" for="f-rate">2/3 — Monatsrate Sparen (optional)</label>
-        <input id="f-rate" class="hh-card" type="number" name="rate" placeholder="z. B. 300" min="0" step="50" inputmode="numeric" />
-      </div>
-      <div class="hh-step" data-step="3">
-        <label class="hh-label" for="f-prio">3/3 — Priorität</label>
-        <select id="f-prio" class="hh-card" name="prio" required>
-          <option value="">Bitte wählen</option>
-          <option>Sicherheit</option>
-          <option>Geldpolster</option>
-          <option>Sparen</option>
-        </select>
-      </div>
 
-      <div style="display:flex; gap:.6rem; flex-wrap:wrap">
-        <button type="button" class="hh-btn hh-btn-ghost" id="prevBtn" data-ripple>Zurück</button>
-        <button type="button" class="hh-btn hh-btn-primary" id="nextBtn" data-ripple>Weiter</button>
-      </div>
-      <div class="hh-micro" aria-live="polite" id="stepsLive"></div>
-    </form>
-  </div>
-</div>
+/* =========================
+   SAFE AREAS
+   ========================= */
+@layer components {
+  @supports(padding:max(0px)) { body { padding-bottom: max(env(safe-area-inset-bottom), 0px) } }
+}
 
-  </section>
-  <!-- PROOF / SOCIAL PROOF -->
-  <section class="hh-section" id="proof" aria-labelledby="sec-proof">
-    <div class="hh-container">
-      <h2 class="hh-h2 fade-up" id="sec-proof">Proof – ruhig, anonym, ohne Druck</h2>
-      <div class="trust fade-up" role="list">
-        <div class="item" role="listitem"><strong>Anonynm</strong><br><span class="hh-micro">Keine Datenweitergabe. Keine Telefonate.</span></div>
-        <div class="item" role="listitem"><strong>Kein Verkauf</strong><br><span class="hh-micro">Kein Upsell, kein Funnel, kein Spam.</span></div>
-        <div class="item" role="listitem"><strong>Zero-Risk</strong><br><span class="hh-micro">Testen ohne Registrierung.</span></div>
-      </div>
-      <div class="proof-quotes" style="margin-top:1rem">
-        <blockquote class="quote fade-up" aria-label="Stimme einer Nutzerin">„Das erste Mal kein Druckgefühl. Ich sehe sofort, was zählt.“</blockquote>
-        <blockquote class="quote fade-up" aria-label="Stimme eines Nutzers">„In zwei Minuten mehr Ruhe im Kopf als nach zig Artikeln.“</blockquote>
-        <blockquote class="quote fade-up" aria-label="Stimme eines Paares">„Klare Reihenfolge: Jetzt, Nächstes, Später. Sehr hilfreich.“</blockquote>
-      </div>
-    </div>
-  </section>
-  <!-- ANGEBOT / CTA -->
-  <section class="hh-section" id="angebot" aria-labelledby="sec-angebot">
-    <div class="hh-container hh-grid-hero">
-      <div class="hh-stack fade-up">
-        <h2 class="hh-h2" id="sec-angebot">Angebot – 2–3 Minuten Mini-Check</h2>
-        <p>Kostenlos. Anonym. Du entscheidest das Tempo. Eine klare Empfehlung am Ende.</p>
-        <div style="display:flex; gap:.6rem; flex-wrap:wrap">
-          <a href="#loesung" class="hh-btn hh-btn-primary hero-cta" data-ripple id="ctaPrimary">Jetzt starten</a>
-          <a href="#faq" class="hh-btn hh-btn-ghost" data-ripple>Fragen zuerst</a>
-        </div>
-      </div>
-      <div class="hh-card hh-zero fade-up" role="note">
-        <strong>Zero-Risk Box</strong>
-        <ul>
-          <li>Keine Registrierung</li>
-          <li>Keine Weitergabe</li>
-          <li>Abbruch jederzeit</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <!-- SHARE COMPOSER -->
-  <section class="hh-section" id="weitergeben" aria-labelledby="sec-share">
-    <div class="hh-container">
-      <h2 class="hh-h2 fade-up" id="sec-share">Weitergeben (WhatsApp-Ton)</h2>
-      <div class="hh-share-box fade-up">
-        <div class="hh-share-seg" role="group" aria-label="Zielgruppe wählen">
-          <button type="button" class="hh-share-seg-btn" data-seg="eltern" aria-pressed="true">Eltern</button>
-          <button type="button" class="hh-share-seg-btn" data-seg="paare" aria-pressed="false">Paare</button>
-          <button type="button" class="hh-share-seg-btn" data-seg="selbst" aria-pressed="false">Selbstständige</button>
-        </div>
-        <label class="hh-label" for="shareText">Nachricht</label>
-        <textarea id="shareText" placeholder="Kurz, anonym, ohne Druck …"></textarea>
-        <div class="hh-share-preview" id="sharePreview" aria-live="polite">Vorschau erscheint hier …</div>
-        <div style="display:flex; gap:.6rem; flex-wrap:wrap">
-          <button class="hh-btn hh-btn-primary" id="copyBtn" data-ripple>Text kopieren</button>
-          <button class="hh-btn hh-btn-ghost" id="waShare" data-ripple>WhatsApp</button>
-          <button class="hh-btn hh-btn-ghost" id="sysShare" data-ripple>Teilen&nbsp;…</button>
-        </div>
-        <div class="hh-micro" id="shareStatus" aria-live="polite"></div>
-      </div>
-    </div>
-  </section>
-  <!-- FAQ -->
-  <section class="hh-section" id="faq" aria-labelledby="sec-faq">
-    <div class="hh-container">
-      <h2 class="hh-h2 fade-up" id="sec-faq">FAQ – schnelle Antworten</h2>
-      <div class="faq">
-        <details class="fade-up">
-          <summary>Ist das wirklich anonym?</summary>
-          <p>Ja. Keine Accounts, keine Weitergabe, keine Nachfass-Mails.</p>
-        </details>
-        <details class="fade-up">
-          <summary>Was bekomme ich am Ende?</summary>
-          <p>Eine ruhige Empfehlung: <em>Jetzt · Als Nächstes · Später</em> – kurz und umsetzbar.</p>
-        </details>
-        <details class="fade-up">
-          <summary>Muss ich etwas kaufen?</summary>
-          <p>Nein. Kein Verkauf, keine versteckten Angebote.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-  <!-- FOOTER -->
-  <footer class="hh-footer" role="contentinfo">
-    <div class="hh-container hh-micro">© 2026 Heiko Haerter · Ruhige Finanzbegleitung · <a href="#faq">FAQ</a></div>
-  </footer>
-  <!-- STICKY CTA (mobile) -->
-  <div class="sticky-cta" id="stickyCta" aria-hidden="true">
-    <div class="inner">
-      <button class="hh-btn hh-btn-primary" data-ctx="sticky" data-ripple id="ctaFinal">Kurz ansehen</button>
-    </div>
-  </div>
-<script>
-/* Minimal, defensive JS (IIFE, feature-detect, motion-safe) */
-(() => {
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function qs(sel, root=document){ return root.querySelector(sel) }
-  function qsa(sel, root=document){ return Array.from(root.querySelectorAll(sel)) }
-
-  function initScrollEffects(){
-    if (!('IntersectionObserver' in window)) return;
-    const io = new IntersectionObserver((entries, obs) => {
-      for (const e of entries) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) }
-      }
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-    qsa('.fade-up').forEach(el => io.observe(el));
-  }
-
-  function initRipple(){
-    if (prefersReduced) return;
-    function createRipple(e){
-      const btn = e.currentTarget;
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const dot = document.createElement('span');
-      dot.className = 'hh-ripple';
-      dot.style.left = x + 'px';
-      dot.style.top = y + 'px';
-      btn.appendChild(dot);
-      dot.addEventListener('animationend', () => dot.remove(), { once: true });
-    }
-    qsa('[data-ripple]').forEach(b => b.addEventListener('click', createRipple));
-  }
-
-  function initStickyCTA(){
-    const sticky = qs('#stickyCta');
-    if (!sticky) return;
-    let shown = false;
-    const onScroll = () => {
-      if (shown) return;
-      if (window.scrollY > window.innerHeight * 0.6) {
-        sticky.classList.add('show');
-        sticky.setAttribute('aria-hidden', 'false');
-        shown = true;
-        window.removeEventListener('scroll', onScroll, { passive: true });
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    const finalBtn = qs('#ctaFinal');
-    if (finalBtn) finalBtn.addEventListener('click', () => location.hash = '#loesung');
-  }
-
-  function initFormSteps(){
-    const form = qs('#stepsForm');
-    if (!form) return;
-    const steps = qsa('.hh-step', form);
-    const nextBtn = qs('#nextBtn');
-    const prevBtn = qs('#prevBtn');
-    const progressFill = qs('#progressFill');
-    const live = qs('#stepsLive');
-    let idx = 0;
-
-    function announce(msg){ if (live) live.textContent = msg }
-
-    function setStep(i){
-      idx = Math.max(0, Math.min(steps.length - 1, i));
-      steps.forEach((s, k) => s.classList.toggle('active', k === idx));
-      const pct = Math.round(((idx + 1) / steps.length) * 100);
-      if (progressFill) progressFill.style.width = pct + '%';
-      if (prevBtn) prevBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
-      if (nextBtn) nextBtn.textContent = (idx === steps.length - 1) ? 'Fertig' : 'Weiter';
-      announce(`Schritt ${idx+1} von ${steps.length}`);
-      const firstInput = steps[idx].querySelector('input,select,textarea,button');
-      if (firstInput) firstInput.focus({ preventScroll: true });
-    }
-
-    function canProceed(){
-      const active = steps[idx];
-      if (!active) return true;
-      const required = qsa('[required]', active);
-      for (const el of required) {
-        if (!el.value || (el.tagName === 'SELECT' && el.value === '')) return false;
-      }
-      return true;
-    }
-
-    if (nextBtn) nextBtn.addEventListener('click', () => {
-      if (idx < steps.length - 1) {
-        if (!canProceed()) { announce('Bitte ausfüllen'); return }
-        setStep(idx + 1);
-      } else {
-        if (progressFill) progressFill.style.width = '100%';
-        const cta = qs('#ctaFinal') || qs('#ctaPrimary');
-        if (cta) cta.focus();
-        announce('Fertig. Empfehlung bereit.');
-      }
-    });
-
-    if (prevBtn) prevBtn.addEventListener('click', () => setStep(idx - 1));
-    setStep(0);
-  }
-
-  function initShareComposer(){
-    const segBtns = qsa('.hh-share-seg-btn');
-    const shareText = qs('#shareText');
-    const sharePreview = qs('#sharePreview');
-    const copyBtn = qs('#copyBtn');
-    const waBtn = qs('#waShare');
-    const sysBtn = qs('#sysShare');
-    const status = qs('#shareStatus');
-
-    if (!shareText || !sharePreview) return;
-
-    const presets = {
-      eltern: 'Hey, dachte an euch. Kurz & anonym. 2 Minuten geben ein Gefühl für heute – ohne Druck.',
-      paare:  'Hey, kurzer Blick für uns zwei. Zeigt sofort „Jetzt · Als Nächstes · Später“. Anonym.',
-      selbst: 'Hey, 2 Minuten Check. Siehst in Ruhe, wo du stehst. Ohne Nachfassen.'
-    };
-
-    function setSeg(seg){
-      segBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.seg === seg)));
-      const val = presets[seg] || '';
-      shareText.value = val;
-      sharePreview.textContent = val || 'Vorschau erscheint hier …';
-    }
-
-    segBtns.forEach(b => b.addEventListener('click', () => setSeg(b.dataset.seg)));
-    setSeg('eltern');
-
-    shareText.addEventListener('input', () => {
-      sharePreview.textContent = shareText.value.trim() || 'Vorschau erscheint hier …';
-    });
-
-    async function copyToClipboard(text){
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-          return true;
-        }
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.focus(); ta.select();
-        const ok = document.execCommand('copy');
-        ta.remove();
-        return ok;
-      } catch { return false }
-    }
-
-    function setStatus(msg){ if (status) status.textContent = msg }
-
-    if (copyBtn) copyBtn.addEventListener('click', async () => {
-      const ok = await copyToClipboard(shareText.value || sharePreview.textContent || '');
-      setStatus(ok ? 'Kopiert.' : 'Kopieren nicht möglich.');
-    });
-
-    if (waBtn) waBtn.addEventListener('click', () => {
-      const txt = encodeURIComponent(shareText.value || sharePreview.textContent || '');
-      const url = 'https://wa.me/?text=' + txt;
-      window.open(url, '_blank', 'noopener,noreferrer');
-    });
-
-    if (sysBtn) sysBtn.addEventListener('click', async () => {
-      const text = shareText.value || sharePreview.textContent || '';
-      if (navigator.share && !prefersReduced) {
-        try { await navigator.share({ text }); setStatus('Geteilt.'); }
-        catch { setStatus('Teilen abgebrochen.'); }
-      } else {
-        const ok = await copyToClipboard(text);
-        setStatus(ok ? 'Kein System-Share. Text kopiert.' : 'Weder Share noch Kopieren möglich.');
-      }
-    });
-  }
-
-  function initAnchorFocus(){
-    // Why: Move focus to section on hash navigation for a11y
-    function focusHash(){
-      if (!location.hash) return;
-      const el = document.getElementById(location.hash.slice(1));
-      if (el) el.setAttribute('tabindex','-1'), el.focus({ preventScroll: true });
-    }
-    window.addEventListener('hashchange', focusHash);
-  }
-
-  // INIT
-  initScrollEffects();
-  initRipple();
-  initStickyCTA();
-  initFormSteps();
-  initShareComposer();
-  initAnchorFocus();
-})();
-</script>
-</body>
-</html>
+/* =========================
+   WIX FIX (kept)
+   ========================= */
+@layer utilities {
+  [data-mesh-id],[data-mesh-id] * { transform:none!important }
+  [data-mesh-id] { max-width:none!important; width:100%!important }
+}
