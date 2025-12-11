@@ -1,61 +1,173 @@
 {
-  "liveMetrics": {
-    "today": 18,
-    "week": 74,
-    "lastUsedMinutesAgo": 3
+  "brand": {
+    "name": "Heiko Haerter",
+    "claim_general": "Ruhiger Finanz-Kompass",
+    "claim_employer": "Arbeitgeber-Architektur Bau & Handwerk",
+    "email": "heiko.haerter@dvag.de",
+    "year": "2026"
   },
 
-  "slotAvailability": {
-    "month": "März",
-    "slots": 9
+  "navigation": {
+    "home": "/",
+    "weitergeben": "/weitergeben",
+    "arbeitgeber_architektur": "/arbeitgeber-architektur",
+    "impressum": "/impressum",
+    "datenschutz": "/datenschutz"
   },
 
-  "ampelStats": {
-    "green": 42,
-    "yellow": 27,
-    "red": 19
+  "social_proof": {
+    "startseite": [
+      "22:47 Uhr. Die Kinder schlafen. Die Ampel hat uns beruhigt.",
+      "Ich wollte nur kurz wissen, ob irgendwo eine Lücke ist.",
+      "Das war das erste Mal, dass Finanzen leicht waren.",
+      "Endlich mal ohne Verkaufsdruck.",
+      "Ich hab das in 2 Minuten verstanden – das hatte ich noch nie."
+    ],
+    "weitergeben": [
+      "Ich hätte nicht gedacht, dass so ein kleiner Link so viel Ruhe bringt.",
+      "Hab's weitergegeben – kam total gut an.",
+      "Meine Schwester meinte: 'Das hat mir gerade gefehlt.'",
+      "Mein Kollege: 'Das war das erste Mal, dass Finanzen leicht waren.'"
+    ],
+    "arbeitgeber": [
+      {
+        "branche": "Tiefbau · 35 Mitarbeiter",
+        "vorher": "3 Kündigungen pro Jahr.",
+        "nachher": "klare Einführung der Benefits, ruhiger Informationsprozess, stabilere Teams."
+      },
+      {
+        "branche": "SHK · 18 Mitarbeiter",
+        "vorher": "Onboarding chaotisch.",
+        "nachher": "feste Abläufe, klare Zuständigkeiten, stärkere Bindung."
+      },
+      {
+        "branche": "Elektro · 50 Mitarbeiter",
+        "vorher": "Unsicherheit wegen bAV-Haftung.",
+        "nachher": "geprüfte Prozesse, klare Dokumentation, sichere Abläufe."
+      }
+    ]
   },
 
-  "testimonials": [
-    {
-      "avatar": "👨‍👩‍👧 Eltern, 34 & 36",
-      "text": "„22:47 – Kinder schlafen. Wir wollten nur wissen, ob wir heute etwas offen haben. Die Ampel hat uns in 2 Minuten beruhigt.“"
-    },
-    {
-      "avatar": "💬 Paar, 31",
-      "text": "„Wir hatten Angst, etwas Wichtiges zu übersehen. Die Ampel hat uns sofort gezeigt: Jetzt · Als Nächstes · Später. Ohne Verkauf.“"
-    },
-    {
-      "avatar": "💼 Selbstständig, 38",
-      "text": "„Ich wollte nur kurz checken, wie verwundbar ich bin. Es war klarer als jede Beratung, die ich je hatte.“"
-    },
-    {
-      "avatar": "👩 Alleinerziehend, 33",
-      "text": "„Ich habe mich nie getraut, mich um Finanzen zu kümmern. Die Ampel war das erste Mal, dass es sich leicht angefühlt hat.“"
-    },
-    {
-      "avatar": "🧑‍🔧 Handwerker, 29",
-      "text": "„Ich habe keine Zeit für Papierkram. Das hier dauerte 2 Minuten – und ich wusste sofort, wo ich stehe.“"
-    },
-    {
-      "avatar": "👨 IT-Lead, 41",
-      "text": "„Kein Verkauf, kein Druck, kein Datenabgriff. Einfach ein ehrlicher Überblick. Genau sowas habe ich gesucht.“"
-    }
+  "micro_hooks": [
+    "Wenn du manchmal hoffst, einfach nichts zu übersehen …",
+    "Ein kurzer Blick – bevor der Alltag weiterläuft.",
+    "2 Minuten. 3 Fragen. Deine Ampel.",
+    "Ein Moment Ruhe für deinen Kopf.",
+    "Die einfachste Entscheidung des Tages.",
+    "Wenn dein Kopf voll ist – aber du trotzdem sicher sein willst."
   ],
 
-  "referral": {
+  "referral_variants": {
     "neutral": [
-      "Hey, kurzer 2-Minuten-Blick – zeigt dir anonym, ob heute etwas für dich wichtig ist. Wenn’s nichts bringt: 25 €. {{URL}}",
-      "Falls du dieses „ich müsste mal…“-Gefühl kennst: Hier bekommst du in 2 Minuten Klarheit. {{URL}}"
+      "Ein kurzer Moment Ruhe für dich – anonym, 2 Minuten, ohne Verkauf: {{URL}}",
+      "Falls du manchmal hoffst, nichts Wichtiges zu übersehen – das hilft: {{URL}}",
+      "Ein kurzer Reality-Check ohne Druck. Grün · Gelb · Rot. Vielleicht gibt’s dir Ruhe: {{URL}}"
     ],
     "eltern": [
-      "Kurz für Eltern (2 Min): zeigt anonym, ob für heute etwas ansteht – ohne Verkauf. {{URL}}"
+      "Wenn die Kids schlafen und der Kopf voll ist: 2 Minuten Ruhe – anonym & ohne Daten: {{URL}}",
+      "Für einen kurzen Moment Orientierung im Alltag: {{URL}}",
+      "Hat mir selbst Ruhe gegeben – vielleicht hilft’s dir: {{URL}}"
     ],
     "paare": [
-      "2-Minuten-Status: zeigt euch sofort, ob ihr etwas überseht – komplett anonym. {{URL}}"
+      "Wenn ihr wissen wollt, ob alles stabil wirkt – neutral, anonym, 2 Minuten: {{URL}}",
+      "Ein kurzer Check, der sich erstaunlich leicht anfühlt: {{URL}}"
     ],
     "selbst": [
-      "Für Selbstständige: 2 Minuten – zeigt, wie verwundbar dein Alltag gerade wäre. {{URL}}"
+      "Würde es heute halten, wenn du ausfällst? 2 Minuten, anonym, ohne Verkauf: {{URL}}",
+      "Für einen klaren Blick, bevor der Alltag weiterläuft: {{URL}}"
+    ],
+    "freunde": [
+      "Hat mir gerade echt Ruhe gegeben – dachte direkt an dich: {{URL}}",
+      "Null Stress, einfach Orientierung. Vielleicht hilft‘s dir: {{URL}}"
+    ],
+    "skeptiker": [
+      "Kein Verkauf, keine Daten – einfach ein ruhiger 2-Minuten-Check: {{URL}}",
+      "Ich weiß, du magst sowas normal nicht – aber das hier ist komplett neutral: {{URL}}"
+    ],
+    "handwerk": [
+      "60-Sekunden-Arbeitgeber-Check – anonym. Zeigt sofort, wo Stabilität fehlt: {{URL}}",
+      "Falls du Mitarbeiter suchst oder Abläufe klären willst: Der Check zeigt echte Stellschrauben: {{URL}}",
+      "Kurz, klar, anonym. Für Inhaber & HR im Handwerk – echte Orientierung ohne Verkauf: {{URL}}"
+    ],
+    "direkt": [
+      "Das könnte dir wirklich helfen – dauert 2 Minuten: {{URL}}",
+      "Ein kurzer Check, der sofort Klarheit bringt: {{URL}}",
+      "Wenn du heute nur kurz Orientierung willst – das hier ist leicht & anonym: {{URL}}"
     ]
+  },
+
+  "check_ampel": {
+    "questions": [
+      {
+        "id": "q1",
+        "text": "Wie sicher fühlst du dich heute, falls etwas passieren würde?",
+        "options": {
+          "green": "Ich wäre stabil aufgestellt",
+          "yellow": "Unsicher, kommt drauf an",
+          "red": "Wahrscheinlich gar nicht"
+        }
+      },
+      {
+        "id": "q2",
+        "text": "Wie klar ist dir, was im Ernstfall wirklich zählt?",
+        "options": {
+          "green": "Sehr klar",
+          "yellow": "Mittel",
+          "red": "Eher unklar"
+        }
+      },
+      {
+        "id": "q3",
+        "text": "Wie geordnet fühlst du deinen aktuellen Stand?",
+        "options": {
+          "green": "Gut strukturiert",
+          "yellow": "Teilweise chaotisch",
+          "red": "Nicht strukturiert"
+        }
+      }
+    ],
+    "results": {
+      "green": "Dein Alltag wirkt heute stabil. 🟢",
+      "yellow": "Einige Bereiche wirken unsicher – ein kurzer Blick könnte beruhigen. 🟡",
+      "red": "Dein Alltag wirkt fragil – hier entsteht echter Handlungsdruck. 🔴"
+    }
+  },
+
+  "check_arbeitgeber": {
+    "questions": [
+      {
+        "id": "ag1",
+        "text": "Wie stabil empfindest du eure Team-Struktur?",
+        "options": {
+          "green": "Stabil",
+          "yellow": "Teilweise stabil",
+          "red": "Instabil / wechselhaft"
+        }
+      },
+      {
+        "id": "ag2",
+        "text": "Wie klar und dokumentiert sind eure Abläufe?",
+        "options": {
+          "green": "Klar & dokumentiert",
+          "yellow": "Teilweise dokumentiert",
+          "red": "Kaum dokumentiert"
+        }
+      },
+      {
+        "id": "ag3",
+        "text": "Wie sicher fühlst du dich hinsichtlich Arbeitgeber-Pflichten (bAV, Haftung)?",
+        "options": {
+          "green": "Sehr sicher",
+          "yellow": "Unsicher",
+          "red": "Gefährlich unsicher"
+        }
+      }
+    ],
+    "results": {
+      "green": "Ihr Betrieb wirkt stabil organisiert. 🟢",
+      "yellow": "Einige Bereiche bremsen Stabilität & Sicherheit. 🟡",
+      "red": "Stabile Arbeitgeber-Strukturen fehlen – echter Handlungsdruck. 🔴"
+    },
+    "meta_note": "Die 3 Fragen stammen aus über 250 Arbeitgeber-Projekten im Handwerk."
   }
 }
