@@ -1,520 +1,392 @@
 /* ============================================================
-   0 — ROOT DESIGN TOKENS (Brand)
-   Deep Black × Gold Accents (Premium, ruhig, 2026)
+   ROOT TOKENS – Deep Black + Gold Accents
 ============================================================ */
-
 :root {
-  /* Brand Colors */
   --black: #05070E;
-  --black-soft: #0A0D16;
-  --white: #F7F8FB;
-  --white-soft: #F1F2F6;
-
+  --black-soft: #0A0D17;
+  --white: #F7F7F7;
+  --gray: #9EA2AF;
+  --gray-soft: #C0C3CC;
   --gold: #C8A44B;
-  --gold-soft: #E9D394;
+  --gold-soft: #E2C983;
 
-  --muted: #6E7483;
-  --muted-soft: #9BA2B4;
+  --radius: 14px;
+  --radius-lg: 20px;
 
-  /* Section Backgrounds */
-  --hero-bg: #05070E;
-  --light-bg: #FAFBFD;
-  --light-bg-soft: #F4F5F9;
-
-  /* Borders / Lines */
-  --line-dark: rgba(255,255,255,0.12);
-  --line-light: rgba(0,0,0,0.08);
-
-  /* Cards */
-  --card-dark: rgba(255,255,255,0.06);
-  --card-light: #ffffff;
-
-  /* Shadows */
-  --shadow-dark: 0 18px 40px rgba(0,0,0,0.35);
-  --shadow-light: 0 12px 20px rgba(0,0,0,0.06);
-
-  /* Radii */
-  --r-lg: 22px;
-  --r-md: 16px;
-  --r-sm: 12px;
-  --r-round: 999px;
-
-  /* Spacing Scale (Apple-Level) */
-  --s-xs: clamp(.35rem, .8vw, .55rem);
-  --s-sm: clamp(.6rem, 1vw, .9rem);
-  --s-md: clamp(.9rem, 1.4vw, 1.3rem);
-  --s-lg: clamp(1.4rem, 2vw, 2rem);
-  --s-xl: clamp(2.2rem, 3vw, 3rem);
-
-  /* Container */
-  --container: 1120px;
-
-  /* Typography */
-  --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-
-  /* Motion */
-  --ease: cubic-bezier(.25,.46,.25,1);
-  --transition: .35s var(--ease);
+  --transition: 0.28s ease;
+  --fade-up: translateY(18px);
 }
 
-
-/* ============================================================
-   1 — GLOBAL RESET & BASE STYLES
-============================================================ */
-
-html {
-  font-family: var(--font-main);
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  scroll-behavior: smooth;
-  color: var(--black);
-  background: var(--light-bg);
-}
-
-body {
+/* Body Global */
+html, body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
-  line-height: 1.45;
-  color: var(--black);
+  background: var(--black);
+  color: var(--white);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* A11y */
-.visually-hidden {
-  position: absolute;
-  left: -9999px;
+/* Disable tap highlight */
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-img, picture {
-  max-width: 100%;
-  display: block;
-}
-
-/* Typography */
-h1, h2, h3 {
-  margin: 0 0 var(--s-sm);
-  font-weight: 700;
-  letter-spacing: -.01em;
-}
-
-h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; }
-h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); }
-h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
-
-p { margin: 0 0 var(--s-sm); color: var(--muted); font-size: clamp(1rem, 1vw, 1.1rem); }
-
-
-/* ============================================================
-   2 — LAYOUT SYSTEM
-============================================================ */
-
-.section {
-  padding: var(--s-xl) 0;
-}
-
+/* Container */
 .container {
-  max-width: var(--container);
-  margin-inline: auto;
-  padding-inline: var(--s-md);
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-sm);
-}
-
-.grid {
-  display: grid;
-  gap: var(--s-md);
-}
-
-.auto-grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-}
-
-
-/* ============================================================
-   3 — HEADER
-============================================================ */
-
-.header {
-  position: sticky;
-  top: 0;
-  background: rgba(5, 7, 14, 0.92);
-  backdrop-filter: blur(10px);
-  z-index: 20;
-  border-bottom: 1px solid var(--line-dark);
-}
-
-.header-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--s-sm) 0;
-}
-
-.brand {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.brand-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: var(--r-round);
-  background: var(--gold);
-  box-shadow: 0 0 12px rgba(200,164,75,0.7);
-}
-
-.brand-name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--white);
-}
-
-.brand-claim {
-  font-size: 0.75rem;
-  color: var(--muted-soft);
-}
-
-
-/* ============================================================
-   4 — HERO (Deep Black × Gold)
-============================================================ */
-
-.hero {
-  background: var(--hero-bg);
-  color: var(--white);
-  padding-top: var(--s-xl);
-  padding-bottom: var(--s-lg);
-}
-
-.hero-grid {
-  display: grid;
-  gap: var(--s-lg);
-}
-
-@media (min-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1.1fr .9fr;
-    align-items: center;
-  }
-}
-
-.hero-title {
-  color: var(--white);
-}
-
-.hero-micro {
-  font-size: .95rem;
-  color: var(--muted-soft);
-}
-
-.rotating-hook {
-  min-height: 1.2em;
+/* Headings */
+h1, h2, h3 {
+  margin: 0 0 12px 0;
   font-weight: 600;
-  color: var(--gold-soft);
 }
 
-.hero-sub {
-  max-width: 600px;
-  color: var(--white);
-  opacity: 0.9;
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  line-height: 1.2;
+}
+h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+h3 {
+  font-size: 1.2rem;
 }
 
-
-/* ============================================================
-   5 — BUTTONS
-============================================================ */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--s-sm) var(--s-md);
-  border: 1px solid transparent;
-  border-radius: var(--r-round);
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
-  text-decoration: none;
+/* Utility classes */
+.stack > * + * {
+  margin-top: 1.3rem;
 }
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-  color: #111;
-  box-shadow: 0 12px 28px rgba(200,164,75,0.35);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(200,164,75,0.45);
-}
-
-.btn-ghost {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: var(--white);
-}
-
-.btn.small {
-  padding: .4rem .8rem;
-  font-size: .85rem;
-}
-
-
-/* ============================================================
-   6 — PREVIEW CARDS (Ampel)
-============================================================ */
-
-.preview-grid {
-  display: grid;
-  gap: var(--s-sm);
-  margin-top: var(--s-sm);
-}
-
-.preview-card {
-  padding: var(--s-sm);
-  border-radius: var(--r-md);
-  color: var(--white);
-  font-size: .9rem;
-}
-
-.preview-green { background: rgba(85,183,107,0.15); border: 1px solid #55b76b; }
-.preview-yellow { background: rgba(214,196,90,0.18); border: 1px solid #d6c45a; }
-.preview-red    { background: rgba(200,81,81,0.18);  border: 1px solid #c85151; }
-
-
-/* ============================================================
-   7 — CHAPTER MARKER (Netflix Doku)
-============================================================ */
-
-.chapter-marker {
-  position: sticky;
-  top: 72px;
-  z-index: 5;
-  padding: var(--s-xs) var(--s-md);
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(10px);
-  font-size: .82rem;
-  color: var(--muted);
-  border-bottom: 1px solid var(--line-light);
-}
-
-
-/* ============================================================
-   8 — LIGHT SECTIONS
-============================================================ */
-
-section:not(#hero) {
-  background: var(--light-bg);
-  color: var(--black);
-}
-
-.section h2 {
-  color: #111;
-}
-
-
-/* ============================================================
-   9 — CARDS, STORY CARDS, TRUST, SOCIAL PROOF
-============================================================ */
-
-.card {
-  background: var(--card-light);
-  border: 1px solid var(--line-light);
-  padding: var(--s-md);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-light);
-}
-
-.story-card {
-  background: var(--white);
-  border: 1px solid var(--line-light);
-  padding: var(--s-md);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-light);
-}
-
-.safety-list ul {
-  margin: 0;
-  padding-left: 1.2rem;
-  color: var(--black);
-}
-
-.trust-disclosure {
-  border-left: 4px solid var(--gold);
-}
-
-
-/* ============================================================
-   10 — LIVE METRICS (Trust, Freshness, Activity)
-============================================================ */
-
-.live-metrics {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: .9rem;
-  color: var(--gold-soft);
-  margin-bottom: var(--s-sm);
-}
-
-
-/* ============================================================
-   11 — FINAL CTA
-============================================================ */
-
-.final-cta-block {
-  margin-top: var(--s-md);
+.center {
   text-align: center;
 }
-
-
-/* ============================================================
-   12 — AMPPEL CHECK SECTION (Wrapper only)
-============================================================ */
-
-#checkMount {
-  margin-top: var(--s-md);
+.smallprint {
+  font-size: 0.9rem;
+  color: var(--gray);
 }
 
-
-/* ============================================================
-   13 — REFERRAL / SHARE COMPOSER
-============================================================ */
-
-.share {
-  background: var(--white);
-  padding: var(--s-md);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-light);
-  border: 1px solid var(--line-light);
-}
-
-#refText, #refName {
-  width: 100%;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--line-light);
-  padding: var(--s-sm);
-  font-size: 1rem;
-  resize: vertical;
-}
-
-.seg-btn {
-  background: var(--white-soft);
-  border: 1px solid var(--line-light);
-  color: var(--black);
-  padding: .55rem 1rem;
-  border-radius: var(--r-round);
-}
-
-.seg-btn:hover {
-  background: var(--gold-soft);
-  border-color: var(--gold);
-  color: #111;
-}
-
-
-/* ============================================================
-   14 — FOOTER
-============================================================ */
-
-.footer {
-  background: var(--hero-bg);
-  color: var(--white);
-  padding: var(--s-lg) 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.footer a {
-  color: var(--gold-soft);
-}
-
-.footer-inner {
-  text-align: center;
-}
-
-
-/* ============================================================
-   15 — STICKY CTA (Mobile)
-============================================================ */
-
-.sticky-cta {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 18px;
-  z-index: 50;
-  display: none;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: var(--transition);
-}
-
-.sticky-cta .inner {
-  background: var(--hero-bg);
-  padding: var(--s-xs);
-  border-radius: var(--r-round);
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: var(--shadow-dark);
-}
-
-@media (max-width: 900px) {
-  .sticky-cta { display: flex; }
-}
-
-
-/* ============================================================
-   16 — WHISPER CTA
-============================================================ */
-
-.whisper {
-  position: fixed;
-  left: 18px;
-  bottom: 18px;
-  background: rgba(5,7,14,0.92);
-  border: 1px solid var(--line-dark);
-  padding: var(--s-sm) var(--s-md);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-dark);
-  color: var(--white);
-  font-size: .9rem;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: var(--transition);
-}
-
-
-/* ============================================================
-   17 — ANIMATIONS / MOTION ENGINE
-============================================================ */
-
+/* Fade-up animation */
 .fade-up {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .6s var(--ease), transform .6s var(--ease);
+  transform: var(--fade-up);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 .fade-up.visible {
   opacity: 1;
   transform: none;
 }
 
-.preview-card,
-.card,
-.story-card {
-  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+/* ============================================================
+   HEADER
+============================================================ */
+.header {
+  padding: 22px 0;
+  background: var(--black-soft);
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
-.card:hover,
-.story-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-dark);
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
+.brand {
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.brand-claim {
+  font-size: 0.85rem;
+  color: var(--gray);
+}
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--gold);
+  margin-bottom: 3px;
+}
 
 /* ============================================================
-   FIN — GODMODE 2026
+   HERO SECTION
 ============================================================ */
+.hero {
+  padding: 70px 0 60px;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 50px;
+}
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+.hero-title strong {
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--gray-soft);
+}
+
+.hero-btn {
+  margin-top: 18px;
+}
+
+/* Rotating Hook */
+.rotating-hook {
+  color: var(--gray);
+  font-size: 1rem;
+  min-height: 1.4em;
+}
+
+/* Hero Image */
+.hero-visual img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Microtrust */
+.microtrust {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  display: inline-block;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: #000;
+}
+.btn-primary:hover {
+  background: var(--gold-soft);
+}
+
+.link-quiet {
+  color: var(--gray-soft);
+  text-decoration: underline;
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   CATEGORY SECTION
+============================================================ */
+.lead {
+  font-size: 1.15rem;
+  color: var(--gray-soft);
+}
+
+.ampel-loop {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.ampel-loop .dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: inline-block;
+  opacity: 0.4;
+}
+.dot.green { background: #55b76b; }
+.dot.yellow { background: #d6c45a; }
+.dot.red { background: #c85151; }
+
+/* ============================================================
+   PREVIEW CARDS
+============================================================ */
+.preview-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.preview-card {
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  background: var(--black-soft);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: var(--transition);
+}
+.preview-card:hover {
+  transform: translateY(-3px);
+}
+
+.preview-card.green { border-color: rgba(85,183,107,0.4); }
+.preview-card.yellow { border-color: rgba(214,196,90,0.4); }
+.preview-card.red { border-color: rgba(200,81,81,0.4); }
+
+/* ============================================================
+   PERSONA CARDS
+============================================================ */
+.personas-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.persona-card {
+  background: var(--black-soft);
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 1.05rem;
+}
+
+/* ============================================================
+   SOCIAL PROOF
+============================================================ */
+.proof-list {
+  display: grid;
+  gap: 20px;
+}
+.proof {
+  font-size: 1.1rem;
+  color: var(--gray-soft);
+  border-left: 3px solid var(--gold);
+  padding-left: 14px;
+}
+
+/* ============================================================
+   SAFETY LAYER
+============================================================ */
+#safety h2 {
+  color: var(--gold);
+}
+
+/* ============================================================
+   AMPSEL CHECK (mount area)
+============================================================ */
+#ampel-check {
+  margin-top: 50px;
+}
+#checkMount {
+  margin-top: 20px;
+  padding: 24px;
+  background: var(--black-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Ampel Reveal Component */
+.ampel-reveal {
+  opacity: 0;
+  transform: scale(.92);
+  transition: .45s cubic-bezier(.25,.46,.25,1);
+  text-align: center;
+}
+.ampel-reveal.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.ampel-reveal .ampel-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  margin: 0 auto 10px;
+  box-shadow: 0 0 20px currentColor;
+}
+.ampel-reveal.green { color:#55b76b; }
+.ampel-reveal.yellow { color:#d6c45a; }
+.ampel-reveal.red { color:#c85151; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.footer {
+  padding: 40px 0;
+  background: #000;
+  text-align: center;
+  margin-top: 60px;
+}
+.footer a {
+  color: var(--gray-soft);
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   STICKY CTA (Mobile)
+============================================================ */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -80px;
+  padding: 16px;
+  background: var(--black-soft);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  transition: var(--transition);
+  z-index: 50;
+}
+.sticky-cta.visible {
+  bottom: 0;
+}
+
+.sticky-cta .btn-primary {
+  width: 100%;
+  text-align: center;
+}
+
+/* ============================================================
+   WHISPER CTA
+============================================================ */
+.whisper {
+  position: fixed;
+  left: 50%;
+  bottom: 120px;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.08);
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: .9rem;
+  color: var(--gray-soft);
+  opacity: 0;
+  transition: var(--transition);
+}
+.whisper.visible {
+  opacity: 1;
+}
+
+/* ============================================================
+   MEDIA QUERIES
+============================================================ */
+@media (max-width: 600px) {
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.4rem; }
+  .hero { padding-top: 40px; }
+  .hero-visual img { margin-top: 30px; }
+}
