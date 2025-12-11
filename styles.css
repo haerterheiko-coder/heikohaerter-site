@@ -1,335 +1,574 @@
-<!-- /public/index.html -->
 <!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
-<title>2026 Master UI – ruhig, klar, schnell</title>
+<title>Heiko Haerter – Ruhige Finanzbegleitung</title>
+<meta name="description" content="Klarheit, Vertrauen, Ruhe. Persönliche Finanzbegleitung ohne Druck – in deinem Tempo." />
 <meta name="color-scheme" content="dark only" />
-<meta name="description" content="Kurz ansehen. Sofort Orientierung. Ruhige UI für Seiten, die nicht nerven.">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop" imagesrcset="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop 1600w" />
 <style>
-/* =========================================================
-   2026 MASTER UI SYSTEM — Ultra-stable · Mobile-first · Neuro-light
-   (Hardened for production: CLS-safe, Motion-safe, @supports)
-   ========================================================= */
+/* ==========================================================================
+   HEIKO HAERTER — 2026 UI SYSTEM (Mobile-first, CLS-safe, Motion-safe)
+   ========================================================================== */
 @layer tokens, base, components, utilities;
-/* 1) ROOT TOKENS */
+/* TOKENS /
 @layer tokens {
-  :root {
-    --bg:#05070E;--bg-soft:#0A0F1E;--surface:rgba(255,255,255,0.045);--surface-soft:rgba(255,255,255,0.06);
-    --text:#F7F8FC;--muted:#A8B1C5;--muted-soft:#8F97AA;--gold:#C8A44B;--gold-soft:#E9D394;--focus:#90C2FF;
-    --radius-xl:34px;--radius-lg:24px;--radius-md:18px;--radius-sm:12px;
-    --elev-1:0 18px 40px rgba(0,0,0,0.35);--elev-2:0 30px 80px rgba(0,0,0,0.55);
-    --ease:cubic-bezier(.25,.46,.25,1);--max-width:1120px;
-    --bg-glow-1:radial-gradient(circle at 15% -10%, rgba(200,164,75,0.22), transparent 55%);
-    --bg-glow-2:radial-gradient(circle at 85% 10%, rgba(120,150,255,0.18), transparent 60%);
-    color-scheme:dark;
-  }
+:root {
+/ Palette */
+--bg: #05070E;
+--bg-soft: #0A0F1E;
+--surface: rgba(255,255,255,0.045);
+--surface-soft: rgba(255,255,255,0.06);
+--text: #F7F8FC;
+--muted: #A8B1C5;
+--muted-soft: #8F97AA;
+--gold: #C8A44B;
+--gold-soft: #E9D394;
+--ok: #6BDB91;
+--warn: #FFBC2D;
+--danger: #FF5858;
+--focus: #90C2FF;
+/* Type scale */
+--fs-h1: clamp(2rem, 5.5vw, 3.25rem);
+--fs-h2: clamp(1.6rem, 3.5vw, 2.2rem);
+--fs-h3: clamp(1.12rem, 2.2vw, 1.35rem);
+--fs-body: clamp(1rem, 1.2vw, 1.08rem);
+--fs-micro: .92rem;
+
+/* Layout */
+--max-w: 1120px;
+--wrap-x: clamp(16px, 5vw, 32px);
+--section-y: clamp(40px, 8vw, 96px);
+
+/* Radii */
+--r-xl: 34px;
+--r-lg: 24px;
+--r-md: 18px;
+--r-sm: 12px;
+
+/* Elevation */
+--elev-1: 0 18px 40px rgba(0,0,0,0.35);
+--elev-2: 0 30px 80px rgba(0,0,0,0.55);
+
+/* Motion */
+--ease: cubic-bezier(.25,.46,.25,1);
+
+/* Decorative glows */
+--bg-glow-1: radial-gradient(circle at 12% -10%, rgba(200,164,75,0.22), transparent 55%);
+--bg-glow-2: radial-gradient(circle at 88% 12%, rgba(120,150,255,0.18), transparent 60%);
+
+color-scheme: dark;
+
 }
-/* 2) BASE */
+}
+/* BASE */
 @layer base {
-  *,:before,:after{box-sizing:border-box}
-  html,body{margin:0;padding:0;overflow-x:hidden;background:var(--bg);color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;line-height:1.6}
-  img,picture,svg,video{max-width:100%;height:auto;display:block;content-visibility:auto;contain-intrinsic-size:300px 200px}
-  a{color:inherit;text-decoration:none}
-  a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:8px}
-  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-  @media (prefers-contrast: more){:root{--surface:rgba(255,255,255,0.08);--surface-soft:rgba(255,255,255,0.12)}}
+*,:before,:after { box-sizing: border-box }
+html, body {
+margin: 0; padding: 0; overflow-x: hidden;
+background: var(--bg); color: var(--text);
+font-family: -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+line-height: 1.6; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
 }
-/* 3) TYPE */
+img,picture,svg,video { display: block; max-width: 100%; height: auto; content-visibility: auto; contain-intrinsic-size: 1200px 800px }
+a { color: inherit; text-decoration: none }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px;
+}
+::selection { background: rgba(233,211,148,.25) }
+@media (prefers-reduced-motion: reduce) {
+* { animation: none !important; transition: none !important; scroll-behavior: auto !important }
+}
+@media (prefers-contrast: more) {
+:root { --surface: rgba(255,255,255,0.08); --surface-soft: rgba(255,255,255,0.12) }
+}
+}
+/* TYPOGRAPHY */
 @layer components {
-  .hh-h1{font-size:clamp(1.9rem,4vw,3rem);font-weight:700;line-height:1.15;margin:0 0 1rem;letter-spacing:-.01em}
-  .hh-h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin:0 0 .8rem;letter-spacing:-.01em}
-  h3{font-size:clamp(1.12rem,2vw,1.3rem);margin:0 0 .5rem;font-weight:700}
-  p,li{font-size:clamp(1rem,1.1vw,1.08rem);color:var(--muted)}
-  .hh-micro,.hh-label{color:var(--muted-soft);font-size:.92rem;letter-spacing:.05em}
+.hh-h1 { font-size: var(--fs-h1); font-weight: 800; line-height: 1.12; margin: 0 0 1rem; letter-spacing: -.01em }
+.hh-h2 { font-size: var(--fs-h2); font-weight: 800; line-height: 1.2; margin: 0 0 .9rem; letter-spacing: -.01em }
+h3 { font-size: var(--fs-h3); font-weight: 700; margin: 0 0 .6rem }
+p, li { font-size: var(--fs-body); color: var(--muted) }
+.hh-micro,.hh-label { color: var(--muted-soft); font-size: var(--fs-micro); letter-spacing: .04em; text-transform: none }
 }
-/* 4) LAYOUT */
+/* LAYOUT */
 @layer components {
-  .hh-container{width:100%;max-width:var(--max-width);margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
-  .hh-section{padding-block:clamp(36px,7vw,80px)}
-  .hh-grid-auto{display:grid;gap:clamp(.8rem,2vw,1.4rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
-  .hh-grid-hero{display:grid;gap:clamp(1.6rem,3vw,2.4rem)}
-  @media (min-width:1024px){.hh-grid-hero{grid-template-columns:1.1fr .9fr;align-items:center}}
-  .hh-stack{display:flex;flex-direction:column;gap:clamp(.6rem,1.5vw,1.1rem)}
-  .hh-center{text-align:center}
+.wrap, .hh-container { width: 100%; max-width: var(--max-w); margin-inline: auto; padding-inline: var(--wrap-x) }
+.section, .hh-section { padding-block: var(--section-y) }
+.grid-auto, .hh-grid-auto { display: grid; gap: clamp(.8rem, 2vw, 1.4rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) }
+.grid-hero, .hh-grid-hero { display: grid; gap: clamp(1.2rem, 3vw, 2.4rem) }
+@media (min-width: 1024px) { .grid-hero, .hh-grid-hero { grid-template-columns: 1.1fr .9fr; align-items: center } }
+.stack, .hh-stack { display: flex; flex-direction: column; gap: clamp(.6rem, 1.6vw, 1.2rem) }
+.center, .hh-center { text-align: center }
 }
-/* 5) BUTTONS */
+/* BUTTONS */
 @layer components {
-  .hh-btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.4rem;border-radius:999px;border:1px solid transparent;cursor:pointer;font-weight:800;background:rgba(255,255,255,0.06);color:var(--text);transition:transform .18s var(--ease),box-shadow .18s var(--ease),filter .18s var(--ease);min-height:48px;position:relative;isolation:isolate}
-  .hh-btn:hover{transform:translateY(-2px)}
-  .hh-btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#111;box-shadow:0 12px 28px rgba(200,164,75,0.35)}
-  .hh-btn-primary:hover{box-shadow:0 18px 40px rgba(200,164,75,0.45);filter:brightness(1.06)}
-  .hh-btn-ghost{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16)}
-  @media (max-width:768px){.hh-btn,.hh-btn-primary,.hh-btn-ghost{width:100%}}
+.hh-btn { display:inline-flex; gap:.55rem; align-items:center; justify-content:center; min-height:48px; padding:.9rem 1.4rem; border-radius:999px; border:1px solid transparent; cursor:pointer; font-weight:800; background:rgba(255,255,255,0.06); color:var(--text); transition: transform .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease); position:relative; isolation:isolate }
+.hh-btn:hover { transform: translateY(-2px) }
+.hh-btn:active { transform: translateY(0) scale(.98) }
+.hh-btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold-soft)); color: #111; box-shadow: 0 12px 28px rgba(200,164,75,0.35) }
+.hh-btn-primary:hover { box-shadow: 0 18px 40px rgba(200,164,75,0.45); filter: brightness(1.06) }
+.hh-btn-ghost { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16) }
+@media (max-width: 768px) { .hh-btn,.hh-btn-primary,.hh-btn-ghost { width: 100% } }
 }
-/* 6) CARDS */
+/* CARDS & SURFACES */
 @layer components {
-  .hh-card{background:var(--surface);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-md);padding:1rem 1.2rem;box-shadow:var(--elev-1);transition:transform .18s var(--ease),box-shadow .18s var(--ease);will-change:transform}
-  .hh-story,.hh-story-sm{background:rgba(255,255,255,0.05)}
-  .hh-benefit{background:rgba(255,255,255,0.08)}
-  .hh-zero{border:1px dashed rgba(233,211,148,0.45);background:rgba(233,211,148,0.08)}
-  .hh-card:hover{transform:translateY(-4px);box-shadow:0 22px 48px rgba(0,0,0,0.55)}
+.card, .hh-card { background: var(--surface); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem; box-shadow: var(--elev-1); transition: transform .18s var(--ease), box-shadow .18s var(--ease) }
+.hh-card:hover { transform: translateY(-4px); box-shadow: 0 22px 48px rgba(0,0,0,0.55) }
+.hh-benefit { background: rgba(255,255,255,0.08) }
+.hh-story, .hh-story-sm { background: rgba(255,255,255,0.05) }
+.hh-zero { border: 1px dashed rgba(233,211,148,0.45); background: rgba(233,211,148,0.08) }
 }
-/* 7) HERO IMG */
-@layer components {.hh-hero-image img{width:100%;border-radius:var(--radius-lg);box-shadow:var(--elev-2);background:var(--bg-soft)}}
-/* 8) FOOTER */
-@layer components {.hh-footer{padding:2rem 0;border-top:1px solid rgba(255,255,255,0.1);text-align:center;background:rgba(5,8,22,0.95)}.hh-footer a{text-decoration:underline}}
-/* 9) ANIMATIONS */
+/* HERO IMAGE */
 @layer components {
-  .fade-up{opacity:0;transform:translateY(18px)}
-  .fade-up.visible{opacity:1;transform:none;transition:opacity .55s var(--ease),transform .55s var(--ease)}
-  @supports (animation-timeline: view()){
-    @media (prefers-reduced-motion: no-preference){
-      .fade-up{view-timeline-name:--fade;view-timeline-axis:block;animation-timeline:--fade;animation-name:fadeUpAnim;animation-range:entry 10% cover 40%;animation-fill-mode:both}
-      @keyframes fadeUpAnim{0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)}}
-    }
-  }
+.hh-hero-image img { width: 100%; border-radius: var(--r-lg); box-shadow: var(--elev-2); background: var(--bg-soft); aspect-ratio: 4 / 3; object-fit: cover }
 }
-/* 10) SAFE AREAS */
-@layer components {@supports(padding:max(0px)){body{padding-bottom:max(env(safe-area-inset-bottom),0px)}}}
-/* 11) WIX FIX */
-@layer utilities {[data-mesh-id],[data-mesh-id] *{transform:none!important}[data-mesh-id]{max-width:none!important;width:100%!important}}
-/* OPTION A — PERFORMANCE */
+/* FOOTER */
+@layer components {
+.hh-footer { padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(5,8,22,0.95) }
+.hh-footer a { text-decoration: underline }
+}
+/* SHARE BOX */
+@layer components {
+.hh-share-box { display: grid; gap: .8rem; background: var(--surface); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem }
+.hh-share-seg { display: flex; flex-wrap: wrap; gap: .5rem }
+.hh-share-seg-btn { padding: .5rem .9rem; border-radius: 999px; border:1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.04); color: var(--text); cursor: pointer; transition: transform .15s var(--ease), background .15s var(--ease) }
+.hh-share-seg-btn[aria-pressed="true"] { background: rgba(233,211,148,0.12); border-color: rgba(233,211,148,0.45) }
+#shareText { width: 100%; min-height: 110px; background: var(--surface-soft); color: var(--text); border: 1px solid rgba(255,255,255,0.16); border-radius: var(--r-sm); padding: .8rem 1rem; resize: vertical }
+.hh-share-preview { padding: .9rem 1rem; border-radius: var(--r-sm); background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.16); min-height: 56px }
+}
+/* PROOF / TRUST */
+@layer components {
+.trust { display:grid; gap:.8rem; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)) }
+.trust .item { background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: .9rem 1rem }
+.proof-quotes { display:grid; gap:.8rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)) }
+.quote { background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 1rem 1.2rem }
+}
+/* PROGRESS & STEPS */
+@layer components {
+.hh-progress { width: 100%; background: rgba(255,255,255,0.08); border-radius: 99px; height: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12) }
+.hh-progress-fill { background: linear-gradient(90deg, var(--gold), var(--gold-soft)); height: 100%; width: 0%; border-radius: 99px; transition: width .35s var(--ease) }
+.hh-step { display: none; background: var(--surface); padding: 1.1rem 1.2rem; border-radius: var(--r-md); border: 1px solid rgba(255,255,255,0.12) }
+.hh-step.active { display: block }
+.hh-ampel { display: flex; flex-direction: column; gap: 1rem }
+.hh-ampel-item { padding: 1rem 1.2rem; border-radius: var(--r-md); border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: flex-start; gap: .8rem; font-size: 1.05rem; background: var(--surface) }
+.hh-ampel-item.now { background: rgba(255,88,88,0.12); border-color: rgba(255,88,88,0.35) }
+.hh-ampel-item.next { background: rgba(255,188,45,0.12); border-color: rgba(255,188,45,0.35) }
+.hh-ampel-item.later { background: rgba(108,255,108,0.12); border-color: rgba(108,255,108,0.28) }
+}
+/* FAQ */
+@layer components {
+.faq { display:grid; gap:.8rem }
+.faq details { background: var(--surface); border:1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding:.6rem .9rem }
+.faq summary { cursor: pointer; font-weight: 700; outline: none }
+.faq p { margin:.4rem 0 0 }
+}
+/* ANIMATIONS */
+@layer components {
+.fade-up { opacity: 0; transform: translateY(18px) }
+.fade-up.visible { opacity: 1; transform: none; transition: opacity .55s var(--ease), transform .55s var(--ease) }
+@supports (animation-timeline: view()) {
+@media (prefers-reduced-motion: no-preference) {
+.fade-up { view-timeline-name: --fade; view-timeline-axis: block; animation-timeline: --fade; animation-name: fadeUp; animation-range: entry 10% cover 40%; animation-fill-mode: both }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px) } to { opacity: 1; transform: translateY(0) } }
+}
+}
+}
+/* STICKY CTA (mobile only) */
+@layer components {
+.sticky-cta { position: fixed; left: 0; right: 0; bottom: 14px; display: none; justify-content: center; padding-bottom: calc(env(safe-area-inset-bottom) + 6px); z-index: 90; transform: translateY(100%); opacity: 0; transition: opacity .25s var(--ease), transform .25s var(--ease) }
+@media (max-width: 979px) { .sticky-cta { display: flex } }
+.sticky-cta .inner { background: rgba(5,8,22,.88); border:1px solid rgba(255,255,255,.08); padding: .55rem; border-radius: 999px; box-shadow: var(--elev-1) }
+.sticky-cta.show { transform: translateY(0); opacity: 1 }
+}
+/* UTILITIES */
 @layer utilities {
-  .hh-accelerate,.fade-up,.hh-btn,.hh-card,.hh-hero-image img{will-change:transform,opacity;transform:translateZ(0)}
-  html{scroll-behavior:smooth}
-  .snap-y{scroll-snap-type:y proximity}.snap-y .hh-section{scroll-snap-align:start;scroll-snap-stop:always}
-  *{-webkit-tap-highlight-color:transparent}a,button{touch-action:manipulation}
+html { scroll-behavior: smooth }
+.hh-accelerate,.fade-up,.hh-btn,.hh-card,.hh-hero-image img { will-change: transform, opacity; transform: translateZ(0) }
+.snap-y { scroll-snap-type: y proximity } .snap-y .section, .snap-y .hh-section { scroll-snap-align: start; scroll-snap-stop: always }
+
+
+{ -webkit-tap-highlight-color: transparent } a,button { touch-action: manipulation }
+.hh-bg { position: relative }
+.hh-bg::before,.hh-bg::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:-1 }
+.hh-bg::before { background: var(--bg-glow-1) } .hh-bg::after { background: var(--bg-glow-2) }
 }
-/* OPTION B — MICRO DOPAMIN */
+
+
+/* MICRO DOPAMIN */
 @layer utilities {
-  .hh-btn:hover{transform:translateY(-3px) scale(1.02)}
-  .hh-btn-primary:hover{filter:brightness(1.12)}
-  @keyframes hhPulse{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0.25)}70%{transform:scale(1.02);box-shadow:0 0 22px 10px rgba(200,164,75,0.15)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0)}}
-  .hh-btn-primary[data-ctx="sticky"],#ctaFinal,.hero-cta{animation:hhPulse 4s ease-in-out infinite;animation-delay:1.4s}
-  .hh-ripple{position:absolute;width:18px;height:18px;background:rgba(255,255,255,0.28);border-radius:50%;transform:translate(-50%,-50%);animation:hhRipple .45s ease-out forwards;pointer-events:none;inset:0}
-  @keyframes hhRipple{to{opacity:0;transform:translate(-50%,-50%) scale(8)}}
-  .hh-glow{box-shadow:0 0 32px rgba(233,211,148,.35)!important;transition:box-shadow .35s ease-out}
-  .hh-click{transform:scale(.96);transition:transform .15s var(--ease)}
+.hh-btn:hover { transform: translateY(-3px) scale(1.02) }
+.hh-btn-primary:hover { filter: brightness(1.12) }
+@keyframes hhPulse { 0%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0.25)} 70%{transform:scale(1.02);box-shadow:0 0 22px 10px rgba(200,164,75,0.15)} 100%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,164,75,0)} }
+.hero-cta,[data-ctx="sticky"] { animation: hhPulse 4s ease-in-out infinite; animation-delay: 1.4s }
+.hh-ripple { position: absolute; width: 18px; height: 18px; background: rgba(255,255,255,0.28); border-radius: 50%; transform: translate(-50%,-50%); animation: hhRipple .45s ease-out forwards; pointer-events: none; inset:0 }
+@keyframes hhRipple { to { opacity: 0; transform: translate(-50%,-50%) scale(8) } }
 }
-/* OPTION C — COMPONENTS */
-@layer components {
-  .hh-ampel{display:flex;flex-direction:column;gap:1rem}
-  .hh-ampel-item{padding:1rem 1.2rem;border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:flex-start;gap:.8rem;font-size:1.05rem;background:var(--surface)}
-  .hh-ampel-item.now{background:rgba(255,68,68,0.12);border-color:rgba(255,68,68,0.35)}
-  .hh-ampel-item.next{background:rgba(255,188,45,0.12);border-color:rgba(255,188,45,0.35)}
-  .hh-ampel-item.later{background:rgba(108,255,108,0.12);border-color:rgba(108,255,108,0.28)}
-  .hh-step{display:none;background:var(--surface);padding:1.4rem;border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.12)}
-  .hh-step.active{display:block}
-  .hh-progress{width:100%;background:rgba(255,255,255,0.08);border-radius:99px;height:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.12)}
-  .hh-progress-fill{background:linear-gradient(90deg,var(--gold),var(--gold-soft));height:100%;width:0%;border-radius:99px;transition:width .35s var(--ease)}
-  .sticky-cta{position:fixed;left:0;right:0;bottom:14px;display:none;justify-content:center;padding-bottom:calc(env(safe-area-inset-bottom) + 6px);z-index:90;transform:translateY(100%);opacity:0;transition:opacity .25s var(--ease),transform .25s var(--ease)}
-  @media (max-width:979px){.sticky-cta{display:flex}}
-  .sticky-cta .inner{background:rgba(5,8,22,.88);border:1px solid rgba(255,255,255,.08);padding:.55rem;border-radius:999px;box-shadow:var(--elev-1)}
-  .sticky-cta.show{transform:translateY(0);opacity:1}
-}
-/* DECORATIVE BG */
-@layer utilities {.hh-bg{position:relative}.hh-bg::before,.hh-bg::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1}.hh-bg::before{background:var(--bg-glow-1)}.hh-bg::after{background:var(--bg-glow-2)}}
+/* SAFE AREAS */
+@layer components { @supports(padding:max(0px)) { body { padding-bottom: max(env(safe-area-inset-bottom), 0px) } } }
+/* WIX FIX */
+@layer utilities { [data-mesh-id],[data-mesh-id] * { transform:none!important } [data-mesh-id] { max-width:none!important; width:100%!important } }
 </style>
 </head>
 <body class="hh-bg">
-
   <!-- HERO -->
-  <header class="hh-section">
+  <header class="hh-section" id="hero" aria-label="Einführung">
     <div class="hh-container hh-grid-hero">
       <div class="hh-stack fade-up">
         <span class="hh-label">Klar sehen. In Ruhe entscheiden.</span>
         <h1 class="hh-h1">Stabil. Schnell. Ruhig.</h1>
         <p>Ein kurzer Blick zeigt dir sofort, was zählt. Ohne Druck. In deinem Tempo.</p>
-        <div style="display:flex; gap:.6rem; flex-wrap:wrap">
-          <button class="hh-btn hh-btn-primary hero-cta" data-ripple>Kurz ansehen</button>
-          <button class="hh-btn hh-btn-ghost" data-ripple>System öffnen</button>
-        </div>
+        <nav aria-label="Primäre Aktionen" style="display:flex; gap:.6rem; flex-wrap:wrap">
+          <a href="#problem" class="hh-btn hh-btn-primary hero-cta" data-ripple aria-describedby="usp">Kurz ansehen</a>
+          <a href="#angebot" class="hh-btn hh-btn-ghost" data-ripple>System öffnen</a>
+        </nav>
+        <span id="usp" class="hh-micro">Anonym · Kein Verkauf · Zero-Risk</span>
       </div>
       <figure class="hh-hero-image fade-up">
         <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop"
-             alt="Beispiel-Ansicht"
+             alt="Ruhige Oberfläche, klare Finanzübersicht"
              width="1600" height="1200" />
       </figure>
     </div>
   </header>
-
-  <!-- BENEFITS -->
-  <section class="hh-section snap-item">
-    <div class="hh-container hh-grid-auto">
-      <div class="hh-card hh-benefit fade-up">
-        <h3>Kein Wackeln</h3>
-        <p>Nichts springt. Bilder haben festen Platz. Ruhiges Scrollen.</p>
-      </div>
-      <div class="hh-card hh-benefit fade-up">
-        <h3>Sanfte Bewegung</h3>
-        <p>Dezente Effekte. Respektiert „Bewegung reduzieren“. Immer angenehm.</p>
-      </div>
-      <div class="hh-card hh-benefit fade-up">
-        <h3>Schnelles Laden</h3>
-        <p>Kurz warten, dann sofort sehen. Fix. Klar. Einfach.</p>
+  <!-- PROBLEM -->
+  <section class="hh-section" id="problem" aria-labelledby="sec-problem">
+    <div class="hh-container">
+      <h2 class="hh-h2 fade-up" id="sec-problem">Das Problem – zu viel Lärm, zu wenig Klarheit</h2>
+      <div class="hh-container grid-auto" style="padding:0">
+        <div class="hh-card hh-benefit fade-up"><h3>Kein Wackeln</h3><p>Nichts springt. Bilder haben festen Platz. Ruhiges Scrollen.</p></div>
+        <div class="hh-card hh-benefit fade-up"><h3>Sanfte Bewegung</h3><p>Dezente Effekte, respektiert „Bewegung reduzieren“.</p></div>
+        <div class="hh-card hh-benefit fade-up"><h3>Schnelles Laden</h3><p>Kurze Wege, sofort Orientierung. Fix. Klar. Einfach.</p></div>
       </div>
     </div>
   </section>
+  <!-- LÖSUNG -->
+  <section class="hh-section" id="loesung" aria-labelledby="sec-loesung">
+    <div class="hh-container hh-grid-hero">
+      <div class="hh-stack fade-up">
+        <h2 class="hh-h2" id="sec-loesung">Die Lösung – dein ruhiger Mini-Check</h2>
+        <p>In 2–3 Minuten siehst du: <strong>Jetzt · Als Nächstes · Später</strong>. Ohne Nachfassen, ohne Verkauf.</p>
+        <div class="hh-ampel">
+          <div class="hh-ampel-item now fade-up"><strong>Jetzt:</strong>&nbsp;Wichtige Punkte zuerst. Ohne Hektik.</div>
+          <div class="hh-ampel-item next fade-up"><strong>Als Nächstes:</strong>&nbsp;Geldpolster sortieren. Schritt für Schritt.</div>
+          <div class="hh-ampel-item later fade-up"><strong>Später:</strong>&nbsp;Feinschliff, wenn es passt.</div>
+        </div>
+      </div>
+      <div class="hh-stack fade-up">
+        <div class="hh-progress" aria-hidden="true"><div class="hh-progress-fill" id="progressFill"></div></div>
+    <form id="stepsForm" class="hh-stack" style="margin-top:1rem" novalidate aria-label="Mini-Check Formular">
+      <div class="hh-step active" data-step="1">
+        <label class="hh-label" for="f-haushalt">1/3 — Haushalt</label>
+        <input id="f-haushalt" class="hh-card" type="text" name="haushalt" placeholder="z. B. 2 Erwachsene, 1 Kind" required inputmode="text" autocomplete="off" />
+      </div>
+      <div class="hh-step" data-step="2">
+        <label class="hh-label" for="f-rate">2/3 — Monatsrate Sparen (optional)</label>
+        <input id="f-rate" class="hh-card" type="number" name="rate" placeholder="z. B. 300" min="0" step="50" inputmode="numeric" />
+      </div>
+      <div class="hh-step" data-step="3">
+        <label class="hh-label" for="f-prio">3/3 — Priorität</label>
+        <select id="f-prio" class="hh-card" name="prio" required>
+          <option value="">Bitte wählen</option>
+          <option>Sicherheit</option>
+          <option>Geldpolster</option>
+          <option>Sparen</option>
+        </select>
+      </div>
 
-  <!-- AMPEL -->
-  <section class="hh-section">
+      <div style="display:flex; gap:.6rem; flex-wrap:wrap">
+        <button type="button" class="hh-btn hh-btn-ghost" id="prevBtn" data-ripple>Zurück</button>
+        <button type="button" class="hh-btn hh-btn-primary" id="nextBtn" data-ripple>Weiter</button>
+      </div>
+      <div class="hh-micro" aria-live="polite" id="stepsLive"></div>
+    </form>
+  </div>
+</div>
+
+  </section>
+  <!-- PROOF / SOCIAL PROOF -->
+  <section class="hh-section" id="proof" aria-labelledby="sec-proof">
     <div class="hh-container">
-      <h2 class="hh-h2 fade-up">Dein Gefühl: Jetzt · Als Nächstes · Später</h2>
-      <div class="hh-ampel">
-        <div class="hh-ampel-item now fade-up"><strong>Jetzt:</strong>&nbsp;Wichtige Punkte zuerst. Ohne Hektik.</div>
-        <div class="hh-ampel-item next fade-up"><strong>Als Nächstes:</strong>&nbsp;Geldpolster sortieren. Schritt für Schritt.</div>
-        <div class="hh-ampel-item later fade-up"><strong>Später:</strong>&nbsp;Feinschliff, wenn es passt.</div>
+      <h2 class="hh-h2 fade-up" id="sec-proof">Proof – ruhig, anonym, ohne Druck</h2>
+      <div class="trust fade-up" role="list">
+        <div class="item" role="listitem"><strong>Anonynm</strong><br><span class="hh-micro">Keine Datenweitergabe. Keine Telefonate.</span></div>
+        <div class="item" role="listitem"><strong>Kein Verkauf</strong><br><span class="hh-micro">Kein Upsell, kein Funnel, kein Spam.</span></div>
+        <div class="item" role="listitem"><strong>Zero-Risk</strong><br><span class="hh-micro">Testen ohne Registrierung.</span></div>
+      </div>
+      <div class="proof-quotes" style="margin-top:1rem">
+        <blockquote class="quote fade-up" aria-label="Stimme einer Nutzerin">„Das erste Mal kein Druckgefühl. Ich sehe sofort, was zählt.“</blockquote>
+        <blockquote class="quote fade-up" aria-label="Stimme eines Nutzers">„In zwei Minuten mehr Ruhe im Kopf als nach zig Artikeln.“</blockquote>
+        <blockquote class="quote fade-up" aria-label="Stimme eines Paares">„Klare Reihenfolge: Jetzt, Nächstes, Später. Sehr hilfreich.“</blockquote>
       </div>
     </div>
   </section>
-
-  <!-- STEPS ENGINE -->
-  <section class="hh-section">
-    <div class="hh-container">
-      <h2 class="hh-h2 fade-up">Mini-Check (2–3 Minuten)</h2>
-
-      <div class="hh-progress" aria-hidden="true"><div class="hh-progress-fill" id="progressFill"></div></div>
-
-      <form id="stepsForm" class="hh-stack" style="margin-top:1rem">
-        <div class="hh-step active" data-step="1">
-          <label class="hh-label">1/3 — Haushalt</label>
-          <input class="hh-card" type="text" name="haushalt" placeholder="z. B. 2 Erwachsene, 1 Kind" required />
-        </div>
-        <div class="hh-step" data-step="2">
-          <label class="hh-label">2/3 — Monatsrate Sparen (optional)</label>
-          <input class="hh-card" type="number" name="rate" placeholder="z. B. 300" min="0" step="50" />
-        </div>
-        <div class="hh-step" data-step="3">
-          <label class="hh-label">3/3 — Priorität</label>
-          <select class="hh-card" name="prio" required>
-            <option value="">Bitte wählen</option>
-            <option>Sicherheit</option>
-            <option>Geldpolster</option>
-            <option>Sparen</option>
-          </select>
-        </div>
-
+  <!-- ANGEBOT / CTA -->
+  <section class="hh-section" id="angebot" aria-labelledby="sec-angebot">
+    <div class="hh-container hh-grid-hero">
+      <div class="hh-stack fade-up">
+        <h2 class="hh-h2" id="sec-angebot">Angebot – 2–3 Minuten Mini-Check</h2>
+        <p>Kostenlos. Anonym. Du entscheidest das Tempo. Eine klare Empfehlung am Ende.</p>
         <div style="display:flex; gap:.6rem; flex-wrap:wrap">
-          <button type="button" class="hh-btn hh-btn-ghost" id="prevBtn" data-ripple>Zurück</button>
-          <button type="button" class="hh-btn hh-btn-primary" id="nextBtn" data-ripple>Weiter</button>
+          <a href="#loesung" class="hh-btn hh-btn-primary hero-cta" data-ripple id="ctaPrimary">Jetzt starten</a>
+          <a href="#faq" class="hh-btn hh-btn-ghost" data-ripple>Fragen zuerst</a>
         </div>
-      </form>
+      </div>
+      <div class="hh-card hh-zero fade-up" role="note">
+        <strong>Zero-Risk Box</strong>
+        <ul>
+          <li>Keine Registrierung</li>
+          <li>Keine Weitergabe</li>
+          <li>Abbruch jederzeit</li>
+        </ul>
+      </div>
     </div>
   </section>
-
   <!-- SHARE COMPOSER -->
-  <section class="hh-section">
+  <section class="hh-section" id="weitergeben" aria-labelledby="sec-share">
     <div class="hh-container">
-      <h2 class="hh-h2 fade-up">Weitergeben (WhatsApp-Ton)</h2>
+      <h2 class="hh-h2 fade-up" id="sec-share">Weitergeben (WhatsApp-Ton)</h2>
       <div class="hh-share-box fade-up">
         <div class="hh-share-seg" role="group" aria-label="Zielgruppe wählen">
           <button type="button" class="hh-share-seg-btn" data-seg="eltern" aria-pressed="true">Eltern</button>
           <button type="button" class="hh-share-seg-btn" data-seg="paare" aria-pressed="false">Paare</button>
           <button type="button" class="hh-share-seg-btn" data-seg="selbst" aria-pressed="false">Selbstständige</button>
         </div>
+        <label class="hh-label" for="shareText">Nachricht</label>
         <textarea id="shareText" placeholder="Kurz, anonym, ohne Druck …"></textarea>
-        <div class="hh-share-preview" id="sharePreview">Vorschau erscheint hier …</div>
+        <div class="hh-share-preview" id="sharePreview" aria-live="polite">Vorschau erscheint hier …</div>
         <div style="display:flex; gap:.6rem; flex-wrap:wrap">
-          <button class="hh-btn hh-btn-primary" data-ripple>Text kopieren</button>
-          <button class="hh-btn hh-btn-ghost" data-ripple>Als Vorlage speichern</button>
+          <button class="hh-btn hh-btn-primary" id="copyBtn" data-ripple>Text kopieren</button>
+          <button class="hh-btn hh-btn-ghost" id="waShare" data-ripple>WhatsApp</button>
+          <button class="hh-btn hh-btn-ghost" id="sysShare" data-ripple>Teilen&nbsp;…</button>
         </div>
+        <div class="hh-micro" id="shareStatus" aria-live="polite"></div>
       </div>
     </div>
   </section>
-
+  <!-- FAQ -->
+  <section class="hh-section" id="faq" aria-labelledby="sec-faq">
+    <div class="hh-container">
+      <h2 class="hh-h2 fade-up" id="sec-faq">FAQ – schnelle Antworten</h2>
+      <div class="faq">
+        <details class="fade-up">
+          <summary>Ist das wirklich anonym?</summary>
+          <p>Ja. Keine Accounts, keine Weitergabe, keine Nachfass-Mails.</p>
+        </details>
+        <details class="fade-up">
+          <summary>Was bekomme ich am Ende?</summary>
+          <p>Eine ruhige Empfehlung: <em>Jetzt · Als Nächstes · Später</em> – kurz und umsetzbar.</p>
+        </details>
+        <details class="fade-up">
+          <summary>Muss ich etwas kaufen?</summary>
+          <p>Nein. Kein Verkauf, keine versteckten Angebote.</p>
+        </details>
+      </div>
+    </div>
+  </section>
   <!-- FOOTER -->
-  <footer class="hh-footer">
-    <div class="hh-container hh-micro">© 2026 Heiko Haerter · Design System</div>
+  <footer class="hh-footer" role="contentinfo">
+    <div class="hh-container hh-micro">© 2026 Heiko Haerter · Ruhige Finanzbegleitung · <a href="#faq">FAQ</a></div>
   </footer>
-
-  <!-- STICKY CTA -->
+  <!-- STICKY CTA (mobile) -->
   <div class="sticky-cta" id="stickyCta" aria-hidden="true">
     <div class="inner">
       <button class="hh-btn hh-btn-primary" data-ctx="sticky" data-ripple id="ctaFinal">Kurz ansehen</button>
     </div>
   </div>
-
 <script>
-/* Minimal JS Enhancers (why: ruhige UX, klare Fallbacks) */
+/* Minimal, defensive JS (IIFE, feature-detect, motion-safe) */
 (() => {
-  const io = ('IntersectionObserver' in window)
-    ? new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-        });
-      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 })
-    : null;
-  document.querySelectorAll('.fade-up').forEach(el => io && io.observe(el));
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const sticky = document.getElementById('stickyCta');
-  let stickyShown = false;
-  const onScroll = () => {
-    if (stickyShown) return;
-    if (window.scrollY > window.innerHeight * 0.6) {
-      sticky.classList.add('show');
-      sticky.setAttribute('aria-hidden', 'false');
-      stickyShown = true;
-      window.removeEventListener('scroll', onScroll, { passive: true });
+  function qs(sel, root=document){ return root.querySelector(sel) }
+  function qsa(sel, root=document){ return Array.from(root.querySelectorAll(sel)) }
+
+  function initScrollEffects(){
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries, obs) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) }
+      }
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    qsa('.fade-up').forEach(el => io.observe(el));
+  }
+
+  function initRipple(){
+    if (prefersReduced) return;
+    function createRipple(e){
+      const btn = e.currentTarget;
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const dot = document.createElement('span');
+      dot.className = 'hh-ripple';
+      dot.style.left = x + 'px';
+      dot.style.top = y + 'px';
+      btn.appendChild(dot);
+      dot.addEventListener('animationend', () => dot.remove(), { once: true });
     }
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  function createRipple(e) {
-    const btn = e.currentTarget;
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const dot = document.createElement('span');
-    dot.className = 'hh-ripple';
-    dot.style.left = x + 'px';
-    dot.style.top = y + 'px';
-    btn.appendChild(dot);
-    dot.addEventListener('animationend', () => dot.remove());
+    qsa('[data-ripple]').forEach(b => b.addEventListener('click', createRipple));
   }
-  document.querySelectorAll('[data-ripple]').forEach(b => b.addEventListener('click', createRipple));
 
-  const form = document.getElementById('stepsForm');
-  const steps = Array.from(form.querySelectorAll('.hh-step'));
-  const nextBtn = document.getElementById('nextBtn');
-  const prevBtn = document.getElementById('prevBtn');
-  const progressFill = document.getElementById('progressFill');
-
-  let idx = 0;
-  function setStep(i) {
-    idx = Math.max(0, Math.min(steps.length - 1, i));
-    steps.forEach((s, k) => s.classList.toggle('active', k === idx));
-    const pct = Math.round(((idx + 1) / steps.length) * 100);
-    progressFill.style.width = pct + '%';
-    prevBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
-    nextBtn.textContent = (idx === steps.length - 1) ? 'Fertig' : 'Weiter';
+  function initStickyCTA(){
+    const sticky = qs('#stickyCta');
+    if (!sticky) return;
+    let shown = false;
+    const onScroll = () => {
+      if (shown) return;
+      if (window.scrollY > window.innerHeight * 0.6) {
+        sticky.classList.add('show');
+        sticky.setAttribute('aria-hidden', 'false');
+        shown = true;
+        window.removeEventListener('scroll', onScroll, { passive: true });
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    const finalBtn = qs('#ctaFinal');
+    if (finalBtn) finalBtn.addEventListener('click', () => location.hash = '#loesung');
   }
-  setStep(0);
 
-  nextBtn.addEventListener('click', () => {
-    if (idx < steps.length - 1) setStep(idx + 1);
-    else { progressFill.style.width = '100%'; document.getElementById('ctaFinal').focus(); }
-  });
-  prevBtn.addEventListener('click', () => setStep(idx - 1));
+  function initFormSteps(){
+    const form = qs('#stepsForm');
+    if (!form) return;
+    const steps = qsa('.hh-step', form);
+    const nextBtn = qs('#nextBtn');
+    const prevBtn = qs('#prevBtn');
+    const progressFill = qs('#progressFill');
+    const live = qs('#stepsLive');
+    let idx = 0;
 
-  const segBtns = document.querySelectorAll('.hh-share-seg-btn');
-  const shareText = document.getElementById('shareText');
-  const sharePreview = document.getElementById('sharePreview');
+    function announce(msg){ if (live) live.textContent = msg }
 
-  const presets = {
-    eltern: 'Hey, dachte an euch. Kurz & anonym. 2 Minuten geben ein Gefühl für heute – ohne Druck.',
-    paare:  'Hey, kurzer Blick für uns zwei. Zeigt sofort „Jetzt · Als Nächstes · Später“. Anonym.',
-    selbst: 'Hey, 2 Minuten Check. Siehst in Ruhe, wo du stehst. Ohne Nachfassen.'
-  };
+    function setStep(i){
+      idx = Math.max(0, Math.min(steps.length - 1, i));
+      steps.forEach((s, k) => s.classList.toggle('active', k === idx));
+      const pct = Math.round(((idx + 1) / steps.length) * 100);
+      if (progressFill) progressFill.style.width = pct + '%';
+      if (prevBtn) prevBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
+      if (nextBtn) nextBtn.textContent = (idx === steps.length - 1) ? 'Fertig' : 'Weiter';
+      announce(`Schritt ${idx+1} von ${steps.length}`);
+      const firstInput = steps[idx].querySelector('input,select,textarea,button');
+      if (firstInput) firstInput.focus({ preventScroll: true });
+    }
 
-  function setSeg(seg) {
-    segBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.seg === seg)));
-    shareText.value = presets[seg] || '';
-    sharePreview.textContent = presets[seg] || 'Vorschau erscheint hier …';
+    function canProceed(){
+      const active = steps[idx];
+      if (!active) return true;
+      const required = qsa('[required]', active);
+      for (const el of required) {
+        if (!el.value || (el.tagName === 'SELECT' && el.value === '')) return false;
+      }
+      return true;
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+      if (idx < steps.length - 1) {
+        if (!canProceed()) { announce('Bitte ausfüllen'); return }
+        setStep(idx + 1);
+      } else {
+        if (progressFill) progressFill.style.width = '100%';
+        const cta = qs('#ctaFinal') || qs('#ctaPrimary');
+        if (cta) cta.focus();
+        announce('Fertig. Empfehlung bereit.');
+      }
+    });
+
+    if (prevBtn) prevBtn.addEventListener('click', () => setStep(idx - 1));
+    setStep(0);
   }
-  segBtns.forEach(b => b.addEventListener('click', () => setSeg(b.dataset.seg)));
-  setSeg('eltern');
 
-  shareText.addEventListener('input', () => {
-    sharePreview.textContent = shareText.value.trim() || 'Vorschau erscheint hier …';
-  });
+  function initShareComposer(){
+    const segBtns = qsa('.hh-share-seg-btn');
+    const shareText = qs('#shareText');
+    const sharePreview = qs('#sharePreview');
+    const copyBtn = qs('#copyBtn');
+    const waBtn = qs('#waShare');
+    const sysBtn = qs('#sysShare');
+    const status = qs('#shareStatus');
+
+    if (!shareText || !sharePreview) return;
+
+    const presets = {
+      eltern: 'Hey, dachte an euch. Kurz & anonym. 2 Minuten geben ein Gefühl für heute – ohne Druck.',
+      paare:  'Hey, kurzer Blick für uns zwei. Zeigt sofort „Jetzt · Als Nächstes · Später“. Anonym.',
+      selbst: 'Hey, 2 Minuten Check. Siehst in Ruhe, wo du stehst. Ohne Nachfassen.'
+    };
+
+    function setSeg(seg){
+      segBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.seg === seg)));
+      const val = presets[seg] || '';
+      shareText.value = val;
+      sharePreview.textContent = val || 'Vorschau erscheint hier …';
+    }
+
+    segBtns.forEach(b => b.addEventListener('click', () => setSeg(b.dataset.seg)));
+    setSeg('eltern');
+
+    shareText.addEventListener('input', () => {
+      sharePreview.textContent = shareText.value.trim() || 'Vorschau erscheint hier …';
+    });
+
+    async function copyToClipboard(text){
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        return ok;
+      } catch { return false }
+    }
+
+    function setStatus(msg){ if (status) status.textContent = msg }
+
+    if (copyBtn) copyBtn.addEventListener('click', async () => {
+      const ok = await copyToClipboard(shareText.value || sharePreview.textContent || '');
+      setStatus(ok ? 'Kopiert.' : 'Kopieren nicht möglich.');
+    });
+
+    if (waBtn) waBtn.addEventListener('click', () => {
+      const txt = encodeURIComponent(shareText.value || sharePreview.textContent || '');
+      const url = 'https://wa.me/?text=' + txt;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+
+    if (sysBtn) sysBtn.addEventListener('click', async () => {
+      const text = shareText.value || sharePreview.textContent || '';
+      if (navigator.share && !prefersReduced) {
+        try { await navigator.share({ text }); setStatus('Geteilt.'); }
+        catch { setStatus('Teilen abgebrochen.'); }
+      } else {
+        const ok = await copyToClipboard(text);
+        setStatus(ok ? 'Kein System-Share. Text kopiert.' : 'Weder Share noch Kopieren möglich.');
+      }
+    });
+  }
+
+  function initAnchorFocus(){
+    // Why: Move focus to section on hash navigation for a11y
+    function focusHash(){
+      if (!location.hash) return;
+      const el = document.getElementById(location.hash.slice(1));
+      if (el) el.setAttribute('tabindex','-1'), el.focus({ preventScroll: true });
+    }
+    window.addEventListener('hashchange', focusHash);
+  }
+
+  // INIT
+  initScrollEffects();
+  initRipple();
+  initStickyCTA();
+  initFormSteps();
+  initShareComposer();
+  initAnchorFocus();
 })();
 </script>
 </body>
