@@ -1,9 +1,8 @@
+// path: /assets/app.js
 /* ==========================================================================
    heikohaerter-site / app.js (2026)
    Vanilla JS • defer-loaded • defensive • single namespace window.hhApp
-   Features auto-initialize only when relevant DOM exists.
    ========================================================================== */
-
 (() => {
   'use strict';
 
@@ -40,7 +39,7 @@
   })();
 
   const showToast = (message) => {
-    // Minimal, non-blocking toast for feedback; reused style for brand consistency.
+    // Warum: einheitliches, nicht-blockierendes Feedback auf Action
     const base = $('#whisper');
     const t = document.createElement('div');
     t.className = 'whisper';
@@ -72,7 +71,8 @@
   /* ===== Base/init ======================================================= */
   function initNoJsAndYear() {
     document.documentElement.classList.remove('no-js');
-    $$('#yearNow').forEach((el) => (el.textContent = String(new Date().getFullYear())));
+    // Warum: mehrfach gleiche ID im Markup → Attribut-Selector updatet alle
+    $$('[id="yearNow"]').forEach((el) => (el.textContent = String(new Date().getFullYear())));
   }
 
   /* ===== Motion / Scroll FX ============================================= */
@@ -110,7 +110,8 @@
       wrap.setAttribute('aria-hidden', String(!v));
     };
 
-    if (!isDesktop()) {
+    const attach = () => {
+      if (isDesktop()) { show(false); return; }
       if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver(([e]) => show(!e.isIntersecting), { threshold:0.35 });
         io.observe(hero);
@@ -118,12 +119,12 @@
       } else {
         on(window,'scroll',()=> show(window.scrollY > 200), { passive:true });
       }
-    }
+    };
+    attach();
     on(window,'resize',()=> { if (isDesktop()) show(false); });
   }
 
   function initStickyPulse() {
-    // Gentle attention only when visible & motion allowed
     if (prefersReduced) return;
     const wrap = $('#stickyCTA'); if (!wrap) return;
     const btn = $('.sticky-cta .btn'); if (!btn) return;
@@ -158,7 +159,6 @@
 
   /* ===== Smooth scroll helpers ========================================== */
   function initSmoothScrollToShare() {
-    // Enhances anchor scrolling with focus; CSS handles smooth behavior.
     const anchors = $$('a[href^="#"]');
     anchors.forEach(a=>{
       on(a,'click',(e)=>{
@@ -166,9 +166,8 @@
         if (!id.startsWith('#') || id === '#') return;
         const target = document.getElementById(id.slice(1));
         if (!target) return;
-        // let browser do scroll; then focus for a11y
         setTimeout(()=>{ target.setAttribute('tabindex','-1'); target.focus({ preventScroll:true }); }, 250);
-      });
+      }, { passive:true });
     });
   }
 
@@ -218,7 +217,7 @@
     setPct(Number(store.getRaw(KEY_PCT,'0') || '0'));
     updateTiers();
 
-    // expose bump hooks
+    // Hooks für Button-Clicks (Weitergeben)
     window._bumpRefHalf = function(){ const c=getC()+0.5; setC(c); updateTiers(); setPct(Math.min(100, c*10)); };
     window._bumpRefFull = function(){ const c=getC()+1;   setC(c); updateTiers(); setPct(Math.min(100, c*12)); };
   }
@@ -229,6 +228,12 @@
     const readyBtn = $('#readyMsg'), magicBtn = $('#magicLine'), addPersonal = $('#addPersonal'), nativeShare = $('#nativeShare'), shareFast = $('#shareFast');
     if (!area || !preview) return;
 
+    // Warum: Basis-URL robust (lokal/Prod) + Canonical erlaubt Domainwechsel ohne Code-Änderung
+    const SHARE_BASE =
+      $('link[rel="canonical"]')?.href ||
+      document.currentScript?.dataset?.shareBase ||
+      location.origin;
+
     const KEY_ID = 'hh.ref.id';
     function randomId(len=10){
       const A='abcdefghijklmnopqrstuvwxyz0123456789';
@@ -238,7 +243,7 @@
     const getId = () => store.getRaw(KEY_ID) || (store.setRaw(KEY_ID, randomId()), store.getRaw(KEY_ID));
     const sanitize = (v) => (v ? v.replace(/[^a-z0-9]/gi,'').toLowerCase() : '');
     const buildURL = () => {
-      const u = new URL('https://heikohaerter.com');
+      const u = new URL(SHARE_BASE);
       u.searchParams.set('utm_source','weitergeben');
       u.searchParams.set('utm_medium','share');
       u.searchParams.set('utm_campaign','check');
@@ -261,7 +266,10 @@
       return 'neutral';
     };
 
-    const ensureURL = (text) => /\bhttps?:\/\/\S+/i.test(text) ? text.trim() : `${text.trim()} ${buildURL()}`;
+    const ensureURL = (text) => {
+      const t = (text||'').trim();
+      return /\bhttps?:\/\/\S+/i.test(t) ? t : (t ? `${t} ${buildURL()}` : buildURL());
+    };
     const plain = () => (area.value||'').replace(/\n+/g,' ').trim();
 
     function updateLinks(){
@@ -272,7 +280,7 @@
     }
     function setSeg(seg){
       const tmpl = pick(seg || detectSeg());
-      if (!tmpl) return;
+      if (!tmpl) { area.value = buildURL(); updateLinks(); return; }
       area.value = tmpl.replace(/\{\{URL\}\}/g, buildURL());
       updateLinks();
       store.setRaw('hh.share.seg', seg || 'neutral');
@@ -380,9 +388,8 @@
 
     on(startBtn,'click',start);
     on(startHero,'click',e=>{ e.preventDefault(); start(); });
-    on(ctaFinal,'click',e=>{ 
-      // auf weitergeben.html gibt es ebenfalls #ctaFinal (final call-to-action) → nur blocken, wenn kein final-cta-Container vorhanden
-      if (ctaFinal.closest('#final-cta')) return;
+    on(ctaFinal,'click',e=>{
+      if (ctaFinal.closest('#final-cta')) return; // Warum: weitergeben.html hat eigenes CTA
       e.preventDefault(); start();
     });
     on(startShort,'click',e=>{
@@ -403,7 +410,7 @@
 
   /* ===== Short Mode (Startseite) ======================================== */
   function initReturnCTA() {
-    // Reserved for future "Back" / secondary CTA behavior; noop if not present.
+    // reserved
   }
   function initShortMode() {
     const btn = $('#dfBtn');
@@ -418,9 +425,10 @@
       if (onState) window.scrollTo({ top:0, behavior:'smooth' });
       store.set(key, onState);
     };
-    set(!!JSON.parse(store.getRaw(key,'false')||'false'));
+    const initial = (()=>{ try { return !!JSON.parse(store.getRaw(key,'false')||'false'); } catch { return false; } })();
+    set(initial);
     on(btn,'click',()=> set(btn.getAttribute('aria-pressed')!=='true'));
-    window.setKurzmodus = set; // intentional small namespace
+    window.setKurzmodus = set;
   }
   function initHeroPreview() {
     const btn = $('#previewToggle'), box = $('#heroPreview');
@@ -440,6 +448,8 @@
       if (el) { el.setAttribute('tabindex','-1'); el.focus({ preventScroll:true }); }
     };
     on(window,'hashchange',focusHash);
+    // Wichtig: auch initial (Seitenaufruf mit #hash)
+    focusHash();
   }
 
   /* ===== Public namespace (debug/hooks) ================================= */
@@ -477,8 +487,11 @@
     initRewardGlowOnShare();
     initGamificationProgress();
 
-    // Share (both pages, no-op if box missing)
+    // Share (both pages)
     initShareEngine();
+
+    // reserved
+    initReturnCTA();
   }
 
   (document.readyState === 'loading') ? on(document,'DOMContentLoaded',init,{ once:true }) : init();
