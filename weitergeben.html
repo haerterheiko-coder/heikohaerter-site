@@ -25,7 +25,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="/styles.css" />
 
-  <!-- Structured Data (FAQ Schema) -->
+  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -70,7 +70,7 @@
 <main id="main">
 
 <!-- ============================================================
-     HERO – WHY SHARE?
+     HERO
 ============================================================ -->
 <section class="section fade-up">
   <div class="container stack center">
@@ -98,7 +98,7 @@
 
     <h2>Wie es funktioniert</h2>
 
-    <div class="personas-grid">
+    <div class="personas-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px,1fr));">
       <div class="persona-card center">
         <strong>1.</strong><br>
         Wähle einen Text aus, der zu deiner Person passt.
@@ -121,15 +121,15 @@
 </section>
 
 <!-- ============================================================
-     WHY IT'S NOT WEIRD
+     WHY ITS NOT WEIRD
 ============================================================ -->
 <section class="section fade-up">
   <div class="container stack center">
 
     <h2>Weitergeben ≠ Verkaufen.</h2>
     <p class="lead">
-      Du gibst niemandem einen Tipp für ein Produkt.<br>
-      Du gibst jemandem <strong>2 ruhige Minuten.</strong><br>
+      Du gibst nicht etwas weiter, das verkauft –<br>
+      du gibst jemandem <strong>2 Minuten weniger Stress.</strong><br>
       Anonym. Ohne Daten. Ohne Druck.
     </p>
 
@@ -154,8 +154,14 @@
       <option value="skeptiker">Skeptiker</option>
     </select>
 
-    <textarea id="referralOutput" rows="6" class="persona-card"
-              style="width:100%; font-size:1rem;"></textarea>
+    <textarea id="referralOutput"
+              rows="6"
+              class="persona-card"
+              style="width:100%; font-size:1rem;"
+              spellcheck="false"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"></textarea>
 
     <button id="copyReferral" class="btn btn-primary">📋 Text kopieren</button>
 
@@ -187,11 +193,10 @@
 </section>
 
 <!-- ============================================================
-     SOCIAL PROOF (MICRO)
+     SOCIAL PROOF
 ============================================================ -->
 <section class="section fade-up">
   <div class="container stack">
-
     <h2>Was andere sagen</h2>
 
     <div class="proof-list">
@@ -199,12 +204,11 @@
       <p class="proof">„Meine Schwester meinte: ‚Das hat mir gerade gefehlt.‘“</p>
       <p class="proof">„Mein Kollege sagte: ‚Das war das erste Mal, dass Finanzen leicht waren.‘“</p>
     </div>
-
   </div>
 </section>
 
 <!-- ============================================================
-     FAQ BLOCK
+     FAQ
 ============================================================ -->
 <section class="section fade-up">
   <div class="container stack">
@@ -257,8 +261,9 @@
   </div>
 </footer>
 
-<script src="/app.js"></script>
-<script src="/referral.js"></script>
+<!-- DEFERRED SCRIPTS -->
+<script defer src="/app.js"></script>
+<script defer src="/referral.js"></script>
 
 </body>
 </html>
