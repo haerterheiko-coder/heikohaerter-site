@@ -1,45 +1,74 @@
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
-  <!-- =========================================
-       META / SEO / BRANDING
-  ========================================== -->
+  <!-- =========================================================
+       META / SEO / BRANDING – GODMODE + PREMIUM
+  ========================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#05070E" />
   <meta name="robots" content="index, follow" />
 
-  <title>In 2 Minuten wissen, ob heute alles gut ist · Ruhiger Finanz-Kompass</title>
-  
-  <meta name="description"
-        content="Die 2-Minuten-Ampel zeigt dir anonym, wie stabil dein Alltag heute ist – und ob du etwas übersiehst. Ohne Daten. Ohne Verkauf. Ein Moment Ruhe, bevor der Alltag weiterläuft." />
+  <title>In 2 Minuten wissen, ob du heute gut aufgestellt bist · Ruhiger Finanz-Kompass</title>
 
+  <meta name="description"
+        content="Die Finanz-Ampel zeigt dir anonym, wie stabil dein Alltag heute ist – und ob du etwas übersiehst. Ohne Daten. Ohne Verkauf. Ein Moment Ruhe, bevor der Alltag weiterläuft." />
+
+  <!-- PREFETCH / PERFORMANCE -->
+  <link rel="preconnect" href="https://static.wixstatic.com">
+  <link rel="dns-prefetch" href="https://static.wixstatic.com">
+  <link rel="prefetch" href="/weitergeben" as="document">
+
+  <!-- CANONICAL -->
   <link rel="canonical" href="https://heikohaerter.com" />
 
-  <!-- SOCIAL / OG -->
+  <!-- OG -->
   <meta property="og:title" content="Die 2-Minuten-Ampel – Ein Moment Ruhe für deinen Alltag" />
   <meta property="og:description"
-        content="In 2 Minuten sehen, ob heute alles gut ist. Anonym. Ohne Verkauf. Der ruhige Finanz-Kompass." />
+        content="In 2 Minuten sehen, wie stabil dein Alltag heute ist. Anonym. Ohne Verkauf." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://heikohaerter.com" />
-  <meta property="og:image"
-        content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
+  <meta property="og:image" content="https://heikohaerter.com/assets/og-ampel.png" />
   <meta property="og:locale" content="de_DE" />
 
-  <!-- ICONS -->
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Die 2-Minuten-Ampel – Ein Moment Ruhe für deinen Alltag" />
+  <meta name="twitter:description"
+        content="In 2 Minuten sehen, ob heute alles gut ist. Anonym. Ohne Verkauf." />
+  <meta name="twitter:image" content="https://heikohaerter.com/assets/og-ampel.png" />
+
+  <!-- FAVICONS -->
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="/styles.css" />
 
-  <!-- PRELOAD BRAND PORTRAIT -->
+  <!-- PRELOAD PORTRAIT -->
   <link rel="preload" as="image"
         href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
         fetchpriority="high" />
 
-  <!-- FAQ STRUCTURED DATA -->
+  <!-- =========================================================
+       STRUCTURED DATA – PERSON + FAQ
+  ========================================================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Heiko Haerter",
+    "jobTitle": "Finanzcoach – Ruhiger Finanz-Kompass",
+    "url": "https://heikohaerter.com",
+    "image": "https://heikohaerter.com/assets/og-ampel.png",
+    "sameAs": [
+      "https://www.instagram.com/heiko.haerter.coach/",
+      "https://www.linkedin.com/in/heiko-haerter-3755b2260/"
+    ]
+  }
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -48,18 +77,12 @@
       {
         "@type": "Question",
         "name": "Kostet die 2-Minuten-Ampel etwas?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Nein. Die Ampel ist anonym, kostenlos und ohne Verkauf."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Nein. Sie ist anonym, kostenlos und ohne Verkauf." }
       },
       {
         "@type": "Question",
         "name": "Werden Daten gespeichert?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Nein. Es werden keine persönlichen Daten abgefragt oder gespeichert."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "Nein. Es werden keine persönlichen Daten erfasst." }
       }
     ]
   }
@@ -87,7 +110,7 @@
 <main id="main">
 
 <!-- =========================================
-     HERO – Signature Moment
+     HERO – Signature Moment + heroBreath
 ========================================== -->
 <section id="hero" class="section hero fade-up">
   <div class="container hero-grid">
@@ -95,31 +118,39 @@
     <div class="stack">
 
       <!-- Rotierender TikTok-Hook -->
-      <p class="rotating-hook" id="rotatingHook"></p>
+      <p class="rotating-hook" id="rotatingHook" aria-live="polite"></p>
 
       <h1 class="hero-title">
         In 2 Minuten weißt du, ob du heute gut aufgestellt bist.
       </h1>
 
       <p class="hero-sub">
-        Die Finanz-Ampel zeigt dir anonym, wie stabil dein Alltag heute ist –
+        Die Finanz-Ampel zeigt dir anonym, wie stabil dein Alltag heute ist –  
         und ob du etwas übersiehst.<br>
         Ohne Vorbereitung. Ohne Unterlagen. Ohne Verkauf.
       </p>
 
-      <p class="microtrust">Ein Moment Ruhe – bevor der Alltag weiterläuft.</p>
+      <p class="microtrust softfade">
+        Ein Moment Ruhe – bevor der Alltag weiterläuft.
+      </p>
 
       <a href="#ampel-check" class="btn btn-primary hero-btn">
         ⚡ Ampel starten
       </a>
 
-      <p class="microtrust">Anonym · Kein Verkauf · Jederzeit abbrechen</p>
+      <p class="microtrust softfade">
+        Anonym · Kein Verkauf · Jederzeit abbrechen
+      </p>
 
     </div>
 
     <div class="hero-visual">
-      <img src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
-           alt="Heiko Haerter – Ruhiger Finanz-Kompass" />
+      <img 
+        src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+        alt="Heiko Haerter – Ruhiger Finanz-Kompass"
+        width="900" height="900"
+        loading="eager" fetchpriority="high"
+      >
     </div>
 
   </div>
@@ -133,7 +164,7 @@
 </section>
 
 <!-- =========================================
-     WHY THE AMPEL WORKS (Neuropsychologie)
+     WHY THE AMPEL WORKS
 ========================================== -->
 <section class="section fade-up">
   <div class="container stack">
@@ -142,7 +173,7 @@
 
     <p class="lead">
       80 % der Menschen wissen nicht, ob ihre Absicherung im Ernstfall trägt.
-      Doch Stress entsteht selten durch fehlendes Wissen –
+      Stress entsteht selten durch fehlendes Wissen –  
       sondern durch fehlende Orientierung.<br>
       Die Ampel gibt dir diese Orientierung in 2 Minuten.
     </p>
@@ -285,11 +316,12 @@
     <h2>Ich weiß, wie sich Unsicherheit anfühlt. Darum habe ich die Ampel gebaut.</h2>
 
     <p class="lead">
-      Finanzen sollen nicht belasten. Sie sollen Orientierung geben – selbst, wenn der Kopf voll ist.<br><br>
+      Finanzen sollen nicht belasten. Sie sollen Orientierung geben – selbst, wenn dein Kopf voll ist.<br><br>
       Ich habe die Ampel gebaut, weil niemand Menschen wirklich erklärt, was wichtig ist – aber jeder Ruhe verdient.<br><br>
-      Darum bekommst du zuerst Klarheit. Ohne Unterlagen. Ohne Vorbereitung. Ohne Druck.<br>
-      Wenn du danach mehr Sicherheit willst, klären wir gemeinsam, was wichtig ist –
-      mit der Struktur der Deutschen Vermögensberatung im Hintergrund.
+      Darum bekommst du zuerst Klarheit. Ohne Unterlagen. Ohne Vorbereitung. Ohne Druck.<br><br>
+      Wenn du danach mehr Sicherheit möchtest, klären wir gemeinsam, was wichtig ist –
+      mit der Struktur der Deutschen Vermögensberatung im Hintergrund.<br><br>
+      Erst Klarheit. Dann Struktur. In deinem Tempo.
     </p>
 
   </div>
@@ -307,7 +339,7 @@
       ⚡ Ampel starten
     </a>
 
-    <p class="microtrust">
+    <p class="microtrust softfade">
       Anonym · Keine Daten · Kein Verkauf · Jederzeit abbrechen
     </p>
 
@@ -315,7 +347,7 @@
 </section>
 
 <!-- =========================================
-     AMPSEL CHECK (Mount)
+     AMPEL CHECK (Mount)
 ========================================== -->
 <section id="ampel-check" class="section fade-up">
   <div class="container" style="max-width: 720px;">
@@ -327,6 +359,16 @@
 </section>
 
 </main>
+
+<!-- =========================================
+     STICKY CTA (BEST PRACTICE POSITION)
+========================================== -->
+<div class="sticky-cta" id="stickyCTA">
+  <a href="#ampel-check" class="btn btn-primary">⚡ Ampel starten</a>
+</div>
+
+<!-- Whisper CTA -->
+<div class="whisper" id="whisper"></div>
 
 <!-- =========================================
      FOOTER
@@ -342,14 +384,6 @@
     </p>
   </div>
 </footer>
-
-<!-- Sticky CTA -->
-<div class="sticky-cta" id="stickyCTA">
-  <a href="#ampel-check" class="btn btn-primary">⚡ Ampel starten</a>
-</div>
-
-<!-- Whisper CTA -->
-<div class="whisper" id="whisper"></div>
 
 <!-- JS -->
 <script defer src="/app.js"></script>
