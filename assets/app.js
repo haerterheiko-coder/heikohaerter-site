@@ -594,8 +594,7 @@
 
     // Share (both pages)
     initShareEngine();
-
-    initReturnCTA();
+    // FIX: Entfernt – initReturnCTA() existiert nicht
   }
 
   (document.readyState === 'loading')
