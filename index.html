@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
-
 <head>
   <!-- =========================================
        META / SEO / BRANDING – GODMODE 2026
@@ -8,18 +7,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
-  <title>Der ruhige Finanz-Kompass – 2-Minuten-Ampel für deinen Alltag</title>
+  <meta name="theme-color" content="#05070E" />
+  <meta name="robots" content="index, follow">
+
+  <title>Der ruhige Finanz-Kompass – 2 Minuten Ruhe, bevor der Alltag dich wieder einholt</title>
 
   <meta name="description"
-        content="Wenn du abends im Bett liegst und kurz denkst, ob du etwas Wichtiges übersiehst – zeigt dir diese 2-Minuten-Ampel anonym, wie stabil dein Alltag heute wirkt. Ohne Daten. Ohne Verkauf." />
+        content="Ein kurzer Blick. Zwei ruhige Minuten. Die 2-Minuten-Ampel zeigt anonym, wie stabil dein Alltag heute wirkt – ohne Daten, ohne Verkauf. Für Eltern, Paare & Selbstständige." />
 
   <link rel="canonical" href="https://heikohaerter.com" />
 
   <!-- SOCIAL / OG -->
   <meta property="og:title" content="Der ruhige Finanz-Kompass – 2-Minuten-Ampel" />
   <meta property="og:description"
-        content="Ein kurzer Blick. Zwei ruhige Minuten. Anonym sehen, wie stabil dein Alltag heute wirkt – ohne Daten, ohne Verkauf." />
+        content="2 Minuten Ruhe – bevor der Alltag dich wieder einholt. Die 2-Minuten-Ampel zeigt anonym, wie stabil dein Alltag wirkt – ohne Daten, ohne Verkauf." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://heikohaerter.com" />
   <meta property="og:image"
         content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
   <meta property="og:locale" content="de_DE" />
@@ -36,36 +39,66 @@
         href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
         fetchpriority="high">
 
-  <!-- STRUCTURED DATA -->
+  <!-- STRUCTURED DATA – PERSON -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Heiko Haerter",
-      "jobTitle": "Ruhiger Finanz-Kompass",
-      "url": "https://heikohaerter.com",
-      "image": "https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Robert-Bosch-Str. 1",
-        "addressLocality": "Rutesheim",
-        "postalCode": "71277",
-        "addressCountry": "DE"
-      },
-      "sameAs": [
-        "https://www.instagram.com/heiko.haerter.coach/",
-        "https://www.linkedin.com/in/heiko-haerter-3755b2260/",
-        "https://www.xing.com/profile/Heiko_Haerter3",
-        "https://beacons.ai/heiko.haerter"
-      ]
-    }
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Heiko Haerter",
+    "jobTitle": "Ruhiger Finanz-Kompass",
+    "url": "https://heikohaerter.com",
+    "image": "https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Robert-Bosch-Str. 1",
+      "addressLocality": "Rutesheim",
+      "postalCode": "71277",
+      "addressCountry": "DE"
+    },
+    "sameAs": [
+      "https://www.instagram.com/heiko.haerter.coach/",
+      "https://www.linkedin.com/in/heiko-haerter-3755b2260/",
+      "https://www.xing.com/profile/Heiko_Haerter3",
+      "https://beacons.ai/heiko.haerter"
+    ]
+  }
   </script>
+
+  <!-- STRUCTURED DATA – FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Kostet die 2-Minuten-Ampel etwas?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nein. Die Ampel ist anonym, kostenlos und ohne Verkauf. Du wirst nicht angerufen und musst nichts abschließen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Werden meine Daten gespeichert?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nein. Es werden keine persönlichen Daten abgefragt, gespeichert oder weitergegeben. Alles bleibt anonym."
+        }
+      }
+    ]
+  }
+  </script>
+
 </head>
 
 <body>
 
 <a href="#main" class="skip-link">Zum Inhalt springen</a>
 
+<!-- =========================================
+     HEADER
+========================================== -->
 <header class="header">
   <div class="container header-inner">
     <a class="brand" href="/">
@@ -86,9 +119,7 @@
 
     <div class="hero-text stack">
 
-      <p class="rotating-hook" id="rotatingHook">
-        <!-- Wird per JS rotieren -->
-      </p>
+      <p class="rotating-hook" id="rotatingHook"></p>
 
       <h1 class="hero-title">
         Wenn du abends im Bett liegst und kurz denkst:<br>
@@ -96,9 +127,8 @@
       </h1>
 
       <p class="hero-sub">
-        Der ruhige Finanz-Kompass.<br>
-        Anonym. Ohne Unterlagen. Ohne Verkauf.<br>
-        Entwickelt für Menschen mit Verantwortung – und wenig Zeit.
+        Ein kurzer Blick. Zwei ruhige Minuten.<br>
+        Die Ampel zeigt anonym, wie stabil dein Alltag heute wirkt – ohne Daten, ohne Verkauf.
       </p>
 
       <a href="#ampel-check" class="btn btn-primary hero-btn">
@@ -118,7 +148,7 @@
 </section>
 
 <!-- =========================================
-     SECTION – CATEGORY
+     CATEGORY
 ========================================== -->
 <section id="category" class="section fade-up">
   <div class="container stack center">
@@ -141,7 +171,7 @@
 </section>
 
 <!-- =========================================
-     SECTION – AMPSEL PREVIEW
+     AMPSEL PREVIEW
 ========================================== -->
 <section id="preview" class="section fade-up">
   <div class="container stack">
@@ -175,7 +205,7 @@
 </section>
 
 <!-- =========================================
-     SECTION – FÜR WEN?
+     FÜR WEN?
 ========================================== -->
 <section id="fuer-wen" class="section fade-up">
   <div class="container stack">
@@ -207,7 +237,7 @@
 </section>
 
 <!-- =========================================
-     SECTION – SOCIAL PROOF
+     SOCIAL PROOF
 ========================================== -->
 <section id="social-proof" class="section fade-up">
   <div class="container stack">
@@ -234,7 +264,7 @@
 </section>
 
 <!-- =========================================
-     SECTION – SAFETY LAYER
+     SAFETY
 ========================================== -->
 <section id="safety" class="section fade-up">
   <div class="container stack">
@@ -251,7 +281,7 @@
 </section>
 
 <!-- =========================================
-     SECTION – ABOUT
+     ABOUT
 ========================================== -->
 <section id="about" class="section fade-up">
   <div class="container stack">
@@ -274,7 +304,7 @@
 </section>
 
 <!-- =========================================
-     SECTION – FINAL CTA
+     FINAL CTA
 ========================================== -->
 <section id="final-cta" class="section fade-up">
   <div class="container stack center">
@@ -289,7 +319,7 @@
 </section>
 
 <!-- =========================================
-     SECTION – AMPSEL CHECK (Mount)
+     AMPSEL CHECK (Mount)
 ========================================== -->
 <section id="ampel-check" class="section fade-up">
   <div class="container" style="max-width: 720px;">
