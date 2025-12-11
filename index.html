@@ -174,9 +174,7 @@
   </header>
 
   <main id="main" role="main">
-    <!-- … dein HTML unverändert … -->
-    <!-- (Alles zwischen MAIN Anfang und Ende bleibt wie gepostet) -->
-    <!-- Ich habe unten NUR im <script> Block etwas ergänzt. -->
+    <!-- … dein HTML … -->
   </main>
 
   <footer role="contentinfo">
@@ -195,8 +193,8 @@
   <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand weiß morgen, was ansteht.</div>
 
   <script>
-    /* ========= BOUNDED LOGGER: HIER OBEN REINKOPIERT =========
-       Warum: Events sicher puffern ohne UI zu blockieren; bei Voll → älteste verwerfen (drop-old).
+    /* ========= BOUNDED LOGGER =========
+       Warum: Puffer verhindert UI-Lags; bei Voll → ältere Einträge verwerfen.
     */
     (function(){
       class BoundedQueue {
@@ -243,9 +241,7 @@
         if(state.id!==null){ clearInterval(state.id); state.id=null; }
         state.running=false;
       }
-      // Expose global
       window.Log = { init, log, droppedCount, stop };
-      // Auto-init: console sink
       init({ capacity: 200, policy: "drop-old" });
     })();
     /* ========= /BOUNDED LOGGER ========= */
@@ -258,17 +254,23 @@
       const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
       const els=[...document.querySelectorAll('.fade-up')];
       if(pref || !('IntersectionObserver' in window)){els.forEach(el=>el.classList.add('visible'));return;}
-      const io=new IntersectionObserver(ents=>ents.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
+      const io=new IntersectionObserver(ents=>ents.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+      }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
       els.forEach(el=>io.observe(el));
     })();
 
-    /* Sticky CTA – früher triggern (scrollY > 200) + Fallback, nur Mobile/Tablet */
+    /* Sticky CTA (nur Mobile/Tablet) */
     (function(){
       const el=document.getElementById('stickyCTA');
       const hero=document.querySelector('.hero');
       if(!el||!hero) return;
       if(innerWidth>=1024) return;
-      const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0'; el.setAttribute('aria-hidden', String(!v));};
+      const show=v=>{
+        el.style.transform=v?'translateY(0)':'translateY(100%)';
+        el.style.opacity=v?'1':'0';
+        el.setAttribute('aria-hidden', String(!v));
+      };
       if('IntersectionObserver'in window){
         const io=new IntersectionObserver(([e])=>show(!e.isIntersecting),{threshold:.35});
         io.observe(hero);
@@ -289,26 +291,27 @@
         btn.textContent=on?'✅ Kurzmodus aktiv':'🔍 Kurzmodus';
         nodes.forEach(n=>n.style.display=on?'none':'');
         if(on) window.scrollTo({top:0,behavior:'smooth'});
-        Log.log(`ui:kurzmodus:${on?'on':'off'}`); // wichtig: Zustand protokollieren
+        Log.log(`ui:kurzmodus:${on?'on':'off'}`);
       };
       btn.addEventListener('click',()=>set(btn.getAttribute('aria-pressed')!=='true'));
       window.setKurzmodus=set;
     })();
 
-    /* Ergebnis-Vorschau Toggle */
+    /* Ergebnis-Vorschau Toggle (robust) */
     (function(){
       const btn=document.getElementById('previewToggle');
       const box=document.getElementById('heroPreview');
       if(!btn||!box) return;
       btn.addEventListener('click',()=>{
-        const open = box.style.display==='none';
+        const currentlyHidden = (box.style.display==='none') || (getComputedStyle(box).display==='none');
+        const open = currentlyHidden;
         box.style.display = open ? 'grid' : 'none';
         btn.setAttribute('aria-expanded', String(open));
         Log.log(`ui:preview:${open?'open':'close'}`);
       });
     })();
 
-    /* Share composer */
+    /* Share composer (sicher beenden, wenn Elemente fehlen) */
     (function(){
       const name = document.getElementById('refName');
       const area = document.getElementById('refText');
@@ -316,6 +319,7 @@
       const mail = document.getElementById('mailShare');
       const copy = document.getElementById('copyBtn');
       const preview = document.getElementById('waPreviewText');
+      if(!area || !wa || !mail || !preview) return; // wichtig: Seite ohne Share-Box
 
       const KEY_REFID='hh_ref_rid_v1';
       function randomId(len=10){
@@ -362,14 +366,15 @@
         preview.textContent = t.length<=190 ? t : t.substring(0,t.lastIndexOf(' ',190))+'…';
       }
 
-      if(area && !area.value){ setTextFrom('neutral'); } updateLinks();
+      if(!area.value){ setTextFrom('neutral'); }
+      updateLinks();
 
       document.querySelectorAll('[data-seg]').forEach(b=> b.addEventListener('click', ()=>{
         const seg=b.getAttribute('data-seg'); setTextFrom(seg);
         Log.log(`share:seg:${seg}`);
       }));
       name?.addEventListener('input', ()=> { setTextFrom(); Log.log('share:name-input'); });
-      area?.addEventListener('input', ()=> { updateLinks(); Log.log('share:text-edit'); });
+      area.addEventListener('input', ()=> { updateLinks(); Log.log('share:text-edit'); });
 
       document.getElementById('readyMsg')?.addEventListener('click', ()=>{
         setTextFrom();
@@ -395,7 +400,7 @@
         updateLinks();
         Log.log('share:add-personal');
       });
-      document.getElementById('copyBtn')?.addEventListener('click', async ()=>{
+      copy?.addEventListener('click', async ()=>{
         try{ await navigator.clipboard.writeText(ensureURL(area.value)); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
         Log.log('share:copy');
       });
@@ -406,16 +411,18 @@
       });
     })();
 
-    /* Ampel-Check */
+    /* Ampel-Check (nur aktiv, wenn Elemente existieren) */
     (function() {
-      let step=1, score=0;
-      const max=3;
-      const startBtn=document.getElementById('startCheckBtn');
       const stepsWrap=document.getElementById('check-steps');
+      const startBtn=document.getElementById('startCheckBtn');
       const resultBox=document.getElementById('check-result');
       const stepLabel=document.getElementById('stepLabel');
       const progress=document.getElementById('progressBar');
       const stepHint=document.getElementById('stepHint');
+      if(!stepsWrap || !resultBox || !stepLabel || !progress || !stepHint) return; // wichtig: Seite ohne Check
+
+      let step=1, score=0;
+      const max=3;
 
       function updateHead(){
         stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`;
@@ -471,7 +478,7 @@
         Log.log(`check:finish:score=${score}`);
       }
       function start(){
-        document.getElementById('check-start').style.display='none';
+        document.getElementById('check-start')?.style.setProperty('display','none');
         stepsWrap.style.display='block';
         resultBox.style.display='none';
         step=1; score=0; showStep(step);
@@ -496,7 +503,7 @@
             Log.log(`check:answer:s${s.getAttribute('data-step')}:v=${btn.getAttribute('data-value')}`);
             step++;
             if(step>3) finish(); else showStep(step);
-          });
+          }, { passive: true });
         });
       });
     })();
