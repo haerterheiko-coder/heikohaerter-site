@@ -1,5 +1,5 @@
 <!-- =======================================================================
-/weitergeben.html  (fix: richtige Asset-Pfade, sauberes Markup)
+/weitergeben.html  (Root-Pfade für CSS/JS: styles.css & app.js)
 ======================================================================= -->
 <!DOCTYPE html>
 <html lang="de" translate="no" class="no-js">
@@ -18,8 +18,8 @@
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
-  <!-- fix: richtiger Pfad -->
-  <link rel="stylesheet" href="assets/styles.css" />
+  <!-- WICHTIG: Root-Pfad, kein assets/ -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
@@ -42,9 +42,7 @@
   </header>
 
   <main id="main">
-    <!-- =========================================================
-         1) HERO
-    ========================================================== -->
+    <!-- ========================================================= 1) HERO ========================================================== -->
     <section id="hero" class="hero section" aria-labelledby="hero-title">
       <div class="wrap hero-wrap">
         <h1 id="hero-title">Weitergeben – ohne etwas erklären zu müssen.</h1>
@@ -73,9 +71,7 @@
       </div>
     </div>
 
-    <!-- =========================================================
-         2) REFERRAL ENGINE 2026 — HTML ONLY
-    ========================================================== -->
+    <!-- ========================================================= 2) REFERRAL ENGINE ========================================================== -->
     <section id="referral-engine" class="section referral-engine" aria-labelledby="ref2-title">
       <div class="wrap">
         <h2 id="ref2-title">In 2 Minuten weitergeben</h2>
@@ -138,9 +134,7 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         3) WHATSAPP TEMPLATES (REQUIRED, EXACT WORDING)
-    ========================================================== -->
+    <!-- ========================================================= 3) WHATSAPP TEMPLATES ========================================================== -->
     <script type="application/json" id="ref2-templates">
     {
       "Locker": "„Hey 👋 ich hab grad den Finanz-Check von Heiko gemacht. Ging super fix und war richtig hilfreich. Schau mal rein – sind nur 2 Minuten: {{URL}}“",
@@ -151,9 +145,7 @@
     }
     </script>
 
-    <!-- =========================================================
-         4) NEURO-UX ELEMENTS
-    ========================================================== -->
+    <!-- ========================================================= 4) NEURO-UX ELEMENTS ========================================================== -->
     <section class="section neuro" aria-labelledby="neuro-title">
       <div class="wrap">
         <h2 id="neuro-title">Sicher weitergeben – ruhig & ohne Druck</h2>
@@ -210,9 +202,7 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         5) BOTTOM NAV
-    ========================================================== -->
+    <!-- ========================================================= 5) BOTTOM NAV ========================================================== -->
     <nav class="bottom-nav" aria-label="Untere Navigation">
       <a href="/" class="nav-item" aria-label="Home">🏠 <span>Home</span></a>
       <a href="/#quiz" class="nav-item" aria-label="Finanzcheck">🚦 <span>Finanzcheck</span></a>
@@ -234,7 +224,7 @@
     </section>
   </main>
 
-  <!-- fix: richtige JS-Datei und Position -->
-  <script defer src="assets/app.js"></script>
+  <!-- WICHTIG: Root-Pfad, kein assets/ -->
+  <script defer src="app.js"></script>
 </body>
 </html>
