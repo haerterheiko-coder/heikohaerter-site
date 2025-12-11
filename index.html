@@ -1,542 +1,609 @@
+<!-- /index.html -->
 <!DOCTYPE html>
-<html lang="de" class="no-js" translate="no">
+<html lang="de" translate="no" class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#05070E">
-  <meta name="format-detection" content="telephone=no">
-
-  <title>In 2 Minuten sehen, wo du heute stehst – Heiko Haerter | Persönliche Finanzbegleitung</title>
-  <meta name="description" content="Ein kurzer, ruhiger 2-Minuten-Blick: zeigt, was heute wichtig ist – anonym, ohne Verkauf, ohne Vorbereitung. Entwickelt von Heiko Haerter – persönliche Finanzbegleitung.">
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://heikohaerter.com">
-
-  <!-- Favicons -->
-  <link rel="icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Heiko Haerter",
-    "jobTitle": "Persönliche Finanzbegleitung",
-    "url": "https://heikohaerter.com",
-    "image": "apple-touch-icon.png",
-    "description": "Ruhige Finanz-Ampel & persönliche Finanzbegleitung – anonym, ohne Verkauf."
-  }
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Kurzer 2-Minuten-Finanz-Check – ehrlich, ohne Verkauf. Finde heraus, wo bei dir Geld liegen bleibt und wie du mehr Ruhe im Kopf bekommst." />
+  <meta property="og:title" content="2-Minuten-Finanz-Check" />
+  <meta property="og:description" content="Kurzer Finanz-Check der zeigt, wo du stehst – anonym, ohne Verkauf, sofort Ergebnis." />
+  <meta property="og:type" content="website" />
+  <title>2-Minuten-Finanz-Check</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
+<body>
 
-<body class="dark page-index no-js">
-<a class="skip-link" href="#main">Zum Inhalt springen</a>
-
-<!-- =========================================================
-     MICRO-LOADER (Neuro-Commitment, Dopamin)
-========================================================= -->
-<div id="micro-loader" class="micro-loader" role="status" aria-live="polite">
-  <div class="micro-loader-box">
-    <div class="micro-loader-dot"></div>
-    <p class="micro-loader-text">Seite ist bereit – du entscheidest</p>
+  <!-- 🔧 Upgrade 1: Micro-Commitment Loader -->
+  <div id="micro-loader" class="micro-loader" role="status" aria-live="polite">
+    <div class="micro-loader-box">
+      <div class="micro-loader-dot" aria-hidden="true"></div>
+      <p class="micro-loader-text">Seite ist bereit – du entscheidest</p>
+    </div>
   </div>
-</div>
 
-<!-- =========================================================
-     DECISION ANCHOR (scroll-triggered)
-========================================================= -->
-<div id="decision-anchor" class="decision-anchor">
-  🔒 100% anonym · kein Verkauf · 25 € wenn’s dir nichts bringt ·
-  <span id="micro-proof">keine Vorbereitung notwendig</span>
-</div>
-
-<!-- =========================================================
-     STICKY CTA (mobile)
-========================================================= -->
-<div id="sticky-cta" class="sticky-cta" aria-hidden="true">
-  <div class="inner">
-    <button class="btn-primary tap-scale" data-target="#quiz" data-track="cta_sticky">
-      👉 Kurz-Check starten
-    </button>
+  <!-- Decision Anchor + 🔧 Upgrade 5: Micro-Proof Loop -->
+  <div class="decision-anchor" id="decision-anchor" role="note" aria-live="polite">
+    🔒 100% <span class="critical-highlight">anonym</span> ·
+    <span class="critical-highlight">kein Verkauf</span> ·
+    <span class="critical-highlight">25 €</span> Garantie ·
+    <span id="micro-proof" class="micro-proof">keine Vorbereitung notwendig</span>
   </div>
-</div>
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
-<header class="site-header" role="banner">
-  <div class="wrap header-bar">
-    <a class="brand" href="/" aria-label="Startseite">
-      <span class="brand-dot"></span>
-      <div class="brand-lines">
-        <span class="brand-name">Heiko Haerter</span>
-        <span class="brand-tag">Persönliche Finanzbegleitung</span>
-      </div>
-    </a>
-
-    <nav class="head-nav">
-      <a href="#quiz">Kurz-Check</a>
-      <a href="#trust">Warum & wie</a>
-      <a href="#referral-teaser">Weitergeben</a>
-    </nav>
+  <!-- Sticky CTA -->
+  <div class="sticky-cta tap-scale" id="sticky-cta" aria-hidden="true">
+    👉 Finanz-Check starten und mehr Ruhe im Kopf bekommen
   </div>
-</header>
 
-<!-- =========================================================
-     HERO – PREMIUM DARK LUXURY × PSYCHOLOGIE 2026
-========================================================= -->
-<main id="main">
+  <!-- Bottom Nav (App-like) -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <a href="#hero" class="nav-item is-active"><span>🏠</span><span>Home</span></a>
+    <a href="#quiz" class="nav-item"><span>🚦</span><span>Finanzcheck</span></a>
+    <a href="#referral" class="nav-item"><span>💬</span><span>Weitergeben</span></a>
+    <a href="#termin" class="nav-item"><span>📞</span><span>Termin</span></a>
+  </nav>
 
-<section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
-  <div class="wrap hero-wrap">
-
-    <div class="hero-left">
-
-      <!-- Dynamic Rotator (Pain-Points 2026) -->
-      <p class="hero-hook"><span id="hero-rotator">Keine Zeit?</span></p>
-
-      <h1 id="hero-title">
-        In 2 Minuten sehen, wo du heute stehst – ruhig, anonym & ohne Druck.
-      </h1>
-
-      <p class="sub">
-        Ein kurzer Blick, der dir zeigt, ob du Geld liegen lässt oder heute etwas Wichtiges offen ist –
-        alltagstauglich, ohne Vorbereitung.
-      </p>
-
-      <!-- AMPPEL -->
-      <div class="ampel" aria-label="Finanz-Ampel">
-        <span class="ampel-light ampel-red"></span>
-        <span class="ampel-light ampel-yellow"></span>
-        <span class="ampel-light ampel-green"></span>
+  <!-- HERO -->
+  <header id="hero" class="hero surface fade-up" role="banner">
+    <div class="wrap hero-wrap">
+      <div class="hero-text">
+        <h1 id="hero-headline">
+          In <span class="critical-highlight">2 Minuten</span> sehen, ob bei dir Geld liegen bleibt – ohne Druck, <span class="critical-highlight">kein Verkauf</span>.
+        </h1>
+        <p id="hero-subheadline" class="subhead">
+          Kurzer 2-Fragen-Check – <span class="critical-highlight">anonym</span> & sofort Ergebnis.
+          Zeigt dir, wo du mehr <span class="critical-highlight">Klarheit</span> & Ruhe bekommst.
+        </p>
+        <button class="btn btn-primary tap-scale" id="hero-cta" data-target="#quiz">Jetzt 2-Minuten-Check starten</button>
+        <p class="social-line">⭐ 4,9 / 250+ Menschen</p>
       </div>
 
-      <p class="social-line">
-        ⭐ 4,9 | Von Familien, Selbstständigen & Angestellten genutzt
-      </p>
+      <!-- Ampel -->
+      <div class="ampel" id="ampel" aria-label="Ampel-Status" role="img">
+        <div class="ampel-light red" aria-hidden="true"></div>
+        <div class="ampel-light yellow" aria-hidden="true"></div>
+        <div class="ampel-light green" aria-hidden="true"></div>
+      </div>
+    </div>
+  </header>
 
-      <!-- CTAS -->
-      <div class="hero-ctas">
-        <button class="btn-primary tap-scale" data-target="#quiz" data-track="cta_start">
-          Jetzt Kurz-Check starten
+  <!-- Live Social Proof -->
+  <section class="live-feed-section fade-up">
+    <div class="wrap">
+      <div id="live-feed" class="live-feed" aria-live="polite">
+        <!-- JS rotiert Nachrichten -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof Bars -->
+  <section class="proof-section fade-up">
+    <div class="wrap">
+      <h2>Was Menschen am meisten hilft</h2>
+      <div class="proof">
+        <div class="proof-item">
+          <div class="proof-top"><span>Vertrauen</span><strong>98 %</strong></div>
+          <div class="proof-bar" data-value="98"><span></span></div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-top"><span>Klarheit</span><strong>92 %</strong></div>
+          <div class="proof-bar" data-value="92"><span></span></div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-top"><span>Empfehlung</span><strong>91 %</strong></div>
+          <div class="proof-bar" data-value="91"><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonial-list fade-up" id="testimonials">
+    <div class="wrap">
+      <h2>Kurze Stimmen von echten Menschen</h2>
+      <div class="micro-t">
+        <figure class="micro"><blockquote>„Hätte nie gedacht, wie viel Ruhe das bringt.“</blockquote><figcaption>– Lisa, 29</figcaption></figure>
+        <figure class="micro"><blockquote>„Endlich Ruhe im Kopf. Wir haben jetzt einen klaren Plan.“</blockquote><figcaption>– Jan, 37</figcaption></figure>
+        <figure class="micro"><blockquote>„Wir sparen 420 € jedes Jahr. Ohne Stress.“</blockquote><figcaption>– Miriam &amp; Paul</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personas -->
+  <section id="personas" class="persona-section fade-up" aria-labelledby="personas-title">
+    <div class="wrap">
+      <h2 id="personas-title">Was trifft am ehesten auf dich zu?</h2>
+      <div class="persona-grid">
+        <button class="persona-card tap-scale" type="button"
+          data-key="familie"
+          data-headline="Mehr Ruhe im Familienbudget – ohne Papierkram."
+          data-subheadline="Wir schauen gemeinsam ehrlich drauf, wo bei euch Geld liegen bleibt – Schritt für Schritt, ohne Druck.">
+          👨‍👩‍👧 Ich bin Familie
         </button>
-        <button class="btn" data-action="open-preview">Erst in Ruhe lesen</button>
+        <button class="persona-card tap-scale" type="button"
+          data-key="selbststaendig"
+          data-headline="Du verdienst gut – aber dein Konto fühlt sich nicht so an?"
+          data-subheadline="Wir sortieren das einmal sauber – damit du weißt, was wirklich zu deinem Risiko passt.">
+          💼 Ich bin Selbstständig
+        </button>
+        <button class="persona-card tap-scale" type="button"
+          data-key="angestellt"
+          data-headline="Einfach wissen, dass alles passt – ohne Papierkram."
+          data-subheadline="Kurzer Check, der zeigt, ob du etwas Wichtiges vergisst oder Geld liegen lässt.">
+          🧑‍💼 Ich bin Angestellt
+        </button>
+      </div>
+      <p id="persona-copy" class="persona-copy" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="story-section fade-up" id="story">
+    <div class="wrap">
+      <h2>Warum tun sich so viele mit dem Thema Geld schwer?</h2>
+      <div class="story-points stack">
+        <p>Weil das Thema riesig wirkt – und man Angst hat, etwas falsch zu machen.</p>
+        <p>Weil niemand einem jemals gezeigt hat, worauf es wirklich ankommt.</p>
+        <p>Weil die Infos überall verteilt sind – und jeder etwas anderes erzählt.</p>
+        <p>Weil man im Alltag genug Stress hat, um sich noch mit Verträgen zu beschäftigen.</p>
+      </div>
+      <div class="story-solution surface">
+        <h3>Die Lösung: einmal sauber sortieren – Schritt für Schritt.</h3>
+        <p>Die <strong>Finanz-Ampel</strong> zeigt dir in <span class="critical-highlight">2 Minuten</span>, wo du stehst – ohne Papierkram, ohne Druck, komplett <span class="critical-highlight">anonym</span>.</p>
+        <p>Danach weißt du: <strong>Wo Geld liegen bleibt · Was wichtig ist · Was du entspannt abhaken kannst</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="quiz section fade-up" aria-labelledby="quiz-title">
+    <div class="wrap">
+      <h2 id="quiz-title">Der kurze 2-Minuten-Check</h2>
+
+      <!-- 🔧 Upgrade 2: Soft-Permission -->
+      <p class="hero-micro" id="soft-permission" aria-live="polite">
+        Es dauert nur 2&nbsp;Minuten. Du kannst jederzeit abbrechen.
+      </p>
+
+      <!-- Progress -->
+      <div class="progress" aria-label="Fortschritt">
+        <div class="track"></div>
+        <div class="bar" id="quiz-progress-bar" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="100"></div>
+        <div class="text"><span id="quiz-step-text">1</span>/3 · <span id="progress-tick">Los geht’s</span></div>
       </div>
 
+      <!-- Steps -->
+      <div id="quiz-steps">
+        <div class="quiz-step" data-step="1">
+          <h3>Wie fühlt sich dein Geld-Alltag aktuell an?</h3>
+          <div class="answers" role="group" aria-label="Geld-Alltag">
+            <button class="pill tap-scale answer" data-value="unsicher">Ich bin oft unsicher, ob ich etwas Wichtiges übersehe.</button>
+            <button class="pill tap-scale answer" data-value="keineahnung">Ich hab keine Ahnung – ich schieb das Thema weg.</button>
+            <button class="pill tap-scale answer" data-value="stabil">Läuft okay, aber ich weiß nicht, ob Luft nach oben ist.</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="2" hidden>
+          <h3>Wie gut bist du abgesichert, wenn mal etwas schiefgeht?</h3>
+          <div class="answers" role="group" aria-label="Absicherung">
+            <button class="pill tap-scale answer" data-value="unsicher">Ich hoffe einfach, dass nichts passiert …</button>
+            <button class="pill tap-scale answer" data-value="keineahnung">Ich weiß es wirklich nicht.</button>
+            <button class="pill tap-scale answer" data-value="stabil">Denke, es passt – aber sicher bin ich nicht.</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="3" hidden>
+          <h3>Wie viel Struktur hast du bei Versicherungen &amp; Verträgen?</h3>
+          <div class="answers" role="group" aria-label="Struktur">
+            <button class="pill tap-scale answer" data-value="unsicher">Eher Chaos – ich weiß nicht, was aktuell ist.</button>
+            <button class="pill tap-scale answer" data-value="keineahnung">Ich habe keine Übersicht.</button>
+            <button class="pill tap-scale answer" data-value="stabil">Ich denke, es ist okay – könnte aber besser sein.</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div id="quiz-result" class="quiz-result fade-up" hidden aria-live="polite">
+        <h3 id="quiz-result-title" class="result-title" tabindex="-1">Deine Ampel <span id="persona-badge" class="persona-badge" hidden>—</span></h3>
+
+        <div class="ampel result-ampel" aria-label="Ergebnis Ampel" role="img">
+          <span class="ampel-light ampel-red" data-lamp="rot" aria-hidden="true"></span>
+          <span class="ampel-light ampel-yellow" data-lamp="gelb" aria-hidden="true"></span>
+          <span class="ampel-light ampel-green" data-lamp="gruen" aria-hidden="true"></span>
+        </div>
+
+        <p id="quiz-summary-text" class="result-note">–</p>
+
+        <div id="slot-container" class="slot-generator" aria-label="freie Zeiten"></div>
+
+        <div class="result-ctas">
+          <button class="btn btn-primary tap-scale" id="result-cta">15-Minuten-Check buchen</button>
+          <button class="btn btn-secondary tap-scale" id="quiz-again">Nochmal starten</button>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- Hero Image (Apple-Style) -->
-    <div class="hero-right">
-      <picture>
-        <img src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200"
-             alt="Ruhige Finanz-Ampel – 2 Minuten, anonym, kein Verkauf"
-             width="1200" height="900" loading="eager" fetchpriority="high">
-      </picture>
+  <!-- Referral (kurz, optional nutzbar) -->
+  <section id="referral" class="referral-section fade-up">
+    <div class="wrap">
+      <h2>Weitergeben – ohne etwas erklären zu müssen</h2>
+      <p class="referral-sub">Die Ampel spricht für dich. Schnell, <span class="critical-highlight">anonym</span>, <span class="critical-highlight">kein Verkauf</span> – einfach weiterleiten.</p>
+      <div id="referral-live-feed" class="live-feed" aria-live="polite"></div>
     </div>
+  </section>
 
-  </div>
-</section>
-<!DOCTYPE html>
-<html lang="de" class="no-js" translate="no">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#05070E">
-  <meta name="format-detection" content="telephone=no">
+  <!-- Footer / Termin -->
+  <footer class="footer surface fade-up" id="termin" role="contentinfo">
+    <div class="wrap">
+      <h3>15-Minuten-Check mit Heiko</h3>
+      <p>Kurz, ehrlich, ohne Druck. Wir schauen einmal gemeinsam drauf – entspannt, ohne Fachchinesisch.</p>
+      <a href="https://heikohaerter.com/termin" class="btn btn-primary tap-scale" rel="noopener">Termin finden</a>
+      <div class="footer-microtrust">
+        <p>🔒 <span class="critical-highlight">anonym</span> starten</p>
+        <p>🤝 <span class="critical-highlight">kein Verkauf</span></p>
+        <p>💶 <span class="critical-highlight">25 € Garantie</span>, falls nichts für dich drin ist</p>
+      </div>
+      <div class="footer-meta">
+        <p>© <span data-year></span> Heiko Härter – Finanzbegleitung</p>
+        <p>Impressum · Datenschutz</p>
+      </div>
+    </div>
+  </footer>
 
-  <title>In 2 Minuten sehen, wo du heute stehst – Heiko Haerter | Persönliche Finanzbegleitung</title>
-  <meta name="description" content="Ein kurzer, ruhiger 2-Minuten-Blick: zeigt, was heute wichtig ist – anonym, ohne Verkauf, ohne Vorbereitung. Entwickelt von Heiko Haerter – persönliche Finanzbegleitung.">
+  <script defer src="app.js"></script>
+</body>
+</html>
 
-  <!-- Canonical -->
-  <link rel="canonical" href="https://heikohaerter.com">
+<!-- /app.js -->
+(() => {
+  const $ = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
 
-  <!-- Favicons -->
-  <link rel="icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  document.documentElement.classList.remove('no-js');
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Heiko Haerter",
-    "jobTitle": "Persönliche Finanzbegleitung",
-    "url": "https://heikohaerter.com",
-    "image": "apple-touch-icon.png",
-    "description": "Ruhige Finanz-Ampel & persönliche Finanzbegleitung – anonym, ohne Verkauf."
+  /* Loader (0.5s) — why: kleines Commitment/Sicherheitssignal */
+  function setupLoader(){
+    const el = $('#micro-loader'); if(!el) return;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hide = () => el.classList.add('hide');
+    if (reduce) return hide();
+    setTimeout(hide, 500);
   }
-  </script>
-</head>
 
-<body class="dark page-index no-js">
-<a class="skip-link" href="#main">Zum Inhalt springen</a>
+  /* Smooth scroll */
+  function setupSmoothScroll(){
+    const handler = (e) => {
+      const t = e.currentTarget;
+      const href = t.getAttribute('data-target') || t.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior:'smooth', block:'start' });
+      if (target.tabIndex === -1) target.focus({ preventScroll:true });
+    };
+    $$('a[href^="#"], [data-target^="#"], #hero-cta').forEach(a => a.addEventListener('click', handler));
+  }
 
-<!-- =========================================================
-     MICRO-LOADER (Neuro-Commitment, Dopamin)
-========================================================= -->
-<div id="micro-loader" class="micro-loader" role="status" aria-live="polite">
-  <div class="micro-loader-box">
-    <div class="micro-loader-dot"></div>
-    <p class="micro-loader-text">Seite ist bereit – du entscheidest</p>
-  </div>
-</div>
+  /* Reveal on scroll */
+  function setupReveal(){
+    const io = new IntersectionObserver((ents)=>{
+      ents.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+    }, { threshold:.12 });
+    $$('.fade-up').forEach(el => io.observe(el));
+  }
 
-<!-- =========================================================
-     DECISION ANCHOR (scroll-triggered)
-========================================================= -->
-<div id="decision-anchor" class="decision-anchor">
-  🔒 100% anonym · kein Verkauf · 25 € wenn’s dir nichts bringt ·
-  <span id="micro-proof">keine Vorbereitung notwendig</span>
-</div>
+  /* Decision anchor show after 180px + Micro-Proof loop */
+  function setupDecisionAnchor(){
+    const anchor = $('#decision-anchor'); if(!anchor) return;
+    let shown=false;
+    const onScroll = () => { if(!shown && window.scrollY > 180){ anchor.classList.add('show'); shown=true; window.removeEventListener('scroll', onScroll);} };
+    window.addEventListener('scroll', onScroll, { passive:true });
 
-<!-- =========================================================
-     STICKY CTA (mobile)
-========================================================= -->
-<div id="sticky-cta" class="sticky-cta" aria-hidden="true">
-  <div class="inner">
-    <button class="btn-primary tap-scale" data-target="#quiz" data-track="cta_sticky">
-      👉 Kurz-Check starten
-    </button>
-  </div>
-</div>
+    const span = $('#micro-proof');
+    const msgs = ['keine Vorbereitung notwendig','dauert nur 2 Minuten','du entscheidest – nichts wird verkauft'];
+    if (span){
+      let i=0; const id = setInterval(()=>{ i=(i+1)%msgs.length; span.textContent = msgs[i]; }, 4000);
+      window.addEventListener('pagehide', ()=>clearInterval(id));
+    }
+  }
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
-<header class="site-header" role="banner">
-  <div class="wrap header-bar">
-    <a class="brand" href="/" aria-label="Startseite">
-      <span class="brand-dot"></span>
-      <div class="brand-lines">
-        <span class="brand-name">Heiko Haerter</span>
-        <span class="brand-tag">Persönliche Finanzbegleitung</span>
-      </div>
-    </a>
+  /* Sticky CTA logic */
+  function setupStickyCTA(){
+    const cta = $('#sticky-cta'); const hero = $('#hero'); const quiz = $('#quiz');
+    if(!cta || !hero) return;
 
-    <nav class="head-nav">
-      <a href="#quiz">Kurz-Check</a>
-      <a href="#trust">Warum & wie</a>
-      <a href="#referral-teaser">Weitergeben</a>
-    </nav>
-  </div>
-</header>
+    const setVis = (show) => {
+      cta.classList.toggle('show', show);
+      cta.setAttribute('aria-hidden', show ? 'false' : 'true');
+    };
 
-<!-- =========================================================
-     HERO – PREMIUM DARK LUXURY × PSYCHOLOGIE 2026
-========================================================= -->
-<main id="main">
+    const ioHero = new IntersectionObserver(([e]) => {
+      const show = !e.isIntersecting && window.scrollY > (document.body.scrollHeight * 0.3);
+      setVis(show);
+    }, { rootMargin: '-64px 0px 0px 0px' });
+    ioHero.observe(hero);
 
-<section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
-  <div class="wrap hero-wrap">
+    if (quiz){
+      const ioQuiz = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) setVis(false); // nicht drängeln am Quiz
+      }, { threshold:.25 });
+      ioQuiz.observe(quiz);
+    }
 
-    <div class="hero-left">
+    cta.addEventListener('click', () => {
+      $('#quiz')?.scrollIntoView({ behavior:'smooth' });
+    });
+  }
 
-      <!-- Dynamic Rotator (Pain-Points 2026) -->
-      <p class="hero-hook"><span id="hero-rotator">Keine Zeit?</span></p>
+  /* Live feeds */
+  function rotateFeed(containerId, items){
+    const box = $(containerId); if(!box) return;
+    box.textContent = items[0];
+    let i=0, paused=false;
+    const id = setInterval(()=>{ if(paused) return; i=(i+1)%items.length; box.textContent = items[i]; }, 3500);
+    ['mouseenter','focusin'].forEach(ev=>box.addEventListener(ev, ()=>paused=true));
+    ['mouseleave','focusout'].forEach(ev=>box.addEventListener(ev, ()=>paused=false));
+    window.addEventListener('pagehide', ()=>clearInterval(id));
+  }
+  function setupLiveFeeds(){
+    rotateFeed('#live-feed', [
+      '„Sandra (31) hat gerade ihre Ampel gemacht.“',
+      '„Leon (27) spart 420 € im Jahr.“',
+      '„Heute schon 18 Menschen Ruhe gewonnen.“'
+    ]);
+    rotateFeed('#referral-live-feed', [
+      '„Clara (34) hat den Link weitergegeben.“',
+      '„Tom (42) hat gerade gestartet – 2 Minuten.“',
+      '„Ohne Druck, ohne Verkauf – einfach anfangen.“'
+    ]);
+  }
 
-      <h1 id="hero-title">
-        In 2 Minuten sehen, wo du heute stehst – ruhig, anonym & ohne Druck.
-      </h1>
+  /* Proof bars */
+  function setupProofBars(){
+    const bars = $$('.proof-bar'); if(!bars.length) return;
+    const io = new IntersectionObserver((ents)=>{
+      ents.forEach(({isIntersecting, target})=>{
+        if(!isIntersecting) return;
+        const v = Math.min(100, Math.max(0, parseInt(target.getAttribute('data-value')||target.getAttribute('data-percentage')||'0',10)));
+        const span = $('span', target); if (span) span.style.width = v + '%';
+        const fill = $('.bar-fill', target); if (fill) fill.style.width = v + '%';
+      });
+    }, { threshold:.35 });
+    bars.forEach(b => io.observe(b));
+  }
 
-      <p class="sub">
-        Ein kurzer Blick, der dir zeigt, ob du Geld liegen lässt oder heute etwas Wichtiges offen ist –
-        alltagstauglich, ohne Vorbereitung.
-      </p>
+  /* Personas */
+  let currentPersona = '';
+  function setupPersonas(){
+    const out = $('#persona-copy');
+    const cards = $$('.persona-card');
+    function setActive(btn){
+      cards.forEach(c => c.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      currentPersona = btn.getAttribute('data-key') || '';
+      const h = btn.getAttribute('data-headline') || '';
+      const s = btn.getAttribute('data-subheadline') || '';
+      if (out) out.textContent = `${h} ${s}`.trim();
+    }
+    cards.forEach(c=>{
+      c.addEventListener('click', ()=>setActive(c));
+      c.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); setActive(c);} });
+    });
+  }
 
-      <!-- AMPPEL -->
-      <div class="ampel" aria-label="Finanz-Ampel">
-        <span class="ampel-light ampel-red"></span>
-        <span class="ampel-light ampel-yellow"></span>
-        <span class="ampel-light ampel-green"></span>
-      </div>
+  /* Quiz with Persona-Auto-Switch + Predictive texts */
+  function setupQuiz(){
+    const steps = $$('#quiz-steps .quiz-step');
+    if(!steps.length) return;
 
-      <p class="social-line">
-        ⭐ 4,9 | Von Familien, Selbstständigen & Angestellten genutzt
-      </p>
+    const bar = $('#quiz-progress-bar');
+    const stepText = $('#quiz-step-text');
+    const tick = $('#progress-tick');
+    const soft = $('#soft-permission');
 
-      <!-- CTAS -->
-      <div class="hero-ctas">
-        <button class="btn-primary tap-scale" data-target="#quiz" data-track="cta_start">
-          Jetzt Kurz-Check starten
-        </button>
-        <button class="btn" data-action="open-preview">Erst in Ruhe lesen</button>
-      </div>
+    const resultCard = $('#quiz-result');
+    const resultNote = $('#quiz-summary-text');
+    const personaBadge = $('#persona-badge');
 
-    </div>
+    const answers = [];
+    const mapVal = v => (v==='unsicher'||v==='keineahnung') ? 'rot' : 'gelb'; // Step-Mapping baseline (why: schnelle Heuristik)
+    let current = 0;
 
-    <!-- Hero Image (Apple-Style) -->
-    <div class="hero-right">
-      <picture>
-        <img src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200"
-             alt="Ruhige Finanz-Ampel – 2 Minuten, anonym, kein Verkauf"
-             width="1200" height="900" loading="eager" fetchpriority="high">
-      </picture>
-    </div>
+    function setProgress(){
+      const pct = Math.round((current/steps.length)*100);
+      bar.style.width = pct + '%';
+      bar.setAttribute('aria-valuenow', String(pct));
+      stepText.textContent = String(Math.min(current+1, steps.length));
+      const labels = ['Los geht’s','✓ 1 von 3 – gut dabei','✓ 2 von 3 – fast geschafft','✓ 3 von 3'];
+      tick.textContent = labels[Math.min(current, labels.length-1)];
+    }
 
-  </div>
-</section>
-<!-- =========================================================
-     TRUST SYSTEM – NEURO-UX 2026
-========================================================= -->
-<section id="trust" class="section neuro fade-up" aria-label="Vertrauen & Wirkung">
-  <div class="wrap">
+    function showStep(i){
+      steps.forEach((s,idx)=>s.hidden = idx!==i);
+      resultCard.hidden = true;
+      current = i;
+      setProgress();
+      const btn = steps[i].querySelector('.answer');
+      btn && btn.focus();
+    }
 
-    <!-- Proof Bars -->
-    <div class="proof">
+    function computeAmpel(){
+      // rot > gelb > gruen (gruen nur bei 2–3× stabil)
+      const counts = { rot:0, gelb:0, gruen:0 };
+      answers.forEach(v=>{
+        if (v==='stabil') counts.gruen++;
+        else if (v==='unsicher' || v==='keineahnung') counts.rot++;
+        else counts.gelb++;
+      });
+      if (counts.gruen >= 2) return 'gruen';
+      if (counts.rot >= 2) return 'rot';
+      return 'gelb';
+    }
 
-      <div class="proof-item fade-up">
-        <div class="proof-top"><span>Vertrauen</span><strong>98 %</strong></div>
-        <div class="proof-bar" data-value="98"><span></span></div>
-      </div>
+    // 🔧 Upgrade 3: Persona-Auto-Switch
+    function autoPersona(stepIdx, value){
+      if (stepIdx !== 2) return; // bei Step 3 entscheiden
+      const step1 = answers[0]; const step2 = answers[1];
+      let key = '';
+      if (value !== 'stabil'){
+        key = (step1==='stabil') ? 'angestellt' : 'familie';
+      } else if (step2 === 'stabil'){
+        key = 'selbststaendig';
+      }
+      if (!key) return;
+      const btn = `.persona-card[data-key="${key}"]`;
+      const el = $(btn); if (!el) return;
+      $$('.persona-card').forEach(c => c.classList.remove('is-active'));
+      el.classList.add('is-active');
+      currentPersona = key;
+      const h = el.getAttribute('data-headline') || '';
+      const s = el.getAttribute('data-subheadline') || '';
+      const out = $('#persona-copy'); out && (out.textContent = `${h} ${s}`.trim());
+    }
 
-      <div class="proof-item fade-up">
-        <div class="proof-top"><span>Ruhe im Kopf</span><strong>92 %</strong></div>
-        <div class="proof-bar" data-value="92"><span></span></div>
-      </div>
+    // 🔧 Upgrade 4: Predictive Result Texts (4 Varianten je Farbe + Persona Appendix)
+    function predictiveText(color){
+      const base = {
+        rot: [
+          'Erstmal Ordnung schaffen – wir gehen das ruhig & strukturiert an.',
+          'Kein Druck: Schritt für Schritt, heute starten reicht.',
+          'Wir sortieren das Wichtigste zuerst – spürbar weniger Chaos.',
+          'Kleine Schritte, klare Reihenfolge – du behältst die Kontrolle.'
+        ],
+        gelb: [
+          'Schon gut – mit ein paar Schritten wird es deutlich entspannter.',
+          'Fast da: Wir drehen an 2–3 kleinen Stellschrauben.',
+          'Gut im Griff – jetzt clever priorisieren für mehr Ruhe.',
+          'Einmal sauber durchgehen und die letzten Lücken schließen.'
+        ],
+        gruen: [
+          'Sehr stabil – nur Kleinigkeiten im Blick behalten.',
+          'Top Basis – wir sichern ab, was wirkt.',
+          'Weiter so: Mini-Checks für langfristige Ruhe.',
+          'Feinschliff: kleine Optimierungen für extra Sicherheit.'
+        ]
+      };
+      const personaAdd = {
+        familie: { rot:' Fokus: Familienalltag einfacher machen.', gelb:' Mehr Ruhe im Alltag ohne Papierkram.', gruen:' Familien-Themen bleiben entspannt.' },
+        angestellt: { rot:' Schnell Ordnung für den Arbeitsalltag.', gelb:' Klarheit, damit sich der Monat besser anfühlt.', gruen:' Stabil weiter – Check zur Bestätigung.' },
+        selbststaendig: { rot:' Schwankungen abfedern, Risiken sortieren.', gelb:' Liquidität & Absicherung sauber justieren.', gruen:' Stabil – Reserve & Absicherung kurz prüfen.' },
+        '': { rot:'', gelb:'', gruen:'' }
+      };
+      const list = base[color] || base.gelb;
+      const pick = list[Math.floor(Math.random()*list.length)];
+      return pick + (personaAdd[currentPersona]?.[color] || '');
+    }
 
-      <div class="proof-item fade-up">
-        <div class="proof-top"><span>Weiterempfohlen</span><strong>91 %</strong></div>
-        <div class="proof-bar" data-value="91"><span></span></div>
-      </div>
+    function paintAmpel(color){
+      $$('[data-lamp]').forEach(l => l.classList.remove('ampel--active'));
+      const act = $(`[data-lamp="${color}"]`);
+      act && act.classList.add('ampel--active');
+    }
 
-    </div>
+    function genSlots(){
+      const box = $('#slot-container'); if(!box) return;
+      box.innerHTML = '';
+      const times = ['09:30','11:00','13:00','15:30','18:00'];
+      const days = 5;
+      for (let i=0;i<days;i++){
+        const d=new Date(); d.setDate(d.getDate()+i);
+        const el = document.createElement('div');
+        el.className = 'slot ' + (i===0?'slot-today': i===1?'slot-tomorrow':'');
+        el.textContent = `${d.toLocaleDateString('de-DE',{weekday:'short', day:'2-digit', month:'2-digit'})} · ${times[i%times.length]} Uhr`;
+        box.appendChild(el);
+      }
+    }
 
-    <!-- LIVE FEED – Social Proof Loop -->
-    <div class="live-feed" aria-live="polite">
-      <ul id="live-messages">
-        <li>„Sandra (31) hat gerade ihre Ampel gemacht.“</li>
-        <li>„Leon (27) spart 420 € im Jahr.“</li>
-        <li>„Heute schon viele Menschen sortiert.“</li>
-        <li>„Miriam (33) fühlt sich endlich sicherer.“</li>
-      </ul>
-    </div>
+    function updatePersonaBadge(){
+      const map = { familie:'Familie', angestellt:'Angestellt', selbststaendig:'Selbstständig' };
+      if (!currentPersona){ personaBadge.hidden = true; return; }
+      personaBadge.hidden = false; personaBadge.textContent = map[currentPersona] || currentPersona;
+    }
 
-    <!-- Micro Testimonials -->
-    <div class="micro-t">
-      <figure class="micro fade-up">
-        <blockquote>„Dachte nicht, dass das so entspannt geht.“</blockquote>
-        <figcaption>– Lisa, 29</figcaption>
-      </figure>
+    function showResult(){
+      steps.forEach(s => s.hidden = true);
+      const color = computeAmpel();
+      paintAmpel(color);
+      resultNote.textContent = predictiveText(color);
+      genSlots();
+      updatePersonaBadge();
+      resultCard.hidden = false;
+      $('#quiz-result-title')?.focus();
+      bar.style.width = '100%'; bar.setAttribute('aria-valuenow','100');
+      $('#quiz-step-text').textContent = String(steps.length);
+      $('#progress-tick').textContent = '✓ 3 von 3';
+    }
 
-      <figure class="micro fade-up">
-        <blockquote>„Endlich Ruhe im Kopf – wir wissen, was heute wichtig ist.“</blockquote>
-        <figcaption>– Jan, 37</figcaption>
-      </figure>
+    steps.forEach((stepEl, idx)=>{
+      stepEl.addEventListener('click', (e)=>{
+        const btn = e.target.closest('.answer'); if (!btn) return;
+        const val = btn.getAttribute('data-value'); if (!val) return;
+        answers[idx] = val;
 
-      <figure class="micro fade-up">
-        <blockquote>„Wir haben jetzt viel mehr Überblick im Alltag.“</blockquote>
-        <figcaption>– Miriam &amp; Paul</figcaption>
-      </figure>
-    </div>
+        if (soft) soft.style.display = 'none';
+        autoPersona(idx, val);
 
-  </div>
-</section>
+        const next = idx+1;
+        if (next < steps.length) {
+          steps[idx].hidden = true; steps[next].hidden = false; current = next; setProgress();
+        } else {
+          showResult();
+        }
+      });
+    });
 
+    $('#quiz-again')?.addEventListener('click', ()=>{
+      answers.length = 0;
+      steps.forEach((s,i)=> s.hidden = i!==0);
+      current = 0; setProgress();
+      resultCard.hidden = true;
+      if (soft) soft.style.display = '';
+      currentPersona = '';
+      $('#persona-copy') && ($('#persona-copy').textContent = '');
+      personaBadge.hidden = true;
+      $$('.persona-card').forEach(c=>c.classList.remove('is-active'));
+    });
 
-<!-- =========================================================
-     STORYBLOCK – Warum tun sich so viele schwer?
-========================================================= -->
-<section id="story" class="section fade-up">
-  <div class="wrap">
+    setProgress();
+  }
 
-    <h2>„Warum kümmern sich so viele nicht darum?“</h2>
+  /* Bottom nav active link */
+  function setupBottomNav(){
+    const sections = [
+      ['#hero', $('#bottom-nav a[href="#hero"]')],
+      ['#quiz', $('#bottom-nav a[href="#quiz"]')],
+      ['#referral', $('#bottom-nav a[href="#referral"]')],
+      ['#termin', $('#bottom-nav a[href="#termin"]')]
+    ].filter(([id,link])=> document.querySelector(id) && link);
 
-    <ul class="story-grid">
-      <li class="story-card">zu viel Papier</li>
-      <li class="story-card">schlechtes Gewissen</li>
-      <li class="story-card">Angst, etwas zu entscheiden</li>
-      <li class="story-card">nie die Zeit gefunden</li>
-      <li class="story-card">fühlt sich größer an, als es ist</li>
-    </ul>
+    const io = new IntersectionObserver((ents)=>{
+      ents.forEach(e=>{
+        if(e.isIntersecting){
+          sections.forEach(([_,link])=> link.classList.remove('is-active'));
+          const item = sections.find(([id])=> '#'+e.target.id===id);
+          item && item[1].classList.add('is-active');
+        }
+      });
+    }, { threshold:.5 });
 
-    <p class="solution">
-      Der 2-Minuten-Check nimmt den Druck raus und sortiert dein Gefühl.
-    </p>
+    sections.forEach(([id])=> io.observe(document.querySelector(id)));
+  }
 
-    <p class="assist">
-      Wir schauen gemeinsam drauf – Schritt für Schritt.  
-      Du musst nichts vorbereiten.  
-      Ziel: ruhiger Kopf, Geld im Griff, heute sehen, wo du stehst.
-    </p>
+  /* Year */
+  function setupYear(){ $$('[data-year]').forEach(n=> n.textContent = String(new Date().getFullYear())); }
 
-  </div>
-</section>
-
-
-<!-- =========================================================
-     PERSONA SYSTEM
-========================================================= -->
-<section class="section personas fade-up" aria-labelledby="personas-title">
-  <div class="wrap">
-    <h2 id="personas-title">Wähle, was zu dir passt</h2>
-
-    <div class="persona-grid">
-
-      <button class="persona-card" data-key="familie">
-        <h3>Ich bin Familie</h3>
-        <p class="persona-points">ruhiger Kopf · Alltag sortieren</p>
-      </button>
-
-      <button class="persona-card" data-key="selbststaendig">
-        <h3>Ich bin Selbstständig</h3>
-        <p class="persona-points">Einnahmen schwanken? ruhig prüfen</p>
-      </button>
-
-      <button class="persona-card" data-key="angestellt">
-        <h3>Ich bin Angestellt</h3>
-        <p class="persona-points">heute sehen, was offen ist</p>
-      </button>
-
-    </div>
-
-    <p id="persona-copy" class="persona-copy" aria-live="polite"></p>
-  </div>
-</section>
-<!-- =========================================================
-     REFERRAL TEASER – Weitergeben ohne erklären
-========================================================= -->
-<section id="referral-teaser" class="referral-teaser section fade-up">
-  <div class="wrap">
-
-    <h2>Weitergeben – ohne etwas erklären zu müssen</h2>
-
-    <p>
-      Du kannst den Link einfach senden.  
-      Die Person sieht ihre Ampel in <span class="auto-key">2 Minuten</span> – 
-      <span class="auto-key">anonym</span>, <span class="auto-key">kein Verkauf</span>, ruhig & ohne Druck.
-    </p>
-
-    <!-- Zero-Risk Badge -->
-    <div class="referral-badge">
-      <span>Zero-Risk:</span> Wenn es der Person nichts bringt → <strong>25 €</strong>.
-    </div>
-
-    <!-- Message Card -->
-    <div class="card referral-card fade-up">
-      <p class="card-label">Beliebter Text:</p>
-
-      <p class="referral-preview">
-        „Hab das gesehen und an dich gedacht – kurzer 2-Minuten-Blick, der zeigt, ob heute etwas offen ist:
-        <span class="referral-url-placeholder">{{URL}}</span>“
-      </p>
-
-      <div class="referral-actions">
-        <a href="weitergeben.html#referral-engine"
-           class="btn btn-primary tap-scale"
-           data-track="referral_more">
-          Mehr Möglichkeiten zum Weitergeben
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-<div id="decision-anchor" class="decision-anchor" aria-live="polite">
-  🔒 100 % anonym · Kein Verkauf · 25 € Garantie
-</div>
-<div id="sticky-cta" class="sticky-cta" aria-hidden="true">
-  <div class="inner">
-    <button class="btn btn-primary tap-scale"
-            data-target="#quiz"
-            data-track="cta_sticky">
-      👉 Finanz-Check starten und Klarheit gewinnen
-    </button>
-  </div>
-</div>
-<nav class="bottom-nav" id="bottom-nav">
-  <button class="bottom-nav-item is-active"
-          data-target="#hero"
-          data-track="nav_home">
-    🏠 <span>Home</span>
-  </button>
-
-  <button class="bottom-nav-item"
-          data-target="#quiz"
-          data-track="nav_quiz">
-    🚦 <span>Finanzcheck</span>
-  </button>
-
-  <button class="bottom-nav-item"
-          data-href="weitergeben.html"
-          data-track="nav_referral">
-    💬 <span>Weitergeben</span>
-  </button>
-
-  <button class="bottom-nav-item"
-          data-target="#contact"
-          data-track="nav_contact">
-    📞 <span>Kontakt</span>
-  </button>
-</nav>
-<section id="ethos" class="section fade-up">
-  <div class="wrap ethos-wrap">
-
-    <h2>Wer hinter der Finanz-Ampel steht</h2>
-
-    <div class="ethos-card">
-      <p>
-        Ich bin <strong>Heiko Haerter</strong. Ich begleite Menschen seit vielen Jahren dabei, 
-        ihr Geld einfacher und ruhiger zu organisieren – ohne Druck, ohne Verkauf, 
-        ohne Fachchinesisch.
-      </p>
-      <p>
-        Die Ampel habe ich gebaut, weil viele gesagt haben:
-        „Ich weiß gar nicht, wo ich anfangen soll.“  
-        Jetzt reicht ein kurzer Blick, um zu sehen, ob heute etwas Wichtiges offen ist.
-      </p>
-      <p>
-        Du musst nichts vorbereiten. Kein Papierkram.  
-        Einfach nur kurz draufschauen – in deinem Tempo.
-      </p>
-    </div>
-
-    <div class="ethos-proofs">
-      <div class="ethos-proof-card">
-        <strong>250+ Menschen</strong>
-        <span>nutzen die Ampel regelmäßig</span>
-      </div>
-      <div class="ethos-proof-card">
-        <strong>⭐ 4,9</strong>
-        <span>ruhiges & klares Erlebnis</span>
-      </div>
-      <div class="ethos-proof-card">
-        <strong>0 Druck</strong>
-        <span>du entscheidest alles selbst</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-<section id="contact" class="contact section fade-up">
-  <div class="wrap">
-
-    <h2>Wenn du darüber sprechen möchtest</h2>
-
-    <p class="contact-lead">
-      Manchmal hilft ein kurzer Austausch, um besser einzuordnen, 
-      was die Ampel gezeigt hat.  
-      Komplett in Ruhe, <span class="auto-key">kein Verkauf</span>.
-    </p>
-
-    <ul class="contact-list">
-      <li><a href="mailto:heiko@haerter-finanz.de">heiko@haerter-finanz.de</a></li>
-      <li><a href="tel:+49XXXXXXXXX">+49 XX XX XX XX</a></li>
-      <li><a href="https://wa.me/49XXXXXXXXX" class="wa-link">WhatsApp öffnen</a></li>
-    </ul>
-
-    <p class="contact-note">
-      Du musst nichts vorbereiten.  
-      Es reicht, wenn du kurz sagst, was du möchtest.
-    </p>
-
-  </div>
-</section>
+  document.addEventListener('DOMContentLoaded', ()=>{
+    setupLoader();
+    setupSmoothScroll();
+    setupReveal();
+    setupDecisionAnchor();
+    setupStickyCTA();
+    setupLiveFeeds();
+    setupProofBars();
+    setupPersonas();
+    setupQuiz();
+    setupBottomNav();
+    setupYear();
+  });
+})();
