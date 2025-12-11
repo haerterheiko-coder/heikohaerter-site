@@ -1,464 +1,467 @@
 // ==========================================================================
 // app.js — GODMODE Edition 2026
 // Ultra-lite Neuro-UX Engine · Zero-Pressure by Design
-// Modules: motion, ampel, persona, referral, quiz, proof, live feed, CTA
+// Modules: loader, reveal, smooth-scroll, decision-anchor, sticky-cta,
+//          live-feed, personas, quiz, bottom-nav, proof bars
 // ==========================================================================
-
 (() => {
-  'use strict';
-
-  /* ---------------------------- Helpers ---------------------------- */
   const $  = (s, r=document) => r.querySelector(s);
   const $$ = (s, r=document) => [...r.querySelectorAll(s)];
-  const on = (el, evt, fn, opt) => el?.addEventListener(evt, fn, opt);
 
-  const store = {
-    get:(k,d)=>{ try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;} },
-    set:(k,v)=>{ try{localStorage.setItem(k,JSON.stringify(v));}catch{} },
-    getRaw:(k,d)=>{ try{const v=localStorage.getItem(k);return v??d;}catch{return d;} },
-    setRaw:(k,v)=>{ try{localStorage.setItem(k,String(v));}catch{} }
-  };
+  document.documentElement.classList.remove("no-js");
 
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* -----------------------------------------------------------------------
+    MICRO LOADER (0.5s) — erzeugt Ruhe & Commitment ohne Druck
+  ----------------------------------------------------------------------- */
+  function setupLoader() {
+    const el = $("#micro-loader");
+    if (!el) return;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const observeOnce = (sel, opt, cb) => {
-    const els = Array.isArray(sel) ? sel : $$(sel);
-    if (!('IntersectionObserver' in window) || prefersReduced) {
-      els.forEach(el => cb?.(el,true));
-      return;
-    }
-    const io = new IntersectionObserver((ents)=>{
-      ents.forEach(e=>{
-        if(e.isIntersecting){ cb?.(e.target,true); io.unobserve(e.target); }
-      });
-    }, opt || {threshold:.12});
-    els.forEach(el=>io.observe(el));
-  };
+    const hide = () => el.classList.add("hide");
+    if (reduce) return hide();
 
-  /* ---------------------------- Motion ---------------------------- */
-  function initMotion(){
-    if(prefersReduced){
-      $$('.fade-up,.fade-slide,.pop-in').forEach(el=>el.classList.add('visible'));
-      return;
-    }
-    observeOnce('.fade-up,.fade-slide,.pop-in', {}, el=>{
-      el.classList.add('visible');
-    });
+    setTimeout(hide, 500);
   }
 
-  /* ---------------------------- Decision Anchor ---------------------------- */
-  function initDecisionAnchor(){
-    const el = $('#decision-anchor');
-    if(!el) return;
-    const onScroll = ()=>{
-      const show = window.scrollY > 180;
-      el.classList.toggle('show', show);
-    };
-    on(window,'scroll',onScroll,{passive:true});
-    onScroll();
-  }
+  /* -----------------------------------------------------------------------
+    SMOOTH SCROLL
+  ----------------------------------------------------------------------- */
+  function setupSmoothScroll() {
+    const handler = (e) => {
+      const t = e.currentTarget;
+      const href = t.getAttribute("data-target") || t.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+      const dest = document.querySelector(href);
+      if (!dest) return;
 
-  /* ---------------------------- Sticky CTA ---------------------------- */
-  function initStickyCTA(){
-    const sticky = $('#sticky-cta') || $('#stickyCTA');
-    if(!sticky) return;
-
-    const btn = $('.btn', sticky);
-    let heroVisible = false;
-
-    if('IntersectionObserver' in window){
-      const heroCTA = $('#hero-cta') || $('#startCheckHero');
-      if(heroCTA){
-        new IntersectionObserver(([e])=>{
-          heroVisible = e.isIntersecting;
-          if(heroVisible) sticky.classList.remove('show');
-        },{threshold:.4}).observe(heroCTA);
-      }
-    }
-
-    const check = ()=>{
-      const doc = document.documentElement;
-      const sc = doc.scrollTop || 0;
-      const max = doc.scrollHeight - doc.clientHeight;
-      const ratio = sc / (max || 1);
-      const should = ratio > 0.30 && !heroVisible;
-      sticky.classList.toggle('show', should);
-      sticky.setAttribute('aria-hidden', String(!should));
+      e.preventDefault();
+      dest.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
-    on(window,'scroll',check,{passive:true});
-    on(window,'resize',check);
-    check();
-
-    on(btn,'click',()=>{
-      const tSel = btn.getAttribute('data-target');
-      const t = tSel ? $(tSel) : $('#quiz');
-      t?.scrollIntoView({behavior:'smooth'});
-    });
+    $$('a[href^="#"], [data-target^="#"]').forEach((a) =>
+      a.addEventListener("click", handler)
+    );
   }
 
-  /* ---------------------------- Auto Highlight (Keywords) ---------------------------- */
-  function initCriticalHighlight(){
-    const words = ['2 Minuten','anonym','Klarheit','Vorteil','kein Verkauf','ruhig','25 €'];
-    const skip = new Set(['SCRIPT','STYLE','NOSCRIPT','CODE','PRE','TEXTAREA']);
+  /* -----------------------------------------------------------------------
+    REVEAL ON SCROLL
+  ----------------------------------------------------------------------- */
+  function setupReveal() {
+    const els = $$(".fade-up");
+    if (!els.length) return;
 
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-      acceptNode(n){
-        const p = n.parentElement;
-        if(!p || skip.has(p.tagName)) return NodeFilter.FILTER_REJECT;
-        if(p.closest('.critical-highlight')) return NodeFilter.FILTER_REJECT;
-        return NodeFilter.FILTER_ACCEPT;
-      }
-    });
+    const io = new IntersectionObserver(
+      (ents) => {
+        ents.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
 
-    const re = new RegExp(`\\b(${words.map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')})\\b`,'gi');
-    const nodes = [];
-    while(walker.nextNode()) nodes.push(walker.currentNode);
-
-    nodes.forEach(n=>{
-      const t = n.nodeValue; if(!re.test(t)) return;
-      const span = document.createElement('span');
-      span.innerHTML = t.replace(re, m=>`<span class="critical-highlight">${m}</span>`);
-      n.parentNode.replaceChild(span,n);
-    });
+    els.forEach((el) => io.observe(el));
   }
 
-  /* ---------------------------- Ampel Animation ---------------------------- */
-  function initAmpel(){
-    const ampel = $('.ampel');
-    if(!ampel) return;
-    const lights = $$('.ampel-light', ampel);
-    if(!lights.length) return;
+  /* -----------------------------------------------------------------------
+    DECISION ANCHOR — erscheint erst nach Scroll
+  ----------------------------------------------------------------------- */
+  function setupDecisionAnchor() {
+    const el = $("#decision-anchor");
+    if (!el) return;
 
-    lights.forEach(l=>{
-      l.style.opacity = '0.25';
-      l.style.transition = 'opacity .5s cubic-bezier(.22,.61,.36,1)';
-    });
-
-    observeOnce([ampel], {threshold:.6}, ()=>{
-      const [r,y,g] = lights;
-      setTimeout(()=>r.style.opacity='1',50);
-      setTimeout(()=>y.style.opacity='1',700);
-      setTimeout(()=>g.style.opacity='1',1400);
-      setTimeout(()=>lights.forEach(l=>l.style.opacity=''),2400);
-    });
-  }
-
-  /* ---------------------------- Persona System ---------------------------- */
-  function initPersona(){
-    const cards = $$('.persona-card'); if(!cards.length) return;
-
-    const set = (el)=>{
-      cards.forEach(c=>c.classList.toggle('is-active', c===el));
-      const t = (el.querySelector('.persona-title')?.textContent || '').toLowerCase();
-
-      let seg='neutral';
-      if(t.includes('famil')) seg='eltern';
-      else if(t.includes('selbst')) seg='selbst';
-      else if(t.includes('angestellt')) seg='freunde';
-
-      store.setRaw('hh.share.seg',seg);
-      store.setRaw('hh.persona.active',seg);
-
-      const feed = $('#live-messages');
-      if(feed && feed.firstElementChild){
-        feed.firstElementChild.textContent = '„Gerade empfohlen – 2 Minuten Orientierung.“';
+    let shown = false;
+    const onScroll = () => {
+      if (!shown && window.scrollY > 180) {
+        el.classList.add("show");
+        shown = true;
       }
     };
 
-    const saved = store.getRaw('hh.persona.active');
-    if(saved){
-      const match = cards.find(c=>{
-        const t=c.textContent.toLowerCase();
-        return (saved==='eltern' && t.includes('famil')) ||
-               (saved==='selbst' && t.includes('selbst')) ||
-               (saved==='freunde' && t.includes('angestellt'));
-      });
-      if(match) set(match);
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Micro-Proof rotierende Messages
+    const micro = $("#micro-proof");
+    const msgs = [
+      "keine Vorbereitung notwendig",
+      "dauert nur 2 Minuten",
+      "du entscheidest – nichts wird verkauft",
+    ];
+    if (micro) {
+      let i = 0;
+      setInterval(() => {
+        i = (i + 1) % msgs.length;
+        micro.textContent = msgs[i];
+      }, 4000);
+    }
+  }
+
+  /* -----------------------------------------------------------------------
+    STICKY CTA — erscheint erst wenn Hero verlassen wird
+  ----------------------------------------------------------------------- */
+  function setupStickyCTA() {
+    const cta = $("#sticky-cta");
+    const hero = $("#hero");
+    const quiz = $("#quiz");
+    if (!cta || !hero) return;
+
+    const set = (show) => {
+      cta.classList.toggle("show", show);
+      cta.setAttribute("aria-hidden", show ? "false" : "true");
+    };
+
+    // Hero beobachten
+    new IntersectionObserver(
+      ([e]) => {
+        const show = !e.isIntersecting && window.scrollY > window.innerHeight * 0.25;
+        set(show);
+      },
+      { threshold: 0.4 }
+    ).observe(hero);
+
+    // Am Quiz nicht stören
+    if (quiz) {
+      new IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting) set(false);
+        },
+        { threshold: 0.25 }
+      ).observe(quiz);
     }
 
-    cards.forEach(c=>{
-      on(c,'click',()=>set(c));
-      on(c,'keydown',e=>{
-        if(e.key==='Enter' || e.key===' '){ e.preventDefault(); set(c); }
-      });
-    });
+    cta.addEventListener("click", () =>
+      $("#quiz")?.scrollIntoView({ behavior: "smooth" })
+    );
   }
 
-  /* ---------------------------- Live Feed ---------------------------- */
-  function initLiveFeed(){
-    const ul = $('#live-messages'); if(!ul) return;
-    const get = ()=>$$('#live-messages li');
-
-    if(get().length < 2) return;
-
-    setInterval(()=>{
-      const first = get()[0];
-      if(!first) return;
-      first.style.opacity='0';
-      first.style.transition='opacity .35s cubic-bezier(.22,.61,.36,1)';
-      setTimeout(()=>{ ul.appendChild(first); first.style.opacity=''; },380);
-    }, 5000);
-  }
-
-  /* ---------------------------- Proof Bars ---------------------------- */
-  function initProofBars(){
-    $$('.proof-bar').forEach(bar=>{
-      const fill = $('span', bar) || document.createElement('span');
-      if(!fill.parentNode) bar.appendChild(fill);
-      const v = Number(bar.getAttribute('data-value')||0);
-      observeOnce([bar], {threshold:.3}, ()=>{ fill.style.width = Math.min(100,Math.max(0,v))+'%'; });
-    });
-  }
-
-  /* ---------------------------- Quiz Wizard ---------------------------- */
-  function initQuiz(){
-    const quiz = $('#quiz'); if(!quiz) return;
-
-    const steps = $$('.quiz-step',quiz);
-    const bar = $('[data-progress]',quiz);
-    const stepText = $('[data-step]',quiz);
-    const result = $('#quiz-result',quiz);
-    const slotsWrap = $('#slot-generator',quiz);
+  /* -----------------------------------------------------------------------
+    LIVE FEEDS — Social Proof in Echtzeit
+  ----------------------------------------------------------------------- */
+  function rotateFeed(selector, lines) {
+    const box = $(selector);
+    if (!box) return;
 
     let i = 0;
+    box.textContent = lines[i];
+
+    setInterval(() => {
+      i = (i + 1) % lines.length;
+      box.textContent = lines[i];
+    }, 3500);
+  }
+
+  function setupLiveFeeds() {
+    rotateFeed("#live-feed", [
+      "„Sandra (31) hat gerade ihre Ampel gemacht.“",
+      "„Leon (27) spart 420 € jedes Jahr.“",
+      "„Heute schon 18 Menschen Ruhe gewonnen.“",
+    ]);
+
+    rotateFeed("#referral-live-feed", [
+      "„Clara (34) hat den Link weitergegeben.“",
+      "„Tom (42) startet – 2 Minuten.“",
+      "„Ohne Verkauf. Einfach anfangen.“",
+    ]);
+  }
+
+  /* -----------------------------------------------------------------------
+    PERSONAS — aktivieren & Text ausgeben
+  ----------------------------------------------------------------------- */
+  let currentPersona = "";
+
+  function setupPersonas() {
+    const out = $("#persona-copy");
+    const cards = $$(".persona-card");
+    if (!cards.length) return;
+
+    function activate(btn) {
+      cards.forEach((c) => c.classList.remove("is-active"));
+      btn.classList.add("is-active");
+
+      currentPersona = btn.getAttribute("data-key") || "";
+
+      const h = btn.getAttribute("data-headline") || "";
+      const s = btn.getAttribute("data-subheadline") || "";
+      if (out) out.textContent = `${h} ${s}`.trim();
+    }
+
+    cards.forEach((c) => {
+      c.addEventListener("click", () => activate(c));
+      c.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          activate(c);
+        }
+      });
+    });
+  }
+
+  /* -----------------------------------------------------------------------
+    PROOF BARS
+  ----------------------------------------------------------------------- */
+  function setupProofBars() {
+    const bars = $$(".proof-bar");
+    if (!bars.length) return;
+
+    const io = new IntersectionObserver(
+      (ents) => {
+        ents.forEach(({ isIntersecting, target }) => {
+          if (!isIntersecting) return;
+          const span = target.querySelector("span");
+          const v = parseInt(target.getAttribute("data-value"), 10) || 0;
+          if (span) span.style.width = Math.min(100, Math.max(0, v)) + "%";
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    bars.forEach((b) => io.observe(b));
+  }
+
+  /* -----------------------------------------------------------------------
+    QUIZ — 3 Schritte, predictive text, persona auto-switch
+  ----------------------------------------------------------------------- */
+  function setupQuiz() {
+    const steps = $$("#quiz-steps .quiz-step");
+    if (!steps.length) return;
+
+    const bar = $("#quiz-progress-bar");
+    const stepText = $("#quiz-step-text");
+    const tick = $("#progress-tick");
+    const soft = $("#soft-permission");
+
+    const resultCard = $("#quiz-result");
+    const resultNote = $("#quiz-summary-text");
+    const personaBadge = $("#persona-badge");
+
     const answers = [];
+    let current = 0;
 
-    const go = (n)=>{
-      steps.forEach((s,idx)=> s.hidden = idx !== n);
-      i = n;
-      bar.style.width = ((n)/steps.length)*100 + '%';
-      if(stepText) stepText.textContent = String(n+1);
+    const setProgress = () => {
+      const pct = Math.round((current / steps.length) * 100);
+      bar.style.width = pct + "%";
+      bar.setAttribute("aria-valuenow", pct);
+      stepText.textContent = String(Math.min(current + 1, steps.length));
+
+      const texts = [
+        "Los geht’s",
+        "✓ 1 von 3 – gut dabei",
+        "✓ 2 von 3 – fast geschafft",
+        "✓ 3 von 3",
+      ];
+      tick.textContent = texts[Math.min(current, texts.length - 1)];
     };
 
-    const interpret = ()=>{
-      const score = answers.reduce((a,v)=> a + (v==='rot'?0:v==='gelb'?1:2), 0);
-      const pct = Math.round((score / (answers.length*2)) * 100);
-      const containsRed = answers.includes('rot');
-      const containsYellow = answers.includes('gelb');
-      const state = containsRed ? 'rot' : containsYellow ? 'gelb' : 'gruen';
-      return {state,pct};
+    const computeAmpel = () => {
+      // unsicher / keine Ahnung = rot
+      // stabil = grün
+      // gemischt = gelb
+      let rot = 0,
+        gruen = 0;
+
+      answers.forEach((v) => {
+        if (v === "stabil") gruen++;
+        else rot++;
+      });
+
+      if (gruen >= 2) return "gruen";
+      if (rot >= 2) return "rot";
+      return "gelb";
     };
 
-    const summary = (answers,pct,state)=>{
-      const head = state==='rot'
-        ? 'Heute wichtig – ruhig anschauen.'
-        : state==='gelb'
-        ? 'Bald wichtig – einplanen.'
-        : 'Passt – ruhig bleiben.';
-      return `${head} Gefühl: ${pct}% Orientierung.`;
-    };
-
-    const generateSlots = ()=>{
-      const out=[]; const now=new Date();
-      const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-      const tomorrow=new Date(today); tomorrow.setDate(today.getDate()+1);
-
-      const make=(d,h,m,type)=>{
-        const dt=new Date(d.getFullYear(),d.getMonth(),d.getDate(),h,m);
-        const fmt=new Intl.DateTimeFormat('de-DE',{weekday:'short',hour:'2-digit',minute:'2-digit'}).format(dt);
-        out.push({label:fmt,type});
+    const predictiveText = (color) => {
+      const base = {
+        rot: [
+          "Erstmal Ordnung schaffen – wir gehen das ruhig & strukturiert an.",
+          "Kein Druck: Schritt für Schritt, heute starten reicht.",
+          "Wir sortieren das Wichtigste zuerst – weniger Chaos sofort spürbar.",
+        ],
+        gelb: [
+          "Schon gut – mit ein paar Schritten wird es deutlich entspannter.",
+          "Fast da: Wir drehen an 2–3 kleinen Stellschrauben.",
+          "Gut im Griff – kleine Optimierungen für mehr Ruhe.",
+        ],
+        gruen: [
+          "Sehr stabil – nur Kleinigkeiten im Blick behalten.",
+          "Top Basis – wir sichern ab, was wirklich wirkt.",
+          "Weiter so: Mini-Checks für langfristige Ruhe.",
+        ],
       };
 
-      const add=(day,type)=>{
-        for(let h=9;h<=18;h++){
-          make(day,h,0,type);
-          if(out.length>=5) break;
-        }
+      const personaAdd = {
+        familie: {
+          rot: " Fokus: Familienalltag einfacher machen.",
+          gelb: " Mehr Ruhe im Alltag ohne Papierkram.",
+          gruen: " Familien-Themen bleiben entspannt.",
+        },
+        angestellt: {
+          rot: " Schnell Ordnung für den Arbeitsalltag.",
+          gelb: " Klarheit, damit sich der Monat besser anfühlt.",
+          gruen: " Stabil weiter – Check zur Bestätigung.",
+        },
+        selbststaendig: {
+          rot: " Schwankungen abfedern, Risiken sortieren.",
+          gelb: " Liquidität & Absicherung sauber justieren.",
+          gruen: " Stabil – Reserve & Absicherung kurz prüfen.",
+        },
       };
 
-      add(today,'today');
-      add(tomorrow,'tomorrow');
-      return out.filter(s=>s.type==='tomorrow' || new Date() < new Date(today.getFullYear(), today.getMonth(), today.getDate(), parseInt(s.label.slice(4,6)))).slice(0,5);
+      const pick = base[color][Math.floor(Math.random() * base[color].length)];
+      return pick + (personaAdd[currentPersona]?.[color] || "");
     };
 
-    const renderResult = ()=>{
-      const {state,pct} = interpret();
-      result.hidden = false;
-      $('.result-title',result).textContent =
-        state==='rot' ? '🔴 Heute wichtig'
-      : state==='gelb'? '🟡 Bald wichtig'
-      : '🟢 Passt – gelassen bleiben';
+    const genSlots = () => {
+      const box = $("#slot-container");
+      if (!box) return;
+      box.innerHTML = "";
 
-      $('.result-note',result).textContent = summary(answers,pct,state);
+      const times = ["09:30", "11:00", "13:30", "15:30", "18:00"];
 
-      const slots = generateSlots();
-      if(slotsWrap){
-        slotsWrap.innerHTML='';
-        slots.forEach(s=>{
-          const div=document.createElement('div');
-          div.className = 'slot '+(s.type==='today'?'slot-today':'slot-tomorrow');
-          div.textContent = s.label;
-          slotsWrap.appendChild(div);
-        });
+      for (let i = 0; i < 5; i++) {
+        const el = document.createElement("div");
+        const d = new Date();
+        d.setDate(d.getDate() + i);
+
+        el.className = "slot " + (i === 0 ? "slot-today" : i === 1 ? "slot-tomorrow" : "");
+        el.textContent =
+          d.toLocaleDateString("de-DE", {
+            weekday: "short",
+            day: "2-digit",
+            month: "2-digit",
+          }) +
+          " · " +
+          times[i] +
+          " Uhr";
+
+        box.appendChild(el);
       }
-
-      result.scrollIntoView({behavior:'smooth'});
     };
 
-    steps.forEach((s,idx)=>{
-      $$('.pill',s).forEach(btn=>{
-        on(btn,'click',()=>{
-          const val = btn.getAttribute('data-value');
-          answers[idx] = val || 'gruen';
-          if(idx < steps.length-1) go(idx+1);
-          else { steps.forEach(x=>x.hidden=true); renderResult(); }
+    const updatePersonaBadge = () => {
+      if (!currentPersona) {
+        personaBadge.hidden = true;
+        return;
+      }
+      const map = {
+        familie: "Familie",
+        angestellt: "Angestellt",
+        selbststaendig: "Selbstständig",
+      };
+      personaBadge.hidden = false;
+      personaBadge.textContent = map[currentPersona] || currentPersona;
+    };
+
+    const showResult = () => {
+      steps.forEach((s) => (s.hidden = true));
+      const color = computeAmpel();
+
+      // Ampel einfärben
+      $$("[data-lamp]").forEach((l) => l.classList.remove("ampel--active"));
+      $(`[data-lamp="${color}"]`).classList.add("ampel--active");
+
+      resultNote.textContent = predictiveText(color);
+      genSlots();
+      updatePersonaBadge();
+
+      resultCard.hidden = false;
+      $("#quiz-result-title")?.focus();
+
+      bar.style.width = "100%";
+      bar.setAttribute("aria-valuenow", "100");
+    };
+
+    // STEP CLICK
+    steps.forEach((stepEl, i) => {
+      stepEl.addEventListener("click", (e) => {
+        const btn = e.target.closest(".answer");
+        if (!btn) return;
+
+        const val = btn.getAttribute("data-value");
+        answers[i] = val;
+
+        soft && (soft.style.display = "none");
+
+        // Letzter Schritt → Ergebnis
+        if (i + 1 === steps.length) return showResult();
+
+        // Weiter
+        steps[i].hidden = true;
+        steps[i + 1].hidden = false;
+        current = i + 1;
+        setProgress();
+      });
+    });
+
+    // Nochmal starten
+    $("#quiz-again")?.addEventListener("click", () => {
+      steps.forEach((s, idx) => (s.hidden = idx !== 0));
+      answers.length = 0;
+      current = 0;
+      setProgress();
+      resultCard.hidden = true;
+      soft && (soft.style.display = "");
+      currentPersona = "";
+      $("#persona-copy").textContent = "";
+      $$(".persona-card").forEach((c) => c.classList.remove("is-active"));
+      personaBadge.hidden = true;
+    });
+
+    setProgress();
+  }
+
+  /* -----------------------------------------------------------------------
+    BOTTOM NAV HIGHLIGHT
+  ----------------------------------------------------------------------- */
+  function setupBottomNav() {
+    const nav = $("#bottom-nav");
+    if (!nav) return;
+
+    const items = [
+      ["#hero", nav.querySelector('a[href="#hero"]')],
+      ["#quiz", nav.querySelector('a[href="#quiz"]')],
+      ["#referral", nav.querySelector('a[href="#referral"]')],
+      ["#termin", nav.querySelector('a[href="#termin"]')],
+    ].filter(([id, link]) => document.querySelector(id) && link);
+
+    const io = new IntersectionObserver(
+      (ents) => {
+        ents.forEach((e) => {
+          if (!e.isIntersecting) return;
+          items.forEach(([, link]) => link.classList.remove("is-active"));
+          const target = items.find(([id]) => "#" + e.target.id === id);
+          target && target[1].classList.add("is-active");
         });
-      });
-    });
+      },
+      { threshold: 0.5 }
+    );
 
-    result.hidden = true;
-    go(0);
+    items.forEach(([id]) => io.observe(document.querySelector(id)));
   }
 
-  /* ---------------------------- Referral Engine ---------------------------- */
-  function initReferral(){
-    const tpl = $('#ref2-templates');
-    const msg = $('#ref2-message');
-    const name = $('#ref2-name');
-    const copy = $('#ref2-copy');
-    const share = $('#ref2-share');
-    const toneBtns = $$('.ref2-tone');
-    const segBtns = $$('.ref2-seg');
-
-    if(!tpl || !msg) return;
-
-    let templates={};
-    try{ templates=JSON.parse(tpl.textContent); }catch{}
-
-    const KEY='hh.ref2.id';
-    const rand=(n=10)=>{
-      const A='abcdefghijklmnopqrstuvwxyz0123456789';
-      try{
-        const u=new Uint8Array(n); crypto.getRandomValues(u);
-        return [...u].map(x=>A[x%A.length]).join('');
-      }catch{ return Array(n).fill().map(()=>A[(Math.random()*A.length)|0]).join(''); }
-    };
-    const getId = ()=> store.getRaw(KEY) || (store.setRaw(KEY,rand()), store.getRaw(KEY));
-
-    const sanitize = v => v ? v.replace(/[^a-z0-9]/gi,'').toLowerCase() : '';
-
-    const buildURL = ()=>{
-      const u = new URL('https://heikohaerter.com');
-      u.searchParams.set('utm_source','weitergeben');
-      u.searchParams.set('utm_medium','share');
-      u.searchParams.set('utm_campaign','check');
-      const rid = getId(); u.searchParams.set('rid',rid);
-      const alias = sanitize((name?.value||'').trim());
-      if(alias) u.searchParams.set('ref',alias+'.'+rid.slice(0,5));
-      return u.toString();
-    };
-
-    const toneMap = {
-      locker:'Locker',
-      kurz:'Kurz',
-      ergebnisorientiert:'Ergebnisorientiert',
-      familie:'Familie',
-      'selbstständig':'Selbstständig'
-    };
-
-    let tone = store.getRaw('hh.ref2.tone') || 'locker';
-    let seg  = store.getRaw('hh.ref2.seg') || 'freund';
-
-    const render = ()=>{
-      const key = toneMap[tone] || 'Locker';
-      const raw = templates[key] || Object.values(templates)[0] || '';
-      msg.textContent = raw.replace(/\{\{URL\}\}/g,buildURL()).replace(/[„”"]/g,'');
-      const t = $('.wa-time'); if(t) t.textContent='jetzt';
-    };
-
-    const setTone = k=>{
-      toneBtns.forEach(b=>b.setAttribute('aria-pressed', String(b.getAttribute('data-tone')===k)));
-      tone=k;
-      store.setRaw('hh.ref2.tone',k);
-      render();
-    };
-
-    const setSeg = k=>{
-      segBtns.forEach(b=>b.setAttribute('aria-pressed', String(b.getAttribute('data-seg')===k)));
-      seg=k;
-      const m={freund:'freunde',familie:'eltern',kollege:'kollegen',selbststaendig:'selbst'};
-      store.setRaw('hh.share.seg',m[k]||'neutral');
-      store.setRaw('hh.ref2.seg',k);
-      render();
-    };
-
-    const ensureURL = t => /\bhttps?:\/\//.test(t) ? t : t+' '+buildURL();
-
-    on(copy,'click',async()=>{
-      try{
-        const t = ensureURL(msg.textContent||'');
-        if(navigator.clipboard) await navigator.clipboard.writeText(t);
-        else{
-          const ta=document.createElement('textarea');
-          ta.value=t; document.body.appendChild(ta); ta.select();
-          document.execCommand('copy'); ta.remove();
-        }
-      }catch{}
-    });
-
-    on(share,'click',()=>{
-      const t = ensureURL(msg.textContent||'');
-      window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank','noopener');
-    });
-
-    toneBtns.forEach(b=>on(b,'click',()=>setTone(b.getAttribute('data-tone'))));
-    segBtns.forEach(b=>on(b,'click',()=>setSeg(b.getAttribute('data-seg'))));
-    on(name,'input',render,{passive:true});
-
-    setTone(tone);
-    setSeg(seg);
-    render();
+  /* -----------------------------------------------------------------------
+    YEAR AUTO
+  ----------------------------------------------------------------------- */
+  function setupYear() {
+    $$("[data-year]").forEach((e) => (e.textContent = new Date().getFullYear()));
   }
 
-  /* ---------------------------- Bottom Nav ---------------------------- */
-  function initBottomNav(){
-    const nav = $('.bottom-nav'); if(!nav) return;
-    const items = $$('a.nav-item',nav);
-    if(!items.length) return;
-
-    const map = items.map(a=>{
-      const href=a.getAttribute('href')||'';
-      if(!href.startsWith('#')) return null;
-      const sec=document.getElementById(href.slice(1));
-      return sec?{a,sec}:null;
-    }).filter(Boolean);
-
-    const update=()=>{
-      let best=-1, idx=-1;
-      map.forEach((m,i)=>{
-        const r=m.sec.getBoundingClientRect();
-        const score=Math.min(innerHeight, Math.max(0,innerHeight - Math.abs(r.top-innerHeight*.35)));
-        if(score>best){best=score; idx=i;}
-      });
-      map.forEach((m,i)=>m.a.classList.toggle('is-active',i===idx));
-    };
-
-    on(window,'scroll',update,{passive:true});
-    on(window,'resize',update);
-    update();
-  }
-
-  /* ---------------------------- Boot ---------------------------- */
-  function init(){
-    document.documentElement.classList.remove('no-js');
-    $$('#yearNow,[data-year]').forEach(el=>el.textContent=String(new Date().getFullYear()));
-
-    initMotion();
-    initDecisionAnchor();
-    initCriticalHighlight();
-    initAmpel();
-    initPersona();
-    initLiveFeed();
-    initProofBars();
-    initQuiz();
-    initReferral();
-    initBottomNav();
-    initStickyCTA();
-  }
-
-  (document.readyState==='loading')
-    ? on(document,'DOMContentLoaded',init,{once:true})
-    : init();
-
+  /* -----------------------------------------------------------------------
+    BOOTSTRAP
+  ----------------------------------------------------------------------- */
+  document.addEventListener("DOMContentLoaded", () => {
+    setupLoader();
+    setupSmoothScroll();
+    setupReveal();
+    setupDecisionAnchor();
+    setupStickyCTA();
+    setupLiveFeeds();
+    setupProofBars();
+    setupPersonas();
+    setupQuiz();
+    setupBottomNav();
+    setupYear();
+  });
 })();
