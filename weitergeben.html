@@ -25,7 +25,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="/styles.css" />
 
-  <!-- Structured Data -->
+  <!-- FAQ Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -36,7 +36,7 @@
         "name": "Ist das Werbung?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nein. Die Ampel ist anonym, ohne Daten und ohne Verkauf. Das Weitergeben entlastet Menschen, die viel im Kopf haben."
+          "text": "Nein. Die Ampel ist anonym, ohne Daten und ohne Verkauf. Weitergeben bedeutet: jemanden entlasten, nicht jemanden werben."
         }
       },
       {
@@ -44,7 +44,7 @@
         "name": "Muss ich etwas erklären?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nein. Der Text erklärt alles von selbst. Wenn es für jemanden nichts ist, kann er es einfach ignorieren."
+          "text": "Nein. Der Text erklärt alles von selbst. Wenn es nichts für jemanden ist, ignoriert er es einfach."
         }
       }
     ]
@@ -70,9 +70,9 @@
 <main id="main">
 
 <!-- ============================================================
-     HERO
+     HERO – WHY SHARE?
 ============================================================ -->
-<section class="section fade-up">
+<section class="section fade-up share-hero">
   <div class="container stack center">
 
     <h1>Wenn dir die Ampel Ruhe gegeben hat –<br>kannst du sie weitergeben.</h1>
@@ -84,7 +84,7 @@
 
     <p class="microtrust">Anonym · Kein Verkauf · Kein Druck</p>
 
-    <a href="#generator" class="btn btn-primary" style="margin-top:22px;">
+    <a href="#generator" class="btn btn-primary hero-btn">
       Weitergabe-Text auswählen
     </a>
   </div>
@@ -98,17 +98,17 @@
 
     <h2>Wie es funktioniert</h2>
 
-    <div class="personas-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px,1fr));">
+    <div class="personas-grid narrow">
       <div class="persona-card center">
-        <strong>1.</strong><br>
+        <strong>1.</strong>
         Wähle einen Text aus, der zu deiner Person passt.
       </div>
       <div class="persona-card center">
-        <strong>2.</strong><br>
+        <strong>2.</strong>
         Dein persönlicher Link wird automatisch eingefügt.
       </div>
       <div class="persona-card center">
-        <strong>3.</strong><br>
+        <strong>3.</strong>
         Schick ihn jemandem, der gerade viel im Kopf hat.
       </div>
     </div>
@@ -121,9 +121,9 @@
 </section>
 
 <!-- ============================================================
-     WHY ITS NOT WEIRD
+     WHY IT'S NOT WEIRD
 ============================================================ -->
-<section class="section fade-up">
+<section id="why-share" class="section fade-up">
   <div class="container stack center">
 
     <h2>Weitergeben ≠ Verkaufen.</h2>
@@ -145,7 +145,8 @@
     <h2>Wähle deine Weitergabe-Nachricht</h2>
 
     <label for="categorySelect"><strong>Für wen ist die Nachricht?</strong></label>
-    <select id="categorySelect" class="btn" style="padding:12px;">
+
+    <select id="categorySelect">
       <option value="neutral">Neutral</option>
       <option value="eltern">Eltern</option>
       <option value="paare">Paare</option>
@@ -154,16 +155,11 @@
       <option value="skeptiker">Skeptiker</option>
     </select>
 
-    <textarea id="referralOutput"
-              rows="6"
-              class="persona-card"
-              style="width:100%; font-size:1rem;"
-              spellcheck="false"
-              autocomplete="off"
-              autocorrect="off"
-              autocapitalize="off"></textarea>
+    <textarea id="referralOutput" rows="6"></textarea>
 
-    <button id="copyReferral" class="btn btn-primary">📋 Text kopieren</button>
+    <button id="copyReferral" class="btn btn-primary">
+      📋 Text kopieren
+    </button>
 
     <p class="microtrust" id="personalLinkInfo"></p>
 
@@ -173,10 +169,11 @@
 <!-- ============================================================
      DANKEMOMENT
 ============================================================ -->
-<section class="section fade-up">
+<section class="section fade-up thanks-block">
   <div class="container stack center">
 
     <h2>Ein kleiner Danke-Moment für dich</h2>
+
     <p class="lead">
       Wenn durch dich jemand Ruhe findet und wir später sprechen,<br>
       schenke ich dir gern einen kleinen Danke-Moment.<br>
@@ -193,10 +190,11 @@
 </section>
 
 <!-- ============================================================
-     SOCIAL PROOF
+     SOCIAL PROOF (MICRO)
 ============================================================ -->
 <section class="section fade-up">
   <div class="container stack">
+
     <h2>Was andere sagen</h2>
 
     <div class="proof-list">
@@ -204,13 +202,14 @@
       <p class="proof">„Meine Schwester meinte: ‚Das hat mir gerade gefehlt.‘“</p>
       <p class="proof">„Mein Kollege sagte: ‚Das war das erste Mal, dass Finanzen leicht waren.‘“</p>
     </div>
+
   </div>
 </section>
 
 <!-- ============================================================
-     FAQ
+     FAQ BLOCK
 ============================================================ -->
-<section class="section fade-up">
+<section class="section fade-up faq-block">
   <div class="container stack">
 
     <h2>Häufige Fragen</h2>
@@ -236,7 +235,7 @@
 <!-- ============================================================
      FINAL CTA
 ============================================================ -->
-<section class="section fade-up">
+<section class="section fade-up final-share-cta">
   <div class="container center stack">
 
     <h2>Wen möchtest du heute entlasten?</h2>
@@ -261,7 +260,7 @@
   </div>
 </footer>
 
-<!-- DEFERRED SCRIPTS -->
+<!-- Scripts -->
 <script defer src="/app.js"></script>
 <script defer src="/referral.js"></script>
 
