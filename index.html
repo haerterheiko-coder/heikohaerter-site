@@ -54,25 +54,127 @@
   {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
   </script>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/public/styles.css" />
+  <style>
+    :root{
+      --bg:#05070E; --bg-soft:#0A0F1E;
+      --surface:rgba(255,255,255,.045); --surface-soft:rgba(255,255,255,.06);
+      --text:#F7F8FC; --muted:#A8B1C5; --muted-soft:#8F97AA;
+      --gold:#C8A44B; --gold-soft:#E9D394;
+      --focus:#90C2FF;
+      --radius-xl:34px; --radius-lg:24px; --radius-md:18px; --radius-sm:12px;
+      --elev-1:0 18px 40px rgba(0,0,0,.35); --elev-2:0 30px 80px rgba(0,0,0,.55);
+      --ease:cubic-bezier(.25,.46,.25,1);
+      --bg-glow-1:radial-gradient(circle at 15% -10%,rgba(200,164,75,.22),transparent 55%);
+      --bg-glow-2:radial-gradient(circle at 85% 10%,rgba(120,150,255,.18),transparent 60%);
+    }
+    html,body{height:auto;overflow-x:hidden}
+    *,*::before,*::after{box-sizing:border-box}
+
+    html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    body{
+      margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+      background:var(--bg-glow-1),var(--bg-glow-2),linear-gradient(180deg,#04050A,#02040A 60%);
+      color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.4;
+      hyphens:auto;
+    }
+    h1,h2,h3,.chip,.btn{word-break:normal;overflow-wrap:break-word}
+    a{color:inherit;text-decoration:none}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
+    img,picture,svg,video{display:block;max-width:100%;height:auto}
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+    }
+
+    /* Layout */
+    .section{padding:clamp(32px,6vw,72px) 0}
+    .container{max-width:1120px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
+    .grid{display:grid;gap:clamp(.6rem,2.2vw,1.2rem)}
+    .stack{display:flex;flex-direction:column;gap:clamp(.45rem,1.8vw,.9rem)}
+    .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+
+    /* Type */
+    h1,h2,h3{margin:0 0 .9rem;font-weight:700;letter-spacing:-.01em}
+    h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.12}
+    h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+    h3{font-size:clamp(1.12rem,2vw,1.28rem)}
+    p{margin:0 0 .6rem;font-size:clamp(1rem,1.2vw,1.08rem);color:var(--muted)}
+    .hero-micro{font-size:clamp(.95rem,1.1vw,1rem);color:var(--muted-soft)}
+    .system-tagline{margin-top:.6rem;font-size:.98rem;color:var(--muted-soft);max-width:620px}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:clamp(.9rem,1.2vw,1rem) clamp(1.2rem,2vw,1.7rem);
+         border-radius:999px;border:1px solid transparent;cursor:pointer;min-height:48px;font-weight:800;
+         transition:transform .18s var(--ease),box-shadow .18s var(--ease);background:rgba(255,255,255,.06);color:var(--text)}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 18px 40px rgba(200,164,75,.40)}
+    .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+    .btn.small{min-height:44px;padding:.6rem 1rem;font-weight:700}
+    @media (max-width:767px){ .btn,.btn-primary,.btn-ghost{width:100%} }
+
+    /* Cards */
+    .card,.premium-card,.share{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:var(--elev-1)}
+    .card{padding:1rem 1.1rem}
+    .premium-card{padding:1.05rem 1.15rem}
+    .story-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.95rem 1.05rem}
+    .safety-card{border-left:4px solid var(--gold)}
+    .tg-card{margin-top:.8rem}
+    .story-grid{display:grid;gap:1rem;margin:1.1rem 0;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+    .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+
+    /* Chips */
+    .chip{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:999px;padding:.4rem .7rem;font-size:.92rem;color:var(--muted-soft)}
+    .bar{display:flex;flex-wrap:wrap;gap:.6rem}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
+    .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:.85rem 0}
+    .brand{display:flex;flex-direction:column;gap:.18rem}
+    .brand-top{display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.02rem}
+    .brand-dot{width:.9rem;height:.9rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold-soft),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
+
+    /* Hero */
+    .hero{padding-top:clamp(28px,4vw,64px);padding-bottom:clamp(16px,2.5vw,28px)}
+    .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
+    @media (min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center} }
+
+    /* Sticky CTA */
+    .sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
+    .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
+    @media (max-width:1023px){ .sticky-cta{display:flex} }
+    @supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
+
+    /* FX */
+    .fade-up{opacity:0;transform:translateY(18px)}
+    .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+
+    /* Result Farben */
+    .result-red{background:#2b1111;border:1px solid #c85151}
+    .result-yellow{background:#2b2b11;border:1px solid #d6c45a}
+    .result-green{background:#0f1b12;border:1px solid #55b76b}
+
+    /* Visually hidden (robust) */
+    .visually-hidden{
+      position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);border:0;white-space:nowrap
+    }
+  </style>
+
   <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
   <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
 
-  <header>
+  <header role="banner">
     <div class="container header-bar">
       <a href="#hero" class="brand" aria-label="Startseite">
         <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
         <span class="hero-micro" style="letter-spacing:.08em;text-transform:uppercase">Persönliche Finanzbegleitung</span>
       </a>
-      <button class="btn" id="dfBtn" aria-pressed="false" title="Nur das Wichtigste anzeigen">🔍 Kurzmodus</button>
+      <button class="btn" id="dfBtn" type="button" aria-pressed="false" title="Nur das Wichtigste anzeigen">🔍 Kurzmodus</button>
     </div>
   </header>
 
-  <main id="main">
-    <!-- ===== SLIDE 1: HERO ===== -->
+  <main id="main" role="main">
+    <!-- HERO -->
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="stack">
@@ -94,16 +196,16 @@
             <p class="hero-micro" style="margin:0"><strong>80 % fühlen sich nach 2 Minuten ruhiger.</strong></p>
           </div>
 
-          <div class="bar">
-            <span class="chip">⭐ <strong>4,9</strong> | 250+ Menschen</span>
-            <span class="chip">Eltern · Paare · Selbstständige</span>
-            <span class="chip">Kein Verkauf · 100 % anonym</span>
+          <div class="bar" role="list">
+            <span class="chip" role="listitem">⭐ <strong>4,9</strong> | 250+ Menschen</span>
+            <span class="chip" role="listitem">Eltern · Paare · Selbstständige</span>
+            <span class="chip" role="listitem">Kein Verkauf · 100 % anonym</span>
           </div>
 
           <div class="stack">
-            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">⚡ „2-Minuten-Check starten“</a>
-            <button class="btn btn-ghost" id="previewToggle" type="button">Ergebnis-Vorschau ansehen</button>
-            <small class="hero-micro">Anonym · keine Daten · kein Verkauf</small>
+            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero" aria-describedby="hero-desc">⚡ „2-Minuten-Check starten“</a>
+            <button class="btn btn-ghost" id="previewToggle" type="button" aria-controls="heroPreview" aria-expanded="false">Ergebnis-Vorschau ansehen</button>
+            <small id="hero-desc" class="hero-micro">Anonym · keine Daten · kein Verkauf</small>
           </div>
 
           <div id="heroPreview" class="grid auto-grid" style="display:none">
@@ -133,7 +235,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 2: ZIELGRUPPEN + SZENEN ===== -->
+    <!-- ZIELGRUPPEN -->
     <section id="zielgruppen-szenen" class="section fade-up" aria-labelledby="tg-h">
       <div class="container stack">
         <div class="premium-card" aria-labelledby="tg-h">
@@ -164,7 +266,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 3: PROZESS ===== -->
+    <!-- PROZESS -->
     <section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
       <div class="container">
         <h2 id="prozess-h">So läuft der Check</h2>
@@ -181,7 +283,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 4: SICHERHEIT ===== -->
+    <!-- SICHERHEIT -->
     <section id="sicherheit" class="section fade-up" aria-labelledby="safe-h">
       <div class="container">
         <h2 id="safe-h">Was NICHT passiert</h2>
@@ -196,7 +298,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 5: VORHER–NACHHER ===== -->
+    <!-- VORHER/NACHHER -->
     <section id="before-after" class="section fade-up" aria-labelledby="ba-h">
       <div class="container">
         <h2 id="ba-h">Vorher – Nachher</h2>
@@ -224,13 +326,13 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 6: ETHOS + CTA ===== -->
+    <!-- ETHOS & FINAL CTA -->
     <section id="ethos-social" class="section fade-up" aria-labelledby="ethos-h">
       <div class="container stack">
         <h2 id="ethos-h">Wer ich bin</h2>
         <div class="premium-card">
           <p class="hero-micro" style="margin:0">
-            „Ich bin Heiko. Ich habe diese Ampel gebaut, weil ich selbst diese 2-Stunden-Beratungen gehasst habe Voller Tarife, Jargon und Verkaufsdruck.
+            „Ich bin Heiko. Ich habe diese Ampel gebaut, weil ich selbst diese 2-Stunden-Beratungen gehasst habe. Voller Tarife, Jargon und Verkaufsdruck.
             Heute dauert Orientierung 2 Minuten – ruhig, verständlich und ohne Verkauf.“
           </p>
         </div>
@@ -263,7 +365,7 @@
       </div>
     </section>
 
-    <!-- ===== 2-MINUTEN-CHECK ===== -->
+    <!-- AMPEL-CHECK -->
     <section id="ampel-check" class="section fade-up">
       <div class="container" style="max-width:720px">
         <div class="stack" id="check-start">
@@ -273,7 +375,7 @@
           <small class="hero-micro" style="opacity:.8">Wenig Zeit? Der <em>Kurzmodus</em> taucht später nochmal auf.</small>
         </div>
 
-        <div id="check-steps" style="display:none;margin-top:1.2rem">
+        <div id="check-steps" style="display:none;margin-top:1.2rem" role="group" aria-label="Ampel Schritte">
           <div class="premium-card" style="margin-bottom:.8rem">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
               <strong id="stepLabel">Schritt 1 von 3</strong>
@@ -287,32 +389,32 @@
           <div class="premium-card step" data-step="1" style="display:none">
             <h3>1 · Wenn du 6 Monate ausfallen würdest – wie sicher wäre euer Einkommen?</h3>
             <div class="stack">
-              <button class="btn small" data-value="1">Wir hätten ein echtes Problem</button>
-              <button class="btn small" data-value="2">Wir würden klarkommen, aber es wäre eng</button>
-              <button class="btn small" data-value="3">Wir wären stabil abgesichert</button>
+              <button class="btn small" type="button" data-value="1">Wir hätten ein echtes Problem</button>
+              <button class="btn small" type="button" data-value="2">Wir würden klarkommen, aber es wäre eng</button>
+              <button class="btn small" type="button" data-value="3">Wir wären stabil abgesichert</button>
             </div>
           </div>
 
           <div class="premium-card step" data-step="2" style="display:none">
             <h3>2 · Wie gut findest du wichtige Unterlagen, wenn du sie brauchst?</h3>
             <div class="stack">
-              <button class="btn small" data-value="1">Ich suche lange / finde nichts</button>
-              <button class="btn small" data-value="2">Finde das Meiste direkt</button>
-              <button class="btn small" data-value="3">Finde alles, was ich brauche</button>
+              <button class="btn small" type="button" data-value="1">Ich suche lange / finde nichts</button>
+              <button class="btn small" type="button" data-value="2">Finde das Meiste direkt</button>
+              <button class="btn small" type="button" data-value="3">Finde alles, was ich brauche</button>
             </div>
           </div>
 
           <div class="premium-card step" data-step="3" style="display:none">
             <h3>3 · „Wie wohl fühlst du dich beim Thema Zukunft &amp; Alter?“</h3>
             <div class="stack">
-              <button class="btn small" data-value="1">Gar nicht / unsicher</button>
-              <button class="btn small" data-value="2">Teilweise – nicht sicher</button>
-              <button class="btn small" data-value="3">Fühlt sich gut an</button>
+              <button class="btn small" type="button" data-value="1">Gar nicht / unsicher</button>
+              <button class="btn small" type="button" data-value="2">Teilweise – nicht sicher</button>
+              <button class="btn small" type="button" data-value="3">Fühlt sich gut an</button>
             </div>
           </div>
         </div>
 
-        <div id="check-result" style="display:none;margin-top:1.4rem"></div>
+        <div id="check-result" style="display:none;margin-top:1.4rem" aria-live="polite"></div>
 
         <div class="premium-card" style="margin-top:1.2rem">
           <h3 style="margin:.1rem 0 .45rem;font-size:1.02rem;">Wenig Zeit?</h3>
@@ -322,7 +424,7 @@
       </div>
     </section>
 
-    <!-- ===== SHARE ===== -->
+    <!-- SHARE -->
     <section class="section fade-up" id="share" aria-labelledby="share-title">
       <div class="container">
         <h2 id="share-title">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
@@ -332,12 +434,12 @@
         </div>
 
         <div class="bar" style="margin:.4rem 0 0">
-          <button class="btn seg-btn" data-seg="eltern">Eltern</button>
-          <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
-          <button class="btn seg-btn" data-seg="freunde">Freunde</button>
-          <button class="btn seg-btn" data-seg="selbst">Selbstständige</button>
-          <button class="btn seg-btn" data-seg="partner">Partner</button>
-          <button class="btn seg-btn" data-seg="neutral">Für alle</button>
+          <button class="btn seg-btn" type="button" data-seg="eltern">Eltern</button>
+          <button class="btn seg-btn" type="button" data-seg="kollegen">Kolleg:innen</button>
+          <button class="btn seg-btn" type="button" data-seg="freunde">Freunde</button>
+          <button class="btn seg-btn" type="button" data-seg="selbst">Selbstständige</button>
+          <button class="btn seg-btn" type="button" data-seg="partner">Partner</button>
+          <button class="btn seg-btn" type="button" data-seg="neutral">Für alle</button>
         </div>
 
         <div class="share stack" id="shareBox" style="margin-top:1rem">
@@ -391,7 +493,7 @@
           </p>
 
           <div class="bar">
-            <button class="btn btn-ghost" id="copyBtn">📋 Text kopieren</button>
+            <button class="btn btn-ghost" id="copyBtn" type="button">📋 Text kopieren</button>
             <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener">💬 WhatsApp</a>
             <button class="btn btn-ghost" id="nativeShare" type="button">📲 System-Teilen</button>
             <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer%20Blick&body=">✉️ Mail</a>
@@ -417,7 +519,243 @@
   <!-- Whisper CTA -->
   <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand weiß morgen, was ansteht.</div>
 
-  <!-- App -->
-  <script defer src="/public/app.js"></script>
+  <script>
+    document.documentElement.classList.remove('no-js');
+    document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
+
+    /* Fade-in */
+    (function(){
+      const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els=[...document.querySelectorAll('.fade-up')];
+      if(pref || !('IntersectionObserver' in window)){els.forEach(el=>el.classList.add('visible'));return;}
+      const io=new IntersectionObserver(ents=>ents.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
+      els.forEach(el=>io.observe(el));
+    })();
+
+    /* Sticky CTA – früher triggern (scrollY > 200) + Fallback, nur Mobile/Tablet */
+    (function(){
+      const el=document.getElementById('stickyCTA');
+      const hero=document.querySelector('.hero');
+      if(!el||!hero) return;
+      if(innerWidth>=1024) return;
+      const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0'; el.setAttribute('aria-hidden', String(!v));};
+      if('IntersectionObserver'in window){
+        const io=new IntersectionObserver(([e])=>show(!e.isIntersecting),{threshold:.35});
+        io.observe(hero);
+        addEventListener('scroll',()=>{ if(scrollY>200) show(true); },{passive:true});
+      }else{
+        addEventListener('scroll',()=>show(scrollY>200),{passive:true});
+      }
+    })();
+
+    /* Kurzmodus */
+    (function(){
+      const btn=document.getElementById('dfBtn');
+      if(!btn) return;
+      const keep=new Set(['hero','ethos-social','stickyCTA','share','ampel-check']);
+      const nodes=[...document.querySelectorAll('main > section')].filter(s=>!keep.has(s.id));
+      const set=(on)=>{
+        btn.setAttribute('aria-pressed',on?'true':'false');
+        btn.textContent=on?'✅ Kurzmodus aktiv':'🔍 Kurzmodus';
+        nodes.forEach(n=>n.style.display=on?'none':'');
+        if(on) window.scrollTo({top:0,behavior:'smooth'});
+      };
+      btn.addEventListener('click',()=>set(btn.getAttribute('aria-pressed')!=='true'));
+      window.setKurzmodus=set;
+    })();
+
+    /* Ergebnis-Vorschau Toggle */
+    (function(){
+      const btn=document.getElementById('previewToggle');
+      const box=document.getElementById('heroPreview');
+      if(!btn||!box) return;
+      btn.addEventListener('click',()=>{
+        const open = box.style.display==='none';
+        box.style.display = open ? 'grid' : 'none';
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    })();
+
+    /* Share composer */
+    (function(){
+      const name = document.getElementById('refName');
+      const area = document.getElementById('refText');
+      const wa   = document.getElementById('waShare');
+      const mail = document.getElementById('mailShare');
+      const copy = document.getElementById('copyBtn');
+      const preview = document.getElementById('waPreviewText');
+
+      const KEY_REFID='hh_ref_rid_v1';
+      function randomId(len=10){
+        const a='abcdefghijklmnopqrstuvwxyz0123456789';
+        const u=new Uint8Array(len);
+        if(window.crypto && crypto.getRandomValues){ crypto.getRandomValues(u); }
+        else { for(let i=0;i<len;i++) u[i]=Math.random()*256; }
+        return Array.from(u,x=>a[x%a.length]).join('');
+      }
+      function getRefId(){
+        try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }
+        catch(_){ return randomId(); }
+      }
+      function sanitize(n){ return n ? n.replace(/[^a-z0-9]/gi,'').toLowerCase() : ''; }
+
+      function buildURL(){
+        const base=new URL('https://heikohaerter.com');
+        base.searchParams.set('utm_source','weitergeben');
+        base.searchParams.set('utm_medium','share');
+        base.searchParams.set('utm_campaign','check');
+        const rid=getRefId(); base.searchParams.set('rid', rid);
+        const alias=sanitize((name?.value||'').trim());
+        if(alias) base.searchParams.set('ref', alias+'.'+rid.slice(0,5));
+        return base.toString();
+      }
+      function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
+      function detectSeg(){
+        const raw=(name?.value||'').toLowerCase();
+        if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
+        if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
+        if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
+        if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
+        if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
+        return 'neutral';
+      }
+      function pick(seg){ const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; const i=Math.floor(Math.random()*pool.length); return pool[i]; }
+      function ensureURL(text){ return /\bhttps?:\/\/\S+/i.test(text) ? text : (text.trim()+' '+buildURL()); }
+      function setTextFrom(seg){ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); }
+      function plain(){ return (area.value||'').replace(/\n+/g,' ').trim(); }
+      function updateLinks(){
+        const t=ensureURL(plain());
+        wa.href='https://wa.me/?text='+encodeURIComponent(t);
+        mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t);
+        preview.textContent = t.length<=190 ? t : t.substring(0,t.lastIndexOf(' ',190))+'…';
+      }
+
+      if(area && !area.value){ setTextFrom('neutral'); } updateLinks();
+
+      document.querySelectorAll('[data-seg]').forEach(b=> b.addEventListener('click', ()=> setTextFrom(b.getAttribute('data-seg')) ));
+      name?.addEventListener('input', ()=> setTextFrom() );
+      area?.addEventListener('input', updateLinks );
+
+      document.getElementById('readyMsg')?.addEventListener('click', ()=>{
+        setTextFrom();
+        const toast=document.createElement('div');
+        toast.textContent='Fertiger Text eingefügt ✔️';
+        toast.className='whisper';
+        toast.style.cssText=document.getElementById('whisper').style.cssText;
+        document.body.appendChild(toast);
+        setTimeout(()=>{ toast.style.opacity='1'; toast.style.transform='translateY(0)'; },10);
+        setTimeout(()=>toast.remove(),2000);
+      });
+      document.getElementById('magicLine')?.addEventListener('click', ()=>{
+        const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
+        const cur=(area.value||'').trim();
+        area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
+        updateLinks();
+      });
+      document.getElementById('addPersonal')?.addEventListener('click', ()=>{
+        const alias=(name?.value||'').trim()||'Hey';
+        area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
+        updateLinks();
+      });
+      document.getElementById('copyBtn')?.addEventListener('click', async ()=>{
+        try{ await navigator.clipboard.writeText(ensureURL(area.value)); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
+      });
+      document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
+        const t=plain(); const url=buildURL();
+        if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); }catch(_){} }
+      });
+    })();
+
+    /* Ampel-Check */
+    (function() {
+      let step=1, score=0;
+      const max=3;
+      const startBtn=document.getElementById('startCheckBtn');
+      const stepsWrap=document.getElementById('check-steps');
+      const resultBox=document.getElementById('check-result');
+      const stepLabel=document.getElementById('stepLabel');
+      const progress=document.getElementById('progressBar');
+      const stepHint=document.getElementById('stepHint');
+
+      function updateHead(){
+        stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`;
+        const pct = max===1 ? 100 : ((Math.min(step-1,max-1))/(max-1))*100;
+        progress.style.width = pct+'%';
+        stepHint.textContent= step===1?'Kurzer Eindruck reicht.': step===2?'Fast geschafft.':'Letzter Klick.';
+      }
+      function showStep(n){
+        document.querySelectorAll('#check-steps .step').forEach(s=>s.style.display='none');
+        const t=document.querySelector(`#check-steps .step[data-step="${n}"]`);
+        if(t){ t.style.display='block'; t.scrollIntoView({behavior:'smooth',block:'start'}); }
+        updateHead();
+      }
+
+      function renderCTA(color){
+        const wa='https://wa.me/4917660408380?text=';
+        if(color==='red') return `<div class="stack" style="text-align:center">
+          <a href="${wa}Kurz%2010%20Minuten%20sprechen" class="btn btn-primary">💬 Kurz sprechen – 10 Minuten</a>
+          <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">🛟 Frage senden</a></div>`;
+        if(color==='yellow') return `<div class="stack" style="text-align:center">
+          <a href="${wa}Als%20N%C3%A4chstes%20angehen" class="btn btn-primary">🧭 Als Nächstes angehen</a>
+          <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">💬 Frage senden</a></div>`;
+        return `<div class="stack" style="text-align:center">
+          <a href="${wa}Smarter%20machen%3F" class="btn btn-primary">✨ Smarter machen?</a>
+          <a href="#share" class="btn btn-ghost">🔗 Weitergeben</a></div>`;
+      }
+      function finish(){
+        stepsWrap.style.display='none';
+        resultBox.style.display='block';
+        let html='';
+        if(score<=4){
+          html=`<div class="result-card result-red">
+            <h3>🔴 Heute wichtig</h3>
+            <p>Mindestens ein Bereich braucht heute deine Aufmerksamkeit.</p>
+            ${renderCTA('red')}
+          </div>`;
+        } else if(score<=7){
+          html=`<div class="result-card result-yellow">
+            <h3>🟡 Bald wichtig</h3>
+            <p>Ein paar Dinge stehen bald an.</p>
+            ${renderCTA('yellow')}
+          </div>`;
+        } else {
+          html=`<div class="result-card result-green">
+            <h3>🟢 Passt für heute</h3>
+            <p>Für heute wirkt alles entspannt.</p>
+            ${renderCTA('green')}
+          </div>`;
+        }
+        html+=`<p class="hero-micro" style="margin-top:.8rem;opacity:.85">Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>`;
+        resultBox.innerHTML=html;
+        resultBox.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+      function start(){
+        document.getElementById('check-start').style.display='none';
+        stepsWrap.style.display='block';
+        resultBox.style.display='none';
+        step=1; score=0; showStep(step);
+      }
+
+      document.getElementById('startCheckHero')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
+      document.getElementById('ctaFinal')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
+      startBtn?.addEventListener('click',start);
+
+      document.getElementById('startShort')?.addEventListener('click',e=>{
+        e.preventDefault(); start();
+        setTimeout(()=>{ score+=2; step=2; showStep(step); },150);
+        setTimeout(()=>{ score+=2; step=3; showStep(step); },350);
+      });
+
+      document.querySelectorAll('#check-steps .step').forEach(s=>{
+        s.querySelectorAll('button').forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            score += Number(btn.getAttribute('data-value'))||0;
+            step++;
+            if(step>3) finish(); else showStep(step);
+          });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
