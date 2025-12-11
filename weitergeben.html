@@ -52,7 +52,6 @@
 </script>
 
 <style>
-/* ===== TOKENS / GLOBAL ===== */
 :root{
   --bg:#05070E;--bg-soft:#0A0F1E;
   --glow1:radial-gradient(circle at 15% -10%,rgba(200,164,75,.22),transparent 55%);
@@ -62,12 +61,11 @@
   --gold:#C8A44B;--gold-soft:#E9D394;
   --focus:#90C2FF;--ease:cubic-bezier(.25,.46,.25,1);
   --elev-1:0 18px 40px rgba(0,0,0,.35);--elev-2:0 30px 80px rgba(0,0,0,.55);
-
   --container:1120px;--gutter:clamp(16px,4vw,32px);
   --fs-h1:clamp(2rem,3.2vw,3.1rem);
   --fs-h2:clamp(1.6rem,2.4vw,2.2rem);
   --fs-h3:clamp(1.05rem,1.6vw,1.25rem);
-  --fs-body:clamp(1rem,1.1vw,1.08rem);--fs-micro:.95rem;
+  --fs-body:clamp(1rem,1.1vw,1.08rem);--fs-micro:.95rem);
 }
 *,*::before,*::after{box-sizing:border-box}
 html,body{width:100%;overflow-x:hidden}
@@ -81,27 +79,26 @@ img,picture,svg,video{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
 @media(prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
 .visually-hidden{position:absolute!important;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;width:1px;overflow:hidden;white-space:nowrap}
 
-/* ===== LAYOUT ===== */
+/* layout */
 .section{padding-block:56px}
 .wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
 .grid{display:grid;gap:1rem}
 .stack{display:flex;flex-direction:column;gap:clamp(.6rem,1.8vw,1rem)}
 .inline{display:flex;flex-wrap:wrap;gap:.6rem}
 
-/* ===== TYPE ===== */
-h1,h2,h3{margin:0 0 .9rem;font-weight:700;letter-spacing:-.01em;word-break:normal}
+/* type */
+h1,h2,h3{margin:0 0 .9rem;font-weight:700;letter-spacing:-.01em}
 h1{font-size:var(--fs-h1);line-height:1.12}
-h2{font-size:var(--fs-h2)}
-h3{font-size:var(--fs-h3)}
+h2{font-size:var(--fs-h2)} h3{font-size:var(--fs-h3)}
 p,li{font-size:var(--fs-body);color:var(--muted)}
 .hero-micro{font-size:var(--fs-micro);color:var(--muted-soft)}
 hr.divider{border:0;height:18px;margin:3rem 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent)}
 
-/* ===== HEADER ===== */
+/* header */
 header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
 .header-inner{max-width:var(--container);margin:0 auto;padding:.85rem var(--gutter);display:flex;align-items:center;justify-content:space-between;min-height:60px}
 .brand{display:flex;flex-direction:column;gap:.18rem}
@@ -109,44 +106,44 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 .brand-dot{width:.9rem;height:.9rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold-soft),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
 .brand-sub{font-size:.72rem;letter-spacing:.18em;color:var(--muted-soft);text-transform:uppercase}
 
-/* ===== BUTTONS ===== */
+/* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.95rem 1.5rem;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease);background:rgba(255,255,255,.06);color:var(--text);white-space:normal}
 .btn:hover{transform:translateY(-1px)}
 .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
 .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
 .btn.small{padding:.6rem 1rem;min-height:44px}
 @media (max-width:767.98px){ .btn,.btn-primary,.btn-ghost{width:100%} }
-@keyframes pulse{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(0) scale(1.02)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
 .pulse{animation:pulse 1600ms ease-in-out 1}
 
-/* ===== CARDS ===== */
+/* cards */
 .premium-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1rem 1.1rem;box-shadow:var(--elev-1)}
 .story-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.9rem 1rem}
 .zero-risk{border:1px dashed rgba(233,211,148,.45);background:rgba(233,211,148,.06)}
 .quote{margin:.7rem 0 0;padding:.6rem .75rem;border-left:4px solid var(--gold);background:rgba(255,255,255,.05);border-radius:10px;font-style:italic;color:var(--text)}
 
-/* ===== HERO ===== */
+/* hero */
 .hero{padding-top:5.2rem;padding-bottom:2.4rem}
 .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
 @media (min-width:1000px){ .hero-grid{grid-template-columns:1.2fr .8fr;align-items:center} }
 .hero-media picture{border-radius:24px;overflow:hidden}
 .hero-media img{width:100%;border-radius:24px;box-shadow:var(--elev-2);object-fit:cover;object-position:center top}
 
-/* ===== REWARD MINI STRIP ===== */
+/* reward mini strip */
 .reward-hero{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:.6rem;border-radius:18px;box-shadow:var(--elev-1);margin-top:.6rem}
 .reward-hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.4rem}
 .rh-item{text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);padding:.45rem .35rem;border-radius:12px;font-size:.85rem}
 .rh-item span{display:block;font-weight:900;color:#111;background:linear-gradient(135deg,var(--gold),var(--gold-soft));border-radius:10px;padding:.15rem .4rem;margin:0 auto .25rem;width:fit-content;font-size:.78rem}
 .rh-vip{border:1px solid rgba(233,211,148,.25);background:rgba(233,211,148,.08)}
 
-/* ===== SLIDER (VIP) ===== */
+/* vip slider */
 .slider{display:flex;gap:.6rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.6rem;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.04)}
 .slide{flex:0 0 82%;max-width:82%;scroll-snap-align:center;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0c1222}
 .slide img{width:100%;aspect-ratio:16/9;object-fit:cover}
 .slider-controls{display:flex;gap:.6rem;justify-content:center;margin-top:.6rem}
 .slider button{padding:.5rem .8rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--text)}
 
-/* ===== MOTIVATION ===== */
+/* motivation */
 .level{height:10px;width:100%;background:rgba(255,255,255,.08);border-radius:999px;margin-top:.6rem;overflow:hidden}
 .level span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));border-radius:999px;transition:width .35s var(--ease)}
 .tiers{margin-top:1rem}
@@ -154,28 +151,38 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 .tiers .bar{height:8px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
 .tiers .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));transition:width .35s var(--ease)}
 
-/* ===== STICKY CTA ===== */
+/* sticky cta */
 .sticky-cta{position:fixed;left:0;right:0;bottom:14px;z-index:60;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:opacity .25s var(--ease),transform .25s var(--ease);padding-bottom:calc(env(safe-area-inset-bottom) + 6px)}
 .sticky-cta .inner{background:rgba(5,8,22,.88);border:1px solid rgba(255,255,255,.08);padding:.55rem;border-radius:999px;box-shadow:var(--elev-1)}
 @media (max-width:979.98px){ .sticky-cta{display:flex} }
 
-/* ===== FX ===== */
+/* fx */
 .fade-up{opacity:0;transform:translateY(18px)}
 .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
 
-/* ===== MOBILE ===== */
+/* mobile */
 @media (max-width:767.98px){
   .hero-micro{font-size:1rem}
   .premium-card{padding:1rem .9rem}
   .reward-hero-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* minimal form defaults so Inputs nicht „roh“ wirken */
+input, textarea{
+  width:100%;color:var(--text);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+  border-radius:14px;padding:.8rem 1rem;font:inherit;outline:none;
+}
+input::placeholder, textarea::placeholder{ color:var(--muted-soft); }
+input:focus, textarea:focus{ border-color:rgba(144,194,255,.5); box-shadow:0 0 0 3px rgba(144,194,255,.18); }
 </style>
+
+<noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 
 <body>
 <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
 
-<header id="header">
+<header id="header" role="banner">
   <div class="header-inner">
     <a href="/" class="brand" aria-label="Startseite" rel="noopener">
       <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
@@ -184,9 +191,9 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
   </div>
 </header>
 
-<main id="main">
+<main id="main" role="main">
 
-  <!-- ============== HERO ============== -->
+  <!-- HERO -->
   <section class="hero section fade-up" aria-labelledby="hero-title">
     <div class="wrap hero-grid">
       <div class="stack">
@@ -235,7 +242,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
     </div>
   </section>
 
-  <!-- ============== 10-SEC HOWTO + SHARE ============== -->
+  <!-- HOWTO + SHARE -->
   <section class="section fade-up" aria-labelledby="s-title">
     <div class="wrap stack">
 
@@ -276,12 +283,12 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         </div>
 
         <div class="inline" style="margin-top:.4rem">
-          <button class="btn seg-btn" data-seg="eltern">Eltern</button>
-          <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
-          <button class="btn seg-btn" data-seg="freunde">Freunde</button>
-          <button class="btn seg-btn" data-seg="selbst">Selbstständige</button>
-          <button class="btn seg-btn" data-seg="partner">Partner</button>
-          <button class="btn seg-btn" data-seg="neutral">Für alle</button>
+          <button class="btn seg-btn" type="button" data-seg="eltern">Eltern</button>
+          <button class="btn seg-btn" type="button" data-seg="kollegen">Kolleg:innen</button>
+          <button class="btn seg-btn" type="button" data-seg="freunde">Freunde</button>
+          <button class="btn seg-btn" type="button" data-seg="selbst">Selbstständige</button>
+          <button class="btn seg-btn" type="button" data-seg="partner">Partner</button>
+          <button class="btn seg-btn" type="button" data-seg="neutral">Für alle</button>
         </div>
 
         <label for="refName" style="display:block;font-size:.92rem;color:#DDE3F4;margin:.6rem 0 .35rem">Dein Vorname (optional):</label>
@@ -329,7 +336,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         </p>
 
         <div class="inline">
-          <button class="btn btn-ghost" id="copyBtn">📋 Text kopieren</button>
+          <button class="btn btn-ghost" id="copyBtn" type="button">📋 Text kopieren</button>
           <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
           <button class="btn btn-ghost" id="nativeShare" type="button">📲 System-Teilen</button>
           <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer%20Blick&body=" rel="noopener">✉️ Mail</a>
@@ -358,7 +365,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 
   <hr class="divider" aria-hidden="true">
 
-  <!-- ============== REWARDS ============== -->
+  <!-- REWARDS -->
   <section class="section fade-up" id="rewards" aria-labelledby="r-title">
     <div class="wrap stack">
       <h2 id="r-title">Deine Wertschätzungen – Sammeln macht’s noch besser</h2>
@@ -378,7 +385,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         </article>
       </div>
 
-      <!-- VIP Slider -->
       <div>
         <h3 style="margin:.8rem 0 .4rem">10× → VIP-Erlebnis (du entscheidest)</h3>
         <div class="slider" id="vipSlider" aria-label="VIP-Erlebnis Highlights">
@@ -393,7 +399,6 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         </div>
       </div>
 
-      <!-- Motivation -->
       <div class="premium-card">
         <h3 style="margin:0 0 .4rem">Dein Motivationsstand</h3>
         <div class="level" aria-label="Motivationsstand"><span id="levelBar"></span></div>
@@ -420,7 +425,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 
   <hr class="divider" aria-hidden="true">
 
-  <!-- ============== ETHOS & FINAL CTA ============== -->
+  <!-- ETHOS & FINAL CTA -->
   <section class="section fade-up" aria-label="Heiko Ethos">
     <div class="wrap">
       <div class="premium-card">
@@ -456,29 +461,28 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 <!-- Whisper -->
 <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand hat morgen ein Gefühl für heute.</div>
 
-<!-- ===== JS: CORE ===== -->
 <script>
+/* core */
 document.documentElement.classList.remove('no-js');
-document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
+const yearEl = document.getElementById('yearNow'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-/* Fade-in */
-(function(){
-  const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const els=[...document.querySelectorAll('.fade-up')];
-  if(pref){els.forEach(el=>el.classList.add('visible'));return;}
-  if('IntersectionObserver'in window){
-    const io=new IntersectionObserver(ents=>ents.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
-    els.forEach(el=>io.observe(el));
-  }else{els.forEach(el=>el.classList.add('visible'));}
+/* fade-in */
+(() => {
+  const pref = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const els = [...document.querySelectorAll('.fade-up')];
+  if (pref || !('IntersectionObserver' in window)) { els.forEach(el=>el.classList.add('visible')); return; }
+  const io = new IntersectionObserver((ents)=>ents.forEach(e=>{
+    if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+  }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
+  els.forEach(el=>io.observe(el));
 })();
 
-/* Sticky CTA – sichtbar ~180px, mobil */
-(function(){
-  const el=document.getElementById('stickyCTA');
-  const hero=document.querySelector('.hero');
-  if(!el||!hero) return;
-  if(innerWidth>=980) return;
-  const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0'; el.setAttribute('aria-hidden', String(!v));};
+/* sticky cta (mobile) */
+(() => {
+  const el = document.getElementById('stickyCTA');
+  const hero = document.querySelector('.hero');
+  if(!el || !hero || innerWidth >= 980) return;
+  const show = (v)=>{ el.style.transform = v?'translateY(0)':'translateY(100%)'; el.style.opacity = v?'1':'0'; el.setAttribute('aria-hidden', String(!v)); };
   if('IntersectionObserver'in window){
     new IntersectionObserver(([e])=>show(!e.isIntersecting),{threshold:.3}).observe(hero);
     addEventListener('scroll',()=>{ if(scrollY>180) show(true); },{passive:true});
@@ -487,15 +491,15 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   }
 })();
 
-/* VIP Slider controls */
-(function(){
+/* vip slider */
+(() => {
   const wrap=document.getElementById('vipSlider'); if(!wrap) return;
   document.getElementById('vipPrev')?.addEventListener('click',()=>wrap.scrollBy({left:-wrap.clientWidth*.9,behavior:'smooth'}));
   document.getElementById('vipNext')?.addEventListener('click',()=>wrap.scrollBy({left: wrap.clientWidth*.9,behavior:'smooth'}));
 })();
 
-/* Whisper once */
-(function(){
+/* whisper once */
+(() => {
   const KEY='hh_whisper_seen_v4';
   try{
     if(sessionStorage.getItem(KEY)) return;
@@ -504,8 +508,8 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   }catch(_){}
 })();
 
-/* CTA Rotator */
-(function(){
+/* cta rotator (respect reduced motion) */
+(() => {
   const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const btn=document.getElementById('shareFast'); if(!btn || pref) return;
   let variants=[]; try{ variants=JSON.parse(btn.getAttribute('data-cta-variants')); }catch(_){}
@@ -514,29 +518,29 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
 })();
 </script>
 
-<!-- ===== JS: MOTIVATION & SHARE ===== -->
 <script>
-/* Motivation & Tiers */
-(function(){
+/* motivation & tiers */
+(() => {
   const KEY_REFCOUNT='hh_ref_count_v2';
   const KEY_PCT='hh_motivation_pct_v4';
   const levelBar=document.getElementById('levelBar');
 
-  function refCount(){ try{ return Number(localStorage.getItem(KEY_REFCOUNT)||'0')||0; }catch(_){ return 0; } }
-  function setRefCount(v){ try{ localStorage.setItem(KEY_REFCOUNT,String(v)); }catch(_){} }
-  function setPct(v){
+  const refCount = () => { try{ return Number(localStorage.getItem(KEY_REFCOUNT)||'0')||0; }catch(_){ return 0; } };
+  const setRefCount = (v) => { try{ localStorage.setItem(KEY_REFCOUNT,String(v)); }catch(_){} };
+  const setPct = (v) => {
     v=Math.max(0,Math.min(100,Math.round(v)));
     if(levelBar) levelBar.style.width=v+'%';
     try{ localStorage.setItem(KEY_PCT,String(v)); }catch(_){}
-  }
-  function updateTiers(){
+  };
+  const updateTiers = () => {
     const c=refCount();
     document.querySelectorAll('#tierList i').forEach(i=>{
       const goal=Number(i.getAttribute('data-goal')||'1');
       const pct=Math.max(0, Math.min(100, Math.round((c/goal)*100)));
       i.style.width=pct+'%';
     });
-  }
+  };
+
   try{ setPct(Number(localStorage.getItem(KEY_PCT)||'0')); }catch(_){ setPct(0); }
   updateTiers();
 
@@ -544,8 +548,8 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   window._bumpRefFull = function(){ const c=refCount()+1;   setRefCount(c); updateTiers(); setPct(Math.min(100, c*12)); };
 })();
 
-/* Share composer + Segmente */
-(function(){
+/* share composer */
+(() => {
   const name = document.getElementById('refName');
   const area = document.getElementById('refText');
   const wa   = document.getElementById('waShare');
@@ -554,16 +558,12 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   const preview = document.getElementById('waPreviewText');
 
   const KEY_REFID='hh_ref_rid_v2';
-  function randomId(len=10){
-    const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len);
-    if(crypto && crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.random()*256;
-    return Array.from(u,x=>a[x%a.length]).join('');
-  }
-  function getRefId(){ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } }
-  function sanitize(n){ return n ? n.replace(/[^a-z0-9]/gi,'').toLowerCase() : ''; }
+  const randomId=(len=10)=>{ const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len); if(crypto && crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.random()*256; return Array.from(u,x=>a[x%a.length]).join(''); };
+  const getRefId=()=>{ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } };
+  const sanitize=(n)=> n ? n.replace(/[^a-z0-9]/gi,'').toLowerCase() : '';
 
   function buildURL(){
-    const base=new URL('https://heikohaerter.com');
+    const base=new URL('https://heikohaerter.com'); // Custom Domain ok (GH Pages CNAME)
     base.searchParams.set('utm_source','weitergeben');
     base.searchParams.set('utm_medium','share');
     base.searchParams.set('utm_campaign','check');
@@ -573,8 +573,8 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
     return base.toString();
   }
 
-  function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
-  function detectSeg(){
+  const variants=()=>{ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } };
+  const detectSeg=()=>{
     const raw=(name?.value||'').toLowerCase();
     if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
     if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
@@ -582,11 +582,12 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
     if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
     if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
     return 'neutral';
-  }
-  function pick(seg){ const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; const i=Math.floor(Math.random()*pool.length); return pool[i]; }
-  function ensureURL(text){ return /\bhttps?:\/\/\S+/i.test(text) ? text : (text.trim()+' '+buildURL()); }
-  function setTextFrom(seg){ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); }
-  function plain(){ return (area.value||'').replace(/\n+/g,' ').trim(); }
+  };
+  const pick = (seg) => { const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; return pool[Math.floor(Math.random()*pool.length)]; };
+  const ensureURL = (t)=> /\bhttps?:\/\/\S+/i.test(t) ? t.trim() : (t.trim()+' '+buildURL());
+  const setTextFrom = (seg)=>{ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); };
+  const plain = ()=> (area.value||'').replace(/\n+/g,' ').trim();
+
   function updateLinks(){
     const t=ensureURL(plain());
     wa.href='https://wa.me/?text='+encodeURIComponent(t);
