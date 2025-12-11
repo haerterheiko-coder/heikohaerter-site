@@ -96,7 +96,7 @@
     $$('a.btn,button.btn,[data-ripple]').forEach(el => on(el,'click',create,{ passive:true }));
   }
 
-  /* ===== Top progress bar (scroll position) ============================== */
+  /* ===== Top progress bar ================================================ */
   function initTopProgress() {
     if (prefersReduced) return;
     let bar = $('.progress');
@@ -153,7 +153,7 @@
     setInterval(()=>{ if (wrap.classList.contains('show')) { btn.style.animation='hhPulse 1600ms ease-in-out 1'; setTimeout(()=>btn.style.animation='',1700); } }, 7000);
   }
 
-  /* ===== Whisper (once per session) ===================================== */
+  /* ===== Whisper CTA (once per session) ================================= */
   function initWhisperCTA() {
     const el = $('#whisper'); if (!el) return;
     const KEY = 'hh_whisper_seen_v5';
@@ -168,7 +168,7 @@
     } catch {}
   }
 
-  /* ===== CTA Rotator (Weitergeben) ====================================== */
+  /* ===== CTA Rotator ===================================================== */
   function initCTARotator() {
     const btn = $('#shareFast');
     if (!btn || prefersReduced) return;
@@ -179,7 +179,7 @@
     setInterval(()=>{ i=(i+1)%variants.length; btn.textContent=variants[i]; btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'),800); }, 4000);
   }
 
-  /* ===== Smooth scroll helpers ========================================== */
+  /* ===== Smooth Scroll + A11y =========================================== */
   function initSmoothScrollToShare() {
     const anchors = $$('a[href^="#"]');
     anchors.forEach(a=>{
@@ -193,14 +193,13 @@
     });
   }
 
-  /* ===== VIP Slider (Weitergeben) ======================================= */
   function initVipSlider() {
     const wrap = $('#vipSlider'); if (!wrap) return;
     on($('#vipPrev'),'click',()=> wrap.scrollBy({ left:-wrap.clientWidth*.9, behavior:'smooth' }));
     on($('#vipNext'),'click',()=> wrap.scrollBy({ left: wrap.clientWidth*.9, behavior:'smooth' }));
   }
 
-  /* ===== Reward Glow when Share visible ================================= */
+  /* ===== Reward Glow ===================================================== */
   function initRewardGlowOnShare() {
     const target = $('#rewardGlow'); if (!target) return;
     const share = document.getElementById('share') || document.getElementById('share-h')?.closest('.share');
@@ -212,7 +211,7 @@
     });
   }
 
-  /* ===== Gamification / Motivation (Weitergeben) ======================== */
+  /* ===== Gamification ==================================================== */
   function initGamificationProgress() {
     const levelBar = $('#levelBar'); const tierList = $('#tierList');
     if (!levelBar && !tierList) return;
@@ -243,10 +242,14 @@
     window._bumpRefFull = function(){ const c=getC()+1;   setC(c); updateTiers(); setPct(Math.min(100, c*12)); };
   }
 
-  /* ===== Share Engine (beide Seiten) ==================================== */
+  /* ===== Share Engine ==================================================== */
   function initShareEngine() {
-    const name = $('#refName'), area = $('#refText'), wa = $('#waShare'), mail = $('#mailShare'), copy = $('#copyBtn'), preview = $('#waPreviewText');
-    const readyBtn = $('#readyMsg'), magicBtn = $('#magicLine'), addPersonal = $('#addPersonal'), nativeShare = $('#nativeShare'), shareFast = $('#shareFast');
+    const name = $('#refName'), area = $('#refText'), wa = $('#waShare'), mail = $('#mailShare'),
+          copy = $('#copyBtn'), preview = $('#waPreviewText');
+    const readyBtn = $('#readyMsg'), magicBtn = $('#magicLine'),
+          addPersonal = $('#addPersonal'), nativeShare = $('#nativeShare'),
+          shareFast = $('#shareFast');
+
     if (!area || !preview) return;
 
     const SHARE_BASE =
@@ -273,13 +276,14 @@
       return u.toString();
     };
 
-    const loadVariants = () => { try { return JSON.parse(area.getAttribute('data-variants')||'{}'); } catch { return { neutral:[] }; } };
-    const variants = loadVariants();
+    const variants = (()=>{ try { return JSON.parse(area.getAttribute('data-variants')||'{}'); } catch { return {neutral:[]}; } })();
     const pick = (seg) => { const pool = variants[seg] || variants.neutral || []; return pool[(Math.random()*pool.length)|0] || ''; };
+    
+    // FIXED: Segment = "kolleg:innen"
     const detectSeg = () => {
       const raw=(name?.value||'').toLowerCase();
       if (/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
-      if (/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
+      if (/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kolleg:innen';
       if (/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
       if (/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
       if (/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
@@ -333,7 +337,7 @@
       const t = ensureURL(area.value); const url = buildURL();
       if (navigator.share && !prefersReduced) {
         try { await navigator.share({ title:'2-Minuten-Blick', text:t, url }); window._bumpRefFull?.(); }
-        catch { /* user cancelled */ }
+        catch {}
       } else {
         try { await navigator.clipboard.writeText(t); showToast('Kein System-Share – Text kopiert.'); }
         catch { showToast('Weder Share noch Kopieren möglich.'); }
@@ -343,14 +347,18 @@
     on(shareFast,'click',()=> setSeg());
   }
 
-  /* ===== Ampel-Check (Startseite) ======================================= */
+  /* ===== Ampel-Check ===================================================== */
   function initAmpelCheck() {
     const stepsWrap = $('#check-steps'), resultBox = $('#check-result');
     const stepLabel = $('#stepLabel'), progress = $('#progressBar'), stepHint = $('#stepHint');
     if (!stepsWrap || !resultBox || !stepLabel || !progress || !stepHint) return;
 
-    const startBtn = $('#startCheckBtn'), startHero = $('#startCheckHero'), ctaFinal = $('#ctaFinal'), startShort = $('#startShort'), startScreen = $('#check-start');
-    let step=1, score=0; const max=3;
+    const startBtn = $('#startCheckBtn'), startHero = $('#startCheckHero'),
+          ctaFinal = $('#ctaFinal'), startShort = $('#startShort'),
+          startScreen = $('#check-start');
+
+    let step=1, score=0;
+    const max=3;
 
     const syncProgressA11y = () => {
       const pct = max===1 ? 100 : ((Math.min(step-1,max-1))/(max-1))*100;
@@ -384,8 +392,10 @@
     };
 
     const finish = () => {
-      stepsWrap.style.display='none'; resultBox.style.display='block';
+      stepsWrap.style.display='none';
+      resultBox.style.display='block';
       let html='';
+
       if (score<=4) {
         html=`<div class="result-card result-red"><h3>🔴 Heute wichtig</h3><p>Mindestens ein Bereich braucht heute deine Aufmerksamkeit.</p>${renderCTA('red')}</div>`;
       } else if (score<=7) {
@@ -393,6 +403,7 @@
       } else {
         html=`<div class="result-card result-green"><h3>🟢 Passt für heute</h3><p>Für heute wirkt alles entspannt.</p>${renderCTA('green')}</div>`;
       }
+
       html+=`<p class="hero-micro" style="margin-top:.8rem;opacity:.85">Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>`;
       resultBox.innerHTML=html;
       resultBox.scrollIntoView({ behavior:'smooth', block:'start' });
@@ -400,8 +411,10 @@
 
     const start = () => {
       if (startScreen) startScreen.style.display='none';
-      stepsWrap.style.display='block'; resultBox.style.display='none';
-      step=1; score=0; showStep(step);
+      stepsWrap.style.display='block';
+      resultBox.style.display='none';
+      step=1; score=0;
+      showStep(step);
     };
 
     on(startBtn,'click',start);
@@ -426,14 +439,14 @@
     });
   }
 
-  /* ===== Short Mode (Startseite) ======================================== */
-  function initReturnCTA() { /* reserved */ }
+  /* ===== Short Mode ====================================================== */
   function initShortMode() {
     const btn = $('#dfBtn');
     if (!btn) return;
     const keep = new Set(['hero','ethos-social','stickyCTA','share','ampel-check']);
     const nodes = $$('main > section').filter(s => !keep.has(s.id));
     const key = 'hh.short.enabled';
+
     const set = (onState) => {
       btn.setAttribute('aria-pressed', onState ? 'true' : 'false');
       btn.textContent = onState ? '✅ Kurzmodus aktiv' : '🔍 Kurzmodus';
@@ -441,11 +454,18 @@
       if (onState) window.scrollTo({ top:0, behavior:'smooth' });
       store.set(key, onState);
     };
-    const initial = (()=>{ try { return !!JSON.parse(store.getRaw(key,'false')||'false'); } catch { return false; } })();
+
+    const initial = (()=>{ 
+      try { return !!JSON.parse(store.getRaw(key,'false')||'false'); } 
+      catch { return false; } 
+    })();
+
     set(initial);
     on(btn,'click',()=> set(btn.getAttribute('aria-pressed')!=='true'));
     window.setKurzmodus = set;
   }
+
+  /* ===== Hero Preview ==================================================== */
   function initHeroPreview() {
     const btn = $('#previewToggle'), box = $('#heroPreview');
     if (!btn || !box) return;
@@ -456,7 +476,7 @@
     });
   }
 
-  /* ===== Anchor focus helper ============================================ */
+  /* ===== Hash Focus ====================================================== */
   function initAnchorFocus() {
     const focusHash = () => {
       if (!location.hash) return;
@@ -467,7 +487,7 @@
     focusHash();
   }
 
-  /* ===== Word Swap (headline micro-animation) =========================== */
+  /* ===== Word Swap ======================================================= */
   function initWordSwap() {
     const root = $('.word-swap'); if (!root) return;
     const words = $$('b', root); if (words.length < 2) return;
@@ -481,7 +501,7 @@
     }, 2200);
   }
 
-  /* ===== Tilt (3D parallax on hero media) =============================== */
+  /* ===== Tilt Effect ===================================================== */
   function initTilt() {
     if (prefersReduced || !mm('(hover:hover)').matches) return;
     $$('.tilt-wrap').forEach((wrap) => {
@@ -501,7 +521,7 @@
     });
   }
 
-  /* ===== Magnet buttons (subtle attract) ================================ */
+  /* ===== Magnet Buttons ================================================== */
   function initMagnet() {
     if (prefersReduced || !mm('(hover:hover)').matches) return;
     $$('[data-magnet]').forEach((el) => {
@@ -533,7 +553,7 @@
     });
   }
 
-  /* ===== Public namespace (debug/hooks) ================================= */
+  /* ===== Public namespace =============================================== */
   window.hhApp = {
     prefersReduced,
     store,
@@ -575,7 +595,6 @@
     // Share (both pages)
     initShareEngine();
 
-    // reserved
     initReturnCTA();
   }
 
