@@ -1,5 +1,5 @@
 <!-- =========================
-File: index.html  (Startseite) — modular build wired to app.js
+File: index.html (Startseite) — produktiver Build mit /assets/*
 ========================= -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
@@ -10,17 +10,18 @@ File: index.html  (Startseite) — modular build wired to app.js
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
 
   <title>2 Minuten – zeigt sofort, was heute wichtig ist.</title>
   <meta name="description" content="Ruhiger 2-Minuten-Blick: zeigt, was heute ansteht – anonym, ohne Unterlagen, ohne Verkauf." />
-  <link rel="canonical" href="https://heikohaerter.com" />
+  <link rel="canonical" href="https://heikohaerter.com/" />
 
   <!-- Open Graph -->
   <meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung" />
   <meta property="og:title" content="2 Minuten – zeigt sofort, was heute wichtig ist." />
   <meta property="og:description" content="Ein kurzer Blick: sofort sehen, ob heute etwas Wichtiges fehlt – anonym & ohne Verpflichtung." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://heikohaerter.com" />
+  <meta property="og:url" content="https://heikohaerter.com/" />
   <meta property="og:locale" content="de_DE" />
   <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -54,11 +55,11 @@ File: index.html  (Startseite) — modular build wired to app.js
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
+  {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com/","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
   </script>
 
-  <!-- Your production styles (Cache-Bust v2) -->
-  <link rel="stylesheet" href="/assets/styles.css?v=2" />
+  <!-- Production styles (Cache-Bust v3) -->
+  <link rel="stylesheet" href="/assets/styles.css?v=3" />
 
   <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -99,9 +100,9 @@ File: index.html  (Startseite) — modular build wired to app.js
 
           <!-- Hero Ampel (animated red → yellow → green on first view) -->
           <div class="ampel" aria-label="Status-Ampel">
-            <i class="ampel-light red"   aria-hidden="true"></i>
+            <i class="ampel-light red" aria-hidden="true"></i>
             <i class="ampel-light yellow" aria-hidden="true"></i>
-            <i class="ampel-light green"  aria-hidden="true"></i>
+            <i class="ampel-light green" aria-hidden="true"></i>
           </div>
 
           <p class="hero-micro system-tagline">
@@ -128,7 +129,7 @@ File: index.html  (Startseite) — modular build wired to app.js
             <small id="hero-desc" class="hero-micro">Anonym · keine Daten · kein Verkauf</small>
           </div>
 
-          <div id="heroPreview" class="grid auto-grid" style="display:none">
+          <div id="heroPreview" class="grid auto-grid" hidden>
             <div class="result-card result-green">
               <h3>🟢 Ampel-Beispiel</h3>
               <p class="hero-micro">Passt für heute · Als Nächstes: ruhig planen.</p>
@@ -180,11 +181,11 @@ File: index.html  (Startseite) — modular build wired to app.js
           </ul>
         </div>
 
-        <!-- Persona cards (affect share/referral tone) -->
+        <!-- Persona cards -->
         <div class="grid auto-grid">
           <button class="card persona-card" data-seg="Familie" type="button" aria-pressed="false">👨‍👩‍👧 Eltern</button>
           <button class="card persona-card" data-seg="Kollege" type="button" aria-pressed="false">🏢 Kolleg:in</button>
-          <button class="card persona-card" data-seg="Freund"  type="button" aria-pressed="false">💬 Freund:in</button>
+          <button class="card persona-card" data-seg="Freund" type="button" aria-pressed="false">💬 Freund:in</button>
           <button class="card persona-card" data-seg="Selbstständig" type="button" aria-pressed="false">💼 Selbstständig</button>
           <button class="card persona-card" data-seg="Angestellt" type="button" aria-pressed="false">🧑‍💼 Angestellt</button>
         </div>
@@ -206,7 +207,7 @@ File: index.html  (Startseite) — modular build wired to app.js
       </div>
     </section>
 
-    <!-- PROZESS + PROOF BARS -->
+    <!-- PROZESS -->
     <section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
       <div class="container">
         <h2 id="prozess-h">So läuft der Check</h2>
@@ -315,7 +316,7 @@ File: index.html  (Startseite) — modular build wired to app.js
           <small class="hero-micro" style="opacity:.8">Wenig Zeit? Der <em>Kurzmodus</em> taucht später nochmal auf.</small>
         </div>
 
-        <div id="check-steps" style="display:none;margin-top:1.2rem" role="group" aria-label="Ampel Schritte">
+        <div id="check-steps" hidden style="margin-top:1.2rem" role="group" aria-label="Ampel Schritte">
           <div class="premium-card" style="margin-bottom:.8rem">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
               <strong id="stepLabel">Schritt 1 von 3</strong>
@@ -326,7 +327,7 @@ File: index.html  (Startseite) — modular build wired to app.js
             </div>
           </div>
 
-          <div class="premium-card step" data-step="1" style="display:none">
+          <div class="premium-card step" data-step="1" hidden>
             <h3>1 · Wenn du 6 Monate ausfallen würdest – wie sicher wäre euer Einkommen?</h3>
             <div class="stack">
               <button class="btn small" type="button" data-value="1" data-magnet>Wir hätten ein echtes Problem</button>
@@ -335,7 +336,7 @@ File: index.html  (Startseite) — modular build wired to app.js
             </div>
           </div>
 
-          <div class="premium-card step" data-step="2" style="display:none">
+          <div class="premium-card step" data-step="2" hidden>
             <h3>2 · Wie gut findest du wichtige Unterlagen, wenn du sie brauchst?</h3>
             <div class="stack">
               <button class="btn small" type="button" data-value="1" data-magnet>Ich suche lange / finde nichts</button>
@@ -344,7 +345,7 @@ File: index.html  (Startseite) — modular build wired to app.js
             </div>
           </div>
 
-          <div class="premium-card step" data-step="3" style="display:none">
+          <div class="premium-card step" data-step="3" hidden>
             <h3>3 · „Wie wohl fühlst du dich beim Thema Zukunft &amp; Alter?“</h3>
             <div class="stack">
               <button class="btn small" type="button" data-value="1" data-magnet>Gar nicht / unsicher</button>
@@ -354,7 +355,7 @@ File: index.html  (Startseite) — modular build wired to app.js
           </div>
         </div>
 
-        <div id="check-result" style="display:none;margin-top:1.4rem" aria-live="polite"></div>
+        <div id="check-result" hidden style="margin-top:1.4rem" aria-live="polite"></div>
 
         <div class="premium-card" style="margin-top:1.2rem">
           <h3 style="margin:.1rem 0 .45rem;font-size:1.02rem;">Wenig Zeit?</h3>
@@ -467,7 +468,7 @@ File: index.html  (Startseite) — modular build wired to app.js
     <a class="nav-item" href="#share">Teilen</a>
   </nav>
 
-  <!-- Single production bundle: loads & initializes all modules -->
+  <!-- Single production bundle -->
   <script src="/assets/app.js" defer></script>
 </body>
 </html>
