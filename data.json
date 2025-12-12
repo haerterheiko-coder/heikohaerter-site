@@ -1,5 +1,5 @@
 {
-  "config_version": "1.0.0",
+  "config_version": "1.1.0",
 
   "feature_flags": {
     "enable_whisper": true,
@@ -11,22 +11,24 @@
 
   "brand": {
     "name": "Heiko Haerter",
-    "claim_general": "Ruhiger Finanz-Kompass",
-    "claim_employer": "Arbeitgeber-Architektur Bau & Handwerk",
-    "email": "heiko.haerter@dvag.de",
-
+    "claims": {
+      "general": "Ruhiger Finanz-Kompass",
+      "employer": "Arbeitgeber-Architektur Bau & Handwerk"
+    },
+    "contact": {
+      "email": "heiko.haerter@dvag.de"
+    },
     "domains": {
       "primary": "https://heikohaerter.com",
       "cdn": "https://heikohaerter.com/assets"
     },
-
     "year": "2026"
   },
 
   "navigation": {
     "home": "/",
     "weitergeben": "/weitergeben",
-    "arbeitgeber_architektur": "/arbeitgeber-architektur",
+    "arbeitgeber": "/arbeitgeber-architektur",
     "impressum": "/impressum",
     "datenschutz": "/datenschutz"
   },
@@ -46,18 +48,18 @@
 
   "social_proof": {
     "startseite": [
-      { "text": "22:47 Uhr. Die Kinder schlafen. Die Ampel hat uns beruhigt.", "tag": "emotional" },
-      { "text": "Ich wollte nur kurz wissen, ob irgendwo eine Lücke ist.", "tag": "neutral" },
-      { "text": "Das war das erste Mal, dass Finanzen leicht waren.", "tag": "emotional" },
-      { "text": "Endlich mal ohne Verkaufsdruck.", "tag": "trust" },
-      { "text": "Ich hab das in 2 Minuten verstanden – das hatte ich noch nie.", "tag": "activation" }
+      { "text": "22:47 Uhr. Die Kinder schlafen. Die Ampel hat uns beruhigt.", "intent": "emotional" },
+      { "text": "Ich wollte nur kurz wissen, ob irgendwo eine Lücke ist.", "intent": "neutral" },
+      { "text": "Das war das erste Mal, dass Finanzen leicht waren.", "intent": "emotional" },
+      { "text": "Endlich mal ohne Verkaufsdruck.", "intent": "trust" },
+      { "text": "Ich hab das in 2 Minuten verstanden – das hatte ich noch nie.", "intent": "activation" }
     ],
 
     "weitergeben": [
-      { "text": "Ich hätte nicht gedacht, dass so ein kleiner Link so viel Ruhe bringt.", "tag": "emotional" },
-      { "text": "Hab's weitergegeben – kam total gut an.", "tag": "activation" },
-      { "text": "Meine Schwester meinte: 'Das hat mir gerade gefehlt.'", "tag": "emotional" },
-      { "text": "Mein Kollege: 'Das war das erste Mal, dass Finanzen leicht waren.'", "tag": "trust" }
+      { "text": "Ich hätte nicht gedacht, dass so ein kleiner Link so viel Ruhe bringt.", "intent": "emotional" },
+      { "text": "Hab's weitergegeben – kam total gut an.", "intent": "activation" },
+      { "text": "Meine Schwester meinte: ‚Das hat mir gerade gefehlt.‘", "intent": "emotional" },
+      { "text": "Mein Kollege: ‚Das war das erste Mal, dass Finanzen leicht waren.‘", "intent": "trust" }
     ],
 
     "arbeitgeber": [
@@ -65,19 +67,19 @@
         "branche": "Tiefbau · 35 Mitarbeiter",
         "vorher": "3 Kündigungen pro Jahr.",
         "nachher": "klare Einführung der Benefits, ruhiger Informationsprozess, stabilere Teams.",
-        "tag": "stability"
+        "intent": "stability"
       },
       {
         "branche": "SHK · 18 Mitarbeiter",
         "vorher": "Onboarding chaotisch.",
         "nachher": "feste Abläufe, klare Zuständigkeiten, stärkere Bindung.",
-        "tag": "process"
+        "intent": "process"
       },
       {
         "branche": "Elektro · 50 Mitarbeiter",
         "vorher": "Unsicherheit wegen bAV-Haftung.",
         "nachher": "geprüfte Prozesse, klare Dokumentation, sichere Abläufe.",
-        "tag": "risk"
+        "intent": "risk"
       }
     ]
   },
@@ -86,7 +88,7 @@
     "neutral": [
       "Ein kurzer Moment Ruhe für dich – anonym, 2 Minuten, ohne Verkauf: {{URL}}",
       "Falls du manchmal hoffst, nichts Wichtiges zu übersehen – das hilft: {{URL}}",
-      "Ein kurzer Reality-Check ohne Druck. Grün · Gelb · Rot. Vielleicht gibt’s dir Ruhe: {{URL}}"
+      "Ein kurzer Reality-Check ohne Druck. Grün · Gelb · Rot. {{URL}}"
     ],
     "eltern": [
       "Wenn die Kids schlafen und der Kopf voll ist: 2 Minuten Ruhe – anonym & ohne Daten: {{URL}}",
@@ -111,32 +113,27 @@
     ],
     "handwerk": [
       "60-Sekunden-Arbeitgeber-Check – anonym. Zeigt sofort, wo Stabilität fehlt: {{URL}}",
-      "Falls du Mitarbeiter suchst oder Abläufe klären willst: Der Check zeigt echte Stellschrauben: {{URL}}",
-      "Kurz, klar, anonym. Für Inhaber & HR im Handwerk – echte Orientierung ohne Verkauf: {{URL}}"
+      "Falls du Mitarbeiter suchst oder Abläufe klären willst: {{URL}}",
+      "Kurz, klar, anonym. Für Inhaber & HR im Handwerk: {{URL}}"
     ],
     "direkt": [
       "Das könnte dir wirklich helfen – dauert 2 Minuten: {{URL}}",
       "Ein kurzer Check, der sofort Klarheit bringt: {{URL}}",
-      "Wenn du heute nur kurz Orientierung willst – das hier ist leicht & anonym: {{URL}}"
+      "Wenn du heute nur kurz Orientierung willst: {{URL}}"
     ]
   },
 
   "checks": {
     "ampel": {
+      "type": "personal",
+      "duration_seconds": 120,
       "scoring": {
-        "green": 0,
-        "yellow": 1,
-        "red": 2,
-        "thresholds": {
-          "green": 0,
-          "yellow": 2,
-          "red": 4
-        }
+        "values": { "green": 0, "yellow": 1, "red": 2 },
+        "thresholds": { "green": 0, "yellow": 2, "red": 4 }
       },
-
       "questions": [
         {
-          "id": "q1",
+          "id": "p1",
           "text": "Wie sicher fühlst du dich heute, falls etwas passieren würde?",
           "options": {
             "green": "Ich wäre stabil aufgestellt",
@@ -145,7 +142,7 @@
           }
         },
         {
-          "id": "q2",
+          "id": "p2",
           "text": "Wie klar ist dir, was im Ernstfall wirklich zählt?",
           "options": {
             "green": "Sehr klar",
@@ -154,7 +151,7 @@
           }
         },
         {
-          "id": "q3",
+          "id": "p3",
           "text": "Wie geordnet fühlst du deinen aktuellen Stand?",
           "options": {
             "green": "Gut strukturiert",
@@ -163,29 +160,24 @@
           }
         }
       ],
-
       "results": {
-        "green": "Dein Alltag wirkt heute stabil. 🟢",
-        "yellow": "Einige Bereiche wirken unsicher – ein kurzer Blick könnte beruhigen. 🟡",
-        "red": "Dein Alltag wirkt fragil – hier entsteht echter Handlungsdruck. 🔴"
+        "green": "Dein Alltag wirkt heute stabil.",
+        "yellow": "Einige Bereiche wirken unsicher – ein kurzer Blick könnte beruhigen.",
+        "red": "Dein Alltag wirkt fragil – hier entsteht echter Handlungsdruck."
       }
     },
 
     "arbeitgeber": {
+      "type": "business",
+      "duration_seconds": 60,
+      "meta_note": "Die 3 Fragen stammen aus über 250 Arbeitgeber-Projekten im Handwerk.",
       "scoring": {
-        "green": 0,
-        "yellow": 1,
-        "red": 2,
-        "thresholds": {
-          "green": 0,
-          "yellow": 2,
-          "red": 4
-        }
+        "values": { "green": 0, "yellow": 1, "red": 2 },
+        "thresholds": { "green": 0, "yellow": 2, "red": 4 }
       },
-
       "questions": [
         {
-          "id": "ag1",
+          "id": "a1",
           "text": "Wie stabil empfindest du eure Team-Struktur?",
           "options": {
             "green": "Stabil",
@@ -194,7 +186,7 @@
           }
         },
         {
-          "id": "ag2",
+          "id": "a2",
           "text": "Wie klar und dokumentiert sind eure Abläufe?",
           "options": {
             "green": "Klar & dokumentiert",
@@ -203,7 +195,7 @@
           }
         },
         {
-          "id": "ag3",
+          "id": "a3",
           "text": "Wie sicher fühlst du dich hinsichtlich Arbeitgeber-Pflichten (bAV, Haftung)?",
           "options": {
             "green": "Sehr sicher",
@@ -212,14 +204,11 @@
           }
         }
       ],
-
       "results": {
-        "green": "Ihr Betrieb wirkt stabil organisiert. 🟢",
-        "yellow": "Einige Bereiche bremsen Stabilität & Sicherheit. 🟡",
-        "red": "Stabile Arbeitgeber-Strukturen fehlen – echter Handlungsdruck. 🔴"
-      },
-
-      "meta_note": "Die 3 Fragen stammen aus über 250 Arbeitgeber-Projekten im Handwerk."
+        "green": "Ihr Betrieb wirkt stabil organisiert.",
+        "yellow": "Einige Bereiche bremsen Stabilität & Sicherheit.",
+        "red": "Stabile Arbeitgeber-Strukturen fehlen – echter Handlungsdruck."
+      }
     }
   }
 }
