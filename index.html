@@ -1,94 +1,124 @@
 <!-- /index.html -->
 <!DOCTYPE html>
-<html lang="de" translate="no" class="no-js">
+<html lang="de" class="no-js" translate="no">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>In 2 Minuten wissen, ob heute etwas Wichtiges fehlt.</title>
-  <meta name="description" content="Ein ruhiger 2-Minuten-Blick. Zeigt, ob dein Alltag heute stabil wirkt – anonym, ohne Unterlagen, ohne Verkauf.">
-  <meta property="og:title" content="In 2 Minuten wissen, ob heute etwas Wichtiges fehlt.">
-  <meta property="og:description" content="Ein ruhiger 2-Minuten-Blick – anonym, ohne Druck.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="de_DE">
-  <link rel="stylesheet" href="./styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#05070E" />
+  <title>2 Minuten – Netflix-Opening für deine Finanzklarheit</title>
+  <meta name="description" content="Cinematic Scrollytelling: In 2 Minuten zur Klarheit. Ruhig, anonym, kein Verkauf. Ampel erst, wenn die Story sie verdient.">
+  <link rel="stylesheet" href="./styles.css" />
   <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="godmode">
-<main>
+<a href="#slides" class="skip">Zum Inhalt springen</a>
 
-<!-- ACT 1 — OPENING -->
-<section id="opening" class="section fade-up" data-act="1">
-  <p class="micro">2 Minuten · 3 Fragen · Deine Ampel</p>
-  <h1>In 2 Minuten weißt du,<br>ob heute etwas Wichtiges fehlt.</h1>
-  <p class="lead">Nicht alles im Leben ist dringend. Aber manches sollte man nicht übersehen.</p>
-  <p class="context">Dieser kurze Blick zeigt dir ruhig, ob dein Alltag heute stabil wirkt – oder ob ein Bereich Aufmerksamkeit braucht.</p>
-  <div class="trust-line"><span>🔒 anonym</span><span>📄 keine Unterlagen</span><span>🚫 kein Verkauf</span></div>
-  <div class="primary-action"><a href="#check" aria-label="2-Minuten-Check starten" class="btn btn-primary">2-Minuten-Check starten</a></div>
-</section>
+<!-- Top Progress (Netflix-Seekbar) -->
+<div id="progress" aria-hidden="true"><span></span></div>
 
-<!-- ACT 2 — SZENEN -->
-<section id="scenes" class="section fade-up" data-act="2">
-  <h2>Das hilft, wenn du …</h2>
-  <ul class="reasons">
-    <li>keine Zeit hast, dich zu kümmern</li>
-    <li>keine Lust auf Verkaufsgespräche hast</li>
-    <li>dir unsicher bist, ob heute etwas offen ist</li>
-    <li>Finanzen lieber ruhig sortierst als hektisch</li>
-  </ul>
-  <div class="scene"><p><strong>22:47 Uhr.</strong><br>Die Kinder schlafen. „Wir müssten das mal klären.“ Die Ampel zeigt sofort, was heute wichtig ist.</p></div>
-  <div class="scene"><p>Ihr wollt Entscheidungen nicht blind treffen? Die Ampel zeigt klar: Jetzt · Als Nächstes · Später.</p></div>
-  <div class="scene"><p>Viel hängt an dir. Ein Ausfall hätte Folgen. Und trotzdem bleibt keine Zeit für lange Gespräche.</p></div>
-</section>
+<!-- Bullet Nav -->
+<nav id="bullets" aria-label="Slides Navigation"></nav>
 
-<!-- ACT 3 — MECHANIK -->
-<section id="mechanik" class="section fade-up" data-act="3">
-  <h2>So funktioniert der Blick</h2>
-  <ol class="steps">
-    <li>Du beantwortest drei kurze Fragen.</li>
-    <li>Du siehst deine persönliche Ampel.</li>
-    <li>Du nimmst Klarheit mit – oder lässt es dabei.</li>
-  </ol>
-  <p class="aside">Kein Konto. Keine Registrierung. Keine Verpflichtung.</p>
-</section>
+<main id="slides" class="slides" tabindex="0" aria-live="polite">
 
-<!-- ACT 4 — AMPEL PREVIEW -->
-<section id="ampel" class="section fade-up" data-act="4">
-  <h2>Deine Ampel</h2>
-  <div class="ampel-preview" aria-hidden="true">
-    <div class="ampel green"></div><div class="ampel yellow"></div><div class="ampel red"></div>
-  </div>
-  <p class="explain">🟢 Passt für heute · 🟡 Bald wichtig · 🔴 Heute wichtig</p>
-  <div class="primary-action"><a href="#check" class="btn btn-ghost">Jetzt 2 Minuten nehmen</a></div>
-</section>
+  <!-- BEAT 1 — OPENING / HOOK -->
+  <section class="slide hero fade-up" data-beat="1" aria-labelledby="b1t">
+    <div class="inner">
+      <p class="eyebrow">2 Minuten · 3 Fragen · Deine Ampel</p>
+      <h1 id="b1t">In 2 Minuten sehen, ob heute etwas Wichtiges fehlt.</h1>
+      <p class="lead">Kein Papierkram. Kein Verkauf. Nur Ruhe im Kopf.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#b2">Weiter</a>
+        <span class="trust">🔒 anonym · 🚫 kein Nachfassen · 📄 keine Unterlagen</span>
+      </div>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="glow glow-a"></div><div class="glow glow-b"></div>
+    </div>
+  </section>
 
-<!-- ACT 5 — SICHERHEIT -->
-<section id="safety" class="section fade-up" data-act="5">
-  <h2>Was bewusst nicht passiert</h2>
-  <ul class="nope"><li>Kein Verkauf</li><li>Kein Nachfassen</li><li>Kein Anruf</li><li>Keine Datenspeicherung</li></ul>
-  <p class="fineprint">Wenn dir dieser Blick nichts bringt, kannst du ihn einfach ignorieren.</p>
-</section>
+  <!-- BEAT 2 — SZENEN / FALLHÖHE -->
+  <section class="slide scene fade-up" id="b2" data-beat="2" aria-labelledby="b2t">
+    <div class="inner">
+      <h2 id="b2t">Wenn das Leben schneller ist als du</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Eltern · 22:47</h3>
+          <p>„Wir müssten das mal klären…“ – Die Ampel zeigt: Jetzt · Als Nächstes · Später.</p>
+        </article>
+        <article class="card">
+          <h3>Paare · Entscheidung</h3>
+          <p>Haus, Kind, Kredit? In 2 Minuten seht ihr, ob etwas offen ist.</p>
+        </article>
+        <article class="card">
+          <h3>Selbstständige · Ausfall</h3>
+          <p>Wenn du 6 Monate ausfällst – hält das System? Schau es kurz an.</p>
+        </article>
+      </div>
+      <div class="cta"><a class="btn" href="#b3">Weiter</a></div>
+    </div>
+  </section>
 
-<!-- ACT 6 — PERSON -->
-<section id="person" class="section fade-up" data-act="6">
-  <p class="portrait">👋 Ich bin Heiko.</p>
-  <p class="about">Ich habe dieses System gebaut, weil ich selbst genug von langen Gesprächen, Fachbegriffen und Druck hatte.</p>
-  <p class="about">Manchmal braucht es keine Beratung – sondern nur einen ruhigen Moment Klarheit.</p>
-</section>
+  <!-- BEAT 3 — WARUM JETZT (Neuro/CLT) -->
+  <section class="slide why fade-up" id="b3" data-beat="3" aria-labelledby="b3t">
+    <div class="inner">
+      <h2 id="b3t">Dein Gehirn mag Klarheit mehr als Hoffnung</h2>
+      <p class="micro">Ungewissheit stresst. Klarheit beruhigt. 2 Minuten senken die Hürde. </p>
+      <ul class="ticks">
+        <li>1 Gedanke pro Screen – keine Textwüste</li>
+        <li>Ein klarer Schritt – kein Druck</li>
+        <li>Sofortiges Feedback – keine Ratlosigkeit</li>
+      </ul>
+      <div class="cta">
+        <button class="btn btn-primary" data-earn-ampel>Offenbarung freischalten</button>
+        <span class="trust">Nach diesem Schritt erscheint die Ampel.</span>
+      </div>
+    </div>
+  </section>
 
-<!-- ACT 7 — CTA -->
-<section id="final" class="section fade-up" data-act="7">
-  <h2>2 Minuten jetzt – weniger Unsicherheit heute Abend.</h2>
-  <div class="primary-action"><a href="#check" class="btn btn-primary">2-Minuten-Check starten</a></div>
-  <p class="trust">anonym · ohne Unterlagen · ohne Verkauf</p>
-</section>
+  <!-- BEAT 4 — OFFENBARUNG (AMPEL ERST JETZT) -->
+  <section class="slide reveal fade-up" id="b4" data-beat="4" aria-labelledby="b4t" hidden>
+    <div class="inner">
+      <h2 id="b4t">Deine Ampel – wenn es darauf ankommt</h2>
+      <p class="eyebrow">Erst verdient, dann sichtbar.</p>
+      <div class="ampel-preview">
+        <span class="dot green"></span><span class="dot yellow"></span><span class="dot red"></span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#b5">Jetzt 2-Minuten-Check</a>
+        <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
+      </div>
+    </div>
+  </section>
 
-<!-- ACT 8 — CHECK HOST -->
-<section id="check" class="section fade-up" data-act="8">
-  <div id="check-steps"></div>
-  <div id="check-result"></div>
-</section>
+  <!-- BEAT 5 — CHECK (HOST) -->
+  <section class="slide check fade-up" id="b5" data-beat="5" aria-labelledby="b5t">
+    <div class="inner narrow">
+      <h2 id="b5t">2-Minuten-Check</h2>
+      <p class="micro">Intuition reicht. Es gibt kein „falsch“.</p>
+      <div id="check-steps" class="check-steps"></div>
+      <div id="check-result" class="check-result"></div>
+    </div>
+  </section>
+
+  <!-- BEAT 6 — SICHERHEIT + PERSON + CTA -->
+  <section class="slide safety fade-up" id="b6" data-beat="6" aria-labelledby="b6t">
+    <div class="inner">
+      <h2 id="b6t">Was bewusst nicht passiert</h2>
+      <ul class="chips">
+        <li>Kein Verkauf</li><li>Keine Datenweitergabe</li><li>Kein Nachfassen</li>
+      </ul>
+      <p class="about">👋 Ich bin Heiko. Ich habe diese Ampel gebaut, weil Orientieren leichter sein muss als Verkaufen.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#b5">Check starten</a>
+        <a class="btn" href="./arbeitgeber.html">Für Arbeitgeber</a>
+      </div>
+    </div>
+  </section>
 
 </main>
+
 <script src="./app.js" defer></script>
 </body>
 </html>
