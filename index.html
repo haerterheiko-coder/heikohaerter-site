@@ -1,3 +1,4 @@
+<!-- /index.html -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -48,6 +49,16 @@
     imagesizes="(min-width: 1024px) 52vw, 92vw"
     fetchpriority="high"
   />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
+  </script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
   <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
 
   <header>
@@ -65,44 +76,29 @@
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="stack">
-          <!-- Microline (exakt) -->
           <p class="hero-micro" style="text-transform:uppercase;letter-spacing:.14em;opacity:.9">
             2 Minuten. 3 Fragen. Deine Finanz-Ampel: Grün, Gelb oder Rot.
           </p>
-
-          <!-- H1 (exakt) -->
           <h1 id="hero-title">In 2 Minuten sehen, ob heute bei deinen Finanzen etwas Wichtiges fehlt.</h1>
-
-          <!-- System-Satz (exakt) -->
           <p class="hero-micro system-tagline">
             Der Check ist der Einstieg in ein ruhiges Finanzsystem, das dir zeigt, was heute wichtig ist – ohne Papierkram, ohne Verkauf.
           </p>
-
-          <!-- Short-Pain (exakt) -->
           <p class="hero-micro">
             Kein Überblick bei Einkommen, Gesundheit, Haftung, Zukunft, Familie? Die Ampel sortiert das – anonym & ohne Druck.
           </p>
-
-          <!-- Dopamin-Element (exakt) -->
           <div class="premium-card">
             <p class="hero-micro" style="margin:0"><strong>80 % fühlen sich nach 2 Minuten ruhiger.</strong></p>
           </div>
-
-          <!-- Trust Chips (exakt) -->
           <div class="bar">
             <span class="chip">⭐ <strong>4,9</strong> | 250+ Menschen</span>
             <span class="chip">Eltern · Paare · Selbstständige</span>
             <span class="chip">Kein Verkauf · 100 % anonym</span>
           </div>
-
-          <!-- CTAs -->
           <div class="stack">
             <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">⚡ „2-Minuten-Check starten“</a>
             <button class="btn btn-ghost" id="previewToggle" type="button">Ergebnis-Vorschau ansehen</button>
             <small class="hero-micro">Anonym · keine Daten · kein Verkauf</small>
           </div>
-
-          <!-- Ergebnis-Vorschau (togglable, nur UI – keine neuen Texte) -->
           <div id="heroPreview" class="grid auto-grid" style="display:none">
             <div class="result-card result-green">
               <h3>🟢 Ampel-Beispiel</h3>
@@ -133,7 +129,6 @@
     <!-- ===== SLIDE 2: ZIELGRUPPEN + SZENEN ===== -->
     <section id="zielgruppen-szenen" class="section fade-up" aria-labelledby="tg-h">
       <div class="container stack">
-        <!-- Premium-Trigger-Card (exakt) -->
         <div class="premium-card" aria-labelledby="tg-h">
           <h2 id="tg-h" style="margin:0 0 .35rem">Das hilft dir, wenn du …</h2>
           <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.2rem">
@@ -145,7 +140,6 @@
           </ul>
         </div>
 
-        <!-- 3 Mini-Szenen (exakt) -->
         <div class="story-grid" aria-label="Mini-Szenen">
           <div class="story-card">
             <p class="hero-micro"><strong>👨‍👩‍👧 Szene Eltern:</strong><br>
@@ -180,7 +174,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 4: SICHERHEIT (Was NICHT passiert) ===== -->
+    <!-- ===== SLIDE 4: SICHERHEIT ===== -->
     <section id="sicherheit" class="section fade-up" aria-labelledby="safe-h">
       <div class="container">
         <h2 id="safe-h">Was NICHT passiert</h2>
@@ -195,7 +189,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 5: VORHER–NACHHER + RISIKO-STORY ===== -->
+    <!-- ===== SLIDE 5: VORHER–NACHHER ===== -->
     <section id="before-after" class="section fade-up" aria-labelledby="ba-h">
       <div class="container">
         <h2 id="ba-h">Vorher – Nachher</h2>
@@ -217,18 +211,16 @@
             </ul>
           </div>
         </div>
-        <!-- Risiko-Story (Zero-Risk Hinweis – ohne neue Texte) -->
         <div class="premium-card" style="margin-top:1.1rem">
           <p class="hero-micro" style="margin:0"><strong>Zero-Risk:</strong> Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>
         </div>
       </div>
     </section>
 
-    <!-- ===== SLIDE 6: WER ICH BIN + SOCIAL PROOF + FAQ + FINAL-CTA ===== -->
+    <!-- ===== SLIDE 6: ETHOS + SOCIAL + FAQ + CTA ===== -->
     <section id="ethos-social" class="section fade-up" aria-labelledby="ethos-h">
       <div class="container stack">
         <h2 id="ethos-h">Wer ich bin</h2>
-        <!-- Ethos-Box (exakt) -->
         <div class="premium-card">
           <p class="hero-micro" style="margin:0">
             „Ich bin Heiko. Ich habe diese Ampel gebaut, weil ich selbst diese 2-Stunden-Beratungen gehasst habe Voller Tarife, Jargon und Verkaufsdruck.
@@ -236,7 +228,6 @@
           </p>
         </div>
 
-        <!-- Social Proof: 3 Mini-Stories (nutzen bestehende Szenen-Zitate; keine neuen Texte) -->
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
           <div class="story-card">
             <p class="hero-micro"><strong>Eltern</strong><br>
@@ -252,13 +243,11 @@
           </div>
         </div>
 
-        <!-- FAQ (Struktur ohne neue Texte) -->
         <details class="premium-card">
           <summary style="cursor:pointer;font-weight:700">FAQ</summary>
           <p class="hero-micro" style="margin-top:.4rem">—</p>
         </details>
 
-        <!-- Final CTA -->
         <div style="text-align:center;max-width:720px;margin-inline:auto">
           <h2>In 2 Minuten weniger Unsicherheit. Starte jetzt.</h2>
           <a href="#ampel-check" class="btn btn-primary" id="ctaFinal">⚡ Jetzt starten</a>
@@ -267,7 +256,7 @@
       </div>
     </section>
 
-    <!-- ===== 2-MINUTEN-CHECK (bestehend; unverändert inhaltlich) ===== -->
+    <!-- ===== 2-MINUTEN-CHECK ===== -->
     <section id="ampel-check" class="section fade-up">
       <div class="container" style="max-width:720px">
         <div class="stack" id="check-start">
@@ -326,7 +315,7 @@
       </div>
     </section>
 
-    <!-- ===== SHARE (bestehend) ===== -->
+    <!-- ===== SHARE ===== -->
     <section class="section fade-up" id="share" aria-labelledby="share-title">
       <div class="container">
         <h2 id="share-title">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
@@ -335,7 +324,6 @@
           <p class="hero-micro" style="margin:0"><strong>Zero-Risk:</strong> Wenn’s der Person nichts bringt, gibt’s <strong>25 €</strong>.</p>
         </div>
 
-        <!-- Buttons Segmente -->
         <div class="bar" style="margin:.4rem 0 0">
           <button class="btn seg-btn" data-seg="eltern">Eltern</button>
           <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
@@ -345,7 +333,6 @@
           <button class="btn seg-btn" data-seg="neutral">Für alle</button>
         </div>
 
-        <!-- Composer (unverändert; gekürzt nicht) -->
         <div class="share stack" id="shareBox" style="margin-top:1rem">
           <h3 style="margin:.2rem 0 .25rem">Text zum Weitergeben</h3>
           <p class="hero-micro" style="margin:0 0 .6rem">Kopieren oder direkt per WhatsApp senden.</p>
@@ -422,3 +409,8 @@
 
   <!-- Whisper CTA -->
   <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand weiß morgen, was ansteht.</div>
+
+  <!-- App -->
+  <script src="./app.js" defer></script>
+</body>
+</html>
