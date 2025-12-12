@@ -1,227 +1,48 @@
 {
-  "config_version": "1.2.0",
-
-  "feature_flags": {
-    "enable_whisper": true,
-    "enable_qr": true,
-    "enable_cases": true,
-    "enable_employer_page": true,
-    "enable_ampel_page": true
-  },
-
+  "config_version": "1.3.0",
   "brand": {
     "name": "Heiko Haerter",
-    "claims": {
-      "general": "Der ruhige Finanz-Kompass",
-      "employer": "Arbeitgeber-Architektur für Bau & Handwerk"
-    },
-    "contact": {
-      "email": "heiko.haerter@dvag.de"
-    },
-    "domains": {
-      "primary": "https://heikohaerter.com",
-      "cdn": "https://heikohaerter.com/assets"
-    },
+    "claims": { "general": "Der ruhige Finanz-Kompass", "employer": "Arbeitgeber-Architektur" },
     "year": "2026"
   },
-
-  "navigation": {
-    "home": "/",
-    "weitergeben": "/weitergeben",
-    "arbeitgeber": "/arbeitgeber-architektur",
-    "impressum": "/impressum",
-    "datenschutz": "/datenschutz"
-  },
-
   "micro_hooks": {
     "emotional": [
-      "Wenn du manchmal hoffst, nichts Wichtiges zu übersehen …",
+      "Wenn du hoffst, nichts Wichtiges zu übersehen …",
       "Ein kurzer Blick – bevor der Alltag weiterläuft.",
       "Ein ruhiger Moment für deinen Kopf."
     ],
     "rational": [
       "2 Minuten. 3 Fragen. Deine Ampel.",
-      "Wenn dein Kopf voll ist – aber du trotzdem sicher sein willst.",
-      "Ein schneller Überblick ohne Verpflichtung."
+      "Schnell, anonym, ohne Verkauf.",
+      "Jetzt · Als Nächstes · Später."
     ]
   },
-
-  "social_proof": {
-    "startseite": [
-      { "text": "22:47 Uhr. Die Kinder schlafen. Der kurze Check hat uns beruhigt.", "intent": "emotional" },
-      { "text": "Ich wollte nur wissen, ob irgendwo etwas wackelt.", "intent": "neutral" },
-      { "text": "Das war das erste Mal, dass sich das leicht angefühlt hat.", "intent": "emotional" },
-      { "text": "Endlich mal ohne Druck.", "intent": "trust" },
-      { "text": "In zwei Minuten ein gutes Gefühl – das war neu.", "intent": "activation" }
-    ],
-
-    "weitergeben": [
-      { "text": "Ich hätte nicht gedacht, dass so ein kleiner Link so viel Ruhe bringt.", "intent": "emotional" },
-      { "text": "Hab’s weitergeschickt – kam erstaunlich entspannt an.", "intent": "activation" },
-      { "text": "‚Das hat mir gerade echt geholfen.‘", "intent": "emotional" },
-      { "text": "‚Zum ersten Mal ohne Verkaufsgefühl.‘", "intent": "trust" }
-    ],
-
-    "arbeitgeber": [
-      {
-        "branche": "Tiefbau · 35 Mitarbeitende",
-        "vorher": "Unruhe im Team, hohe Fluktuation.",
-        "nachher": "klare Abläufe, ruhige Einführung, stabileres Miteinander.",
-        "intent": "stability"
-      },
-      {
-        "branche": "SHK · 18 Mitarbeitende",
-        "vorher": "Onboarding unklar, vieles blieb liegen.",
-        "nachher": "feste Strukturen, klare Zuständigkeiten.",
-        "intent": "process"
-      },
-      {
-        "branche": "Elektro · 50 Mitarbeitende",
-        "vorher": "Unsicherheit bei Pflichten und Verantwortung.",
-        "nachher": "klare Dokumentation, spürbar mehr Sicherheit.",
-        "intent": "risk"
-      }
-    ]
-  },
-
-  "referral_variants": {
-    "neutral": [
-      "Ein ruhiger 2-Minuten-Blick – anonym, ohne Druck: {{URL}}",
-      "Falls du manchmal hoffst, nichts zu übersehen – das hier hilft beim Einordnen: {{URL}}",
-      "Kurz innehalten. Grün · Gelb · Rot. {{URL}}"
-    ],
-    "eltern": [
-      "Wenn die Kinder schlafen und der Kopf voll ist: 2 Minuten Ruhe – anonym: {{URL}}",
-      "Ein kleiner Moment Überblick im Alltag: {{URL}}",
-      "Hat mir selbst Ruhe gegeben – vielleicht hilft’s dir auch: {{URL}}"
-    ],
-    "paare": [
-      "Ein kurzer Blick, ob alles stabil wirkt – neutral & anonym: {{URL}}",
-      "Erstaunlich leicht für ein wichtiges Thema: {{URL}}"
-    ],
-    "selbst": [
-      "Würde es heute halten, wenn etwas dazwischenkommt? 2 Minuten: {{URL}}",
-      "Ein klarer Blick, bevor der Tag weiterläuft: {{URL}}"
-    ],
-    "freunde": [
-      "Hat mir gerade echt gutgetan – musste an dich denken: {{URL}}",
-      "Ganz ohne Stress. Vielleicht passt’s gerade für dich: {{URL}}"
-    ],
-    "skeptiker": [
-      "Kein Verkauf, keine Daten – einfach ein ruhiger Überblick: {{URL}}",
-      "Normalerweise nicht dein Ding – aber das hier ist wirklich neutral: {{URL}}"
-    ],
-    "handwerk": [
-      "60-Sekunden-Arbeitgeber-Check – anonym. Zeigt, wo es wackelt: {{URL}}",
-      "Kurz innehalten und Strukturen einordnen: {{URL}}",
-      "Ruhiger Überblick für Inhaber & HR im Handwerk: {{URL}}"
-    ],
-    "direkt": [
-      "Vielleicht hilft dir das gerade – dauert 2 Minuten: {{URL}}",
-      "Ein kurzer Überblick, ohne dass etwas von dir erwartet wird: {{URL}}",
-      "Wenn du heute nur kurz einordnen willst: {{URL}}"
-    ]
-  },
-
   "checks": {
     "ampel": {
-      "type": "personal",
-      "duration_seconds": 120,
-      "scoring": {
-        "values": { "green": 0, "yellow": 1, "red": 2 },
-        "thresholds": { "green": 0, "yellow": 2, "red": 4 }
-      },
+      "scoring": { "values": { "green": 0, "yellow": 1, "red": 2 }, "thresholds": { "green": 0, "yellow": 2, "red": 4 } },
       "questions": [
-        {
-          "id": "p1",
-          "text": "Wie stabil fühlt sich dein Alltag an, falls etwas dazwischenkommt?",
-          "options": {
-            "green": "Wir wären gut aufgestellt",
-            "yellow": "Kommt darauf an",
-            "red": "Eher nicht"
-          }
-        },
-        {
-          "id": "p2",
-          "text": "Wie klar ist dir, was im Ernstfall wirklich wichtig wäre?",
-          "options": {
-            "green": "Sehr klar",
-            "yellow": "Teilweise",
-            "red": "Unklar"
-          }
-        },
-        {
-          "id": "p3",
-          "text": "Wie geordnet fühlt sich dein aktueller Stand an?",
-          "options": {
-            "green": "Übersichtlich",
-            "yellow": "Etwas durcheinander",
-            "red": "Ziemlich chaotisch"
-          }
-        }
+        { "id": "p1", "text": "Wenn du 6 Monate ausfällst – wie stabil wäre euer Einkommen?", "options": { "green": "Stabil", "yellow": "Kommt darauf an", "red": "Eher nicht" } },
+        { "id": "p2", "text": "Wie klar ist dir, was im Ernstfall wirklich wichtig wäre?", "options": { "green": "Sehr klar", "yellow": "Teilweise", "red": "Unklar" } },
+        { "id": "p3", "text": "Wie geordnet fühlt sich dein aktueller Stand an?", "options": { "green": "Übersichtlich", "yellow": "Etwas durcheinander", "red": "Ziemlich chaotisch" } }
       ],
       "results": {
-        "green": {
-          "title": "Für heute wirkt alles stabil.",
-          "text": "Du kannst entspannt weitermachen, ohne etwas im Hinterkopf zu behalten.",
-          "micro": "Wenn du willst, leg das Thema einfach wieder weg."
-        },
-        "yellow": {
-          "title": "Ein paar Dinge wirken wackelig.",
-          "text": "Nichts Dringendes – aber ein kurzer Blick könnte beruhigen.",
-          "micro": "Du musst heute nichts entscheiden."
-        },
-        "red": {
-          "title": "Ein Bereich braucht Aufmerksamkeit.",
-          "text": "Hier entsteht unnötiger Druck, der sich ruhig sortieren lässt.",
-          "micro": "Mach langsam. Schritt für Schritt."
-        }
+        "green": { "title": "🟢 Passt für heute", "text": "Du kannst entspannt weitermachen.", "micro": "Leg es wieder weg – alles gut." },
+        "yellow": { "title": "🟡 Bald wichtig", "text": "Ein kurzer Blick könnte beruhigen.", "micro": "Kleine Schritte reichen." },
+        "red":   { "title": "🔴 Heute wichtig", "text": "Ein Bereich braucht Aufmerksamkeit.", "micro": "Ruhig. Schritt für Schritt." }
       }
     },
-
     "arbeitgeber": {
-      "type": "business",
-      "duration_seconds": 60,
-      "meta_note": "Die Fragen basieren auf wiederkehrenden Mustern aus Arbeitgeber-Projekten im Handwerk.",
-      "scoring": {
-        "values": { "green": 0, "yellow": 1, "red": 2 },
-        "thresholds": { "green": 0, "yellow": 2, "red": 4 }
-      },
+      "scoring": { "values": { "green": 0, "yellow": 1, "red": 2 }, "thresholds": { "green": 0, "yellow": 2, "red": 4 } },
       "questions": [
-        {
-          "id": "a1",
-          "text": "Wie stabil wirkt euer Team aktuell?",
-          "options": {
-            "green": "Stabil",
-            "yellow": "Wechselhaft",
-            "red": "Unruhig"
-          }
-        },
-        {
-          "id": "a2",
-          "text": "Wie klar und greifbar sind eure Abläufe?",
-          "options": {
-            "green": "Klar geregelt",
-            "yellow": "Teilweise geregelt",
-            "red": "Unklar"
-          }
-        },
-        {
-          "id": "a3",
-          "text": "Wie sicher fühlst du dich bei euren Arbeitgeber-Pflichten?",
-          "options": {
-            "green": "Sicher",
-            "yellow": "Unsicher",
-            "red": "Eher riskant"
-          }
-        }
+        { "id": "a1", "text": "Wie stabil wirkt Ihr Team?", "options": { "green": "Stabil", "yellow": "Wechselhaft", "red": "Unruhig" } },
+        { "id": "a2", "text": "Wie klar sind Abläufe & Zuständigkeiten?", "options": { "green": "Klar", "yellow": "Teilweise", "red": "Unklar" } },
+        { "id": "a3", "text": "Wie sicher bei Pflichten (bAV/Haftung)?", "options": { "green": "Sicher", "yellow": "Unsicher", "red": "Riskant" } }
       ],
       "results": {
-        "green": {
-          "title": "Euer Betrieb wirkt gut aufgestellt.",
-          "text": "Strukturen tragen – auch wenn es stressig wird.",
-          "micro": "Behalten, was funktioniert."
-        },
-        "yellow": {
-          "title": "Einige Punkte bremsen Stabilität.",
-          "text": "Mit klareren Abläufen
+        "green": { "title": "🟢 Stabil", "text": "Strukturen tragen.", "micro": "Beibehalten, was wirkt." },
+        "yellow": { "title": "🟡 Bremst etwas", "text": "Mit Klarheit wird es ruhiger.", "micro": "Sortieren, dann vereinfachen." },
+        "red":   { "title": "🔴 Heute wichtig", "text": "Risiko sichtbar – jetzt ordnen.", "micro": "Schrittweise stabilisieren." }
+      }
+    }
+  }
+}
