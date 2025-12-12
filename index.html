@@ -7,116 +7,154 @@
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#05070E" />
   <title>2 Minuten – Netflix-Opening für deine Finanzklarheit</title>
-  <meta name="description" content="Cinematic Scrollytelling: In 2 Minuten zur Klarheit. Ruhig, anonym, kein Verkauf. Ampel erst, wenn die Story sie verdient.">
+  <meta name="description" content="Cinematic Scrollytelling: In 2 Minuten zur Klarheit. Ruhig, anonym, kein Verkauf.">
   <link rel="stylesheet" href="./styles.css" />
   <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
+
 <body class="godmode">
 <a href="#slides" class="skip">Zum Inhalt springen</a>
 
+<!-- Cinematic Overlays -->
 <div class="cinema-bars" aria-hidden="true"></div>
 <div class="film-grain" aria-hidden="true"></div>
 
+<!-- Progress + Bullets -->
 <div id="progress" aria-hidden="true"><span></span></div>
 <nav id="bullets" aria-label="Slides Navigation"></nav>
 
-<main id="slides" class="slides" tabindex="0" aria-live="polite">
+<main id="slides" class="slides" tabindex="0">
 
-  <section class="slide hero fade-up" data-beat="1">
-    <div class="inner">
-      <p class="eyebrow">Ein kurzer Moment · Keine Entscheidung · Nur Klarheit</p>
-      <h1 class="kinetic">
-        Manchmal spürt man nur:<br>
-        <em><span class="swap" data-words='["Da fehlt etwas.","Kein Überblick.","Zu viele To-dos."]'>Da fehlt etwas.</span></em>
-      </h1>
-      <p class="lead">
-        Kein Drama. Kein Notfall.<br>
-        Nur dieses leise Gefühl, dass man etwas nicht ganz im Blick hat.
-      </p>
-      <div class="cta">
-        <a class="btn btn-primary" href="#b2">Weiter</a>
-        <span class="trust">🔒 anonym · 🚫 kein Nachfassen · 📄 keine Unterlagen</span>
-      </div>
-    </div>
-    <div class="stage" aria-hidden="true">
-      <div class="glow glow-a"></div>
-      <div class="glow glow-b"></div>
-      <canvas id="particles" class="particles"></canvas>
-    </div>
-  </section>
+<!-- BEAT 1 — HOOK -->
+<section class="slide hero fade-up" data-beat="1">
+  <div class="inner">
+    <p class="eyebrow">Ein kurzer Moment · Keine Entscheidung · Nur Einordnung</p>
 
-  <section class="slide scene fade-up" id="b2" data-beat="2">
-    <div class="inner">
-      <h2>Der Moment, in dem der Gedanke auftaucht</h2>
-      <div class="cards">
-        <article class="card parallax">
-          <h3>22:47 · Eltern</h3>
-          <p>Die Kinder schlafen.<br>„Wir müssten das eigentlich mal sortieren.“</p>
-        </article>
-        <article class="card parallax">
-          <h3>Entscheidung · Paare</h3>
-          <p>Nichts brennt – aber alles hängt zusammen.</p>
-        </article>
-        <article class="card parallax">
-          <h3>Ausfall · Selbstständige</h3>
-          <p>Wenn du morgen nicht kannst – trägt dein System dich?</p>
-        </article>
-      </div>
-      <div class="cta"><a class="btn" href="#b3">Weiter</a></div>
-    </div>
-  </section>
+    <h1 class="kinetic">
+      Manchmal bleibt nur dieser Gedanke:<br>
+      <em><span class="swap" data-words='["Da fehlt etwas.","Kein Überblick.","Ich schieb das vor mir her."]'>Da fehlt etwas.</span></em>
+    </h1>
 
-  <section class="slide why fade-up" id="b3" data-beat="3">
-    <div class="inner">
-      <h2 class="parallax">Ungewissheit ist lauter als schlechte Nachrichten</h2>
-      <p class="micro">Klarheit beruhigt – selbst wenn sie unbequem ist.</p>
-      <ul class="ticks">
-        <li>Ein Gedanke pro Moment</li>
-        <li>Kein Gespräch</li>
-        <li>Ein Ergebnis</li>
-      </ul>
-      <div class="cta">
-        <button class="btn btn-primary" data-earn-ampel>Zeig mir die Einordnung</button>
-        <span class="trust">Die Ampel erscheint erst nach diesem Schritt.</span>
-      </div>
-    </div>
-  </section>
+    <p class="lead">
+      Kein Drama. Kein Alarm.<br>
+      Nur dieses leise Gefühl, etwas Wichtiges nicht ganz im Blick zu haben.
+    </p>
 
-  <section class="slide reveal fade-up" id="b4" data-beat="4" hidden>
-    <div class="inner">
-      <h2>Nicht alles ist dringend.<br>Aber manches ist heute wichtig.</h2>
-      <div class="ampel-preview">
-        <span class="dot green"></span><span class="dot yellow"></span><span class="dot red"></span>
-      </div>
-      <div class="cta">
-        <a class="btn btn-primary" href="#b5">2 Minuten Klarheit</a>
-        <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
-      </div>
+    <div class="cta">
+      <a class="btn btn-primary" href="#b2">Weiter</a>
+      <span class="trust">🔒 anonym · 🚫 kein Nachfassen · 📄 keine Unterlagen</span>
     </div>
-  </section>
+  </div>
 
-  <section class="slide check fade-up" id="b5" data-beat="5">
-    <div class="inner narrow">
-      <h2>Drei Fragen. Kein Richtig. Kein Falsch.</h2>
-      <div id="check-steps"></div>
-      <div id="check-result"></div>
-    </div>
-  </section>
+  <div class="stage" aria-hidden="true">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <canvas id="particles" class="particles"></canvas>
+  </div>
+</section>
 
-  <section class="slide safety fade-up" id="b6" data-beat="6">
-    <div class="inner">
-      <h2>Was hier bewusst nicht passiert</h2>
-      <ul class="chips">
-        <li>Kein Verkauf</li>
-        <li>Keine Datenweitergabe</li>
-        <li>Kein Nachfassen</li>
-      </ul>
-      <p class="about">👋 Ich bin Heiko. Orientierung sollte leiser sein als Verkaufsdruck.</p>
+<!-- BEAT 2 — SZENEN -->
+<section class="slide scene fade-up" id="b2" data-beat="2">
+  <div class="inner">
+    <h2>Der Moment, in dem der Gedanke auftaucht</h2>
+
+    <div class="cards">
+      <article class="card parallax">
+        <h3>22:47 · Eltern</h3>
+        <p>Die Kinder schlafen.<br>„Wir müssten das eigentlich mal sortieren.“</p>
+      </article>
+      <article class="card parallax">
+        <h3>Paare</h3>
+        <p>Nichts brennt.<br>Aber alles hängt zusammen.</p>
+      </article>
+      <article class="card parallax">
+        <h3>Selbstständige</h3>
+        <p>Wenn du ausfällst –<br>trägt es dann noch?</p>
+      </article>
     </div>
-  </section>
+
+    <div class="cta">
+      <a class="btn" href="#b3">Weiter</a>
+    </div>
+  </div>
+</section>
+
+<!-- BEAT 3 — WARUM -->
+<section class="slide why fade-up" id="b3" data-beat="3">
+  <div class="inner">
+    <h2 class="parallax">Ungewissheit ist lauter als schlechte Nachrichten</h2>
+
+    <p class="micro">
+      Das Gehirn hasst offene Schleifen.<br>
+      Einordnung beruhigt – sofort.
+    </p>
+
+    <ul class="ticks">
+      <li>Ein Gedanke gleichzeitig</li>
+      <li>Kein Gespräch, kein Rechtfertigen</li>
+      <li>Ein klares Signal</li>
+    </ul>
+
+    <div class="cta">
+      <button class="btn btn-primary" data-earn-ampel>Zeig mir die Einordnung</button>
+      <span class="trust">Die Ampel erscheint erst jetzt.</span>
+    </div>
+  </div>
+</section>
+
+<!-- BEAT 4 — GATE / OFFENBARUNG -->
+<section class="slide reveal fade-up" id="b4" data-beat="4" hidden>
+  <div class="inner">
+    <h2>Nicht alles ist dringend.<br>Aber manches ist heute wichtig.</h2>
+    <p class="eyebrow">Kein Urteil. Nur Orientierung.</p>
+
+    <div class="ampel-preview">
+      <span class="dot green"></span>
+      <span class="dot yellow"></span>
+      <span class="dot red"></span>
+    </div>
+
+    <div class="cta">
+      <a class="btn btn-primary" href="#b5">2 Minuten Klarheit</a>
+      <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
+    </div>
+  </div>
+</section>
+
+<!-- BEAT 5 — CHECK -->
+<section class="slide check fade-up" id="b5" data-beat="5">
+  <div class="inner narrow">
+    <h2>Drei Fragen. Kein Richtig. Kein Falsch.</h2>
+    <p class="micro">Dein Bauchgefühl reicht.</p>
+
+    <div id="check-steps"></div>
+    <div id="check-result"></div>
+  </div>
+</section>
+
+<!-- BEAT 6 — SICHERHEIT -->
+<section class="slide safety fade-up" data-beat="6">
+  <div class="inner">
+    <h2>Was hier bewusst nicht passiert</h2>
+    <ul class="chips">
+      <li>Kein Verkauf</li>
+      <li>Keine Daten</li>
+      <li>Kein Nachfassen</li>
+    </ul>
+
+    <p class="about">
+      👋 Ich bin Heiko.<br>
+      Diese Ampel ist gebaut, damit Orientierung leiser ist als Verkaufsdruck.
+    </p>
+
+    <div class="cta">
+      <a class="btn btn-primary" href="#b5">Check starten</a>
+      <a class="btn" href="./arbeitgeber.html">Für Arbeitgeber</a>
+    </div>
+  </div>
+</section>
 
 </main>
-
 <script src="./app.js" defer></script>
 </body>
 </html>
