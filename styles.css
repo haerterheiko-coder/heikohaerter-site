@@ -1,11 +1,11 @@
-<!-- /styles.css -->
-<style>
+/* /styles.css */
+/* WHY: tokens & motion toggles = konsistent, barrierearm */
 :root{
   --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5;
   --gold:#C8A44B; --gold2:#EADCA8;
   --green:#7EDFA5; --yellow:#F7E39A; --red:#F3A6A6;
   --glass:rgba(255,255,255,.05); --line:rgba(255,255,255,.12);
-  --ease:cubic-bezier(.25,.46,.25,1); --motion:1;
+  --ease:cubic-bezier(.25,.46,.25,1); --motion:1; --shadow:0 18px 60px rgba(0,0,0,.5);
   font-size: clamp(16px, 0.9vw + 8px, 20px);
 }
 @media (prefers-reduced-motion:reduce){ :root{--motion:0} }
@@ -22,27 +22,52 @@ body.godmode{
 }
 .skip{position:absolute;left:-9999px;top:auto} .skip:focus{left:8px;top:8px;background:#000;padding:.6rem;border-radius:8px}
 
-/* Slides (cinematic, centered) */
-.slides{height:auto; min-height:100dvh; overflow-y:scroll; scroll-snap-type:y mandatory; scroll-snap-stop:always; scroll-padding-top:0}
-.slides--short{height:auto; overflow:visible}
+/* Cinematic layers */
+.cinema-bars{position:fixed;inset:0;pointer-events:none;z-index:50;background:
+  linear-gradient(#000c,transparent 8%,transparent 92%,#000c)}
+.film-grain{position:fixed;inset:-20%;pointer-events:none;z-index:40;opacity:.12;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/></svg>');animation:grain 1.6s steps(2,end) infinite}
+@keyframes grain{to{transform:translate3d(-5%,3%,0)}}
+
+/* Slides (centered, snap) */
+.slides{min-height:100dvh; overflow-y:scroll; scroll-snap-type:y mandatory; scroll-snap-stop:always}
 .slide{min-height:100dvh; display:flex; align-items:center; justify-content:center; scroll-snap-align:start; position:relative; padding:clamp(24px,5vw,56px)}
 .slide .inner{width:100%; max-width:min(92vw, 1280px); margin-inline:auto; padding-inline:clamp(16px, 3.6vw, 32px)}
-.slide.hero h1{font-size:clamp(2.4rem, 6.2vw, 5.2rem); line-height:1.06; letter-spacing:-.016em}
-.slide h2{font-size:clamp(1.8rem, 3.8vw, 3rem); letter-spacing:-.012em}
-.lead{font-size:clamp(1.1rem, 1.8vw, 1.35rem); color:var(--muted)}
+
+/* Type scale */
+.slide.hero h1{font-size:clamp(2.6rem,6.6vw,5.4rem); line-height:1.04; letter-spacing:-.016em}
+.slide h2{font-size:clamp(1.9rem,3.9vw,3.2rem); letter-spacing:-.012em}
+.lead{font-size:clamp(1.1rem,1.8vw,1.35rem); color:var(--muted)}
 .eyebrow,.micro{color:var(--muted); letter-spacing:.08em; text-transform:uppercase; font-size:.9rem}
 .trust{color:var(--muted); display:block; margin-top:.5rem}
 
+/* Kinetic type */
+.kinetic em{background:linear-gradient(90deg,#fff,#fff, #e7d69f 60%, #fff); -webkit-background-clip:text; background-clip:text; color:transparent}
+.swap{display:inline-block;will-change:opacity,transform}
+.swap.enter{animation:kin 0.6s ease both}
+@keyframes kin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* Stage & Particles */
+.stage{position:absolute;inset:0;pointer-events:none}
+.stage .glow{position:absolute; border-radius:50%; filter:blur(42px); opacity:.45}
+.glow-a{width:46vw;height:46vw;left:-12vw;top:-10vw;background:radial-gradient(circle,#C8A44B22,transparent 60%); animation:floatA calc(16s*var(--motion)) ease-in-out infinite alternate}
+.glow-b{width:52vw;height:52vw;right:-14vw;top:-12vw;background:radial-gradient(circle,#8899FF22,transparent 60%); animation:floatB calc(18s*var(--motion)) ease-in-out infinite alternate}
+@keyframes floatA{to{transform:translate3d(2vw,2vh,0) scale(1.05)}}
+@keyframes floatB{to{transform:translate3d(-2vw,1.5vh,0) scale(1.04)}}
+.particles{position:absolute;inset:0;}
+
 /* Cards & lists */
 .cards{display:grid; gap:clamp(.8rem,2.4vw,1.2rem); grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); margin-top:1rem}
-.card{background:var(--glass); border:1px solid var(--line); border-radius:18px; padding:clamp(1rem, 1.2vw, 1.35rem) clamp(1.05rem, 1.6vw, 1.55rem)}
+.card{background:var(--glass); border:1px solid var(--line); border-radius:18px; padding:clamp(1rem, 1.2vw, 1.35rem) clamp(1.05rem, 1.6vw, 1.55rem); box-shadow:var(--shadow); transform:translateZ(0)}
+.card.parallax{will-change:transform}
+
+/* Chips, ticks */
 .chips{display:flex;flex-wrap:wrap;gap:.6rem}
 .chips li{list-style:none; border:1px solid var(--line); border-radius:999px; padding:.35rem .8rem; background:rgba(255,255,255,.04); color:var(--muted)}
 .ticks{margin:.6rem 0 0; padding-left:1.2rem; color:var(--muted)}
 .narrow{max-width:760px}
 
 /* Buttons */
-.btn{display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:.95rem 1.35rem; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--text); font-weight:800; cursor:pointer; transition:transform .18s var(--ease), box-shadow .18s var(--ease)}
+.btn{display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:.95rem 1.35rem; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--text); font-weight:800; cursor:pointer; transition:transform .18s var(--ease), box-shadow .18s var(--ease); will-change:transform}
 .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#111; box-shadow:0 14px 32px rgba(200,164,75,.35)}
 .btn-primary:hover{transform:translateY(-1px); box-shadow:0 20px 48px rgba(200,164,75,.42)}
 .btn-ghost{background:rgba(255,255,255,.06)}
@@ -54,35 +79,34 @@ body.godmode{
 .dot{width:14px;height:14px;border-radius:50%}
 .dot.green{background:var(--green)} .dot.yellow{background:var(--yellow)} .dot.red{background:var(--red)}
 
-/* Check */
+/* Check + Result dopaminic feedback */
 .check-steps .check-step{background:var(--glass); border:1px solid var(--line); border-radius:18px; padding:clamp(1rem, 1.2vw, 1.35rem) clamp(1.05rem, 1.6vw, 1.55rem); margin:.6rem 0}
-.result-card{border-radius:18px; padding:1.1rem 1.2rem; margin-top:1rem; border:1px solid var(--line); background:rgba(255,255,255,.04)}
-.result-green{box-shadow:0 0 0 1px rgba(126,223,165,.25) inset} .result-yellow{box-shadow:0 0 0 1px rgba(247,227,154,.25) inset} .result-red{box-shadow:0 0 0 1px rgba(243,166,166,.25) inset}
+.result-card{border-radius:18px; padding:1.1rem 1.2rem; margin-top:1rem; border:1px solid var(--line); background:rgba(255,255,255,.04); box-shadow:var(--shadow)}
+.result-green{box-shadow:0 0 0 1px rgba(126,223,165,.25) inset}
+.result-yellow{box-shadow:0 0 0 1px rgba(247,227,154,.25) inset; animation:pulseY calc(2.6s*var(--motion)) ease-in-out infinite}
+.result-red{box-shadow:0 0 0 1px rgba(243,166,166,.25) inset; animation:pulseR calc(2.1s*var(--motion)) ease-in-out infinite}
+@keyframes pulseR{50%{box-shadow:0 0 0 1px rgba(243,166,166,.35) inset, 0 0 22px rgba(243,166,166,.12)}}
+@keyframes pulseY{50%{box-shadow:0 0 0 1px rgba(247,227,154,.35) inset, 0 0 22px rgba(247,227,154,.10)}}
 
 /* Fade-up */
 .fade-up{opacity:0; transform:translateY(18px)}
 .fade-up.visible{opacity:1; transform:none; transition:opacity calc(.5s*var(--motion)) var(--ease), transform calc(.5s*var(--motion)) var(--ease)}
 html.no-js .fade-up{opacity:1!important;transform:none!important}
 
-/* Stage glows */
-.stage .glow{position:absolute; inset:auto; border-radius:50%; filter:blur(42px); opacity:.45; pointer-events:none}
-.glow-a{width:46vw;height:46vw;left:-12vw;top:-10vw;background:radial-gradient(circle,#C8A44B22,transparent 60%)}
-.glow-b{width:52vw;height:52vw;right:-14vw;top:-12vw;background:radial-gradient(circle,#8899FF22,transparent 60%)}
-
 /* Progress bar */
-#progress{position:fixed;left:0;right:0;top:0;height:4px;z-index:80;background:rgba(255,255,255,.06)}
+#progress{position:fixed;left:0;right:0;top:0;height:4px;z-index:90;background:rgba(255,255,255,.06)}
 #progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#fff1); transition:width .2s var(--ease)}
 
 /* Bullets */
-#bullets{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:70}
+#bullets{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:80}
 #bullets button{width:10px;height:10px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.08);cursor:pointer;opacity:.7}
 #bullets button[aria-current="true"]{background:var(--gold); border-color:transparent; opacity:1}
 
-/* Inputs (share) */
+/* Inputs */
 textarea, select{width:100%; background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:10px; color:var(--text); padding:.75rem .9rem}
 textarea:focus, select:focus, .btn:focus-visible{outline:2px solid rgba(233,211,148,.6); outline-offset:2px}
 
-/* Responsive tweaks */
+/* Responsive */
 @media (max-width:1023px){
   #bullets{right:8px}
   .btn, .btn-primary, .btn-ghost{width:100%}
@@ -91,4 +115,3 @@ textarea:focus, select:focus, .btn:focus-visible{outline:2px solid rgba(233,211,
   .slide .inner{ max-width:min(88vw, 1400px); }
   .slide.hero h1{ font-size: clamp(3rem, 5.6vw, 5.8rem); }
 }
-</style>
