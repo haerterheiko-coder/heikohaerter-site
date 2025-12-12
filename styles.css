@@ -1,5 +1,5 @@
 /* ============================================================
-   GODMODE++ V6 (2026) — FINAL SYSTEM CSS
+   GODMODE++ V6.2 (2026) — FINAL SYSTEM CSS
    Calm · Trust · Zero-Pressure UI Framework
    Aktivierung: <body class="godmode">
 ============================================================ */
@@ -16,6 +16,10 @@ button { cursor:pointer; }
 a { color:inherit; text-decoration:none; }
 a:hover { text-decoration:underline; text-underline-offset:3px; }
 :target { scroll-margin-top:92px; }
+
+/* Tap/Selection polish (mobile calm) */
+html, body { -webkit-tap-highlight-color: transparent; }
+::selection { background: rgba(200,164,75,.22); }
 
 /* Skip-Link */
 .visually-hidden{
@@ -61,6 +65,7 @@ body.godmode{
   --glass-inset:rgba(255,255,255,0.03);
 
   --elevation-1:0 4px 14px rgba(0,0,0,0.22);
+  --elevation-2:0 10px 26px rgba(0,0,0,0.30);
 
   --curve:cubic-bezier(.25,.46,.25,1);
   --motion:1;
@@ -75,17 +80,20 @@ body.godmode{
   --fs-h2:clamp(20px,2.4vw,28px);
   --fs-base:16px;
   --lh:1.55;
+
+  /* driven by app.js (optional) */
+  --scroll-progress:0%;
 }
 
 /* ------------------------------------------------------------
-   2) REDUCED MOTION
+   2) REDUCED MOTION (WCAG)
 ------------------------------------------------------------ */
 @media (prefers-reduced-motion:reduce){
   body.godmode{ --motion:0; }
 }
 
 /* ------------------------------------------------------------
-   3) BODY / BACKGROUND
+   3) BODY / BACKGROUND (CLS-SAFE)
 ------------------------------------------------------------ */
 body.godmode{
   min-height:100dvh;
@@ -101,11 +109,25 @@ body.godmode{
   overflow-x:hidden;
 }
 
+/* Subtle scroll progress (no pressure, just direction) */
+body.godmode::before{
+  content:"";
+  position:fixed;
+  top:0; left:0;
+  height:2px;
+  width:var(--scroll-progress);
+  background:linear-gradient(90deg, rgba(126,223,165,.75), rgba(200,164,75,.75));
+  opacity:.55;
+  pointer-events:none;
+  z-index:999;
+  transition:width calc(.18s * var(--motion)) var(--curve);
+}
+
 /* ------------------------------------------------------------
-   4) GLOBAL MOTION
+   4) GLOBAL MOTION (GPU-SAFE)
 ------------------------------------------------------------ */
 body.godmode *{
-  transition-property:opacity,transform,box-shadow,background-color,border-color;
+  transition-property:opacity,transform,box-shadow,background-color,border-color,filter;
   transition-duration:calc(.28s * var(--motion));
   transition-timing-function:var(--curve);
 }
@@ -114,7 +136,7 @@ body.godmode *{
 }
 
 /* ------------------------------------------------------------
-   5) LAYOUT PRIMITIVES
+   5) LAYOUT PRIMITIVES (systemweit)
 ------------------------------------------------------------ */
 .container,.wrap{
   width:min(var(--max),calc(100% - (var(--pad) * 2)));
@@ -125,19 +147,27 @@ body.godmode *{
   margin-inline:auto;
 }
 .section{ padding:clamp(42px,8vw,88px) 0; }
+
 .stack{ display:flex;flex-direction:column;gap:14px; }
 .inline,.bar{ display:flex;gap:10px;align-items:center;flex-wrap:wrap; }
 .grid{ display:grid;gap:14px; }
+
 .hero-grid{
   display:grid;
   gap:22px;
   grid-template-columns:1.15fr .85fr;
+  align-items:center;
 }
 @media (max-width:900px){
   .hero-grid{ grid-template-columns:1fr; }
 }
+
 .text-center{ text-align:center; }
 .muted{ color:var(--calm-text-soft); }
+
+/* Helpers */
+.mt-4{ margin-top:1rem; }
+.mt-6{ margin-top:1.5rem; }
 
 /* ------------------------------------------------------------
    6) TYPOGRAPHY
@@ -147,25 +177,69 @@ h1{ font-size:var(--fs-hero); line-height:1.12; letter-spacing:-.016em; }
 h2{ font-size:var(--fs-h2); line-height:1.22; letter-spacing:-.012em; }
 h3{ font-size:18px; line-height:1.25; }
 
-.hero-micro{ color:var(--calm-text-soft); opacity:.92; }
-.hero-sub{ color:var(--calm-text-soft); font-size:clamp(15px,1.4vw,18px); }
+.hero-micro{ color:var(--calm-text-soft); opacity:.92; line-height:1.5; }
+.hero-sub{ color:var(--calm-text-soft); font-size:clamp(15px,1.4vw,18px); line-height:1.6; }
+
+strong{ font-weight:700; }
 
 /* ------------------------------------------------------------
-   7) CARDS / GLASS
+   7) HEADER (ruhige Premium-Kante)
 ------------------------------------------------------------ */
-.card,.calm-surface,.result-card,.share-card,.process-card{
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:saturate(120%) blur(10px);
+  background:rgba(5,7,14,.55);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.header-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
+  gap:12px;
+}
+.brand{ display:inline-flex; flex-direction:column; gap:2px; }
+.brand-top{ display:flex; align-items:center; gap:8px; font-weight:650; }
+.brand-dot{
+  width:10px;height:10px;border-radius:999px;
+  background:rgba(200,164,75,.55);
+  box-shadow:0 0 0 1px rgba(200,164,75,.55) inset;
+}
+.brand-tagline{
+  font-size:12.5px;
+  color:var(--calm-text-soft);
+  opacity:.88;
+}
+
+/* ------------------------------------------------------------
+   8) CARDS / GLASS
+------------------------------------------------------------ */
+.card,.calm-surface,.result-card,.share-card,.process-card,.tg-card{
   background:var(--glass-bg);
   border:1px solid var(--glass-border);
-  box-shadow:0 1px 2px var(--glass-inset) inset,var(--elevation-1);
+  box-shadow:
+    0 1px 2px var(--glass-inset) inset,
+    var(--elevation-1);
   border-radius:var(--radius);
   padding:1.1rem 1.25rem;
 }
 @supports (backdrop-filter:blur(14px)){
-  .card,.calm-surface,.process-card{ backdrop-filter:blur(14px); }
+  .card,.calm-surface,.process-card,.tg-card{ backdrop-filter:blur(14px); }
+}
+
+/* Hover lift (desktop only, calm) */
+@media (hover:hover){
+  .card:hover,.tg-card:hover,.process-card:hover{
+    transform:translateY(-2px);
+    box-shadow: var(--elevation-2);
+    border-color:rgba(255,255,255,.16);
+  }
 }
 
 /* ------------------------------------------------------------
-   8) BUTTONS
+   9) BUTTONS (Apple-Haptik)
 ------------------------------------------------------------ */
 .btn{
   display:inline-flex;
@@ -176,15 +250,42 @@ h3{ font-size:18px; line-height:1.25; }
   border-radius:12px;
   border:1px solid rgba(255,255,255,0.12);
   background:rgba(255,255,255,0.03);
+  color:var(--calm-text);
+  user-select:none;
+  min-height:44px; /* mobile target */
+  transform:translateZ(0);
 }
+.btn:hover{ text-decoration:none; }
+.btn:active{ transform:scale(.97); box-shadow:0 4px 14px rgba(0,0,0,.35) inset; }
+
 .btn-primary{
   background:var(--gold-soft);
   color:#0E1118;
-  box-shadow:0 6px 14px var(--gold-glow),0 0 0 1px var(--gold) inset;
+  border-color:rgba(200,164,75,.28);
+  box-shadow:0 6px 14px var(--gold-glow), 0 0 0 1px var(--gold) inset;
+}
+@media (hover:hover){
+  .btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(200,164,75,.32), 0 0 0 1px rgba(200,164,75,.55) inset;
+  }
+}
+.btn-ghost{
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.12);
 }
 
 /* ------------------------------------------------------------
-   9) FADE-UP
+   10) FOCUS RING (WCAG SAFE)
+------------------------------------------------------------ */
+:focus-visible{
+  outline:2px solid rgba(233,211,148,.55);
+  outline-offset:3px;
+  border-radius:10px;
+}
+
+/* ------------------------------------------------------------
+   11) FADE-UP (JS CONTROLLED)
 ------------------------------------------------------------ */
 .fade-up{ opacity:0; transform:translateY(20px); }
 .fade-up.visible{
@@ -198,21 +299,99 @@ html.no-js body.godmode .fade-up{
 }
 
 /* ------------------------------------------------------------
-   10) AMPEL
+   12) AMPEL VISUAL (ruhig + hochwertig)
 ------------------------------------------------------------ */
-.ampel-light{
-  width:62px;height:62px;border-radius:50%;opacity:.92;
+.ampel-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
 }
-.ampel-green{ background:var(--green-soft); }
-.ampel-yellow{ background:var(--yellow-soft); }
-.ampel-red{ background:var(--red-soft); }
+.ampel-light{
+  width:62px;height:62px;border-radius:50%;
+  opacity:.92;
+  transform:translateZ(0);
+}
+
+/* calm depth */
+.ampel-green{
+  background:var(--green-soft);
+  box-shadow:0 0 18px rgba(126,223,165,.20) inset, 0 0 18px rgba(126,223,165,.12);
+}
+.ampel-yellow{
+  background:var(--yellow-soft);
+  box-shadow:0 0 18px rgba(247,227,154,.18) inset, 0 0 18px rgba(247,227,154,.10);
+}
+.ampel-red{
+  background:var(--red-soft);
+  box-shadow:0 0 18px rgba(243,166,166,.16) inset, 0 0 18px rgba(243,166,166,.10);
+}
+
+/* Ampel Atem (nur wenn Motion erlaubt) */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes calmPulse{
+    0%,100%{ transform:scale(1); opacity:.86; }
+    50%{ transform:scale(1.06); opacity:1; }
+  }
+  .ampel-light{ animation:calmPulse 5.2s ease-in-out infinite; }
+  .ampel-yellow{ animation-delay:.7s; }
+  .ampel-red{ animation-delay:1.4s; }
+}
 
 /* ------------------------------------------------------------
-   11) FOOTER / WHISPER
+   13) CINEMATIC RESULT REVEAL (Ahhh-Moment)
+   - genutzt durch: window.revealAmpelMoment()
 ------------------------------------------------------------ */
+[data-ampel-reveal]{
+  opacity:0;
+  transform:scale(.96);
+  filter:blur(2px);
+}
+[data-ampel-reveal].visible{
+  opacity:1;
+  transform:scale(1);
+  filter:none;
+  transition-duration:calc(.55s * var(--motion));
+}
+
+/* optional: Ergebnis-Karten-Polish */
+.result-card h3{ margin:0 0 8px; font-size:18px; }
+.result-card p{ margin:0; }
+
+/* ------------------------------------------------------------
+   14) FOOTER / WHISPER / STICKY
+------------------------------------------------------------ */
+.site-footer, footer{
+  padding:28px 0 36px;
+  border-top:1px solid rgba(255,255,255,.08);
+  background:rgba(5,7,14,.35);
+}
+
+.sticky-cta{
+  position:fixed;
+  left:0; right:0;
+  bottom:14px;
+  z-index:60;
+  pointer-events:none;
+  opacity:0;
+  transform:translateY(10px);
+}
+.sticky-cta .inner{
+  width:min(var(--max), calc(100% - (var(--pad) * 2)));
+  margin-inline:auto;
+  display:flex;
+  justify-content:flex-end;
+  pointer-events:auto;
+}
+.sticky-cta.is-on{ opacity:1; transform:none; }
+
 .whisper{
   position:fixed;
   left:14px;bottom:14px;
+  z-index:55;
+  max-width:min(420px, calc(100vw - 28px));
   padding:.7rem .85rem;
   border-radius:12px;
   background:rgba(255,255,255,0.06);
@@ -220,8 +399,6 @@ html.no-js body.godmode .fade-up{
   color:var(--calm-text-soft);
   opacity:0;
   transform:translateY(8px);
+  pointer-events:none;
 }
-.whisper.is-on{
-  opacity:1;
-  transform:none;
-}
+.whisper.is-on{ opacity:1; transform:none; }
