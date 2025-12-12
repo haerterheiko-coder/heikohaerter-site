@@ -23,12 +23,12 @@
   <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Favicons -->
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+  <!-- Favicons (relative, robust für Project Pages & Custom Domain) -->
+  <link rel="icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#05070E" />
 
   <!-- Preconnect -->
@@ -55,8 +55,15 @@
   {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
   </script>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="./styles.css" />
+  <!-- Styles (ohne führenden Slash, mit Cache-Busting) -->
+  <link rel="stylesheet" href="styles.css?v=2" />
+
+  <!-- No-JS Fallback: vermeidet unsichtbare Bereiche, falls JS blockiert -->
+  <noscript>
+    <style>
+      .fade-up{opacity:1 !important;transform:none !important}
+    </style>
+  </noscript>
 </head>
 <body>
   <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
@@ -410,7 +417,7 @@
   <!-- Whisper CTA -->
   <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand weiß morgen, was ansteht.</div>
 
-  <!-- App -->
-  <script src="./app.js" defer></script>
+  <!-- App (ohne führenden Slash, mit Cache-Busting) -->
+  <script src="app.js?v=2" defer></script>
 </body>
 </html>
