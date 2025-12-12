@@ -268,3 +268,39 @@ textarea:focus,select:focus,.btn:focus-visible{
   .slide .inner{max-width:min(88vw,1400px)}
   .slide.hero h1{font-size:clamp(3rem,5.6vw,5.8rem)}
 }
+/* ============================================================
+   EXISTENZ BEAT — SELBSTSTÄNDIGE
+============================================================ */
+.exist .lead{
+  max-width:42rem;
+}
+.exist-grid{
+  display:grid;
+  gap:clamp(.8rem,2.4vw,1.2rem);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  margin:1rem 0 .6rem;
+}
+.exist .card{
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.06),
+    rgba(255,255,255,.03)
+  );
+}
+.exist .card h3{
+  margin-bottom:.2rem;
+}
+.exist .micro{
+  margin-top:.6rem;
+  opacity:.9;
+}
+
+/* leichte Bedrohungsruhe */
+.exist .card::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,rgba(243,166,166,.45),transparent);
+  opacity:.35;
+}
