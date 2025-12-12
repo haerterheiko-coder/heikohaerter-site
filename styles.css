@@ -102,3 +102,6 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
 
 /* Minor utilities */
 .visually-hidden{position:absolute;inset:auto auto auto -9999px}
+
+/* --- No-JS Fallback (robust bei geblocktem JS) --- */
+.no-js .fade-up{opacity:1 !important;transform:none !important}
