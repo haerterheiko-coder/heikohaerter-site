@@ -14,6 +14,11 @@
 <body class="godmode">
 <a href="#slides" class="skip">Zum Inhalt springen</a>
 
+<!-- Cinematic overlays -->
+<div class="cinema-bars" aria-hidden="true"></div>
+<div class="film-grain" aria-hidden="true"></div>
+
+<!-- Progress & Bullets -->
 <div id="progress" aria-hidden="true"><span></span></div>
 <nav id="bullets" aria-label="Slides Navigation"></nav>
 
@@ -24,9 +29,9 @@
     <div class="inner">
       <p class="eyebrow">Ein kurzer Moment · Keine Entscheidung · Nur Klarheit</p>
 
-      <h1 id="b1t">
+      <h1 id="b1t" class="kinetic">
         Manchmal spürt man nur:<br>
-        <em>Da fehlt etwas.</em>
+        <em><span class="swap" data-words='["Da fehlt etwas.","Kein Überblick.","Zu viele To-dos."]'>Da fehlt etwas.</span></em>
       </h1>
 
       <p class="lead">
@@ -43,6 +48,7 @@
     </div>
     <div class="stage" aria-hidden="true">
       <div class="glow glow-a"></div><div class="glow glow-b"></div>
+      <canvas id="particles" class="particles"></canvas>
     </div>
   </section>
 
@@ -52,7 +58,7 @@
       <h2 id="b2t">Der Moment, in dem der Gedanke auftaucht</h2>
 
       <div class="cards">
-        <article class="card">
+        <article class="card parallax">
           <h3>22:47 · Eltern</h3>
           <p>
             Die Kinder schlafen.<br>
@@ -61,7 +67,7 @@
           </p>
         </article>
 
-        <article class="card">
+        <article class="card parallax">
           <h3>Entscheidung · Paare</h3>
           <p>
             Haus, Zukunft, Verantwortung.<br>
@@ -69,7 +75,7 @@
           </p>
         </article>
 
-        <article class="card">
+        <article class="card parallax">
           <h3>Ausfall · Selbstständige</h3>
           <p>
             Wenn du morgen nicht kannst –<br>
@@ -87,7 +93,7 @@
   <!-- BEAT 3 — WARUM JETZT -->
   <section class="slide why fade-up" id="b3" data-beat="3" aria-labelledby="b3t">
     <div class="inner">
-      <h2 id="b3t">Ungewissheit ist lauter als schlechte Nachrichten</h2>
+      <h2 id="b3t" class="parallax">Ungewissheit ist lauter als schlechte Nachrichten</h2>
 
       <p class="micro">
         Das Gehirn mag keine offenen Schleifen.<br>
