@@ -1,58 +1,118 @@
-/* ============================================
-   GODMODE HYBRID (scoped + tokens + fallbacks)
-   Drop-in NACH deinem Basis-CSS.
-   Aktivieren: <body class="godmode">
-============================================ */
+/* ============================================================
+   GODMODE++ V5 (2026)
+   High-End UI Framework für Heiko Haerter – Ruhiger Finanz-Kompass
+   Perfekt für Calm-Branding, High-End Motion, iOS/Android/Desktop
+   Aktiv: <body class="godmode">
+============================================================ */
 
-/* ---- Tokens (scoped) ---- */
-.godmode{
-  --calm-bg:#05070E; --calm-bg-soft:#0B0F19;
-  --calm-text:#EDEEF3; --calm-text-soft:rgba(237,238,243,.85);
-  --gold:#C8A44B; --gold-soft:rgba(200,164,75,.45); --gold-glow:rgba(200,164,75,.30);
-  --green:#7EDFA5; --green-soft:rgba(85,183,107,.35);
-  --yellow:#F7E39A; --yellow-soft:rgba(214,196,90,.35);
-  --red:#F3A6A6; --red-soft:rgba(200,81,81,.35);
-  --glass-bg:rgba(255,255,255,.045); --glass-border:rgba(255,255,255,.12); --glass-inset:rgba(255,255,255,.03);
-  --shadow-ambient:rgba(0,0,0,.35); --shadow-deep:rgba(0,0,0,.55);
-  --curve:cubic-bezier(.22,.61,.36,1);
+
+/* ------------------------------------------------------------
+   0) TOKENS
+------------------------------------------------------------ */
+.godmode {
+  /* Base */
+  --calm-bg:#05070E;
+  --calm-bg-soft:#0B0F19;
+  --calm-text:#EDEEF3;
+  --calm-text-soft:rgba(237,238,243,.85);
+
+  /* Brand Glow */
+  --gold:#C8A44B;
+  --gold-soft:rgba(200,164,75,.45);
+  --gold-glow:rgba(200,164,75,.30);
+
+  /* Ampel */
+  --green:#7EDFA5;
+  --green-soft:rgba(85,183,107,.35);
+  --yellow:#F7E39A;
+  --yellow-soft:rgba(214,196,90,.35);
+  --red:#F3A6A6;
+  --red-soft:rgba(200,81,81,.35);
+
+  /* Glass */
+  --glass-bg:rgba(255,255,255,.045);
+  --glass-border:rgba(255,255,255,.12);
+  --glass-inset:rgba(255,255,255,.03);
+
+  /* Shadows */
+  --shadow-ambient:rgba(0,0,0,.35);
+  --shadow-deep:rgba(0,0,0,.55);
+
+  /* Apple Motion Timing */
+  --curve: cubic-bezier(.25,.46,.45,.94);
+
+  /* Motion Toggle */
+  --motion:1;
+
+  /* Elevation-System */
+  --elevation-1: 0 4px 14px rgba(0,0,0,.22);
+  --elevation-2: 0 10px 26px rgba(0,0,0,.38);
+  --elevation-3: 0 14px 42px rgba(0,0,0,.55);
 }
 
-/* ---- Sanfter Hintergrund-Glow ---- */
-.godmode body{
+/* Prefers Reduced Motion → Soft Override */
+@media (prefers-reduced-motion:reduce){
+  .godmode { --motion:0; }
+}
+
+
+/* ------------------------------------------------------------
+   1) BACKGROUND (Fix: body.godmode)
+------------------------------------------------------------ */
+body.godmode {
   background:
     radial-gradient(circle at 18% -12%, rgba(200,164,75,.12), transparent 55%),
     radial-gradient(circle at 82% 0%, rgba(120,150,255,.08), transparent 60%),
     linear-gradient(180deg, var(--calm-bg) 0%, #02040A 68%);
+
   color:var(--calm-text);
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeSpeed;
+  -webkit-text-size-adjust: 100%; /* iOS text-correct */
 }
 
-/* ---- Motion Defaults (nur optisch) ---- */
-.godmode *{
-  transition-property:opacity,transform,box-shadow,background,border-color;
-  transition-duration:.28s;
-  transition-timing-function:var(--curve);
+
+/* ------------------------------------------------------------
+   2) MOTION ENGINE + GPU Hinting
+------------------------------------------------------------ */
+.godmode * {
+  transition-property: opacity, transform, box-shadow, background, border-color;
+  transition-duration: calc(.28s * var(--motion));
+  transition-timing-function: var(--curve);
+  will-change: transform, opacity;
+  transform: translateZ(0); /* GPU smoother */
 }
+
 @media (prefers-reduced-motion:reduce){
-  .godmode *{transition:none!important;animation:none!important}
-  .godmode .fade-up{opacity:1!important;transform:none!important}
+  .godmode * {
+    transition:none!important;
+    animation:none!important;
+    transform:none!important;
+  }
 }
 
-/* ---- Cards / Glass (mit Fallback) ---- */
+
+/* ------------------------------------------------------------
+   3) GLASS SURFACES
+------------------------------------------------------------ */
 .godmode .card,
 .godmode .premium-card,
 .godmode .story-card,
 .godmode .result-card,
 .godmode .share-card,
 .godmode .tg-card,
-.godmode .process-card{
-  background:var(--glass-bg);
-  border:1px solid var(--glass-border);
-  box-shadow:0 1px 2px var(--glass-inset) inset, 0 10px 26px var(--shadow-ambient);
-  border-radius:14px; /* bleibt dezent */
-  padding:1.1rem 1.25rem; /* minimal mehr Luft */
+.godmode .process-card,
+.godmode .calm-surface {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 1px 2px var(--glass-inset) inset,
+    var(--elevation-1);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
 }
+
 @supports (backdrop-filter:blur(14px)) or (-webkit-backdrop-filter:blur(14px)){
   .godmode .card,
   .godmode .premium-card,
@@ -60,58 +120,117 @@
   .godmode .result-card,
   .godmode .share-card,
   .godmode .tg-card,
-  .godmode .process-card{
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
+  .godmode .process-card,
+  .godmode .calm-surface {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 }
 
-/* ---- Buttons ---- */
-.godmode .btn{will-change:transform,box-shadow}
-.godmode .btn-primary{
-  background:var(--gold-soft);
+
+/* ------------------------------------------------------------
+   4) BUTTON SYSTEM (Apple Glow)
+------------------------------------------------------------ */
+.godmode .btn {
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+}
+
+/* Soft Golden Glow */
+.godmode .btn-primary {
+  background: var(--gold-soft);
   color:#0E1118;
-  box-shadow:0 6px 18px var(--gold-glow), 0 0 0 1px var(--gold) inset;
+  box-shadow:
+    0 6px 14px var(--gold-glow),
+    0 0 0 1px var(--gold) inset;
 }
-.godmode .btn-primary:hover{
-  transform:translateY(-2px);
-  box-shadow:0 14px 32px rgba(200,164,75,.42), 0 0 0 1px rgba(200,164,75,.65) inset;
+
+.godmode .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 28px rgba(200,164,75,.34),
+    0 0 0 1px rgba(200,164,75,.55) inset;
 }
-.godmode .btn-ghost{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
 
-/* ---- Section Rhythm ---- */
-.godmode .section{padding:clamp(42px,8vw,88px) 0}
+.godmode .btn-ghost {
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.03);
+}
 
-/* ---- Headings / Micro ---- */
-.godmode h1,.godmode h2{letter-spacing:-.016em;text-rendering:geometricPrecision}
-.godmode .hero-micro{opacity:.92;line-height:1.46}
 
-/* ---- Fade-in ---- */
-.godmode .fade-up{opacity:0;transform:translateY(20px)}
-.godmode .fade-up.visible{opacity:1;transform:none;transition-duration:.7s}
+/* ------------------------------------------------------------
+   5) TYPOGRAPHY
+------------------------------------------------------------ */
+.godmode h1,
+.godmode h2 {
+  letter-spacing:-.016em;
+  text-rendering: geometricPrecision;
+}
 
-/* ---- Whisper / Sticky ---- */
-.godmode .whisper{
+.godmode .hero-micro {
+  opacity:.92;
+  line-height:1.46;
+}
+
+
+/* ------------------------------------------------------------
+   6) SECTIONS
+------------------------------------------------------------ */
+.godmode .section {
+  padding: clamp(42px, 8vw, 88px) 0;
+}
+
+
+/* ------------------------------------------------------------
+   7) FADE-UP (Observer benötigt)
+------------------------------------------------------------ */
+.godmode .fade-up {
+  opacity:0;
+  transform:translateY(20px);
+}
+
+.godmode .fade-up.visible {
+  opacity:1;
+  transform:none;
+  transition-duration: calc(.7s * var(--motion));
+}
+
+
+/* ------------------------------------------------------------
+   8) WHISPER + STICKY CTA
+------------------------------------------------------------ */
+.godmode .whisper {
   background:rgba(12,16,26,.96);
   border:1px solid rgba(255,255,255,.10);
-  box-shadow:0 14px 32px var(--shadow-deep);
+  box-shadow: var(--elevation-3);
 }
-.godmode .sticky-cta .inner{
+
+.godmode .sticky-cta .inner {
   background:rgba(12,16,26,.94);
   border:1px solid rgba(233,211,148,.22);
-  box-shadow:0 18px 42px var(--shadow-deep);
+  box-shadow: var(--elevation-3);
 }
 
-/* ---- Ampel Visuals (ruhig, performant) ---- */
-.godmode .ampel-light{
-  width:62px;height:62px;border-radius:50%;
-  margin:10px auto;opacity:.9;
-}
-.godmode .ampel-green { background:var(--green-soft);  box-shadow:0 0 18px var(--green) inset }
-.godmode .ampel-yellow{ background:var(--yellow-soft); box-shadow:0 0 18px var(--yellow) inset }
-.godmode .ampel-red   { background:var(--red-soft);    box-shadow:0 0 18px var(--red) inset }
 
-/* ---- Result Cards (softer) ---- */
+/* ------------------------------------------------------------
+   9) AMPEL
+------------------------------------------------------------ */
+.godmode .ampel-light {
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  margin:10px auto;
+  opacity:.9;
+}
+
+.godmode .ampel-green  { background:var(--green-soft);  box-shadow:0 0 18px var(--green) inset; }
+.godmode .ampel-yellow { background:var(--yellow-soft); box-shadow:0 0 18px var(--yellow) inset; }
+.godmode .ampel-red    { background:var(--red-soft);    box-shadow:0 0 18px var(--red) inset; }
+
+
+/* ------------------------------------------------------------
+   10) RESULT CARDS
+------------------------------------------------------------ */
 .godmode .result-green {
   background:rgba(25,45,30,.28);
   border-color:var(--green-soft);
@@ -128,17 +247,31 @@
   box-shadow:0 0 14px rgba(200,81,81,.20);
 }
 
-/* ---- Inputs Share Composer ---- */
+
+/* ------------------------------------------------------------
+   11) INPUT FIELDS
+------------------------------------------------------------ */
 .godmode .share-card input,
-.godmode .share-card textarea{
+.godmode .share-card textarea {
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.12);
-  padding:.7rem .9rem;border-radius:8px;color:var(--calm-text);
-}
-.godmode .share-card input:focus,
-.godmode .share-card textarea:focus{
-  border-color:var(--gold-soft); outline:0;
+  padding:.7rem .9rem;
+  border-radius:8px;
+  color:var(--calm-text);
 }
 
-/* ---- Focus Ring (barrierearm, markengetreu) ---- */
-.godmode :focus-visible{outline:2px solid rgba(233,211,148,.55);outline-offset:3px;border-radius:6px}
+.godmode .share-card input:focus,
+.godmode .share-card textarea:focus {
+  border-color:var(--gold-soft);
+  outline:0;
+}
+
+
+/* ------------------------------------------------------------
+   12) ACCESSIBILITY – FOCUS RING
+------------------------------------------------------------ */
+.godmode :focus-visible {
+  outline:2px solid rgba(233,211,148,.55);
+  outline-offset:3px;
+  border-radius:6px;
+}
