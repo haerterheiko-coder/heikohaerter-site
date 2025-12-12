@@ -1,41 +1,39 @@
-<!-- /index.html -->
-<!DOCTYPE html>
-<html lang="de" class="no-js" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#05070E" />
 
-  <title>2 Minuten – zeigt sofort, was heute wichtig ist.</title>
-  <meta name="description" content="Ruhiger 2-Minuten-Blick: zeigt, was heute ansteht – anonym, ohne Unterlagen, ohne Verkauf." />
+  <title>In 2 Minuten wissen, ob heute alles gut ist – Finanz-Ampel</title>
+  <meta name="description" content="Die 2-Minuten-Ampel zeigt dir anonym, ob du heute gut aufgestellt bist – ohne Unterlagen, ohne Verkauf, ohne Stress. Orientierung statt Überforderung." />
+
   <link rel="canonical" href="https://heikohaerter.com" />
 
   <!-- Open Graph -->
-  <meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung" />
-  <meta property="og:title" content="2 Minuten – zeigt sofort, was heute wichtig ist." />
-  <meta property="og:description" content="Ein kurzer Blick: sofort sehen, ob heute etwas Wichtiges fehlt – anonym & ohne Verpflichtung." />
+  <meta property="og:site_name" content="Der ruhige Finanz-Kompass" />
+  <meta property="og:title" content="In 2 Minuten wissen, ob heute alles gut ist." />
+  <meta property="og:description" content="Die 2-Minuten-Ampel zeigt anonym, ob du heute gut aufgestellt bist – schnell, klar und ohne Verkauf." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://heikohaerter.com" />
   <meta property="og:locale" content="de_DE" />
   <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Favicons (relative für GitHub Pages) -->
+  <!-- Favicons -->
   <link rel="icon" href="favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#05070E" />
 
   <!-- Preconnect -->
   <link rel="preconnect" href="https://static.wixstatic.com" crossorigin />
   <link rel="preconnect" href="https://wa.me" crossorigin />
 
-  <!-- LCP Preload -->
+  <!-- LCP Image Preload -->
   <link
     rel="preload"
     as="image"
@@ -50,348 +48,511 @@
     fetchpriority="high"
   />
 
-  <!-- JSON-LD -->
+  <!-- Schema: Person + Tool + Brand -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Heiko Haerter",
+    "jobTitle": "Finanzbegleiter",
+    "description": "Erfinder der 2-Minuten-Ampel und des ruhigen Finanz-Kompass.",
+    "url": "https://heikohaerter.com",
+    "image": "https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png",
+    "brand": {
+      "@type": "Brand",
+      "name": "Der ruhige Finanz-Kompass",
+      "description": "Ein System für klarere finanzielle Orientierung in wenigen Minuten."
+    }
+  }
   </script>
 
-  <!-- Styles (relativ + Cache-Busting) -->
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css?v=4" />
 
-  <!-- No-JS-Fallback: verhindert unsichtbare Sektionen bei blockiertem JS -->
+  <!-- No-JS Fallback -->
   <noscript>
-    <style>.fade-up{opacity:1!important;transform:none!important}</style>
+    <style>.fade-up { opacity: 1 !important; transform: none !important; }</style>
   </noscript>
-</head>
-<body>
-  <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
+  <div class="container header-bar">
+    
+    <!-- BRAND -->
+    <a href="#hero" class="brand" aria-label="Startseite – Der ruhige Finanz-Kompass">
+      <div class="brand-top">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span class="brand-name">Heiko Haerter</span>
+      </div>
+      <span class="brand-tagline" aria-hidden="true">
+        Der ruhige Finanz-Kompass
+      </span>
+    </a>
 
-  <header>
-    <div class="container header-bar">
-      <a href="#hero" class="brand" aria-label="Startseite">
-        <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
-        <span class="hero-micro" style="letter-spacing:.08em;text-transform:uppercase">Persönliche Finanzbegleitung</span>
+    <!-- QUICK-ACTION (Kurzmodus) -->
+    <button 
+      class="btn btn-quiet" 
+      id="dfBtn" 
+      aria-pressed="false" 
+      aria-label="Kurzmodus aktivieren – 12 Sekunden Überblick"
+      title="Kurzmodus: 12-Sekunden-Überblick"
+      data-ctx="header"
+    >
+      ⚡ Kurzmodus
+    </button>
+
+  </div>
+  <!-- ===== HERO — GODMODE 2026 ===== -->
+<section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
+
+  <div class="container hero-grid">
+
+    <!-- TEXTBLOCK -->
+    <div class="stack hero-text">
+
+      <!-- Micro-Hook (rotierend durch JS) -->
+      <p class="hero-micro hook-rotate" aria-live="polite">
+        Ein Moment Ruhe – bevor der Alltag weiterläuft.
+      </p>
+
+      <!-- MAIN HEADLINE -->
+      <h1 id="hero-title">
+        In 2 Minuten weißt du,<br />
+        ob du heute gut aufgestellt bist.
+      </h1>
+
+      <!-- SUBLINE -->
+      <p class="hero-sub">
+        Die 2-Minuten-Ampel zeigt dir anonym, wie stabil dein Alltag wirkt –
+        und ob etwas Wichtiges fehlt.<br />
+        Ohne Vorbereitung. Ohne Unterlagen. Ohne Verkauf.
+      </p>
+
+      <!-- PRIMARY CTA -->
+      <a href="#ampel-check" class="btn btn-primary hero-cta" id="startCheckHero">
+        ⚡ Ampel starten
       </a>
-      <button class="btn" id="dfBtn" aria-pressed="false" title="Nur das Wichtigste anzeigen">🔍 Kurzmodus</button>
+
+      <!-- SAFETY MICROCOPY -->
+      <p class="hero-micro safety">
+        Anonym · Keine Daten · Jederzeit abbrechbar
+      </p>
+
     </div>
-  </header>
 
-  <main id="main">
-    <!-- ===== SLIDE 1: HERO ===== -->
-    <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
-      <div class="container hero-grid">
-        <div class="stack">
-          <p class="hero-micro" style="text-transform:uppercase;letter-spacing:.14em;opacity:.9">
-            2 Minuten. 3 Fragen. Deine Finanz-Ampel: Grün, Gelb oder Rot.
-          </p>
-          <h1 id="hero-title">In 2 Minuten sehen, ob heute bei deinen Finanzen etwas Wichtiges fehlt.</h1>
-          <p class="hero-micro system-tagline">
-            Der Check ist der Einstieg in ein ruhiges Finanzsystem, das dir zeigt, was heute wichtig ist – ohne Papierkram, ohne Verkauf.
-          </p>
-          <p class="hero-micro">
-            Kein Überblick bei Einkommen, Gesundheit, Haftung, Zukunft, Familie? Die Ampel sortiert das – anonym & ohne Druck.
-          </p>
-          <div class="premium-card">
-            <p class="hero-micro" style="margin:0"><strong>80 % fühlen sich nach 2 Minuten ruhiger.</strong></p>
-          </div>
-          <div class="bar">
-            <span class="chip">⭐ <strong>4,9</strong> | 250+ Menschen</span>
-            <span class="chip">Eltern · Paare · Selbstständige</span>
-            <span class="chip">Kein Verkauf · 100 % anonym</span>
-          </div>
-          <div class="stack">
-            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">⚡ „2-Minuten-Check starten“</a>
-            <button class="btn btn-ghost" id="previewToggle" type="button">Ergebnis-Vorschau ansehen</button>
-            <small class="hero-micro">Anonym · keine Daten · kein Verkauf</small>
-          </div>
-          <div id="heroPreview" class="grid auto-grid" style="display:none">
-            <div class="result-card result-green">
-              <h3>🟢 Ampel-Beispiel</h3>
-              <p class="hero-micro">Passt für heute · Als Nächstes: ruhig planen.</p>
-            </div>
-            <div class="result-card result-yellow">
-              <h3>🟡 Ampel-Beispiel</h3>
-              <p class="hero-micro">Bald wichtig · Als Nächstes angehen.</p>
-            </div>
-            <div class="result-card result-red">
-              <h3>🔴 Ampel-Beispiel</h3>
-              <p class="hero-micro">Heute wichtig · Kurz priorisieren.</p>
-            </div>
-          </div>
-        </div>
+    <!-- SIGNATURE VISUAL -->
+    <div class="hero-visual">
 
-        <div class="stack">
-          <picture>
-            <img
-              src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200"
-              alt="2-Minuten-Check ohne Papierkram"
-              width="1200" height="900" loading="eager" fetchpriority="high" decoding="async" />
-          </picture>
-        </div>
+      <div class="ampel-wrap" aria-hidden="true">
+        <div class="ampel-light ampel-green"></div>
+        <div class="ampel-light ampel-yellow"></div>
+        <div class="ampel-light ampel-red"></div>
       </div>
-    </section>
 
-    <!-- ===== SLIDE 2: ZIELGRUPPEN + SZENEN ===== -->
-    <section id="zielgruppen-szenen" class="section fade-up" aria-labelledby="tg-h">
-      <div class="container stack">
-        <div class="premium-card" aria-labelledby="tg-h">
-          <h2 id="tg-h" style="margin:0 0 .35rem">Das hilft dir, wenn du …</h2>
-          <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.2rem">
-            <li>• keine Zeit hast, dich zu kümmern</li>
-            <li>• keine Lust auf Verkaufsrunden hast</li>
-            <li>• dir unsicher bist, ob heute etwas fehlt</li>
-            <li>• dich bei Finanzen überfordert fühlst</li>
-            <li>• einfach wissen willst: Was ist jetzt wichtig?</li>
-          </ul>
-        </div>
-
-        <div class="story-grid" aria-label="Mini-Szenen">
-          <div class="story-card">
-            <p class="hero-micro"><strong>👨‍👩‍👧 Szene Eltern:</strong><br>
-              „22:47 – Kinder schlafen. Wieder dieses Gefühl: ‚Wir müssten das mal klären…‘ Die Ampel zeigt dir sofort, was heute wirklich wichtig ist.“</p>
-          </div>
-          <div class="story-card">
-            <p class="hero-micro"><strong>💬 Szene Paare:</strong><br>
-              „Ihr wollt Entscheidungen nicht blind treffen? Die Ampel zeigt klar: Jetzt · Als Nächstes · Später.“</p>
-          </div>
-          <div class="story-card">
-            <p class="hero-micro"><strong>💼 Szene Selbstständige:</strong><br>
-              „Ausfall wäre ein echtes Risiko. Die Ampel zeigt dir in 2 Minuten, wo du heute verwundbar bist.“</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SLIDE 3: PROZESS ===== -->
-    <section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
-      <div class="container">
-        <h2 id="prozess-h">So läuft der Check</h2>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:.8rem">
-          <div class="premium-card"><h3>Kurz antworten (ca. 2 Minuten)</h3></div>
-          <div class="premium-card"><h3>Deine Ampel sehen</h3></div>
-          <div class="premium-card">
-            <h3>In Ruhe entscheiden</h3>
-            <p class="hero-micro" style="margin-top:.4rem">
-              Du entscheidest in Ruhe, ob du etwas ändern möchtest oder einfach nur Klarheit mitnimmst.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SLIDE 4: SICHERHEIT ===== -->
-    <section id="sicherheit" class="section fade-up" aria-labelledby="safe-h">
-      <div class="container">
-        <h2 id="safe-h">Was NICHT passiert</h2>
-        <div class="premium-card safety-card">
-          <ul class="hero-micro" style="margin:0;padding-left:1.2rem">
-            <li>❌ Kein Verkauf</li>
-            <li>🚫 Keine Datenweitergabe</li>
-            <li>📞 Kein Überraschungsanruf</li>
-            <li>💸 Kein Nachteil, wenn du nichts machst</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SLIDE 5: VORHER–NACHHER ===== -->
-    <section id="before-after" class="section fade-up" aria-labelledby="ba-h">
-      <div class="container">
-        <h2 id="ba-h">Vorher – Nachher</h2>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin-top:.8rem">
-          <div class="card">
-            <h3>Vorher</h3>
-            <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
-              <li>„Ich hoffe, dass alles passt…“</li>
-              <li>„Ich weiß nicht, wo ich anfangen soll.“</li>
-              <li>„Ich schiebe es vor mir her.“</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Nachher</h3>
-            <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
-              <li>„Ich weiß, was heute wichtig ist.“</li>
-              <li>„Ich habe Klarheit – ohne Verkauf.“</li>
-              <li>„Ich fühle mich sicherer.“</li>
-            </ul>
-          </div>
-        </div>
-        <div class="premium-card" style="margin-top:1.1rem">
-          <p class="hero-micro" style="margin:0"><strong>Zero-Risk:</strong> Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SLIDE 6: ETHOS + SOCIAL + FAQ + CTA ===== -->
-    <section id="ethos-social" class="section fade-up" aria-labelledby="ethos-h">
-      <div class="container stack">
-        <h2 id="ethos-h">Wer ich bin</h2>
-        <div class="premium-card">
-          <p class="hero-micro" style="margin:0">
-            „Ich bin Heiko. Ich habe diese Ampel gebaut, weil ich selbst diese 2-Stunden-Beratungen gehasst habe Voller Tarife, Jargon und Verkaufsdruck.
-            Heute dauert Orientierung 2 Minuten – ruhig, verständlich und ohne Verkauf.“
-          </p>
-        </div>
-
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
-          <div class="story-card">
-            <p class="hero-micro"><strong>Eltern</strong><br>
-              „22:47 – Kinder schlafen. Wieder dieses Gefühl: ‚Wir müssten das mal klären…‘ Die Ampel zeigt dir sofort, was heute wirklich wichtig ist.“</p>
-          </div>
-          <div class="story-card">
-            <p class="hero-micro"><strong>Paare</strong><br>
-              „Ihr wollt Entscheidungen nicht blind treffen? Die Ampel zeigt klar: Jetzt · Als Nächstes · Später.“</p>
-          </div>
-          <div class="story-card">
-            <p class="hero-micro"><strong>Selbstständige</strong><br>
-              „Ausfall wäre ein echtes Risiko. Die Ampel zeigt dir in 2 Minuten, wo du heute verwundbar bist.“</p>
-          </div>
-        </div>
-
-        <details class="premium-card">
-          <summary style="cursor:pointer;font-weight:700">FAQ</summary>
-          <p class="hero-micro" style="margin-top:.4rem">—</p>
-        </details>
-
-        <div style="text-align:center;max-width:720px;margin-inline:auto">
-          <h2>In 2 Minuten weniger Unsicherheit. Starte jetzt.</h2>
-          <a href="#ampel-check" class="btn btn-primary" id="ctaFinal">⚡ Jetzt starten</a>
-          <p class="hero-micro" style="margin-top:.6rem;">Anonym · Keine Daten · Kein Verkauf</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 2-MINUTEN-CHECK ===== -->
-    <section id="ampel-check" class="section fade-up">
-      <div class="container" style="max-width:720px">
-        <div class="stack" id="check-start">
-          <h2>Dein 2-Minuten-Check</h2>
-          <p class="hero-micro">3 kurze Fragen → sofort deine Ampel.</p>
-          <a class="btn btn-primary" id="startCheckBtn">⚡ Jetzt starten</a>
-          <small class="hero-micro" style="opacity:.8">Wenig Zeit? Der <em>Kurzmodus</em> taucht später nochmal auf.</small>
-        </div>
-
-        <div id="check-steps" style="display:none;margin-top:1.2rem">
-          <div class="premium-card" style="margin-bottom:.8rem">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
-              <strong id="stepLabel">Schritt 1 von 3</strong>
-              <span class="hero-micro" id="stepHint">Kurzer Eindruck reicht.</span>
-            </div>
-            <div class="bar" style="width:100%;height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.12)">
-              <span id="progressBar" style="display:block;height:10px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));transition:width .35s var(--ease)"></span>
-            </div>
-          </div>
-
-          <div class="premium-card step" data-step="1" style="display:none">
-            <h3>1 · Wenn du 6 Monate ausfallen würdest – wie sicher wäre euer Einkommen?</h3>
-            <div class="stack">
-              <button class="btn small" data-value="1">Wir hätten ein echtes Problem</button>
-              <button class="btn small" data-value="2">Wir würden klarkommen, aber es wäre eng</button>
-              <button class="btn small" data-value="3">Wir wären stabil abgesichert</button>
-            </div>
-          </div>
-
-          <div class="premium-card step" data-step="2" style="display:none">
-            <h3>2 · Wie gut findest du wichtige Unterlagen, wenn du sie brauchst?</h3>
-            <div class="stack">
-              <button class="btn small" data-value="1">Ich suche lange / finde nichts</button>
-              <button class="btn small" data-value="2">Finde das Meiste direkt</button>
-              <button class="btn small" data-value="3">Finde alles, was ich brauche</button>
-            </div>
-          </div>
-
-          <div class="premium-card step" data-step="3" style="display:none">
-            <h3>3 · „Wie wohl fühlst du dich beim Thema Zukunft &amp; Alter?“</h3>
-            <div class="stack">
-              <button class="btn small" data-value="1">Gar nicht / unsicher</button>
-              <button class="btn small" data-value="2">Teilweise – nicht sicher</button>
-              <button class="btn small" data-value="3">Fühlt sich gut an</button>
-            </div>
-          </div>
-        </div>
-
-        <div id="check-result" style="display:none;margin-top:1.4rem"></div>
-
-        <div class="premium-card" style="margin-top:1.2rem">
-          <h3 style="margin:.1rem 0 .45rem;font-size:1.02rem;">Wenig Zeit?</h3>
-          <p class="hero-micro" style="margin-top:.1rem">12-Sekunden-Kurzmodus: Gefühl für <em>Jetzt · Als Nächstes · Später</em> – ohne Details.</p>
-          <a href="#ampel-check" class="btn btn-ghost" id="startShort">⏱️ Kurzmodus starten</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== SHARE ===== -->
-    <section class="section fade-up" id="share" aria-labelledby="share-title">
-      <div class="container">
-        <h2 id="share-title">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
-        <p class="hero-micro">Der Link übernimmt alles: Die Person sieht anonym die Ampel – ohne Unterlagen und ohne Verkauf.</p>
-        <div class="premium-card" style="border:1px dashed rgba(233,211,148,.45);background:rgba(233,211,148,.08);margin:.8rem 0 1rem">
-          <p class="hero-micro" style="margin:0"><strong>Zero-Risk:</strong> Wenn’s der Person nichts bringt, gibt’s <strong>25 €</strong>.</p>
-        </div>
-
-        <div class="bar" style="margin:.4rem 0 0">
-          <button class="btn seg-btn" data-seg="eltern">Eltern</button>
-          <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
-          <button class="btn seg-btn" data-seg="freunde">Freunde</button>
-          <button class="btn seg-btn" data-seg="selbst">Selbstständige</button>
-          <button class="btn seg-btn" data-seg="partner">Partner</button>
-          <button class="btn seg-btn" data-seg="neutral">Für alle</button>
-        </div>
-
-        <div class="share stack" id="shareBox" style="margin-top:1rem">
-          <h3 style="margin:.2rem 0 .25rem">Text zum Weitergeben</h3>
-          <p class="hero-micro" style="margin:0 0 .6rem">Kopieren oder direkt per WhatsApp senden.</p>
-
-          <label for="refName" class="hero-micro" style="font-size:.92rem;color:#DDE3F4">Dein Vorname (optional):</label>
-          <input id="refName" name="ref" placeholder="z. B. Alex (Papa) / Dani – Chef" />
-
-          <textarea rows="6" id="refText" inputmode="text" spellcheck="false"
-            data-variants='{ "neutral":[ "Hey, hab das gerade gesehen – dachte sofort an dich. 2 Minuten – zeigt, ob heute etwas für dich offen ist. Wenn’s dir nichts bringt: 25 €. {{URL}}","Eine neutrale Einschätzung: anonym & ohne Verpflichtung. Du siehst gleich, wie es für heute wirkt. {{URL}}","Falls du dieses „Ich müsste mich mal kümmern…“ kennst – hier bekommst du in 2 Min ein Gefühl für heute. {{URL}}" ], "eltern":[ "Kurz für Eltern (2 Min): zeigt, ob heute etwas offen ist – ohne Verkauf. Wenn’s nichts bringt: 25 €. {{URL}}","Anonym sehen, ob für die Familie heute etwas ansteht – ohne Druck. {{URL}}" ], "kollegen":[ "2-Minuten-Blick für die To-do-Liste: zeigt dir, ob heute etwas offen ist – ohne Tarifkram. {{URL}}","Nutze ich selbst als kurzen Blick ohne Aufwand. Vielleicht hilft’s dir auch. {{URL}}" ], "freunde":[ "Hey, kurzer Blick (2 Min), komplett anonym – zeigt dir, was heute wichtig sein könnte. {{URL}}","Hab das gesehen & dachte an dich – null Druck, einfach hilfreich. {{URL}}" ], "selbst":[ "Für Selbstständige: kurzer 2-Minuten-Blick, ob gerade etwas ansteht – ohne Verkauf. {{URL}}" ], "partner":[ "Magst du kurz schauen (2 Min), ob für heute etwas ansteht? {{URL}}" ] }'
-          ></textarea>
-
-          <div class="bar">
-            <button type="button" id="readyMsg" class="btn btn-primary">✨ Fertigen Text übernehmen</button>
-            <button type="button" id="magicLine" class="btn">+ Beliebten Start-Satz einfügen</button>
-          </div>
-
-          <div class="premium-card">
-            <strong style="display:block;font-size:.85rem;color:var(--muted-soft);margin-bottom:.3rem">WhatsApp-Vorschau</strong>
-            <div id="waPreviewText" class="hero-micro">Wird erstellt…</div>
-          </div>
-
-          <p class="hero-micro">
-            Tipp: Eine persönliche Zeile wirkt immer besser.
-            <button type="button" id="addPersonal" class="btn" style="padding:.4rem .7rem">+ Persönliche Zeile</button>
-          </p>
-
-          <div class="bar">
-            <button class="btn btn-ghost" id="copyBtn">📋 Text kopieren</button>
-            <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener">💬 WhatsApp</a>
-            <button class="btn btn-ghost" id="nativeShare" type="button">📲 System-Teilen</button>
-            <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer%20Blick&body=">✉️ Mail</a>
-          </div>
-          <small class="hero-micro">Zählt ab: Erstgespräch – kein Abschluss nötig.</small>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer role="contentinfo">
-    <div class="container" style="text-align:center">
-      <div style="margin-bottom:.6rem">© <span id="yearNow">2026</span> Heiko Haerter – Persönliche Finanzbegleitung · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></div>
-      <div class="hero-micro">Privates Dankeschön – unabhängig von Organisationen. Keine DVAG-Aktion.</div>
     </div>
-  </footer>
 
-  <!-- Sticky Mobile CTA -->
-  <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
-    <div class="inner"><a href="#ampel-check" class="btn btn-primary" data-ctx="sticky">⚡ 2-Minuten-Check</a></div>
   </div>
 
-  <!-- Whisper CTA -->
-  <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand weiß morgen, was ansteht.</div>
+</section>
+<section id="zielgruppen" class="section fade-up" aria-labelledby="zielgruppen-h">
+  <div class="container stack">
 
-  <!-- App (relativ + Cache-Busting) -->
-  <script src="app.js?v=3" defer></script>
-</body>
-</html>
+    <h2 id="zielgruppen-h">Für wen die Ampel besonders hilfreich ist</h2>
+
+    <div class="grid tg-grid">
+
+      <!-- Eltern -->
+      <div class="tg-card">
+        <h3>👨‍👩‍👧 Eltern</h3>
+        <p class="hero-micro">
+          Wenn du manchmal hoffst, nichts Wichtiges zu übersehen – die Ampel zeigt dir sofort, wie stabil heute alles wirkt.
+        </p>
+        <a href="#ampel-check" class="btn btn-ghost small">Ampel starten</a>
+      </div>
+
+      <!-- Selbstständige -->
+      <div class="tg-card">
+        <h3>💼 Selbstständige</h3>
+        <p class="hero-micro">
+          Wenn dein Einkommen und euer Alltag komplett an dir hängen – die Ampel zeigt, wo du heute verwundbar bist.
+        </p>
+        <a href="#ampel-check" class="btn btn-ghost small">Ampel starten</a>
+      </div>
+
+      <!-- Paare -->
+      <div class="tg-card">
+        <h3>💕 Paare</h3>
+        <p class="hero-micro">
+          Wenn ihr Entscheidungen nicht blind treffen wollt – die Ampel zeigt: Jetzt · Als Nächstes · Später.
+        </p>
+        <a href="#ampel-check" class="btn btn-ghost small">Ampel starten</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section id="neuro" class="section fade-up" aria-labelledby="neuro-h">
+  <div class="container stack">
+
+    <h2 id="neuro-h">Warum du manchmal unsicher bist – obwohl du es nicht willst</h2>
+
+    <p class="hero-sub" style="max-width:680px">
+      Dein Gehirn mag Orientierung – aber es hasst Ungewissheit.  
+      80 % der Menschen wissen nicht, ob ihre Absicherung im Ernstfall trägt.  
+      Die Ampel reduziert diesen Mental Load in wenigen Minuten.
+    </p>
+
+    <div class="mini-icons">
+      <div class="mi">
+        <span class="icon">🔍</span>
+        <p class="hero-micro">Risiko klar sehen</p>
+      </div>
+      <div class="mi">
+        <span class="icon">🧠</span>
+        <p class="hero-micro">Kopf entlasten</p>
+      </div>
+      <div class="mi">
+        <span class="icon">🌿</span>
+        <p class="hero-micro">Sicherheit spüren</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
+  <div class="container stack">
+
+    <h2 id="prozess-h">So bekommst du Klarheit – ohne Aufwand</h2>
+
+    <div class="grid process-grid">
+
+      <div class="process-card">
+        <h3>1 · Drei kurze Fragen</h3>
+        <p class="hero-micro">
+          Neutral, anonym, verständlich – selbst wenn dein Kopf voll ist.
+        </p>
+      </div>
+
+      <div class="process-card">
+        <h3>2 · Deine Ampel</h3>
+        <p class="hero-micro">
+          Grün · Gelb · Rot – sofort klar, was heute wichtig ist.
+        </p>
+      </div>
+
+      <div class="process-card">
+        <h3>3 · Ruhe & nächste Schritte</h3>
+        <p class="hero-micro">
+          Wenn du möchtest, klären wir später in Ruhe, was die Ampel sichtbar macht.
+        </p>
+      </div>
+
+    </div>
+
+    <a href="#ampel-check" class="btn btn-primary" style="margin-top:1rem">
+      Jetzt starten
+    </a>
+
+  </div>
+</section>
+<section id="sicherheit" class="section fade-up" aria-labelledby="safe-h">
+  <div class="container stack">
+
+    <h2 id="safe-h">Was die Ampel NICHT macht</h2>
+
+    <div class="premium-card safety-list">
+      <ul>
+        <li>❌ Kein Verkauf</li>
+        <li>🚫 Keine Datenweitergabe</li>
+        <li>📞 Keine unerwarteten Anrufe</li>
+        <li>💸 Kein Nachteil, wenn du danach nichts machst</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section id="before-after" class="section fade-up" aria-labelledby="ba-h">
+  <div class="container">
+
+    <h2 id="ba-h">Wie sich Klarheit anfühlt</h2>
+
+    <div class="grid ba-grid">
+
+      <!-- BEFORE -->
+      <div class="card">
+        <h3>Vorher</h3>
+        <ul>
+          <li>Viele offene Fragen</li>
+          <li>Verträge überall verteilt</li>
+          <li>Bauchgefühl statt Struktur</li>
+          <li>„Ich hoffe, es passt schon.“</li>
+          <li>Mental Load</li>
+        </ul>
+      </div>
+
+      <!-- AFTER -->
+      <div class="card">
+        <h3>Nachher</h3>
+        <ul>
+          <li>Eine klare Ampel</li>
+          <li>Orientierung in Sekunden</li>
+          <li>Struktur statt Stress</li>
+          <li>Ein ruhiger Kopf</li>
+          <li>Sicherheit für den Alltag</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<section id="heiko" class="section fade-up" aria-labelledby="heiko-h">
+  <div class="container stack">
+
+    <h2 id="heiko-h">Warum ich die Ampel gebaut habe</h2>
+
+    <div class="premium-card">
+      <p class="hero-micro">
+        Finanzen sollen nicht belasten. Sie sollen Orientierung geben – selbst, wenn der Kopf voll ist.<br><br>
+        Darum bekommst du zuerst Klarheit. Ohne Unterlagen. Ohne Vorbereitung. Ohne Druck.<br><br>
+        Wenn du danach mehr Sicherheit willst, klären wir gemeinsam, was wichtig ist –  
+        mit der Struktur der Deutschen Vermögensberatung im Hintergrund.
+      </p>
+    </div>
+
+  </div>
+</section>
+<!-- ===== 2-MINUTEN-CHECK — GODMODE 2026 ===== -->
+<section id="ampel-check" class="section fade-up" aria-labelledby="check-h">
+  <div class="container" style="max-width:680px">
+
+    <!-- INTRO -->
+    <div class="stack" id="check-start">
+      <h2 id="check-h">Dein 2-Minuten-Check</h2>
+      <p class="hero-micro" style="margin-top:.2rem">
+        Drei kurze Fragen → sofort deine Ampel.
+      </p>
+
+      <a class="btn btn-primary" id="startCheckBtn">⚡ Jetzt starten</a>
+
+      <p class="hero-micro safety" style="margin-top:.4rem">
+        Anonym · Keine Daten · Jederzeit abbrechbar
+      </p>
+    </div>
+
+    <!-- PROGRESS + STEPS -->
+    <div id="check-steps" style="display:none;margin-top:1.4rem">
+
+      <!-- PROGRESS BAR -->
+      <div class="premium-card progress-shell">
+        <div class="progress-header">
+          <strong id="stepLabel">Schritt 1 von 3</strong>
+          <span class="hero-micro" id="stepHint">Eine spontane Antwort reicht.</span>
+        </div>
+
+        <div class="progress-bar">
+          <span id="progressBar"></span>
+        </div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="premium-card step" data-step="1" style="display:none">
+        <h3>
+          Wie sicher wäre euer Einkommen,<br />
+          wenn du 6 Monate ausfallen würdest?
+        </h3>
+
+        <div class="stack">
+          <button class="btn answer" data-value="1">Wir hätten ein echtes Problem</button>
+          <button class="btn answer" data-value="2">Wir würden klarkommen – aber eng</button>
+          <button class="btn answer" data-value="3">Wir wären stabil abgesichert</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="premium-card step" data-step="2" style="display:none">
+        <h3>
+          Wie schnell findest du wichtige Unterlagen,<br />
+          wenn du sie brauchst?
+        </h3>
+
+        <div class="stack">
+          <button class="btn answer" data-value="1">Ich suche lange oder finde nichts</button>
+          <button class="btn answer" data-value="2">Finde das Meiste direkt</button>
+          <button class="btn answer" data-value="3">Finde alles sofort</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="premium-card step" data-step="3" style="display:none">
+        <h3>
+          Wie sicher fühlst du dich beim Thema<br />
+          Zukunft & Alter?
+        </h3>
+
+        <div class="stack">
+          <button class="btn answer" data-value="1">Unsicher / kein gutes Gefühl</button>
+          <button class="btn answer" data-value="2">Teils gut, teils unsicher</button>
+          <button class="btn answer" data-value="3">Fühlt sich stabil an</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESULT -->
+    <div id="check-result" style="display:none;margin-top:1.6rem"></div>
+
+    <!-- SHORT MODE -->
+    <div class="premium-card" style="margin-top:1.4rem">
+      <h3 style="margin:.1rem 0 .45rem;font-size:1.02rem;">
+        Wenig Zeit?
+      </h3>
+      <p class="hero-micro" style="margin-top:.1rem">
+        12-Sekunden-Kurzmodus: Gefühl für <em>Jetzt · Als Nächstes · Später</em>.
+      </p>
+
+      <a href="#ampel-check" class="btn btn-ghost" id="startShort">
+        ⏱️ Kurzmodus starten
+      </a>
+    </div>
+
+  </div>
+</section>
+<!-- ===== SHARE — GODMODE 2026 ===== -->
+<section id="share" class="section fade-up" aria-labelledby="share-title">
+  <div class="container stack" style="max-width:720px">
+
+    <!-- HERO -->
+    <h2 id="share-title">Wenn dir die Ampel Ruhe gegeben hat – gib sie weiter.</h2>
+    <p class="hero-sub">
+      Viele Menschen hoffen heimlich, nichts Wichtiges zu übersehen.  
+      Dein Link kann jemandem heute wirklich Last abnehmen – anonym, ohne Druck.
+    </p>
+
+    <!-- SOCIAL CURRENCY BLOCK -->
+    <div class="premium-card share-value">
+      <h3 style="margin:0 0 .45rem">Warum Weitergeben nicht weird ist</h3>
+      <ul class="hero-micro" style="padding-left:1.1rem;margin:0">
+        <li>Du verkaufst nichts</li>
+        <li>Du gibst Orientierung, keine Werbung</li>
+        <li>Es kostet nichts</li>
+        <li>Es hilft sofort</li>
+      </ul>
+    </div>
+
+    <!-- SELECTOR -->
+    <div class="bar" style="margin:.6rem 0 0">
+      <button class="btn seg-btn" data-seg="eltern">Eltern</button>
+      <button class="btn seg-btn" data-seg="paare">Paare</button>
+      <button class="btn seg-btn" data-seg="freunde">Freunde</button>
+      <button class="btn seg-btn" data-seg="selbst">Selbstständige</button>
+      <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
+      <button class="btn seg-btn" data-seg="neutral">Für alle</button>
+    </div>
+
+    <!-- TEXT-GENERATOR -->
+    <div class="premium-card share-card stack" id="shareBox">
+
+      <h3 style="margin:.2rem 0 .4rem">Text zum Weitergeben</h3>
+      <p class="hero-micro" style="margin:0 0 .6rem">Kopieren oder direkt per WhatsApp senden.</p>
+
+      <label for="refName" class="hero-micro" style="font-size:.9rem">Dein Vorname (optional):</label>
+      <input id="refName" name="ref" placeholder="z. B. Alex / Dani / Papa" />
+
+      <textarea
+        rows="6"
+        id="refText"
+        spellcheck="false"
+        data-variants='{
+          "neutral": [
+            "Hey, hab das gerade gesehen – dachte sofort an dich. 2 Minuten, anonym – zeigt dir, ob heute etwas offen ist. {{URL}}",
+            "Neutrale Einschätzung, ohne Verkauf. Du siehst gleich, wie stabil heute alles wirkt. {{URL}}",
+            "Wenn du dieses „Ich müsste mich mal kümmern…“ kennst – hier bekommst du in 2 Minuten ein Gefühl für heute. {{URL}}"
+          ],
+          "eltern": [
+            "Kurz für Eltern (2 Min): zeigt anonym, ob heute etwas offen ist – ohne Verkauf. {{URL}}",
+            "Ein kurzer Blick: anonym sehen, ob für die Familie heute etwas ansteht. {{URL}}"
+          ],
+          "paare": [
+            "Für Paare: 2 Minuten, komplett anonym – zeigt klar: Jetzt · Als Nächstes · Später. {{URL}}"
+          ],
+          "freunde": [
+            "Hey – kurzer Blick (2 Min), komplett anonym. Zeigt dir, was heute wichtig sein könnte. {{URL}}",
+            "Hab das gesehen & dachte an dich – null Druck, einfach hilfreich. {{URL}}"
+          ],
+          "selbst": [
+            "Für Selbstständige: 2-Minuten-Blick, ob heute etwas ansteht – ohne Verkauf. {{URL}}",
+            "Nutze ich selbst als kurzen Blick ohne Aufwand. Vielleicht hilft’s dir auch. {{URL}}"
+          ],
+          "kollegen": [
+            "2-Minuten-Blick für die To-do-Liste: zeigt dir anonym, ob heute etwas offen ist. {{URL}}"
+          ]
+        }'
+      ></textarea>
+
+      <div class="bar">
+        <button type="button" id="readyMsg" class="btn btn-primary">✨ Text übernehmen</button>
+        <button type="button" id="magicLine" class="btn">+ Beliebter Startsatz</button>
+      </div>
+
+      <!-- WHATSAPP PREVIEW -->
+      <div class="premium-card wa-preview">
+        <strong class="hero-micro label">WhatsApp-Vorschau</strong>
+        <div id="waPreviewText" class="hero-micro">Wird erstellt…</div>
+      </div>
+
+      <p class="hero-micro">
+        Tipp: Eine persönliche Zeile wirkt immer besser.
+        <button type="button" id="addPersonal" class="btn small">+ Persönlich</button>
+      </p>
+
+      <!-- SHARE BUTTONS -->
+      <div class="bar">
+        <button class="btn btn-ghost" id="copyBtn">📋 Kopieren</button>
+        <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <button class="btn btn-ghost" id="nativeShare" type="button">📲 Teilen</button>
+        <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer Blick&body=">✉️ Mail</a>
+      </div>
+
+      <small class="hero-micro trust-line">
+        Du hilfst heute jemandem – ganz ohne Druck.
+      </small>
+
+    </div>
+
+    <!-- SOCIAL PROOF FOR SHARING -->
+    <div class="stack share-social">
+      <blockquote class="hero-micro">„Hab’s weitergegeben – kam total gut an.“</blockquote>
+      <blockquote class="hero-micro">„Meine Schwester meinte: ‚Das hat mir gerade gefehlt.‘“</blockquote>
+      <blockquote class="hero-micro">„Fühlt sich gut an, etwas Kleines weiterzugeben.“</blockquote>
+    </div>
+
+  </div>
+</section>
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-wrap">
+
+    <p class="hero-micro" style="opacity:.9;margin:0;">
+      © <span id="yearNow">2026</span> Heiko Haerter · Der ruhige Finanz-Kompass
+    </p>
+
+    <p class="hero-micro" style="margin:.25rem 0 0;">
+      <a href="/impressum">Impressum</a> · 
+      <a href="/datenschutz">Datenschutz</a>
+    </p>
+
+    <p class="hero-micro" style="opacity:.65;margin-top:.4rem;">
+      Hinweis: Ruhiges Finanzsystem – Unterstützung ohne Verkaufsdruck.  
+      Private Initiative, unabhängig von Organisationen.
+    </p>
+
+  </div>
+</footer>
+<div class="sticky-cta" id="stickyCTA" aria-hidden="true">
+  <div class="inner">
+    <a href="#ampel-check" class="btn btn-primary" data-ctx="sticky">
+      ⚡ 2-Minuten-Ampel starten
+    </a>
+  </div>
+</div>
+<div class="whisper" id="whisper" role="status" aria-live="polite">
+  💛 Ein kurzer Hinweis: Die Ampel zeigt dir heute in 2 Minuten, ob alles gut ist.
+</div>
+
+</head>
