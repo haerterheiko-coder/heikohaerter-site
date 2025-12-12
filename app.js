@@ -267,3 +267,30 @@
   }
 
 })();
+/* ----------------------------------------------------------
+   EXISTENZ MICRO-TENSION (STILL)
+---------------------------------------------------------- */
+(function(){
+  const exist = document.querySelector(".slide.exist");
+  if(!exist) return;
+
+  const cards = exist.querySelectorAll(".card");
+  let armed = false;
+
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting && !armed){
+        armed = true;
+        cards.forEach((c,i)=>{
+          setTimeout(()=>{
+            c.style.boxShadow =
+              "0 18px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(243,166,166,.18) inset";
+          }, i*120);
+        });
+        io.disconnect();
+      }
+    });
+  },{threshold:.5});
+
+  io.observe(exist);
+})();
