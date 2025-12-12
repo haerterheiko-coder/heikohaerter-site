@@ -1,13 +1,13 @@
 /* ============================================================
-   GODMODE++ V5 (2026)
-   High-End UI Framework für Heiko Haerter – Ruhiger Finanz-Kompass
-   Perfekt für Calm-Branding, High-End Motion, iOS/Android/Desktop
-   Aktiv: <body class="godmode">
+   GODMODE++ V5.1 (2026)
+   High-End UI Framework – Ruhiger Finanz- & Arbeitgeber-Kompass
+   System-Level CSS für SaaS / Funnel / Handwerk / Entscheider
+   Aktivierung: <body class="godmode" data-funnel="cold|warm|hot">
 ============================================================ */
 
 
 /* ------------------------------------------------------------
-   0) TOKENS
+   0) CORE TOKENS (FOUNDATION)
 ------------------------------------------------------------ */
 .godmode {
   /* Base */
@@ -16,12 +16,12 @@
   --calm-text:#EDEEF3;
   --calm-text-soft:rgba(237,238,243,.85);
 
-  /* Brand Glow */
+  /* Brand */
   --gold:#C8A44B;
   --gold-soft:rgba(200,164,75,.45);
   --gold-glow:rgba(200,164,75,.30);
 
-  /* Ampel */
+  /* Status Colors */
   --green:#7EDFA5;
   --green-soft:rgba(85,183,107,.35);
   --yellow:#F7E39A;
@@ -29,59 +29,66 @@
   --red:#F3A6A6;
   --red-soft:rgba(200,81,81,.35);
 
+  /* Semantic States */
+  --state-calm: var(--calm-bg-soft);
+  --state-trust: rgba(25,35,60,.45);
+  --state-attention: rgba(70,70,32,.35);
+  --state-risk: rgba(65,22,22,.35);
+
+  /* Semantic Accents */
+  --accent-primary: var(--gold);
+  --accent-positive: var(--green);
+  --accent-warning: var(--yellow);
+  --accent-negative: var(--red);
+
   /* Glass */
   --glass-bg:rgba(255,255,255,.045);
   --glass-border:rgba(255,255,255,.12);
   --glass-inset:rgba(255,255,255,.03);
 
-  /* Shadows */
-  --shadow-ambient:rgba(0,0,0,.35);
-  --shadow-deep:rgba(0,0,0,.55);
-
-  /* Apple Motion Timing */
-  --curve: cubic-bezier(.25,.46,.45,.94);
-
-  /* Motion Toggle */
-  --motion:1;
-
-  /* Elevation-System */
+  /* Elevation */
   --elevation-1: 0 4px 14px rgba(0,0,0,.22);
   --elevation-2: 0 10px 26px rgba(0,0,0,.38);
   --elevation-3: 0 14px 42px rgba(0,0,0,.55);
+
+  /* Motion */
+  --curve:cubic-bezier(.25,.46,.45,.94);
+  --motion:1;
 }
 
-/* Prefers Reduced Motion → Soft Override */
+
+/* ------------------------------------------------------------
+   1) ACCESSIBILITY – REDUCED MOTION
+------------------------------------------------------------ */
 @media (prefers-reduced-motion:reduce){
   .godmode { --motion:0; }
 }
 
 
 /* ------------------------------------------------------------
-   1) BACKGROUND (Fix: body.godmode)
+   2) BACKGROUND & BASE
 ------------------------------------------------------------ */
 body.godmode {
   background:
     radial-gradient(circle at 18% -12%, rgba(200,164,75,.12), transparent 55%),
     radial-gradient(circle at 82% 0%, rgba(120,150,255,.08), transparent 60%),
     linear-gradient(180deg, var(--calm-bg) 0%, #02040A 68%);
-
   color:var(--calm-text);
-
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeSpeed;
-  -webkit-text-size-adjust: 100%; /* iOS text-correct */
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeSpeed;
+  -webkit-text-size-adjust:100%;
 }
 
 
 /* ------------------------------------------------------------
-   2) MOTION ENGINE + GPU Hinting
+   3) MOTION ENGINE (GPU SAFE)
 ------------------------------------------------------------ */
 .godmode * {
-  transition-property: opacity, transform, box-shadow, background, border-color;
-  transition-duration: calc(.28s * var(--motion));
-  transition-timing-function: var(--curve);
-  will-change: transform, opacity;
-  transform: translateZ(0); /* GPU smoother */
+  transition-property:opacity, transform, box-shadow, background, border-color;
+  transition-duration:calc(.28s * var(--motion));
+  transition-timing-function:var(--curve);
+  will-change:transform, opacity;
+  transform:translateZ(0);
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -94,51 +101,80 @@ body.godmode {
 
 
 /* ------------------------------------------------------------
-   3) GLASS SURFACES
+   4) MOTION HIERARCHY
+------------------------------------------------------------ */
+.godmode .motion-slow   { transition-duration:calc(.9s * var(--motion)); }
+.godmode .motion-normal { transition-duration:calc(.45s * var(--motion)); }
+.godmode .motion-fast   { transition-duration:calc(.22s * var(--motion)); }
+
+
+/* ------------------------------------------------------------
+   5) FUNNEL STATES (app.js ready)
+------------------------------------------------------------ */
+.godmode[data-funnel="cold"] { --motion:.85; }
+.godmode[data-funnel="warm"] { --motion:1; }
+.godmode[data-funnel="hot"]  { --motion:1.15; }
+
+
+/* ------------------------------------------------------------
+   6) GLASS SURFACES
 ------------------------------------------------------------ */
 .godmode .card,
+.godmode .calm-surface,
 .godmode .premium-card,
 .godmode .story-card,
 .godmode .result-card,
 .godmode .share-card,
-.godmode .tg-card,
-.godmode .process-card,
-.godmode .calm-surface {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+.godmode .process-card {
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
   box-shadow:
     0 1px 2px var(--glass-inset) inset,
     var(--elevation-1);
-  border-radius: 14px;
-  padding: 1.1rem 1.25rem;
+  border-radius:14px;
+  padding:1.1rem 1.25rem;
 }
 
-@supports (backdrop-filter:blur(14px)) or (-webkit-backdrop-filter:blur(14px)){
+@supports (backdrop-filter:blur(14px)){
   .godmode .card,
-  .godmode .premium-card,
-  .godmode .story-card,
-  .godmode .result-card,
-  .godmode .share-card,
-  .godmode .tg-card,
-  .godmode .process-card,
   .godmode .calm-surface {
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter:blur(14px);
   }
 }
 
 
 /* ------------------------------------------------------------
-   4) BUTTON SYSTEM (Apple Glow)
+   7) CARD ROLES (CONVERSION ARCHITECTURE)
 ------------------------------------------------------------ */
-.godmode .btn {
-  will-change: transform, box-shadow;
-  transform: translateZ(0);
+.godmode .card-neutral { background:var(--glass-bg); }
+
+.godmode .card-trust {
+  background:var(--state-trust);
+  border-color:rgba(120,150,255,.35);
 }
 
-/* Soft Golden Glow */
+.godmode .card-decision {
+  background:var(--state-attention);
+  border-color:var(--gold-soft);
+  box-shadow:0 0 24px rgba(200,164,75,.18);
+}
+
+.godmode .card-risk {
+  background:var(--state-risk);
+  border-color:var(--red-soft);
+}
+
+
+/* ------------------------------------------------------------
+   8) BUTTON SYSTEM
+------------------------------------------------------------ */
+.godmode .btn {
+  will-change:transform, box-shadow;
+  transform:translateZ(0);
+}
+
 .godmode .btn-primary {
-  background: var(--gold-soft);
+  background:var(--gold-soft);
   color:#0E1118;
   box-shadow:
     0 6px 14px var(--gold-glow),
@@ -146,7 +182,7 @@ body.godmode {
 }
 
 .godmode .btn-primary:hover {
-  transform: translateY(-2px);
+  transform:translateY(-2px);
   box-shadow:
     0 12px 28px rgba(200,164,75,.34),
     0 0 0 1px rgba(200,164,75,.55) inset;
@@ -159,12 +195,12 @@ body.godmode {
 
 
 /* ------------------------------------------------------------
-   5) TYPOGRAPHY
+   9) TYPOGRAPHY
 ------------------------------------------------------------ */
 .godmode h1,
 .godmode h2 {
   letter-spacing:-.016em;
-  text-rendering: geometricPrecision;
+  text-rendering:geometricPrecision;
 }
 
 .godmode .hero-micro {
@@ -172,17 +208,23 @@ body.godmode {
   line-height:1.46;
 }
 
-
-/* ------------------------------------------------------------
-   6) SECTIONS
------------------------------------------------------------- */
-.godmode .section {
-  padding: clamp(42px, 8vw, 88px) 0;
+.godmode .microtrust {
+  font-size:.85rem;
+  opacity:.82;
+  letter-spacing:.02em;
 }
 
 
 /* ------------------------------------------------------------
-   7) FADE-UP (Observer benötigt)
+   10) SECTIONS
+------------------------------------------------------------ */
+.godmode .section {
+  padding:clamp(42px, 8vw, 88px) 0;
+}
+
+
+/* ------------------------------------------------------------
+   11) FADE-UP (IntersectionObserver)
 ------------------------------------------------------------ */
 .godmode .fade-up {
   opacity:0;
@@ -192,28 +234,12 @@ body.godmode {
 .godmode .fade-up.visible {
   opacity:1;
   transform:none;
-  transition-duration: calc(.7s * var(--motion));
+  transition-duration:calc(.7s * var(--motion));
 }
 
 
 /* ------------------------------------------------------------
-   8) WHISPER + STICKY CTA
------------------------------------------------------------- */
-.godmode .whisper {
-  background:rgba(12,16,26,.96);
-  border:1px solid rgba(255,255,255,.10);
-  box-shadow: var(--elevation-3);
-}
-
-.godmode .sticky-cta .inner {
-  background:rgba(12,16,26,.94);
-  border:1px solid rgba(233,211,148,.22);
-  box-shadow: var(--elevation-3);
-}
-
-
-/* ------------------------------------------------------------
-   9) AMPEL
+   12) AMPEL SYSTEM
 ------------------------------------------------------------ */
 .godmode .ampel-light {
   width:62px;
@@ -229,18 +255,20 @@ body.godmode {
 
 
 /* ------------------------------------------------------------
-   10) RESULT CARDS
+   13) RESULT STATES
 ------------------------------------------------------------ */
 .godmode .result-green {
   background:rgba(25,45,30,.28);
   border-color:var(--green-soft);
   box-shadow:0 0 16px rgba(85,183,107,.22);
 }
+
 .godmode .result-yellow {
   background:rgba(70,70,32,.28);
   border-color:var(--yellow-soft);
   box-shadow:0 0 14px rgba(214,196,90,.20);
 }
+
 .godmode .result-red {
   background:rgba(65,22,22,.28);
   border-color:var(--red-soft);
@@ -249,10 +277,10 @@ body.godmode {
 
 
 /* ------------------------------------------------------------
-   11) INPUT FIELDS
+   14) INPUTS
 ------------------------------------------------------------ */
-.godmode .share-card input,
-.godmode .share-card textarea {
+.godmode input,
+.godmode textarea {
   background:rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.12);
   padding:.7rem .9rem;
@@ -260,15 +288,15 @@ body.godmode {
   color:var(--calm-text);
 }
 
-.godmode .share-card input:focus,
-.godmode .share-card textarea:focus {
+.godmode input:focus,
+.godmode textarea:focus {
   border-color:var(--gold-soft);
   outline:0;
 }
 
 
 /* ------------------------------------------------------------
-   12) ACCESSIBILITY – FOCUS RING
+   15) ACCESSIBILITY – FOCUS
 ------------------------------------------------------------ */
 .godmode :focus-visible {
   outline:2px solid rgba(233,211,148,.55);
