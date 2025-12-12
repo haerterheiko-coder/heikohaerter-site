@@ -249,3 +249,85 @@ section[data-act]:nth-of-type(3) *{animation-delay:.1s}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
+/* ============================================================
+   DRAMATURGICAL LIFT — ACT DIFFERENTIATION
+   Hebt deine bestehende Dramaturgie visuell an
+============================================================ */
+
+/* ---------- ACT CONTRAST ---------- */
+section[data-act="1"]{
+  background:transparent;
+}
+
+section[data-act="2"],
+section[data-act="3"]{
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.02),
+    rgba(255,255,255,.00)
+  );
+}
+
+section[data-act="4"]{
+  background:
+    radial-gradient(circle at 50% 30%, rgba(200,164,75,.18), transparent 55%);
+  text-align:center;
+}
+
+section[data-act="5"]{
+  background:rgba(255,255,255,.02);
+}
+
+section[data-act="6"]{
+  background:transparent;
+}
+
+section[data-act="7"]{
+  background:
+    radial-gradient(circle at 50% 0%, rgba(200,164,75,.12), transparent 60%);
+  text-align:center;
+}
+
+/* ---------- AMPHEL MOMENT ---------- */
+section#ampel .ampel-preview{
+  justify-content:center;
+  margin:2.6rem auto 2.2rem;
+}
+
+section#ampel .ampel{
+  width:72px;
+  height:72px;
+  box-shadow:
+    0 0 0 10px rgba(255,255,255,.03),
+    0 20px 60px rgba(0,0,0,.45);
+}
+
+/* ---------- CTA DOMINANCE ---------- */
+.primary-action a{
+  font-size:1.05rem;
+  letter-spacing:.01em;
+}
+
+section[data-act="7"] .primary-action a{
+  padding:1.1rem 2rem;
+  font-size:1.1rem;
+}
+
+/* ---------- RHYTHM ---------- */
+section[data-act] h2{
+  margin-bottom:1.2rem;
+}
+
+section[data-act] .scene{
+  margin-top:1.2rem;
+}
+
+/* ---------- MICRO TRUST ---------- */
+.trust-line span{
+  opacity:.9;
+}
+
+/* ---------- FINAL POLISH ---------- */
+section[data-act]{
+  scroll-margin-top:60px;
+}
