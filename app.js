@@ -4,7 +4,7 @@
 
   document.documentElement.classList.remove("no-js");
 
-  // GODDATA shim (falls keine data.json benötigt, bleibt leer – nichts bricht)
+  // WHY: failsafe-Datenlade-Schutz – UI bleibt immer funktionsfähig
   if (!window.GODDATA) {
     const Q=[]; window.GODDATA={ onReady(cb){ if(typeof cb==="function") Q.push(cb);} };
     fetch("./data.json").then(r=>r.ok?r.json():Promise.reject()).then(d=>{ while(Q.length){ try{Q.shift()(d);}catch{}} })
@@ -35,7 +35,6 @@
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add("visible");
-          // leichte parallax-aktivierung
           e.target.querySelectorAll(".parallax").forEach(el => el.style.willChange = "transform");
         }
       });
@@ -92,8 +91,7 @@
     const tick=()=>{
       i=(i+1)%words.length;
       el.classList.remove("enter");
-      // repaint trick
-      void el.offsetWidth;
+      void el.offsetWidth; // WHY: reflow für Re-Anim
       el.textContent=words[i];
       el.classList.add("enter");
     };
@@ -114,7 +112,7 @@
         const f = (v)=>`translate3d(0,${v}px,0)`;
         stageA && (stageA.style.transform = f(t*-0.02));
         stageB && (stageB.style.transform = f(t*-0.04));
-        cards.forEach((c,idx)=>{
+        cards.forEach((c)=>{
           const r=c.getBoundingClientRect();
           const p=(r.top/innerHeight - .5);
           c.style.transform = `translate3d(0, ${p* -12}px, 0)`;
@@ -133,7 +131,10 @@
     let W,H,pts=[];
     function resize(){
       const b=canvas.getBoundingClientRect();
-      W=b.width; H=b.height; canvas.width=W*DPR; canvas.height=H*DPR; ctx.scale(DPR,DPR);
+      canvas.width=Math.max(1,Math.floor(b.width*DPR));
+      canvas.height=Math.max(1,Math.floor(b.height*DPR));
+      W=b.width; H=b.height;
+      ctx.setTransform(DPR,0,0,DPR,0,0); // WHY: saubere DPR-Skalierung
       pts = Array.from({length:60},()=>({x:Math.random()*W,y:Math.random()*H, r:Math.random()*1.6+0.4, s:0.2+Math.random()*0.8 }));
     }
     function draw(){
@@ -155,7 +156,7 @@
     }
   });
 
-  // Ampel Check (data-driven optional)
+  // Ampel Check
   GODDATA.onReady((data)=>{
     if (document.getElementById("check-steps") && document.getElementById("check-result")) {
       renderCheck({ stepsId:"check-steps", resultId:"check-result", check:data.checks?.ampel || defaultCheck() });
@@ -187,7 +188,6 @@
     stepsRoot.innerHTML=""; resultRoot.innerHTML="";
     let score=0, step=0;
 
-    // Steps
     check.questions.forEach((q, idx)=>{
       const el=document.createElement("div");
       el.className="check-step";
@@ -230,7 +230,7 @@
       if(color==="green" && !prefersReduced) confetti(resultRoot.querySelector(".result-card"));
     }
 
-    // Micro-dopamine
+    // WHY: Fortschritt anfühlen lassen, senkt Abbruch
     function progressTick(){
       const span = document.querySelector("#progress span");
       const total = check.questions.length;
@@ -247,11 +247,12 @@
     }
   }
 
-  // Tiny confetti (no lib)
+  // Tiny confetti
   function confetti(target){
     const box = target.getBoundingClientRect();
     const canvas = document.createElement("canvas");
-    canvas.width = box.width; canvas.height = 160;
+    canvas.width = Math.max(1, Math.floor(box.width));
+    canvas.height = 160;
     canvas.style.cssText = `position:absolute;left:${box.left + scrollX}px;top:${box.top + scrollY - 10}px;pointer-events:none;z-index:99`;
     document.body.appendChild(canvas);
     const ctx = canvas.getContext("2d");
@@ -259,11 +260,11 @@
       x: Math.random()*canvas.width, y: Math.random()*-60,
       s: 2+Math.random()*3, a: 0.6+Math.random()*0.4, c: ["#7EDFA5","#F7E39A","#F3A6A6","#EADCA8"][Math.floor(Math.random()*4)]
     }));
-    let t=0; function draw(){
+    let t=0; (function draw(){
       ctx.clearRect(0,0,canvas.width,canvas.height);
       bits.forEach(b=>{ b.y+=b.s; b.x+=Math.sin((t+b.y)*0.02); ctx.globalAlpha=b.a; ctx.fillStyle=b.c; ctx.fillRect(b.x,b.y,3,6); });
       t++; if(t<240) requestAnimationFrame(draw); else canvas.remove();
-    } draw();
+    })();
   }
 
 })();
@@ -283,8 +284,7 @@
         armed = true;
         cards.forEach((c,i)=>{
           setTimeout(()=>{
-            c.style.boxShadow =
-              "0 18px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(243,166,166,.18) inset";
+            c.style.boxShadow = "0 18px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(243,166,166,.18) inset";
           }, i*120);
         });
         io.disconnect();
