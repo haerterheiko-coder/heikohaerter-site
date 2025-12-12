@@ -37,7 +37,7 @@
         ...(data.micro_hooks.rational || [])
       ].filter(Boolean);
 
-      if (hooks.length > 0 && !prefersReducedMotion) {
+      if (hooks.length && !prefersReducedMotion) {
         let i = 0;
         setInterval(() => {
           hookEl.style.opacity = 0;
@@ -46,26 +46,26 @@
             hookEl.style.opacity = 1;
           }, 240);
         }, 3600);
-      } else if (hooks.length > 0) {
+      } else if (hooks.length) {
         hookEl.textContent = hooks[0];
       }
     }
 
-    /* ---------------- FADE-UP SYSTEM ---------------- */
+    /* ---------------- FADE-UP SYSTEM (HARDENED) ---------------- */
     const fadeEls = document.querySelectorAll(".fade-up");
 
-    if (!prefersReducedMotion && fadeEls.length > 0) {
-      const io = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              io.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.15 }
-      );
+    if (!prefersReducedMotion && fadeEls.length) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (
+            entry.isIntersecting ||
+            entry.boundingClientRect.top < window.innerHeight
+          ) {
+            entry.target.classList.add("visible");
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.01 });
 
       fadeEls.forEach(el => io.observe(el));
     } else {
@@ -87,7 +87,6 @@
 
     function showResult(color) {
       GODMODE.ampelState = color;
-
       if (!resultEl) return;
 
       resultEl.dataset.state = color;
@@ -112,8 +111,7 @@
         GODMODE.step += 1;
 
         if (GODMODE.step >= check.questions.length) {
-          const state = resolveAmpel(GODMODE.score);
-          showResult(state);
+          showResult(resolveAmpel(GODMODE.score));
         } else {
           steps[GODMODE.step - 1].hidden = true;
           steps[GODMODE.step].hidden = false;
