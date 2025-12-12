@@ -1,12 +1,12 @@
 /* ============================================================
-   GODMODE HYBRID V4 (2026) — FINAL · COPY/PASTE
-   System-Level Calm UI Framework
+   GODMODE++ V6 (2026) — FINAL SYSTEM CSS
+   Calm · Trust · Zero-Pressure UI Framework
    Aktivierung: <body class="godmode">
 ============================================================ */
 
 
 /* ------------------------------------------------------------
-   TOKENS
+   0) TOKENS (FOUNDATION)
 ------------------------------------------------------------ */
 body.godmode {
   /* Base */
@@ -43,7 +43,15 @@ body.godmode {
 
 
 /* ------------------------------------------------------------
-   BODY BACKGROUND
+   1) REDUCED MOTION (WCAG 2.2)
+------------------------------------------------------------ */
+@media (prefers-reduced-motion:reduce){
+  body.godmode { --motion:0; }
+}
+
+
+/* ------------------------------------------------------------
+   2) BODY / BACKGROUND (CLS-SAFE)
 ------------------------------------------------------------ */
 body.godmode {
   background:
@@ -53,11 +61,12 @@ body.godmode {
   color:var(--calm-text);
   -webkit-font-smoothing:antialiased;
   -webkit-text-size-adjust:100%;
+  overflow-x:hidden;
 }
 
 
 /* ------------------------------------------------------------
-   MOTION DEFAULTS
+   3) GLOBAL MOTION ENGINE (GPU-SAFE)
 ------------------------------------------------------------ */
 body.godmode * {
   transition-property:opacity, transform, box-shadow, background-color, border-color;
@@ -66,7 +75,6 @@ body.godmode * {
 }
 
 @media (prefers-reduced-motion:reduce){
-  body.godmode { --motion:0; }
   body.godmode * {
     transition:none !important;
     animation:none !important;
@@ -75,7 +83,25 @@ body.godmode * {
 
 
 /* ------------------------------------------------------------
-   CARDS / GLASS (WITH FALLBACK)
+   4) LAYOUT STABILITY / PERFORMANCE
+------------------------------------------------------------ */
+body.godmode section,
+body.godmode .section {
+  content-visibility:auto;
+  contain-intrinsic-size:600px;
+}
+
+body.godmode .card,
+body.godmode .calm-surface,
+body.godmode .result-card,
+body.godmode .share-card,
+body.godmode .process-card {
+  contain:layout paint;
+}
+
+
+/* ------------------------------------------------------------
+   5) CARDS / GLASS (WITH FALLBACK)
 ------------------------------------------------------------ */
 body.godmode .card,
 body.godmode .calm-surface,
@@ -100,7 +126,7 @@ body.godmode .process-card {
 
 
 /* ------------------------------------------------------------
-   BUTTONS
+   6) BUTTONS (CALM DEPTH)
 ------------------------------------------------------------ */
 body.godmode .btn {
   transform:translateZ(0);
@@ -128,15 +154,7 @@ body.godmode .btn-ghost {
 
 
 /* ------------------------------------------------------------
-   SECTION RHYTHM
------------------------------------------------------------- */
-body.godmode .section {
-  padding:clamp(42px, 8vw, 88px) 0;
-}
-
-
-/* ------------------------------------------------------------
-   HEADINGS
+   7) TYPOGRAPHY
 ------------------------------------------------------------ */
 body.godmode h1,
 body.godmode h2 {
@@ -150,7 +168,15 @@ body.godmode .hero-micro {
 
 
 /* ------------------------------------------------------------
-   FADE-UP SYSTEM
+   8) SECTION RHYTHM
+------------------------------------------------------------ */
+body.godmode .section {
+  padding:clamp(42px, 8vw, 88px) 0;
+}
+
+
+/* ------------------------------------------------------------
+   9) FADE-UP (JS CONTROLLED)
 ------------------------------------------------------------ */
 body.godmode .fade-up {
   opacity:0;
@@ -165,16 +191,7 @@ body.godmode .fade-up.visible {
 
 
 /* ------------------------------------------------------------
-   WHISPER / STICKY CTA
------------------------------------------------------------- */
-body.godmode .whisper {
-  opacity:.85;
-  font-size:.85rem;
-}
-
-
-/* ------------------------------------------------------------
-   AMPEL STATES
+   10) AMPEL STATES
 ------------------------------------------------------------ */
 body.godmode .ampel-green  { color:var(--green); }
 body.godmode .ampel-yellow { color:var(--yellow); }
@@ -182,7 +199,7 @@ body.godmode .ampel-red    { color:var(--red); }
 
 
 /* ------------------------------------------------------------
-   RESULT CARDS
+   11) RESULT CARDS
 ------------------------------------------------------------ */
 body.godmode .result-green {
   background:rgba(25,45,30,.28);
@@ -201,7 +218,7 @@ body.godmode .result-red {
 
 
 /* ------------------------------------------------------------
-   INPUTS
+   12) INPUTS
 ------------------------------------------------------------ */
 body.godmode input,
 body.godmode textarea {
@@ -220,7 +237,7 @@ body.godmode textarea:focus {
 
 
 /* ------------------------------------------------------------
-   FOCUS RING
+   13) FOCUS RING (WCAG SAFE)
 ------------------------------------------------------------ */
 body.godmode :focus-visible {
   outline:2px solid rgba(233,211,148,.55);
