@@ -1,210 +1,202 @@
 /* ============================================================
-   referral.js – GODMODE 2026 (Premium Ultimate)
-   Universelles Weitergabe-System – Heiko Haerter
+   referral.js – GODMODE 2026 (FINAL)
+   Premium Weitergabe-System · Heiko Haerter
+   ruhig · anonym · skalierbar · DVAG-safe
 ============================================================ */
 
-/* ------------------------------------------------------------
-   0) Varianten (inkl. Handwerk & Direkt)
------------------------------------------------------------- */
-const referralVariants = {
-  neutral: [
-    `Ein kurzer Moment Ruhe für dich – anonym, 2 Minuten, ohne Verkauf: {{URL}}`,
-    `Falls du manchmal hoffst, nichts Wichtiges zu übersehen – das hilft: {{URL}}`,
-    `Ein ruhiger Reality-Check ohne Druck. Grün · Gelb · Rot. Vielleicht gibt’s dir Ruhe: {{URL}}`,
-    `Ein Mini-Check, der sofort beruhigt – anonym & freundlich: {{URL}}`,
-    `Wenn du kurz Klarheit willst – das hier fühlt sich leicht an: {{URL}}`
-  ],
-  eltern: [
-    `Wenn die Kids schlafen und der Kopf voll ist: 2 Minuten Ruhe – anonym & ohne Daten: {{URL}}`,
-    `Für einen kurzen Moment Orientierung im Alltag: {{URL}}`,
-    `Hat mir selbst Ruhe gegeben – vielleicht hilft’s dir auch: {{URL}}`,
-    `Ein schneller Blick: „Alles gut für heute?“ – anonym & ohne Papierkram: {{URL}}`,
-    `Für Eltern, die nichts Wichtiges übersehen wollen – 2 Minuten: {{URL}}`
-  ],
-  paare: [
-    `Wenn ihr wissen wollt, ob alles stabil wirkt – neutral, anonym, 2 Minuten: {{URL}}`,
-    `Ein kurzer Check, der sich erstaunlich leicht anfühlt: {{URL}}`,
-    `Hilft, ohne eine Diskussion auszulösen – 2 Minuten Blick: {{URL}}`
-  ],
-  selbst: [
-    `Kurze Selbstständigen-Frage: Würde es heute halten, wenn du ausfällst? 2 Minuten, anonym: {{URL}}`,
-    `Für einen klaren Blick, bevor der Alltag weiterläuft: {{URL}}`,
-    `Mini-Risiko-Check für heute – ohne Verkauf, neutral & anonym: {{URL}}`
-  ],
-  freunde: [
-    `Hat mir gerade echt Ruhe gegeben – dachte direkt an dich: {{URL}}`,
-    `Null Stress, einfach nur Orientierung. Vielleicht hilft‘s dir: {{URL}}`,
-    `Ein leichter, kurzer Blick – fühlt sich gut an: {{URL}}`
-  ],
-  skeptiker: [
-    `Nur damit klar ist: kein Verkauf, keine Daten – einfach ein ruhiger 2-Minuten-Check: {{URL}}`,
-    `Ich weiß, du magst sowas normal nicht – aber das hier ist komplett neutral: {{URL}}`,
-    `Keine Werbung, kein Druck – nur eine faire Einschätzung: {{URL}}`
-  ],
-  handwerk: [
-    `60-Sekunden-Arbeitgeber-Check – anonym. Zeigt sofort, wo heute Stabilität fehlt: {{URL}}`,
-    `Falls du Abläufe klären oder Mitarbeiter halten willst: Der Check zeigt die echten Stellschrauben – ohne Verkauf: {{URL}}`,
-    `Kurz, klar, anonym. Für Inhaber & HR im Handwerk – echte Orientierung statt Papierkram: {{URL}}`,
-    `Kostet 0 Minuten Gespräch – gibt aber sofort Klarheit: {{URL}}`,
-    `Neutraler Lage-Check fürs Handwerk – sofort anwendbar: {{URL}}`
-  ],
-  direkt: [
-    `Das könnte dir wirklich helfen – dauert 2 Minuten: {{URL}}`,
-    `Ein kurzer Check, der sofort Klarheit bringt: {{URL}}`,
-    `Wenn du heute kurz Orientierung willst – das hier ist leicht & anonym: {{URL}}`,
-    `Zwei Minuten, die dir Stress sparen können: {{URL}}`,
-    `Einfach ausprobieren – nichts zu verlieren: {{URL}}`
-  ]
-};
+(() => {
+  "use strict";
 
-/* ------------------------------------------------------------
-   1) DOM References
------------------------------------------------------------- */
-let selectEl, outputEl, copyBtnEl, linkInfoEl, qrCanvas, shareFeedback;
+  /* ----------------------------------------------------------
+     0) VARIANTEN (Content-Engine-ready)
+  ---------------------------------------------------------- */
+  const VARIANTS = {
+    neutral: [
+      "Ein kurzer Moment Ruhe für dich – anonym, 2 Minuten, ohne Verkauf: {{URL}}",
+      "Falls du manchmal hoffst, nichts Wichtiges zu übersehen – das hilft: {{URL}}",
+      "Ein ruhiger Reality-Check ohne Druck. Grün · Gelb · Rot: {{URL}}"
+    ],
+    eltern: [
+      "Wenn die Kids schlafen und der Kopf voll ist: 2 Minuten Ruhe – anonym: {{URL}}",
+      "Für einen kurzen Moment Orientierung im Alltag: {{URL}}"
+    ],
+    paare: [
+      "Wenn ihr wissen wollt, ob alles stabil wirkt – neutral & anonym: {{URL}}"
+    ],
+    selbst: [
+      "Kurzer Selbstständigen-Blick: Würde es halten, wenn du ausfällst? {{URL}}"
+    ],
+    freunde: [
+      "Hat mir gerade Ruhe gegeben – dachte an dich: {{URL}}"
+    ],
+    skeptiker: [
+      "Kein Verkauf, keine Daten – nur ein ruhiger 2-Minuten-Check: {{URL}}"
+    ],
+    handwerk: [
+      "60-Sekunden-Arbeitgeber-Check – anonym. Zeigt, wo Stabilität fehlt: {{URL}}",
+      "Kurz, klar, ohne Verkauf. Für Inhaber & HR im Handwerk: {{URL}}"
+    ],
+    direkt: [
+      "Ein kurzer Check, der sofort Klarheit bringt: {{URL}}"
+    ]
+  };
 
-/* ------------------------------------------------------------
-   2) Referral-Link (inkl. Handwerk-Erkennung)
------------------------------------------------------------- */
-function getReferralLink() {
-  const params = new URLSearchParams(location.search);
-  const ref = params.get("ref");
+  /* ----------------------------------------------------------
+     1) DOM REFERENCES (defensiv)
+  ---------------------------------------------------------- */
+  const $ = id => document.getElementById(id);
 
-  const isHandwerk = /arbeitgeber-architektur/i.test(location.pathname);
+  const ui = {
+    select: $("categorySelect"),
+    output: $("referralOutput"),
+    copy: $("copyReferral"),
+    linkInfo: $("personalLinkInfo"),
+    qr: $("qrCanvas"),
+    feedback: $("shareFeedback")
+  };
 
-  const base = isHandwerk
+  /* ----------------------------------------------------------
+     2) REFERRAL ID (COOKIE-FREI)
+  ---------------------------------------------------------- */
+  const RID_KEY = "hh_rid_v1";
+
+  const generateRID = () =>
+    crypto.getRandomValues(new Uint32Array(1))[0].toString(36);
+
+  const getRID = () => {
+    try {
+      return (
+        localStorage.getItem(RID_KEY) ||
+        (localStorage.setItem(RID_KEY, generateRID()),
+        localStorage.getItem(RID_KEY))
+      );
+    } catch {
+      return generateRID();
+    }
+  };
+
+  /* ----------------------------------------------------------
+     3) CONTEXT-AWARE URL
+  ---------------------------------------------------------- */
+  const isEmployer = /arbeitgeber-architektur/i.test(location.pathname);
+
+  const BASE_URL = isEmployer
     ? "https://heikohaerter.com/arbeitgeber-architektur"
     : "https://heikohaerter.com";
 
-  return ref ? `${base}?ref=${encodeURIComponent(ref)}` : base;
-}
+  const buildURL = () => {
+    const url = new URL(BASE_URL);
+    url.searchParams.set("utm_source", "weitergeben");
+    url.searchParams.set("utm_medium", "share");
+    url.searchParams.set("utm_campaign", isEmployer ? "arbeitgeber" : "ampel");
+    url.searchParams.set("rid", getRID());
+    return url.toString();
+  };
 
-const personalURL = getReferralLink();
-window.personalURL = personalURL;
+  const REF_URL = buildURL();
 
-/* ------------------------------------------------------------
-   3) Textgenerator
------------------------------------------------------------- */
-function updateReferralText() {
-  if (!selectEl || !outputEl) return;
+  /* ----------------------------------------------------------
+     4) TEXT GENERATOR
+  ---------------------------------------------------------- */
+  function updateText() {
+    if (!ui.output) return;
 
-  const key = selectEl.value || "neutral";
-  const variants = referralVariants[key] || referralVariants.neutral;
+    const key = ui.select?.value || "neutral";
+    const pool = VARIANTS[key] || VARIANTS.neutral;
+    const text = pool[Math.floor(Math.random() * pool.length)]
+      .replace("{{URL}}", REF_URL);
 
-  const chosen = variants[Math.floor(Math.random() * variants.length)];
-  outputEl.value = chosen.replace("{{URL}}", personalURL);
+    ui.output.value = text;
 
-  if (linkInfoEl) {
-    linkInfoEl.textContent =
-      `Dein persönlicher, anonymer Weitergabe-Link: ${personalURL}`;
-  }
-}
-
-/* ------------------------------------------------------------
-   4) Copy inkl. Safari-Fallback
------------------------------------------------------------- */
-async function copyReferral() {
-  const val = outputEl?.value?.trim();
-  if (!val) return;
-
-  try {
-    await navigator.clipboard.writeText(val);
-    showFeedback("✔️ Text kopiert!");
-  } catch {
-    try {
-      outputEl.focus();
-      outputEl.select();
-      document.execCommand("copy");
-      showFeedback("✔️ Kopiert (Fallback)");
-    } catch {
-      alert("Konnte nicht kopieren – bitte manuell markieren.");
+    if (ui.linkInfo) {
+      ui.linkInfo.textContent =
+        "Dein persönlicher, anonymer Weitergabe-Link: " + REF_URL;
     }
   }
-}
 
-/* ------------------------------------------------------------
-   5) WhatsApp (iOS-sicher)
------------------------------------------------------------- */
-function shareWhatsApp() {
-  const val = outputEl?.value?.trim();
-  if (!val) return;
+  /* ----------------------------------------------------------
+     5) COPY (inkl. Safari Fallback)
+  ---------------------------------------------------------- */
+  async function copyText() {
+    const val = ui.output?.value?.trim();
+    if (!val) return;
 
-  location.href = `https://wa.me/?text=${encodeURIComponent(val)}`;
-  showFeedback("📨 WhatsApp geöffnet!");
-}
-
-/* ------------------------------------------------------------
-   6) Nur Link kopieren
------------------------------------------------------------- */
-function shareLinkOnly() {
-  navigator.clipboard.writeText(personalURL).then(() => {
-    showFeedback("🔗 Link kopiert!");
-  });
-}
-
-/* ------------------------------------------------------------
-   7) Microreward UI
------------------------------------------------------------- */
-function showFeedback(msg = "Erledigt!") {
-  if (!shareFeedback) return;
-  shareFeedback.textContent = msg;
-  shareFeedback.classList.add("active");
-
-  setTimeout(() => shareFeedback.classList.remove("active"), 2300);
-}
-
-/* ------------------------------------------------------------
-   8) QR-Code Generator
------------------------------------------------------------- */
-function generateQR(url = personalURL) {
-  if (!qrCanvas) return;
-
-  const ctx = qrCanvas.getContext("2d");
-  ctx.clearRect(0, 0, qrCanvas.width, qrCanvas.height);
-
-  fetch(
-    `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(url)}&_=${Date.now()}`
-  )
-    .then(r => r.blob())
-    .then(blob => {
-      const img = new Image();
-      img.onload = () => ctx.drawImage(img, 0, 0, qrCanvas.width, qrCanvas.height);
-      img.onerror = drawQRFallback;
-      img.src = URL.createObjectURL(blob);
-    })
-    .catch(drawQRFallback);
-
-  function drawQRFallback() {
-    ctx.font = "14px system-ui, sans-serif";
-    ctx.fillStyle = "#fff";
-    ctx.fillText("QR konnte nicht geladen werden", 18, 110);
+    try {
+      await navigator.clipboard.writeText(val);
+      feedback("✔️ Text kopiert");
+    } catch {
+      try {
+        ui.output.select();
+        document.execCommand("copy");
+        feedback("✔️ Kopiert");
+      } catch {
+        alert("Bitte Text manuell markieren.");
+      }
+    }
   }
-}
 
-/* ------------------------------------------------------------
-   9) Init – DOM Ready
------------------------------------------------------------- */
-document.addEventListener("DOMContentLoaded", () => {
-  selectEl      = document.getElementById("categorySelect");
-  outputEl      = document.getElementById("referralOutput");
-  copyBtnEl     = document.getElementById("copyReferral");
-  linkInfoEl    = document.getElementById("personalLinkInfo");
-  qrCanvas      = document.getElementById("qrCanvas");
-  shareFeedback = document.getElementById("shareFeedback");
+  /* ----------------------------------------------------------
+     6) SHARE CHANNELS
+  ---------------------------------------------------------- */
+  function shareWhatsApp() {
+    const val = ui.output?.value?.trim();
+    if (!val) return;
+    location.href = "https://wa.me/?text=" + encodeURIComponent(val);
+  }
 
-  if (selectEl)  selectEl.addEventListener("change", updateReferralText);
-  if (copyBtnEl) copyBtnEl.addEventListener("click", copyReferral);
+  function copyLinkOnly() {
+    navigator.clipboard.writeText(REF_URL).then(() =>
+      feedback("🔗 Link kopiert")
+    );
+  }
 
-  updateReferralText();
-  generateQR();
-});
+  /* ----------------------------------------------------------
+     7) FEEDBACK UI
+  ---------------------------------------------------------- */
+  function feedback(msg) {
+    if (!ui.feedback) return;
+    ui.feedback.textContent = msg;
+    ui.feedback.classList.add("active");
+    setTimeout(() => ui.feedback.classList.remove("active"), 2200);
+  }
 
-/* ------------------------------------------------------------
-   10) Export (optional global API)
------------------------------------------------------------- */
-Object.assign(window, {
-  updateReferralText,
-  copyReferral,
-  shareWhatsApp,
-  shareLinkOnly,
-  generateQR
-});
+  /* ----------------------------------------------------------
+     8) QR CODE (Graceful)
+  ---------------------------------------------------------- */
+  function renderQR() {
+    if (!ui.qr) return;
+    const ctx = ui.qr.getContext("2d");
+
+    const img = new Image();
+    img.onload = () => ctx.drawImage(img, 0, 0, ui.qr.width, ui.qr.height);
+    img.onerror = () => {
+      ctx.fillStyle = "#fff";
+      ctx.fillText("QR nicht verfügbar", 20, 120);
+    };
+
+    img.src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+      encodeURIComponent(REF_URL);
+  }
+
+  /* ----------------------------------------------------------
+     9) INIT
+  ---------------------------------------------------------- */
+  document.addEventListener("DOMContentLoaded", () => {
+    ui.select?.addEventListener("change", updateText);
+    ui.copy?.addEventListener("click", copyText);
+
+    updateText();
+    renderQR();
+  });
+
+  /* ----------------------------------------------------------
+     10) PUBLIC API (optional)
+  ---------------------------------------------------------- */
+  window.Referral = {
+    updateText,
+    copyText,
+    shareWhatsApp,
+    copyLinkOnly
+  };
+})();
