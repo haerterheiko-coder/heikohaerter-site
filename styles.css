@@ -1,83 +1,247 @@
-/* /styles.css */
-/* ===== TOKENS (wie gehabt) ===== */
-body.godmode {
-  --calm-bg:#05070E; --calm-bg-soft:#0B0F19;
-  --calm-text:#EDEEF3; --calm-text-soft:rgba(237,238,243,.85);
-  --gold:#C8A44B; --gold-soft:rgba(200,164,75,.45); --gold-glow:rgba(200,164,75,.30);
-  --green:#7EDFA5; --green-soft:rgba(85,183,107,.35);
-  --yellow:#F7E39A; --yellow-soft:rgba(214,196,90,.35);
-  --red:#F3A6A6; --red-soft:rgba(200,81,81,.35);
-  --glass-bg:rgba(255,255,255,.045); --glass-border:rgba(255,255,255,.12); --glass-inset:rgba(255,255,255,.03);
-  --elevation-1:0 4px 14px rgba(0,0,0,.22);
-  --curve:cubic-bezier(.25,.46,.25,1); --motion:1;
+/* === TOKENS (cinematic) === */
+:root{
+  --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5;
+  --gold:#C8A44B; --gold2:#EADCA8;
+  --green:#7EDFA5; --yellow:#F7E39A; --red:#F3A6A6;
+  --glass:rgba(255,255,255,.05); --line:rgba(255,255,255,.12);
+  --ease:cubic-bezier(.25,.46,.25,1); --motion:1;
 }
-@media (prefers-reduced-motion:reduce){ body.godmode{ --motion:0; } }
-
+@media (prefers-reduced-motion:reduce){ :root{--motion:0} }
+*{box-sizing:border-box}
+html,body{height:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%}
 body.godmode{
-  background:
+  margin:0; color:var(--text); background:
     radial-gradient(circle at 18% -12%, rgba(200,164,75,.12), transparent 55%),
     radial-gradient(circle at 82% 0%, rgba(120,150,255,.08), transparent 60%),
-    linear-gradient(180deg, var(--calm-bg) 0%, #02040A 68%);
-  color:var(--calm-text); -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%;
-  margin:0; overflow-x:hidden; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    linear-gradient(180deg,var(--bg),#02040A 68%);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased; overflow:clip;
 }
-body.godmode *{
-  transition-property:opacity, transform, box-shadow, background-color, border-color;
-  transition-duration:calc(.28s * var(--motion)); transition-timing-function:var(--curve);
-}
-.section{ padding:clamp(36px,7vw,84px) 0; }
-.container, .wrap { max-width:1120px; margin-inline:auto; padding-inline:clamp(16px,5vw,32px); }
-.grid{ display:grid; gap:clamp(.6rem,2.2vw,1.2rem); }
-.stack{ display:flex; flex-direction:column; gap:clamp(.45rem,1.8vw,.9rem); }
+.skip{position:absolute;left:-9999px;top:auto} .skip:focus{left:8px;top:8px;background:#000;padding:.6rem;border-radius:8px}
 
-/* Buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem 1.2rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--calm-text);font-weight:700;cursor:pointer;transform:translateZ(0)}
-.btn-primary{background:var(--gold-soft);color:#0E1118;box-shadow:0 6px 14px var(--gold-glow),0 0 0 1px var(--gold) inset}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(200,164,75,.32),0 0 0 1px rgba(200,164,75,.55) inset}
-.btn-ghost{background:rgba(255,255,255,.03)}
+/* === Slides (Netflix) === */
+.slides{height:100svh; overflow-y:scroll; scroll-snap-type:y mandatory; scroll-padding-top:0}
+.slides--short{height:auto; overflow:visible}
+.slide{min-height:100svh; display:grid; place-items:center; scroll-snap-align:start; position:relative; padding:clamp(24px,5vw,48px)}
+.slide .inner{max-width:1080px; width:100%; margin-inline:auto}
+.slide.hero h1{font-size:clamp(2rem,5.2vw,4rem); line-height:1.08; letter-spacing:-.015em}
+.slide h2{font-size:clamp(1.6rem,3.6vw,2.6rem); letter-spacing:-.01em}
+.lead{font-size:clamp(1.05rem,1.6vw,1.25rem); color:var(--muted)}
+.eyebrow,.micro{color:var(--muted); letter-spacing:.08em; text-transform:uppercase; font-size:.9rem}
+.trust{color:var(--muted); display:block; margin-top:.5rem}
 
-/* Fade-up */
-.fade-up{opacity:0;transform:translateY(18px)}
-.fade-up.visible{opacity:1;transform:none;transition-duration:calc(.6s * var(--motion))}
-html.no-js .fade-up{opacity:1!important;transform:none!important}
+.cards{display:grid; gap:clamp(.8rem,2.4vw,1.2rem); grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); margin-top:1rem}
+.card{background:var(--glass); border:1px solid var(--line); border-radius:16px; padding:1rem 1.1rem}
 
-/* Cards */
-.premium-card,.card,.process-card,.result-card,.share{background:var(--glass-bg);border:1px solid var(--glass-border);box-shadow:0 1px 2px var(--glass-inset) inset, var(--elevation-1);border-radius:14px;padding:1rem 1.1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.chips li{list-style:none; border:1px solid var(--line); border-radius:999px; padding:.35rem .8rem; background:rgba(255,255,255,.04); color:var(--muted)}
+.ticks{margin:.6rem 0 0; padding-left:1.2rem; color:var(--muted)}
 
-/* Storyline Type */
-h1,h2,h3{margin:0 0 .7rem;letter-spacing:-.012em}
-h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.12}
-h2{font-size:clamp(1.5rem,3vw,2.2rem)}
-h3{font-size:clamp(1.12rem,2vw,1.28rem)}
-p{margin:0 0 .6rem}
-.micro{opacity:.92;letter-spacing:.08em;text-transform:uppercase;font-size:.94rem;color:var(--calm-text-soft)}
-.lead{font-size:clamp(1.05rem,1.4vw,1.18rem);color:var(--calm-text-soft)}
-.context,.about,.hero-micro,.trust{color:var(--calm-text-soft)}
-.primary-action{margin-top:.8rem}
-.primary-action .btn{min-width:260px}
-.trust-line{display:flex;flex-wrap:wrap;gap:.6rem;margin:.6rem 0}
-.trust-line span{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:.3rem .7rem;background:rgba(255,255,255,.05);color:var(--calm-text-soft);font-size:.92rem}
+.narrow{max-width:760px}
 
-/* Scenes / lists */
-.reasons{margin:.6rem 0 1rem;padding-left:1.2rem;color:var(--calm-text-soft)}
-.scene{border-left:3px solid var(--gold-soft);padding:.6rem 0 .6rem .9rem;margin:.4rem 0;background:rgba(255,255,255,.03)}
-.aside{opacity:.9}
-.steps{margin:.4rem 0 0;padding-left:1.2rem;color:var(--calm-text-soft)}
+.btn{display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:.85rem 1.25rem; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.06); color:var(--text); font-weight:800; cursor:pointer; transition:transform .18s var(--ease), box-shadow .18s var(--ease)}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#111; box-shadow:0 14px 32px rgba(200,164,75,.35)}
+.btn-primary:hover{transform:translateY(-1px); box-shadow:0 20px 48px rgba(200,164,75,.42)}
+.btn-ghost{background:rgba(255,255,255,.06)}
+
+.cta{display:flex; flex-direction:column; gap:.6rem; margin-top:1rem}
+.cta-row{display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.6rem}
 
 /* Ampel preview */
-.ampel-preview{display:flex;gap:.6rem;align-items:center;margin:.6rem 0}
-.ampel{width:14px;height:14px;border-radius:50%}
-.ampel.green{background:#2fbf71}.ampel.yellow{background:#f0d775}.ampel.red{background:#e77}
+.ampel-preview{display:flex;gap:.6rem;align-items:center;margin:.8rem 0 0}
+.dot{width:14px;height:14px;border-radius:50%}
+.dot.green{background:var(--green)} .dot.yellow{background:var(--yellow)} .dot.red{background:var(--red)}
 
-/* Result states */
-.result-green{background:rgba(25,45,30,.28);border-color:var(--green-soft)}
-.result-yellow{background:rgba(70,70,32,.28);border-color:var(--yellow-soft)}
-.result-red{background:rgba(65,22,22,.28);border-color:var(--red-soft)}
+/* Check */
+.check-steps .check-step{background:var(--glass); border:1px solid var(--line); border-radius:16px; padding:1rem 1.1rem; margin:.6rem 0}
+.result-card{border-radius:16px; padding:1.1rem 1.2rem; margin-top:1rem; border:1px solid var(--line); background:rgba(255,255,255,.04)}
+.result-green{box-shadow:0 0 0 1px rgba(126,223,165,.25) inset} .result-yellow{box-shadow:0 0 0 1px rgba(247,227,154,.25) inset} .result-red{box-shadow:0 0 0 1px rgba(243,166,166,.25) inset}
 
-/* Inputs (weitergeben) */
-textarea, select, input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);padding:.7rem .9rem;border-radius:8px;color:var(--calm-text)}
-textarea:focus, select:focus, input:focus{outline:2px solid rgba(233,211,148,.45);outline-offset:2px}
+/* Fade-up */
+.fade-up{opacity:0; transform:translateY(18px)}
+.fade-up.visible{opacity:1; transform:none; transition:opacity calc(.5s*var(--motion)) var(--ease), transform calc(.5s*var(--motion)) var(--ease)}
+html.no-js .fade-up{opacity:1!important;transform:none!important}
 
-/* Utilities */
-.inline{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
-.narrow{text-align:center;max-width:720px}
+/* Stage glows (hero ambience) */
+.stage .glow{position:absolute; inset:auto; border-radius:50%; filter:blur(42px); opacity:.45; pointer-events:none}
+.glow-a{width:38vw;height:38vw;left:-12vw;top:-8vw;background:radial-gradient(circle,#C8A44B22,transparent 60%)}
+.glow-b{width:44vw;height:44vw;right:-14vw;top:-10vw;background:radial-gradient(circle,#8899FF22,transparent 60%)}
+
+/* Progress bar */
+#progress{position:fixed;left:0;right:0;top:0;height:4px;z-index:80;background:rgba(255,255,255,.06)}
+#progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#fff1); transition:width .2s var(--ease)}
+
+/* Bullets */
+#bullets{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:70}
+#bullets button{width:10px;height:10px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.08);cursor:pointer;opacity:.7}
+#bullets button[aria-current="true"]{background:var(--gold); border-color:transparent; opacity:1}
+
+/* Inputs (share) */
+textarea, select{width:100%; background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:10px; color:var(--text); padding:.75rem .9rem}
+textarea:focus, select:focus, .btn:focus-visible{outline:2px solid rgba(233,211,148,.6); outline-offset:2px}
+
+/* Responsive tweaks */
+@media (max-width:1023px){ #bullets{right:8px} .btn, .btn-primary, .btn-ghost{width:100%} }
+
+/* === /app.js === */
+ 
+/* /app.js */
+(function(){
+  "use strict";
+  // remove no-js
+  document.documentElement.classList.remove("no-js");
+
+  // GODDATA shim + loader
+  if(!window.GODDATA){
+    const Q=[]; window.GODDATA={ onReady(cb){ if(typeof cb==="function") Q.push(cb);} };
+    fetch("./data.json").then(r=>r.ok?r.json():Promise.reject()).then(d=>{ while(Q.length){ try{Q.shift()(d);}catch{}} })
+    .catch(()=>{ const d={brand:{year:String(new Date().getFullYear())},checks:{}}; while(Q.length){ try{Q.shift()(d);}catch{}} });
+  }
+
+  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Slides controller (progress + bullets + reveal rule)
+  const slides = document.querySelectorAll("main.slides > .slide");
+  const bullets = document.getElementById("bullets");
+  const progress = document.querySelector("#progress span");
+  const revealGateBtn = document.querySelector("[data-earn-ampel]");
+  const revealSlide = document.querySelector('#b4');
+
+  // bullets
+  slides.forEach((s,i)=>{
+    const b=document.createElement("button");
+    b.setAttribute("aria-label", "Zu Slide "+(i+1));
+    b.addEventListener("click",()=>s.scrollIntoView({behavior: prefersReduced?"auto":"smooth", block:"start"}));
+    bullets.appendChild(b);
+  });
+
+  // fade-up observer + bullets active + progress
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(entries=>{
+      const visible = entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("visible"); }});
+      if(visible){
+        const idx = [...slides].indexOf(visible.target);
+        bullets.querySelectorAll("button").forEach((b,i)=> b.setAttribute("aria-current", i===idx ? "true" : "false"));
+        const pct = ((idx+1)/slides.length)*100; progress.style.width = pct+"%";
+      }
+    },{threshold:.6});
+    slides.forEach(s=>io.observe(s));
+  }else{
+    slides.forEach(s=>s.classList.add("visible"));
+  }
+
+  // keyboard nav
+  document.getElementById("slides")?.addEventListener("keydown", (e)=>{
+    const current = [...slides].findIndex(s=> s.getBoundingClientRect().top >= 0 && s.getBoundingClientRect().top < innerHeight*0.6);
+    if(e.key==="ArrowDown"||e.key==="PageDown"){ e.preventDefault(); slides[Math.min(current+1,slides.length-1)].scrollIntoView({behavior:"smooth"}); }
+    if(e.key==="ArrowUp"||e.key==="PageUp"){ e.preventDefault(); slides[Math.max(current-1,0)].scrollIntoView({behavior:"smooth"}); }
+  });
+
+  // earn-the-reveal (Beat 4 hidden until confirmed)
+  revealGateBtn?.addEventListener("click", ()=>{
+    revealSlide?.removeAttribute("hidden");
+    revealSlide.scrollIntoView({behavior: prefersReduced?"auto":"smooth"});
+  });
+
+  // Ampel Check renderer (personal + employer)
+  GODDATA.onReady((data)=>{
+    // personal
+    if(document.getElementById("check-steps") && document.getElementById("check-result")){
+      renderCheck({
+        rootSteps: "check-steps", rootResult: "check-result",
+        check: data.checks?.ampel
+      });
+    }
+    // employer
+    if(document.getElementById("employer-check-steps") && document.getElementById("employer-check-result")){
+      renderCheck({
+        rootSteps: "employer-check-steps", rootResult: "employer-check-result",
+        check: data.checks?.arbeitgeber
+      });
+    }
+  });
+
+  function renderCheck({rootSteps, rootResult, check}){
+    if(!check) return;
+    const stepsRoot = document.getElementById(rootSteps);
+    const resultRoot = document.getElementById(rootResult);
+    stepsRoot.innerHTML = "";
+    resultRoot.innerHTML = "";
+    let score=0, step=0;
+
+    check.questions.forEach((q, idx)=>{
+      const wrap = document.createElement("div");
+      wrap.className="check-step";
+      if(idx>0) wrap.hidden = true;
+      wrap.innerHTML = `
+        <h3>${q.text}</h3>
+        <div class="cta-row">
+          <button class="btn btn-primary" data-a="green">${q.options.green}</button>
+          <button class="btn" data-a="yellow">${q.options.yellow}</button>
+          <button class="btn" data-a="red">${q.options.red}</button>
+        </div>`;
+      stepsRoot.appendChild(wrap);
+    });
+
+    const stepEls = [...stepsRoot.querySelectorAll(".check-step")];
+    stepsRoot.querySelectorAll("[data-a]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        score += check.scoring.values[btn.dataset.a] || 0;
+        step++;
+        if(step >= check.questions.length){
+          stepEls.at(-1).hidden = true;
+          showResult(resolve(score, check.scoring.thresholds), check.results, resultRoot);
+        }else{
+          stepEls[step-1].hidden = true; stepEls[step].hidden = false;
+          stepEls[step].scrollIntoView({behavior: prefersReduced?"auto":"smooth", block:"start"});
+        }
+      });
+    });
+
+    function resolve(s, t){ if(s>=t.red) return "red"; if(s>=t.yellow) return "yellow"; return "green"; }
+    function showResult(color, results, root){
+      const r = results[color];
+      root.innerHTML = `<div class="result-card result-${color}">
+        <h3>${r.title}</h3><p>${r.text}</p><p class="micro">${r.micro||""}</p>
+        ${postActions(color)}
+      </div>`;
+      root.scrollIntoView({behavior: prefersReduced?"auto":"smooth", block:"start"});
+    }
+    function postActions(color){
+      const wa='https://wa.me/?text=';
+      if(color==="red") return `<div class="cta"><a class="btn btn-primary" href="${wa}Kurz%2010%20Minuten%20sprechen">💬 Kurz sprechen</a><a class="btn btn-ghost" href="./weitergeben.html">🔗 Weitergeben</a></div>`;
+      if(color==="yellow") return `<div class="cta"><a class="btn btn-primary" href="${wa}Als%20N%C3%A4chstes%20angehen">🧭 Als Nächstes angehen</a><a class="btn btn-ghost" href="./weitergeben.html">🔗 Weitergeben</a></div>`;
+      return `<div class="cta"><a class="btn btn-primary" href="${wa}Smarter%20machen%3F">✨ Smarter machen?</a><a class="btn btn-ghost" href="./weitergeben.html">🔗 Weitergeben</a></div>`;
+    }
+  }
+
+})();
+
+/* /referral.js */
+(()=>{"use strict";
+  const VARIANTS={
+    neutral:["Ein kurzer Moment Ruhe – anonym, 2 Minuten, ohne Verkauf: {{URL}}","Falls du manchmal hoffst, nichts Wichtiges zu übersehen – das hilft: {{URL}}","Ein ruhiger Reality-Check ohne Druck. Grün · Gelb · Rot: {{URL}}"],
+    eltern:["Wenn die Kids schlafen und der Kopf voll ist: 2 Minuten Ruhe – anonym: {{URL}}","Für einen kurzen Moment Orientierung im Alltag: {{URL}}"],
+    paare:["Wenn ihr wissen wollt, ob alles stabil wirkt – neutral & anonym: {{URL}}"],
+    selbst:["Kurzer Selbstständigen-Blick: Würde es halten, wenn du ausfällst? {{URL}}"],
+    freunde:["Hat mir gerade Ruhe gegeben – dachte an dich: {{URL}}"],
+    skeptiker:["Kein Verkauf, keine Daten – nur ein ruhiger 2-Minuten-Check: {{URL}}"],
+    handwerk:["60-Sekunden-Arbeitgeber-Check – anonym. Zeigt, wo Stabilität fehlt: {{URL}}","Kurz, klar, ohne Verkauf. Für Inhaber & HR im Handwerk: {{URL}}"],
+    direkt:["Ein kurzer Check, der sofort Klarheit bringt: {{URL}}"]
+  };
+  const $=id=>document.getElementById(id);
+  const ui={select:$("categorySelect"),output:$("referralOutput"),copy:$("copyReferral"),linkInfo:$("personalLinkInfo"),qr:$("qrCanvas"),feedback:$("shareFeedback")};
+  const RID="hh_rid_v1"; const gen=()=>crypto.getRandomValues(new Uint32Array(1))[0].toString(36);
+  const getRID=()=>{try{return localStorage.getItem(RID)|| (localStorage.setItem(RID,gen()),localStorage.getItem(RID));}catch{return gen();}};
+  const isEmp=/arbeitgeber/i.test(location.pathname);
+  const BASE=isEmp?"https://heikohaerter.com/arbeitgeber-architektur":"https://heikohaerter.com";
+  const build=()=>{const u=new URL(BASE); u.searchParams.set("utm_source","weitergeben");u.searchParams.set("utm_medium","share");u.searchParams.set("utm_campaign",isEmp?"arbeitgeber":"ampel");u.searchParams.set("rid",getRID()); return u.toString();};
+  function feedback(m){ if(!ui.feedback) return; ui.feedback.textContent=m; ui.feedback.classList.add("active"); setTimeout(()=>ui.feedback.classList.remove("active"),2000); }
+  function update(){ if(!ui.output) return; const k=ui.select?.value||"neutral"; const pool=VARIANTS[k]||VARIANTS.neutral; const txt=pool[Math.floor(Math.random()*pool.length)].replace("{{URL}}",build()); ui.output.value=txt; ui.linkInfo && (ui.linkInfo.textContent="Dein persönlicher Link: "+build());}
+  async function copy(){ const v=ui.output?.value?.trim(); if(!v) return; try{await navigator.clipboard.writeText(v); feedback("✔️ Text kopiert");}catch{ try{ui.output.select(); document.execCommand("copy"); feedback("✔️ Kopiert");}catch{alert("Bitte manuell kopieren.");}}}
+  function qr(){ if(!ui.qr) return; const ctx=ui.qr.getContext("2d"),img=new Image(); img.onload=()=>ctx.drawImage(img,0,0,ui.qr.width,ui.qr.height); img.onerror=()=>{ctx.fillStyle="#fff";ctx.fillText("QR nicht verfügbar",20,120)}; img.src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent(build());}
+  document.addEventListener("DOMContentLoaded",()=>{ ui.select?.addEventListener("change",update); ui.copy?.addEventListener("click",copy); update(); qr(); });
+  window.Referral={updateText:update, copyText:copy};
+})();
