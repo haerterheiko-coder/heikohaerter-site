@@ -23,7 +23,7 @@
   <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Favicons (relative, robust für Project Pages & Custom Domain) -->
+  <!-- Favicons (relative für GitHub Pages) -->
   <link rel="icon" href="favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -55,14 +55,12 @@
   {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
   </script>
 
-  <!-- Styles (ohne führenden Slash, mit Cache-Busting) -->
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <!-- Styles (relativ + Cache-Busting) -->
+  <link rel="stylesheet" href="styles.css?v=3" />
 
-  <!-- No-JS Fallback: vermeidet unsichtbare Bereiche, falls JS blockiert -->
+  <!-- No-JS-Fallback: verhindert unsichtbare Sektionen bei blockiertem JS -->
   <noscript>
-    <style>
-      .fade-up{opacity:1 !important;transform:none !important}
-    </style>
+    <style>.fade-up{opacity:1!important;transform:none!important}</style>
   </noscript>
 </head>
 <body>
@@ -348,31 +346,7 @@
           <input id="refName" name="ref" placeholder="z. B. Alex (Papa) / Dani – Chef" />
 
           <textarea rows="6" id="refText" inputmode="text" spellcheck="false"
-            data-variants='{
-              "neutral":[
-                "Hey, hab das gerade gesehen – dachte sofort an dich. 2 Minuten – zeigt, ob heute etwas für dich offen ist. Wenn’s dir nichts bringt: 25 €. {{URL}}",
-                "Eine neutrale Einschätzung: anonym & ohne Verpflichtung. Du siehst gleich, wie es für heute wirkt. {{URL}}",
-                "Falls du dieses „Ich müsste mich mal kümmern…“ kennst – hier bekommst du in 2 Min ein Gefühl für heute. {{URL}}"
-              ],
-              "eltern":[
-                "Kurz für Eltern (2 Min): zeigt, ob heute etwas offen ist – ohne Verkauf. Wenn’s nichts bringt: 25 €. {{URL}}",
-                "Anonym sehen, ob für die Familie heute etwas ansteht – ohne Druck. {{URL}}"
-              ],
-              "kollegen":[
-                "2-Minuten-Blick für die To-do-Liste: zeigt dir, ob heute etwas offen ist – ohne Tarifkram. {{URL}}",
-                "Nutze ich selbst als kurzen Blick ohne Aufwand. Vielleicht hilft’s dir auch. {{URL}}"
-              ],
-              "freunde":[
-                "Hey, kurzer Blick (2 Min), komplett anonym – zeigt dir, was heute wichtig sein könnte. {{URL}}",
-                "Hab das gesehen & dachte an dich – null Druck, einfach hilfreich. {{URL}}"
-              ],
-              "selbst":[
-                "Für Selbstständige: kurzer 2-Minuten-Blick, ob gerade etwas ansteht – ohne Verkauf. {{URL}}"
-              ],
-              "partner":[
-                "Magst du kurz schauen (2 Min), ob für heute etwas ansteht? {{URL}}"
-              ]
-            }'
+            data-variants='{ "neutral":[ "Hey, hab das gerade gesehen – dachte sofort an dich. 2 Minuten – zeigt, ob heute etwas für dich offen ist. Wenn’s dir nichts bringt: 25 €. {{URL}}","Eine neutrale Einschätzung: anonym & ohne Verpflichtung. Du siehst gleich, wie es für heute wirkt. {{URL}}","Falls du dieses „Ich müsste mich mal kümmern…“ kennst – hier bekommst du in 2 Min ein Gefühl für heute. {{URL}}" ], "eltern":[ "Kurz für Eltern (2 Min): zeigt, ob heute etwas offen ist – ohne Verkauf. Wenn’s nichts bringt: 25 €. {{URL}}","Anonym sehen, ob für die Familie heute etwas ansteht – ohne Druck. {{URL}}" ], "kollegen":[ "2-Minuten-Blick für die To-do-Liste: zeigt dir, ob heute etwas offen ist – ohne Tarifkram. {{URL}}","Nutze ich selbst als kurzen Blick ohne Aufwand. Vielleicht hilft’s dir auch. {{URL}}" ], "freunde":[ "Hey, kurzer Blick (2 Min), komplett anonym – zeigt dir, was heute wichtig sein könnte. {{URL}}","Hab das gesehen & dachte an dich – null Druck, einfach hilfreich. {{URL}}" ], "selbst":[ "Für Selbstständige: kurzer 2-Minuten-Blick, ob gerade etwas ansteht – ohne Verkauf. {{URL}}" ], "partner":[ "Magst du kurz schauen (2 Min), ob für heute etwas ansteht? {{URL}}" ] }'
           ></textarea>
 
           <div class="bar">
@@ -417,7 +391,7 @@
   <!-- Whisper CTA -->
   <div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">🟡 10 Sekunden – jemand weiß morgen, was ansteht.</div>
 
-  <!-- App (ohne führenden Slash, mit Cache-Busting) -->
-  <script src="app.js?v=2" defer></script>
+  <!-- App (relativ + Cache-Busting) -->
+  <script src="app.js?v=3" defer></script>
 </body>
 </html>
