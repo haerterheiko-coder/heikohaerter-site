@@ -48,7 +48,8 @@
   </div>
 </header>
 
-<main id="main">
+<!-- ⬇️ WICHTIG: Scroll-Root für Progress -->
+<main id="main" data-scroll-root>
 
 <!-- ================= HERO ================= -->
 <section class="hero section fade-up" aria-labelledby="hero-title">
@@ -175,7 +176,9 @@
     </div>
 
     <div id="check-steps"></div>
-    <div id="check-result"></div>
+
+    <!-- ⬇️ WICHTIG: Ampel-Reveal-Hook -->
+    <div id="check-result" data-ampel-reveal></div>
   </div>
 </section>
 
