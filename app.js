@@ -4,14 +4,18 @@
 // ============================================================
 
 
-// 0) BOOTSTRAP
+// ------------------------------------------------------------
+// 0) BOOTSTRAP + YEAR
+// ------------------------------------------------------------
 document.documentElement.classList.remove("no-js");
 document.querySelectorAll("#yearNow").forEach(
   el => (el.textContent = new Date().getFullYear())
 );
 
 
+// ------------------------------------------------------------
 // 1) ROTIERENDE HERO MICRO-HOOKS
+// ------------------------------------------------------------
 (() => {
   const el = document.querySelector(".hook-rotate");
   if (!el) return;
@@ -38,7 +42,9 @@ document.querySelectorAll("#yearNow").forEach(
 })();
 
 
+// ------------------------------------------------------------
 // 2) FADE-UP OBSERVER
+// ------------------------------------------------------------
 (() => {
   const els = [...document.querySelectorAll(".fade-up")];
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -63,7 +69,9 @@ document.querySelectorAll("#yearNow").forEach(
 })();
 
 
+// ------------------------------------------------------------
 // 3) SMOOTH SCROLLING
+// ------------------------------------------------------------
 document.querySelectorAll("a[href^='#']").forEach(link => {
   link.addEventListener("click", e => {
     const t = document.querySelector(link.getAttribute("href"));
@@ -74,7 +82,9 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
 });
 
 
+// ------------------------------------------------------------
 // 4) STICKY CTA (Mobile)
+// ------------------------------------------------------------
 (() => {
   const el = document.getElementById("stickyCTA");
   const hero = document.querySelector(".hero");
@@ -93,17 +103,15 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
     io.observe(hero);
   }
 
-  addEventListener(
-    "scroll",
-    () => {
-      if (scrollY > 260) toggle(true);
-    },
-    { passive: true }
-  );
+  addEventListener("scroll", () => {
+    if (scrollY > 260) toggle(true);
+  }, { passive: true });
 })();
 
 
-// 5) AMP-CHECK ENGINE (3 Schritte + Ergebnis)
+// ------------------------------------------------------------
+// 5) AMPEL-CHECK ENGINE (3-Schritt Analyse)
+// ------------------------------------------------------------
 (() => {
   let step = 1;
   let score = 0;
@@ -130,17 +138,15 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
     bar.style.width = `${((step - 1) / (max - 1)) * 100}%`;
 
     hint.textContent =
-      step === 1
-        ? "Kurzer Eindruck reicht."
-        : step === 2
-        ? "Fast geschafft."
-        : "Letzter Klick.";
+      step === 1 ? "Kurzer Eindruck reicht."
+      : step === 2 ? "Fast geschafft."
+      : "Letzter Klick.";
   }
 
   function show(n) {
-    document
-      .querySelectorAll("#check-steps .step")
-      .forEach(s => (s.style.display = "none"));
+    document.querySelectorAll("#check-steps .step").forEach(
+      s => (s.style.display = "none")
+    );
 
     const el = document.querySelector(`.step[data-step="${n}"]`);
     if (el) el.style.display = "block";
@@ -157,11 +163,13 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
           <a href="${wa}Kurz%2010%20Minuten%20sprechen" class="btn btn-primary">💬 Kurz sprechen – 10 Minuten</a>
           <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">🛟 Frage senden</a>
         </div>`,
+
       yellow: `
         <div class="stack" style="text-align:center">
           <a href="${wa}Als%20N%C3%A4chstes%20angehen" class="btn btn-primary">🧭 Als Nächstes angehen</a>
           <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">💬 Frage senden</a>
         </div>`,
+
       green: `
         <div class="stack" style="text-align:center">
           <a href="${wa}Smarter%20machen%3F" class="btn btn-primary">✨ Smarter machen?</a>
@@ -251,7 +259,9 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
 })();
 
 
-// 6) KURZMODUS – Hide non-core sections
+// ------------------------------------------------------------
+// 6) KURZMODUS – Fokus auf Kernbereiche
+// ------------------------------------------------------------
 (() => {
   const btn = document.getElementById("dfBtn");
   if (!btn) return;
@@ -283,7 +293,9 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
 })();
 
 
+// ------------------------------------------------------------
 // 7) WHISPER – Micro Nudge
+// ------------------------------------------------------------
 (() => {
   const w = document.getElementById("whisper");
   if (!w) return;
@@ -292,7 +304,9 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
 })();
 
 
-// 8) SHARE COMPOSER – Ref-ID + UTM + Segmente + Copy
+// ------------------------------------------------------------
+// 8) SHARE COMPOSER – UTM + RID + Preview + Copy + WA
+// ------------------------------------------------------------
 (() => {
   const area = document.getElementById("refText");
   if (!area) return;
@@ -303,9 +317,11 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
   const mail = document.getElementById("mailShare");
   const copyBtn = document.getElementById("copyBtn");
   const nativeShare = document.getElementById("nativeShare");
+  const segBtns = [...document.querySelectorAll(".seg-btn")];
 
   const KEY = "hh_ref_rid_v1";
 
+  // ---- Random ID Generator ----
   const rand = len => {
     const a = "abcdefghijklmnopqrstuvwxyz0123456789";
     const buf = crypto.getRandomValues(new Uint8Array(len));
@@ -318,13 +334,14 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
         localStorage.getItem(KEY) ||
         (localStorage.setItem(KEY, rand(10)), localStorage.getItem(KEY))
       );
-    } catch (_) {
+    } catch {
       return rand(10);
     }
   };
 
   const sanitize = v => v.replace(/[^a-z0-9]/gi, "").toLowerCase();
 
+  // ---- Build Share URL ----
   const buildURL = () => {
     const u = new URL("https://heikohaerter.com");
     u.searchParams.set("utm_source", "weitergeben");
@@ -351,3 +368,53 @@ document.querySelectorAll("a[href^='#']").forEach(link => {
       final.length < 190
         ? final
         : final.slice(0, final.lastIndexOf(" ", 190)) + "…";
+
+    preview.textContent = short;
+
+    wa.href = "https://wa.me/?text=" + encodeURIComponent(final);
+    mail.href = "mailto:?subject=Kurzer%20Blick&body=" + encodeURIComponent(final);
+  };
+
+  // ---- Paste Segment Text ----
+  segBtns.forEach(btn =>
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.seg;
+      const variants = JSON.parse(area.dataset.variants)[key];
+      if (!variants) return;
+
+      const chosen =
+        variants[Math.floor(Math.random() * variants.length)];
+
+      area.value = chosen.replace("{{URL}}", buildURL());
+      update();
+    })
+  );
+
+  // ---- Copy Button ----
+  copyBtn?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(area.value.trim());
+      copyBtn.textContent = "✔️ Kopiert";
+      setTimeout(() => (copyBtn.textContent = "📋 Text kopieren"), 1800);
+    } catch {
+      area.select();
+      document.execCommand("copy");
+    }
+  });
+
+  // ---- Native Share (Mobile) ----
+  nativeShare?.addEventListener("click", async () => {
+    const val = area.value.trim();
+    if (!navigator.share) return alert("Teilen nicht unterstützt.");
+
+    try {
+      await navigator.share({ text: val });
+    } catch (_) {}
+  });
+
+  // ---- On Typing → Update Preview ----
+  area.addEventListener("input", update);
+  name?.addEventListener("input", update);
+
+  update();
+})();
