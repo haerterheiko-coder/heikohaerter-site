@@ -255,3 +255,87 @@
         <a href="/weitergeben.html#share" class="btn btn-ghost">🔗 Weitergeben</a></div>`;
     }
     funct
+/* ===== CINEMATIC RUNTIME ===== */
+(function(){
+  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cut = document.querySelector(".cut-overlay");
+
+  // Smooth scroll mit „Cut“
+  function cinematicScroll(target){
+    if(!target) return;
+    cut?.classList.add("on");
+    setTimeout(()=> target.scrollIntoView({behavior: prefersReduced?"auto":"smooth", block:"start"}), 110);
+    setTimeout(()=> cut?.classList.remove("on"), 360);
+  }
+
+  // Interne Anker mit „Cut“
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener("click",(e)=>{
+      const id=a.getAttribute("href");
+      if(id && id.length>1){
+        const t=document.querySelector(id);
+        if(t){ e.preventDefault(); cinematicScroll(t); }
+      }
+    }, {passive:false});
+  });
+
+  // iOS Video Autoplay „nudge“
+  function tryPlay(){ const v=document.querySelector(".hero-video"); v?.play?.().catch(()=>{}); }
+  document.addEventListener("touchstart", tryPlay, {once:true, passive:true});
+  document.addEventListener("click", tryPlay, {once:true, passive:true});
+
+  // Parallax für Stage-Glows & parallax-Karten
+  (function initParallax(){
+    if(prefersReduced) return;
+    const glowA=document.querySelector(".glow-a");
+    const glowB=document.querySelector(".glow-b");
+    const cards=document.querySelectorAll(".parallax");
+    let raf;
+    const onScroll=()=>{
+      cancelAnimationFrame(raf);
+      raf=requestAnimationFrame(()=>{
+        const t=scrollY||0;
+        if(glowA) glowA.style.transform=`translate3d(0,${t*-0.02}px,0)`;
+        if(glowB) glowB.style.transform=`translate3d(0,${t*-0.04}px,0)`;
+        cards.forEach(c=>{
+          const r=c.getBoundingClientRect(); const p=(r.top/innerHeight - .5);
+          c.style.transform=`translate3d(0,${p*-14}px,0)`;
+        });
+      });
+    };
+    addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  })();
+
+  // Subtiles Partikel-„Dust“
+  (function initParticles(){
+    const canvas=document.getElementById("particles");
+    if(!canvas || prefersReduced) return;
+    const ctx=canvas.getContext("2d"); const DPR=Math.min(devicePixelRatio||1,2);
+    let W=1,H=1,pts=[];
+    function resize(){
+      const b=canvas.getBoundingClientRect();
+      canvas.width=Math.max(1, Math.floor(b.width*DPR));
+      canvas.height=Math.max(1, Math.floor(b.height*DPR));
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+      W=b.width; H=b.height;
+      pts=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,s:.2+Math.random()}));
+    }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle="rgba(233,211,148,.28)";
+      pts.forEach(p=>{ p.y+=p.s*.25; if(p.y>H) p.y=-10; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); });
+      requestAnimationFrame(draw);
+    }
+    resize(); addEventListener("resize", resize, {passive:true}); draw();
+  })();
+
+  // (Optional) Kinetische Headline: <span class="swap" data-words='["heute","bald","später"]'>heute</span>
+  (function(){
+    const el=document.querySelector(".swap");
+    if(!el || prefersReduced) return;
+    let words=[]; try{ words=JSON.parse(el.getAttribute("data-words")||"[]"); }catch{}
+    if(!words.length) return;
+    let i=0;
+    setInterval(()=>{ i=(i+1)%words.length; el.classList.remove("enter"); void el.offsetWidth; el.textContent=words[i]; el.classList.add("enter"); },2800);
+  })();
+})();
