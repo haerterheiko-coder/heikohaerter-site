@@ -54,7 +54,110 @@
   {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
   </script>
 
-  <link rel="stylesheet" href="styles.css" />
+  <!-- ===== INLINE styles.css ===== -->
+  <style>
+/* ============================================================
+   GODMODE — CINEMATIC CUT (2026)
+============================================================ */
+:root{
+  --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5; --muted-soft:#8F97AA;
+  --gold:#C8A44B; --gold2:#EADCA8; --focus:#90C2FF;
+  --green:#7EDFA5; --yellow:#F7E39A; --red:#F3A6A6;
+  --glass:rgba(255,255,255,.055); --line:rgba(255,255,255,.12);
+  --ease:cubic-bezier(.25,.46,.25,1); --motion:1;
+  --shadow-deep:0 34px 110px rgba(0,0,0,.68); --shadow-soft:0 16px 52px rgba(0,0,0,.46);
+  --container:1120px; --gutter:clamp(16px,5vw,32px);
+  font-size:clamp(16px,0.9vw + 8px,20px);
+}
+@media (prefers-reduced-motion:reduce){ :root{--motion:0} }
+*{box-sizing:border-box; max-width:100%}
+html,body{height:auto; overflow-x:hidden}
+html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
+body{
+  margin:0; color:var(--text);
+  background:
+    radial-gradient(circle at 20% -12%, rgba(200,164,75,.16), transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(120,150,255,.11), transparent 60%),
+    linear-gradient(180deg,#04050A,#02040A 68%);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  contain:paint; line-height:1.4;
+}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
+img,picture,svg,video{display:block;max-width:100%;height:auto}
+.visually-hidden{position:absolute;inset:auto auto auto -9999px}
+.section{padding:clamp(32px,6vw,72px) 0}
+.container{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.grid{display:grid;gap:clamp(.6rem,2.2vw,1.2rem)}
+.stack{display:flex;flex-direction:column;gap:clamp(.45rem,1.8vw,.9rem)}
+.auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+h1,h2,h3{margin:0 0 .9rem;font-weight:700;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.12}
+h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+h3{font-size:clamp(1.12rem,2vw,1.28rem)}
+p{margin:0 0 .6rem;font-size:clamp(1rem,1.2vw,1.08rem);color:var(--muted)}
+.hero-micro{font-size:clamp(.95rem,1.1vw,1rem);color:var(--muted-soft)}
+.system-tagline{margin-top:.6rem;font-size:.98rem;color:var(--muted-soft);max-width:620px}
+header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
+.header-bar{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:.85rem 0}
+.brand{display:flex;flex-direction:column;gap:.18rem}
+.brand-top{display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.02rem}
+.brand-dot{width:.9rem;height:.9rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold2),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
+.hero{padding-top:clamp(28px,4vw,64px);padding-bottom:clamp(16px,2.5vw,28px)}
+.hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
+@media (min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center} }
+.hero-media picture{border-radius:24px;overflow:hidden}
+.hero-media img{width:100%;border-radius:24px;box-shadow:var(--shadow-deep);object-fit:cover;object-position:center top}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:1rem 1.55rem;border-radius:999px;border:1px solid transparent;background:rgba(255,255,255,.06);color:var(--text);font-weight:850;cursor:pointer;transition:transform .18s var(--ease), box-shadow .18s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(1px) scale(.99)}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
+.btn-primary:hover{box-shadow:0 18px 40px rgba(200,164,75,.40)}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+.btn.small{min-height:44px;padding:.6rem 1rem;font-weight:700}
+@media (max-width:767px){ .btn, .btn-primary, .btn-ghost{width:100%} }
+.card,.premium-card,.share{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:var(--shadow-soft)}
+.card{padding:1rem 1.1rem}
+.premium-card{padding:1.05rem 1.15rem}
+.story-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.95rem 1.05rem}
+.safety-card{border-left:4px solid var(--gold)}
+.share{padding:1rem 1.1rem}
+.result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.chip{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:999px;padding:.42rem .95rem;font-size:.92rem;color:var(--muted-soft)}
+.bar{display:flex;flex-wrap:wrap;gap:.6rem}
+.story-grid{display:grid;gap:1rem;margin:1.1rem 0;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
+.sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
+@media (max-width:1023px){ .sticky-cta{display:flex} }
+@supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
+.fade-up{opacity:0;transform:translateY(18px)}
+.fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+/* ===== CINEMA PACK ===== */
+.cut-overlay{position:fixed; inset:0; background:rgba(5,7,14,.72); opacity:0; pointer-events:none; z-index:200; transition:opacity .22s cubic-bezier(.25,.46,.25,1)}
+.cut-overlay.on{opacity:1}
+.cinema-bars{position:fixed; inset:0; pointer-events:none; z-index:60; background:linear-gradient(#000c,transparent 11%,transparent 89%,#000c)}
+.film-grain{position:fixed; inset:0; pointer-events:none; z-index:55; opacity:.14;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/></svg>');
+  animation:grain 2.2s steps(2,end) infinite;}
+@keyframes grain{to{transform:translate3d(-5%,3%,0)}}
+.stage{position:absolute; inset:0; pointer-events:none; z-index:-1; overflow:hidden}
+.stage .glow{position:absolute;border-radius:50%;filter:blur(52px);opacity:.46; transform:translateZ(0)}
+.glow-a{width:50vw;height:50vw;left:-16vw;top:-14vw;background:radial-gradient(circle,rgba(200,164,75,.28),transparent 62%)}
+.glow-b{width:56vw;height:56vw;right:-18vw;top:-16vw;background:radial-gradient(circle,rgba(136,153,255,.26),transparent 62%)}
+.particles{position:absolute; inset:0}
+.opening-shot{position:absolute;top:clamp(18px,4vw,42px);left:50%;transform:translateX(-50%);width:min(72vw,420px);height:2px;opacity:.65}
+.breath-line{display:block;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:breath 4.7s ease-in-out infinite}
+@keyframes breath{0%,100%{opacity:.16}50%{opacity:.62}}
+.swap{display:inline-block;will-change:opacity,transform}
+.swap.enter{animation:kinIn .62s cubic-bezier(.25,.46,.25,1) both}
+@keyframes kinIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero-media{position:absolute; inset:0; overflow:hidden; z-index:-1; pointer-events:none}
+.hero-media::after{content:""; position:absolute; inset:0;
+  background: radial-gradient(circle at 20% 20%, rgba(200,164,75,.10), transparent 52%), linear-gradient(180deg, rgba(5,7,14,.20), rgba(5,7,14,.72))}
+.hero-video{width:100%; height:100%; object-fit:cover; opacity:.24; filter:contrast(1.06) saturate(1.06); transform:translateZ(0)}
+@media (max-width:767.98px){ .hero-micro{font-size:1rem} .premium-card{padding:1rem .9rem} }
+  </style>
 </head>
 <body>
   <!-- Cinematic Overlays -->
@@ -77,7 +180,6 @@
   <main id="main">
     <!-- ===== SLIDE 1: HERO ===== -->
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title" style="position:relative;overflow:hidden">
-      <!-- Opening Shot + Stage (Kino) -->
       <div class="opening-shot" aria-hidden="true"><span class="breath-line"></span></div>
       <div class="stage" aria-hidden="true">
         <div class="glow glow-a"></div>
@@ -85,8 +187,7 @@
         <canvas id="particles" class="particles"></canvas>
       </div>
 
-      <!-- Optional: Background Video Layer (falls vorhanden, sonst einfach lassen) -->
-      <!--
+      <!-- Optional Background Video
       <div class="hero-media" aria-hidden="true">
         <video class="hero-video" src="/media/hero-loop.mp4" autoplay muted playsinline loop></video>
       </div>
@@ -151,7 +252,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 2: ZIELGRUPPEN + SZENEN ===== -->
+    <!-- ===== SLIDE 2 ===== -->
     <section id="zielgruppen-szenen" class="section fade-up" aria-labelledby="tg-h">
       <div class="container stack">
         <div class="premium-card parallax" aria-labelledby="tg-h">
@@ -182,7 +283,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 3: PROZESS ===== -->
+    <!-- ===== SLIDE 3 ===== -->
     <section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
       <div class="container">
         <h2 id="prozess-h">So läuft der Check</h2>
@@ -199,7 +300,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 4: SICHERHEIT ===== -->
+    <!-- ===== SLIDE 4 ===== -->
     <section id="sicherheit" class="section fade-up" aria-labelledby="safe-h">
       <div class="container">
         <h2 id="safe-h">Was NICHT passiert</h2>
@@ -214,7 +315,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 5: VORHER–NACHHER ===== -->
+    <!-- ===== SLIDE 5 ===== -->
     <section id="before-after" class="section fade-up" aria-labelledby="ba-h">
       <div class="container">
         <h2 id="ba-h">Vorher – Nachher</h2>
@@ -242,7 +343,7 @@
       </div>
     </section>
 
-    <!-- ===== SLIDE 6: ETHOS / PROOF ===== -->
+    <!-- ===== SLIDE 6 ===== -->
     <section id="ethos-social" class="section fade-up" aria-labelledby="ethos-h">
       <div class="container stack">
         <h2 id="ethos-h">Wer ich bin</h2>
@@ -298,7 +399,7 @@
               <span class="hero-micro" id="stepHint">Kurzer Eindruck reicht.</span>
             </div>
             <div class="bar" style="width:100%;height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.12)">
-              <span id="progressBar" style="display:block;height:10px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-soft));transition:width .35s var(--ease)"></span>
+              <span id="progressBar" style="display:block;height:10px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .35s var(--ease)"></span>
             </div>
           </div>
 
@@ -340,7 +441,7 @@
       </div>
     </section>
 
-    <!-- ===== SHARE-Hinweis (Index) ===== -->
+    <!-- ===== SHARE ===== -->
     <section class="section fade-up" id="share" aria-labelledby="share-title">
       <div class="container">
         <h2 id="share-title">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
@@ -394,17 +495,331 @@
     </div>
   </footer>
 
-  <!-- Sticky Mobile CTA -->
   <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
     <div class="inner"><a href="#ampel-check" class="btn btn-primary" data-ctx="sticky">⚡ 2-Minuten-Check</a></div>
   </div>
 
-  <!-- Whisper CTA -->
   <div class="whisper" id="whisper" role="status" aria-live="polite"
        style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">
        🟡 10 Sekunden – jemand weiß morgen, was ansteht.
   </div>
 
-  <script src="app.js" defer></script>
+  <!-- ===== INLINE app.js ===== -->
+  <script>
+(function(){
+  "use strict";
+  document.documentElement.classList.remove('no-js');
+  document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
+
+  // Fade-in
+  (function(){
+    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els=[...document.querySelectorAll('.fade-up')];
+    if(pref){els.forEach(el=>el.classList.add('visible'));return;}
+    if('IntersectionObserver'in window){
+      const io=new IntersectionObserver(ents=>ents.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+      }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
+      els.forEach(el=>io.observe(el));
+    }else{els.forEach(el=>el.classList.add('visible'));}
+  })();
+
+  // Sticky CTA (mobile)
+  (function(){
+    const el=document.getElementById('stickyCTA');
+    const hero=document.querySelector('.hero');
+    if(!el||!hero) return;
+    if(innerWidth>=980) return;
+    const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0'};
+    if('IntersectionObserver'in window){
+      new IntersectionObserver(ents=>ents.forEach(e=>show(!e.isIntersecting)),{threshold:.3}).observe(hero);
+      addEventListener('scroll',()=>{ if(scrollY>180) show(true); },{passive:true});
+    }else{ addEventListener('scroll',()=>show(scrollY>180),{passive:true}); }
+  })();
+
+  // Kurzmodus
+  (function(){
+    const btn=document.getElementById('dfBtn'); if(!btn) return;
+    const keep=new Set(['hero','ethos-social','stickyCTA','share','ampel-check']);
+    const nodes=[...document.querySelectorAll('main > section')].filter(s=>!keep.has(s.id));
+    const set=(on)=>{
+      btn.setAttribute('aria-pressed',on?'true':'false');
+      btn.textContent=on?'✅ Kurzmodus aktiv':'🔍 Kurzmodus';
+      nodes.forEach(n=>n.style.display=on?'none':'');
+      if(on) window.scrollTo({top:0,behavior:'smooth'});
+    };
+    btn.addEventListener('click',()=>set(btn.getAttribute('aria-pressed')!=='true'));
+    window.setKurzmodus=set;
+  })();
+
+  // Ergebnis-Vorschau Toggle
+  (function(){
+    const btn=document.getElementById('previewToggle');
+    const box=document.getElementById('heroPreview');
+    if(btn && box){ btn.addEventListener('click',()=>{ box.style.display=box.style.display==='none'?'grid':'none'; }); }
+  })();
+
+  // Whisper (once)
+  (function(){
+    const KEY='hh_whisper_seen_v4';
+    try{
+      if(sessionStorage.getItem(KEY)) return;
+      const w=document.getElementById('whisper'); if(!w) return;
+      setTimeout(()=>{ w.style.opacity='1'; w.style.transform='translateY(0)';
+        setTimeout(()=>{ w.style.opacity='0'; w.style.transform='translateY(10px)'; }, 4200);
+        sessionStorage.setItem(KEY,'1');
+      }, 16000);
+    }catch(_){}
+  })();
+
+  // ===== Ampel-Check (fixed) =====
+  (function() {
+    let step=1, score=0;
+    const max=3;
+    const startBtn=document.getElementById('startCheckBtn');
+    const stepsWrap=document.getElementById('check-steps');
+    const resultBox=document.getElementById('check-result');
+    const stepLabel=document.getElementById('stepLabel');
+    const progress=document.getElementById('progressBar');
+    const stepHint=document.getElementById('stepHint');
+    if(!stepsWrap || !resultBox) return;
+
+    function updateHead(){
+      stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`;
+      const pct = ((Math.min(step-1,max-1))/(max-1))*100;
+      progress.style.width = (max===1?100:pct)+'%';
+      stepHint.textContent= step===1?'Kurzer Eindruck reicht.': step===2?'Fast geschafft.':'Letzter Klick.';
+    }
+    function showStep(n){
+      document.querySelectorAll('#check-steps .step').forEach(s=>s.style.display='none');
+      const t=document.querySelector(`#check-steps .step[data-step="${n}"]`);
+      if(t){ t.style.display='block'; t.scrollIntoView({behavior:'smooth',block:'start'}); }
+      updateHead();
+    }
+    function renderCTA(color){
+      const wa='https://wa.me/4917660408380?text=';
+      if(color==='red') return `<div class="stack" style="text-align:center">
+        <a href="${wa}Kurz%2010%20Minuten%20sprechen" class="btn btn-primary">💬 Kurz sprechen – 10 Minuten</a>
+        <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">🛟 Frage senden</a></div>`;
+      if(color==='yellow') return `<div class="stack" style="text-align:center">
+        <a href="${wa}Als%20N%C3%A4chstes%20angehen" class="btn btn-primary">🧭 Als Nächstes angehen</a>
+        <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">💬 Frage senden</a></div>`;
+      return `<div class="stack" style="text-align:center">
+        <a href="${wa}Smarter%20machen%3F" class="btn btn-primary">✨ Smarter machen?</a>
+        <a href="/weitergeben.html#share" class="btn btn-ghost">🔗 Weitergeben</a></div>`;
+    }
+    function finish(){
+      stepsWrap.style.display='none';
+      resultBox.style.display='block';
+      let html='';
+      if(score<=4){
+        html=`<div class="result-card result-red">
+          <h3>🔴 Heute wichtig</h3>
+          <p>Mindestens ein Bereich braucht heute deine Aufmerksamkeit.</p>
+          ${renderCTA('red')}
+        </div>`;
+      } else if(score<=7){
+        html=`<div class="result-card result-yellow">
+          <h3>🟡 Bald wichtig</h3>
+          <p>Ein paar Dinge stehen bald an.</p>
+          ${renderCTA('yellow')}
+        </div>`;
+      } else {
+        html=`<div class="result-card result-green">
+          <h3>🟢 Passt für heute</h3>
+          <p>Für heute wirkt alles entspannt.</p>
+          ${renderCTA('green')}
+        </div>`;
+      }
+      html+=`<p class="hero-micro" style="margin-top:.8rem;opacity:.85">Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>`;
+      resultBox.innerHTML=html;
+      resultBox.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    function start(){
+      document.getElementById('check-start').style.display='none';
+      stepsWrap.style.display='block';
+      resultBox.style.display='none';
+      step=1; score=0; showStep(step);
+    }
+    document.getElementById('startCheckHero')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
+    document.getElementById('ctaFinal')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
+    startBtn?.addEventListener('click',start);
+    document.getElementById('startShort')?.addEventListener('click',e=>{
+      e.preventDefault(); start();
+      setTimeout(()=>{ score+=2; step=2; showStep(step); },150);
+      setTimeout(()=>{ score+=2; step=3; showStep(step); },350);
+    });
+    document.querySelectorAll('#check-steps .step').forEach(s=>{
+      s.querySelectorAll('button').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          score += Number(btn.getAttribute('data-value'))||0;
+          step++; if(step>3) finish(); else showStep(step);
+        });
+      });
+    });
+  })();
+
+  // ===== Share composer =====
+  (function(){
+    const name = document.getElementById('refName');
+    const area = document.getElementById('refText');
+    const wa   = document.getElementById('waShare');
+    const mail = document.getElementById('mailShare');
+    const copy = document.getElementById('copyBtn');
+    const preview = document.getElementById('waPreviewText');
+    if(!area) return;
+
+    const KEY_REFID='hh_ref_rid_v2';
+    function randomId(len=10){ const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len); if(crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.random()*256; return Array.from(u,x=>a[x%a.length]).join(''); }
+    function getRefId(){ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } }
+    function sanitize(n){ return n ? n.replace(/[^a-z0-9]/gi,'').toLowerCase() : ''; }
+    function buildURL(){
+      const base=new URL('https://heikohaerter.com');
+      base.searchParams.set('utm_source','weitergeben');
+      base.searchParams.set('utm_medium','share');
+      base.searchParams.set('utm_campaign','check');
+      const rid=getRefId(); base.searchParams.set('rid', rid);
+      const alias=sanitize((name?.value||'').trim());
+      if(alias) base.searchParams.set('ref', alias+'.'+rid.slice(0,5));
+      return base.toString();
+    }
+    function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
+    function detectSeg(){
+      const raw=(name?.value||'').toLowerCase();
+      if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
+      if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
+      if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
+      if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
+      if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
+      return 'neutral';
+    }
+    function pick(seg){ const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; const i=Math.floor(Math.random()*pool.length); return pool[i]; }
+    function ensureURL(text){ return /\bhttps?:\/\/\S+/i.test(text) ? text : (text.trim()+' '+buildURL()); }
+    function setTextFrom(seg){ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); }
+    function plain(){ return (area.value||'').replace(/\n+/g,' ').trim(); }
+    function updateLinks(){
+      const t=ensureURL(plain());
+      wa && (wa.href='https://wa.me/?text='+encodeURIComponent(t));
+      mail && (mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t));
+      preview && (preview.textContent = t.length<=190 ? t : t.substring(0,t.lastIndexOf(' ',190))+'…');
+    }
+    if(area && !area.value){ setTextFrom('neutral'); } updateLinks();
+
+    document.querySelectorAll('.seg-btn').forEach(b=>{
+      b.addEventListener('click', ()=>{ setTextFrom(b.getAttribute('data-seg')); window._bumpRefHalf?.(); });
+    });
+    name?.addEventListener('input', ()=> setTextFrom(), {passive:true});
+    area?.addEventListener('input', updateLinks, {passive:true});
+
+    document.getElementById('readyMsg')?.addEventListener('click', ()=>{
+      setTextFrom(); window._bumpRefHalf?.();
+      const toast=document.createElement('div');
+      toast.textContent='Fertiger Text eingefügt ✔️';
+      toast.className='whisper';
+      const base=document.getElementById('whisper');
+      toast.style.cssText= base ? base.style.cssText : 'position:fixed;left:18px;bottom:18px;z-index:70;background:#0b0f16;border:1px solid #333;color:#fff;border-radius:14px;padding:.6rem .8rem;opacity:0;transform:translateY(10px);transition:opacity .25s ease, transform .25s ease';
+      document.body.appendChild(toast);
+      setTimeout(()=>{ toast.style.opacity='1'; toast.style.transform='translateY(0)'; },10);
+      setTimeout(()=>toast.remove(),1800);
+    });
+    document.getElementById('magicLine')?.addEventListener('click', ()=>{
+      const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
+      const cur=(area.value||'').trim();
+      area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
+      updateLinks(); window._bumpRefHalf?.();
+    });
+    document.getElementById('addPersonal')?.addEventListener('click', ()=>{
+      const alias=(name?.value||'').trim()||'Hey';
+      area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
+      updateLinks(); window._bumpRefHalf?.();
+    });
+    copy?.addEventListener('click', async ()=>{
+      try{ await navigator.clipboard.writeText(ensureURL(area.value)); }
+      catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
+      window._bumpRefHalf?.();
+    });
+    document.getElementById('waShare')?.addEventListener('click', ()=> window._bumpRefFull?.());
+    document.getElementById('mailShare')?.addEventListener('click', ()=> window._bumpRefFull?.());
+    document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
+      const t=ensureURL(area.value); const url=buildURL();
+      if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); window._bumpRefFull?.(); }catch(_){} }
+    });
+    document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); window._bumpRefHalf?.(); });
+  })();
+
+  // ===== Cinematic Runtime =====
+  (function(){
+    const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const cut = document.querySelector(".cut-overlay");
+    function cinematicScroll(target){
+      if(!target) return;
+      cut?.classList.add("on");
+      setTimeout(()=> target.scrollIntoView({behavior: prefersReduced?"auto":"smooth", block:"start"}), 110);
+      setTimeout(()=> cut?.classList.remove("on"), 360);
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener("click",(e)=>{
+        const id=a.getAttribute("href");
+        if(id && id.length>1){
+          const t=document.querySelector(id);
+          if(t){ e.preventDefault(); cinematicScroll(t); }
+        }
+      }, {passive:false});
+    });
+    function tryPlay(){ const v=document.querySelector(".hero-video"); v?.play?.().catch(()=>{}); }
+    document.addEventListener("touchstart", tryPlay, {once:true, passive:true});
+    document.addEventListener("click", tryPlay, {once:true, passive:true});
+    (function initParallax(){
+      if(prefersReduced) return;
+      const glowA=document.querySelector(".glow-a");
+      const glowB=document.querySelector(".glow-b");
+      const cards=document.querySelectorAll(".parallax");
+      let raf;
+      const onScroll=()=>{
+        cancelAnimationFrame(raf);
+        raf=requestAnimationFrame(()=>{
+          const t=scrollY||0;
+          if(glowA) glowA.style.transform=`translate3d(0,${t*-0.02}px,0)`;
+          if(glowB) glowB.style.transform=`translate3d(0,${t*-0.04}px,0)`;
+          cards.forEach(c=>{
+            const r=c.getBoundingClientRect(); const p=(r.top/innerHeight - .5);
+            c.style.transform=`translate3d(0,${p*-14}px,0)`;
+          });
+        });
+      };
+      addEventListener("scroll", onScroll, {passive:true}); onScroll();
+    })();
+    (function initParticles(){
+      const canvas=document.getElementById("particles");
+      if(!canvas || prefersReduced) return;
+      const ctx=canvas.getContext("2d"); const DPR=Math.min(devicePixelRatio||1,2);
+      let W=1,H=1,pts=[];
+      function resize(){
+        const b=canvas.getBoundingClientRect();
+        canvas.width=Math.max(1, Math.floor(b.width*DPR));
+        canvas.height=Math.max(1, Math.floor(b.height*DPR));
+        ctx.setTransform(DPR,0,0,DPR,0,0);
+        W=b.width; H=b.height;
+        pts=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,s:.2+Math.random()}));
+      }
+      function draw(){
+        ctx.clearRect(0,0,W,H);
+        ctx.fillStyle="rgba(233,211,148,.28)";
+        pts.forEach(p=>{ p.y+=p.s*.25; if(p.y>H) p.y=-10; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); });
+        requestAnimationFrame(draw);
+      }
+      resize(); addEventListener("resize", resize, {passive:true}); draw();
+    })();
+    (function(){
+      const el=document.querySelector(".swap");
+      if(!el || prefersReduced) return;
+      let words=[]; try{ words=JSON.parse(el.getAttribute("data-words")||"[]"); }catch{}
+      if(!words.length) return;
+      let i=0;
+      setInterval(()=>{ i=(i+1)%words.length; el.classList.remove("enter"); void el.offsetWidth; el.textContent=words[i]; el.classList.add("enter"); },2800);
+    })();
+  })();
+})();
+  </script>
 </body>
 </html>
