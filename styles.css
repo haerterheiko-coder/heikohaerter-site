@@ -1,51 +1,30 @@
+/* /styles.css */
 /* ============================================================
    GODMODE — HOLLYWOOD CUT (2026)
-   Cinematic UI · Narrative Motion · Calm Dopamine
-   Safe for Production · No Libs · A11y aware
+   Mobile-first, Perf-optimiert, A11y-aware
 ============================================================ */
 
-/* ------------------------------------------------------------
-   TOKENS & MOTION CONTROL
------------------------------------------------------------- */
+/* TOKENS & CONTROLS */
 :root{
-  --bg:#05070E;
-  --bg2:#0B0F19;
-  --text:#F1F3FA;
-  --muted:#A8B1C5;
-
-  --gold:#C8A44B;
-  --gold2:#EADCA8;
-
-  --green:#7EDFA5;
-  --yellow:#F7E39A;
-  --red:#F3A6A6;
-
-  --glass:rgba(255,255,255,.055);
-  --line:rgba(255,255,255,.12);
-
-  --ease:cubic-bezier(.25,.46,.25,1);
-  --motion:1;
-
-  --shadow-deep:0 30px 90px rgba(0,0,0,.65);
-  --shadow-soft:0 14px 40px rgba(0,0,0,.45);
-
-  font-size:clamp(16px,0.9vw + 8px,20px);
+  --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5;
+  --gold:#C8A44B; --gold2:#EADCA8;
+  --green:#7EDFA5; --yellow:#F7E39A; --red:#F3A6A6;
+  --glass:rgba(255,255,255,.055); --line:rgba(255,255,255,.12);
+  --ease:cubic-bezier(.25,.46,.25,1); --motion:1;
+  --shadow-deep:0 30px 90px rgba(0,0,0,.65); --shadow-soft:0 14px 40px rgba(0,0,0,.45);
+  --hit:44px; /* min tap target */
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  font-size:clamp(16px,0.92vw + 8px,20px);
 }
+@media (prefers-reduced-motion:reduce){ :root{ --motion:0 } }
+@media (prefers-reduced-data:reduce){ :root{ --motion:0 } }
 
-@media (prefers-reduced-motion:reduce){
-  :root{ --motion:0 }
-}
-
-/* ------------------------------------------------------------
-   BASE
------------------------------------------------------------- */
-*{ box-sizing:border-box }
+*{ box-sizing:border-box; -webkit-tap-highlight-color: rgba(255,255,255,0) }
 html,body{ height:100%; scroll-behavior:smooth }
 html{ -webkit-text-size-adjust:100% }
 
 body.godmode{
-  margin:0;
-  color:var(--text);
+  margin:0; color:var(--text);
   background:
     radial-gradient(circle at 20% -12%, rgba(200,164,75,.14), transparent 55%),
     radial-gradient(circle at 80% 0%, rgba(120,150,255,.10), transparent 60%),
@@ -53,436 +32,146 @@ body.godmode{
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+  touch-action:manipulation;
 }
+
+/* Better mobile 100vh */
+.slides{ min-height:calc(var(--vh,1vh) * 100); }
 
 /* Skip */
 .skip{ position:absolute; left:-9999px; top:auto }
-.skip:focus{
-  left:8px; top:8px;
-  background:#000;
-  padding:.6rem;
-  border-radius:8px;
-}
+.skip:focus{ left:8px; top:8px; background:#000; padding:.6rem; border-radius:8px }
 
-/* ------------------------------------------------------------
-   CINEMATIC OVERLAYS
------------------------------------------------------------- */
+/* CINEMATIC */
 .cinema-bars{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:50;
-  background:
-    linear-gradient(#000e,transparent 10%,transparent 90%,#000e);
+  position:fixed; inset:0; pointer-events:none; z-index:50;
+  background:linear-gradient(#000e,transparent 10%,transparent 90%,#000e);
+  content-visibility:auto; contain:paint;
 }
-
 .film-grain{
-  position:fixed;
-  inset:-20%;
-  pointer-events:none;
-  z-index:40;
-  opacity:.14;
-  background-image:url('data:image/svg+xml;utf8,\
-<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160">\
-<filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/></filter>\
-<rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/>\
-</svg>');
+  position:fixed; inset:-20%; pointer-events:none; z-index:40; opacity:.14;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/></svg>');
   animation:grain 1.6s steps(2,end) infinite;
 }
-@keyframes grain{
-  to{ transform:translate3d(-5%,3%,0) }
-}
+@keyframes grain{ to{ transform:translate3d(-5%,3%,0) } }
 
-/* ------------------------------------------------------------
-   SLIDES / SCROLL CINEMA
------------------------------------------------------------- */
+/* SLIDES */
 .slides{
-  min-height:100dvh;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-  scroll-snap-stop:always;
+  overflow-y:scroll; scroll-snap-type:y mandatory; scroll-snap-stop:always;
+  overscroll-behavior-y:contain;
 }
-
 .slide{
-  min-height:100dvh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  scroll-snap-align:start;
-  position:relative;
-  padding:clamp(28px,5vw,64px);
+  min-height:calc(var(--vh,1vh) * 100);
+  display:flex; align-items:center; justify-content:center;
+  scroll-snap-align:start; position:relative;
+  padding:clamp(24px,5vw,64px);
+  content-visibility:auto; contain:layout paint;
 }
+.slide .inner{ width:100%; max-width:min(92vw,1280px); margin-inline:auto; padding-inline:clamp(16px,3.6vw,32px) }
 
-.slide .inner{
-  width:100%;
-  max-width:min(92vw,1280px);
-  margin-inline:auto;
-  padding-inline:clamp(16px,3.6vw,32px);
-}
+/* TYPE */
+.slide.hero h1{ font-size:clamp(2.6rem,6.6vw,5.6rem); line-height:1.04; letter-spacing:-.02em }
+.slide h2{ font-size:clamp(1.9rem,3.9vw,3.4rem); letter-spacing:-.015em }
+.lead{ font-size:clamp(1.1rem,1.8vw,1.35rem); color:var(--muted); max-width:52ch }
+.eyebrow,.micro{ color:var(--muted); letter-spacing:.12em; text-transform:uppercase; font-size:.85rem }
+.trust{ color:var(--muted); display:block; margin-top:.6rem }
 
-/* ------------------------------------------------------------
-   TYPOGRAPHY — FILMIC RHYTHM
------------------------------------------------------------- */
-.slide.hero h1{
-  font-size:clamp(2.8rem,6.8vw,5.6rem);
-  line-height:1.02;
-  letter-spacing:-.02em;
-}
-
-.slide h2{
-  font-size:clamp(2rem,4vw,3.4rem);
-  letter-spacing:-.015em;
-}
-
-.lead{
-  font-size:clamp(1.15rem,1.9vw,1.4rem);
-  color:var(--muted);
-  max-width:52ch;
-}
-
-.eyebrow,.micro{
-  color:var(--muted);
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  font-size:.85rem;
-}
-
-.trust{
-  color:var(--muted);
-  display:block;
-  margin-top:.6rem;
-}
-
-/* ------------------------------------------------------------
-   KINETIC TYPE (HOLLYWOOD MOMENT)
------------------------------------------------------------- */
+/* KINETIC */
 .kinetic em{
-  background:linear-gradient(
-    90deg,
-    #fff 0%,
-    #fff 40%,
-    #e7d69f 60%,
-    #fff 80%
-  );
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+  background:linear-gradient(90deg,#fff 0%,#fff 40%,#e7d69f 60%,#fff 80%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
 }
+.swap{ display:inline-block; will-change:opacity,transform; min-height:1em }
+.swap.enter{ animation:kineticIn calc(.6s * var(--motion)) var(--ease) both }
+@keyframes kineticIn{ from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
 
-.swap{
-  display:inline-block;
-  will-change:opacity,transform;
-}
-
-.swap.enter{
-  animation:kineticIn calc(.6s * var(--motion)) var(--ease) both;
-}
-
-@keyframes kineticIn{
-  from{ opacity:0; transform:translateY(18px) }
-  to{ opacity:1; transform:none }
-}
-
-/* ------------------------------------------------------------
-   STAGE / LIGHT / ATMOSPHERE
------------------------------------------------------------- */
-.stage{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-}
-
-.stage .glow{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(48px);
-  opacity:.45;
-}
-
-.glow-a{
-  width:48vw;height:48vw;
-  left:-14vw;top:-12vw;
-  background:radial-gradient(circle,#C8A44B33,transparent 60%);
-  animation:floatA calc(18s * var(--motion)) ease-in-out infinite alternate;
-}
-
-.glow-b{
-  width:54vw;height:54vw;
-  right:-16vw;top:-14vw;
-  background:radial-gradient(circle,#8899FF33,transparent 60%);
-  animation:floatB calc(20s * var(--motion)) ease-in-out infinite alternate;
-}
-
-@keyframes floatA{
-  to{ transform:translate3d(3vw,2vh,0) scale(1.05) }
-}
-@keyframes floatB{
-  to{ transform:translate3d(-3vw,2vh,0) scale(1.04) }
-}
-
+/* STAGE */
+.stage{ position:absolute; inset:0; pointer-events:none; z-index:-1 }
+.stage .glow{ position:absolute; border-radius:50%; filter:blur(48px); opacity:.45; will-change:transform }
+.glow-a{ width:48vw; height:48vw; left:-14vw; top:-12vw; background:radial-gradient(circle,#C8A44B33,transparent 60%); animation:floatA calc(18s*var(--motion)) ease-in-out infinite alternate }
+.glow-b{ width:54vw; height:54vw; right:-16vw; top:-14vw; background:radial-gradient(circle,#8899FF33,transparent 60%); animation:floatB calc(20s*var(--motion)) ease-in-out infinite alternate }
+@keyframes floatA{ to{ transform:translate3d(3vw,2vh,0) scale(1.05) } }
+@keyframes floatB{ to{ transform:translate3d(-3vw,2vh,0) scale(1.04) } }
 .particles{ position:absolute; inset:0 }
 
-/* ------------------------------------------------------------
-   CARDS — DEPTH & TENSION
------------------------------------------------------------- */
-.cards{
-  display:grid;
-  gap:clamp(1rem,2.6vw,1.4rem);
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
-  margin-top:1.2rem;
-}
-
+/* CARDS */
+.cards{ display:grid; gap:clamp(1rem,2.6vw,1.4rem); grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); margin-top:1.2rem }
 .card{
-  position:relative;
-  background:linear-gradient(
-    180deg,
-    rgba(255,255,255,.075),
-    rgba(255,255,255,.03)
-  );
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:clamp(1.1rem,1.4vw,1.6rem);
-  box-shadow:var(--shadow-deep);
-  transform:translateZ(0);
+  position:relative; background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.03));
+  border:1px solid var(--line); border-radius:20px; padding:clamp(1.1rem,1.4vw,1.6rem);
+  box-shadow:var(--shadow-deep); transform:translateZ(0);
 }
-
+.card::before{ content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:inset 0 -30px 60px rgba(0,0,0,.35); pointer-events:none }
 .card.parallax{ will-change:transform }
 
-/* subtle cinematic vignette */
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  box-shadow:inset 0 -30px 60px rgba(0,0,0,.35);
-  pointer-events:none;
-}
-
-/* ------------------------------------------------------------
-   CHIPS & LISTS
------------------------------------------------------------- */
-.chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.6rem;
-}
-
-.chips li{
-  list-style:none;
-  border:1px solid var(--line);
-  border-radius:999px;
-  padding:.4rem .9rem;
-  background:rgba(255,255,255,.04);
-  color:var(--muted);
-}
-
-.ticks{
-  margin:.8rem 0 0;
-  padding-left:1.2rem;
-  color:var(--muted);
-}
-
+/* CHIPS & LISTS */
+.chips{ display:flex; flex-wrap:wrap; gap:.6rem }
+.chips li{ list-style:none; border:1px solid var(--line); border-radius:999px; padding:.45rem .95rem; background:rgba(255,255,255,.04); color:var(--muted) }
+.ticks{ margin:.8rem 0 0; padding-left:1.2rem; color:var(--muted) }
 .narrow{ max-width:760px }
 
-/* ------------------------------------------------------------
-   BUTTONS — CINEMATIC DEPTH
------------------------------------------------------------- */
+/* BUTTONS */
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:54px;
-  padding:1rem 1.5rem;
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.06);
-  color:var(--text);
-  font-weight:800;
-  cursor:pointer;
-  transition:
-    transform .22s var(--ease),
-    box-shadow .22s var(--ease);
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:54px; padding:1rem 1.5rem; border-radius:999px;
+  border:1px solid var(--line); background:rgba(255,255,255,.06);
+  color:var(--text); font-weight:800; cursor:pointer;
+  transition:transform .22s var(--ease), box-shadow .22s var(--ease);
 }
-
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 16px 46px rgba(0,0,0,.55);
-}
-
-.btn-primary{
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#111;
-  box-shadow:0 20px 44px rgba(200,164,75,.45);
-}
-
-.btn-primary:hover{
-  box-shadow:0 28px 70px rgba(200,164,75,.55);
-}
-
+.btn:hover{ transform:translateY(-2px); box-shadow:0 16px 46px rgba(0,0,0,.55) }
+.btn-primary{ background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#111; box-shadow:0 20px 44px rgba(200,164,75,.45) }
+.btn-primary:hover{ box-shadow:0 28px 70px rgba(200,164,75,.55) }
 .btn-ghost{ background:rgba(255,255,255,.06) }
 
-.cta{
-  display:flex;
-  flex-direction:column;
-  gap:.7rem;
-  margin-top:1.2rem;
-}
+/* AMPEL & RESULTS */
+.ampel-preview{ display:flex; gap:.7rem; align-items:center; margin:1rem 0 0 }
+.dot{ width:14px; height:14px; border-radius:50% }
+.dot.green{ background:var(--green) } .dot.yellow{ background:var(--yellow) } .dot.red{ background:var(--red) }
 
-.cta-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.6rem;
-  margin-top:.6rem;
-}
-
-/* ------------------------------------------------------------
-   AMPEL & RESULTS — DOPAMINE
------------------------------------------------------------- */
-.ampel-preview{
-  display:flex;
-  gap:.7rem;
-  align-items:center;
-  margin:1rem 0 0;
-}
-
-.dot{ width:14px;height:14px;border-radius:50% }
-.dot.green{background:var(--green)}
-.dot.yellow{background:var(--yellow)}
-.dot.red{background:var(--red)}
-
-.check-step{
-  background:var(--glass);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:1.3rem;
-  margin:.7rem 0;
-}
-
-.result-card{
-  border-radius:20px;
-  padding:1.3rem;
-  margin-top:1.2rem;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.05);
-  box-shadow:var(--shadow-deep);
-}
-
+.check-step{ background:var(--glass); border:1px solid var(--line); border-radius:20px; padding:1.3rem; margin:.7rem 0 }
+.result-card{ border-radius:20px; padding:1.3rem; margin-top:1.2rem; border:1px solid var(--line); background:rgba(255,255,255,.05); box-shadow:var(--shadow-deep) }
 .result-green{ box-shadow:0 0 0 1px rgba(126,223,165,.25) inset }
-.result-yellow{
-  box-shadow:0 0 0 1px rgba(247,227,154,.25) inset;
-  animation:pulseY calc(2.6s * var(--motion)) ease-in-out infinite;
-}
-.result-red{
-  box-shadow:0 0 0 1px rgba(243,166,166,.25) inset;
-  animation:pulseR calc(2.1s * var(--motion)) ease-in-out infinite;
-}
+.result-yellow{ box-shadow:0 0 0 1px rgba(247,227,154,.25) inset; animation:pulseY calc(2.6s*var(--motion)) ease-in-out infinite }
+.result-red{ box-shadow:0 0 0 1px rgba(243,166,166,.25) inset; animation:pulseR calc(2.1s*var(--motion)) ease-in-out infinite }
+@keyframes pulseR{ 50%{ box-shadow:0 0 0 1px rgba(243,166,166,.35) inset, 0 0 28px rgba(243,166,166,.14) } }
+@keyframes pulseY{ 50%{ box-shadow:0 0 0 1px rgba(247,227,154,.35) inset, 0 0 26px rgba(247,227,154,.12) } }
 
-@keyframes pulseR{
-  50%{
-    box-shadow:
-      0 0 0 1px rgba(243,166,166,.35) inset,
-      0 0 28px rgba(243,166,166,.14);
-  }
-}
-@keyframes pulseY{
-  50%{
-    box-shadow:
-      0 0 0 1px rgba(247,227,154,.35) inset,
-      0 0 26px rgba(247,227,154,.12);
-  }
-}
+/* FADE-UP */
+.fade-up{ opacity:0; transform:translateY(22px) }
+.fade-up.visible{ opacity:1; transform:none; transition:opacity calc(.6s*var(--motion)) var(--ease), transform calc(.6s*var(--motion)) var(--ease) }
+html.no-js .fade-up{ opacity:1!important; transform:none!important }
 
-/* ------------------------------------------------------------
-   FADE-UP — STORY BEATS
------------------------------------------------------------- */
-.fade-up{
-  opacity:0;
-  transform:translateY(22px);
-}
-
-.fade-up.visible{
-  opacity:1;
-  transform:none;
-  transition:
-    opacity calc(.6s * var(--motion)) var(--ease),
-    transform calc(.6s * var(--motion)) var(--ease);
-}
-
-html.no-js .fade-up{
-  opacity:1!important;
-  transform:none!important;
-}
-
-/* ------------------------------------------------------------
-   PROGRESS & BULLETS
------------------------------------------------------------- */
-#progress{
-  position:fixed;
-  left:0;right:0;top:0;
-  height:4px;
-  z-index:90;
-  background:rgba(255,255,255,.06);
-}
-#progress span{
-  display:block;
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--gold),#fff2);
-  transition:width .25s var(--ease);
-}
+/* PROGRESS & BULLETS */
+#progress{ position:fixed; left:0; right:0; top:0; height:4px; z-index:90; background:rgba(255,255,255,.06) }
+#progress span{ display:block; height:100%; width:0; background:linear-gradient(90deg,var(--gold),#fff2); transition:width .25s var(--ease) }
 
 #bullets{
-  position:fixed;
-  right:16px;
-  top:50%;
-  transform:translateY(-50%);
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-  z-index:80;
+  position:fixed; right:16px; top:50%; transform:translateY(-50%);
+  display:flex; flex-direction:column; gap:9px; z-index:80;
 }
 #bullets button{
-  width:11px;height:11px;
-  border-radius:50%;
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.08);
-  cursor:pointer;
-  opacity:.65;
+  position:relative; width:12px; height:12px; border-radius:50%;
+  border:1px solid var(--line); background:rgba(255,255,255,.08); cursor:pointer; opacity:.65;
 }
-#bullets button[aria-current="true"]{
-  background:var(--gold);
-  border-color:transparent;
-  opacity:1;
+#bullets button::after{ /* bigger hit area */
+  content:""; position:absolute; inset:calc((var(--hit) - 12px)/-2);
 }
+#bullets button[aria-current="true"]{ background:var(--gold); border-color:transparent; opacity:1 }
 
-/* ------------------------------------------------------------
-   INPUTS
------------------------------------------------------------- */
+/* INPUTS */
 textarea,select{
-  width:100%;
-  background:rgba(255,255,255,.05);
-  border:1px solid var(--line);
-  border-radius:12px;
-  color:var(--text);
-  padding:.85rem 1rem;
+  width:100%; background:rgba(255,255,255,.05); border:1px solid var(--line);
+  border-radius:12px; color:var(--text); padding:.85rem 1rem;
+}
+textarea:focus,select:focus,.btn:focus-visible{
+  outline:2px solid rgba(233,211,148,.6); outline-offset:3px
 }
 
-textarea:focus,
-select:focus,
-.btn:focus-visible{
-  outline:2px solid rgba(233,211,148,.6);
-  outline-offset:3px;
-}
-
-/* ------------------------------------------------------------
-   RESPONSIVE
------------------------------------------------------------- */
+/* RESPONSIVE */
 @media (max-width:1023px){
   #bullets{ right:10px }
   .btn,.btn-primary,.btn-ghost{ width:100% }
 }
-
 @media (min-width:1600px){
   .slide .inner{ max-width:min(88vw,1400px) }
   .slide.hero h1{ font-size:clamp(3rem,5.6vw,5.9rem) }
