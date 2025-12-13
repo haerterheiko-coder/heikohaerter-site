@@ -37,7 +37,7 @@ body.godmode{
   contain:paint;
 }
 
-/* Root snap (natürlicher Body-Scroll) */
+/* Root snap (natürlicher Body-Scroll für index.html mit Slides) */
 html{ scroll-snap-type:y mandatory; scroll-snap-stop:always; scroll-padding-top:0 }
 
 /* iOS 100vh stabilisieren */
@@ -67,7 +67,7 @@ html{ scroll-snap-type:y mandatory; scroll-snap-stop:always; scroll-padding-top:
 }
 @keyframes grain{to{transform:translate3d(-5%,3%,0)}}
 
-/* Slides */
+/* Slides (index.html) */
 .slides{display:block}
 .slide{
   scroll-snap-align:start;
@@ -83,17 +83,46 @@ html{ scroll-snap-type:y mandatory; scroll-snap-stop:always; scroll-padding-top:
   position:relative;
 }
 
+/* Generic Sections (arbeitgeber.html / weitergeben.html) */
+.section{
+  position:relative;
+  padding:clamp(28px,6vw,84px) 0;
+  isolation:isolate;
+}
+.container,.wrap,.inner{
+  width:100%;
+  max-width:min(92vw,1280px);
+  margin-inline:auto;
+  padding-inline:clamp(16px,3.6vw,32px);
+}
+.narrow{ max-width:760px }
+
+.stack{ display:flex; flex-direction:column; gap:clamp(.6rem,1.8vw,1rem) }
+.text-center{ text-align:center }
+
+.grid{ display:grid; gap:clamp(1rem,2.6vw,1.6rem) }
+
+/* Hero Grids (arbeitgeber/weitergeben) */
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:center;
+  gap:clamp(1rem,3vw,1.6rem);
+}
+
 /* Opening shot */
 .opening-shot{position:absolute;top:clamp(18px,4vw,42px);left:50%;transform:translateX(-50%);width:min(72vw,420px);height:2px;opacity:.65}
 .breath-line{display:block;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:breath calc(4.7s*var(--motion)) ease-in-out infinite}
 @keyframes breath{0%,100%{opacity:.16}50%{opacity:.62}}
 
 /* Typography */
-.slide.hero h1{font-size:clamp(2.9rem,6.9vw,5.9rem);line-height:1.01;letter-spacing:-.022em;margin:.2rem 0 .6rem}
-.slide h2{font-size:clamp(2rem,4vw,3.45rem);letter-spacing:-.016em;line-height:1.06;margin:.2rem 0 .6rem}
+h1,h2{ margin:.2rem 0 .6rem }
+.slide.hero h1{font-size:clamp(2.9rem,6.9vw,5.9rem);line-height:1.01;letter-spacing:-.022em}
+.slide h2, .section h2{font-size:clamp(2rem,4vw,3.45rem);letter-spacing:-.016em;line-height:1.06}
 .lead{font-size:clamp(1.15rem,1.9vw,1.42rem);color:var(--muted);max-width:56ch}
-.eyebrow,.micro{color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-size:.85rem}
+.eyebrow,.hero-micro,.micro{color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-size:.85rem}
 .trust{color:var(--muted);display:block;margin-top:.65rem}
+.hero-sub{ color:var(--muted); max-width:60ch }
 
 /* Kinetic type */
 .kinetic em{background:linear-gradient(90deg,#fff 0%,#fff 45%,#e7d69f 62%,#fff 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -126,17 +155,26 @@ html{ scroll-snap-type:y mandatory; scroll-snap-stop:always; scroll-padding-top:
 .card img{width:100%;height:auto;border-radius:16px;margin-top:.85rem;display:block}
 .card.parallax{will-change:transform}
 
-/* Exist grid / inline images */
-.exist-grid{display:grid;gap:clamp(.9rem,2.4vw,1.2rem);grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin:1rem 0 .6rem}
-.hero-inline{width:100%;height:auto;border-radius:18px;margin-top:1rem;display:block;box-shadow:var(--shadow-soft)}
+/* Arbeitgeber — Grid & Cards */
+.process-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  gap:clamp(1rem,2.6vw,1.4rem);
+}
+.process-card{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.05);
+  border-radius:18px;
+  padding:1rem 1.1rem;
+  box-shadow:var(--shadow-soft);
+}
 
 /* Chips / ticks */
 .chips{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0 0;padding:0}
 .chips li{list-style:none;border:1px solid var(--line);border-radius:999px;padding:.42rem .95rem;background:rgba(255,255,255,.04);color:var(--muted)}
 .ticks{margin:.85rem 0 0;padding-left:1.2rem;color:var(--muted)}
-.narrow{max-width:760px}
 
-/* Buttons */
+/* Buttons & Inputs */
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:1rem 1.55rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font-weight:850;cursor:pointer;transition:transform .22s var(--ease), box-shadow .22s var(--ease);user-select:none;-webkit-tap-highlight-color:transparent}
 .btn:hover{transform:translateY(-2px);box-shadow:0 18px 58px rgba(0,0,0,.55)}
 .btn:active{transform:translateY(1px) scale(.99)}
@@ -144,6 +182,21 @@ html{ scroll-snap-type:y mandatory; scroll-snap-stop:always; scroll-padding-top:
 .btn-primary:hover{box-shadow:0 34px 92px rgba(200,164,75,.56)}
 .btn-ghost{background:rgba(255,255,255,.06)}
 .cta{display:flex;flex-direction:column;gap:.75rem;margin-top:1.2rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.6rem}
+
+.input, textarea, select{
+  width:100%;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:var(--text);
+  padding:.85rem 1rem;
+}
+textarea{resize:vertical}
+.input:focus, textarea:focus, select:focus, .btn:focus-visible, a:focus-visible{
+  outline:2px solid rgba(233,211,148,.62);
+  outline-offset:3px;
+}
 
 /* Ampel / Check */
 .ampel-preview{display:flex;gap:.75rem;align-items:center;margin:1rem 0 0}
@@ -156,7 +209,7 @@ html{ scroll-snap-type:y mandatory; scroll-snap-stop:always; scroll-padding-top:
 @keyframes pulseR{50%{box-shadow:0 0 0 1px rgba(243,166,166,.35) inset,0 0 30px rgba(243,166,166,.14)}}
 @keyframes pulseY{50%{box-shadow:0 0 0 1px rgba(247,227,154,.35) inset,0 0 26px rgba(247,227,154,.12)}}
 
-/* Proof swipe (optional future) */
+/* Proof swipe (optional) */
 .proof-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0 .8rem}
 .tab{border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);border-radius:999px;padding:.5rem .9rem;font-weight:800;cursor:pointer}
 .tab.is-on{background:rgba(200,164,75,.18);border-color:rgba(200,164,75,.34)}
@@ -170,7 +223,7 @@ html{ scroll-snap-type:y mandatory; scroll-snap-stop:always; scroll-padding-top:
 .fade-up.visible{opacity:1;transform:none;transition:opacity calc(.62s*var(--motion)) var(--ease), transform calc(.62s*var(--motion)) var(--ease)}
 html.no-js .fade-up{opacity:1!important;transform:none!important}
 
-/* Progress + bullets (thumb-friendly + safe-area) */
+/* Progress + bullets (index.html) */
 #progress{position:fixed;left:0;right:0;top:0;height:4px;z-index:120;background:rgba(255,255,255,.06)}
 #progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#fff2);transition:width .25s var(--ease);transform-origin:top}
 #bullets{position:fixed;right:calc(12px + env(safe-area-inset-right));top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:130}
@@ -179,69 +232,64 @@ html.no-js .fade-up{opacity:1!important;transform:none!important}
 #bullets button:active{transform:scale(1.15)}
 #bullets button[aria-current="true"]{background:var(--gold);border-color:transparent;opacity:1}
 
-/* CLS-freier Reveal */
+/* CLS-freier Reveal (index.html Gate) */
 .slide[aria-hidden="true"]{display:block;visibility:hidden;height:0;min-height:0;padding:0;margin:0;opacity:0;pointer-events:none}
 .slide.reveal{transition:opacity .35s var(--ease)}
 .slide.reveal.show{opacity:1;visibility:visible;height:auto;min-height:inherit;padding:clamp(28px,5vw,72px);padding-bottom:calc(clamp(28px,5vw,72px) + env(safe-area-inset-bottom));pointer-events:auto}
 
-/* Focus */
-.btn:focus-visible, a:focus-visible{outline:2px solid rgba(233,211,148,.62);outline-offset:3px}
+/* Weitergeben — Page Additions */
+.hero-share .inner{ z-index:1 }
+.hero-share::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(1200px 600px at 12% 8%, rgba(200,164,75,.14), transparent 60%),
+    radial-gradient(1200px 600px at 88% 12%, rgba(120,150,255,.12), transparent 60%),
+    linear-gradient(180deg, rgba(10,14,24,.25), rgba(5,7,14,.85));
+}
+.hero-share{
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.02) 0,
+      rgba(255,255,255,.02) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  backdrop-filter:saturate(1.02) contrast(1.02);
+}
+.premium-card{
+  margin-top:1rem;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.05);
+  border-radius:16px;
+  padding:.8rem 1rem;
+  box-shadow:var(--shadow-soft);
+}
+.qr-wrap{display:flex;align-items:center;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.qr-actions{display:flex;gap:.6rem;align-items:center}
+#qrCanvas{border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);box-shadow:var(--shadow-soft)}
+
+/* Footer / Signature */
+.footer{padding:28px 0 42px;text-align:center}
+.footer .signature{font-size:.95rem;letter-spacing:.08em;opacity:.55;margin-bottom:1.1rem}
+.footer .legal{font-size:.75rem;opacity:.55}
+.footer a{color:inherit;text-decoration:none}
+.footer a:hover{text-decoration:underline}
 
 /* Mobile */
 @media (max-width:1023px){
   .btn{width:100%}
+  .hero-grid{grid-template-columns:1fr}
+  .qr-wrap{justify-content:flex-start}
+  #qrCanvas{width:200px;height:200px}
 }
-/* ============================================================
-   ACT VIII — EPILOG
-   Stiller Nachhall · Kein CTA · Kino-Ende
-============================================================ */
 
+/* Epilog (optional) */
 .epilog{
   background:
     radial-gradient(circle at 50% 20%, rgba(255,255,255,.04), transparent 55%),
     linear-gradient(180deg, transparent, rgba(0,0,0,.35));
 }
-
-.epilog h2{
-  font-size:clamp(1.8rem,3.6vw,2.8rem);
-  letter-spacing:-.015em;
-}
-
-.epilog .lead{
-  max-width:42ch;
-  margin-inline:auto;
-}
-
-.epilog .micro{
-  margin-top:1.2rem;
-}
-/* ============================================================
-   ACT IX — UNSICHTBARE SIGNATUR
-   Haltung statt Marke · Red Dot Niveau
-============================================================ */
-
-.footer{
-  padding:28px 0 42px;
-  text-align:center;
-}
-
-.footer .signature{
-  font-size:.95rem;
-  letter-spacing:.08em;
-  opacity:.55;
-  margin-bottom:1.1rem;
-}
-
-.footer .legal{
-  font-size:.75rem;
-  opacity:.55;
-}
-
-.footer a{
-  color:inherit;
-  text-decoration:none;
-}
-
-.footer a:hover{
-  text-decoration:underline;
-}
+.epilog h2{font-size:clamp(1.8rem,3.6vw,2.8rem);letter-spacing:-.015em}
+.epilog .lead{max-width:42ch;margin-inline:auto}
+.epilog .micro{margin-top:1.2rem}
