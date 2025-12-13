@@ -214,3 +214,136 @@ textarea:focus,select:focus,.btn:focus-visible{ outline:2px solid rgba(233,211,1
     radial-gradient(120% 60% at 50% 0%, rgba(0,0,0,.20), transparent 60%),
     radial-gradient(120% 60% at 50% 100%, rgba(0,0,0,.20), transparent 60%);
 }
+/* ============================================================
+   GODMODE — Mobile First Hardening (iOS/Android)
+   Fix: horizontal jiggle, vh wobble, snap feel, CLS on reveal
+============================================================ */
+
+/* 0) Hard containment / no horizontal bleed */
+html, body {
+  height: 100%;
+  overflow-x: hidden; /* kill sideways jiggle */
+}
+
+body.godmode {
+  /* replace overflow:clip behavior for mobile stability */
+  overflow-x: hidden;
+  overflow-y: hidden; /* we scroll inside .slides (container) */
+  contain: paint;     /* isolates fixed layers / reduces bleed */
+}
+
+/* Ensure nothing can exceed viewport width */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 1) VH stability (mobile address bar) */
+.slides {
+  min-height: 100dvh;
+}
+.slide {
+  min-height: 100dvh;
+}
+
+@supports (height: 100svh) {
+  .slides { min-height: 100svh; }
+  .slide  { min-height: 100svh; }
+}
+
+/* 2) Snap polish + iOS feel */
+.slides {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y mandatory;
+  scroll-snap-stop: always;
+  scroll-padding-top: 0;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y manipulation;
+}
+
+/* 3) Fixed layers: prevent negative inset / bleeding */
+.cinema-bars,
+.film-grain,
+.stage,
+.particles {
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+/* Reduce chance of layout jitter from huge fixed grain */
+.film-grain {
+  inset: -12%; /* was -20% -> reduces chance of bleed/wobble */
+}
+
+/* 4) Bullet nav: thumb-friendly + safe area */
+#bullets {
+  right: 12px;
+}
+@supports (padding: max(0px)) {
+  #bullets {
+    right: calc(12px + env(safe-area-inset-right));
+  }
+}
+#bullets button {
+  width: 14px;
+  height: 14px;
+  /* bigger hit area without changing visual */
+  position: relative;
+}
+#bullets button::after {
+  content: "";
+  position: absolute;
+  inset: -14px; /* 40px-ish target */
+}
+
+/* 5) Reveal ohne CLS (replace hidden jump)
+   IMPORTANT: works with JS below (class .show toggled)
+*/
+.slide.reveal {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity calc(.35s * var(--motion)) var(--ease),
+    transform calc(.35s * var(--motion)) var(--ease),
+    visibility 0s linear calc(.35s * var(--motion));
+}
+
+.slide.reveal.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition:
+    opacity calc(.35s * var(--motion)) var(--ease),
+    transform calc(.35s * var(--motion)) var(--ease),
+    visibility 0s;
+}
+
+/* If you still keep [hidden] in HTML, avoid display:none jump */
+.slide[hidden] {
+  display: block;
+  height: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* 6) Reduce heavy effects until "armed" */
+body:not(.fx-on) .film-grain { opacity: 0.0; }
+body:not(.fx-on) .glow { opacity: 0.0; }
+body:not(.fx-on) .particles { opacity: 0.0; }
+
+/* When effects are on, we bring them back */
+body.fx-on .film-grain { opacity: .12; }
+body.fx-on .glow { opacity: .45; }
+body.fx-on .particles { opacity: 1; }
+
+/* 7) iOS paint stability on big layers */
+.stage, .film-grain, .cinema-bars {
+  transform: translateZ(0);
+}
