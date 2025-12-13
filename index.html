@@ -4,10 +4,59 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <!-- Branding & Theming -->
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#05070E" />
   <title>2 Minuten – Netflix-Opening für deine Finanzklarheit</title>
-  <meta name="description" content="Cinematic Scrollytelling: In 2 Minuten zur Klarheit. Ruhig, anonym, kein Verkauf.">
+  <meta name="description" content="Cinematic Scrollytelling: In 2 Minuten zur Klarheit. Ruhig, anonym, kein Verkauf. Ampel erst, wenn die Story sie verdient." />
+  <link rel="canonical" href="https://heikohaerter.com" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung" />
+  <meta property="og:title" content="2 Minuten – zeigt sofort, was heute wichtig ist." />
+  <meta property="og:description" content="Ein kurzer Blick: sofort sehen, ob heute etwas Wichtiges fehlt – anonym & ohne Verpflichtung." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://heikohaerter.com" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Preconnects -->
+  <link rel="preconnect" href="https://static.wixstatic.com" crossorigin />
+  <link rel="preconnect" href="https://wa.me" crossorigin />
+
+  <!-- LCP Preload (Hero-Visual, falls benötigt) -->
+  <link
+    rel="preload"
+    as="image"
+    href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+    imagesrcset="
+      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=480 480w,
+      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=720 720w,
+      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=900 900w,
+      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200 1200w
+    "
+    imagesizes="(min-width: 1024px) 52vw, 92vw"
+    fetchpriority="high"
+  />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
+  </script>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="./styles.css" />
   <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -23,223 +72,268 @@
 <div id="progress" aria-hidden="true"><span></span></div>
 <nav id="bullets" aria-label="Slides Navigation"></nav>
 
-<main id="slides" class="slides" tabindex="0">
+<main id="slides" class="slides" tabindex="0" aria-live="polite">
 
-<!-- BEAT 1 — HOOK -->
-<section class="slide hero fade-up" data-beat="1">
-  <div class="inner">
-    <p class="eyebrow">Ein kurzer Moment · Keine Entscheidung · Nur Einordnung</p>
+  <!-- BEAT 1 — HOOK -->
+  <section class="slide hero fade-up" data-beat="1">
+    <div class="inner">
+      <p class="eyebrow">Ein kurzer Moment · Keine Entscheidung · Nur Einordnung</p>
 
-    <h1 class="kinetic">
-      Manchmal bleibt nur dieser Gedanke:<br>
-      <em><span class="swap" data-words='["Da fehlt etwas.","Kein Überblick.","Ich schieb das vor mir her."]'>Da fehlt etwas.</span></em>
-    </h1>
+      <h1 class="kinetic">
+        Manchmal bleibt nur dieser Gedanke:<br>
+        <em><span class="swap" data-words='["Da fehlt etwas.","Kein Überblick.","Ich schieb das vor mir her."]'>Da fehlt etwas.</span></em>
+      </h1>
 
-    <p class="lead">
-      Kein Drama. Kein Alarm.<br>
-      Nur dieses leise Gefühl, etwas Wichtiges nicht ganz im Blick zu haben.
-    </p>
+      <p class="lead">
+        Kein Drama. Kein Alarm.<br />
+        Nur dieses leise Gefühl, etwas Wichtiges nicht ganz im Blick zu haben.
+      </p>
 
-    <div class="cta">
-      <a class="btn btn-primary" href="#b2">Weiter</a>
-      <span class="trust">🔒 anonym · 🚫 kein Nachfassen · 📄 keine Unterlagen</span>
-    </div>
-  </div>
+      <!-- Trust-Chips aus Wix (verdichtet) -->
+      <div class="chips" aria-label="Trust">
+        <span>⭐ 4,9 · 250+ Menschen</span>
+        <span>Eltern · Paare · Selbstständige</span>
+        <span>Kein Verkauf · 100% anonym</span>
+      </div>
 
-  <div class="stage" aria-hidden="true">
-    <div class="glow glow-a"></div>
-    <div class="glow glow-b"></div>
-    <canvas id="particles" class="particles"></canvas>
-  </div>
-</section>
-
-<!-- BEAT 2 — SZENEN -->
-<section class="slide scene fade-up" id="b2" data-beat="2">
-  <div class="inner">
-    <h2>Der Moment, in dem der Gedanke auftaucht</h2>
-
-    <div class="cards">
-      <article class="card parallax">
-        <h3>22:47 · Eltern</h3>
-        <p>Die Kinder schlafen.<br>„Wir müssten das eigentlich mal sortieren.“</p>
-      </article>
-      <article class="card parallax">
-        <h3>Paare</h3>
-        <p>Nichts brennt.<br>Aber alles hängt zusammen.</p>
-      </article>
-      <article class="card parallax">
-        <h3>Selbstständige</h3>
-        <p>Wenn du ausfällst –<br>trägt es dann noch?</p>
-      </article>
-    </div>
-
-    <div class="cta">
-      <a class="btn" href="#b3">Weiter</a>
-    </div>
-  </div>
-</section>
-<!-- BEAT X — EXISTENZ / SELBSTSTÄNDIGE -->
-<section class="slide exist fade-up" id="bx" data-beat="2.5" aria-labelledby="bxt">
-  <div class="inner">
-    <h2 id="bxt" class="parallax">Wenn du morgen nicht kannst</h2>
-
-    <p class="lead">
-      Keine Panik. Nur eine ehrliche Frage:
-    </p>
-
-    <div class="exist-grid">
-      <article class="card parallax">
-        <h3>Einkommen</h3>
-        <p>
-          Kommt es weiter –<br>
-          oder stoppt alles mit dir?
-        </p>
-      </article>
-
-      <article class="card parallax">
-        <h3>Verantwortung</h3>
-        <p>
-          Wer übernimmt Entscheidungen,<br>
-          wenn du es nicht kannst?
-        </p>
-      </article>
-
-      <article class="card parallax">
-        <h3>Rücklagen</h3>
-        <p>
-          Wochen? Monate?<br>
-          Oder nur Hoffnung?
-        </p>
-      </article>
-    </div>
-
-    <p class="micro">
-      Die meisten merken erst im Ernstfall,<br>
-      was wirklich fehlt.
-    </p>
-
-    <div class="cta">
-      <a class="btn btn-primary" href="#b3">Weiter</a>
-      <span class="trust">Keine Entscheidung. Nur Einordnung.</span>
-    </div>
-  </div>
-</section>
-
-<!-- BEAT 3 — WARUM -->
-<section class="slide why fade-up" id="b3" data-beat="3">
-  <div class="inner">
-    <h2 class="parallax">Ungewissheit ist lauter als schlechte Nachrichten</h2>
-
-    <p class="micro">
-      Das Gehirn hasst offene Schleifen.<br>
-      Einordnung beruhigt – sofort.
-    </p>
-
-    <ul class="ticks">
-      <li>Ein Gedanke gleichzeitig</li>
-      <li>Kein Gespräch, kein Rechtfertigen</li>
-      <li>Ein klares Signal</li>
-    </ul>
-
-    <div class="cta">
-      <button class="btn btn-primary" data-earn-ampel>Zeig mir die Einordnung</button>
-      <span class="trust">Die Ampel erscheint erst jetzt.</span>
-    </div>
-  </div>
-</section>
-
-<!-- BEAT 4 — GATE / OFFENBARUNG -->
-<section class="slide reveal fade-up" id="b4" data-beat="4" hidden>
-  <div class="inner">
-    <h2>Nicht alles ist dringend.<br>Aber manches ist heute wichtig.</h2>
-    <p class="eyebrow">Kein Urteil. Nur Orientierung.</p>
-
-    <div class="ampel-preview">
-      <span class="dot green"></span>
-      <span class="dot yellow"></span>
-      <span class="dot red"></span>
-    </div>
-
-    <div class="cta">
-      <a class="btn btn-primary" href="#b5">2 Minuten Klarheit</a>
-      <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
-    </div>
-  </div>
-</section>
-
-<!-- BEAT 5 — CHECK -->
-<section class="slide check fade-up" id="b5" data-beat="5">
-  <div class="inner narrow">
-    <h2>Drei Fragen. Kein Richtig. Kein Falsch.</h2>
-    <p class="micro">Dein Bauchgefühl reicht.</p>
-
-    <div id="check-steps"></div>
-    <div id="check-result"></div>
-  </div>
-</section>
-
-<!-- BEAT 6 — SICHERHEIT -->
-<section class="slide safety fade-up" data-beat="6">
-  <div class="inner">
-    <h2>Was hier bewusst nicht passiert</h2>
-    <ul class="chips">
-      <li>Kein Verkauf</li>
-      <li>Keine Daten</li>
-      <li>Kein Nachfassen</li>
-    </ul>
-
-    <p class="about">
-      👋 Ich bin Heiko.<br>
-      Diese Ampel ist gebaut, damit Orientierung leiser ist als Verkaufsdruck.
-    </p>
-
-    <div class="cta">
-      <a class="btn btn-primary" href="#b5">Check starten</a>
-      <a class="btn" href="./arbeitgeber.html">Für Arbeitgeber</a>
-    </div>
-  </div>
-</section>
-<!-- SOCIAL PROOF — SWIPE -->
-<section class="slide proof fade-up" data-beat="7" aria-labelledby="prooft">
-  <div class="inner narrow">
-    <h2 id="prooft">Dieser Moment ist nicht ungewöhnlich</h2>
-    <p class="micro">Ein paar echte Szenen aus dem Alltag.</p>
-
-    <div class="proof-tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-proof="parents">Eltern</button>
-      <button role="tab" aria-selected="false" data-proof="couples">Paare</button>
-      <button role="tab" aria-selected="false" data-proof="self">Selbstständige</button>
-    </div>
-
-    <div class="proof-swiper" tabindex="0" aria-live="polite">
-      <div class="proof-track">
-        <article class="proof-card" data-group="parents">
-          <p>„22:47. Die Kinder schlafen.  
-          Danach hab ich besser geschlafen.“</p>
-        </article>
-        <article class="proof-card" data-group="parents">
-          <p>„Endlich mal ohne jemandem was erklären zu müssen.“</p>
-        </article>
-
-        <article class="proof-card" data-group="couples" hidden>
-          <p>„Wir haben zum ersten Mal dasselbe Bild gesehen.“</p>
-        </article>
-        <article class="proof-card" data-group="couples" hidden>
-          <p>„Kein Streit. Einfach Einordnung.“</p>
-        </article>
-
-        <article class="proof-card" data-group="self" hidden>
-          <p>„Ich wusste sofort, was heute wichtig ist.“</p>
-        </article>
-        <article class="proof-card" data-group="self" hidden>
-          <p>„Zwei Minuten – und der Kopf war ruhiger.“</p>
-        </article>
+      <div class="cta">
+        <a class="btn btn-primary" href="#b2">Weiter</a>
+        <span class="trust">🔒 anonym · 🚫 kein Nachfassen · 📄 keine Unterlagen</span>
       </div>
     </div>
-  </div>
-</section>
+
+    <div class="stage" aria-hidden="true">
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+      <canvas id="particles" class="particles"></canvas>
+    </div>
+  </section>
+
+  <!-- BEAT 2 — SZENEN / FALLHÖHE -->
+  <section class="slide scene fade-up" id="b2" data-beat="2">
+    <div class="inner">
+      <h2>Der Moment, in dem der Gedanke auftaucht</h2>
+
+      <div class="cards">
+        <article class="card parallax">
+          <h3>22:47 · Eltern</h3>
+          <p>Die Kinder schlafen.<br>„Wir müssten das eigentlich mal sortieren.“</p>
+        </article>
+        <article class="card parallax">
+          <h3>Paare</h3>
+          <p>Haus, Zukunft, Verantwortung.<br>Nichts brennt – aber alles hängt zusammen.</p>
+        </article>
+        <article class="card parallax">
+          <h3>Selbstständige</h3>
+          <p>Wenn du ausfällst –<br>trägt es dann noch?</p>
+        </article>
+      </div>
+
+      <div class="cta">
+        <a class="btn" href="#bx">Weiter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEAT 2.5 — EXISTENZ / SELBSTSTÄNDIGE -->
+  <section class="slide exist fade-up" id="bx" data-beat="2.5" aria-labelledby="bxt">
+    <div class="inner">
+      <h2 id="bxt" class="parallax">Wenn du morgen nicht kannst</h2>
+      <p class="lead">Keine Panik. Nur eine ehrliche Frage:</p>
+
+      <div class="exist-grid">
+        <article class="card parallax">
+          <h3>Einkommen</h3>
+          <p>Kommt es weiter –<br>oder stoppt alles mit dir?</p>
+        </article>
+        <article class="card parallax">
+          <h3>Verantwortung</h3>
+          <p>Wer übernimmt Entscheidungen,<br>wenn du es nicht kannst?</p>
+        </article>
+        <article class="card parallax">
+          <h3>Rücklagen</h3>
+          <p>Wochen? Monate?<br>Oder nur Hoffnung?</p>
+        </article>
+      </div>
+
+      <p class="micro">Die meisten merken erst im Ernstfall,<br>was wirklich fehlt.</p>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="#b3">Weiter</a>
+        <span class="trust">Keine Entscheidung. Nur Einordnung.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEAT 3 — WARUM JETZT -->
+  <section class="slide why fade-up" id="b3" data-beat="3">
+    <div class="inner">
+      <h2 class="parallax">Ungewissheit ist lauter als schlechte Nachrichten</h2>
+      <p class="micro">
+        Das Gehirn hasst offene Schleifen. <br />
+        Einordnung beruhigt – sofort.
+      </p>
+      <ul class="ticks">
+        <li>Ein Gedanke gleichzeitig</li>
+        <li>Kein Gespräch, kein Rechtfertigen</li>
+        <li>Ein klares Signal</li>
+      </ul>
+
+      <div class="cta">
+        <button class="btn btn-primary" data-earn-ampel>Zeig mir die Einordnung</button>
+        <span class="trust">Die Ampel erscheint erst jetzt.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEAT 4 — OFFENBARUNG / GATE -->
+  <section class="slide reveal fade-up" id="b4" data-beat="4" hidden>
+    <div class="inner">
+      <h2>Nicht alles ist dringend.<br>Aber manches ist heute wichtig.</h2>
+      <p class="eyebrow">Kein Urteil. Nur Orientierung.</p>
+
+      <div class="ampel-preview" aria-label="Ampel-Vorschau">
+        <span class="dot green" title="grün"></span>
+        <span class="dot yellow" title="gelb"></span>
+        <span class="dot red" title="rot"></span>
+      </div>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="#b5">2 Minuten Klarheit</a>
+        <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEAT 5 — CHECK -->
+  <section class="slide check fade-up" id="b5" data-beat="5">
+    <div class="inner narrow">
+      <h2>Drei Fragen. Kein Richtig. Kein Falsch.</h2>
+      <p class="micro">Dein Bauchgefühl reicht. Du musst nichts erklären.</p>
+
+      <div id="check-steps"></div>
+      <div id="check-result"></div>
+
+      <!-- Kurzmodus-Hinweis aus Wix (kompakt) -->
+      <div class="result-card" style="margin-top:1rem">
+        <h3 style="margin:0 0 .35rem;">Wenig Zeit?</h3>
+        <p class="micro" style="margin:.1rem 0 0;">12-Sekunden-Kurzmodus: Gefühl für <em>Jetzt · Als Nächstes · Später</em> – ohne Details.</p>
+        <a class="btn" href="#b5" onclick="document.dispatchEvent(new CustomEvent('startShort'));">⏱️ Kurzmodus starten</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEAT 6 — SICHERHEIT (Was NICHT passiert) -->
+  <section class="slide safety fade-up" data-beat="6">
+    <div class="inner">
+      <h2>Was hier bewusst nicht passiert</h2>
+      <ul class="chips">
+        <li>Kein Verkauf</li>
+        <li>Keine Datenweitergabe</li>
+        <li>Kein Nachfassen</li>
+        <li>Kein Nachteil, wenn du nichts machst</li>
+      </ul>
+
+      <p class="about">
+        👋 Ich bin Heiko. Ich habe diese Ampel gebaut, weil ich selbst diese 2-Stunden-Runden kannte:
+        voller Tarife, Jargon und Druck. Orientierung sollte leiser sein.
+      </p>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="#b5">Check starten</a>
+        <a class="btn" href="./arbeitgeber.html">Für Arbeitgeber</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEAT 7 — SOCIAL PROOF (Mini-Stories) -->
+  <section class="slide proof fade-up" data-beat="7" aria-labelledby="prooft">
+    <div class="inner narrow">
+      <h2 id="prooft">Dieser Moment ist nicht ungewöhnlich</h2>
+      <p class="micro">Ein paar echte Szenen aus dem Alltag.</p>
+
+      <div class="cards">
+        <article class="card"><p>„22:47. Die Kinder schlafen. Danach hab ich besser geschlafen.“</p></article>
+        <article class="card"><p>„Endlich mal ohne jemandem was erklären zu müssen.“</p></article>
+        <article class="card"><p>„Wir hatten zum ersten Mal dasselbe Bild.“</p></article>
+        <article class="card"><p>„Zwei Minuten – und der Kopf war ruhiger.“</p></article>
+      </div>
+
+      <div class="cta">
+        <a class="btn" href="./weitergeben.html">🔗 Ruhig weitergeben</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEAT 8 — WEITERGEBEN (reine Verlinkung) -->
+  <section class="slide fade-up" data-beat="8" aria-labelledby="sharetitle">
+    <div class="inner narrow">
+      <h2 id="sharetitle">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
+      <p class="micro">Der Link übernimmt alles: anonym, ohne Unterlagen, ohne Verkauf.</p>
+      <div class="result-card" style="border-style:dashed">
+        <p class="micro" style="margin:0"><strong>Zero-Risk:</strong> Wenn’s der Person nichts bringt → <strong>25 €</strong>.</p>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="./weitergeben.html">Weitergeben öffnen</a>
+        <a class="btn btn-ghost" href="#b5">Oder: Check starten</a>
+      </div>
+    </div>
+  </section>
 
 </main>
+
+<!-- Footer (aus Wix übernommen) -->
+<footer role="contentinfo" class="fade-up" style="padding:24px 0; text-align:center">
+  <div style="max-width:1120px;margin:0 auto;padding:0 16px">
+    <div style="margin-bottom:.6rem">
+      © <span id="yearNow">2026</span> Heiko Haerter – Persönliche Finanzbegleitung ·
+      <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a>
+    </div>
+    <div class="micro">Privates Dankeschön – unabhängig von Organisationen. Keine DVAG-Aktion.</div>
+  </div>
+</footer>
+
+<!-- Sticky Mobile CTA -->
+<div class="sticky-cta" id="stickyCTA" aria-hidden="true" style="position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s,var(--ease),opacity .25s var(--ease)">
+  <div class="inner"><a href="#b5" class="btn btn-primary" data-ctx="sticky">⚡ 2-Minuten-Check</a></div>
+</div>
+
+<!-- Whisper CTA -->
+<div class="whisper" id="whisper" role="status" aria-live="polite" style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">
+  🟡 10 Sekunden – jemand weiß morgen, was ansteht.
+</div>
+
+<!-- App -->
 <script src="./app.js" defer></script>
+<script>
+  // Minimal: Jahr + Sticky-CTA Aktivierung (ohne Logik-Duplikate aus app.js)
+  document.documentElement.classList.remove('no-js');
+  document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
+
+  // Sticky CTA nur auf Mobile zeigen, wenn der Hero raus ist
+  (function(){
+    const el=document.getElementById('stickyCTA');
+    const hero=document.querySelector('.slide.hero');
+    if(!el||!hero) return;
+    if(innerWidth>=1024){ el.remove(); return; } // nur Mobile/Tablet
+    el.style.display='flex';
+    const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0'};
+    if('IntersectionObserver'in window){
+      const io=new IntersectionObserver(ents=>ents.forEach(e=>show(!e.isIntersecting)),{threshold:.4});
+      io.observe(hero);
+      addEventListener('scroll',()=>{ if(scrollY>180) show(true); },{passive:true});
+    }else{
+      addEventListener('scroll',()=>show(scrollY>220),{passive:true});
+    }
+  })();
+
+  // Kurzmodus-Trigger kompatibel zu weiterem Code
+  document.addEventListener('startShort', ()=> {
+    // noop – die eigentliche Abkürzung macht app.js beim Rendern (Score-Booster)
+  });
+
+  // Whisper sanft zeigen
+  setTimeout(()=>{ const w=document.getElementById('whisper'); if(w){ w.style.opacity='1'; w.style.transform='translateY(0)'; setTimeout(()=>w.style.opacity='0', 3800); }}, 1800);
+</script>
 </body>
 </html>
