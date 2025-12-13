@@ -4,62 +4,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#05070E" />
+
   <title>Arbeitgeber-Architektur – 60 Sekunden Überblick für Bau & Handwerk</title>
-  <meta name="description" content="Ein kurzer, anonymer Arbeitgeber-Check für Bau- und Handwerksbetriebe. Zeigt in 60 Sekunden, ob Strukturen tragen – ohne Daten, ohne Verkauf."/>
+  <meta name="description" content="Ein kurzer, anonymer Arbeitgeber-Check für Bau- und Handwerksbetriebe. Zeigt in 60 Sekunden, ob Strukturen tragen – ohne Daten, ohne Verkauf.">
+  <link rel="canonical" href="https://heikohaerter.com/arbeitgeber.html" />
+
+  <!-- OG -->
+  <meta property="og:site_name" content="Heiko Haerter – Arbeitgeber-Architektur">
+  <meta property="og:title" content="Arbeitgeber-Architektur – 60 Sekunden Überblick">
+  <meta property="og:description" content="Drei ruhige Fragen zeigen, ob Strukturen heute tragen – anonym, ohne Verkauf.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://heikohaerter.com/arbeitgeber.html">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Person (optional, konsistent zur Hauptseite) -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
+  </script>
+
   <link rel="stylesheet" href="./styles.css" />
   <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="godmode">
-<main>
+<a href="#content" class="skip">Zum Inhalt springen</a>
 
-<section class="hero section fade-up" aria-labelledby="hero-title">
-  <div class="container hero-grid">
-    <div class="stack hero-text">
-      <p class="hero-micro">Ein ruhiger Blick für Inhaber.</p>
-      <h1 id="hero-title">In 60 Sekunden sehen,<br>ob Ihr Betrieb heute stabil aufgestellt ist.</h1>
-      <p class="hero-sub">Drei kurze Fragen zeigen, ob Strukturen tragen – oder ob etwas unbemerkt wackelt.</p>
-      <a href="#arbeitgeber-check" class="btn btn-primary hero-cta">⚡ Arbeitgeber-Check starten</a>
-      <p class="hero-micro safety">Anonym · Keine Daten · Kein Verkauf</p>
+<!-- Cinematic overlay & layers -->
+<div class="cut-overlay" aria-hidden="true"></div>
+<div class="cinema-bars" aria-hidden="true"></div>
+<div class="film-grain" aria-hidden="true"></div>
+
+<main id="content">
+
+  <!-- HERO (ruhig, ohne Video – sauberes Layering + Opening Shot) -->
+  <section class="slide hero hero-employer fade-up" aria-labelledby="t-hero">
+    <div class="inner">
+      <div class="opening-shot" aria-hidden="true"><span class="breath-line"></span></div>
+
+      <p class="eyebrow">Ein ruhiger Blick für Inhaber</p>
+      <h1 id="t-hero" class="kinetic">
+        In 60&nbsp;Sekunden sehen,<br>
+        ob Ihr Betrieb heute stabil aufgestellt ist.
+      </h1>
+      <p class="lead">
+        Drei kurze Fragen zeigen, ob Strukturen tragen – oder ob etwas unbemerkt wackelt.
+      </p>
+
+      <div class="chips" aria-label="Kontext">
+        <span>💼 Bau · Handwerk</span>
+        <span>👷‍♂️ 5–100 Mitarbeiter</span>
+        <span>🔒 Anonym · Kein Verkauf</span>
+      </div>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="#arbeitgeber-check">⚡ Arbeitgeber-Check starten</a>
+        <span class="trust">Ohne Daten · Jederzeit abbrechbar</span>
+      </div>
     </div>
-  </div>
-</section>
 
-<section id="arbeitgeber-check" class="section fade-up" aria-labelledby="check-h">
-  <div class="container" style="max-width:680px">
-    <div class="stack" id="employer-start">
-      <h2 id="check-h">Der 60-Sekunden-Arbeitgeber-Check</h2>
-      <p class="hero-micro">Drei Fragen. Eine klare Einordnung. Kein Gespräch, keine Verpflichtung.</p>
-      <a class="btn btn-primary" id="startEmployerBtn">⚡ Jetzt starten</a>
-      <p class="hero-micro safety">Anonym · Jederzeit abbrechbar</p>
+    <!-- ruhige Lichter (ohne Video) -->
+    <div class="stage" aria-hidden="true">
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+      <canvas id="particles" class="particles"></canvas>
     </div>
-    <div id="employer-check-steps"></div>
-    <div id="employer-check-result"></div>
-  </div>
-</section>
+  </section>
 
-<section class="section fade-up" aria-labelledby="proof-h">
-  <div class="container stack">
-    <h2 id="proof-h">Erfahrungen aus der Praxis</h2>
-    <div class="grid process-grid">
-      <div class="process-card"><strong>Tiefbau · 35 MA</strong><p class="hero-micro">Weniger Kündigungen. Ruhigere Teams.</p></div>
-      <div class="process-card"><strong>SHK · 18 MA</strong><p class="hero-micro">Sauberes Onboarding. Klare Zuständigkeiten.</p></div>
-      <div class="process-card"><strong>Elektro · 50 MA</strong><p class="hero-micro">Sicherheit bei bAV & Haftung.</p></div>
+  <!-- CHECK -->
+  <section id="arbeitgeber-check" class="slide fade-up" aria-labelledby="t-check">
+    <div class="inner narrow">
+      <h2 id="t-check">Der 60-Sekunden-Arbeitgeber-Check</h2>
+      <p class="micro">Drei Fragen. Eine klare Einordnung. Kein Gespräch, keine Verpflichtung.</p>
+
+      <div id="employer-start">
+        <div class="cta">
+          <button class="btn btn-primary" id="startEmployerBtn">⚡ Jetzt starten</button>
+        </div>
+        <p class="micro safety">Anonym · Keine Unterlagen nötig</p>
+      </div>
+
+      <div id="employer-check-steps"></div>
+      <div id="employer-check-result" aria-live="polite"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section fade-up">
-  <div class="container narrow text-center">
-    <h2>Ordnung schafft Ruhe.</h2>
-    <p class="hero-micro">Der Check zeigt, ob Ihr Betrieb heute trägt.</p>
-    <a href="#arbeitgeber-check" class="btn btn-primary">Arbeitgeber-Check starten</a>
-  </div>
-</section>
+  <!-- PROOF / Praxis -->
+  <section class="slide fade-up" aria-labelledby="t-proof">
+    <div class="inner">
+      <h2 id="t-proof">Aus der Praxis</h2>
+      <div class="employer-proof">
+        <article class="employer-proof-card">
+          <strong>Tiefbau · 35 MA</strong>
+          <p class="micro">Weniger Kündigungen · Ruhigere Teams</p>
+        </article>
+        <article class="employer-proof-card">
+          <strong>SHK · 18 MA</strong>
+          <p class="micro">Sauberes Onboarding · Klare Zuständigkeiten</p>
+        </article>
+        <article class="employer-proof-card">
+          <strong>Elektro · 50 MA</strong>
+          <p class="micro">Sicherheit bei bAV & Haftung</p>
+        </article>
+      </div>
+
+      <div class="cta">
+        <a class="btn" href="#arbeitgeber-check">Erneut prüfen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="slide fade-up" aria-labelledby="t-final">
+    <div class="inner narrow" style="text-align:center">
+      <h2 id="t-final">Ordnung schafft Ruhe.</h2>
+      <p class="micro">Der Check zeigt, ob Ihr Betrieb heute trägt.</p>
+      <div class="cta" style="align-items:center">
+        <a class="btn btn-primary" href="#arbeitgeber-check">Arbeitgeber-Check starten</a>
+        <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
+      </div>
+    </div>
+  </section>
 
 </main>
+
+<footer class="fade-up" role="contentinfo">
+  <div class="inner narrow" style="text-align:center">
+    <p class="micro">
+      © <span id="yNow"></span> Heiko Haerter ·
+      <a href="/impressum">Impressum</a> ·
+      <a href="/datenschutz">Datenschutz</a>
+    </p>
+    <p class="micro" style="opacity:.82">Hinweis: Weitergabe über externe Dienste (z. B. WhatsApp). Es gelten deren Datenschutz-Bestimmungen.</p>
+  </div>
+</footer>
+
 <script src="./app.js" defer></script>
 </body>
 </html>
