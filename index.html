@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -7,33 +6,31 @@
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#05070E" />
 
-  <title>2 Minuten – zeigt dir, was heute wirklich wichtig ist</title>
-  <meta name="description" content="2 Minuten. 3 ruhige Fragen. Kein Verkauf, kein Gespräch. Ein kurzer Blick, der zeigt, ob heute etwas trägt oder wackelt.">
+  <title>2 Minuten · Ein ruhiger Blick, bevor der Tag weiterläuft</title>
+  <meta name="description" content="2 Minuten. 3 ruhige Fragen. Kein Verkauf. Kein Gespräch. Ein kurzer Blick, der zeigt, ob heute etwas trägt oder wackelt.">
   <link rel="canonical" href="https://heikohaerter.com/" />
 
-  <!-- OG / Twitter -->
-  <meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung">
-  <meta property="og:title" content="2 Minuten – ein ruhiger Blick">
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Heiko Haerter">
+  <meta property="og:title" content="2 Minuten · Ein ruhiger Blick">
   <meta property="og:description" content="Anonym. Ohne Druck. Ohne Nachfassen. Ein kurzer Moment Ordnung für den Kopf.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://heikohaerter.com/">
+  <meta property="og:url" content="https://heikohaerter.com">
   <meta property="og:locale" content="de_DE">
   <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
-  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- LCP image preload -->
   <link rel="preload" as="image"
         href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
-        imagesrcset="
-          https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=480 480w,
-          https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=720 720w,
-          https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200 1200w"
-        imagesizes="(min-width:1024px) 52vw, 92vw"
         fetchpriority="high">
 
-  <!-- Person JSON-LD -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Heiko Haerter",
+    "url":"https://heikohaerter.com",
+    "areaServed":"Deutschland"
+  }
   </script>
 
   <link rel="stylesheet" href="./styles.css" />
@@ -43,195 +40,201 @@
 <body class="godmode">
 <a href="#slides" class="skip">Zum Inhalt springen</a>
 
-<!-- Cinematic overlay -->
-<div class="cut-overlay" aria-hidden="true"></div>
+<div class="cut-overlay"></div>
+<div class="cinema-bars"></div>
+<div class="film-grain"></div>
 
-<!-- Cinematic layers -->
-<div class="cinema-bars" aria-hidden="true"></div>
-<div class="film-grain" aria-hidden="true"></div>
-
-<!-- Progress + bullets -->
-<div id="progress" aria-hidden="true"><span></span></div>
+<div id="progress"><span></span></div>
 <nav id="bullets" aria-label="Navigation"></nav>
 
 <main id="slides" class="slides">
 
-  <!-- ACT I — OPENING -->
-  <section class="slide hero fade-up" id="b1" aria-labelledby="t1">
-    <div class="inner">
-      <div class="opening-shot" aria-hidden="true"><span class="breath-line"></span></div>
+<!-- ACT I — OPENING -->
+<section class="slide hero fade-up" id="b1">
+  <div class="inner">
+    <div class="opening-shot"><span class="breath-line"></span></div>
 
-      <p class="eyebrow">Kein Gespräch · Keine Entscheidung · Nur kurz einordnen</p>
+    <p class="eyebrow">Kein Gespräch · Keine Entscheidung · Nur kurz einordnen</p>
 
-      <h1 id="t1" class="kinetic">
-        Es gibt diesen Moment,<br>
-        in dem man still denkt:
-        <em>
-          <span class="swap" data-words='[
-            "Da fehlt noch etwas.",
-            "Ich verliere gerade den Überblick.",
-            "Das schiebe ich schon zu lange."
-          ]'>Da fehlt noch etwas.</span>
-        </em>
-      </h1>
+    <h1 class="kinetic">
+      Es gibt diesen Moment,<br>
+      in dem man still denkt:
+      <em>
+        <span class="swap" data-words='[
+          "Da fehlt noch etwas.",
+          "Ich verliere gerade den Überblick.",
+          "Das schiebe ich schon zu lange."
+        ]'>Da fehlt noch etwas.</span>
+      </em>
+    </h1>
 
-      <p class="lead">
-        Kein Drama. Nur dieses leise Gefühl,<br>
-        dass etwas Wichtiges gerade nicht sauber sortiert ist.
-      </p>
+    <p class="lead">
+      Kein Drama.<br>
+      Nur dieses leise Gefühl,<br>
+      dass etwas Wichtiges gerade nicht sauber sortiert ist.
+    </p>
 
-      <ul class="chips" aria-label="Vertrauen">
-        <li>⭐ 4,9 · 250+ ruhige Rückmeldungen</li>
-        <li>Eltern · Paare · Selbstständige</li>
-        <li>Kein Verkauf · Kein Gespräch</li>
-        <li>100 % anonym</li>
-      </ul>
+    <ul class="chips">
+      <li>⭐ 4,9 · 250+ ruhige Rückmeldungen</li>
+      <li>Eltern · Paare · Selbstständige</li>
+      <li>Kein Verkauf · Kein Gespräch</li>
+      <li>100 % anonym · jederzeit abbrechbar</li>
+    </ul>
 
-      <div class="cta">
-        <a class="btn btn-primary" href="#b2">Kurz anschauen</a>
-        <span class="trust">Ohne Daten · Ohne Nachfassen · Ohne Verpflichtung</span>
-      </div>
+    <div class="cta">
+      <a class="btn btn-primary" href="#b2">Kurz anschauen</a>
+      <span class="trust">Ohne Daten · Ohne Nachfassen · Ohne Verpflichtung</span>
+    </div>
+  </div>
+
+  <div class="hero-media">
+    <video class="hero-video" muted playsinline autoplay loop preload="metadata"
+      poster="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
+      <source src="https://video.wixstatic.com/video/4e46cf_6fc6da8b5b26415db4354bd72bd5f8f4/480p/mp4/file.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="stage">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <canvas id="particles"></canvas>
+  </div>
+</section>
+
+<!-- ACT II — REALITY -->
+<section class="slide fade-up" id="b2">
+  <div class="inner">
+    <h2>Der Gedanke taucht immer ähnlich auf</h2>
+
+    <div class="cards">
+      <article class="card parallax">
+        <h3>22:47 · Eltern</h3>
+        <p>
+          Die Kinder schlafen.<br>
+          Und plötzlich ist er da:<br>
+          „Würde es eigentlich halten, wenn etwas dazwischenkommt?“
+        </p>
+      </article>
+
+      <article class="card parallax">
+        <h3>Paare</h3>
+        <p>
+          Verantwortung fühlt sich selten laut an.<br>
+          Eher wie ein offener Punkt, den man verschiebt.
+        </p>
+      </article>
+
+      <article class="card parallax">
+        <h3>Selbstständige</h3>
+        <p>
+          Wenn du kurz raus wärst –<br>
+          trägt dein System dich oder wackelt es?
+        </p>
+      </article>
     </div>
 
-    <!-- Hero media (sauberes Layering) -->
-    <div class="hero-media" aria-hidden="true">
-      <video class="hero-video" muted playsinline autoplay loop preload="metadata"
-        poster="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
-        <source src="https://video.wixstatic.com/video/4e46cf_6fc6da8b5b26415db4354bd72bd5f8f4/480p/mp4/file.mp4" type="video/mp4">
-      </video>
+    <div class="cta">
+      <a class="btn" href="#b3">Weiter</a>
+    </div>
+  </div>
+</section>
+
+<!-- ACT III — INSIGHT -->
+<section class="slide fade-up" id="b3">
+  <div class="inner narrow">
+    <h2>Ungewissheit ist anstrengender als schlechte Nachrichten</h2>
+
+    <p class="micro">
+      Ein klares Signal beruhigt schneller als langes Nachdenken.
+    </p>
+
+    <ul class="ticks">
+      <li>Immer nur ein Gedanke gleichzeitig</li>
+      <li>Kein Erklären · kein Rechtfertigen</li>
+      <li>Ein ruhiger Überblick statt Kopfchaos</li>
+    </ul>
+
+    <div class="cta">
+      <button class="btn btn-primary" data-earn-ampel aria-expanded="false">
+        Einordnung ansehen
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ACT IV — REVEAL -->
+<section class="slide reveal fade-up" id="b4" aria-hidden="true">
+  <div class="inner narrow">
+    <h2>
+      Nicht alles ist dringend.<br>
+      Aber manches fühlt sich heute wichtig an.
+    </h2>
+
+    <div class="ampel-preview">
+      <span class="dot green"></span>
+      <span class="dot yellow"></span>
+      <span class="dot red"></span>
     </div>
 
-    <div class="stage" aria-hidden="true">
-      <div class="glow glow-a"></div>
-      <div class="glow glow-b"></div>
-      <canvas id="particles" class="particles"></canvas>
+    <div class="cta">
+      <a class="btn btn-primary" href="#b5">2 Minuten einordnen</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ACT II — REALITY -->
-  <section class="slide fade-up" id="b2" aria-labelledby="t2">
-    <div class="inner">
-      <h2 id="t2">Der Gedanke taucht immer ähnlich auf</h2>
+<!-- ACT V — CHECK -->
+<section class="slide fade-up" id="b5">
+  <div class="inner narrow">
+    <h2>Drei ruhige Fragen. Kein Richtig. Kein Falsch.</h2>
+    <p class="micro">
+      Die Fragen stammen aus vielen echten Alltagssituationen.<br>
+      Sie zeigen nicht „gut oder schlecht“, sondern: trägt es – oder wackelt es.
+    </p>
 
-      <div class="cards">
-        <article class="card parallax">
-          <h3>22:47 · Eltern</h3>
-          <p>Die Kinder schlafen. „Haben wir eigentlich alles geregelt?“</p>
-          <img src="https://static.wixstatic.com/media/4e46cf_a4ddba89cb8b48e58f20432680f8abde~mv2.png" alt="Eltern – ruhiger Blick nach dem Zubettbringen" loading="lazy" decoding="async" width="1200" height="800">
-        </article>
+    <div id="check-steps"></div>
+    <div id="check-result" aria-live="polite"></div>
+  </div>
+</section>
 
-        <article class="card parallax">
-          <h3>Paare</h3>
-          <p>Verantwortung fühlt sich selten laut an. Eher wie ein offener Punkt, der mitschwingt.</p>
-          <img src="https://static.wixstatic.com/media/4e46cf_a4ddba89cb8b48e58f20432680f8abde~mv2.png" alt="Paare – gemeinsame Einordnung" loading="lazy" decoding="async" width="1200" height="800">
-        </article>
+<!-- ACT VI — PERSON -->
+<section class="slide fade-up" id="b6">
+  <div class="inner narrow">
+    <p class="eyebrow">Warum es diese 2 Minuten gibt</p>
 
-        <article class="card parallax">
-          <h3>Selbstständige</h3>
-          <p>Wenn du kurz raus wärst – trägt dein System dich oder wackelt es?</p>
-          <img src="https://static.wixstatic.com/media/4e46cf_cfdf02af54b2430d96bf844b08d08428~mv2.png" alt="Selbstständige – Ausfallrisiko" loading="lazy" decoding="async" width="1200" height="800">
-        </article>
-      </div>
+    <h2>Ich habe diese Gespräche selbst vermieden</h2>
 
-      <div class="cta"><a class="btn" href="#b3">Weiter</a></div>
+    <p class="lead">
+      Ich bin Heiko.<br>
+      Ich habe oft erlebt, dass Menschen nach Gesprächen unruhiger waren als davor.<br><br>
+      Diese 2 Minuten existieren, damit Einordnung leichter wird –
+      ruhig, verständlich, ohne Druck.
+    </p>
+  </div>
+</section>
+
+<!-- ACT VII — AFTERGLOW -->
+<section class="slide fade-up" id="b7">
+  <div class="inner narrow" style="text-align:center">
+    <h2>Jetzt ist es eingeordnet</h2>
+    <p class="lead">Mehr war nie das Ziel.</p>
+
+    <div class="cta">
+      <a class="btn btn-primary" href="./weitergeben.html">Ruhig weitergeben</a>
+      <a class="btn btn-ghost" href="https://wa.me/?text=Ich%20wollte%20dir%20etwas%20Ruhiges%20schicken">
+        Jemandem einen ruhigen Moment schicken
+      </a>
     </div>
-  </section>
-
-  <!-- ACT III — INSIGHT -->
-  <section class="slide fade-up" id="b3" aria-labelledby="t3">
-    <div class="inner narrow">
-      <h2 id="t3">Ungewissheit ist anstrengender als schlechte Nachrichten</h2>
-      <p class="micro">Ein klares Signal beruhigt schneller als langes Nachdenken.</p>
-
-      <ul class="ticks">
-        <li>Immer nur ein Gedanke gleichzeitig</li>
-        <li>Kein Erklären · kein Rechtfertigen</li>
-        <li>Ein ruhiger Überblick statt Kopfchaos</li>
-      </ul>
-
-      <div class="cta">
-        <button class="btn btn-primary" data-earn-ampel aria-expanded="false">Einordnung ansehen</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACT IV — REVEAL (CLS-frei) -->
-  <section class="slide reveal fade-up" id="b4" aria-hidden="true" aria-labelledby="t4">
-    <div class="inner narrow">
-      <h2 id="t4">Nicht alles ist dringend.<br>Aber manches fühlt sich heute wichtig an.</h2>
-
-      <div class="ampel-preview" aria-label="Ampel">
-        <span class="dot green" title="Grün"></span>
-        <span class="dot yellow" title="Gelb"></span>
-        <span class="dot red" title="Rot"></span>
-      </div>
-
-      <div class="cta">
-        <a class="btn btn-primary" href="#b5">2 Minuten einordnen</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACT V — CHECK -->
-  <section class="slide fade-up" id="b5" aria-labelledby="t5">
-    <div class="inner narrow">
-      <h2 id="t5">Drei ruhige Fragen. Kein Richtig. Kein Falsch.</h2>
-      <p class="micro">
-        Die Fragen stammen aus vielen echten Alltagssituationen.<br>
-        Sie zeigen nicht „gut oder schlecht“, sondern nur: trägt es – oder wackelt es.
-      </p>
-      <div id="check-steps"></div>
-      <div id="check-result" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <!-- ACT VI — PERSON -->
-  <section class="slide fade-up" id="b6" aria-labelledby="t6">
-    <div class="inner narrow">
-      <p class="eyebrow">Warum es diese 2 Minuten gibt</p>
-      <h2 id="t6">Ich habe diese Gespräche selbst vermieden</h2>
-      <p class="lead">
-        Ich bin Heiko. Ich habe oft erlebt, dass Menschen nach Gesprächen unruhiger waren als davor.<br><br>
-        Diese 2 Minuten existieren, damit Einordnung leichter wird – ruhig, verständlich, ohne Druck, ohne Gespräch.
-      </p>
-    </div>
-  </section>
-
-  <!-- ACT VII — AFTERGLOW -->
-  <section class="slide fade-up" id="b7">
-    <div class="inner narrow" style="text-align:center">
-      <h2>Jetzt ist es eingeordnet</h2>
-      <p class="lead">Mehr war nie das Ziel.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="./weitergeben.html">Ruhig weitergeben</a>
-        <a class="btn btn-ghost" href="https://wa.me/?text=Ich%20wollte%20dir%20etwas%20Ruhiges%20schicken">Jemandem einen ruhigen Moment schicken</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINAL — kleine Wiederholung -->
-  <section class="slide fade-up" id="b8" aria-labelledby="t8">
-    <div class="inner narrow" style="text-align:center">
-      <h2 id="t8">In 2 Minuten weniger Unsicherheit.</h2>
-      <p class="micro">Anonym · Keine Daten · Kein Verkauf</p>
-      <div class="cta" style="align-items:center">
-        <a class="btn btn-primary" href="#b5">⚡ Jetzt starten</a>
-        <a class="btn" href="./weitergeben.html">🔗 Ruhig weitergeben</a>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
-<footer class="fade-up" role="contentinfo">
-  <div class="inner narrow" style="text-align:center">
-    <p class="micro">
-      © <span id="yNow"></span> Heiko Haerter ·
-      <a href="/impressum">Impressum</a> ·
-      <a href="/datenschutz">Datenschutz</a>
-    </p>
-    <p class="micro" style="opacity:.82">Hinweis: Weitergabe über externe Dienste (z. B. WhatsApp). Es gelten deren Datenschutz-Bestimmungen.</p>
-  </div>
+<footer class="fade-up">
+  <p class="micro">
+    © <span id="yNow"></span> Heiko Haerter ·
+    <a href="/impressum">Impressum</a> ·
+    <a href="/datenschutz">Datenschutz</a>
+  </p>
 </footer>
 
 <script src="./app.js" defer></script>
