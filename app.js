@@ -231,17 +231,21 @@
     if(!stepsWrap || !resultBox) return;
 
     function updateHead(){
-      stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`;
-      const pct = ((Math.min(step-1,max-1))/(max-1))*100;
-      progress.style.width = (max===1?100:pct)+'%';
-      stepHint.textContent= step===1?'Kurzer Eindruck reicht.': step===2?'Fast geschafft.':'Letzter Klick.';
+      if(stepLabel) stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`;
+      if(progress){
+        const pct = ((Math.min(step-1,max-1))/(max-1))*100;
+        progress.style.width = (max===1?100:pct)+'%';
+      }
+      if(stepHint) stepHint.textContent= step===1?'Kurzer Eindruck reicht.': step===2?'Fast geschafft.':'Letzter Klick.';
     }
+
     function showStep(n){
       document.querySelectorAll('#check-steps .step').forEach(s=>s.style.display='none');
       const t=document.querySelector(`#check-steps .step[data-step="${n}"]`);
       if(t){ t.style.display='block'; t.scrollIntoView({behavior:'smooth',block:'start'}); }
       updateHead();
     }
+
     function renderCTA(color){
       const wa='https://wa.me/4917660408380?text=';
       if(color==='red') return `<div class="stack" style="text-align:center">
@@ -254,7 +258,69 @@
         <a href="${wa}Smarter%20machen%3F" class="btn btn-primary">✨ Smarter machen?</a>
         <a href="/weitergeben.html#share" class="btn btn-ghost">🔗 Weitergeben</a></div>`;
     }
-    funct
+
+    function finish(){
+      stepsWrap.style.display='none';
+      resultBox.style.display='block';
+      let html='';
+      // Score 3..9 (1..3 je Frage). Schwellen analog zu deinem Draft:
+      if(score<=4){
+        html=`<div class="result-card result-red">
+          <h3>🔴 Heute wichtig</h3>
+          <p>Mindestens ein Bereich braucht heute deine Aufmerksamkeit.</p>
+          ${renderCTA('red')}
+        </div>`;
+      } else if(score<=7){
+        html=`<div class="result-card result-yellow">
+          <h3>🟡 Bald wichtig</h3>
+          <p>Ein paar Dinge stehen bald an.</p>
+          ${renderCTA('yellow')}
+        </div>`;
+      } else {
+        html=`<div class="result-card result-green">
+          <h3>🟢 Passt für heute</h3>
+          <p>Für heute wirkt alles entspannt.</p>
+          ${renderCTA('green')}
+        </div>`;
+      }
+      html+=`<p class="hero-micro" style="margin-top:.8rem;opacity:.85">Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>`;
+      resultBox.innerHTML=html;
+      resultBox.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    function start(){
+      const startWrap=document.getElementById('check-start');
+      if(startWrap) startWrap.style.display='none';
+      stepsWrap.style.display='block';
+      resultBox.style.display='none';
+      step=1; score=0; showStep(step);
+    }
+
+    document.getElementById('startCheckHero')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
+    document.getElementById('ctaFinal')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
+    startBtn?.addEventListener('click',start);
+
+    // Kurzmodus-Teaser: springt schneller durch
+    document.getElementById('startShort')?.addEventListener('click',e=>{
+      e.preventDefault(); start();
+      setTimeout(()=>{ score+=2; step=2; showStep(step); },150);
+      setTimeout(()=>{ score+=2; step=3; showStep(step); },350);
+    });
+
+    // Antworten
+    document.querySelectorAll('#check-steps .step').forEach(s=>{
+      s.querySelectorAll('button').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          score += Number(btn.getAttribute('data-value'))||0;
+          step++;
+          if(step>max) finish(); else showStep(step);
+        });
+      });
+    });
+  })();
+
+})();
+
 /* ===== CINEMATIC RUNTIME ===== */
 (function(){
   const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
