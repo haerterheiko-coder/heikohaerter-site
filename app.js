@@ -1,341 +1,257 @@
-// app.js
 /* ============================================================
-   GODMODE — CINEMATIC CUT (2026, FINAL)
-   iOS/Android polish · Idle motion · Stable media · Data-driven
+   GODMODE — CINEMATIC CUT (2026, FINAL SHARED)
+   Landing + Weitergeben · iOS/Android polish · Idle motion
 ============================================================ */
-(function () {
+(function(){
   "use strict";
 
-  // --- ENV/BOOT -------------------------------------------------------------
-  document.documentElement.classList.remove("no-js");
-  const y = document.getElementById("yNow");
-  if (y) y.textContent = String(new Date().getFullYear());
+  document.documentElement.classList.remove('no-js');
+  document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
 
-  // Respect Save-Data (reduziert Motion/CPU)
-  try { if (navigator.connection?.saveData) document.documentElement.style.setProperty("--motion", "0"); } catch {}
-
-  const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // --- DATA LAYER FAILSAFE --------------------------------------------------
-  // Lädt /data.json und stellt GODDATA.onReady(cb) bereit.
-  if (!window.GODDATA) {
-    const Q = [];
-    window.GODDATA = { onReady(cb){ if (typeof cb === "function") Q.push(cb); } };
-    fetch("./data.json")
-      .then(r => r.ok ? r.json() : Promise.reject())
-      .then(d => { while (Q.length) { try { Q.shift()(d); } catch {} } })
-      .catch(() => {
-        const d = { brand:{year:String(new Date().getFullYear())}, checks:{ } };
-        while (Q.length) { try { Q.shift()(d); } catch {} }
-      });
-  }
-
-  // --- HELPERS: CINEMATIC CUT/SCROLL ---------------------------------------
-  const cut = document.querySelector(".cut-overlay");
-  function cinematicScroll(target){
-    if(!target) return;
-    cut?.classList.add("on");
-    setTimeout(()=> target.scrollIntoView({behavior: prefersReduced?"auto":"smooth", block:"start"}), 110);
-    setTimeout(()=> cut?.classList.remove("on"), 360);
-  }
-
-  // Anchor → cinematic scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener("click",(e)=>{
-      const id=a.getAttribute("href");
-      if(!id || id.length<=1) return;
-      const t=document.querySelector(id);
-      if(t){ e.preventDefault(); cinematicScroll(t); }
-    }, {passive:false});
-  });
-
-  // --- SLIDES / BULLETS / PROGRESS -----------------------------------------
-  const slides = [...document.querySelectorAll("main.slides > .slide")];
-  const bullets = document.getElementById("bullets");
-  const progressBar = document.querySelector("#progress span");
-
-  if (bullets && slides.length) {
-    slides.forEach((s,i)=>{
-      const b=document.createElement("button");
-      b.setAttribute("aria-label",`Zu Abschnitt ${i+1}`);
-      b.addEventListener("click",()=>cinematicScroll(s));
-      bullets.appendChild(b);
-    });
-  }
-
-  if ("IntersectionObserver" in window && slides.length) {
-    const io=new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("visible"); });
-      const active=entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
-      if(active){
-        const idx=slides.indexOf(active.target);
-        bullets?.querySelectorAll("button").forEach((b,i)=> b.setAttribute("aria-current", i===idx ? "true" : "false"));
-        if(progressBar) progressBar.style.width = (((idx+1)/slides.length)*100).toFixed(2)+"%";
-      }
-    },{threshold:.66});
-    slides.forEach(s=>io.observe(s));
-  } else {
-    document.querySelectorAll(".fade-up").forEach(el=>el.classList.add("visible"));
-  }
-
-  // --- KINETIC WORDS --------------------------------------------------------
+  // Fade-in observer
   (function(){
-    const el=document.querySelector(".swap");
-    if(!el || prefersReduced) return;
-    let words=[]; try{ words=JSON.parse(el.getAttribute("data-words")||"[]"); }catch{}
-    if(!words.length) return;
-    let i=0;
-    setInterval(()=>{ i=(i+1)%words.length; el.classList.remove("enter"); void el.offsetWidth; el.textContent=words[i]; el.classList.add("enter"); }, 2800);
-  })();
-
-  // --- iOS VIDEO AUTOPLAY NUDGE --------------------------------------------
-  function tryPlay(){ const v=document.querySelector(".hero-video"); v?.play?.().catch(()=>{}); }
-  document.addEventListener("touchstart", tryPlay, {once:true, passive:true});
-  document.addEventListener("click", tryPlay, {once:true, passive:true});
-
-  // --- PARALLAX (idle) ------------------------------------------------------
-  function initParallax(){
-    if(prefersReduced) return;
-    const glowA=document.querySelector(".glow-a");
-    const glowB=document.querySelector(".glow-b");
-    const cards=document.querySelectorAll(".parallax");
-    let raf;
-    const onScroll=()=>{
-      cancelAnimationFrame(raf);
-      raf=requestAnimationFrame(()=>{
-        const t=scrollY||0;
-        if(glowA) glowA.style.transform=`translate3d(0,${t*-0.02}px,0)`;
-        if(glowB) glowB.style.transform=`translate3d(0,${t*-0.04}px,0)`;
-        cards.forEach(c=>{
-          const r=c.getBoundingClientRect(); const p=(r.top/innerHeight - .5);
-          c.style.transform=`translate3d(0,${p*-14}px,0)`;
+    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els=[...document.querySelectorAll('.fade-up')];
+    if(pref){els.forEach(el=>el.classList.add('visible'));return;}
+    if('IntersectionObserver'in window){
+      const io=new IntersectionObserver(ents=>{
+        ents.forEach(e=>{
+          if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
         });
-      });
-    };
-    addEventListener("scroll", onScroll, {passive:true}); onScroll();
-  }
-
-  // --- PARTICLES (idle) -----------------------------------------------------
-  function initParticles(){
-    const canvas=document.getElementById("particles");
-    if(!canvas || prefersReduced) return;
-    const ctx=canvas.getContext("2d"); const DPR=Math.min(devicePixelRatio||1,2);
-    let W=1,H=1,pts=[];
-    function resize(){
-      const b=canvas.getBoundingClientRect();
-      canvas.width=Math.max(1, Math.floor(b.width*DPR));
-      canvas.height=Math.max(1, Math.floor(b.height*DPR));
-      ctx.setTransform(DPR,0,0,DPR,0,0);
-      W=b.width; H=b.height;
-      pts=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,s:.2+Math.random()}));
-    }
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      ctx.fillStyle="rgba(233,211,148,.28)";
-      pts.forEach(p=>{ p.y+=p.s*.25; if(p.y>H) p.y=-10; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); });
-      requestAnimationFrame(draw);
-    }
-    resize(); addEventListener("resize", resize, {passive:true}); draw();
-  }
-
-  // Idle start (Performance)
-  (('requestIdleCallback'in window)?requestIdleCallback:setTimeout)(()=>{ initParallax(); initParticles(); }, 320);
-
-  // --- GATE REVEAL (CLS-frei + cinematic) ----------------------------------
-  const gateBtn=document.querySelector('[data-earn-ampel]');
-  const gate=document.getElementById('b4');
-  gateBtn?.addEventListener('click',()=>{
-    gateBtn.setAttribute('aria-expanded','true');
-    cut?.classList.add('on');
-    setTimeout(()=>{ gate?.removeAttribute('aria-hidden'); gate?.classList.add('show'); cinematicScroll(gate); }, 240);
-    setTimeout(()=> cut?.classList.remove('on'), 520);
-  });
-
-  // --- DATA UTILITIES (shared) ---------------------------------------------
-  function normalizeCheck(raw){
-    const defaults = {
-      questions: [],
-      scoring: { values: { green: 0, yellow: 1, red: 2 }, thresholds: { green: 0, yellow: 2, red: 4 } },
-      results: {
-        green: { title:"🟢 Passt", text:"", micro:"" },
-        yellow:{ title:"🟡 Bald wichtig", text:"", micro:"" },
-        red:   { title:"🔴 Heute wichtig", text:"", micro:"" }
-      }
-    };
-    if (!raw) return defaults; // leer, aber strukturell korrekt
-    const c = {
-      ...defaults,
-      questions: Array.isArray(raw.questions) ? raw.questions : defaults.questions,
-      scoring: {
-        values: { ...defaults.scoring.values, ...(raw.scoring?.values||{}) },
-        thresholds: { ...defaults.scoring.thresholds, ...(raw.scoring?.thresholds||{}) }
-      },
-      results: { ...defaults.results, ...(raw.results||{}) }
-    };
-    // Sanity: options + Zahlen
-    c.questions = c.questions.map(q=>({
-      id: q.id || "",
-      text: q.text || "",
-      options: {
-        green: q.options?.green ?? "Grün",
-        yellow: q.options?.yellow ?? "Gelb",
-        red: q.options?.red ?? "Rot"
-      }
-    }));
-    ["green","yellow","red"].forEach(k=>{
-      c.scoring.values[k] = Number(c.scoring.values[k]);
-      c.scoring.thresholds[k] = Number(c.scoring.thresholds[k]);
-    });
-    return c;
-  }
-  function getCheckFromData(data, key){
-    return normalizeCheck(data?.checks?.[key]);
-  }
-  function applyMicroHooks(data){
-    const emo = data?.micro_hooks?.emotional || [];
-    const rat = data?.micro_hooks?.rational || [];
-    const pick = arr => arr && arr.length ? arr[Math.floor(Math.random()*arr.length)] : "";
-    const emoEl = document.querySelector('[data-hook="emotional"]');
-    const ratEl = document.querySelector('[data-hook="rational"]');
-    if (emoEl) emoEl.textContent = pick(emo);
-    if (ratEl) ratEl.textContent = pick(rat);
-  }
-
-  // --- CHECK RENDERER (shared) ---------------------------------------------
-  function pulseProgress(){
-    const p=document.querySelector('#progress span'); if(!p || prefersReduced) return;
-    p.animate(
-      [{transform:'scaleY(1)'},{transform:'scaleY(1.7)'},{transform:'scaleY(1)'}],
-      {duration:280,easing:'ease-out'}
-    );
-  }
-  function resolveColor(score, thresholds){
-    if(score >= thresholds.red) return "red";
-    if(score >= thresholds.yellow) return "yellow";
-    return "green";
-  }
-  function showResultCard(color, results, mount){
-    const r = results[color];
-    const wa="https://wa.me/?text=";
-    const msg=encodeURIComponent(`Hi Heiko — ich hab die 2-Minuten-Ampel gemacht (${color.toUpperCase()}). Kannst du mir kurz helfen, den nächsten Schritt ruhig zu sortieren?`);
-    const share=encodeURIComponent("Kurz & ruhig: In 2 Minuten siehst du, ob heute etwas Wichtiges fehlt. Anonym. Kein Verkauf. https://heikohaerter.com/");
-
-    mount.innerHTML = `
-      <div class="result-card result-${color}">
-        <h3>${r.title}</h3>
-        <p>${r.text}</p>
-        <p class="micro">${r.micro || ""}</p>
-        <div class="cta" style="margin-top:1rem">
-          <a class="btn btn-primary" href="${wa}${msg}">💬 10 Minuten Ruhe schaffen</a>
-          <a class="btn btn-ghost" href="./weitergeben.html">🔗 Ruhig weitergeben</a>
-          <button class="btn" type="button" id="copyShare">📋 Text kopieren</button>
-          <span class="micro" id="copyToast" style="opacity:.82"></span>
-        </div>
-      </div>`;
-    document.getElementById("copyShare")?.addEventListener("click", async ()=>{
-      const t=document.getElementById("copyToast");
-      try{
-        await navigator.clipboard.writeText(decodeURIComponent(share));
-        if(t) t.textContent="Kopiert. Du kannst es jetzt überall einfügen.";
-      } catch {
-        if(t) t.textContent="Automatisches Kopieren nicht möglich. Markieren & kopieren klappt immer.";
-      }
-    });
-    cinematicScroll(mount);
-  }
-  function renderStepCheck(check, stepsRoot, resultRoot, opts = {}){
-    const { afterglow = true } = opts;
-    let score = 0, step = 0;
-    stepsRoot.innerHTML = "";
-    resultRoot.innerHTML = "";
-
-    check.questions.forEach((q,i)=>{
-      const el=document.createElement("div");
-      el.className="check-step";
-      if(i>0) el.hidden=true;
-      el.innerHTML=`
-        <h3>${q.text}</h3>
-        <div class="cta">
-          <button class="btn btn-primary" data-a="green">${q.options.green}</button>
-          <button class="btn" data-a="yellow">${q.options.yellow}</button>
-          <button class="btn" data-a="red">${q.options.red}</button>
-        </div>`;
-      stepsRoot.appendChild(el);
-    });
-
-    const stepEls=[...stepsRoot.children];
-    stepsRoot.querySelectorAll("[data-a]").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const a = btn.getAttribute("data-a");
-        score += (check.scoring.values[a] || 0);
-        step++;
-        pulseProgress();
-
-        if(step >= check.questions.length){
-          stepEls.at(-1).hidden = true;
-          const color = resolveColor(score, check.scoring.thresholds);
-          showResultCard(color, check.results, resultRoot);
-        } else {
-          stepEls[step-1].hidden = true;
-          stepEls[step].hidden = false;
-          cinematicScroll(stepEls[step]);
-        }
-      }, {passive:true});
-    });
-  }
-
-  // --- AMPel CHECK (Startseite) --------------------------------------------
-  GODDATA.onReady(data=>{
-    applyMicroHooks(data);
-    const stepsRoot=document.getElementById("check-steps");
-    const resultRoot=document.getElementById("check-result");
-    if(!stepsRoot || !resultRoot) return; // nicht auf dieser Seite
-
-    const check = getCheckFromData(data, "ampel");
-    if (!check.questions.length) return;
-    renderStepCheck(check, stepsRoot, resultRoot, { afterglow: true });
-  });
-
-  // --- ARBEITGEBER CHECK (arbeitgeber.html) --------------------------------
-  (function employerCheckInit(){
-    const startBtn  = document.getElementById("startEmployerBtn");
-    const stepsRoot = document.getElementById("employer-check-steps");
-    const resultRoot= document.getElementById("employer-check-result");
-    if (!startBtn || !stepsRoot || !resultRoot) return; // nicht auf dieser Seite
-
-    let readyCheck = null;
-    GODDATA.onReady(data=>{
-      applyMicroHooks(data);
-      const c = getCheckFromData(data, "arbeitgeber");
-      if (c?.questions?.length) readyCheck = c;
-    });
-
-    startBtn.addEventListener("click", ()=>{
-      const c = readyCheck || normalizeCheck(null);
-      if (!c.questions.length) return;
-      renderStepCheck(c, stepsRoot, resultRoot, { afterglow: true });
-
-      const target = stepsRoot.closest(".section") || stepsRoot;
-      if (target) target.scrollIntoView({behavior: prefersReduced ? "auto" : "smooth", block:"start"});
-    });
+      },{threshold:.12,rootMargin:'0px 0px -10% 0px'});
+      els.forEach(el=>io.observe(el));
+    }else{els.forEach(el=>el.classList.add('visible'));}
   })();
 
-  // --- OPTIONAL: PROOF TABS (falls vorhanden) ------------------------------
-  document.querySelectorAll(".proof-tabs .tab").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const g = btn.getAttribute("data-group");
-      document.querySelectorAll(".proof-tabs .tab").forEach(t=>{
-        const on = (t === btn);
-        t.classList.toggle("is-on", on);
-        t.setAttribute("aria-selected", on ? "true" : "false");
-      });
-      document.querySelectorAll(".proof-card").forEach(card=>{
-        const ok = card.getAttribute("data-group") === g;
-        card.hidden = !ok;
-      });
-      const track = document.querySelector(".proof-track");
-      if(track) track.scrollTo({left:0, behavior: prefersReduced ? "auto" : "smooth"});
-    });
-  });
+  // Sticky CTA (hero leaves viewport) — mobile only
+  (function(){
+    const el=document.getElementById('stickyCTA');
+    const hero=document.querySelector('.hero');
+    if(!el||!hero) return;
+    if(innerWidth>=980) return;
+    const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0'};
+    if('IntersectionObserver'in window){
+      new IntersectionObserver(ents=>ents.forEach(e=>show(!e.isIntersecting)),{threshold:.3}).observe(hero);
+      addEventListener('scroll',()=>{ if(scrollY>180) show(true); },{passive:true});
+    }else{
+      addEventListener('scroll',()=>show(scrollY>180),{passive:true});
+    }
+  })();
 
-})();
+  // Kurzmodus (nur auf index.html sichtbar)
+  (function(){
+    const btn=document.getElementById('dfBtn');
+    if(!btn) return;
+    const keep=new Set(['hero','ethos-social','stickyCTA','share','ampel-check']);
+    const nodes=[...document.querySelectorAll('main > section')].filter(s=>!keep.has(s.id));
+    const set=(on)=>{
+      btn.setAttribute('aria-pressed',on?'true':'false');
+      btn.textContent=on?'✅ Kurzmodus aktiv':'🔍 Kurzmodus';
+      nodes.forEach(n=>n.style.display=on?'none':'');
+      if(on) window.scrollTo({top:0,behavior:'smooth'});
+    };
+    btn.addEventListener('click',()=>set(btn.getAttribute('aria-pressed')!=='true'));
+    window.setKurzmodus=set;
+  })();
+
+  // Ergebnis-Vorschau Toggle (Index)
+  (function(){
+    const btn=document.getElementById('previewToggle');
+    const box=document.getElementById('heroPreview');
+    if(btn && box){
+      btn.addEventListener('click',()=>{ box.style.display=box.style.display==='none'?'grid':'none'; });
+    }
+  })();
+
+  // Whisper once per session
+  (function(){
+    const KEY='hh_whisper_seen_v4';
+    try{
+      if(sessionStorage.getItem(KEY)) return;
+      const w=document.getElementById('whisper'); if(!w) return;
+      setTimeout(()=>{
+        w.style.opacity='1'; w.style.transform='translateY(0)';
+        setTimeout(()=>{ w.style.opacity='0'; w.style.transform='translateY(10px)'; }, 4200);
+        sessionStorage.setItem(KEY,'1');
+      }, 16000);
+    }catch(_){}
+  })();
+
+  // CTA Rotator (weitergeben hero button)
+  (function(){
+    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const btn=document.getElementById('shareFast'); if(!btn || pref) return;
+    let variants=[]; try{ variants=JSON.parse(btn.getAttribute('data-cta-variants')); }catch(_){}
+    if(!variants?.length) return;
+    let i=0; setInterval(()=>{ i=(i+1)%variants.length; btn.textContent=variants[i]; btn.classList.add('pulse'); setTimeout(()=>btn.classList.remove('pulse'),800); }, 4000);
+  })();
+
+  // VIP slider controls (weitergeben)
+  (function(){
+    const wrap=document.getElementById('vipSlider'); if(!wrap) return;
+    document.getElementById('vipPrev')?.addEventListener('click',()=>wrap.scrollBy({left:-wrap.clientWidth*.9,behavior:'smooth'}));
+    document.getElementById('vipNext')?.addEventListener('click',()=>wrap.scrollBy({left: wrap.clientWidth*.9,behavior:'smooth'}));
+  })();
+
+  // Motivation (weitergeben)
+  (function(){
+    const levelBar=document.getElementById('levelBar'); if(!levelBar) return;
+    const KEY_REFCOUNT='hh_ref_count_v2';
+    const KEY_PCT='hh_motivation_pct_v4';
+    function refCount(){ try{ return Number(localStorage.getItem(KEY_REFCOUNT)||'0')||0; }catch(_){ return 0; } }
+    function setRefCount(v){ try{ localStorage.setItem(KEY_REFCOUNT,String(v)); }catch(_){} }
+    function setPct(v){
+      v=Math.max(0,Math.min(100,Math.round(v)));
+      levelBar.style.width=v+'%';
+      try{ localStorage.setItem(KEY_PCT,String(v)); }catch(_){}
+    }
+    function updateTiers(){
+      const c=refCount();
+      document.querySelectorAll('#tierList i').forEach(i=>{
+        const goal=Number(i.getAttribute('data-goal')||'1');
+        const pct=Math.max(0, Math.min(100, Math.round((c/goal)*100)));
+        i.style.width=pct+'%';
+      });
+    }
+    try{ setPct(Number(localStorage.getItem(KEY_PCT)||'0')); }catch(_){ setPct(0); }
+    updateTiers();
+    // bump helpers called by share actions
+    window._bumpRefHalf = function(){ const c=refCount()+0.5; setRefCount(c); updateTiers(); setPct(Math.min(100, c*10)); };
+    window._bumpRefFull = function(){ const c=refCount()+1;   setRefCount(c); updateTiers(); setPct(Math.min(100, c*12)); };
+  })();
+
+  // Share composer (beide Seiten: index & weitergeben)
+  (function(){
+    const name = document.getElementById('refName');
+    const area = document.getElementById('refText');
+    const wa   = document.getElementById('waShare');
+    const mail = document.getElementById('mailShare');
+    const copy = document.getElementById('copyBtn');
+    const preview = document.getElementById('waPreviewText');
+    if(!area) return; // Seite hat keinen Composer
+
+    const KEY_REFID='hh_ref_rid_v2';
+    function randomId(len=10){ const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len); if(crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.random()*256; return Array.from(u,x=>a[x%a.length]).join(''); }
+    function getRefId(){ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } }
+    function sanitize(n){ return n ? n.replace(/[^a-z0-9]/gi,'').toLowerCase() : ''; }
+
+    function buildURL(){
+      const base=new URL('https://heikohaerter.com');
+      base.searchParams.set('utm_source','weitergeben');
+      base.searchParams.set('utm_medium','share');
+      base.searchParams.set('utm_campaign','check');
+      const rid=getRefId(); base.searchParams.set('rid', rid);
+      const alias=sanitize((name?.value||'').trim());
+      if(alias) base.searchParams.set('ref', alias+'.'+rid.slice(0,5));
+      return base.toString();
+    }
+
+    function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
+    function detectSeg(){
+      const raw=(name?.value||'').toLowerCase();
+      if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
+      if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
+      if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
+      if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
+      if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
+      return 'neutral';
+    }
+    function pick(seg){ const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; const i=Math.floor(Math.random()*pool.length); return pool[i]; }
+    function ensureURL(text){ return /\bhttps?:\/\/\S+/i.test(text) ? text : (text.trim()+' '+buildURL()); }
+    function setTextFrom(seg){ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); }
+    function plain(){ return (area.value||'').replace(/\n+/g,' ').trim(); }
+    function updateLinks(){
+      const t=ensureURL(plain());
+      wa && (wa.href='https://wa.me/?text='+encodeURIComponent(t));
+      mail && (mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t));
+      preview && (preview.textContent = t.length<=190 ? t : t.substring(0,t.lastIndexOf(' ',190))+'…');
+    }
+
+    if(area && !area.value){ setTextFrom('neutral'); } updateLinks();
+
+    // events
+    document.querySelectorAll('.seg-btn').forEach(b=>{
+      b.addEventListener('click', ()=>{ setTextFrom(b.getAttribute('data-seg')); window._bumpRefHalf?.(); });
+    });
+    name?.addEventListener('input', ()=> setTextFrom(), {passive:true});
+    area?.addEventListener('input', updateLinks, {passive:true});
+
+    document.getElementById('readyMsg')?.addEventListener('click', ()=>{
+      setTextFrom(); window._bumpRefHalf?.();
+      const toast=document.createElement('div');
+      toast.textContent='Fertiger Text eingefügt ✔️';
+      toast.className='whisper';
+      const base=document.getElementById('whisper');
+      toast.style.cssText= base ? base.style.cssText : 'position:fixed;left:18px;bottom:18px;z-index:70;background:#0b0f16;border:1px solid #333;color:#fff;border-radius:14px;padding:.6rem .8rem;opacity:0;transform:translateY(10px);transition:opacity .25s ease, transform .25s ease';
+      document.body.appendChild(toast);
+      setTimeout(()=>{ toast.style.opacity='1'; toast.style.transform='translateY(0)'; },10);
+      setTimeout(()=>toast.remove(),1800);
+    });
+
+    document.getElementById('magicLine')?.addEventListener('click', ()=>{
+      const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
+      const cur=(area.value||'').trim();
+      area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
+      updateLinks(); window._bumpRefHalf?.();
+    });
+
+    document.getElementById('addPersonal')?.addEventListener('click', ()=>{
+      const alias=(name?.value||'').trim()||'Hey';
+      area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
+      updateLinks(); window._bumpRefHalf?.();
+    });
+
+    copy?.addEventListener('click', async ()=>{
+      try{ await navigator.clipboard.writeText(ensureURL(area.value)); }
+      catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
+      window._bumpRefHalf?.();
+    });
+
+    document.getElementById('waShare')?.addEventListener('click', ()=> window._bumpRefFull?.());
+    document.getElementById('mailShare')?.addEventListener('click', ()=> window._bumpRefFull?.());
+    document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
+      const t=ensureURL(area.value); const url=buildURL();
+      if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); window._bumpRefFull?.(); }catch(_){} }
+    });
+
+    document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); window._bumpRefHalf?.(); });
+  })();
+
+  // Ampel-Check (index)
+  (function() {
+    let step=1, score=0;
+    const max=3;
+    const startBtn=document.getElementById('startCheckBtn');
+    const stepsWrap=document.getElementById('check-steps');
+    const resultBox=document.getElementById('check-result');
+    const stepLabel=document.getElementById('stepLabel');
+    const progress=document.getElementById('progressBar');
+    const stepHint=document.getElementById('stepHint');
+
+    if(!stepsWrap || !resultBox) return;
+
+    function updateHead(){
+      stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`;
+      const pct = ((Math.min(step-1,max-1))/(max-1))*100;
+      progress.style.width = (max===1?100:pct)+'%';
+      stepHint.textContent= step===1?'Kurzer Eindruck reicht.': step===2?'Fast geschafft.':'Letzter Klick.';
+    }
+    function showStep(n){
+      document.querySelectorAll('#check-steps .step').forEach(s=>s.style.display='none');
+      const t=document.querySelector(`#check-steps .step[data-step="${n}"]`);
+      if(t){ t.style.display='block'; t.scrollIntoView({behavior:'smooth',block:'start'}); }
+      updateHead();
+    }
+    function renderCTA(color){
+      const wa='https://wa.me/4917660408380?text=';
+      if(color==='red') return `<div class="stack" style="text-align:center">
+        <a href="${wa}Kurz%2010%20Minuten%20sprechen" class="btn btn-primary">💬 Kurz sprechen – 10 Minuten</a>
+        <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">🛟 Frage senden</a></div>`;
+      if(color==='yellow') return `<div class="stack" style="text-align:center">
+        <a href="${wa}Als%20N%C3%A4chstes%20angehen" class="btn btn-primary">🧭 Als Nächstes angehen</a>
+        <a href="${wa}Kurze%20Frage%20senden" class="btn btn-ghost">💬 Frage senden</a></div>`;
+      return `<div class="stack" style="text-align:center">
+        <a href="${wa}Smarter%20machen%3F" class="btn btn-primary">✨ Smarter machen?</a>
+        <a href="/weitergeben.html#share" class="btn btn-ghost">🔗 Weitergeben</a></div>`;
+    }
+    funct
