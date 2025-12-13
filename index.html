@@ -3,9 +3,15 @@
 <html lang="de" class="no-js" translate="no">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+  />
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#05070E" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
   <title>2 Minuten – zeigt dir, was heute wirklich wichtig ist</title>
   <meta name="description" content="Cinematic Scrollytelling. 2 Minuten. 3 Fragen. Kein Verkauf. Eine klare Einordnung für deinen Kopf.">
@@ -29,8 +35,23 @@
 
   <!-- Preconnect -->
   <link rel="preconnect" href="https://static.wixstatic.com" crossorigin />
+  <link rel="preconnect" href="https://wa.me" crossorigin />
 
-  <!-- Styles -->
+  <!-- LCP Preload -->
+  <link
+    rel="preload"
+    as="image"
+    href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+    imagesrcset="
+      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=480 480w,
+      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=720 720w,
+      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=900 900w,
+      https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200 1200w
+    "
+    imagesizes="(min-width:1024px) 46vw, 92vw"
+    fetchpriority="high"
+  />
+
   <link rel="stylesheet" href="./styles.css" />
   <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -46,8 +67,7 @@
 <div id="progress" aria-hidden="true"><span></span></div>
 <nav id="bullets" aria-label="Navigation"></nav>
 
-<main id="slides" class="slides" tabindex="0">
-
+<main id="slides" class="slides" tabindex="0" aria-live="polite">
   <!-- ACT I — OPENING -->
   <section class="slide hero fade-up" data-beat="1" aria-labelledby="t1">
     <div class="inner">
@@ -62,10 +82,10 @@
       <p class="lead">
         Kein Drama.<br>
         Nur dieses leise Gefühl, dass etwas Wichtiges
-        gerade **nicht sauber sortiert** ist.
+        gerade <strong>nicht sauber sortiert</strong> ist.
       </p>
 
-      <ul class="chips">
+      <ul class="chips" aria-label="Vertrauen">
         <li>⭐ 4,9 · 250+ Menschen</li>
         <li>Eltern · Paare · Selbstständige</li>
         <li>Kein Verkauf</li>
@@ -93,27 +113,17 @@
       <div class="cards">
         <article class="card parallax">
           <h3>22:47 · Eltern</h3>
-          <p>
-            Die Kinder schlafen.<br>
-            Und plötzlich ist da diese Frage:
-            „Haben wir eigentlich alles geregelt?“
-          </p>
+          <p>Die Kinder schlafen.<br>„Haben wir eigentlich alles geregelt?“</p>
         </article>
 
         <article class="card parallax">
           <h3>Paare</h3>
-          <p>
-            Zukunft, Verantwortung, Entscheidungen.<br>
-            Nichts brennt – aber alles hängt zusammen.
-          </p>
+          <p>Zukunft, Verantwortung, Entscheidungen.<br>Nichts brennt – aber alles hängt zusammen.</p>
         </article>
 
         <article class="card parallax">
           <h3>Selbstständige</h3>
-          <p>
-            Wenn du ausfällst –<br>
-            trägt dein System dich dann?
-          </p>
+          <p>Wenn du ausfällst –<br>trägt dein System dich dann?</p>
         </article>
       </div>
 
@@ -127,40 +137,26 @@
   <section class="slide exist fade-up" id="bx" data-beat="2.5" aria-labelledby="tx">
     <div class="inner">
       <h2 id="tx" class="parallax">Wenn du morgen nicht kannst</h2>
-
       <p class="lead">Keine Panik. Nur Ehrlichkeit.</p>
 
       <div class="exist-grid">
         <article class="card parallax">
           <h3>Einkommen</h3>
-          <p>
-            Kommt es weiter –<br>
-            oder stoppt alles mit dir?
-          </p>
+          <p>Kommt es weiter –<br>oder stoppt alles mit dir?</p>
         </article>
 
         <article class="card parallax">
           <h3>Verantwortung</h3>
-          <p>
-            Wer entscheidet,<br>
-            wenn du es nicht kannst?
-          </p>
+          <p>Wer entscheidet,<br>wenn du es nicht kannst?</p>
         </article>
 
         <article class="card parallax">
           <h3>Rücklagen</h3>
-          <p>
-            Wochen?<br>
-            Monate?<br>
-            Oder Hoffnung?
-          </p>
+          <p>Wochen?<br>Monate?<br>Oder Hoffnung?</p>
         </article>
       </div>
 
-      <p class="micro">
-        Die meisten merken erst im Ernstfall,
-        was wirklich fehlt.
-      </p>
+      <p class="micro">Die meisten merken erst im Ernstfall, was wirklich fehlt.</p>
 
       <div class="cta">
         <a class="btn btn-primary" href="#b3">Weiter</a>
@@ -171,9 +167,7 @@
   <!-- ACT III — INSIGHT -->
   <section class="slide why fade-up" id="b3" data-beat="3" aria-labelledby="t3">
     <div class="inner">
-      <h2 id="t3" class="parallax">
-        Ungewissheit ist lauter als schlechte Nachrichten
-      </h2>
+      <h2 id="t3" class="parallax">Ungewissheit ist lauter als schlechte Nachrichten</h2>
 
       <p class="micro">
         Dein Gehirn hasst offene Schleifen.<br>
@@ -187,9 +181,7 @@
       </ul>
 
       <div class="cta">
-        <button class="btn btn-primary" data-earn-ampel>
-          Zeig mir die Einordnung
-        </button>
+        <button class="btn btn-primary" data-earn-ampel>Zeig mir die Einordnung</button>
         <span class="trust">Die Ampel erscheint erst jetzt.</span>
       </div>
     </div>
@@ -198,17 +190,13 @@
   <!-- ACT IV — REVEAL -->
   <section class="slide reveal fade-up" id="b4" data-beat="4" hidden aria-labelledby="t4">
     <div class="inner">
-      <h2 id="t4">
-        Nicht alles ist dringend.<br>
-        Aber manches ist heute wichtig.
-      </h2>
-
+      <h2 id="t4">Nicht alles ist dringend.<br>Aber manches ist heute wichtig.</h2>
       <p class="eyebrow">Kein Urteil. Nur Orientierung.</p>
 
-      <div class="ampel-preview">
-        <span class="dot green"></span>
-        <span class="dot yellow"></span>
-        <span class="dot red"></span>
+      <div class="ampel-preview" aria-label="Ampel-Vorschau">
+        <span class="dot green" title="Grün"></span>
+        <span class="dot yellow" title="Gelb"></span>
+        <span class="dot red" title="Rot"></span>
       </div>
 
       <div class="cta">
@@ -232,12 +220,11 @@
       </p>
     </div>
   </section>
-
 </main>
 
 <footer role="contentinfo" class="fade-up" style="padding:24px 0;text-align:center">
   <p class="micro">
-    © 2025 Heiko Haerter · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a>
+    © <span id="yearNow">2025</span> Heiko Haerter · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a>
   </p>
 </footer>
 
