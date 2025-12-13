@@ -75,7 +75,7 @@
   <!-- ===== styles.css (inline) ===== -->
   <style>
     /* ============================================================
-       TOKENS / BASE — Disney-clean, Netflix-controlled
+       TOKENS / BASE — 2026 Quiet-Cinema Controls
     ============================================================ */
     :root{
       --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5; --muted-soft:#8F97AA;
@@ -85,6 +85,7 @@
       --ease:cubic-bezier(.25,.46,.25,1); --motion:1;
       --shadow-deep:0 34px 110px rgba(0,0,0,.68); --shadow-soft:0 16px 52px rgba(0,0,0,.46);
       --container:1120px; --gutter:clamp(16px,5vw,32px);
+      --heroHue: 220; /* Time-of-day tint */
       font-size:clamp(16px,0.9vw + 8px,20px);
     }
     @media (prefers-reduced-motion:reduce){ :root{--motion:0} }
@@ -96,7 +97,7 @@
       background:
         radial-gradient(circle at 20% -12%, rgba(200,164,75,.16), transparent 55%),
         radial-gradient(circle at 80% 0%, rgba(120,150,255,.11), transparent 60%),
-        linear-gradient(180deg,#04050A,#02040A 68%);
+        linear-gradient(180deg,hsl(var(--heroHue) 35% 4%),#02040A 68%);
       font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
       -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
       line-height:1.4;
@@ -134,7 +135,6 @@
     .brand{display:flex;flex-direction:column;gap:.18rem}
     .brand-top{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.02rem}
     .brand-dot{width:.9rem;height:.9rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold2),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
-
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:1rem 1.55rem;border-radius:999px;border:1px solid transparent;background:rgba(255,255,255,.06);color:var(--text);font-weight:850;cursor:pointer;transition:transform .18s var(--ease), box-shadow .18s var(--ease)}
     .btn:hover{transform:translateY(-1px)}
     .btn:active{transform:translateY(1px) scale(.99)}
@@ -143,7 +143,6 @@
     .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
     .btn.small{min-height:44px;padding:.6rem 1rem;font-weight:700}
     @media (max-width:767px){ .btn, .btn-primary, .btn-ghost{width:100%} }
-
     .card,.premium-card,.story-card,.share{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:var(--shadow-soft)}
     .card{padding:1rem 1.1rem}
     .premium-card{padding:1.05rem 1.15rem}
@@ -164,7 +163,7 @@
     .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
 
     /* ============================================================
-       CINEMA PACK — staged like a film
+       CINEMA PACK — layered like a film
     ============================================================ */
     .title-card{position:fixed;inset:0;z-index:190;display:grid;place-items:center;pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
     .title-card.on{opacity:1;transform:none}
@@ -184,8 +183,13 @@
       background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/></svg>')}
     .film-grain.off{opacity:0; transition:opacity .4s var(--ease)}
 
+    /* Cursor spotlight (GPU-cheap) */
+    .spotlight{position:fixed;inset:0;pointer-events:none;z-index:65;mix-blend-mode:screen;opacity:.0;transition:opacity .35s var(--ease)}
+    .spotlight.on{opacity:.35}
+    .spotlight::before{content:"";position:absolute;left:var(--x,50%);top:var(--y,50%);width:42vmin;height:42vmin;transform:translate(-50%,-50%);border-radius:999px;background:radial-gradient(circle, rgba(233,211,168,.45), transparent 60%)}
+
     /* ============================================================
-       HERO — Act I: quiet power (only Glow + Copy + CTA)
+       HERO — Act I: quiet power (Glow + Copy + CTA)
     ============================================================ */
     .hero{padding-top:clamp(28px,4vw,64px);padding-bottom:clamp(16px,2.5vw,28px);position:relative;overflow:hidden}
     .stage{position:absolute; inset:0; pointer-events:none; z-index:-1; overflow:hidden}
@@ -194,11 +198,19 @@
     .glow-b{width:56vw;height:56vw;right:-18vw;top:-16vw;background:radial-gradient(circle,rgba(136,153,255,.26),transparent 62%)}
 
     /* ============================================================
+       CHECK: progress ring + keys + haptics
+    ============================================================ */
+    .progress-dial{--p:0; width:64px;height:64px;border-radius:999px;background:
+      conic-gradient(from -90deg, var(--gold) calc(var(--p)*1%), rgba(255,255,255,.12) 0);
+      display:grid;place-items:center;border:1px solid rgba(255,255,255,.12)}
+    .progress-dial span{font-weight:800;font-size:.9rem;color:#111;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+    /* ============================================================
        PRINT — only the result card
     ============================================================ */
     @media print{
       body{background:#fff;color:#000}
-      header, .title-card, .cinema-bars, .film-grain, .cut-overlay, .sticky-cta, .whisper, #zielgruppen-szenen, #prozess, #sicherheit, #before-after, #ethos-social, #final-cta, #share, footer, #hero{display:none !important}
+      header, .title-card, .cinema-bars, .film-grain, .cut-overlay, .sticky-cta, .whisper, #zielgruppen-szenen, #prozess, #sicherheit, #before-after, #ethos-social, #final-cta, #share, footer, #hero, .spotlight{display:none !important}
       #ampel-check{padding:0}
       #check-result{display:block !important}
       .result-card{box-shadow:none;border:1px solid #ccc;border-radius:10px}
@@ -213,7 +225,7 @@
       <span class="tc-kicker">Ein ruhiger Blick</span>
       <h2 class="tc-title">Was heute wichtig ist</h2>
       <span class="tc-credit">— Heiko Haerter</span>
-      <i class="tc-sweep"></i>
+      <i class="tc-sweep" aria-hidden="true"></i>
     </div>
   </div>
 
@@ -221,6 +233,7 @@
   <div class="cut-overlay" aria-hidden="true"></div>
   <div class="cinema-bars" aria-hidden="true"></div>
   <div class="film-grain off" aria-hidden="true"></div>
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
 
   <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
 
@@ -231,12 +244,15 @@
         <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
         <span class="hero-micro" style="letter-spacing:.08em;text-transform:uppercase">Persönliche Finanzbegleitung</span>
       </a>
-      <button class="btn btn-ghost" id="dfBtn" aria-pressed="false" type="button" title="Nur das Wichtigste anzeigen">🔍 Kurzmodus</button>
+      <div class="bar">
+        <button class="btn btn-ghost" id="cinemaToggle" aria-pressed="true" title="Kino-Modus an/aus">🎬 Kino</button>
+        <button class="btn btn-ghost" id="dfBtn" aria-pressed="false" type="button" title="Nur das Wichtigste anzeigen">🔍 Kurzmodus</button>
+      </div>
     </div>
   </header>
 
   <main id="main" role="main">
-    <!-- ===== ACT I: HERO (single primary effect) ===== -->
+    <!-- ===== ACT I: HERO ===== -->
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
       <div class="stage" aria-hidden="true">
         <div class="glow glow-a"></div>
@@ -249,8 +265,8 @@
             in dem man still denkt:<br>
             <em>Da fehlt noch etwas.</em>
           </h1>
-          <p class="hero-micro">Kein Drama. Nur kurz einordnen.</p>
-          <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">2 Minuten ansehen</a>
+          <p class="hero-micro" id="heroLine">Kein Drama. Nur kurz einordnen.</p>
+          <a class="btn btn-primary" href="#ampel-check" id="startCheckHero" data-cta-variants='["2 Minuten ansehen","Jetzt kurz sortieren","Ruhigen Blick starten"]'>2 Minuten ansehen</a>
         </div>
       </div>
     </section>
@@ -258,7 +274,7 @@
     <!-- ===== ACT II: REASONS / SCENES ===== -->
     <section id="zielgruppen-szenen" class="section fade-up" aria-labelledby="tg-h">
       <div class="container stack">
-        <div class="premium-card">
+        <div class="premium-card" data-tilt>
           <h2 id="tg-h">Das hilft dir, wenn du …</h2>
           <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.2rem">
             <li>• keine Zeit hast, dich zu kümmern</li>
@@ -270,15 +286,15 @@
         </div>
 
         <div class="story-grid" aria-label="Mini-Szenen">
-          <div class="story-card">
+          <div class="story-card" data-tilt>
             <p class="hero-micro"><strong>👨‍👩‍👧 Szene Eltern:</strong><br>
               „22:47 – Kinder schlafen. Wieder dieses Gefühl: ‚Wir müssten das mal klären…‘ Die Ampel zeigt dir sofort, was heute wirklich wichtig ist.“</p>
           </div>
-          <div class="story-card">
+          <div class="story-card" data-tilt>
             <p class="hero-micro"><strong>💬 Szene Paare:</strong><br>
               „Ihr wollt Entscheidungen nicht blind treffen? Die Ampel zeigt klar: Jetzt · Als Nächstes · Später.“</p>
           </div>
-          <div class="story-card">
+          <div class="story-card" data-tilt>
             <p class="hero-micro"><strong>💼 Szene Selbstständige:</strong><br>
               „Ausfall wäre ein echtes Risiko. Die Ampel zeigt dir in 2 Minuten, wo du heute verwundbar bist.“</p>
           </div>
@@ -291,9 +307,9 @@
       <div class="container">
         <h2 id="prozess-h">So läuft der Check</h2>
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:.8rem">
-          <div class="premium-card"><h3>Kurz antworten (ca. 2 Minuten)</h3></div>
-          <div class="premium-card"><h3>Deine Ampel sehen</h3></div>
-          <div class="premium-card">
+          <div class="premium-card" data-tilt><h3>Kurz antworten (ca. 2 Minuten)</h3></div>
+          <div class="premium-card" data-tilt><h3>Deine Ampel sehen</h3></div>
+          <div class="premium-card" data-tilt>
             <h3>In Ruhe entscheiden</h3>
             <p class="hero-micro" style="margin-top:.4rem">
               Du entscheidest in Ruhe, ob du etwas ändern möchtest oder einfach nur Klarheit mitnimmst.
@@ -306,7 +322,7 @@
     <section id="sicherheit" class="section fade-up" aria-labelledby="safe-h">
       <div class="container">
         <h2 id="safe-h">Was NICHT passiert</h2>
-        <div class="premium-card safety-card">
+        <div class="premium-card safety-card" data-tilt>
           <ul class="hero-micro" style="margin:0;padding-left:1.2rem">
             <li>❌ Kein Verkauf</li>
             <li>🚫 Keine Datenweitergabe</li>
@@ -321,7 +337,7 @@
       <div class="container">
         <h2 id="ba-h">Vorher – Nachher</h2>
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin-top:.8rem">
-          <div class="card">
+          <div class="card" data-tilt>
             <h3>Vorher</h3>
             <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
               <li>„Ich hoffe, dass alles passt…“</li>
@@ -329,7 +345,7 @@
               <li>„Ich schiebe es vor mir her.“</li>
             </ul>
           </div>
-          <div class="card">
+          <div class="card" data-tilt>
             <h3>Nachher</h3>
             <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
               <li>„Ich weiß, was heute wichtig ist.“</li>
@@ -338,7 +354,7 @@
             </ul>
           </div>
         </div>
-        <div class="premium-card" style="margin-top:1.1rem">
+        <div class="premium-card" style="margin-top:1.1rem" data-tilt>
           <p class="hero-micro mb-0"><strong>Zero-Risk:</strong> Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>
         </div>
       </div>
@@ -347,7 +363,7 @@
     <section id="ethos-social" class="section fade-up" aria-labelledby="ethos-h">
       <div class="container stack">
         <h2 id="ethos-h">Wer ich bin</h2>
-        <div class="premium-card">
+        <div class="premium-card" data-tilt>
           <p class="hero-micro mb-0">
             „Ich bin Heiko. Ich habe diese Ampel gebaut, weil ich selbst diese 2-Stunden-Beratungen gehasst habe – voller Tarife, Jargon und Verkaufsdruck.
             Heute dauert Orientierung 2 Minuten – ruhig, verständlich und ohne Verkauf.“
@@ -369,10 +385,13 @@
     <section id="ampel-check" class="section fade-up" aria-labelledby="check-h">
       <div class="container" style="max-width:720px">
         <div class="stack" id="check-start">
-          <h2 id="check-h">Dein 2-Minuten-Check</h2>
+          <div class="bar" style="align-items:center;justify-content:space-between">
+            <h2 id="check-h" class="mb-0">Dein 2-Minuten-Check</h2>
+            <div class="progress-dial" role="img" aria-label="Fortschritt"><span id="dialPct">0%</span></div>
+          </div>
           <p class="hero-micro">3 kurze Fragen → sofort deine Ampel.</p>
-          <a class="btn btn-primary" id="startCheckBtn">⚡ Jetzt starten</a>
-          <small class="hero-micro" style="opacity:.8">Wenig Zeit? Der <em>Kurzmodus</em> taucht später nochmal auf.</small>
+          <a class="btn btn-primary" id="startCheckBtn" aria-describedby="checkHint">⚡ Jetzt starten</a>
+          <small id="checkHint" class="hero-micro" style="opacity:.8">Tipp: 1, 2 oder 3 auf der Tastatur wählt eine Antwort.</small>
         </div>
 
         <div id="check-steps" style="display:none;margin-top:1.2rem">
@@ -405,7 +424,7 @@
           </div>
 
           <div class="premium-card step" data-step="3" style="display:none">
-            <h3>3 · „Wie wohl fühlst du dich beim Thema Zukunft &amp; Alter?“</h3>
+            <h3>3 · Wie wohl fühlst du dich beim Thema Zukunft &amp; Alter?</h3>
             <div class="stack">
               <button class="btn small" data-value="1">Gar nicht / unsicher</button>
               <button class="btn small" data-value="2">Teilweise – nicht sicher</button>
@@ -418,8 +437,8 @@
       </div>
     </section>
 
-    <!-- ===== ACT VI: SHARE (only after result) ===== -->
-    <section class="section fade-up" id="share" aria-labelledby="share-title">
+    <!-- ===== ACT VI: SHARE (after result) ===== -->
+    <section class="section fade-up" id="share" aria-labelledby="share-title" style="display:none">
       <div class="container">
         <h2 id="share-title">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
         <p class="hero-micro">Der Link übernimmt alles: Die Person sieht anonym die Ampel – ohne Unterlagen und ohne Verkauf.</p>
@@ -506,6 +525,13 @@
     document.documentElement.classList.remove('no-js');
     document.querySelectorAll('.js-year-now').forEach(el=> el.textContent=new Date().getFullYear());
 
+    // Time-of-day tint (dawn/day/dusk)
+    (function(){
+      const h=(new Date()).getHours();
+      const hue = (h<6)?220:(h<12)?205:(h<18)?200:230;
+      document.documentElement.style.setProperty('--heroHue', hue);
+    })();
+
     // Title Card in/out
     (function(){
       const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -528,7 +554,7 @@
       }else{els.forEach(el=>el.classList.add('visible'));}
     })();
 
-    // Header appears after leaving hero; Film-grain fades in then
+    // Header appears after leaving hero; Film-grain toggles
     (function(){
       const hero=document.getElementById('hero');
       const header=document.querySelector('header');
@@ -539,6 +565,35 @@
         header.classList.toggle('show', !inView);
         grain && grain.classList.toggle('off', inView);
       },{threshold:.2}).observe(hero);
+    })();
+
+    // CTA variants cycle (quiet)
+    (function(){
+      const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const btn=document.getElementById('startCheckHero');
+      if(!btn||pref) return;
+      let v=[]; try{ v=JSON.parse(btn.getAttribute('data-cta-variants')||'[]'); }catch(_){}
+      if(!v.length) return;
+      let i=0; setInterval(()=>{ i=(i+1)%v.length; btn.textContent=v[i]; }, 3600);
+    })();
+
+    // Spotlight cursor (desktop only)
+    (function(){
+      const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const canHover=matchMedia('(hover:hover)').matches;
+      const spot=document.getElementById('spotlight');
+      if(!spot || pref || !canHover) return;
+      spot.classList.add('on');
+      let raf;
+      addEventListener('pointermove', (e)=>{
+        cancelAnimationFrame(raf);
+        raf=requestAnimationFrame(()=>{
+          spot.style.setProperty('--x', e.clientX+'px');
+          spot.style.setProperty('--y', e.clientY+'px');
+        });
+      }, {passive:true});
+      addEventListener('pointerleave', ()=> spot.classList.remove('on'), {passive:true});
+      addEventListener('pointerenter', ()=> spot.classList.add('on'), {passive:true});
     })();
 
     // Sticky CTA (mobile)
@@ -554,7 +609,7 @@
       }else{ addEventListener('scroll',()=>show(scrollY>180),{passive:true}); }
     })();
 
-    // Kurzmodus (hides optional sections; interface, not cinema)
+    // Kurzmodus (hides optional sections)
     (function(){
       const btn=document.getElementById('dfBtn'); if(!btn) return;
       const keep=new Set(['hero','ethos-social','stickyCTA','share','ampel-check']);
@@ -569,9 +624,24 @@
       window.setKurzmodus=set;
     })();
 
+    // Cinema mode toggle (bars + grain)
+    (function(){
+      const btn=document.getElementById('cinemaToggle');
+      const bars=document.querySelector('.cinema-bars');
+      const grain=document.querySelector('.film-grain');
+      if(!btn||!bars||!grain) return;
+      const set=(on)=>{
+        btn.setAttribute('aria-pressed', on?'true':'false');
+        bars.style.display = on ? '' : 'none';
+        grain.classList.toggle('off', !on);
+      };
+      btn.addEventListener('click', ()=> set(btn.getAttribute('aria-pressed')!=='true'));
+      set(true);
+    })();
+
     // Whisper (once per session)
     (function(){
-      const KEY='hh_whisper_seen_v4';
+      const KEY='hh_whisper_seen_v5';
       try{
         if(sessionStorage.getItem(KEY)) return;
         const w=document.getElementById('whisper'); if(!w) return;
@@ -582,7 +652,74 @@
       }catch(_){}
     })();
 
-    // Ampel-Check
+    // Cinematic Scroll (cut overlay)
+    (function(){
+      const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const cut = document.querySelector(".cut-overlay");
+      function cinematicScroll(target){
+        if(!target) return;
+        cut?.classList.add("on");
+        setTimeout(()=> target.scrollIntoView({behavior: prefersReduced?"auto":"smooth", block:"start"}), 110);
+        setTimeout(()=> cut?.classList.remove("on"), 360);
+      }
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener("click",(e)=>{
+          const id=a.getAttribute("href");
+          if(id && id.length>1){
+            const t=document.querySelector(id);
+            if(t){ e.preventDefault(); cinematicScroll(t); }
+          }
+        }, {passive:false});
+      });
+    })();
+
+    // Parallax & Tilt — never in Hero
+    (function initParallax(){
+      const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if(prefersReduced) return;
+      const cards = Array.from(document.querySelectorAll("[data-tilt]"))
+        .filter(el => !el.closest('#hero'));
+      if(!cards.length) return;
+      let raf;
+      const onScroll=()=>{
+        cancelAnimationFrame(raf);
+        raf=requestAnimationFrame(()=>{
+          cards.forEach(c=>{
+            const r=c.getBoundingClientRect(); const p=(r.top/innerHeight - .5);
+            c.style.transform=`translate3d(0,${p*-14}px,0)`;
+          });
+        });
+      };
+      addEventListener("scroll", onScroll, {passive:true}); onScroll();
+    })();
+
+    (function TiltDepth(){
+      const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const canHover=matchMedia('(hover:hover)').matches;
+      if(pref || !canHover) return;
+      const els = Array.from(document.querySelectorAll('[data-tilt]'))
+        .filter(el => !el.closest('#hero'));
+      if(!els.length) return;
+      const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+      let raf;
+      function onMove(e){
+        cancelAnimationFrame(raf);
+        raf=requestAnimationFrame(()=>{
+          const x=e.clientX||innerWidth/2, y=e.clientY||innerHeight/2;
+          els.forEach(el=>{
+            const r=el.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
+            const dx=clamp((x-cx)/r.width,-.6,.6), dy=clamp((y-cy)/r.height,-.6,.6);
+            el.style.transform=`rotateX(${dy*-6}deg) rotateY(${dx*6}deg) translateZ(0)`;
+            el.classList.add('focus');
+          });
+        });
+      }
+      const onOut=()=>{ els.forEach(e=>{ e.style.transform='none'; e.classList.remove('focus'); }); };
+      addEventListener('pointermove', onMove, {passive:true});
+      addEventListener('pointerleave', onOut, {passive:true});
+    })();
+
+    // Ampel-Check (with dial, keys, haptics)
     (function() {
       let step=1, score=0;
       const max=3;
@@ -592,13 +729,21 @@
       const stepLabel=document.getElementById('stepLabel');
       const progress=document.getElementById('progressBar');
       const stepHint=document.getElementById('stepHint');
+      const dial=document.querySelector('.progress-dial');
+      const dialPct=document.getElementById('dialPct');
+      const shareSection=document.getElementById('share');
 
-      if(!stepsWrap || !resultBox) return;
+      if(!stepsWrap || !resultBox || !dial) return;
 
+      function setDial(pct){
+        dial.style.setProperty('--p', pct);
+        dialPct.textContent=Math.round(pct)+'%';
+      }
       function updateHead(){
         stepLabel.textContent=`Schritt ${Math.min(step,max)} von ${max}`;
         const pct = ((Math.min(step-1,max-1))/(max-1))*100;
         progress.style.width = (max===1?100:pct)+'%';
+        setDial((step-1)/max*100);
         stepHint.textContent= step===1?'Kurzer Eindruck reicht.': step===2?'Fast geschafft.':'Letzter Klick.';
       }
       function showStep(n){
@@ -607,6 +752,7 @@
         if(t){ t.style.display='block'; t.scrollIntoView({behavior:'smooth',block:'start'}); }
         updateHead();
       }
+      function vibrate(ms){ try{ navigator.vibrate && navigator.vibrate(ms); }catch(_){ } }
       function renderCTA(color){
         const wa='https://wa.me/4917660408380?text=';
         const pdfBtn = `<button class="btn btn-ghost" id="exportPDF" type="button">🖨️ PDF-Export</button>`;
@@ -632,8 +778,9 @@
         stepsWrap.style.display='none';
         resultBox.style.display='block';
         let color = score<=4 ? 'red' : score<=7 ? 'yellow' : 'green';
-        const html = `<div class="result-card">
-          <h3>${color==='red'?'🔴 Heute wichtig':color==='yellow'?'🟡 Bald wichtig':'🟢 Passt für heute'}</h3>
+        const title = color==='red'?'🔴 Heute wichtig':color==='yellow'?'🟡 Bald wichtig':'🟢 Passt für heute';
+        const html = `<div class="result-card" data-tilt>
+          <h3>${title}</h3>
           <p class="hero-micro">Deine Empfehlungen:</p>
           ${recommendations(color)}
           ${renderCTA(color)}
@@ -641,22 +788,39 @@
         <p class="hero-micro" style="margin-top:.8rem;opacity:.85">Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>`;
         resultBox.innerHTML=html;
         resultBox.scrollIntoView({behavior:'smooth',block:'start'});
+        setDial(100);
 
         document.getElementById('exportPDF')?.addEventListener('click', ()=> window.print());
+
+        // Make share section visible now (narrative order)
+        if(shareSection) shareSection.style.display='';
       }
       function start(){
         document.getElementById('check-start').style.display='none';
         stepsWrap.style.display='block';
         resultBox.style.display='none';
+        setDial(0);
         step=1; score=0; showStep(step);
       }
       document.getElementById('startCheckHero')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
       document.getElementById('ctaFinal')?.addEventListener('click',e=>{ e.preventDefault(); start(); });
       startBtn?.addEventListener('click',start);
+
+      // Keyboard shortcuts 1/2/3
+      addEventListener('keydown',(e)=>{
+        if(!stepsWrap || stepsWrap.style.display==='none') return;
+        if(['1','2','3'].includes(e.key)){
+          const btn = document.querySelector(`.step[data-step="${step}"] .btn[data-value="${e.key}"]`);
+          btn && btn.click();
+        }
+      });
+
+      // Button clicks / haptics
       document.querySelectorAll('#check-steps .step').forEach(s=>{
         s.querySelectorAll('button').forEach(btn=>{
           btn.addEventListener('click', ()=>{
             score += Number(btn.getAttribute('data-value'))||0;
+            vibrate(12);
             step++; if(step>3) finish(); else showStep(step);
           });
         });
@@ -724,101 +888,31 @@
       }
       if(area && !area.value){ setTextFrom('neutral'); } updateLinks();
 
-      document.getElementById('readyMsg')?.addEventListener('click', ()=>{
-        setTextFrom();
-        const toast=document.createElement('div');
-        toast.textContent='Fertiger Text eingefügt ✔️';
-        toast.className='whisper';
+      function toast(msg='OK'){
+        const t=document.createElement('div');
+        t.textContent=msg;
+        t.className='whisper';
         const base=document.getElementById('whisper');
-        toast.style.cssText= base ? base.style.cssText : 'position:fixed;left:18px;bottom:18px;z-index:70;background:#0b0f16;border:1px solid #333;color:#fff;border-radius:14px;padding:.6rem .8rem;opacity:0;transform:translateY(10px);transition:opacity .25s ease, transform .25s ease';
-        document.body.appendChild(toast);
-        setTimeout(()=>{ toast.style.opacity='1'; toast.style.transform='translateY(0)'; },10);
-        setTimeout(()=>toast.remove(),1800);
-      });
-      document.getElementById('magicLine')?.addEventListener('click', ()=>{
-        const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
-        const cur=(area.value||'').trim();
-        area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
-        updateLinks();
-      });
-      document.getElementById('addPersonal')?.addEventListener('click', ()=>{
-        const alias=(name?.value||'').trim()||'Hey';
-        area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
-        updateLinks();
-      });
-      document.getElementById('copyBtn')?.addEventListener('click', async ()=>{
-        try{ await navigator.clipboard.writeText(ensureURL(area.value)); }
-        catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
-      });
-      document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
-        const t=ensureURL(area.value); const url=buildURL();
-        if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); }catch(_){} }
-      });
+        t.style.cssText= base ? base.style.cssText : 'position:fixed;left:18px;bottom:18px;z-index:70;background:#0b0f16;border:1px solid #333;color:#fff;border-radius:14px;padding:.6rem .8rem;opacity:0;transform:translateY(10px);transition:opacity .25s ease, transform .25s ease';
+        document.body.appendChild(t);
+        setTimeout(()=>{ t.style.opacity='1'; t.style.transform='translateY(0)'; },10);
+        setTimeout(()=>t.remove(),1600);
+      }
+
+      document.getElementById('readyMsg')?.addEventListener('click', ()=>{ setTextFrom(); toast('Fertiger Text eingefügt ✔️'); });
+      document.getElementById('magicLine')?.addEventListener('click', ()=>{ const line='Hey, hab das gerade gesehen – dachte sofort an dich.'; const cur=(area.value||'').trim(); area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL(); updateLinks(); });
+      document.getElementById('addPersonal')?.addEventListener('click', ()=>{ const alias=(name?.value||'').trim()||'Hey'; area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`; updateLinks(); });
+      document.getElementById('copyBtn')?.addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(ensureURL(area.value)); toast('Kopiert 📋'); } catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }});
+      document.getElementById('nativeShare')?.addEventListener('click', async ()=>{ const t=ensureURL(area.value); const url=buildURL(); if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); }catch(_){}}});
     })();
 
-    // Cinematic Scroll (cut overlay)
+    // Micro copy shuffler for hero line
     (function(){
-      const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const cut = document.querySelector(".cut-overlay");
-      function cinematicScroll(target){
-        if(!target) return;
-        cut?.classList.add("on");
-        setTimeout(()=> target.scrollIntoView({behavior: prefersReduced?"auto":"smooth", block:"start"}), 110);
-        setTimeout(()=> cut?.classList.remove("on"), 360);
-      }
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener("click",(e)=>{
-          const id=a.getAttribute("href");
-          if(id && id.length>1){
-            const t=document.querySelector(id);
-            if(t){ e.preventDefault(); cinematicScroll(t); }
-          }
-        }, {passive:false});
-      });
-    })();
-
-    // Parallax & Tilt — staged: never in Hero
-    (function initParallax(){
-      const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if(prefersReduced) return;
-      const cards = Array.from(document.querySelectorAll("[data-tilt]"))
-        .filter(el => !el.closest('#hero'));
-      if(!cards.length) return;
-      let raf;
-      const onScroll=()=>{
-        cancelAnimationFrame(raf);
-        raf=requestAnimationFrame(()=>{
-          cards.forEach(c=>{
-            const r=c.getBoundingClientRect(); const p=(r.top/innerHeight - .5);
-            c.style.transform=`translate3d(0,${p*-14}px,0)`;
-          });
-        });
-      };
-      addEventListener("scroll", onScroll, {passive:true}); onScroll();
-    })();
-    (function TiltDepth(){
+      const el=document.getElementById('heroLine');
       const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(pref) return;
-      const els = Array.from(document.querySelectorAll('[data-tilt]'))
-        .filter(el => !el.closest('#hero'));
-      if(!els.length) return;
-      const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-      let raf;
-      function onMove(e){
-        cancelAnimationFrame(raf);
-        raf=requestAnimationFrame(()=>{
-          const x=e.clientX||innerWidth/2, y=e.clientY||innerHeight/2;
-          els.forEach(el=>{
-            const r=el.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
-            const dx=clamp((x-cx)/r.width,-.6,.6), dy=clamp((y-cy)/r.height,-.6,.6);
-            el.style.transform=`rotateX(${dy*-6}deg) rotateY(${dx*6}deg) translateZ(0)`;
-            el.classList.add('focus');
-          });
-        });
-      }
-      const onOut=()=>{ els.forEach(e=>{ e.style.transform='none'; e.classList.remove('focus'); }); };
-      addEventListener('pointermove', onMove, {passive:true});
-      addEventListener('pointerleave', onOut, {passive:true});
+      if(!el || pref) return;
+      const lines=['Kein Drama. Nur kurz einordnen.','Ein ruhiger Blick – ohne Druck.','Nur zwei Minuten – Klarheit.'];
+      let i=0; setInterval(()=>{ i=(i+1)%lines.length; el.textContent=lines[i]; }, 6000);
     })();
   })();
   </script>
