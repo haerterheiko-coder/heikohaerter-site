@@ -56,110 +56,153 @@
 
   <!-- ===== INLINE styles.css ===== -->
   <style>
-/* ============================================================
-   GODMODE — CINEMATIC CUT (2026)
-============================================================ */
-:root{
-  --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5; --muted-soft:#8F97AA;
-  --gold:#C8A44B; --gold2:#EADCA8; --focus:#90C2FF;
-  --green:#7EDFA5; --yellow:#F7E39A; --red:#F3A6A6;
-  --glass:rgba(255,255,255,.055); --line:rgba(255,255,255,.12);
-  --ease:cubic-bezier(.25,.46,.25,1); --motion:1;
-  --shadow-deep:0 34px 110px rgba(0,0,0,.68); --shadow-soft:0 16px 52px rgba(0,0,0,.46);
-  --container:1120px; --gutter:clamp(16px,5vw,32px);
-  font-size:clamp(16px,0.9vw + 8px,20px);
-}
-@media (prefers-reduced-motion:reduce){ :root{--motion:0} }
-*{box-sizing:border-box; max-width:100%}
-html,body{height:auto; overflow-x:hidden}
-html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
-body{
-  margin:0; color:var(--text);
-  background:
-    radial-gradient(circle at 20% -12%, rgba(200,164,75,.16), transparent 55%),
-    radial-gradient(circle at 80% 0%, rgba(120,150,255,.11), transparent 60%),
-    linear-gradient(180deg,#04050A,#02040A 68%);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  contain:paint; line-height:1.4;
-}
-a{color:inherit;text-decoration:none}
-a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
-img,picture,svg,video{display:block;max-width:100%;height:auto}
-.visually-hidden{position:absolute;inset:auto auto auto -9999px}
-.section{padding:clamp(32px,6vw,72px) 0}
-.container{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
-.grid{display:grid;gap:clamp(.6rem,2.2vw,1.2rem)}
-.stack{display:flex;flex-direction:column;gap:clamp(.45rem,1.8vw,.9rem)}
-.auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
-h1,h2,h3{margin:0 0 .9rem;font-weight:700;letter-spacing:-.01em}
-h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.12}
-h2{font-size:clamp(1.6rem,3vw,2.2rem)}
-h3{font-size:clamp(1.12rem,2vw,1.28rem)}
-p{margin:0 0 .6rem;font-size:clamp(1rem,1.2vw,1.08rem);color:var(--muted)}
-.hero-micro{font-size:clamp(.95rem,1.1vw,1rem);color:var(--muted-soft)}
-.system-tagline{margin-top:.6rem;font-size:.98rem;color:var(--muted-soft);max-width:620px}
-header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
-.header-bar{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:.85rem 0}
-.brand{display:flex;flex-direction:column;gap:.18rem}
-.brand-top{display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.02rem}
-.brand-dot{width:.9rem;height:.9rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold2),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
-.hero{padding-top:clamp(28px,4vw,64px);padding-bottom:clamp(16px,2.5vw,28px)}
-.hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
-@media (min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center} }
-.hero-media picture{border-radius:24px;overflow:hidden}
-.hero-media img{width:100%;border-radius:24px;box-shadow:var(--shadow-deep);object-fit:cover;object-position:center top}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:1rem 1.55rem;border-radius:999px;border:1px solid transparent;background:rgba(255,255,255,.06);color:var(--text);font-weight:850;cursor:pointer;transition:transform .18s var(--ease), box-shadow .18s var(--ease)}
-.btn:hover{transform:translateY(-1px)}
-.btn:active{transform:translateY(1px) scale(.99)}
-.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
-.btn-primary:hover{box-shadow:0 18px 40px rgba(200,164,75,.40)}
-.btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
-.btn.small{min-height:44px;padding:.6rem 1rem;font-weight:700}
-@media (max-width:767px){ .btn, .btn-primary, .btn-ghost{width:100%} }
-.card,.premium-card,.share{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:var(--shadow-soft)}
-.card{padding:1rem 1.1rem}
-.premium-card{padding:1.05rem 1.15rem}
-.story-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.95rem 1.05rem}
-.safety-card{border-left:4px solid var(--gold)}
-.share{padding:1rem 1.1rem}
-.result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
-.chip{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:999px;padding:.42rem .95rem;font-size:.92rem;color:var(--muted-soft)}
-.bar{display:flex;flex-wrap:wrap;gap:.6rem}
-.story-grid{display:grid;gap:1rem;margin:1.1rem 0;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
-.sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
-.sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
-@media (max-width:1023px){ .sticky-cta{display:flex} }
-@supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
-.fade-up{opacity:0;transform:translateY(18px)}
-.fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
-/* ===== CINEMA PACK ===== */
-.cut-overlay{position:fixed; inset:0; background:rgba(5,7,14,.72); opacity:0; pointer-events:none; z-index:200; transition:opacity .22s cubic-bezier(.25,.46,.25,1)}
-.cut-overlay.on{opacity:1}
-.cinema-bars{position:fixed; inset:0; pointer-events:none; z-index:60; background:linear-gradient(#000c,transparent 11%,transparent 89%,#000c)}
-.film-grain{position:fixed; inset:0; pointer-events:none; z-index:55; opacity:.14;
-  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/></svg>');
-  animation:grain 2.2s steps(2,end) infinite;}
-@keyframes grain{to{transform:translate3d(-5%,3%,0)}}
-.stage{position:absolute; inset:0; pointer-events:none; z-index:-1; overflow:hidden}
-.stage .glow{position:absolute;border-radius:50%;filter:blur(52px);opacity:.46; transform:translateZ(0)}
-.glow-a{width:50vw;height:50vw;left:-16vw;top:-14vw;background:radial-gradient(circle,rgba(200,164,75,.28),transparent 62%)}
-.glow-b{width:56vw;height:56vw;right:-18vw;top:-16vw;background:radial-gradient(circle,rgba(136,153,255,.26),transparent 62%)}
-.particles{position:absolute; inset:0}
-.opening-shot{position:absolute;top:clamp(18px,4vw,42px);left:50%;transform:translateX(-50%);width:min(72vw,420px);height:2px;opacity:.65}
-.breath-line{display:block;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:breath 4.7s ease-in-out infinite}
-@keyframes breath{0%,100%{opacity:.16}50%{opacity:.62}}
-.swap{display:inline-block;will-change:opacity,transform}
-.swap.enter{animation:kinIn .62s cubic-bezier(.25,.46,.25,1) both}
-@keyframes kinIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-.hero-media{position:absolute; inset:0; overflow:hidden; z-index:-1; pointer-events:none}
-.hero-media::after{content:""; position:absolute; inset:0;
-  background: radial-gradient(circle at 20% 20%, rgba(200,164,75,.10), transparent 52%), linear-gradient(180deg, rgba(5,7,14,.20), rgba(5,7,14,.72))}
-.hero-video{width:100%; height:100%; object-fit:cover; opacity:.24; filter:contrast(1.06) saturate(1.06); transform:translateZ(0)}
-@media (max-width:767.98px){ .hero-micro{font-size:1rem} .premium-card{padding:1rem .9rem} }
+    /* Title Card */
+    .title-card{position:fixed;inset:0;z-index:190;display:grid;place-items:center;pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+    .title-card.on{opacity:1;transform:none}
+    .tc-inner{text-align:center;filter:drop-shadow(0 10px 30px rgba(0,0,0,.45))}
+    .tc-kicker{display:block;letter-spacing:.22em;text-transform:uppercase;font-size:.75rem;color:rgba(255,255,255,.7)}
+    .tc-title{margin:.35rem 0 .2rem;font-weight:900;letter-spacing:.01em;font-size:clamp(1.6rem,3.4vw,2.6rem);
+      background:linear-gradient(135deg,var(--gold2),var(--gold) 60%,#b48f3a);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .tc-credit{display:block;color:var(--muted-soft);font-size:.95rem}
+    .tc-sweep{position:absolute;left:50%;top:50%;width:40vw;max-width:520px;height:2px;transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);opacity:.0}
+    .title-card.on .tc-sweep{animation:tcSweep 1.2s ease .15s forwards}
+    @keyframes tcSweep{0%{opacity:.0;transform:translate(-50%,-50%) scaleX(.4)}60%{opacity:.9}100%{opacity:0;transform:translate(-50%,-50%) scaleX(1)}}
+    .title-card.on .tc-inner{animation:gate 1.8s steps(2,end) infinite}
+    @keyframes gate{to{transform:translate3d(.6px,-.4px,0)}}
+
+    /* ============================================================
+       GODMODE — CINEMATIC CUT (2026)
+    ============================================================ */
+    :root{
+      --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5; --muted-soft:#8F97AA;
+      --gold:#C8A44B; --gold2:#EADCA8; --focus:#90C2FF;
+      --green:#7EDFA5; --yellow:#F7E39A; --red:#F3A6A6;
+      --glass:rgba(255,255,255,.055); --line:rgba(255,255,255,.12);
+      --ease:cubic-bezier(.25,.46,.25,1); --motion:1;
+      --shadow-deep:0 34px 110px rgba(0,0,0,.68); --shadow-soft:0 16px 52px rgba(0,0,0,.46);
+      --container:1120px; --gutter:clamp(16px,5vw,32px);
+      font-size:clamp(16px,0.9vw + 8px,20px);
+    }
+    @media (prefers-reduced-motion:reduce){ :root{--motion:0} }
+    *{box-sizing:border-box; max-width:100%}
+    html,body{height:auto; overflow-x:hidden}
+    html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
+    body{
+      margin:0; color:var(--text);
+      background:
+        radial-gradient(circle at 20% -12%, rgba(200,164,75,.16), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(120,150,255,.11), transparent 60%),
+        linear-gradient(180deg,#04050A,#02040A 68%);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      contain:paint; line-height:1.4;
+    }
+    a{color:inherit;text-decoration:none}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
+    img,picture,svg,video{display:block;max-width:100%;height:auto}
+    .visually-hidden{position:absolute;inset:auto auto auto -9999px}
+    .section{padding:clamp(32px,6vw,72px) 0}
+    .container{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+    .grid{display:grid;gap:clamp(.6rem,2.2vw,1.2rem)}
+    .stack{display:flex;flex-direction:column;gap:clamp(.45rem,1.8vw,.9rem)}
+    .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+    h1,h2,h3{margin:0 0 .9rem;font-weight:700;letter-spacing:-.01em}
+    h1{font-size:clamp(1.9rem,4vw,3rem);line-height:1.12}
+    h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+    h3{font-size:clamp(1.12rem,2vw,1.28rem)}
+    p{margin:0 0 .6rem;font-size:clamp(1rem,1.2vw,1.08rem);color:var(--muted)}
+    .hero-micro{font-size:clamp(.95rem,1.1vw,1rem);color:var(--muted-soft)}
+    .system-tagline{margin-top:.6rem;font-size:.98rem;color:var(--muted-soft);max-width:620px}
+    header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
+    .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:.85rem 0}
+    .brand{display:flex;flex-direction:column;gap:.18rem}
+    .brand-top{display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.02rem}
+    .brand-dot{width:.9rem;height:.9rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold2),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
+    .hero{padding-top:clamp(28px,4vw,64px);padding-bottom:clamp(16px,2.5vw,28px)}
+    .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
+    @media (min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center} }
+    .hero-media picture{border-radius:24px;overflow:hidden}
+    .hero-media img{width:100%;border-radius:24px;box-shadow:var(--shadow-deep);object-fit:cover;object-position:center top}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:1rem 1.55rem;border-radius:999px;border:1px solid transparent;background:rgba(255,255,255,.06);color:var(--text);font-weight:850;cursor:pointer;transition:transform .18s var(--ease), box-shadow .18s var(--ease)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(1px) scale(.99)}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
+    .btn-primary:hover{box-shadow:0 18px 40px rgba(200,164,75,.40)}
+    .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
+    .btn.small{min-height:44px;padding:.6rem 1rem;font-weight:700}
+    @media (max-width:767px){ .btn, .btn-primary, .btn-ghost{width:100%} }
+    .card,.premium-card,.share{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:var(--shadow-soft)}
+    .card{padding:1rem 1.1rem}
+    .premium-card{padding:1.05rem 1.15rem}
+    .story-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.95rem 1.05rem}
+    .safety-card{border-left:4px solid var(--gold)}
+    .share{padding:1rem 1.1rem}
+    .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+    .chip{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:999px;padding:.42rem .95rem;font-size:.92rem;color:var(--muted-soft)}
+    .bar{display:flex;flex-wrap:wrap;gap:.6rem}
+    .story-grid{display:grid;gap:1rem;margin:1.1rem 0;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+    .sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
+    .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
+    @media (max-width:1023px){ .sticky-cta{display:flex} }
+    @supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
+    .fade-up{opacity:0;transform:translateY(18px)}
+    .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+
+    /* ===== CINEMA PACK ===== */
+    .cut-overlay{position:fixed; inset:0; background:rgba(5,7,14,.72); opacity:0; pointer-events:none; z-index:200; transition:opacity .22s cubic-bezier(.25,.46,.25,1)}
+    .cut-overlay.on{opacity:1}
+    .cinema-bars{position:fixed; inset:0; pointer-events:none; z-index:60; background:linear-gradient(#000c,transparent 11%,transparent 89%,#000c)}
+    .film-grain{position:fixed; inset:0; pointer-events:none; z-index:55; opacity:.14;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/></svg>');
+      animation:grain 2.2s steps(2,end) infinite;}
+    @keyframes grain{to{transform:translate3d(-5%,3%,0)}}
+    .stage{position:absolute; inset:0; pointer-events:none; z-index:-1; overflow:hidden}
+    .stage .glow{position:absolute;border-radius:50%;filter:blur(52px);opacity:.46; transform:translateZ(0)}
+    .glow-a{width:50vw;height:50vw;left:-16vw;top:-14vw;background:radial-gradient(circle,rgba(200,164,75,.28),transparent 62%)}
+    .glow-b{width:56vw;height:56vw;right:-18vw;top:-16vw;background:radial-gradient(circle,rgba(136,153,255,.26),transparent 62%)}
+    .particles{position:absolute; inset:0}
+    .opening-shot{position:absolute;top:clamp(18px,4vw,42px);left:50%;transform:translateX(-50%);width:min(72vw,420px);height:2px;opacity:.65}
+    .breath-line{display:block;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:breath 4.7s ease-in-out infinite}
+    @keyframes breath{0%,100%{opacity:.16}50%{opacity:.62}}
+    .swap{display:inline-block;will-change:opacity,transform}
+    .swap.enter{animation:kinIn .62s cubic-bezier(.25,.46,.25,1) both}
+    @keyframes kinIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+    .hero-media{position:absolute; inset:0; overflow:hidden; z-index:-1; pointer-events:none}
+    .hero-media::after{content:""; position:absolute; inset:0;
+      background: radial-gradient(circle at 20% 20%, rgba(200,164,75,.10), transparent 52%), linear-gradient(180deg, rgba(5,7,14,.20), rgba(5,7,14,.72))}
+    .hero-video{width:100%; height:100%; object-fit:cover; opacity:.24; filter:contrast(1.06) saturate(1.06); transform:translateZ(0)}
+    @media (max-width:767.98px){ .hero-micro{font-size:1rem} .premium-card{padding:1rem .9rem} }
+
+    /* ===== Tilt / Depth FX ===== */
+    .interact-blur::after{
+      content:"";position:fixed;inset:-10px;z-index:1;pointer-events:none;
+      backdrop-filter:blur(0px);transition:backdrop-filter .2s var(--ease)
+    }
+    .interact-blur.on::after{backdrop-filter:blur(2px)}
+    [data-tilt]{will-change:transform,filter;transform-style:preserve-3d;
+      transition:transform .15s var(--ease), filter .25s var(--ease)}
+    [data-tilt].focus{filter:drop-shadow(0 18px 38px rgba(0,0,0,.45)) saturate(1.04) contrast(1.02)}
+
+    /* ===== Line-by-Line Reveal ===== */
+    .reveal{overflow:hidden}
+    .reveal span{display:block;transform:translateY(120%);opacity:0}
+    .reveal.on span{animation:lineIn .6s var(--ease) forwards}
+    .reveal.on span:nth-child(2){animation-delay:.06s}
+    .reveal.on span:nth-child(3){animation-delay:.12s}
+    @keyframes lineIn{to{transform:none;opacity:1}}
   </style>
 </head>
 <body>
+  <!-- Title Card -->
+  <div class="title-card" aria-hidden="true" id="titleCard">
+    <div class="tc-inner">
+      <span class="tc-kicker">Ein ruhiger Blick</span>
+      <h2 class="tc-title">Was heute wichtig ist</h2>
+      <span class="tc-credit">— Heiko Haerter</span>
+      <i class="tc-sweep"></i>
+    </div>
+  </div>
+
   <!-- Cinematic Overlays -->
   <div class="cut-overlay" aria-hidden="true"></div>
   <div class="cinema-bars" aria-hidden="true"></div>
@@ -199,7 +242,7 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
             2 Minuten. 3 Fragen. Deine Finanz-Ampel: Grün, Gelb oder Rot.
           </p>
 
-          <h1 id="hero-title">In 2 Minuten sehen, ob heute bei deinen Finanzen etwas Wichtiges fehlt.</h1>
+          <h1 id="hero-title" data-tilt>In 2 Minuten sehen, ob heute bei deinen Finanzen etwas Wichtiges fehlt.</h1>
 
           <p class="hero-micro system-tagline">
             Der Check ist der Einstieg in ein ruhiges Finanzsystem, das dir zeigt, was heute wichtig ist – ohne Papierkram, ohne Verkauf.
@@ -209,7 +252,7 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
             Kein Überblick bei Einkommen, Gesundheit, Haftung, Zukunft, Familie? Die Ampel sortiert das – anonym & ohne Druck.
           </p>
 
-          <div class="premium-card parallax">
+          <div class="premium-card parallax" data-tilt>
             <p class="hero-micro m-0"><strong>80 % fühlen sich nach 2 Minuten ruhiger.</strong></p>
           </div>
 
@@ -226,15 +269,15 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
           </div>
 
           <div id="heroPreview" class="grid auto-grid" style="display:none">
-            <div class="result-card result-green parallax">
+            <div class="result-card result-green parallax" data-tilt>
               <h3>🟢 Ampel-Beispiel</h3>
               <p class="hero-micro">Passt für heute · Als Nächstes: ruhig planen.</p>
             </div>
-            <div class="result-card result-yellow parallax">
+            <div class="result-card result-yellow parallax" data-tilt>
               <h3>🟡 Ampel-Beispiel</h3>
               <p class="hero-micro">Bald wichtig · Als Nächstes angehen.</p>
             </div>
-            <div class="result-card result-red parallax">
+            <div class="result-card result-red parallax" data-tilt>
               <h3>🔴 Ampel-Beispiel</h3>
               <p class="hero-micro">Heute wichtig · Kurz priorisieren.</p>
             </div>
@@ -242,7 +285,7 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
         </div>
 
         <div class="stack">
-          <picture class="parallax">
+          <picture class="parallax" data-tilt>
             <img
               src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200"
               alt="2-Minuten-Check ohne Papierkram"
@@ -255,8 +298,8 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
     <!-- ===== SLIDE 2 ===== -->
     <section id="zielgruppen-szenen" class="section fade-up" aria-labelledby="tg-h">
       <div class="container stack">
-        <div class="premium-card parallax" aria-labelledby="tg-h">
-          <h2 id="tg-h" style="margin:0 0 .35rem">Das hilft dir, wenn du …</h2>
+        <div class="premium-card parallax" aria-labelledby="tg-h" data-tilt>
+          <h2 id="tg-h" class="reveal-ready">Das hilft dir, wenn du …</h2>
           <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.2rem">
             <li>• keine Zeit hast, dich zu kümmern</li>
             <li>• keine Lust auf Verkaufsrunden hast</li>
@@ -267,15 +310,15 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
         </div>
 
         <div class="story-grid" aria-label="Mini-Szenen">
-          <div class="story-card parallax">
+          <div class="story-card parallax" data-tilt>
             <p class="hero-micro"><strong>👨‍👩‍👧 Szene Eltern:</strong><br>
               „22:47 – Kinder schlafen. Wieder dieses Gefühl: ‚Wir müssten das mal klären…‘ Die Ampel zeigt dir sofort, was heute wirklich wichtig ist.“</p>
           </div>
-          <div class="story-card parallax">
+          <div class="story-card parallax" data-tilt>
             <p class="hero-micro"><strong>💬 Szene Paare:</strong><br>
               „Ihr wollt Entscheidungen nicht blind treffen? Die Ampel zeigt klar: Jetzt · Als Nächstes · Später.“</p>
           </div>
-          <div class="story-card parallax">
+          <div class="story-card parallax" data-tilt>
             <p class="hero-micro"><strong>💼 Szene Selbstständige:</strong><br>
               „Ausfall wäre ein echtes Risiko. Die Ampel zeigt dir in 2 Minuten, wo du heute verwundbar bist.“</p>
           </div>
@@ -286,12 +329,12 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
     <!-- ===== SLIDE 3 ===== -->
     <section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
       <div class="container">
-        <h2 id="prozess-h">So läuft der Check</h2>
+        <h2 id="prozess-h" class="reveal-ready">So läuft der Check</h2>
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:.8rem">
-          <div class="premium-card parallax"><h3>Kurz antworten (ca. 2 Minuten)</h3></div>
-          <div class="premium-card parallax"><h3>Deine Ampel sehen</h3></div>
-          <div class="premium-card parallax">
-            <h3>In Ruhe entscheiden</h3>
+          <div class="premium-card parallax" data-tilt><h3 class="reveal-ready">Kurz antworten (ca. 2 Minuten)</h3></div>
+          <div class="premium-card parallax" data-tilt><h3 class="reveal-ready">Deine Ampel sehen</h3></div>
+          <div class="premium-card parallax" data-tilt>
+            <h3 class="reveal-ready">In Ruhe entscheiden</h3>
             <p class="hero-micro" style="margin-top:.4rem">
               Du entscheidest in Ruhe, ob du etwas ändern möchtest oder einfach nur Klarheit mitnimmst.
             </p>
@@ -303,8 +346,8 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
     <!-- ===== SLIDE 4 ===== -->
     <section id="sicherheit" class="section fade-up" aria-labelledby="safe-h">
       <div class="container">
-        <h2 id="safe-h">Was NICHT passiert</h2>
-        <div class="premium-card safety-card parallax">
+        <h2 id="safe-h" class="reveal-ready">Was NICHT passiert</h2>
+        <div class="premium-card safety-card parallax" data-tilt>
           <ul class="hero-micro" style="margin:0;padding-left:1.2rem">
             <li>❌ Kein Verkauf</li>
             <li>🚫 Keine Datenweitergabe</li>
@@ -318,18 +361,18 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
     <!-- ===== SLIDE 5 ===== -->
     <section id="before-after" class="section fade-up" aria-labelledby="ba-h">
       <div class="container">
-        <h2 id="ba-h">Vorher – Nachher</h2>
+        <h2 id="ba-h" class="reveal-ready">Vorher – Nachher</h2>
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin-top:.8rem">
-          <div class="card parallax">
-            <h3>Vorher</h3>
+          <div class="card parallax" data-tilt>
+            <h3 class="reveal-ready">Vorher</h3>
             <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
               <li>„Ich hoffe, dass alles passt…“</li>
               <li>„Ich weiß nicht, wo ich anfangen soll.“</li>
               <li>„Ich schiebe es vor mir her.“</li>
             </ul>
           </div>
-          <div class="card parallax">
-            <h3>Nachher</h3>
+          <div class="card parallax" data-tilt>
+            <h3 class="reveal-ready">Nachher</h3>
             <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
               <li>„Ich weiß, was heute wichtig ist.“</li>
               <li>„Ich habe Klarheit – ohne Verkauf.“</li>
@@ -337,7 +380,7 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
             </ul>
           </div>
         </div>
-        <div class="premium-card parallax" style="margin-top:1.1rem">
+        <div class="premium-card parallax" style="margin-top:1.1rem" data-tilt>
           <p class="hero-micro" style="margin:0"><strong>Zero-Risk:</strong> Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>
         </div>
       </div>
@@ -346,8 +389,8 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
     <!-- ===== SLIDE 6 ===== -->
     <section id="ethos-social" class="section fade-up" aria-labelledby="ethos-h">
       <div class="container stack">
-        <h2 id="ethos-h">Wer ich bin</h2>
-        <div class="premium-card parallax">
+        <h2 id="ethos-h" class="reveal-ready">Wer ich bin</h2>
+        <div class="premium-card parallax" data-tilt>
           <p class="hero-micro" style="margin:0">
             „Ich bin Heiko. Ich habe diese Ampel gebaut, weil ich selbst diese 2-Stunden-Beratungen gehasst habe Voller Tarife, Jargon und Verkaufsdruck.
             Heute dauert Orientierung 2 Minuten – ruhig, verständlich und ohne Verkauf.“
@@ -355,27 +398,27 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
         </div>
 
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
-          <div class="story-card parallax">
+          <div class="story-card parallax" data-tilt>
             <p class="hero-micro"><strong>Eltern</strong><br>
               „22:47 – Kinder schlafen. Wieder dieses Gefühl: ‚Wir müssten das mal klären…‘ Die Ampel zeigt dir sofort, was heute wirklich wichtig ist.“</p>
           </div>
-          <div class="story-card parallax">
+          <div class="story-card parallax" data-tilt>
             <p class="hero-micro"><strong>Paare</strong><br>
               „Ihr wollt Entscheidungen nicht blind treffen? Die Ampel zeigt klar: Jetzt · Als Nächstes · Später.“</p>
           </div>
-          <div class="story-card parallax">
+          <div class="story-card parallax" data-tilt>
             <p class="hero-micro"><strong>Selbstständige</strong><br>
               „Ausfall wäre ein echtes Risiko. Die Ampel zeigt dir in 2 Minuten, wo du heute verwundbar bist.“</p>
           </div>
         </div>
 
-        <details class="premium-card parallax">
+        <details class="premium-card parallax" data-tilt>
           <summary style="cursor:pointer;font-weight:700">FAQ</summary>
           <p class="hero-micro" style="margin-top:.4rem">—</p>
         </details>
 
         <div style="text-align:center;max-width:720px;margin-inline:auto">
-          <h2>In 2 Minuten weniger Unsicherheit. Starte jetzt.</h2>
+          <h2 class="reveal-ready">In 2 Minuten weniger Unsicherheit. Starte jetzt.</h2>
           <a href="#ampel-check" class="btn btn-primary" id="ctaFinal">⚡ Jetzt starten</a>
           <p class="hero-micro" style="margin-top:.6rem;">Anonym · Keine Daten · Kein Verkauf</p>
         </div>
@@ -386,14 +429,14 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
     <section id="ampel-check" class="section fade-up">
       <div class="container" style="max-width:720px">
         <div class="stack" id="check-start">
-          <h2>Dein 2-Minuten-Check</h2>
+          <h2 class="reveal-ready">Dein 2-Minuten-Check</h2>
           <p class="hero-micro">3 kurze Fragen → sofort deine Ampel.</p>
           <a class="btn btn-primary" id="startCheckBtn">⚡ Jetzt starten</a>
           <small class="hero-micro" style="opacity:.8">Wenig Zeit? Der <em>Kurzmodus</em> taucht später nochmal auf.</small>
         </div>
 
         <div id="check-steps" style="display:none;margin-top:1.2rem">
-          <div class="premium-card" style="margin-bottom:.8rem">
+          <div class="premium-card" style="margin-bottom:.8rem" data-tilt>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
               <strong id="stepLabel">Schritt 1 von 3</strong>
               <span class="hero-micro" id="stepHint">Kurzer Eindruck reicht.</span>
@@ -403,8 +446,8 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
             </div>
           </div>
 
-          <div class="premium-card step" data-step="1" style="display:none">
-            <h3>1 · Wenn du 6 Monate ausfallen würdest – wie sicher wäre euer Einkommen?</h3>
+          <div class="premium-card step" data-step="1" style="display:none" data-tilt>
+            <h3 class="reveal-ready">1 · Wenn du 6 Monate ausfallen würdest – wie sicher wäre euer Einkommen?</h3>
             <div class="stack">
               <button class="btn small" data-value="1">Wir hätten ein echtes Problem</button>
               <button class="btn small" data-value="2">Wir würden klarkommen, aber es wäre eng</button>
@@ -412,8 +455,8 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
             </div>
           </div>
 
-          <div class="premium-card step" data-step="2" style="display:none">
-            <h3>2 · Wie gut findest du wichtige Unterlagen, wenn du sie brauchst?</h3>
+          <div class="premium-card step" data-step="2" style="display:none" data-tilt>
+            <h3 class="reveal-ready">2 · Wie gut findest du wichtige Unterlagen, wenn du sie brauchst?</h3>
             <div class="stack">
               <button class="btn small" data-value="1">Ich suche lange / finde nichts</button>
               <button class="btn small" data-value="2">Finde das Meiste direkt</button>
@@ -421,8 +464,8 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
             </div>
           </div>
 
-          <div class="premium-card step" data-step="3" style="display:none">
-            <h3>3 · „Wie wohl fühlst du dich beim Thema Zukunft &amp; Alter?“</h3>
+          <div class="premium-card step" data-step="3" style="display:none" data-tilt>
+            <h3 class="reveal-ready">3 · „Wie wohl fühlst du dich beim Thema Zukunft &amp; Alter?“</h3>
             <div class="stack">
               <button class="btn small" data-value="1">Gar nicht / unsicher</button>
               <button class="btn small" data-value="2">Teilweise – nicht sicher</button>
@@ -433,8 +476,8 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
 
         <div id="check-result" style="display:none;margin-top:1.4rem"></div>
 
-        <div class="premium-card parallax" style="margin-top:1.2rem">
-          <h3 style="margin:.1rem 0 .45rem;font-size:1.02rem;">Wenig Zeit?</h3>
+        <div class="premium-card parallax" style="margin-top:1.2rem" data-tilt>
+          <h3 style="margin:.1rem 0 .45rem;font-size:1.02rem;" class="reveal-ready">Wenig Zeit?</h3>
           <p class="hero-micro" style="margin-top:.1rem">12-Sekunden-Kurzmodus: Gefühl für <em>Jetzt · Als Nächstes · Später</em> – ohne Details.</p>
           <a href="#ampel-check" class="btn btn-ghost" id="startShort">⏱️ Kurzmodus starten</a>
         </div>
@@ -444,11 +487,11 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
     <!-- ===== SHARE ===== -->
     <section class="section fade-up" id="share" aria-labelledby="share-title">
       <div class="container">
-        <h2 id="share-title">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
+        <h2 id="share-title" class="reveal-ready">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
         <p class="hero-micro">Der Link übernimmt alles: Die Person sieht anonym die Ampel – ohne Unterlagen und ohne Verkauf.</p>
 
-        <div class="share stack parallax" id="shareBox" style="margin-top:1rem">
-          <h3 style="margin:.2rem 0 .25rem">Text zum Weitergeben</h3>
+        <div class="share stack parallax" id="shareBox" style="margin-top:1rem" data-tilt>
+          <h3 style="margin:.2rem 0 .25rem" class="reveal-ready">Text zum Weitergeben</h3>
           <p class="hero-micro" style="margin:0 0 .6rem">Kopieren oder direkt per WhatsApp senden.</p>
 
           <label class="hero-micro" style="font-size:.92rem;color:#DDE3F4" for="refName">Dein Vorname (optional):</label>
@@ -511,6 +554,15 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
   document.documentElement.classList.remove('no-js');
   document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
 
+  // Title Card in/out
+  (function(){
+    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const tc=document.getElementById('titleCard');
+    if(!tc) return;
+    setTimeout(()=> tc.classList.add('on'), 220);
+    if(!pref) setTimeout(()=> tc.classList.remove('on'), 2600);
+  })();
+
   // Fade-in
   (function(){
     const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -572,7 +624,7 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
     }catch(_){}
   })();
 
-  // ===== Ampel-Check (fixed) =====
+  // ===== Ampel-Check =====
   (function() {
     let step=1, score=0;
     const max=3;
@@ -613,19 +665,19 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
       resultBox.style.display='block';
       let html='';
       if(score<=4){
-        html=`<div class="result-card result-red">
+        html=`<div class="result-card result-red" data-tilt>
           <h3>🔴 Heute wichtig</h3>
           <p>Mindestens ein Bereich braucht heute deine Aufmerksamkeit.</p>
           ${renderCTA('red')}
         </div>`;
       } else if(score<=7){
-        html=`<div class="result-card result-yellow">
+        html=`<div class="result-card result-yellow" data-tilt>
           <h3>🟡 Bald wichtig</h3>
           <p>Ein paar Dinge stehen bald an.</p>
           ${renderCTA('yellow')}
         </div>`;
       } else {
-        html=`<div class="result-card result-green">
+        html=`<div class="result-card result-green" data-tilt>
           <h3>🟢 Passt für heute</h3>
           <p>Für heute wirkt alles entspannt.</p>
           ${renderCTA('green')}
@@ -659,7 +711,7 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
     });
   })();
 
-  // ===== Share composer =====
+  // Share composer
   (function(){
     const name = document.getElementById('refName');
     const area = document.getElementById('refText');
@@ -818,6 +870,53 @@ header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-botto
       let i=0;
       setInterval(()=>{ i=(i+1)%words.length; el.classList.remove("enter"); void el.offsetWidth; el.textContent=words[i]; el.classList.add("enter"); },2800);
     })();
+  })();
+
+  // ===== Kamera-Tilt + Tiefe =====
+  (function TiltDepth(){
+    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(pref) return;
+    const els=[...document.querySelectorAll('[data-tilt]')];
+    if(!els.length) return;
+    const body=document.body; body.classList.add('interact-blur');
+    const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+    let raf;
+    function onMove(e){
+      cancelAnimationFrame(raf);
+      raf=requestAnimationFrame(()=>{
+        const x=e.clientX||innerWidth/2, y=e.clientY||innerHeight/2;
+        els.forEach(el=>{
+          const r=el.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
+          const dx=clamp((x-cx)/r.width,-.6,.6), dy=clamp((y-cy)/r.height,-.6,.6);
+          el.style.transform=`rotateX(${dy*-6}deg) rotateY(${dx*6}deg) translateZ(0)`;
+        });
+      });
+    }
+    const onIn=()=>{ body.classList.add('on'); els.forEach(e=>e.classList.add('focus')); };
+    const onOut=()=>{ body.classList.remove('on'); els.forEach(e=>{ e.style.transform='none'; e.classList.remove('focus'); }); };
+    addEventListener('pointermove', onMove, {passive:true});
+    addEventListener('pointerenter', onIn, {passive:true});
+    addEventListener('pointerleave', onOut, {passive:true});
+  })();
+
+  // ===== Line-by-Line Reveal =====
+  (function RevealLines(){
+    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(pref) return;
+    document.querySelectorAll('h2.reveal-ready, h3.reveal-ready').forEach(h=>{
+      if(h.dataset.revealed) return;
+      const words=h.textContent.trim().split(' ');
+      h.textContent='';
+      const wrap=document.createElement('div'); wrap.className='reveal';
+      const lines=[], parts=Math.min(3, Math.max(2, Math.ceil(words.length/6)));
+      words.forEach((w,i)=>{ const idx=Math.floor(i/(words.length/parts)); (lines[idx]=lines[idx]||[]).push(w); });
+      lines.forEach(line=>{ const s=document.createElement('span'); s.textContent=line.join(' '); wrap.appendChild(s); });
+      h.appendChild(wrap); h.dataset.revealed='1';
+    });
+    const io=new IntersectionObserver(ents=>{
+      ents.forEach(e=>{ if(e.isIntersecting) e.target.querySelector('.reveal')?.classList.add('on'); });
+    },{threshold:.35});
+    document.querySelectorAll('.reveal-ready').forEach(el=>io.observe(el));
   })();
 })();
   </script>
