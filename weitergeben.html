@@ -34,8 +34,110 @@
 <link rel="preload" as="image"
   href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
   fetchpriority="high">
+<style>
+/* ====== Base / Tokens ====== */
+:root{
+  --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5; --muted-soft:#97A0B6;
+  --gold:#C8A44B; --gold2:#EADCA8; --focus:#90C2FF;
+  --line:rgba(255,255,255,.12); --glass:rgba(255,255,255,.06);
+  --container:1100px; --gutter:clamp(16px,5vw,32px); --ease:cubic-bezier(.25,.46,.25,1);
+  --shadow:0 18px 48px rgba(0,0,0,.46);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:
+  radial-gradient(1200px 600px at 15% -10%, rgba(200,164,75,.12), transparent 60%),
+  radial-gradient(900px 600px at 90% -6%, rgba(130,150,255,.10), transparent 65%),
+  linear-gradient(180deg,#04060E,#060915);
+color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
+img{display:block;max-width:100%;height:auto}
+.visually-hidden{position:absolute;left:-9999px}
 
-<link rel="stylesheet" href="styles.css" />
+/* ====== Layout ====== */
+.section{padding:clamp(28px,6vw,72px) 0}
+.wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.grid{display:grid;gap:clamp(.8rem,2.2vw,1.2rem)}
+.stack{display:flex;flex-direction:column;gap:clamp(.6rem,2vw,1rem)}
+.inline{display:flex;flex-wrap:wrap;gap:.6rem}
+.hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
+@media (min-width:1024px){.hero-grid{grid-template-columns:1.06fr .94fr;align-items:center}}
+.divider{border:none;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);margin:.2rem 0}
+
+/* ====== Type ====== */
+h1,h2,h3{margin:0 0 .8rem;font-weight:800;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,4.2vw,3rem);line-height:1.12}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem)}
+h3{font-size:clamp(1.12rem,2vw,1.26rem)}
+p{margin:0 0 .6rem;color:var(--muted)}
+.hero-micro{font-size:clamp(.96rem,1.1vw,1rem);color:var(--muted-soft)}
+.quote{opacity:.9;font-style:italic}
+
+/* ====== Chrome ====== */
+header{position:sticky;top:0;z-index:10;background:rgba(7,10,18,.9);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(1.1) blur(8px)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:.85rem var(--gutter)}
+.brand{display:flex;flex-direction:column;gap:.16rem}
+.brand-top{display:flex;align-items:center;gap:.5rem;font-weight:800}
+.brand-sub{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-soft)}
+.brand-dot{width:.8rem;height:.8rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold2),var(--gold));box-shadow:0 0 0 4px rgba(200,164,75,.22),0 0 22px rgba(200,164,75,.5)}
+
+/* ====== Cards / Buttons ====== */
+.premium-card,.story-card,.share{background:var(--glass);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.premium-card{padding:1.05rem 1.15rem}
+.story-card{padding:.9rem 1rem}
+.share{padding:1rem 1.1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:.9rem 1.4rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);font-weight:800;cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#181818;box-shadow:0 14px 34px rgba(200,164,75,.35)}
+.btn-ghost{background:rgba(255,255,255,.06)}
+.pulse{animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{filter:saturate(1)}50%{filter:saturate(1.15)}}
+
+/* ====== Hero Right: Rewards ====== */
+.reward-hero{position:relative;padding:1rem 1.1rem;border:1px solid rgba(233,211,148,.28);border-radius:16px;background:rgba(233,211,148,.06)}
+.reward-hero::after{content:"";position:absolute;inset:-1px;border-radius:18px;opacity:.0;background:radial-gradient(400px 120px at 20% -10%, rgba(234,220,168,.35), transparent 60%);transition:opacity .35s var(--ease)}
+.reward-hero.on::after{opacity:1}
+.reward-hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+.rh-item{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:.7rem .8rem}
+.rh-item span{font-weight:800}
+
+/* ====== Slider (VIP) ====== */
+.slider{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
+.slider .track{display:flex;transition:transform .4s var(--ease)}
+.slide{min-width:100%}
+.slide img{width:100%;height:auto;display:block}
+.slider-controls{display:flex;gap:.4rem;margin-top:.5rem}
+.slider-controls button{width:42px;height:42px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);cursor:pointer}
+
+/* ====== Level / Tiers ====== */
+.level{height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);overflow:hidden}
+.level #levelBar{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.tiers li{display:flex;align-items:center;gap:.6rem;margin:.3rem 0}
+.tiers li span{min-width:110px;display:inline-block}
+.tiers .bar{flex:1;height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);position:relative;overflow:hidden}
+.tiers .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+
+/* ====== Sticky CTA + Whisper ====== */
+.sticky-cta{position:fixed;left:0;right:0;bottom:16px;z-index:60;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .22s var(--ease),opacity .22s var(--ease)}
+.sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 34px rgba(0,0,0,.55)}
+@media (max-width:1023px){.sticky-cta{display:flex}}
+.whisper{pointer-events:none}
+
+/* ====== Animations ====== */
+.fade-up{opacity:0;transform:translateY(16px)}
+.fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.hero picture img{border-radius:20px;box-shadow:var(--shadow)}
+
+/* ====== Inputs ====== */
+input,textarea{width:100%;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);padding:.8rem .9rem;font:inherit}
+textarea{min-height:130px;resize:vertical}
+label{color:#DDE3F4}
+
+/* Footer */
+footer a{text-decoration:underline;text-underline-offset:3px;color:var(--text)}
+</style>
 </head>
 
 <body>
@@ -246,10 +348,12 @@
       <div>
         <h3 style="margin:.8rem 0 .4rem">10× → VIP-Erlebnis (du entscheidest)</h3>
         <div class="slider" id="vipSlider" aria-label="VIP-Erlebnis Highlights">
-          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_d56ea9b3d9314d1abb26324412dffe81~mv2.png" alt="VIP: Konzert"></div>
-          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_506ae19443064d949800ba1db5957184~mv2.png" alt="VIP: Day-Spa & Massage für 2"></div>
-          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_038389a8dd2644fe9741e60585908181~mv2.png" alt="VIP: Fußball-Lounge"></div>
-          <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_6193ac7b30f4471ea277ab6bbfe3d690~mv2.png" alt="VIP: du entscheidest"></div>
+          <div class="track" id="vipTrack">
+            <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_d56ea9b3d9314d1abb26324412dffe81~mv2.png" alt="VIP: Konzert"></div>
+            <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_506ae19443064d949800ba1db5957184~mv2.png" alt="VIP: Day-Spa & Massage für 2"></div>
+            <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_038389a8dd2644fe9741e60585908181~mv2.png" alt="VIP: Fußball-Lounge"></div>
+            <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_6193ac7b30f4471ea277ab6bbfe3d690~mv2.png" alt="VIP: du entscheidest"></div>
+          </div>
         </div>
         <div class="slider-controls">
           <button type="button" id="vipPrev" aria-label="VIP vorheriges Bild" aria-controls="vipSlider">‹</button>
@@ -323,6 +427,204 @@
      🟡 10 Sekunden – jemand hat morgen ein Gefühl für heute.
 </div>
 
-<script src="app.js" defer></script>
+<script>
+(function(){
+  "use strict";
+  document.documentElement.classList.remove('no-js');
+  document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
+
+  // Fade-in on view
+  (function(){
+    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els=[...document.querySelectorAll('.fade-up')];
+    if(pref){els.forEach(el=>el.classList.add('visible'));return;}
+    if('IntersectionObserver'in window){
+      const io=new IntersectionObserver(ents=>ents.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+      }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
+      els.forEach(el=>io.observe(el));
+    }else{els.forEach(el=>el.classList.add('visible'));}
+  })();
+
+  // Reward hero gentle glow (once)
+  (function(){
+    try{
+      const box=document.getElementById('rewardGlow');
+      if(!box) return;
+      const key='hh_reward_glow_once';
+      if(!sessionStorage.getItem(key)){
+        setTimeout(()=>box.classList.add('on'), 300);
+        setTimeout(()=>box.classList.remove('on'), 2500);
+        sessionStorage.setItem(key,'1');
+      }
+    }catch(_){}
+  })();
+
+  // Sticky CTA (mobile only)
+  (function(){
+    const el=document.getElementById('stickyCTA');
+    const hero=document.querySelector('.hero');
+    if(!el||!hero||innerWidth>=1024) return;
+    const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0';el.setAttribute('aria-hidden',v?'false':'true');};
+    if('IntersectionObserver'in window){
+      new IntersectionObserver(ents=>ents.forEach(e=>show(!e.isIntersecting)),{threshold:.35}).observe(hero);
+      addEventListener('scroll',()=>{ if(scrollY>180) show(true); },{passive:true});
+    }else{ addEventListener('scroll',()=>show(scrollY>180),{passive:true}); }
+  })();
+
+  // CTA variant rotator
+  (function(){
+    const btn=document.getElementById('shareFast');
+    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!btn) return;
+    let variants=[];
+    try{ variants=JSON.parse(btn.getAttribute('data-cta-variants')||'[]'); }catch(_){}
+    if(!variants.length || pref) return;
+    let i=0;
+    setInterval(()=>{ i=(i+1)%variants.length; btn.textContent=variants[i]; }, 3400);
+  })();
+
+  // Whisper (once per session)
+  (function(){
+    const KEY='hh_whisper_seen_wg_v1';
+    try{
+      if(sessionStorage.getItem(KEY)) return;
+      const w=document.getElementById('whisper'); if(!w) return;
+      setTimeout(()=>{ w.style.opacity='1'; w.style.transform='translateY(0)';
+        setTimeout(()=>{ w.style.opacity='0'; w.style.transform='translateY(10px)'; }, 4200);
+        sessionStorage.setItem(KEY,'1');
+      }, 16000);
+    }catch(_){}
+  })();
+
+  // VIP Slider
+  (function(){
+    const track=document.getElementById('vipTrack');
+    const prev=document.getElementById('vipPrev');
+    const next=document.getElementById('vipNext');
+    if(!track||!prev||!next) return;
+    let idx=0;
+    const slides=track.children.length;
+    function set(i){ idx=(i+slides)%slides; track.style.transform=`translateX(${idx*-100}%)`; }
+    prev.addEventListener('click',()=>set(idx-1));
+    next.addEventListener('click',()=>set(idx+1));
+    let t=setInterval(()=>set(idx+1), 4500);
+    ['mouseenter','touchstart'].forEach(ev=>track.addEventListener(ev,()=>{ clearInterval(t); },{passive:true}));
+    ['mouseleave','touchend'].forEach(ev=>track.addEventListener(ev,()=>{ t=setInterval(()=>set(idx+1),4500); },{passive:true}));
+  })();
+
+  // Share Composer (+ UTM / ref tracking)
+  (function(){
+    const name = document.getElementById('refName');
+    const area = document.getElementById('refText');
+    const wa   = document.getElementById('waShare');
+    const mail = document.getElementById('mailShare');
+    const copy = document.getElementById('copyBtn');
+    const preview = document.getElementById('waPreviewText');
+    const segBtns=[...document.querySelectorAll('.seg-btn')];
+    if(!area) return;
+
+    const KEY_REFID='hh_ref_rid_v3';
+    function randomId(len=10){ const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len); (crypto.getRandomValues?crypto.getRandomValues(u):u).forEach((_,i)=>u[i]=u[i]||Math.random()*256); return Array.from(u,x=>a[x%a.length]).join(''); }
+    function getRefId(){ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } }
+    function sanitize(n){ return n ? n.replace(/[^a-z0-9äöüÄÖÜß\- ]/gi,'').trim() : ''; }
+    function aliasSlug(n){ return (n||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+    function buildURL(){
+      // Zielseite für Empfänger ist die Hauptseite (Ampel), nicht /weitergeben
+      const base=new URL('https://heikohaerter.com/');
+      base.searchParams.set('utm_source','weitergeben');
+      base.searchParams.set('utm_medium','share');
+      base.searchParams.set('utm_campaign','check');
+      const rid=getRefId(); base.searchParams.set('rid', rid);
+      const alias=aliasSlug(sanitize(name?.value));
+      if(alias) base.searchParams.set('ref', alias+'.'+String(rid).slice(0,5));
+      return base.toString();
+    }
+    function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
+    function detectSeg(){
+      const raw=(name?.value||'').toLowerCase();
+      if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
+      if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
+      if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
+      if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
+      if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
+      return 'neutral';
+    }
+    function pick(seg){ const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; const i=Math.floor(Math.random()*pool.length); return pool[i]; }
+    function ensureURL(text){ return /\bhttps?:\/\/\S+/i.test(text) ? text : (text.trim()+' '+buildURL()); }
+    function setTextFrom(seg){ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); }
+    function plain(){ return (area.value||'').replace(/\n+/g,' ').trim(); }
+    function updateLinks(){
+      const t=ensureURL(plain());
+      wa && (wa.href='https://wa.me/?text='+encodeURIComponent(t));
+      mail && (mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t));
+      if(preview){ const cut=190; preview.textContent = t.length<=cut ? t : t.substring(0,t.lastIndexOf(' ',cut))+'…'; }
+    }
+    if(!area.value){ setTextFrom('neutral'); } updateLinks();
+    segBtns.forEach(b=> b.addEventListener('click', ()=>{ setTextFrom(b.getAttribute('data-seg')); bumpHalf(); },{passive:true}));
+    name?.addEventListener('input', ()=> setTextFrom(), {passive:true});
+    area?.addEventListener('input', updateLinks, {passive:true});
+
+    // Quick helpers for level
+    function toast(msg='OK'){ const t=document.createElement('div'); t.textContent=msg; t.className='whisper'; const base=document.getElementById('whisper'); t.style.cssText=base?base.style.cssText:t.style.cssText; document.body.appendChild(t); requestAnimationFrame(()=>{t.style.opacity='1'; t.style.transform='translateY(0)';}); setTimeout(()=>t.remove(),1600); }
+
+    document.getElementById('readyMsg')?.addEventListener('click', ()=>{ setTextFrom(); bumpHalf(); toast('Fertiger Text eingefügt ✔️'); });
+    document.getElementById('magicLine')?.addEventListener('click', ()=>{
+      const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
+      const cur=(area.value||'').trim();
+      area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
+      updateLinks(); bumpHalf();
+    });
+    document.getElementById('addPersonal')?.addEventListener('click', ()=>{
+      const alias=(name?.value||'').trim()||'Hey';
+      area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
+      updateLinks(); bumpHalf();
+    });
+    copy?.addEventListener('click', async ()=>{
+      try{ await navigator.clipboard.writeText(ensureURL(area.value)); toast('Kopiert 📋'); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
+      bumpFull();
+    });
+    document.getElementById('waShare')?.addEventListener('click', ()=> bumpFull());
+    document.getElementById('mailShare')?.addEventListener('click', ()=> bumpFull());
+    document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
+      const t=ensureURL(plain()); const url=buildURL();
+      if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); bumpFull(); }catch(_){/* ignore */} }
+    });
+
+    // Progress / tiers
+    let progress=0; // 0..100
+    const level=document.getElementById('levelBar');
+    const bars=[...document.querySelectorAll('.tiers .bar i')];
+    function renderProgress(){
+      level && (level.style.width=progress+'%');
+      const hits = Math.round(progress/10); // arbitrary mapping
+      bars.forEach(i=>{
+        const goal=Number(i.getAttribute('data-goal'))||0;
+        const pct = Math.min(100, Math.max(0, (hits/goal)*100));
+        i.style.width = pct + '%';
+      });
+    }
+    function bumpHalf(){ progress = Math.min(100, progress+8); renderProgress(); }
+    function bumpFull(){ progress = Math.min(100, progress+20); renderProgress(); }
+    renderProgress();
+
+    // Fast CTA also bumps
+    document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); bumpHalf(); });
+  })();
+
+  // Smooth anchor scroll (reduced-motion aware)
+  (function(){
+    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id=a.getAttribute('href'); if(!id||id==='#') return;
+        const t=document.querySelector(id); if(!t) return;
+        e.preventDefault();
+        t.scrollIntoView({behavior: pref?'auto':'smooth', block:'start'});
+      }, {passive:false});
+    });
+  })();
+})();
+</script>
 </body>
 </html>
