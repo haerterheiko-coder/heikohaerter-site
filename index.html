@@ -72,10 +72,10 @@
   ]}
   </script>
 
-  <!-- ===== INLINE styles.css ===== -->
+  <!-- ===== styles.css (inline) ===== -->
   <style>
     /* ============================================================
-       TOKENS / BASE
+       TOKENS / BASE — Disney-clean, Netflix-controlled
     ============================================================ */
     :root{
       --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5; --muted-soft:#8F97AA;
@@ -99,7 +99,7 @@
         linear-gradient(180deg,#04050A,#02040A 68%);
       font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
       -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-      contain:paint;line-height:1.4;
+      line-height:1.4;
     }
     a{color:inherit;text-decoration:none}
     a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
@@ -116,12 +116,20 @@
     h3{font-size:clamp(1.12rem,2vw,1.28rem)}
     p{margin:0 0 .6rem;font-size:clamp(1rem,1.2vw,1.08rem);color:var(--muted)}
     .hero-micro{font-size:clamp(.95rem,1.1vw,1rem);color:var(--muted-soft)}
-    .system-tagline{margin-top:.6rem;font-size:.98rem;color:var(--muted-soft);max-width:620px}
+    .center{text-align:center}
+    .mb-0{margin-bottom:0}.mb-6{margin-bottom:.6rem}
 
     /* ============================================================
-       CHROME / CARDS / BUTTONS
+       CHROME / CARDS / BUTTONS — Red Dot calm
     ============================================================ */
-    header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 6px 24px rgba(0,0,0,.28)}
+    header{
+      position:sticky;top:0;z-index:70;
+      background:rgba(5,8,22,.92);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      box-shadow:0 6px 24px rgba(0,0,0,.28);
+      opacity:0; pointer-events:none; transition:opacity .4s var(--ease);
+    }
+    header.show{opacity:1; pointer-events:auto}
     .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:.85rem 0}
     .brand{display:flex;flex-direction:column;gap:.18rem}
     .brand-top{display:flex;align-items:center;gap:.55rem;font-weight:800;font-size:1.02rem}
@@ -143,7 +151,6 @@
     .safety-card{border-left:4px solid var(--gold)}
     .share{padding:1rem 1.1rem}
     .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
-
     .chip{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:999px;padding:.42rem .95rem;font-size:.92rem;color:var(--muted-soft)}
     .bar{display:flex;flex-wrap:wrap;gap:.6rem}
     .story-grid{display:grid;gap:1rem;margin:1.1rem 0;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
@@ -156,7 +163,9 @@
     .fade-up{opacity:0;transform:translateY(18px)}
     .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
 
-    /* ===== Cinematic ===== */
+    /* ============================================================
+       CINEMA PACK — staged like a film
+    ============================================================ */
     .title-card{position:fixed;inset:0;z-index:190;display:grid;place-items:center;pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
     .title-card.on{opacity:1;transform:none}
     .tc-inner{text-align:center;filter:drop-shadow(0 10px 30px rgba(0,0,0,.45))}
@@ -172,37 +181,24 @@
     .cut-overlay.on{opacity:1}
     .cinema-bars{position:fixed; inset:0; pointer-events:none; z-index:60; background:linear-gradient(#000c,transparent 11%,transparent 89%,#000c)}
     .film-grain{position:fixed; inset:0; pointer-events:none; z-index:55; opacity:.14;
-      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/></svg>');
-      animation:grain 2.2s steps(2,end) infinite;}
-    @keyframes grain{to{transform:translate3d(-5%,3%,0)}}
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/></svg>')}
+    .film-grain.off{opacity:0; transition:opacity .4s var(--ease)}
 
-    .hero{padding-top:clamp(28px,4vw,64px);padding-bottom:clamp(16px,2.5vw,28px)}
-    .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
-    @media (min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center} }
-    .hero-media picture{border-radius:24px;overflow:hidden}
-    .hero-media img{width:100%;border-radius:24px;box-shadow:var(--shadow-deep);object-fit:cover;object-position:center top}
-
-    .hero-media::after{content:""; position:absolute; inset:0;
-      background: radial-gradient(circle at 20% 20%, rgba(200,164,75,.10), transparent 52%), linear-gradient(180deg, rgba(5,7,14,.20), rgba(5,7,14,.72))}
-
-    /* Tilt/Depth (activated by JS) */
-    .interact-blur::after{content:"";position:fixed;inset:-10px;z-index:1;pointer-events:none;backdrop-filter:blur(0px);transition:backdrop-filter .2s var(--ease)}
-    .interact-blur.on::after{backdrop-filter:blur(2px)}
-    [data-tilt]{will-change:transform,filter;transform-style:preserve-3d;transition:transform .15s var(--ease), filter .25s var(--ease)}
-    [data-tilt].focus{filter:drop-shadow(0 18px 38px rgba(0,0,0,.45)) saturate(1.04) contrast(1.02)}
-
-    /* Simple utilities */
-    .center{text-align:center}
-    .mt-6{margin-top:.6rem}.mt-8{margin-top:.8rem}.mb-0{margin-bottom:0}.mb-6{margin-bottom:.6rem}
-
-    /* Particles canvas */
+    /* ============================================================
+       HERO — Act I: quiet power (only Glow + Copy + CTA)
+    ============================================================ */
+    .hero{padding-top:clamp(28px,4vw,64px);padding-bottom:clamp(16px,2.5vw,28px);position:relative;overflow:hidden}
     .stage{position:absolute; inset:0; pointer-events:none; z-index:-1; overflow:hidden}
-    .particles{position:absolute; inset:0}
+    .stage .glow{position:absolute;border-radius:50%;filter:blur(52px);opacity:.46; transform:translateZ(0)}
+    .glow-a{width:50vw;height:50vw;left:-16vw;top:-14vw;background:radial-gradient(circle,rgba(200,164,75,.28),transparent 62%)}
+    .glow-b{width:56vw;height:56vw;right:-18vw;top:-16vw;background:radial-gradient(circle,rgba(136,153,255,.26),transparent 62%)}
 
-    /* ===== Print: Nur Ergebniskarte + Basis-Typo ===== */
+    /* ============================================================
+       PRINT — only the result card
+    ============================================================ */
     @media print{
       body{background:#fff;color:#000}
-      header, .title-card, .cinema-bars, .film-grain, .cut-overlay, .sticky-cta, .whisper, .hero, #zielgruppen-szenen, #prozess, #sicherheit, #before-after, #ethos-social, #final-cta, #share, footer{display:none !important}
+      header, .title-card, .cinema-bars, .film-grain, .cut-overlay, .sticky-cta, .whisper, #zielgruppen-szenen, #prozess, #sicherheit, #before-after, #ethos-social, #final-cta, #share, footer, #hero{display:none !important}
       #ampel-check{padding:0}
       #check-result{display:block !important}
       .result-card{box-shadow:none;border:1px solid #ccc;border-radius:10px}
@@ -224,90 +220,45 @@
   <!-- Cinematic Overlays -->
   <div class="cut-overlay" aria-hidden="true"></div>
   <div class="cinema-bars" aria-hidden="true"></div>
-  <div class="film-grain" aria-hidden="true"></div>
+  <div class="film-grain off" aria-hidden="true"></div>
 
   <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
 
+  <!-- Header fades in after Hero leaves viewport -->
   <header role="banner">
     <div class="container header-bar">
       <a href="#hero" class="brand" aria-label="Startseite">
         <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
         <span class="hero-micro" style="letter-spacing:.08em;text-transform:uppercase">Persönliche Finanzbegleitung</span>
       </a>
-      <button class="btn" id="dfBtn" aria-pressed="false" type="button" title="Nur das Wichtigste anzeigen">🔍 Kurzmodus</button>
+      <button class="btn btn-ghost" id="dfBtn" aria-pressed="false" type="button" title="Nur das Wichtigste anzeigen">🔍 Kurzmodus</button>
     </div>
   </header>
 
   <main id="main" role="main">
-    <!-- ===== HERO ===== -->
-    <section id="hero" class="hero section fade-up" aria-labelledby="hero-title" style="position:relative;overflow:hidden">
+    <!-- ===== ACT I: HERO (single primary effect) ===== -->
+    <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
       <div class="stage" aria-hidden="true">
-        <canvas id="particles" class="particles"></canvas>
+        <div class="glow glow-a"></div>
+        <div class="glow glow-b"></div>
       </div>
-
-      <div class="container hero-grid">
+      <div class="container">
         <div class="stack">
-          <p class="hero-micro" style="text-transform:uppercase;letter-spacing:.14em;opacity:.9">
-            2 Minuten. 3 Fragen. Deine Finanz-Ampel: Grün, Gelb oder Rot.
-          </p>
-
-          <h1 id="hero-title" data-tilt>In 2 Minuten sehen, ob heute bei deinen Finanzen etwas Wichtiges fehlt.</h1>
-
-          <p class="hero-micro system-tagline">
-            Der Check ist der Einstieg in ein ruhiges Finanzsystem, das dir zeigt, was heute wichtig ist – ohne Papierkram, ohne Verkauf.
-          </p>
-
-          <p class="hero-micro">
-            Kein Überblick bei Einkommen, Gesundheit, Haftung, Zukunft, Familie? Die Ampel sortiert das – anonym & ohne Druck.
-          </p>
-
-          <div class="premium-card" data-tilt>
-            <p class="hero-micro mb-0"><strong>80 % fühlen sich nach 2 Minuten ruhiger.</strong></p>
-          </div>
-
-          <div class="bar">
-            <span class="chip">⭐ <strong>4,9</strong> | 250+ Menschen</span>
-            <span class="chip">Eltern · Paare · Selbstständige</span>
-            <span class="chip">Kein Verkauf · 100 % anonym</span>
-          </div>
-
-          <div class="stack">
-            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">⚡ „2-Minuten-Check starten“</a>
-            <button class="btn btn-ghost" id="previewToggle" type="button" aria-controls="heroPreview" aria-expanded="false">Ergebnis-Vorschau ansehen</button>
-            <small class="hero-micro">Anonym · keine Daten · kein Verkauf</small>
-          </div>
-
-          <div id="heroPreview" class="grid auto-grid" style="display:none">
-            <div class="result-card" data-tilt>
-              <h3>🟢 Ampel-Beispiel</h3>
-              <p class="hero-micro">Passt für heute · Als Nächstes: ruhig planen.</p>
-            </div>
-            <div class="result-card" data-tilt>
-              <h3>🟡 Ampel-Beispiel</h3>
-              <p class="hero-micro">Bald wichtig · Als Nächstes angehen.</p>
-            </div>
-            <div class="result-card" data-tilt>
-              <h3>🔴 Ampel-Beispiel</h3>
-              <p class="hero-micro">Heute wichtig · Kurz priorisieren.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="stack">
-          <picture class="hero-media" data-tilt>
-            <img
-              src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200"
-              alt="2-Minuten-Check ohne Papierkram"
-              width="1200" height="900" loading="eager" fetchpriority="high" decoding="async" />
-          </picture>
+          <h1 id="hero-title">
+            Es gibt diesen Moment,<br>
+            in dem man still denkt:<br>
+            <em>Da fehlt noch etwas.</em>
+          </h1>
+          <p class="hero-micro">Kein Drama. Nur kurz einordnen.</p>
+          <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">2 Minuten ansehen</a>
         </div>
       </div>
     </section>
 
-    <!-- ===== ZIELGRUPPEN ===== -->
+    <!-- ===== ACT II: REASONS / SCENES ===== -->
     <section id="zielgruppen-szenen" class="section fade-up" aria-labelledby="tg-h">
       <div class="container stack">
-        <div class="premium-card" aria-labelledby="tg-h" data-tilt>
+        <div class="premium-card">
           <h2 id="tg-h">Das hilft dir, wenn du …</h2>
           <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.2rem">
             <li>• keine Zeit hast, dich zu kümmern</li>
@@ -319,15 +270,15 @@
         </div>
 
         <div class="story-grid" aria-label="Mini-Szenen">
-          <div class="story-card" data-tilt>
+          <div class="story-card">
             <p class="hero-micro"><strong>👨‍👩‍👧 Szene Eltern:</strong><br>
               „22:47 – Kinder schlafen. Wieder dieses Gefühl: ‚Wir müssten das mal klären…‘ Die Ampel zeigt dir sofort, was heute wirklich wichtig ist.“</p>
           </div>
-          <div class="story-card" data-tilt>
+          <div class="story-card">
             <p class="hero-micro"><strong>💬 Szene Paare:</strong><br>
               „Ihr wollt Entscheidungen nicht blind treffen? Die Ampel zeigt klar: Jetzt · Als Nächstes · Später.“</p>
           </div>
-          <div class="story-card" data-tilt>
+          <div class="story-card">
             <p class="hero-micro"><strong>💼 Szene Selbstständige:</strong><br>
               „Ausfall wäre ein echtes Risiko. Die Ampel zeigt dir in 2 Minuten, wo du heute verwundbar bist.“</p>
           </div>
@@ -335,14 +286,14 @@
       </div>
     </section>
 
-    <!-- ===== PROZESS ===== -->
+    <!-- ===== ACT III: PROCESS & SAFETY ===== -->
     <section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
       <div class="container">
         <h2 id="prozess-h">So läuft der Check</h2>
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:.8rem">
-          <div class="premium-card" data-tilt><h3>Kurz antworten (ca. 2 Minuten)</h3></div>
-          <div class="premium-card" data-tilt><h3>Deine Ampel sehen</h3></div>
-          <div class="premium-card" data-tilt>
+          <div class="premium-card"><h3>Kurz antworten (ca. 2 Minuten)</h3></div>
+          <div class="premium-card"><h3>Deine Ampel sehen</h3></div>
+          <div class="premium-card">
             <h3>In Ruhe entscheiden</h3>
             <p class="hero-micro" style="margin-top:.4rem">
               Du entscheidest in Ruhe, ob du etwas ändern möchtest oder einfach nur Klarheit mitnimmst.
@@ -352,11 +303,10 @@
       </div>
     </section>
 
-    <!-- ===== SICHERHEIT ===== -->
     <section id="sicherheit" class="section fade-up" aria-labelledby="safe-h">
       <div class="container">
         <h2 id="safe-h">Was NICHT passiert</h2>
-        <div class="premium-card safety-card" data-tilt>
+        <div class="premium-card safety-card">
           <ul class="hero-micro" style="margin:0;padding-left:1.2rem">
             <li>❌ Kein Verkauf</li>
             <li>🚫 Keine Datenweitergabe</li>
@@ -367,12 +317,11 @@
       </div>
     </section>
 
-    <!-- ===== BEFORE/AFTER ===== -->
     <section id="before-after" class="section fade-up" aria-labelledby="ba-h">
       <div class="container">
         <h2 id="ba-h">Vorher – Nachher</h2>
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin-top:.8rem">
-          <div class="card" data-tilt>
+          <div class="card">
             <h3>Vorher</h3>
             <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
               <li>„Ich hoffe, dass alles passt…“</li>
@@ -380,7 +329,7 @@
               <li>„Ich schiebe es vor mir her.“</li>
             </ul>
           </div>
-          <div class="card" data-tilt>
+          <div class="card">
             <h3>Nachher</h3>
             <ul class="hero-micro" style="margin:.2rem 0 0;padding-left:1.1rem">
               <li>„Ich weiß, was heute wichtig ist.“</li>
@@ -389,17 +338,16 @@
             </ul>
           </div>
         </div>
-        <div class="premium-card" style="margin-top:1.1rem" data-tilt>
+        <div class="premium-card" style="margin-top:1.1rem">
           <p class="hero-micro mb-0"><strong>Zero-Risk:</strong> Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.</p>
         </div>
       </div>
     </section>
 
-    <!-- ===== ETHOS ===== -->
     <section id="ethos-social" class="section fade-up" aria-labelledby="ethos-h">
       <div class="container stack">
         <h2 id="ethos-h">Wer ich bin</h2>
-        <div class="premium-card" data-tilt>
+        <div class="premium-card">
           <p class="hero-micro mb-0">
             „Ich bin Heiko. Ich habe diese Ampel gebaut, weil ich selbst diese 2-Stunden-Beratungen gehasst habe – voller Tarife, Jargon und Verkaufsdruck.
             Heute dauert Orientierung 2 Minuten – ruhig, verständlich und ohne Verkauf.“
@@ -408,7 +356,7 @@
       </div>
     </section>
 
-    <!-- ===== CTA ===== -->
+    <!-- ===== ACT IV: CTA ===== -->
     <section class="section fade-up" id="final-cta">
       <div class="container center" style="max-width:720px">
         <h2 class="mb-6">In 2 Minuten weniger Unsicherheit. Starte jetzt.</h2>
@@ -417,7 +365,7 @@
       </div>
     </section>
 
-    <!-- ===== CHECK ===== -->
+    <!-- ===== ACT V: CHECK (App) ===== -->
     <section id="ampel-check" class="section fade-up" aria-labelledby="check-h">
       <div class="container" style="max-width:720px">
         <div class="stack" id="check-start">
@@ -428,7 +376,7 @@
         </div>
 
         <div id="check-steps" style="display:none;margin-top:1.2rem">
-          <div class="premium-card" style="margin-bottom:.8rem" data-tilt>
+          <div class="premium-card" style="margin-bottom:.8rem">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
               <strong id="stepLabel">Schritt 1 von 3</strong>
               <span class="hero-micro" id="stepHint">Kurzer Eindruck reicht.</span>
@@ -438,7 +386,7 @@
             </div>
           </div>
 
-          <div class="premium-card step" data-step="1" style="display:none" data-tilt>
+          <div class="premium-card step" data-step="1" style="display:none">
             <h3>1 · Wenn du 6 Monate ausfallen würdest – wie sicher wäre euer Einkommen?</h3>
             <div class="stack">
               <button class="btn small" data-value="1">Wir hätten ein echtes Problem</button>
@@ -447,7 +395,7 @@
             </div>
           </div>
 
-          <div class="premium-card step" data-step="2" style="display:none" data-tilt>
+          <div class="premium-card step" data-step="2" style="display:none">
             <h3>2 · Wie gut findest du wichtige Unterlagen, wenn du sie brauchst?</h3>
             <div class="stack">
               <button class="btn small" data-value="1">Ich suche lange / finde nichts</button>
@@ -456,7 +404,7 @@
             </div>
           </div>
 
-          <div class="premium-card step" data-step="3" style="display:none" data-tilt>
+          <div class="premium-card step" data-step="3" style="display:none">
             <h3>3 · „Wie wohl fühlst du dich beim Thema Zukunft &amp; Alter?“</h3>
             <div class="stack">
               <button class="btn small" data-value="1">Gar nicht / unsicher</button>
@@ -470,13 +418,13 @@
       </div>
     </section>
 
-    <!-- ===== SHARE ===== -->
+    <!-- ===== ACT VI: SHARE (only after result) ===== -->
     <section class="section fade-up" id="share" aria-labelledby="share-title">
       <div class="container">
         <h2 id="share-title">Einfach weitergeben – ohne etwas erklären zu müssen</h2>
         <p class="hero-micro">Der Link übernimmt alles: Die Person sieht anonym die Ampel – ohne Unterlagen und ohne Verkauf.</p>
 
-        <div class="share stack" id="shareBox" style="margin-top:1rem" data-tilt>
+        <div class="share stack" id="shareBox" style="margin-top:1rem">
           <h3 style="margin:.2rem 0 .25rem">Text zum Weitergeben</h3>
           <p class="hero-micro mb-6">Kopieren oder direkt per WhatsApp senden.</p>
 
@@ -551,14 +499,14 @@
     </div>
   </noscript>
 
-  <!-- ===== INLINE app.js ===== -->
+  <!-- ===== app.js (inline) ===== -->
   <script>
   (function(){
     "use strict";
     document.documentElement.classList.remove('no-js');
     document.querySelectorAll('.js-year-now').forEach(el=> el.textContent=new Date().getFullYear());
 
-    // Title Card
+    // Title Card in/out
     (function(){
       const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
       const tc=document.getElementById('titleCard');
@@ -567,7 +515,7 @@
       if(!pref) setTimeout(()=> tc.classList.remove('on'), 2600);
     })();
 
-    // Fade-in
+    // Fade-in scenes
     (function(){
       const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
       const els=[...document.querySelectorAll('.fade-up')];
@@ -580,10 +528,23 @@
       }else{els.forEach(el=>el.classList.add('visible'));}
     })();
 
+    // Header appears after leaving hero; Film-grain fades in then
+    (function(){
+      const hero=document.getElementById('hero');
+      const header=document.querySelector('header');
+      const grain=document.querySelector('.film-grain');
+      if(!hero || !header || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver((ents)=>{
+        const inView = ents[0].isIntersecting;
+        header.classList.toggle('show', !inView);
+        grain && grain.classList.toggle('off', inView);
+      },{threshold:.2}).observe(hero);
+    })();
+
     // Sticky CTA (mobile)
     (function(){
       const el=document.getElementById('stickyCTA');
-      const hero=document.querySelector('.hero');
+      const hero=document.getElementById('hero');
       if(!el||!hero) return;
       if(innerWidth>=980) return;
       const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0';el.setAttribute('aria-hidden',v?'false':'true');};
@@ -593,7 +554,7 @@
       }else{ addEventListener('scroll',()=>show(scrollY>180),{passive:true}); }
     })();
 
-    // Kurzmodus (blendet opt. Sektionen aus)
+    // Kurzmodus (hides optional sections; interface, not cinema)
     (function(){
       const btn=document.getElementById('dfBtn'); if(!btn) return;
       const keep=new Set(['hero','ethos-social','stickyCTA','share','ampel-check']);
@@ -608,24 +569,7 @@
       window.setKurzmodus=set;
     })();
 
-    // Ergebnis-Vorschau Toggle (mit ARIA)
-    (function(){
-      const btn=document.getElementById('previewToggle');
-      const box=document.getElementById('heroPreview');
-      if(btn && box){
-        const toggle=()=>{
-          const open = box.style.display==='none';
-          box.style.display = open ? 'grid' : 'none';
-          btn.setAttribute('aria-expanded', String(open));
-          btn.textContent = open ? 'Vorschau ausblenden' : 'Ergebnis-Vorschau ansehen';
-        };
-        box.style.display='none';
-        btn.setAttribute('aria-expanded','false');
-        btn.addEventListener('click',toggle);
-      }
-    })();
-
-    // Whisper (once)
+    // Whisper (once per session)
     (function(){
       const KEY='hh_whisper_seen_v4';
       try{
@@ -638,7 +582,7 @@
       }catch(_){}
     })();
 
-    // ===== Ampel-Check =====
+    // Ampel-Check
     (function() {
       let step=1, score=0;
       const max=3;
@@ -688,7 +632,7 @@
         stepsWrap.style.display='none';
         resultBox.style.display='block';
         let color = score<=4 ? 'red' : score<=7 ? 'yellow' : 'green';
-        const html = `<div class="result-card" data-tilt>
+        const html = `<div class="result-card">
           <h3>${color==='red'?'🔴 Heute wichtig':color==='yellow'?'🟡 Bald wichtig':'🟢 Passt für heute'}</h3>
           <p class="hero-micro">Deine Empfehlungen:</p>
           ${recommendations(color)}
@@ -698,7 +642,6 @@
         resultBox.innerHTML=html;
         resultBox.scrollIntoView({behavior:'smooth',block:'start'});
 
-        // Warum: sofortige Mitnahme ohne E-Mail – senkt Friktion
         document.getElementById('exportPDF')?.addEventListener('click', ()=> window.print());
       }
       function start(){
@@ -720,7 +663,7 @@
       });
     })();
 
-    // Share composer
+    // Share composer (appears after the result in DOM order)
     (function(){
       const $ = sel => document.querySelector(sel);
       const name = $('#refName');
@@ -813,7 +756,7 @@
       });
     })();
 
-    // Cinematic Scroll
+    // Cinematic Scroll (cut overlay)
     (function(){
       const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
       const cut = document.querySelector(".cut-overlay");
@@ -834,11 +777,13 @@
       });
     })();
 
-    // Parallax + Particles (PRM-aware)
+    // Parallax & Tilt — staged: never in Hero
     (function initParallax(){
       const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
       if(prefersReduced) return;
-      const cards=document.querySelectorAll("[data-tilt]");
+      const cards = Array.from(document.querySelectorAll("[data-tilt]"))
+        .filter(el => !el.closest('#hero'));
+      if(!cards.length) return;
       let raf;
       const onScroll=()=>{
         cancelAnimationFrame(raf);
@@ -851,37 +796,12 @@
       };
       addEventListener("scroll", onScroll, {passive:true}); onScroll();
     })();
-
-    (function initParticles(){
-      const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const canvas=document.getElementById("particles");
-      if(!canvas || prefersReduced) return;
-      const ctx=canvas.getContext("2d"); const DPR=Math.min(devicePixelRatio||1,2);
-      let W=1,H=1,pts=[];
-      function resize(){
-        const b=canvas.getBoundingClientRect();
-        canvas.width=Math.max(1, Math.floor(b.width*DPR));
-        canvas.height=Math.max(1, Math.floor(b.height*DPR));
-        ctx.setTransform(DPR,0,0,DPR,0,0);
-        W=b.width; H=b.height;
-        pts=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,s:.2+Math.random()}));
-      }
-      function draw(){
-        ctx.clearRect(0,0,W,H);
-        ctx.fillStyle="rgba(233,211,148,.28)";
-        pts.forEach(p=>{ p.y+=p.s*.25; if(p.y>H) p.y=-10; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); });
-        requestAnimationFrame(draw);
-      }
-      resize(); addEventListener("resize", resize, {passive:true}); draw();
-    })();
-
-    // TiltDepth interaction
     (function TiltDepth(){
       const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
       if(pref) return;
-      const els=[...document.querySelectorAll('[data-tilt]')];
+      const els = Array.from(document.querySelectorAll('[data-tilt]'))
+        .filter(el => !el.closest('#hero'));
       if(!els.length) return;
-      const body=document.body; body.classList.add('interact-blur');
       const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
       let raf;
       function onMove(e){
