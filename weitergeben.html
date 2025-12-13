@@ -4,66 +4,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#05070E" />
+
   <title>2 Minuten – ein ruhiger Blick für Menschen, die du magst</title>
-  <meta name="description" content="Ein kurzer, neutraler 2-Minuten-Blick. Anonym. Ohne Unterlagen. Ohne Verkauf. Weitergeben dauert wenige Sekunden – ohne Druck." />
+  <meta name="description" content="Ein kurzer, neutraler 2-Minuten-Blick. Anonym. Ohne Unterlagen. Ohne Verkauf. Weitergeben dauert wenige Sekunden – ohne Druck.">
+  <link rel="canonical" href="https://heikohaerter.com/weitergeben.html" />
+
+  <!-- OG -->
+  <meta property="og:site_name" content="Heiko Haerter">
+  <meta property="og:title" content="2 Minuten – ein ruhiger Blick">
+  <meta property="og:description" content="Anonym. Ohne Druck. Ohne Nachfassen. Ein kurzer Moment Ordnung für den Kopf.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://heikohaerter.com/weitergeben.html">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="stylesheet" href="./styles.css" />
   <noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
 </head>
-<body class="godmode">
-<main>
 
-<section class="hero section fade-up">
-  <div class="wrap hero-grid">
-    <div class="stack">
-      <p class="hero-micro">Du schickst nur einen Link. Mehr musst du nicht tun.</p>
-      <h1>Viele tragen etwas mit sich herum, das sie „eigentlich mal klären müssten“. Du schenkst jemandem einen ruhigen Moment – ohne Gespräch, ohne Verpflichtung.</h1>
-      <ul class="hero-micro list">
-        <li>2 Minuten – klare Ampel: stabil · wackelig · heute wichtig</li>
+<body class="godmode">
+<a href="#content" class="skip">Zum Inhalt springen</a>
+
+<!-- Cinematic -->
+<div class="cut-overlay" aria-hidden="true"></div>
+<div class="cinema-bars" aria-hidden="true"></div>
+<div class="film-grain" aria-hidden="true"></div>
+
+<main id="content">
+
+  <!-- HERO -->
+  <section class="slide hero hero-share fade-up" aria-labelledby="t-hero">
+    <div class="inner">
+      <div class="opening-shot" aria-hidden="true"><span class="breath-line"></span></div>
+
+      <p class="eyebrow">Du schickst nur einen Link – mehr nicht</p>
+      <h1 id="t-hero" class="kinetic">
+        Viele tragen etwas mit sich herum, das sie „eigentlich mal klären müssten“. <br>
+        Du schenkst jemanden einen ruhigen Moment – ohne Gespräch, ohne Verpflichtung.
+      </h1>
+
+      <ul class="ticks">
+        <li>2 Minuten · klare Ampel: stabil · wackelig · heute wichtig</li>
         <li>anonym · ohne Unterlagen · ohne Verkauf</li>
         <li>wenn es nichts bringt: einfach ignorieren</li>
       </ul>
-      <div class="premium-card"><p class="hero-micro m-0"><strong>Nur Orientierung. Kein Kontakt. Kein Nachfassen. Kein Druck.</strong></p></div>
-      <a href="#share" class="btn btn-primary">✨ In wenigen Sekunden weitergeben</a>
-    </div>
-  </div>
-</section>
 
-<section class="section fade-up" id="share">
-  <div class="wrap stack">
-    <h3>Text zum Weitergeben</h3>
-    <p class="hero-micro">Neutral formuliert. Ohne Erwartung. Du kannst ihn jederzeit anpassen.</p>
+      <div class="premium-card">
+        <p class="micro" style="margin:0"><strong>Nur Orientierung. Kein Kontakt. Kein Nachfassen. Kein Druck.</strong></p>
+      </div>
 
-    <label class="hero-micro" for="categorySelect">Variante</label>
-    <select id="categorySelect">
-      <option value="neutral">Neutral</option>
-      <option value="eltern">Eltern</option>
-      <option value="paare">Paare</option>
-      <option value="selbst">Selbstständige</option>
-      <option value="freunde">Freunde</option>
-      <option value="skeptiker">Skeptiker</option>
-      <option value="handwerk">Handwerk</option>
-      <option value="direkt">Direkt</option>
-    </select>
-
-    <textarea id="referralOutput" rows="6" spellcheck="false"></textarea>
-
-    <div class="inline">
-      <button id="copyReferral" class="btn btn-ghost">📋 Text kopieren</button>
-      <button id="nativeShare" class="btn btn-ghost">📲 Teilen</button>
+      <div class="cta">
+        <a class="btn btn-primary" href="#share">✨ In wenigen Sekunden weitergeben</a>
+        <span class="trust">Hinweis: Weitergabe erfolgt über externe Dienste (z. B. WhatsApp).</span>
+      </div>
     </div>
 
-    <canvas id="qrCanvas" width="220" height="220" aria-label="QR zum Link"></canvas>
-    <p id="personalLinkInfo" class="hero-micro"></p>
-    <p id="shareFeedback" class="hero-micro" aria-live="polite"></p>
+    <div class="stage" aria-hidden="true">
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+      <canvas id="particles" class="particles"></canvas>
+    </div>
+  </section>
 
-    <p class="hero-micro">Wenn es für jemanden nicht passt, ist das völlig okay.</p>
-  </div>
-</section>
+  <!-- SHARE -->
+  <section id="share" class="slide fade-up" aria-labelledby="t-share">
+    <div class="inner narrow">
+      <h2 id="t-share">Text zum Weitergeben</h2>
+      <p class="micro">Neutral formuliert. Ohne Erwartung. Du kannst ihn jederzeit anpassen.</p>
+
+      <label class="micro" for="categorySelect">Variante</label>
+      <select id="categorySelect" class="input">
+        <option value="neutral">Neutral</option>
+        <option value="eltern">Eltern</option>
+        <option value="paare">Paare</option>
+        <option value="selbst">Selbstständige</option>
+        <option value="freunde">Freunde</option>
+        <option value="skeptiker">Skeptiker</option>
+        <option value="handwerk">Handwerk</option>
+        <option value="direkt">Direkt</option>
+      </select>
+
+      <label class="micro" for="referralOutput">Dein Text</label>
+      <textarea id="referralOutput" class="input" rows="6" spellcheck="false"></textarea>
+
+      <div class="cta-row" style="margin-top:.5rem">
+        <button id="copyReferral" class="btn btn-ghost">📋 Text kopieren</button>
+        <button id="nativeShare" class="btn btn-ghost">📲 Teilen</button>
+        <button id="qrMake" class="btn">🧾 QR erzeugen</button>
+      </div>
+
+      <div class="qr-wrap">
+        <canvas id="qrCanvas" width="220" height="220" aria-label="QR zum Link"></canvas>
+        <div class="qr-actions">
+          <button id="qrDownload" class="btn" disabled>⬇️ QR speichern</button>
+          <span id="qrNote" class="micro"></span>
+        </div>
+      </div>
+
+      <p id="personalLinkInfo" class="micro"></p>
+      <p id="shareFeedback" class="micro" aria-live="polite"></p>
+    </div>
+  </section>
 
 </main>
+
+<footer class="fade-up" role="contentinfo">
+  <div class="inner narrow" style="text-align:center">
+    <p class="micro">
+      © <span id="yNow"></span> Heiko Haerter ·
+      <a href="/impressum">Impressum</a> ·
+      <a href="/datenschutz">Datenschutz</a>
+    </p>
+    <p class="micro" style="opacity:.82">Hinweis: Weitergabe über externe Dienste (z. B. WhatsApp). Es gelten deren Datenschutz-Bestimmungen.</p>
+  </div>
+</footer>
+
 <script src="./referral.js" defer></script>
 <script src="./app.js" defer></script>
 </body>
