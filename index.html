@@ -1,4 +1,3 @@
-<!-- /index.html -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -8,10 +7,10 @@
   <meta name="theme-color" content="#05070E" />
 
   <title>2 Minuten – zeigt dir, was heute wirklich wichtig ist</title>
-  <meta name="description" content="Cinematic Scrollytelling. 2 Minuten. 3 Fragen. Kein Verkauf. Eine klare Einordnung für deinen Kopf.">
+  <meta name="description" content="Cinematic Scrollytelling. 2 Minuten. 3 Fragen. Kein Verkauf. Ruhige Klarheit für deinen Kopf.">
   <link rel="canonical" href="https://heikohaerter.com" />
 
-  <!-- Open Graph / Twitter -->
+  <!-- Open Graph -->
   <meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung">
   <meta property="og:title" content="2 Minuten – zeigt sofort, was heute wichtig ist.">
   <meta property="og:description" content="Ruhiger 2-Minuten-Blick – anonym, ohne Unterlagen, ohne Verkauf.">
@@ -21,19 +20,22 @@
   <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- LCP image preload -->
+  <!-- LCP preload -->
   <link rel="preload" as="image"
         href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
-        imagesrcset="
-          https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=480 480w,
-          https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=720 720w,
-          https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200 1200w"
-        imagesizes="(min-width:1024px) 52vw, 92vw"
         fetchpriority="high">
 
-  <!-- JSON-LD Person -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Heiko Haerter","jobTitle":"Finanzbegleiter","url":"https://heikohaerter.com","image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png","areaServed":"Deutschland"}
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Heiko Haerter",
+    "jobTitle":"Finanzbegleiter",
+    "url":"https://heikohaerter.com",
+    "image":"https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png",
+    "areaServed":"Deutschland"
+  }
   </script>
 
   <link rel="stylesheet" href="./styles.css" />
@@ -43,203 +45,160 @@
 <body class="godmode">
 <a href="#slides" class="skip">Zum Inhalt springen</a>
 
-<!-- Cinematic cut overlay -->
-<div class="cut-overlay" aria-hidden="true"></div>
+<!-- Cinematic overlays -->
+<div class="cut-overlay"></div>
+<div class="cinema-bars"></div>
+<div class="film-grain"></div>
 
-<!-- CINEMATIC LAYERS -->
-<div class="cinema-bars" aria-hidden="true"></div>
-<div class="film-grain" aria-hidden="true"></div>
-
-<!-- PROGRESS + BULLETS -->
-<div id="progress" aria-hidden="true"><span></span></div>
+<!-- Progress + bullets -->
+<div id="progress"><span></span></div>
 <nav id="bullets" aria-label="Navigation"></nav>
 
-<main id="slides" class="slides" tabindex="0">
+<main id="slides" class="slides">
 
-  <!-- ACT I — OPENING -->
-  <section class="slide hero fade-up" data-beat="1" aria-labelledby="t1">
-    <div class="inner">
+<!-- ACT I — OPENING -->
+<section class="slide hero fade-up" id="b1">
+  <div class="inner">
+    <div class="opening-shot"><span class="breath-line"></span></div>
 
-      <!-- Opening Shot -->
-      <div class="opening-shot" aria-hidden="true"><span class="breath-line"></span></div>
+    <p class="eyebrow">Kein Gespräch · Keine Entscheidung · Nur Klarheit</p>
 
-      <p class="eyebrow">Kein Gespräch · Keine Entscheidung · Nur Klarheit</p>
+    <h1 class="kinetic">
+      Es gibt diesen Moment,<br>
+      in dem man denkt:
+      <em><span class="swap" data-words='["Da fehlt etwas.","Ich verliere den Überblick.","Ich schieb das vor mir her."]'>Da fehlt etwas.</span></em>
+    </h1>
 
-      <h1 id="t1" class="kinetic">
-        Es gibt diesen Moment,<br>
-        in dem man denkt:
-        <em><span class="swap" data-words='["Da fehlt etwas.","Ich verliere den Überblick.","Ich schieb das vor mir her."]'>Da fehlt etwas.</span></em>
-      </h1>
+    <p class="lead">
+      Kein Drama.<br>
+      Nur dieses leise Gefühl, dass etwas Wichtiges
+      gerade nicht sauber sortiert ist.
+    </p>
 
-      <p class="lead">
-        Kein Drama.<br>
-        Nur dieses leise Gefühl, dass etwas Wichtiges
-        gerade nicht sauber sortiert ist.
-      </p>
+    <ul class="chips">
+      <li>⭐ 4,9 · 250+ Menschen</li>
+      <li>Eltern · Paare · Selbstständige</li>
+      <li>Kein Verkauf</li>
+      <li>100 % anonym</li>
+    </ul>
 
-      <ul class="chips">
-        <li>⭐ 4,9 · 250+ Menschen</li>
-        <li>Eltern · Paare · Selbstständige</li>
-        <li>Kein Verkauf</li>
-        <li>100 % anonym</li>
-      </ul>
+    <div class="cta">
+      <a class="btn btn-primary" href="#b2">Weiter</a>
+      <span class="trust">Anonym · Ohne Daten · Ohne Nachfassen</span>
+    </div>
+  </div>
 
-      <div class="cta">
-        <a class="btn btn-primary" href="#b2">Weiter</a>
-        <span class="trust">Anonym · Ohne Daten · Ohne Nachfassen</span>
-      </div>
+  <div class="hero-media">
+    <video class="hero-video" muted playsinline autoplay loop preload="metadata"
+      poster="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
+      <source src="https://video.wixstatic.com/video/4e46cf_6fc6da8b5b26415db4354bd72bd5f8f4/480p/mp4/file.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="stage">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <canvas id="particles"></canvas>
+  </div>
+</section>
+
+<!-- ACT II — REALITY -->
+<section class="slide fade-up" id="b2">
+  <div class="inner">
+    <h2>Der Gedanke taucht immer gleich auf</h2>
+    <div class="cards">
+      <article class="card parallax">
+        <h3>22:47 · Eltern</h3>
+        <p>Die Kinder schlafen. „Haben wir eigentlich alles geregelt?“</p>
+      </article>
+      <article class="card parallax">
+        <h3>Paare</h3>
+        <p>Zukunft. Verantwortung. Entscheidungen.</p>
+      </article>
+      <article class="card parallax">
+        <h3>Selbstständige</h3>
+        <p>Wenn du ausfällst – trägt dein System dich?</p>
+      </article>
+    </div>
+    <div class="cta"><a class="btn" href="#b3">Weiter</a></div>
+  </div>
+</section>
+
+<!-- ACT III — INSIGHT -->
+<section class="slide fade-up" id="b3">
+  <div class="inner narrow">
+    <h2>Ungewissheit ist lauter als schlechte Nachrichten</h2>
+    <p class="micro">Klarheit beruhigt. Sofort.</p>
+
+    <ul class="ticks">
+      <li>Ein Gedanke gleichzeitig</li>
+      <li>Kein Rechtfertigen</li>
+      <li>Ein klares Signal</li>
+    </ul>
+
+    <div class="cta">
+      <button class="btn btn-primary" data-earn-ampel aria-expanded="false">
+        Zeig mir die Einordnung
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ACT IV — REVEAL -->
+<section class="slide reveal fade-up" id="b4" aria-hidden="true">
+  <div class="inner narrow">
+    <h2>Nicht alles ist dringend.<br>Aber manches ist heute wichtig.</h2>
+
+    <div class="ampel-preview">
+      <span class="dot green"></span>
+      <span class="dot yellow"></span>
+      <span class="dot red"></span>
     </div>
 
-    <!-- Hero Media -->
-    <div class="hero-media" aria-hidden="true">
-      <video class="hero-video" playsinline muted loop autoplay preload="metadata"
-             poster="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
-        <source src="https://video.wixstatic.com/video/4e46cf_6fc6da8b5b26415db4354bd72bd5f8f4/480p/mp4/file.mp4" type="video/mp4">
-      </video>
+    <div class="cta">
+      <a class="btn btn-primary" href="#b5">2 Minuten Klarheit</a>
     </div>
+  </div>
+</section>
 
-    <div class="stage" aria-hidden="true">
-      <div class="glow glow-a"></div>
-      <div class="glow glow-b"></div>
-      <canvas id="particles" class="particles"></canvas>
+<!-- ACT V — CHECK -->
+<section class="slide fade-up" id="b5">
+  <div class="inner narrow">
+    <h2>Drei Fragen. Kein Richtig. Kein Falsch.</h2>
+    <div id="check-steps"></div>
+    <div id="check-result" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- ACT VI — PERSON -->
+<section class="slide fade-up" id="b6">
+  <div class="inner narrow">
+    <p class="eyebrow">Warum es das gibt</p>
+    <h2>Ich habe diese Gespräche gehasst</h2>
+    <p class="lead">
+      Ich bin Heiko. Ich habe erlebt, wie Menschen durch Beratung eher
+      unruhiger wurden. Diese 2 Minuten existieren, damit Klarheit schneller
+      geht – ruhig, verständlich, ohne Druck.
+    </p>
+  </div>
+</section>
+
+<!-- ACT VII — AFTERGLOW -->
+<section class="slide fade-up" id="b7">
+  <div class="inner narrow" style="text-align:center">
+    <h2>Jetzt ist es eingeordnet</h2>
+    <p class="lead">Mehr war nie das Ziel.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="./weitergeben.html">Ruhig weitergeben</a>
+      <a class="btn btn-ghost" href="https://wa.me/?text=Kurz%2010%20Minuten%20sprechen">10 Minuten Ruhe</a>
     </div>
-  </section>
-
-  <!-- ACT II — REALITY -->
-  <section class="slide scene fade-up" id="b2" data-beat="2" aria-labelledby="t2">
-    <div class="inner">
-      <h2 id="t2">Der Gedanke taucht immer gleich auf</h2>
-
-      <div class="cards">
-        <article class="card parallax">
-          <h3>22:47 · Eltern</h3>
-          <p>Die Kinder schlafen. „Haben wir eigentlich alles geregelt?“</p>
-          <picture>
-            <img src="https://static.wixstatic.com/media/4e46cf_a4ddba89cb8b48e58f20432680f8abde~mv2.png"
-                 alt="Eltern – ruhiger Blick nach dem Zubettbringen"
-                 loading="lazy" decoding="async" width="1200" height="800">
-          </picture>
-        </article>
-
-        <article class="card parallax">
-          <h3>Paare</h3>
-          <p>Zukunft, Verantwortung, Entscheidungen. Nichts brennt – aber alles hängt zusammen.</p>
-          <picture>
-            <img src="https://static.wixstatic.com/media/4e46cf_a4ddba89cb8b48e58f20432680f8abde~mv2.png"
-                 alt="Paare – gemeinsam Entscheidungen treffen"
-                 loading="lazy" decoding="async" width="1200" height="800">
-          </picture>
-        </article>
-
-        <article class="card parallax">
-          <h3>Selbstständige</h3>
-          <p>Wenn du ausfällst – trägt dein System dich dann?</p>
-          <picture>
-            <img src="https://static.wixstatic.com/media/4e46cf_cfdf02af54b2430d96bf844b08d08428~mv2.png"
-                 alt="Selbstständige – Ausfallrisiko im Blick"
-                 loading="lazy" decoding="async" width="1200" height="800">
-          </picture>
-        </article>
-      </div>
-
-      <div class="cta">
-        <a class="btn" href="#bx">Weiter</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACT II.5 — EXISTENZ -->
-  <section class="slide exist fade-up" id="bx" data-beat="2.5" aria-labelledby="tx">
-    <div class="inner">
-      <h2 id="tx" class="parallax">Wenn du morgen nicht kannst</h2>
-      <p class="lead">Keine Panik. Nur Ehrlichkeit.</p>
-
-      <div class="exist-grid">
-        <article class="card parallax"><h3>Einkommen</h3><p>Kommt es weiter – oder stoppt alles mit dir?</p></article>
-        <article class="card parallax"><h3>Verantwortung</h3><p>Wer entscheidet, wenn du es nicht kannst?</p></article>
-        <article class="card parallax"><h3>Rücklagen</h3><p>Wochen? Monate? Oder Hoffnung?</p></article>
-      </div>
-
-      <picture>
-        <img class="exist-img" src="https://static.wixstatic.com/media/4e46cf_a314641973ba44aba9e40fe8134211b9~mv2.png"
-             alt="Wenn du morgen nicht kannst – ruhige Einordnung"
-             loading="lazy" decoding="async" width="1600" height="900">
-      </picture>
-
-      <p class="micro">Die meisten merken erst im Ernstfall, was wirklich fehlt.</p>
-
-      <div class="cta">
-        <a class="btn btn-primary" href="#b3">Weiter</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACT III — INSIGHT -->
-  <section class="slide why fade-up" id="b3" data-beat="3" aria-labelledby="t3">
-    <div class="inner">
-      <h2 id="t3" class="parallax">Ungewissheit ist lauter als schlechte Nachrichten</h2>
-      <p class="micro">Dein Gehirn hasst offene Schleifen. Klarheit beruhigt – sofort.</p>
-
-      <ul class="ticks">
-        <li>Ein Gedanke gleichzeitig</li>
-        <li>Kein Rechtfertigen</li>
-        <li>Ein klares Signal</li>
-      </ul>
-
-      <picture>
-        <img class="why-img" src="https://static.wixstatic.com/media/4e46cf_166412eae49949bca1880b550f6a159a~mv2.png"
-             alt="Ungewissheit – Einordnung beruhigt"
-             loading="lazy" decoding="async" width="1600" height="900">
-      </picture>
-
-      <div class="cta">
-        <button class="btn btn-primary" data-earn-ampel aria-controls="b4" aria-expanded="false">
-          Zeig mir die Einordnung
-        </button>
-        <span class="trust">Die Ampel erscheint erst jetzt.</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACT IV — REVEAL (CLS-frei) -->
-  <section class="slide reveal fade-up" id="b4" data-beat="4" aria-hidden="true" aria-labelledby="t4">
-    <div class="inner">
-      <h2 id="t4">Nicht alles ist dringend.<br>Aber manches ist heute wichtig.</h2>
-      <p class="eyebrow">Kein Urteil. Nur Orientierung.</p>
-
-      <div class="ampel-preview">
-        <span class="dot green"></span><span class="dot yellow"></span><span class="dot red"></span>
-      </div>
-
-      <div class="cta">
-        <a class="btn btn-primary" href="#b5">2 Minuten Klarheit</a>
-        <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACT V — CHECK -->
-  <section class="slide check fade-up" id="b5" data-beat="5" aria-labelledby="t5">
-    <div class="inner narrow">
-      <h2 id="t5">Drei Fragen. Keine Vorbereitung.</h2>
-      <p class="micro">Dein Bauchgefühl reicht.</p>
-
-      <div id="check-steps" class="check-steps"></div>
-      <div id="check-result" class="check-result" aria-live="polite"></div>
-
-      <p class="micro" style="margin-top:.8rem">
-        Zero-Risk: Wenn dir die Ampel nichts bringt → <strong>25 €</strong>.
-      </p>
-    </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
-<footer role="contentinfo" class="fade-up" style="padding:24px 0;text-align:center">
-  <p class="micro">
-    © <span id="yNow">2025</span> Heiko Haerter · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a>
-  </p>
-  <p class="micro" style="opacity:.8">Hinweis: Weitergabe/Teilen erfolgt über externe Dienste (z. B. WhatsApp).</p>
+<footer class="fade-up">
+  <p class="micro">© <span id="yNow"></span> Heiko Haerter · <a href="/impressum">Impressum</a></p>
 </footer>
 
 <script src="./app.js" defer></script>
