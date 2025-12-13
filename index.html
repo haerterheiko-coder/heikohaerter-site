@@ -21,6 +21,7 @@
   <meta property="og:url" content="https://heikohaerter.com" />
   <meta property="og:locale" content="de_DE" />
   <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
+  <meta property="og:image:alt" content="2-Minuten-Check – anonym, ohne Unterlagen, ohne Verkauf" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Favicons -->
@@ -197,6 +198,16 @@
     /* Particles canvas */
     .stage{position:absolute; inset:0; pointer-events:none; z-index:-1; overflow:hidden}
     .particles{position:absolute; inset:0}
+
+    /* ===== Print: Nur Ergebniskarte + Basis-Typo ===== */
+    @media print{
+      body{background:#fff;color:#000}
+      header, .title-card, .cinema-bars, .film-grain, .cut-overlay, .sticky-cta, .whisper, .hero, #zielgruppen-szenen, #prozess, #sicherheit, #before-after, #ethos-social, #final-cta, #share, footer{display:none !important}
+      #ampel-check{padding:0}
+      #check-result{display:block !important}
+      .result-card{box-shadow:none;border:1px solid #ccc;border-radius:10px}
+      .hero-micro{color:#222}
+    }
   </style>
 </head>
 <body>
@@ -262,7 +273,7 @@
 
           <div class="stack">
             <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">⚡ „2-Minuten-Check starten“</a>
-            <button class="btn btn-ghost" id="previewToggle" type="button">Ergebnis-Vorschau ansehen</button>
+            <button class="btn btn-ghost" id="previewToggle" type="button" aria-controls="heroPreview" aria-expanded="false">Ergebnis-Vorschau ansehen</button>
             <small class="hero-micro">Anonym · keine Daten · kein Verkauf</small>
           </div>
 
@@ -455,7 +466,7 @@
           </div>
         </div>
 
-        <div id="check-result" style="display:none;margin-top:1.4rem"></div>
+        <div id="check-result" style="display:none;margin-top:1.4rem" role="status" aria-live="polite"></div>
       </div>
     </section>
 
@@ -597,11 +608,21 @@
       window.setKurzmodus=set;
     })();
 
-    // Ergebnis-Vorschau Toggle
+    // Ergebnis-Vorschau Toggle (mit ARIA)
     (function(){
       const btn=document.getElementById('previewToggle');
       const box=document.getElementById('heroPreview');
-      if(btn && box){ btn.addEventListener('click',()=>{ box.style.display=box.style.display==='none'?'grid':'none'; }); }
+      if(btn && box){
+        const toggle=()=>{
+          const open = box.style.display==='none';
+          box.style.display = open ? 'grid' : 'none';
+          btn.setAttribute('aria-expanded', String(open));
+          btn.textContent = open ? 'Vorschau ausblenden' : 'Ergebnis-Vorschau ansehen';
+        };
+        box.style.display='none';
+        btn.setAttribute('aria-expanded','false');
+        btn.addEventListener('click',toggle);
+      }
     })();
 
     // Whisper (once)
@@ -666,11 +687,8 @@
       function finish(){
         stepsWrap.style.display='none';
         resultBox.style.display='block';
-        let html='', color;
-        if(score<=4){ color='red'; }
-        else if(score<=7){ color='yellow'; }
-        else { color='green'; }
-        html+=`<div class="result-card" data-tilt>
+        let color = score<=4 ? 'red' : score<=7 ? 'yellow' : 'green';
+        const html = `<div class="result-card" data-tilt>
           <h3>${color==='red'?'🔴 Heute wichtig':color==='yellow'?'🟡 Bald wichtig':'🟢 Passt für heute'}</h3>
           <p class="hero-micro">Deine Empfehlungen:</p>
           ${recommendations(color)}
@@ -680,10 +698,8 @@
         resultBox.innerHTML=html;
         resultBox.scrollIntoView({behavior:'smooth',block:'start'});
 
-        document.getElementById('exportPDF')?.addEventListener('click', ()=>{
-          // Warum: sofortige Mitnahme ohne E-Mail – senkt Friktion
-          window.print();
-        });
+        // Warum: sofortige Mitnahme ohne E-Mail – senkt Friktion
+        document.getElementById('exportPDF')?.addEventListener('click', ()=> window.print());
       }
       function start(){
         document.getElementById('check-start').style.display='none';
@@ -827,7 +843,6 @@
       const onScroll=()=>{
         cancelAnimationFrame(raf);
         raf=requestAnimationFrame(()=>{
-          const t=scrollY||0;
           cards.forEach(c=>{
             const r=c.getBoundingClientRect(); const p=(r.top/innerHeight - .5);
             c.style.transform=`translate3d(0,${p*-14}px,0)`;
