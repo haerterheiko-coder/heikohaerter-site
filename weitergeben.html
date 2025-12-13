@@ -1,630 +1,746 @@
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="dark">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="format-detection" content="telephone=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <title>2 Minuten – zeigt sofort, was heute wichtig ist.</title>
+  <meta name="description" content="Kennst du jemanden mit „Ich müsste mal…“? Link weitergeben → 2 Minuten – zeigt sofort, was heute wichtig ist. Kein Verkauf. Deine Wertschätzung (25–150 € oder VIP) zählt ab Erstgespräch. Zero-Risk: kein Vorteil → 25 €.">
+  <link rel="canonical" href="https://heikohaerter.com/weitergeben">
 
-<title>2 Minuten – zeigt sofort, was heute wichtig ist.</title>
-<meta name="description" content="Kennst du jemanden mit „Ich müsste mal…“? Link weitergeben → 2 Minuten – zeigt sofort, was heute wichtig ist. Kein Verkauf. Deine Wertschätzung (25–150 € oder VIP) zählt ab Erstgespräch. Zero-Risk: kein Vorteil → 25 €.">
-<link rel="canonical" href="https://heikohaerter.com/weitergeben">
+  <meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung">
+  <meta property="og:title" content="2 Minuten – zeigt sofort, was heute wichtig ist.">
+  <meta property="og:description" content="Ein kurzer Blick, der sofort zeigt, wo man steht. Anonym & ohne irgendetwas zu müssen. Deine Wertschätzung zählt ab Erstgespräch.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://heikohaerter.com/weitergeben">
+  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
+  <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
 
-<meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung">
-<meta property="og:title" content="2 Minuten – zeigt sofort, was heute wichtig ist.">
-<meta property="og:description" content="Ein kurzer Blick, der sofort zeigt, wo man steht. Anonym & ohne irgendetwas zu müssen. Deine Wertschätzung zählt ab Erstgespräch.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://heikohaerter.com/weitergeben">
-<meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
-<meta property="og:locale" content="de_DE">
-<meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#05070E">
 
-<link rel="icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#05070E">
+  <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
+  <link rel="preconnect" href="https://wa.me" crossorigin>
 
-<link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
-<link rel="preconnect" href="https://wa.me" crossorigin>
+  <link rel="preload" as="image"
+        href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+        fetchpriority="high">
 
-<link rel="preload" as="image"
-  href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
-  fetchpriority="high">
-<style>
-/* ====== Base / Tokens ====== */
-:root{
-  --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5; --muted-soft:#97A0B6;
-  --gold:#C8A44B; --gold2:#EADCA8; --focus:#90C2FF;
-  --line:rgba(255,255,255,.12); --glass:rgba(255,255,255,.06);
-  --container:1100px; --gutter:clamp(16px,5vw,32px); --ease:cubic-bezier(.25,.46,.25,1);
-  --shadow:0 18px 48px rgba(0,0,0,.46);
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:
-  radial-gradient(1200px 600px at 15% -10%, rgba(200,164,75,.12), transparent 60%),
-  radial-gradient(900px 600px at 90% -6%, rgba(130,150,255,.10), transparent 65%),
-  linear-gradient(180deg,#04060E,#060915);
-color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
-img{display:block;max-width:100%;height:auto}
-.visually-hidden{position:absolute;left:-9999px}
+  <style>
+    /* ====== Base / Tokens ====== */
+    :root{
+      --bg:#05070E; --bg2:#0B0F19; --text:#F1F3FA; --muted:#A8B1C5; --muted-soft:#97A0B6;
+      --gold:#C8A44B; --gold2:#EADCA8; --focus:#90C2FF;
+      --line:rgba(255,255,255,.12); --glass:rgba(255,255,255,.06);
+      --container:1100px; --gutter:clamp(16px,5vw,32px); --ease:cubic-bezier(.25,.46,.25,1);
+      --shadow:0 18px 48px rgba(0,0,0,.46);
+    }
+    *{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    body{
+      margin:0;background:
+        radial-gradient(1200px 600px at 15% -10%, rgba(200,164,75,.12), transparent 60%),
+        radial-gradient(900px 600px at 90% -6%, rgba(130,150,255,.10), transparent 65%),
+        linear-gradient(180deg,#04060E,#060915);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+      line-height:1.45;
+      -webkit-font-smoothing:antialiased
+    }
+    a{color:inherit;text-decoration:none}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
+    img{display:block;max-width:100%;height:auto}
+    .visually-hidden{position:absolute;left:-9999px}
 
-/* ====== Layout ====== */
-.section{padding:clamp(28px,6vw,72px) 0}
-.wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
-.grid{display:grid;gap:clamp(.8rem,2.2vw,1.2rem)}
-.stack{display:flex;flex-direction:column;gap:clamp(.6rem,2vw,1rem)}
-.inline{display:flex;flex-wrap:wrap;gap:.6rem}
-.hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
-@media (min-width:1024px){.hero-grid{grid-template-columns:1.06fr .94fr;align-items:center}}
-.divider{border:none;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);margin:.2rem 0}
+    /* ====== Layout ====== */
+    .section{padding:clamp(28px,6vw,72px) 0}
+    .wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+    .grid{display:grid;gap:clamp(.8rem,2.2vw,1.2rem)}
+    .stack{display:flex;flex-direction:column;gap:clamp(.6rem,2vw,1rem)}
+    .inline{display:flex;flex-wrap:wrap;gap:.6rem}
+    .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
+    @media (min-width:1024px){.hero-grid{grid-template-columns:1.06fr .94fr;align-items:center}}
+    .divider{border:none;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14),transparent);margin:.2rem 0}
+    /* small utilities (ersetzt Inline-Styles) */
+    .mt-0{margin-top:0} .mb-0{margin-bottom:0}
+    .mt-2{margin-top:.2rem} .mt-4{margin-top:.4rem} .mt-6{margin-top:.6rem} .mt-8{margin-top:.8rem}
+    .mb-2{margin-bottom:.2rem} .mb-4{margin-bottom:.4rem} .mb-6{margin-bottom:.6rem} .mb-8{margin-bottom:.8rem}
+    .pl-11{padding-left:1.1rem} .pl-12{padding-left:1.2rem}
+    .center{text-align:center}
 
-/* ====== Type ====== */
-h1,h2,h3{margin:0 0 .8rem;font-weight:800;letter-spacing:-.01em}
-h1{font-size:clamp(1.9rem,4.2vw,3rem);line-height:1.12}
-h2{font-size:clamp(1.5rem,3.2vw,2.1rem)}
-h3{font-size:clamp(1.12rem,2vw,1.26rem)}
-p{margin:0 0 .6rem;color:var(--muted)}
-.hero-micro{font-size:clamp(.96rem,1.1vw,1rem);color:var(--muted-soft)}
-.quote{opacity:.9;font-style:italic}
+    /* ====== Type ====== */
+    h1,h2,h3{margin:0 0 .8rem;font-weight:800;letter-spacing:-.01em}
+    h1{font-size:clamp(1.9rem,4.2vw,3rem);line-height:1.12}
+    h2{font-size:clamp(1.5rem,3.2vw,2.1rem)}
+    h3{font-size:clamp(1.12rem,2vw,1.26rem)}
+    p{margin:0 0 .6rem;color:var(--muted)}
+    .hero-micro{font-size:clamp(.96rem,1.1vw,1rem);color:var(--muted-soft)}
+    .quote{opacity:.9;font-style:italic}
 
-/* ====== Chrome ====== */
-header{position:sticky;top:0;z-index:10;background:rgba(7,10,18,.9);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(1.1) blur(8px)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:.85rem var(--gutter)}
-.brand{display:flex;flex-direction:column;gap:.16rem}
-.brand-top{display:flex;align-items:center;gap:.5rem;font-weight:800}
-.brand-sub{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-soft)}
-.brand-dot{width:.8rem;height:.8rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold2),var(--gold));box-shadow:0 0 0 4px rgba(200,164,75,.22),0 0 22px rgba(200,164,75,.5)}
+    /* ====== Chrome ====== */
+    header{position:sticky;top:0;z-index:10;background:rgba(7,10,18,.9);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(1.1) blur(8px)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:.85rem var(--gutter)}
+    .brand{display:flex;flex-direction:column;gap:.16rem}
+    .brand-top{display:flex;align-items:center;gap:.5rem;font-weight:800}
+    .brand-sub{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-soft)}
+    .brand-dot{width:.8rem;height:.8rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold2),var(--gold));box-shadow:0 0 0 4px rgba(200,164,75,.22),0 0 22px rgba(200,164,75,.5)}
 
-/* ====== Cards / Buttons ====== */
-.premium-card,.story-card,.share{background:var(--glass);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
-.premium-card{padding:1.05rem 1.15rem}
-.story-card{padding:.9rem 1rem}
-.share{padding:1rem 1.1rem}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:.9rem 1.4rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);font-weight:800;cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
-.btn:hover{transform:translateY(-1px)}
-.btn:active{transform:translateY(0)}
-.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#181818;box-shadow:0 14px 34px rgba(200,164,75,.35)}
-.btn-ghost{background:rgba(255,255,255,.06)}
-.pulse{animation:pulse 1.8s ease-in-out infinite}
-@keyframes pulse{0%,100%{filter:saturate(1)}50%{filter:saturate(1.15)}}
+    /* ====== Cards / Buttons ====== */
+    .premium-card,.story-card,.share{background:var(--glass);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+    .premium-card{padding:1.05rem 1.15rem}
+    .story-card{padding:.9rem 1rem}
+    .share{padding:1rem 1.1rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:.9rem 1.4rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);font-weight:800;cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#181818;box-shadow:0 14px 34px rgba(200,164,75,.35)}
+    .btn-ghost{background:rgba(255,255,255,.06)}
+    .pulse{animation:pulse 1.8s ease-in-out infinite}
+    @keyframes pulse{0%,100%{filter:saturate(1)}50%{filter:saturate(1.15)}}
 
-/* ====== Hero Right: Rewards ====== */
-.reward-hero{position:relative;padding:1rem 1.1rem;border:1px solid rgba(233,211,148,.28);border-radius:16px;background:rgba(233,211,148,.06)}
-.reward-hero::after{content:"";position:absolute;inset:-1px;border-radius:18px;opacity:.0;background:radial-gradient(400px 120px at 20% -10%, rgba(234,220,168,.35), transparent 60%);transition:opacity .35s var(--ease)}
-.reward-hero.on::after{opacity:1}
-.reward-hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
-.rh-item{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:.7rem .8rem}
-.rh-item span{font-weight:800}
+    /* ====== Hero Right: Rewards ====== */
+    .reward-hero{position:relative;padding:1rem 1.1rem;border:1px solid rgba(233,211,148,.28);border-radius:16px;background:rgba(233,211,148,.06)}
+    .reward-hero::after{content:"";position:absolute;inset:-1px;border-radius:18px;opacity:.0;background:radial-gradient(400px 120px at 20% -10%, rgba(234,220,168,.35), transparent 60%);transition:opacity .35s var(--ease)}
+    .reward-hero.on::after{opacity:1}
+    .reward-hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+    .rh-item{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:.7rem .8rem}
+    .rh-item span{font-weight:800}
 
-/* ====== Slider (VIP) ====== */
-.slider{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
-.slider .track{display:flex;transition:transform .4s var(--ease)}
-.slide{min-width:100%}
-.slide img{width:100%;height:auto;display:block}
-.slider-controls{display:flex;gap:.4rem;margin-top:.5rem}
-.slider-controls button{width:42px;height:42px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);cursor:pointer}
+    /* ====== Slider (VIP) ====== */
+    .slider{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
+    .slider .track{display:flex;transition:transform .4s var(--ease)}
+    .slide{min-width:100%}
+    .slide img{width:100%;height:auto;display:block}
+    .slider-controls{display:flex;gap:.4rem;margin-top:.5rem}
+    .slider-controls button{width:42px;height:42px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);cursor:pointer}
 
-/* ====== Level / Tiers ====== */
-.level{height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);overflow:hidden}
-.level #levelBar{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2))}
-.tiers li{display:flex;align-items:center;gap:.6rem;margin:.3rem 0}
-.tiers li span{min-width:110px;display:inline-block}
-.tiers .bar{flex:1;height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);position:relative;overflow:hidden}
-.tiers .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+    /* ====== Level / Tiers ====== */
+    .level{height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);overflow:hidden}
+    .level #levelBar{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+    .tiers li{display:flex;align-items:center;gap:.6rem;margin:.3rem 0}
+    .tiers li span{min-width:110px;display:inline-block}
+    .tiers .bar{flex:1;height:10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);position:relative;overflow:hidden}
+    .tiers .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2))}
 
-/* ====== Sticky CTA + Whisper ====== */
-.sticky-cta{position:fixed;left:0;right:0;bottom:16px;z-index:60;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .22s var(--ease),opacity .22s var(--ease)}
-.sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 34px rgba(0,0,0,.55)}
-@media (max-width:1023px){.sticky-cta{display:flex}}
-.whisper{pointer-events:none}
+    /* ====== Sticky CTA + Whisper ====== */
+    .sticky-cta{position:fixed;left:0;right:0;bottom:16px;z-index:60;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .22s var(--ease),opacity .22s var(--ease)}
+    .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 34px rgba(0,0,0,.55)}
+    @media (max-width:1023px){.sticky-cta{display:flex}}
+    .whisper{pointer-events:none}
 
-/* ====== Animations ====== */
-.fade-up{opacity:0;transform:translateY(16px)}
-.fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
-.hero picture img{border-radius:20px;box-shadow:var(--shadow)}
+    /* ====== Animations ====== */
+    .fade-up{opacity:0;transform:translateY(16px)}
+    .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+    .hero picture img{border-radius:20px;box-shadow:var(--shadow)}
 
-/* ====== Inputs ====== */
-input,textarea{width:100%;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);padding:.8rem .9rem;font:inherit}
-textarea{min-height:130px;resize:vertical}
-label{color:#DDE3F4}
+    /* ====== Inputs ====== */
+    input,textarea{width:100%;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);padding:.8rem .9rem;font:inherit}
+    textarea{min-height:130px;resize:vertical}
+    label{color:#DDE3F4}
 
-/* Footer */
-footer a{text-decoration:underline;text-underline-offset:3px;color:var(--text)}
-</style>
+    /* Footer */
+    footer a{text-decoration:underline;text-underline-offset:3px;color:var(--text)}
+  </style>
+
+  <!-- JSON-LD (Organisation) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Heiko Haerter – Persönliche Finanzbegleitung",
+    "url":"https://heikohaerter.com/",
+    "logo":"https://heikohaerter.com/favicon-32x32.png",
+    "sameAs":[]
+  }
+  </script>
 </head>
 
 <body>
-<a href="#main" class="visually-hidden">Zum Inhalt springen</a>
+  <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
 
-<header id="header">
-  <div class="header-inner">
-    <a href="/" class="brand" aria-label="Startseite">
-      <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
-      <span class="brand-sub">Persönliche Finanzbegleitung</span>
-    </a>
-  </div>
-</header>
+  <header id="header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="brand" aria-label="Startseite">
+        <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
+        <span class="brand-sub">Persönliche Finanzbegleitung</span>
+      </a>
+    </div>
+  </header>
 
-<main id="main">
-  <!-- HERO -->
-  <section class="hero section fade-up" aria-labelledby="hero-title">
-    <div class="wrap hero-grid">
-      <div class="stack">
-        <p class="hero-micro" style="margin:0 0 .4rem;">10 Sekunden – du gibst nur einen Link weiter. Der Rest passiert automatisch.</p>
+  <main id="main" role="main">
+    <!-- HERO -->
+    <section class="hero section fade-up" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="stack">
+          <p class="hero-micro mb-4">10 Sekunden – du gibst nur einen Link weiter. Der Rest passiert automatisch.</p>
+          <h1 id="hero-title" class="mt-0">Fast jeder kennt dieses „Ich müsste mal…“ – du kannst heute jemandem Ruhe geben.</h1>
 
-        <h1 id="hero-title" style="margin-top:.1rem">Fast jeder kennt dieses „Ich müsste mal…“ – du kannst heute jemandem Ruhe geben.</h1>
+          <ul class="hero-micro mt-2 pl-11" aria-label="Vorteile">
+            <li>2 Minuten – zeigt sofort, was heute wichtig ist</li>
+            <li>100 % anonym · kein Verkauf</li>
+            <li>Kein Vorteil → 25 € (Zero-Risk)</li>
+          </ul>
 
-        <ul class="hero-micro" style="margin:.2rem 0 0; padding-left:1.05rem">
-          <li>2 Minuten – zeigt sofort, was heute wichtig ist</li>
-          <li>100 % anonym · kein Verkauf</li>
-          <li>Kein Vorteil → 25 € (Zero-Risk)</li>
-        </ul>
+          <p class="hero-micro mt-4"><strong>⭐ Über 250 Menschen haben damit schon Klarheit gewonnen.</strong></p>
 
-        <p class="hero-micro" style="margin:.5rem 0 0;"><strong>⭐ Über 250 Menschen haben damit schon Klarheit gewonnen.</strong></p>
+          <div class="premium-card">
+            <p class="hero-micro mb-0"><strong>Die empfohlene Person sieht in 2 Minuten anonym ihre Ampel – kein Verkauf, keine Unterlagen, kein Risiko.</strong></p>
+          </div>
+
+          <a id="shareFast" href="#share" class="btn btn-primary pulse"
+             data-cta-variants='["✨ In 7 Sekunden weitergeben","💬 Per WhatsApp senden","🤝 Heute jemandem helfen"]'>
+            ✨ In 7 Sekunden weitergeben
+          </a>
+
+          <p class="hero-micro quote">„Danke, dass du mir das geschickt hast – ich hätte das schon viel früher gebraucht.“</p>
+        </div>
+
+        <div class="hero-media stack">
+          <div class="reward-hero" aria-label="Wertschätzungsstufen kompakt" id="rewardGlow" data-glow-once>
+            <h3 class="mb-2">Deine Wertschätzungen</h3>
+            <div class="reward-hero-grid">
+              <div class="rh-item"><span>1×</span><p class="mt-2 mb-0">25 € = kleiner Luxus</p></div>
+              <div class="rh-item"><span>3×</span><p class="mt-2 mb-0">50 € + Extra</p></div>
+              <div class="rh-item"><span>5×</span><p class="mt-2 mb-0">150 € = echtes Upgrade</p></div>
+              <div class="rh-item rh-vip"><span>10×</span><p class="mt-2 mb-0">VIP-Erlebnis (du entscheidest)</p></div>
+            </div>
+          </div>
+
+          <picture class="hero">
+            <img
+              src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+              alt="Weitergeben: 2 Minuten – anonym & ohne irgendetwas zu müssen"
+              width="1200" height="900" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOWTO + SHARE -->
+    <section class="section fade-up" aria-labelledby="s-title">
+      <div class="wrap stack">
 
         <div class="premium-card">
-          <p class="hero-micro" style="margin:0"><strong>Die empfohlene Person sieht in 2 Minuten anonym ihre Ampel – kein Verkauf, keine Unterlagen, kein Risiko.</strong></p>
+          <h3 id="s-title" class="mt-2 mb-2">So geht’s in 10 Sekunden</h3>
+          <ol class="hero-micro mt-2 pl-12">
+            <li>Deinen Vornamen eintragen</li>
+            <li>„✨ Fertigen Text übernehmen“ tippen</li>
+            <li>WhatsApp senden – fertig</li>
+          </ol>
+          <p class="hero-micro mt-4">Du musst nichts erklären. Der Link macht die ganze Arbeit.</p>
         </div>
 
-        <a id="shareFast" href="#share" class="btn btn-primary pulse"
-           data-cta-variants='["✨ In 7 Sekunden weitergeben","💬 Per WhatsApp senden","🤝 Heute jemandem helfen"]'>
-          ✨ In 7 Sekunden weitergeben
-        </a>
+        <div class="premium-card">
+          <h3 class="mb-2">Was die empfohlene Person bekommt</h3>
+          <ul class="hero-micro pl-11 mt-2">
+            <li>🟢 2-Minuten-Ampel → sofort ein Gefühl für heute</li>
+            <li>🟢 anonym & ohne Verkauf</li>
+            <li>🟢 zeigt: Jetzt · Als Nächstes · Später</li>
+          </ul>
+        </div>
 
-        <p class="hero-micro quote">„Danke, dass du mir das geschickt hast – ich hätte das schon viel früher gebraucht.“</p>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
+          <div class="story-card"><p class="hero-micro mb-0"><strong>Eltern:</strong> „Kein Abend opfern“ – der Link nimmt Druck raus.</p></div>
+          <div class="story-card"><p class="hero-micro mb-0"><strong>Paare:</strong> In 2 Minuten sehen, was heute zählt – ohne Diskussion.</p></div>
+          <div class="story-card"><p class="hero-micro mb-0"><strong>Selbstständige:</strong> Schnell ein Gefühl für heutige Risiken – ohne Verkauf.</p></div>
+        </div>
+
+        <div class="share stack" role="region" aria-labelledby="share-h" id="share">
+          <div class="stack">
+            <h3 id="share-h" class="mt-2 mb-2">Text zum Weitergeben</h3>
+            <p class="hero-micro mb-6">Kopieren oder direkt per WhatsApp senden.</p>
+          </div>
+
+          <div class="premium-card zero-risk fade-up">
+            <p class="hero-micro mb-0"><strong>Wenn jemand keinen Vorteil hat → 25 € für dich. Fair & ohne Verpflichtung.</strong></p>
+          </div>
+
+          <div class="inline mt-4" role="group" aria-label="Zielgruppe wählen">
+            <button class="btn seg-btn" data-seg="eltern" type="button">Eltern</button>
+            <button class="btn seg-btn" data-seg="kollegen" type="button">Kolleg:innen</button>
+            <button class="btn seg-btn" data-seg="freunde" type="button">Freunde</button>
+            <button class="btn seg-btn" data-seg="selbst" type="button">Selbstständige</button>
+            <button class="btn seg-btn" data-seg="partner" type="button">Partner</button>
+            <button class="btn seg-btn" data-seg="neutral" type="button">Für alle</button>
+          </div>
+
+          <label for="refName" class="mt-6" style="display:block;font-size:.92rem;color:#DDE3F4;margin-bottom:.35rem">Dein Vorname (optional):</label>
+          <input id="refName" name="ref" inputmode="text" autocapitalize="words" autocomplete="nickname given-name" placeholder="z. B. Alex (Papa) / Dani – Chef" aria-describedby="refNameHelp">
+          <span id="refNameHelp" class="visually-hidden">Vorname wird in der persönlichen Zeile verwendet.</span>
+
+          <textarea rows="6" id="refText" inputmode="text" spellcheck="false"
+            data-variants='{
+              "neutral":[
+                "Hey, hab das gerade gesehen – dachte sofort an dich. 2 Minuten – zeigt sofort, was heute wichtig ist. Kein Vorteil → 25 €. {{URL}}",
+                "Eine faire Einschätzung: anonym & ohne irgendetwas zu müssen. Du siehst gleich, wo du stehst. {{URL}}",
+                "Falls du dieses „Ich müsste mal…“ kennst: hier siehst du in 2 Min, ob alles gut ist. {{URL}}"
+              ],
+              "eltern":[
+                "Kurz für Eltern (2 Min): zeigt, ob heute etwas Wichtiges fehlt – ohne Verkauf. Kein Vorteil → 25 €. {{URL}}",
+                "Anonym schauen, ob alles Wichtige sitzt – ohne Druck. {{URL}}"
+              ],
+              "kollegen":[
+                "2-Minuten-Blick für die To-do-Liste: sofort sehen, ob etwas fehlt – ohne Papierkram. {{URL}}",
+                "Nutze ich selbst als kurzen Blick ohne Aufwand. Vielleicht hilft’s dir auch. {{URL}}"
+              ],
+              "freunde":[
+                "Hey, kurzer Blick (2 Min), völlig anonym – sagt dir, was heute wichtig ist. {{URL}}",
+                "Hab das gesehen & dachte an dich – null Druck, einfach hilfreich. {{URL}}"
+              ],
+              "selbst":[
+                "Für Selbstständige: kurz schauen (2 Min), wie es heute aussieht – bei Rücklagen & Haftung – ohne Verkauf. {{URL}}"
+              ],
+              "partner":[
+                "Magst du in 2 Min schauen, ob alles passt? Anonym – zeigt sofort, was wichtig ist. {{URL}}"
+              ]
+            }'></textarea>
+
+          <div class="inline">
+            <button type="button" id="readyMsg" class="btn btn-primary">✨ Fertigen Text übernehmen</button>
+            <button type="button" id="magicLine" class="btn">+ Beliebten Start-Satz einfügen</button>
+          </div>
+
+          <div class="premium-card mt-6" aria-live="polite" aria-atomic="true">
+            <strong style="display:block;font-size:.85rem;color:var(--muted-soft);margin-bottom:.3rem">WhatsApp-Vorschau</strong>
+            <div id="waPreviewText" class="hero-micro">Wird erstellt…</div>
+          </div>
+
+          <p class="hero-micro">Tipp: Eine persönliche Zeile wirkt besser.
+            <button type="button" id="addPersonal" class="btn" style="padding:.4rem .7rem;margin-left:.4rem">+ Persönliche Zeile</button>
+          </p>
+
+          <div class="inline" role="group" aria-label="Teilen">
+            <button class="btn btn-ghost" id="copyBtn" type="button">📋 Text kopieren</button>
+            <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+            <button class="btn btn-ghost" id="nativeShare" type="button">📲 System-Teilen</button>
+            <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer%20Blick&body=">✉️ Mail</a>
+          </div>
+
+          <small class="hero-micro" style="display:block">Zählt ab: Erstgespräch – kein Abschluss nötig.</small>
+        </div>
+
+        <div class="premium-card" style="border-left:4px solid var(--gold)">
+          <h3 class="mb-4">Was NICHT passiert, wenn du empfiehlst</h3>
+          <ul class="hero-micro mt-0 pl-12">
+            <li>🙅 Kein peinliches Verkaufsgespräch</li>
+            <li>🤫 Du erfährst keine Details</li>
+            <li>📞 Ich melde mich nur, wenn sie wirklich will</li>
+            <li>💬 Empfehlung ohne Verpflichtung</li>
+          </ul>
+        </div>
+
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
+          <div class="story-card"><p class="hero-micro mb-0"><strong>Eltern</strong> → „Will ich sicherstellen, dass wirklich alles passt?“</p></div>
+          <div class="story-card"><p class="hero-micro mb-0"><strong>Paare</strong> → „Finanzen endlich gemeinsam klären?“</p></div>
+          <div class="story-card"><p class="hero-micro mb-0"><strong>Selbstständige</strong> → „Ausfall wäre ein Risiko – kurz checken?“</p></div>
+        </div>
       </div>
+    </section>
 
-      <div class="hero-media stack">
-        <div class="reward-hero" aria-label="Wertschätzungsstufen kompakt" id="rewardGlow" data-glow-once>
-          <h3 style="margin:0 0 .2rem">Deine Wertschätzungen</h3>
-          <div class="reward-hero-grid">
-            <div class="rh-item"><span>1×</span><p style="margin:.1rem 0 0">25 € = kleiner Luxus</p></div>
-            <div class="rh-item"><span>3×</span><p style="margin:.1rem 0 0">50 € + Extra</p></div>
-            <div class="rh-item"><span>5×</span><p style="margin:.1rem 0 0">150 € = echtes Upgrade</p></div>
-            <div class="rh-item rh-vip"><span>10×</span><p style="margin:.1rem 0 0">VIP-Erlebnis (du entscheidest)</p></div>
+    <hr class="divider" aria-hidden="true">
+
+    <!-- REWARDS -->
+    <section class="section fade-up" id="rewards" aria-labelledby="r-title">
+      <div class="wrap stack">
+        <h2 id="r-title">Deine Wertschätzungen – Sammeln macht’s noch besser</h2>
+
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:.9rem">
+          <article class="premium-card" aria-describedby="r25desc">
+            <h3 class="mb-2">1× → 25 € = kleiner Luxus</h3>
+            <p id="r25desc" class="hero-micro mb-0">Zählt ab Erstgespräch.</p>
+          </article>
+          <article class="premium-card" aria-describedby="r50desc">
+            <h3 class="mb-2">3× → 50 € + Extra</h3>
+            <p id="r50desc" class="hero-micro mb-0">Spürbarer Gewinn – plus kleine Überraschung.</p>
+          </article>
+          <article class="premium-card" aria-describedby="r150desc">
+            <h3 class="mb-2">5× → 150 € = echtes Upgrade</h3>
+            <p id="r150desc" class="hero-micro mb-0">Einfach gut.</p>
+          </article>
+        </div>
+
+        <!-- VIP Slider -->
+        <div>
+          <h3 class="mt-8 mb-4">10× → VIP-Erlebnis (du entscheidest)</h3>
+          <div class="slider" id="vipSlider" aria-label="VIP-Erlebnis Highlights">
+            <div class="track" id="vipTrack">
+              <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_d56ea9b3d9314d1abb26324412dffe81~mv2.png" alt="VIP: Konzert"></div>
+              <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_506ae19443064d949800ba1db5957184~mv2.png" alt="VIP: Day-Spa & Massage für 2"></div>
+              <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_038389a8dd2644fe9741e60585908181~mv2.png" alt="VIP: Fußball-Lounge"></div>
+              <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_6193ac7b30f4471ea277ab6bbfe3d690~mv2.png" alt="VIP: du entscheidest"></div>
+            </div>
+          </div>
+          <div class="slider-controls" aria-label="VIP Bilder wechseln">
+            <button type="button" id="vipPrev" aria-label="VIP vorheriges Bild" aria-controls="vipSlider">‹</button>
+            <button type="button" id="vipNext" aria-label="VIP nächstes Bild" aria-controls="vipSlider">›</button>
           </div>
         </div>
 
-        <picture>
-          <img
-            src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
-            alt="Weitergeben: 2 Minuten – anonym & ohne irgendetwas zu müssen"
-            width="1200" height="900" loading="eager" fetchpriority="high" decoding="async">
-        </picture>
+        <!-- Motivation -->
+        <div class="premium-card">
+          <h3 class="mb-4">Dein Motivationsstand</h3>
+          <div class="level" aria-label="Motivationsstand"><span id="levelBar"></span></div>
+          <p id="rewardMsg" class="hero-micro mt-6">Der Balken ist nur dein Fortschritt. Die echten Belohnungen gelten ab Erstgespräch – unabhängig vom Balken.</p>
+          <ul class="tiers hero-micro" id="tierList" style="list-style:none;padding:0;margin-top:.8rem">
+            <li><span>25 €</span><div class="bar"><i data-goal="1"></i></div></li>
+            <li><span>50 € + Extra</span><div class="bar"><i data-goal="3"></i></div></li>
+            <li><span>150 €</span><div class="bar"><i data-goal="5"></i></div></li>
+            <li><span>VIP</span><div class="bar"><i data-goal="10"></i></div></li>
+          </ul>
+        </div>
+
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
+          <div class="story-card"><p class="hero-micro mb-0">„Dani schickte den Link ihrer Schwester. 2 Minuten später: Ruhe. Kein Verkauf, kein Druck.“</p></div>
+          <div class="story-card"><p class="hero-micro mb-0">„Tom empfahl es einem Kollegen. 10 Minuten später: erster Überblick – dankbar.“</p></div>
+          <div class="story-card"><p class="hero-micro mb-0">„Maria sendete an 3 Kontakte → 50 € + Extra – und alle fühlten sich sicherer.“</p></div>
+        </div>
+
+        <div class="center">
+          <a href="#share" class="btn btn-primary">✨ Weitergeben</a>
+        </div>
       </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true">
+
+    <!-- ETHOS & FINAL CTA -->
+    <section class="section fade-up" aria-label="Heiko Ethos">
+      <div class="wrap">
+        <div class="premium-card">
+          <p class="hero-micro mb-0">
+            Ich bin Heiko. Ich begleite Menschen dabei, in Ruhe zu sehen, was heute wichtig ist – ohne Verkaufsdruck.
+            Die 2-Minuten-Ampel habe ich gebaut, weil ich die üblichen 2-Stunden-Beratungen selbst gehasst habe.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-up" id="final-cta">
+      <div class="wrap center" style="max-width:720px">
+        <h2 class="mb-8">Bereit, jemandem heute wirklich zu helfen?</h2>
+        <p style="color:var(--muted);margin-bottom:1.1rem;font-size:1.05rem">Wenn jemand keinen Vorteil hat → 25 € für dich. Fair & ohne Verpflichtung.</p>
+        <a href="#share" class="btn btn-primary" id="ctaFinal">🤝 Hilf heute 1 Person – 10 Sek.</a>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="wrap center">
+      <div class="mb-6">© <span class="js-year-now">2025</span> Heiko Haerter – Persönliche Finanzbegleitung · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></div>
+      <div class="hero-micro">Wertschätzungen erfolgen privat durch mich – unabhängig von Organisationen. Keine verbandliche Aktion.</div>
     </div>
-  </section>
+  </footer>
 
-  <!-- HOWTO + SHARE -->
-  <section class="section fade-up" aria-labelledby="s-title">
-    <div class="wrap stack">
-
-      <div class="premium-card">
-        <h3 id="s-title" style="margin:.2rem 0 .25rem">So geht’s in 10 Sekunden</h3>
-        <ol class="hero-micro" style="margin:.2rem 0 0; padding-left:1.2rem">
-          <li>Deinen Vornamen eintragen</li>
-          <li>„✨ Fertigen Text übernehmen“ tippen</li>
-          <li>WhatsApp senden – fertig</li>
-        </ol>
-        <p class="hero-micro" style="margin:.5rem 0 0">Du musst nichts erklären. Der Link macht die ganze Arbeit.</p>
-      </div>
-
-      <div class="premium-card">
-        <h3 style="margin:0 0 .25rem">Was die empfohlene Person bekommt</h3>
-        <ul class="hero-micro" style="padding-left:1.1rem;margin:.2rem 0 0">
-          <li>🟢 2-Minuten-Ampel → sofort ein Gefühl für heute</li>
-          <li>🟢 anonym & ohne Verkauf</li>
-          <li>🟢 zeigt: Jetzt · Als Nächstes · Später</li>
-        </ul>
-      </div>
-
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
-        <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Eltern:</strong> „Kein Abend opfern“ – der Link nimmt Druck raus.</p></div>
-        <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Paare:</strong> In 2 Minuten sehen, was heute zählt – ohne Diskussion.</p></div>
-        <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Selbstständige:</strong> Schnell ein Gefühl für heutige Risiken – ohne Verkauf.</p></div>
-      </div>
-
-      <div class="share stack" role="region" aria-labelledby="share-h" id="share">
-        <div class="stack">
-          <h3 id="share-h" style="margin:.2rem 0 .25rem">Text zum Weitergeben</h3>
-          <p class="hero-micro" style="margin:0 0 .6rem">Kopieren oder direkt per WhatsApp senden.</p>
-        </div>
-
-        <div class="premium-card zero-risk fade-up">
-          <p class="hero-micro" style="margin:0"><strong>Wenn jemand keinen Vorteil hat → 25 € für dich. Fair & ohne Verpflichtung.</strong></p>
-        </div>
-
-        <div class="inline" style="margin-top:.4rem">
-          <button class="btn seg-btn" data-seg="eltern">Eltern</button>
-          <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
-          <button class="btn seg-btn" data-seg="freunde">Freunde</button>
-          <button class="btn seg-btn" data-seg="selbst">Selbstständige</button>
-          <button class="btn seg-btn" data-seg="partner">Partner</button>
-          <button class="btn seg-btn" data-seg="neutral">Für alle</button>
-        </div>
-
-        <label for="refName" style="display:block;font-size:.92rem;color:#DDE3F4;margin:.6rem 0 .35rem">Dein Vorname (optional):</label>
-        <input id="refName" name="ref" inputmode="text" autocapitalize="words" autocomplete="nickname given-name" placeholder="z. B. Alex (Papa) / Dani – Chef">
-
-        <textarea rows="6" id="refText" inputmode="text" spellcheck="false"
-          data-variants='{
-            "neutral":[
-              "Hey, hab das gerade gesehen – dachte sofort an dich. 2 Minuten – zeigt sofort, was heute wichtig ist. Kein Vorteil → 25 €. {{URL}}",
-              "Eine faire Einschätzung: anonym & ohne irgendetwas zu müssen. Du siehst gleich, wo du stehst. {{URL}}",
-              "Falls du dieses „Ich müsste mal…“ kennst: hier siehst du in 2 Min, ob alles gut ist. {{URL}}"
-            ],
-            "eltern":[
-              "Kurz für Eltern (2 Min): zeigt, ob heute etwas Wichtiges fehlt – ohne Verkauf. Kein Vorteil → 25 €. {{URL}}",
-              "Anonym schauen, ob alles Wichtige sitzt – ohne Druck. {{URL}}"
-            ],
-            "kollegen":[
-              "2-Minuten-Blick für die To-do-Liste: sofort sehen, ob etwas fehlt – ohne Papierkram. {{URL}}",
-              "Nutze ich selbst als kurzen Blick ohne Aufwand. Vielleicht hilft’s dir auch. {{URL}}"
-            ],
-            "freunde":[
-              "Hey, kurzer Blick (2 Min), völlig anonym – sagt dir, was heute wichtig ist. {{URL}}",
-              "Hab das gesehen & dachte an dich – null Druck, einfach hilfreich. {{URL}}"
-            ],
-            "selbst":[
-              "Für Selbstständige: kurz schauen (2 Min), wie es heute aussieht – bei Rücklagen & Haftung – ohne Verkauf. {{URL}}"
-            ],
-            "partner":[
-              "Magst du in 2 Min schauen, ob alles passt? Anonym – zeigt sofort, was wichtig ist. {{URL}}"
-            ]
-          }'></textarea>
-
-        <div class="inline">
-          <button type="button" id="readyMsg" class="btn btn-primary">✨ Fertigen Text übernehmen</button>
-          <button type="button" id="magicLine" class="btn">+ Beliebten Start-Satz einfügen</button>
-        </div>
-
-        <div class="premium-card" style="margin-top:.6rem">
-          <strong style="display:block;font-size:.85rem;color:var(--muted-soft);margin-bottom:.3rem">WhatsApp-Vorschau</strong>
-          <div id="waPreviewText" class="hero-micro">Wird erstellt…</div>
-        </div>
-
-        <p class="hero-micro">Tipp: Eine persönliche Zeile wirkt besser.
-          <button type="button" id="addPersonal" class="btn" style="padding:.4rem .7rem;margin-left:.4rem">+ Persönliche Zeile</button>
-        </p>
-
-        <div class="inline">
-          <button class="btn btn-ghost" id="copyBtn">📋 Text kopieren</button>
-          <a id="waShare" class="btn btn-primary" href="https://wa.me/?text=" target="_blank" rel="noopener">💬 WhatsApp</a>
-          <button class="btn btn-ghost" id="nativeShare" type="button">📲 System-Teilen</button>
-          <a id="mailShare" class="btn btn-ghost" href="mailto:?subject=Kurzer%20Blick&body=">✉️ Mail</a>
-        </div>
-
-        <small class="hero-micro" style="display:block;margin-top:.6rem">Zählt ab: Erstgespräch – kein Abschluss nötig.</small>
-      </div>
-
-      <div class="premium-card" style="border-left:4px solid var(--gold)">
-        <h3 style="margin:0 0 .4rem;">Was NICHT passiert, wenn du empfiehlst</h3>
-        <ul class="hero-micro" style="margin:0; padding-left:1.2rem;">
-          <li>🙅 Kein peinliches Verkaufsgespräch</li>
-          <li>🤫 Du erfährst keine Details</li>
-          <li>📞 Ich melde mich nur, wenn sie wirklich will</li>
-          <li>💬 Empfehlung ohne Verpflichtung</li>
-        </ul>
-      </div>
-
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
-        <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Eltern</strong> → „Will ich sicherstellen, dass wirklich alles passt?“</p></div>
-        <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Paare</strong> → „Finanzen endlich gemeinsam klären?“</p></div>
-        <div class="story-card"><p class="hero-micro" style="margin:0"><strong>Selbstständige</strong> → „Ausfall wäre ein Risiko – kurz checken?“</p></div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- REWARDS -->
-  <section class="section fade-up" id="rewards" aria-labelledby="r-title">
-    <div class="wrap stack">
-      <h2 id="r-title">Deine Wertschätzungen – Sammeln macht’s noch besser</h2>
-
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:.9rem">
-        <article class="premium-card" aria-describedby="r25desc">
-          <h3 style="margin:0 0 .2rem">1× → 25 € = kleiner Luxus</h3>
-          <p id="r25desc" class="hero-micro" style="margin:0">Zählt ab Erstgespräch.</p>
-        </article>
-        <article class="premium-card" aria-describedby="r50desc">
-          <h3 style="margin:0 0 .2rem">3× → 50 € + Extra</h3>
-          <p id="r50desc" class="hero-micro" style="margin:0">Spürbarer Gewinn – plus kleine Überraschung.</p>
-        </article>
-        <article class="premium-card" aria-describedby="r150desc">
-          <h3 style="margin:0 0 .2rem">5× → 150 € = echtes Upgrade</h3>
-          <p id="r150desc" class="hero-micro" style="margin:0">Einfach gut.</p>
-        </article>
-      </div>
-
-      <!-- VIP Slider -->
-      <div>
-        <h3 style="margin:.8rem 0 .4rem">10× → VIP-Erlebnis (du entscheidest)</h3>
-        <div class="slider" id="vipSlider" aria-label="VIP-Erlebnis Highlights">
-          <div class="track" id="vipTrack">
-            <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_d56ea9b3d9314d1abb26324412dffe81~mv2.png" alt="VIP: Konzert"></div>
-            <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_506ae19443064d949800ba1db5957184~mv2.png" alt="VIP: Day-Spa & Massage für 2"></div>
-            <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_038389a8dd2644fe9741e60585908181~mv2.png" alt="VIP: Fußball-Lounge"></div>
-            <div class="slide"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/4e46cf_6193ac7b30f4471ea277ab6bbfe3d690~mv2.png" alt="VIP: du entscheidest"></div>
-          </div>
-        </div>
-        <div class="slider-controls">
-          <button type="button" id="vipPrev" aria-label="VIP vorheriges Bild" aria-controls="vipSlider">‹</button>
-          <button type="button" id="vipNext" aria-label="VIP nächstes Bild" aria-controls="vipSlider">›</button>
-        </div>
-      </div>
-
-      <!-- Motivation -->
-      <div class="premium-card">
-        <h3 style="margin:0 0 .4rem">Dein Motivationsstand</h3>
-        <div class="level" aria-label="Motivationsstand"><span id="levelBar"></span></div>
-        <p id="rewardMsg" class="hero-micro" style="margin:.6rem 0 0">Der Balken ist nur dein Fortschritt. Die echten Belohnungen gelten ab Erstgespräch – unabhängig vom Balken.</p>
-        <ul class="tiers hero-micro" id="tierList" style="list-style:none;padding:0;margin-top:.8rem">
-          <li><span>25 €</span><div class="bar"><i data-goal="1"></i></div></li>
-          <li><span>50 € + Extra</span><div class="bar"><i data-goal="3"></i></div></li>
-          <li><span>150 €</span><div class="bar"><i data-goal="5"></i></div></li>
-          <li><span>VIP</span><div class="bar"><i data-goal="10"></i></div></li>
-        </ul>
-      </div>
-
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem">
-        <div class="story-card"><p class="hero-micro" style="margin:0">„Dani schickte den Link ihrer Schwester. 2 Minuten später: Ruhe. Kein Verkauf, kein Druck.“</p></div>
-        <div class="story-card"><p class="hero-micro" style="margin:0">„Tom empfahl es einem Kollegen. 10 Minuten später: erster Überblick – dankbar.“</p></div>
-        <div class="story-card"><p class="hero-micro" style="margin:0">„Maria sendete an 3 Kontakte → 50 € + Extra – und alle fühlten sich sicherer.“</p></div>
-      </div>
-
-      <div style="text-align:center">
-        <a href="#share" class="btn btn-primary">✨ Weitergeben</a>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- ETHOS & FINAL CTA -->
-  <section class="section fade-up" aria-label="Heiko Ethos">
-    <div class="wrap">
-      <div class="premium-card">
-        <p class="hero-micro" style="margin:0;">
-          Ich bin Heiko. Ich begleite Menschen dabei, in Ruhe zu sehen, was heute wichtig ist – ohne Verkaufsdruck.
-          Die 2-Minuten-Ampel habe ich gebaut, weil ich die üblichen 2-Stunden-Beratungen selbst gehasst habe.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section fade-up" id="final-cta">
-    <div class="wrap" style="text-align:center;max-width:720px">
-      <h2 style="margin-bottom:1rem">Bereit, jemandem heute wirklich zu helfen?</h2>
-      <p style="color:var(--muted);margin-bottom:1.1rem;font-size:1.05rem">Wenn jemand keinen Vorteil hat → 25 € für dich. Fair & ohne Verpflichtung.</p>
-      <a href="#share" class="btn btn-primary" id="ctaFinal">🤝 Hilf heute 1 Person – 10 Sek.</a>
-    </div>
-  </section>
-</main>
-
-<footer role="contentinfo">
-  <div class="wrap" style="text-align:center">
-    <div style="margin-bottom:.6rem">© <span id="yearNow">2026</span> Heiko Haerter – Persönliche Finanzbegleitung · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></div>
-    <div class="hero-micro">Wertschätzungen erfolgen privat durch mich – unabhängig von Organisationen. Keine verbandliche Aktion.</div>
+  <!-- Sticky CTA -->
+  <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
+    <div class="inner"><a href="#share" class="btn btn-primary" id="stickyBtn">💬 Mit WhatsApp weitergeben</a></div>
   </div>
-</footer>
 
-<!-- Sticky CTA -->
-<div class="sticky-cta" id="stickyCTA" aria-hidden="true">
-  <div class="inner"><a href="#share" class="btn btn-primary" id="stickyBtn">💬 Mit WhatsApp weitergeben</a></div>
-</div>
+  <!-- Whisper -->
+  <div class="whisper" id="whisper" role="status" aria-live="polite" aria-atomic="true"
+       style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">
+       🟡 10 Sekunden – jemand hat morgen ein Gefühl für heute.
+  </div>
 
-<!-- Whisper -->
-<div class="whisper" id="whisper" role="status" aria-live="polite"
-     style="position:fixed;left:18px;bottom:18px;z-index:70;background:rgba(11,15,22,.92);border:1px solid rgba(255,255,255,.14);color:#F6F7FB;border-radius:14px;padding:.6rem .8rem;box-shadow:0 12px 28px rgba(0,0,0,.38);opacity:0;transform:translateY(10px);transition:opacity .25s var(--ease), transform .25s var(--ease)">
-     🟡 10 Sekunden – jemand hat morgen ein Gefühl für heute.
-</div>
+  <noscript>
+    <div style="max-width:1100px;margin:16px auto;padding:12px;border:1px solid rgba(255,255,255,.2);border-radius:12px;color:#F1F3FA;background:rgba(255,255,255,.06)">
+      JavaScript ist deaktiviert. Du kannst den Text trotzdem kopieren und per WhatsApp, Mail oder System-Teilen senden.
+    </div>
+  </noscript>
 
-<script>
-(function(){
-  "use strict";
-  document.documentElement.classList.remove('no-js');
-  document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
-
-  // Fade-in on view
+  <script>
   (function(){
-    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const els=[...document.querySelectorAll('.fade-up')];
-    if(pref){els.forEach(el=>el.classList.add('visible'));return;}
-    if('IntersectionObserver'in window){
-      const io=new IntersectionObserver(ents=>ents.forEach(e=>{
-        if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
-      }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
-      els.forEach(el=>io.observe(el));
-    }else{els.forEach(el=>el.classList.add('visible'));}
-  })();
+    "use strict";
+    // JS-Flag
+    document.documentElement.classList.remove('no-js');
+    // Jahr setzen (valide mehrfach via Klasse)
+    document.querySelectorAll('.js-year-now').forEach(el => { el.textContent = String(new Date().getFullYear()); });
 
-  // Reward hero gentle glow (once)
-  (function(){
-    try{
-      const box=document.getElementById('rewardGlow');
-      if(!box) return;
-      const key='hh_reward_glow_once';
-      if(!sessionStorage.getItem(key)){
-        setTimeout(()=>box.classList.add('on'), 300);
-        setTimeout(()=>box.classList.remove('on'), 2500);
-        sessionStorage.setItem(key,'1');
+    // Fade-in bei Sichtbarkeit
+    (function(){
+      const pref = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els = Array.from(document.querySelectorAll('.fade-up'));
+      if (pref) { els.forEach(el=>el.classList.add('visible')); return; }
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((ents)=>{
+          ents.forEach(e=>{
+            if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+          });
+        }, {threshold:.12, rootMargin:'0px 0px -10% 0px'});
+        els.forEach(el=>io.observe(el));
+      } else {
+        els.forEach(el=>el.classList.add('visible'));
       }
-    }catch(_){}
-  })();
+    })();
 
-  // Sticky CTA (mobile only)
-  (function(){
-    const el=document.getElementById('stickyCTA');
-    const hero=document.querySelector('.hero');
-    if(!el||!hero||innerWidth>=1024) return;
-    const show=v=>{el.style.transform=v?'translateY(0)':'translateY(100%)';el.style.opacity=v?'1':'0';el.setAttribute('aria-hidden',v?'false':'true');};
-    if('IntersectionObserver'in window){
-      new IntersectionObserver(ents=>ents.forEach(e=>show(!e.isIntersecting)),{threshold:.35}).observe(hero);
-      addEventListener('scroll',()=>{ if(scrollY>180) show(true); },{passive:true});
-    }else{ addEventListener('scroll',()=>show(scrollY>180),{passive:true}); }
-  })();
+    // Reward hero glow (einmal pro Session)
+    (function(){
+      try{
+        const box = document.getElementById('rewardGlow');
+        if(!box) return;
+        const key='hh_reward_glow_once';
+        if(!sessionStorage.getItem(key)){
+          setTimeout(()=>box.classList.add('on'), 300);
+          setTimeout(()=>box.classList.remove('on'), 2500);
+          sessionStorage.setItem(key,'1');
+        }
+      }catch(_){}
+    })();
 
-  // CTA variant rotator
-  (function(){
-    const btn=document.getElementById('shareFast');
-    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(!btn) return;
-    let variants=[];
-    try{ variants=JSON.parse(btn.getAttribute('data-cta-variants')||'[]'); }catch(_){}
-    if(!variants.length || pref) return;
-    let i=0;
-    setInterval(()=>{ i=(i+1)%variants.length; btn.textContent=variants[i]; }, 3400);
-  })();
+    // Sticky CTA mobil
+    (function(){
+      const el = document.getElementById('stickyCTA');
+      const hero = document.querySelector('.hero');
+      if(!el || !hero || innerWidth >= 1024) return;
+      const show = v => { el.style.transform = v ? 'translateY(0)' : 'translateY(100%)'; el.style.opacity = v ? '1' : '0'; el.setAttribute('aria-hidden', v?'false':'true'); };
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(ents=>ents.forEach(e=>show(!e.isIntersecting)),{threshold:.35}).observe(hero);
+        addEventListener('scroll',()=>{ if(scrollY>180) show(true); },{passive:true});
+      }else{
+        addEventListener('scroll',()=>show(scrollY>180),{passive:true});
+      }
+    })();
 
-  // Whisper (once per session)
-  (function(){
-    const KEY='hh_whisper_seen_wg_v1';
-    try{
-      if(sessionStorage.getItem(KEY)) return;
-      const w=document.getElementById('whisper'); if(!w) return;
-      setTimeout(()=>{ w.style.opacity='1'; w.style.transform='translateY(0)';
-        setTimeout(()=>{ w.style.opacity='0'; w.style.transform='translateY(10px)'; }, 4200);
-        sessionStorage.setItem(KEY,'1');
-      }, 16000);
-    }catch(_){}
-  })();
+    // CTA Variationen
+    (function(){
+      const btn = document.getElementById('shareFast');
+      const pref = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!btn) return;
+      let variants=[];
+      try{ variants=JSON.parse(btn.getAttribute('data-cta-variants')||'[]'); }catch(_){}
+      if(!variants.length || pref) return;
+      let i=0;
+      setInterval(()=>{ i=(i+1)%variants.length; btn.textContent=variants[i]; }, 3400);
+    })();
 
-  // VIP Slider
-  (function(){
-    const track=document.getElementById('vipTrack');
-    const prev=document.getElementById('vipPrev');
-    const next=document.getElementById('vipNext');
-    if(!track||!prev||!next) return;
-    let idx=0;
-    const slides=track.children.length;
-    function set(i){ idx=(i+slides)%slides; track.style.transform=`translateX(${idx*-100}%)`; }
-    prev.addEventListener('click',()=>set(idx-1));
-    next.addEventListener('click',()=>set(idx+1));
-    let t=setInterval(()=>set(idx+1), 4500);
-    ['mouseenter','touchstart'].forEach(ev=>track.addEventListener(ev,()=>{ clearInterval(t); },{passive:true}));
-    ['mouseleave','touchend'].forEach(ev=>track.addEventListener(ev,()=>{ t=setInterval(()=>set(idx+1),4500); },{passive:true}));
-  })();
+    // Whisper (einmal pro Session)
+    (function(){
+      const KEY='hh_whisper_seen_wg_v1';
+      try{
+        if(sessionStorage.getItem(KEY)) return;
+        const w=document.getElementById('whisper'); if(!w) return;
+        setTimeout(()=>{ w.style.opacity='1'; w.style.transform='translateY(0)';
+          setTimeout(()=>{ w.style.opacity='0'; w.style.transform='translateY(10px)'; }, 4200);
+          sessionStorage.setItem(KEY,'1');
+        }, 16000);
+      }catch(_){}
+    })();
 
-  // Share Composer (+ UTM / ref tracking)
-  (function(){
-    const name = document.getElementById('refName');
-    const area = document.getElementById('refText');
-    const wa   = document.getElementById('waShare');
-    const mail = document.getElementById('mailShare');
-    const copy = document.getElementById('copyBtn');
-    const preview = document.getElementById('waPreviewText');
-    const segBtns=[...document.querySelectorAll('.seg-btn')];
-    if(!area) return;
+    // VIP Slider
+    (function(){
+      const track=document.getElementById('vipTrack');
+      const prev=document.getElementById('vipPrev');
+      const next=document.getElementById('vipNext');
+      if(!track||!prev||!next) return;
+      let idx=0;
+      const slides=track.children.length;
+      function set(i){ idx=(i+slides)%slides; track.style.transform=`translateX(${idx*-100}%)`; }
+      prev.addEventListener('click',()=>set(idx-1));
+      next.addEventListener('click',()=>set(idx+1));
+      let t=setInterval(()=>set(idx+1), 4500);
+      ['mouseenter','touchstart'].forEach(ev=>track.addEventListener(ev,()=>{ clearInterval(t); },{passive:true}));
+      ['mouseleave','touchend'].forEach(ev=>track.addEventListener(ev,()=>{ t=setInterval(()=>set(idx+1),4500); },{passive:true}));
+    })();
 
-    const KEY_REFID='hh_ref_rid_v3';
-    function randomId(len=10){ const a='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len); (crypto.getRandomValues?crypto.getRandomValues(u):u).forEach((_,i)=>u[i]=u[i]||Math.random()*256); return Array.from(u,x=>a[x%a.length]).join(''); }
-    function getRefId(){ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } }
-    function sanitize(n){ return n ? n.replace(/[^a-z0-9äöüÄÖÜß\- ]/gi,'').trim() : ''; }
-    function aliasSlug(n){ return (n||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
-    function buildURL(){
-      // Zielseite für Empfänger ist die Hauptseite (Ampel), nicht /weitergeben
-      const base=new URL('https://heikohaerter.com/');
-      base.searchParams.set('utm_source','weitergeben');
-      base.searchParams.set('utm_medium','share');
-      base.searchParams.set('utm_campaign','check');
-      const rid=getRefId(); base.searchParams.set('rid', rid);
-      const alias=aliasSlug(sanitize(name?.value));
-      if(alias) base.searchParams.set('ref', alias+'.'+String(rid).slice(0,5));
-      return base.toString();
-    }
-    function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
-    function detectSeg(){
-      const raw=(name?.value||'').toLowerCase();
-      if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
-      if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
-      if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
-      if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
-      if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
-      return 'neutral';
-    }
-    function pick(seg){ const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; const i=Math.floor(Math.random()*pool.length); return pool[i]; }
-    function ensureURL(text){ return /\bhttps?:\/\/\S+/i.test(text) ? text : (text.trim()+' '+buildURL()); }
-    function setTextFrom(seg){ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); }
-    function plain(){ return (area.value||'').replace(/\n+/g,' ').trim(); }
-    function updateLinks(){
-      const t=ensureURL(plain());
-      wa && (wa.href='https://wa.me/?text='+encodeURIComponent(t));
-      mail && (mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t));
-      if(preview){ const cut=190; preview.textContent = t.length<=cut ? t : t.substring(0,t.lastIndexOf(' ',cut))+'…'; }
-    }
-    if(!area.value){ setTextFrom('neutral'); } updateLinks();
-    segBtns.forEach(b=> b.addEventListener('click', ()=>{ setTextFrom(b.getAttribute('data-seg')); bumpHalf(); },{passive:true}));
-    name?.addEventListener('input', ()=> setTextFrom(), {passive:true});
-    area?.addEventListener('input', updateLinks, {passive:true});
+    // Share Composer (+ UTM / ref tracking)
+    (function(){
+      const $ = sel => document.querySelector(sel);
+      const name = $('#refName');
+      const area = $('#refText');
+      const wa   = $('#waShare');
+      const mail = $('#mailShare');
+      const copy = $('#copyBtn');
+      const preview = $('#waPreviewText');
+      const segBtns = Array.from(document.querySelectorAll('.seg-btn'));
+      if(!area) return;
 
-    // Quick helpers for level
-    function toast(msg='OK'){ const t=document.createElement('div'); t.textContent=msg; t.className='whisper'; const base=document.getElementById('whisper'); t.style.cssText=base?base.style.cssText:t.style.cssText; document.body.appendChild(t); requestAnimationFrame(()=>{t.style.opacity='1'; t.style.transform='translateY(0)';}); setTimeout(()=>t.remove(),1600); }
+      const KEY_REFID='hh_ref_rid_v3';
 
-    document.getElementById('readyMsg')?.addEventListener('click', ()=>{ setTextFrom(); bumpHalf(); toast('Fertiger Text eingefügt ✔️'); });
-    document.getElementById('magicLine')?.addEventListener('click', ()=>{
-      const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
-      const cur=(area.value||'').trim();
-      area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
-      updateLinks(); bumpHalf();
-    });
-    document.getElementById('addPersonal')?.addEventListener('click', ()=>{
-      const alias=(name?.value||'').trim()||'Hey';
-      area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
-      updateLinks(); bumpHalf();
-    });
-    copy?.addEventListener('click', async ()=>{
-      try{ await navigator.clipboard.writeText(ensureURL(area.value)); toast('Kopiert 📋'); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
-      bumpFull();
-    });
-    document.getElementById('waShare')?.addEventListener('click', ()=> bumpFull());
-    document.getElementById('mailShare')?.addEventListener('click', ()=> bumpFull());
-    document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
-      const t=ensureURL(plain()); const url=buildURL();
-      if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); bumpFull(); }catch(_){/* ignore */} }
-    });
+      function randomId(len=10){
+        const alphabet='abcdefghijklmnopqrstuvwxyz0123456789';
+        const u=new Uint8Array(len);
+        if (window.crypto && crypto.getRandomValues) {
+          crypto.getRandomValues(u);
+        } else {
+          for(let i=0;i<len;i++) u[i]=Math.floor(Math.random()*256);
+        }
+        let out='';
+        for(let i=0;i<len;i++) out += alphabet[u[i] % alphabet.length];
+        return out;
+      }
 
-    // Progress / tiers
-    let progress=0; // 0..100
-    const level=document.getElementById('levelBar');
-    const bars=[...document.querySelectorAll('.tiers .bar i')];
-    function renderProgress(){
-      level && (level.style.width=progress+'%');
-      const hits = Math.round(progress/10); // arbitrary mapping
-      bars.forEach(i=>{
-        const goal=Number(i.getAttribute('data-goal'))||0;
-        const pct = Math.min(100, Math.max(0, (hits/goal)*100));
-        i.style.width = pct + '%';
+      function getRefId(){
+        try{
+          let v = localStorage.getItem(KEY_REFID);
+          if (!v){ v=randomId(); localStorage.setItem(KEY_REFID, v); }
+          return v;
+        }catch(_){ return randomId(); }
+      }
+
+      function sanitize(n){ return n ? n.replace(/[^a-z0-9äöüÄÖÜß\- ]/gi,'').trim() : ''; }
+      function aliasSlug(n){ return (n||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
+
+      function buildURL(){
+        // Zielseite ist die Hauptseite (Ampel)
+        const base = new URL('https://heikohaerter.com/');
+        base.searchParams.set('utm_source','weitergeben');
+        base.searchParams.set('utm_medium','share');
+        base.searchParams.set('utm_campaign','check');
+        const rid = getRefId();
+        base.searchParams.set('rid', rid);
+        const alias = aliasSlug(sanitize(name?.value));
+        if(alias) base.searchParams.set('ref', alias+'.'+String(rid).slice(0,5));
+        return base.toString();
+      }
+
+      function variants(){
+        try{ return JSON.parse(area.getAttribute('data-variants')); }
+        catch(_){ return {neutral:[]}; }
+      }
+
+      function detectSeg(){
+        const raw=(name?.value||'').toLowerCase();
+        if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
+        if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
+        if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
+        if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
+        if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
+        return 'neutral';
+      }
+
+      function pick(seg){
+        const sets=variants(); const pool=(sets[seg]||sets.neutral||[]);
+        if(!pool.length) return '';
+        const i=Math.floor(Math.random()*pool.length); return pool[i];
+      }
+
+      function ensureURL(text){
+        return /\bhttps?:\/\/\S+/i.test(text) ? text : (text.trim()+' '+buildURL());
+      }
+
+      function setTextFrom(seg){
+        const tmpl=pick(seg||detectSeg()); if(!tmpl) return;
+        area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL());
+        updateLinks();
+      }
+
+      function plain(){ return (area.value||'').replace(/\n+/g,' ').trim(); }
+
+      function updateLinks(){
+        const t=ensureURL(plain());
+        if (wa)  wa.href='https://wa.me/?text='+encodeURIComponent(t);
+        if (mail) mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t);
+        if (preview){
+          const cut=190;
+          preview.textContent = t.length<=cut ? t : (t.substring(0, t.lastIndexOf(' ', cut)) + '…');
+        }
+      }
+
+      if(!area.value){ setTextFrom('neutral'); }
+      updateLinks();
+
+      segBtns.forEach(b=> b.addEventListener('click', ()=>{
+        setTextFrom(b.getAttribute('data-seg'));
+        bumpHalf();
+      },{passive:true}));
+
+      name?.addEventListener('input', ()=> setTextFrom(), {passive:true});
+      area?.addEventListener('input', updateLinks, {passive:true});
+
+      // Kleine Toaster-Hilfe
+      function toast(msg='OK'){
+        const t=document.createElement('div');
+        t.textContent=msg; t.className='whisper'; const base=document.getElementById('whisper');
+        t.style.cssText=base?base.style.cssText:t.style.cssText;
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>{t.style.opacity='1'; t.style.transform='translateY(0)';});
+        setTimeout(()=>t.remove(),1600);
+      }
+
+      document.getElementById('readyMsg')?.addEventListener('click', ()=>{
+        setTextFrom(); bumpHalf(); toast('Fertiger Text eingefügt ✔️');
       });
-    }
-    function bumpHalf(){ progress = Math.min(100, progress+8); renderProgress(); }
-    function bumpFull(){ progress = Math.min(100, progress+20); renderProgress(); }
-    renderProgress();
 
-    // Fast CTA also bumps
-    document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); bumpHalf(); });
-  })();
+      document.getElementById('magicLine')?.addEventListener('click', ()=>{
+        const line='Hey, hab das gerade gesehen – dachte sofort an dich.';
+        const cur=(area.value||'').trim();
+        area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL();
+        updateLinks(); bumpHalf();
+      });
 
-  // Smooth anchor scroll (reduced-motion aware)
-  (function(){
-    const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const id=a.getAttribute('href'); if(!id||id==='#') return;
-        const t=document.querySelector(id); if(!t) return;
-        e.preventDefault();
-        t.scrollIntoView({behavior: pref?'auto':'smooth', block:'start'});
-      }, {passive:false});
-    });
+      document.getElementById('addPersonal')?.addEventListener('click', ()=>{
+        const alias=(name?.value||'').trim()||'Hey';
+        area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`;
+        updateLinks(); bumpHalf();
+      });
+
+      copy?.addEventListener('click', async ()=>{
+        try{
+          await navigator.clipboard.writeText(ensureURL(area.value));
+          toast('Kopiert 📋');
+        }catch(_){
+          area.select();
+          document.execCommand && document.execCommand('copy');
+        }
+        bumpFull();
+      });
+
+      document.getElementById('waShare')?.addEventListener('click', ()=> bumpFull());
+      document.getElementById('mailShare')?.addEventListener('click', ()=> bumpFull());
+      document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
+        const t=ensureURL(plain()); const url=buildURL();
+        if(navigator.share){
+          try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); bumpFull(); }catch(_){}
+        } else {
+          // Fallback: Kopieren
+          try{ await navigator.clipboard.writeText(t); toast('Link kopiert 📋'); bumpHalf(); }catch(_){}
+        }
+      });
+
+      // Fortschritt / Tiers
+      let progress=0; // 0..100
+      const level=document.getElementById('levelBar');
+      const bars=Array.from(document.querySelectorAll('.tiers .bar i'));
+
+      function renderProgress(){
+        if(level) level.style.width=progress+'%';
+        const hits = Math.round(progress/10); // mapping
+        bars.forEach(i=>{
+          const goal=Number(i.getAttribute('data-goal'))||0;
+          const pct = goal ? Math.min(100, Math.max(0, (hits/goal)*100)) : 0;
+          i.style.width = pct + '%';
+        });
+      }
+      function bumpHalf(){ progress = Math.min(100, progress+8); renderProgress(); }
+      function bumpFull(){ progress = Math.min(100, progress+20); renderProgress(); }
+      renderProgress();
+
+      // Fast-CTA bump
+      document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); bumpHalf(); });
+    })();
+
+    // Smooth-Scroll (Motion-aware)
+    (function(){
+      const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const id=a.getAttribute('href'); if(!id||id==='#') return;
+          const t=document.querySelector(id); if(!t) return;
+          e.preventDefault();
+          t.scrollIntoView({behavior: pref?'auto':'smooth', block:'start'});
+        }, {passive:false});
+      });
+    })();
   })();
-})();
-</script>
+  </script>
 </body>
 </html>
