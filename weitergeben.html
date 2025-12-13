@@ -34,6 +34,7 @@
   <!-- Preconnect -->
   <link rel="preconnect" href="https://static.wixstatic.com" crossorigin />
   <link rel="preconnect" href="https://wa.me" crossorigin />
+  <link rel="dns-prefetch" href="https://wa.me" />
 
   <!-- LCP Preload -->
   <link rel="preload" as="image" href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" fetchpriority="high" />
@@ -94,7 +95,12 @@
     /* Buttons / Cards */
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:.9rem 1.4rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);font-weight:800;cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
     .btn:hover{transform:translateY(-1px)}
-    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#161616;box-shadow:0 14px 34px rgba(200,164,75,.35)}
+    .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#161616;box-shadow:0 14px 34px rgba(200,164,75,.35); position:relative; overflow:hidden; isolation:isolate}
+    /* sheen */
+    .btn-primary::after{content:""; position:absolute; inset:-20% auto -20% -60%; width:40%; transform:skewX(-20deg); background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent); filter:blur(1px); opacity:0; pointer-events:none}
+    .btn-primary:hover::after{animation:sheen .9s ease; opacity:1}
+    @keyframes sheen{to{transform:skewX(-20deg) translateX(260%)}}
+
     .btn-ghost{background:rgba(255,255,255,.06)}
     .premium-card,.story-card,.share{background:var(--glass);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
     .premium-card{padding:1.05rem 1.15rem}
@@ -155,6 +161,10 @@
     /* Motion */
     .fade-up{opacity:0;transform:translateY(16px)}
     .fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+
+    /* Social Proof ticker */
+    #leise-stimmen .track{display:flex;gap:1rem;white-space:nowrap;animation:wgScroll 28s linear infinite}
+    @keyframes wgScroll{to{transform:translateX(-50%)}}
 
     /* Print — keep share text only */
     @media print{
@@ -243,6 +253,22 @@
           <div class="story-card"><p class="hero-micro mb-0"><strong>Selbstständige:</strong> Kurz Gefühl für Risiken – ohne Verkauf.</p></div>
         </div>
 
+        <!-- Social-Proof Ticker -->
+        <div class="premium-card" id="leise-stimmen" aria-label="Leise Rückmeldungen">
+          <div class="ticker" style="position:relative;overflow:hidden;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04)">
+            <div class="track">
+              <span class="chip">„Null Druck – einfach hilfreich.“ — L.</span>
+              <span class="chip">„Endlich kein Verkauf.“ — M.M.</span>
+              <span class="chip">„In 2 Minuten: Klar.“ — P.&nbsp;&T.</span>
+              <span class="chip">„Würde ich sofort weitergeben.“ — S.</span>
+              <span class="chip">„Null Druck – einfach hilfreich.“ — L.</span>
+              <span class="chip">„Endlich kein Verkauf.“ — M.M.</span>
+              <span class="chip">„In 2 Minuten: Klar.“ — P.&nbsp;&T.</span>
+              <span class="chip">„Würde ich sofort weitergeben.“ — S.</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Share composer -->
         <div class="share stack" role="region" aria-labelledby="share-h" id="share">
           <div class="stack">
@@ -314,7 +340,7 @@
           <small class="hero-micro" style="display:block">Zählt ab: Erstgespräch – kein Abschluss nötig.</small>
         </div>
 
-        <div class="premium-card" style="border-left:4px solid var(--gold)">
+        <div class="premium-card" style="border-left:4px solid var(--gold)" id="no-sales">
           <h3 class="mb-0">Was NICHT passiert</h3>
           <ul class="hero-micro" style="margin:.45rem 0 0;padding-left:1.2rem">
             <li>🙅 Kein peinliches Verkaufsgespräch</li>
@@ -322,6 +348,20 @@
             <li>📞 Ich melde mich nur, wenn sie wirklich will</li>
             <li>💬 Empfehlung ohne Verpflichtung</li>
           </ul>
+        </div>
+
+        <!-- Trust Sheet -->
+        <div class="premium-card" id="trust-sheet">
+          <h3 style="margin:.1rem 0 .4rem">So gehe ich mit Empfehlungen um</h3>
+          <ul class="hero-micro" style="margin:0;padding-left:1.2rem">
+            <li>Keine Datenweitergabe. Link enthält nur eine anonyme Referenz-ID.</li>
+            <li>Ich melde mich nur, wenn die Person aktiv will.</li>
+            <li>Wertschätzungen erfolgen privat und unabhängig.</li>
+          </ul>
+          <button class="btn btn-ghost" id="trustMore" style="margin-top:.6rem">🔎 Details einblenden</button>
+          <div id="trustDetails" class="hero-micro" style="display:none;margin-top:.6rem;opacity:.9">
+            Technisch: RID in LocalStorage für Zählung; UTM nur zur Attribution; keine Cookies von Dritten; kein Pixel.
+          </div>
         </div>
       </div>
     </section>
@@ -429,6 +469,9 @@
        🟡 10 Sekunden – jemand hat morgen ein Gefühl für heute.
   </div>
 
+  <!-- Confetti Canvas -->
+  <canvas id="fxConfetti" aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:120;mix-blend-mode:screen;opacity:0;transition:opacity .25s ease"></canvas>
+
   <noscript>
     <div style="max-width:1100px;margin:16px auto;padding:12px;border:1px solid rgba(255,255,255,.2);border-radius:12px;color:#F1F3FA;background:rgba(255,255,255,.06)">
       JavaScript ist deaktiviert. Du kannst den Text trotzdem kopieren und per WhatsApp, Mail oder System-Teilen senden.
@@ -458,8 +501,7 @@
       if(pref){els.forEach(el=>el.classList.add('visible'));return;}
       if('IntersectionObserver'in window){
         const io=new IntersectionObserver(ents=>ents.forEach(e=>{
-          if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
-        }),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
+          if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} } ),{threshold:.12,rootMargin:'0px 0px -10% 0px'});
         els.forEach(el=>io.observe(el));
       }else{els.forEach(el=>el.classList.add('visible'));}
     })();
@@ -499,8 +541,8 @@
           setTimeout(()=>{ w.style.opacity='0'; w.style.transform='translateY(10px)'; }, 4200);
           sessionStorage.setItem(KEY,'1');
         }, 16000);
-      }catch(_){}
-    })();
+      }catch(_){}}
+    )();
 
     // VIP Slider
     (function(){
@@ -521,22 +563,32 @@
     (function(){
       const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
       const cut=document.querySelector('.cut-overlay');
-      function cinematicScroll(target){
-        if(!target) return;
-        cut?.classList.add('on');
-        setTimeout(()=> target.scrollIntoView({behavior: pref?'auto':'smooth', block:'start'}), 110);
-        setTimeout(()=> cut?.classList.remove('on'), 360);
-      }
+      function cinematicScroll(target){ if(!target) return; cut?.classList.add('on'); setTimeout(()=> target.scrollIntoView({behavior: pref?'auto':'smooth', block:'start'}), 110); setTimeout(()=> cut?.classList.remove('on'), 360); }
       document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click',(e)=>{
-          const id=a.getAttribute('href'); if(!id||id==='#') return;
-          const t=document.querySelector(id); if(!t) return;
-          e.preventDefault(); cinematicScroll(t);
-        },{passive:false});
+        a.addEventListener('click',(e)=>{ const id=a.getAttribute('href'); if(!id||id==='#') return; const t=document.querySelector(id); if(!t) return; e.preventDefault(); cinematicScroll(t); },{passive:false});
       });
+      // Hook explicit CTAs (ensures cut effect)
+      document.getElementById('shareFast')?.addEventListener('click',(e)=>{ const t=document.querySelector('#share'); if(!t) return; e.preventDefault(); cinematicScroll(t); });
+      document.getElementById('ctaFinal')?.addEventListener('click',(e)=>{ const t=document.querySelector('#share'); if(!t) return; e.preventDefault(); cinematicScroll(t); });
     })();
 
-    // Share Composer (UTM/ref + segments + progress)
+    // Confetti FX (celebrate on copy/share)
+    (function confetti(){
+      const c=document.getElementById('fxConfetti'); if(!c) return;
+      const ctx=c.getContext('2d',{alpha:true});
+      let W=innerWidth,H=innerHeight; function resize(){W=innerWidth;H=innerHeight;c.width=W;c.height=H}
+      resize(); addEventListener('resize',resize,{passive:true});
+      let parts=[],raf,t0=0;
+      function burst(x=W/2,y=H/2,n=120){ for(let i=0;i<n;i++){ const a=Math.random()*Math.PI*2, sp=2+Math.random()*4, r=2+Math.random()*3; parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-2,life:60+Math.random()*30,r,rot:Math.random()*6.28,vr:(Math.random()-.5)*.2}); } run(); }
+      function run(ts){ if(!raf){ c.style.opacity='1'; raf=requestAnimationFrame(run); return; }
+        const dt=(ts-(t0||ts))/16; t0=ts; ctx.clearRect(0,0,W,H); parts=parts.filter(p=>p.life>0);
+        for(const p of parts){ p.life-=dt; p.vy+=0.12*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; p.rot+=p.vr*dt; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=`hsla(${Math.random()*50+40},80%,${60+Math.random()*20}%,.9)`; ctx.fillRect(-p.r,-p.r,p.r*2,p.r*2); ctx.restore(); }
+        if(parts.length){ raf=requestAnimationFrame(run); } else { raf=null; c.style.opacity='0'; }
+      }
+      window.celebrate=(el)=>{ try{ navigator.vibrate && navigator.vibrate([10,30,10]); }catch(_){ } const b=(el&&el.getBoundingClientRect())||{left:W/2,top:H/2,width:0,height:0}; burst(b.left+b.width/2, b.top+b.height/2); };
+    })();
+
+    // Share Composer (UTM/ref + segments + progress + a11y + tones + confetti)
     (function(){
       const $ = s => document.querySelector(s);
       const name = $('#refName');
@@ -549,17 +601,8 @@
       if(!area) return;
 
       const KEY_REFID='hh_ref_rid_v3';
-
-      function randomId(len=10){
-        const alphabet='abcdefghijklmnopqrstuvwxyz0123456789';
-        const u=new Uint8Array(len);
-        if (crypto && crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.floor(Math.random()*256);
-        let out=''; for(let i=0;i<len;i++) out += alphabet[u[i] % alphabet.length]; return out;
-      }
-      function getRefId(){
-        try{ let v=localStorage.getItem(KEY_REFID); if(!v){ v=randomId(); localStorage.setItem(KEY_REFID,v); } return v; }
-        catch(_){ return randomId(); }
-      }
+      function randomId(len=10){ const alphabet='abcdefghijklmnopqrstuvwxyz0123456789'; const u=new Uint8Array(len); if (crypto && crypto.getRandomValues) crypto.getRandomValues(u); else for(let i=0;i<len;i++) u[i]=Math.floor(Math.random()*256); let out=''; for(let i=0;i<len;i++) out += alphabet[u[i] % alphabet.length]; return out; }
+      function getRefId(){ try{ let v=localStorage.getItem(KEY_REFID); if(!v){ v=randomId(); localStorage.setItem(KEY_REFID,v); } return v; } catch(_){ return randomId(); } }
       const sanitize = n => n ? n.replace(/[^a-z0-9äöüÄÖÜß\- ]/gi,'').trim() : '';
       const aliasSlug = n => (n||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 
@@ -573,34 +616,19 @@
         return base.toString();
       }
       function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
-      function detectSeg(){
-        const raw=(name?.value||'').toLowerCase();
-        if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
-        if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen';
-        if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde';
-        if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst';
-        if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
-        return 'neutral';
-      }
-      const pick = seg => {
-        const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return '';
-        const i=Math.floor(Math.random()*pool.length); return pool[i];
-      };
+      function detectSeg(){ const raw=(name?.value||'').toLowerCase(); if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern'; if(/(chef|manager|kolleg|team|büro)/.test(raw)) return 'kollegen'; if(/(freund|kumpel|bff|buddy|schatz)/.test(raw)) return 'freunde'; if(/(selbständig|selbstständig|freelance|freiberuf)/.test(raw)) return 'selbst'; if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner'; return 'neutral'; }
+      const pick = seg => { const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; const i=Math.floor(Math.random()*pool.length); return pool[i]; };
       const ensureURL = t => /\bhttps?:\/\/\S+/i.test(t) ? t : (t.trim()+' '+buildURL());
       function setTextFrom(seg){ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); }
       const plain = ()=> (area.value||'').replace(/\n+/g,' ').trim();
-      function updateLinks(){
-        const t=ensureURL(plain());
-        wa && (wa.href='https://wa.me/?text='+encodeURIComponent(t));
-        mail && (mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t));
-        if(preview){ const cut=190; preview.textContent = t.length<=cut ? t : (t.substring(0, t.lastIndexOf(' ', cut)) + '…'); }
-      }
+      function updateLinks(){ const t=ensureURL(plain()); wa && (wa.href='https://wa.me/?text='+encodeURIComponent(t)); mail && (mail.href='mailto:?subject='+encodeURIComponent('Kurzer Blick')+'&body='+encodeURIComponent(t)); if(preview){ const cut=190; preview.textContent = t.length<=cut ? t : (t.substring(0, t.lastIndexOf(' ', cut)) + '…'); } }
 
       if(!area.value){ setTextFrom('neutral'); } updateLinks();
 
-      // Progress visuals
+      // Progress visuals + tones
       let progress=0; const level=document.getElementById('levelBar'); const bars=[...document.querySelectorAll('.tiers .bar i')];
-      const render=()=>{ if(level) level.style.width=progress+'%'; const hits=Math.round(progress/10); bars.forEach(i=>{ const goal=Number(i.getAttribute('data-goal'))||0; i.style.width=Math.min(100,(hits/goal)*100)+'%'; }); };
+      let tone50=false, tone100=false; let _ctx; const tone=(f=640,ms=120)=>{ try{ _ctx=_ctx||new (window.AudioContext||window.webkitAudioContext)(); const o=_ctx.createOscillator(), g=_ctx.createGain(); o.type='sine'; o.frequency.value=f; g.gain.value=.0001; g.gain.exponentialRampToValueAtTime(.12,_ctx.currentTime+.03); g.gain.exponentialRampToValueAtTime(.0001,_ctx.currentTime+ms/1000); o.connect(g).connect(_ctx.destination); o.start(); o.stop(_ctx.currentTime+ms/1000); }catch(_){ } };
+      const render=()=>{ if(level) level.style.width=progress+'%'; const hits=Math.round(progress/10); bars.forEach(i=>{ const goal=Number(i.getAttribute('data-goal'))||0; i.style.width=Math.min(100,(hits/goal)*100)+'%'; }); if(!tone50 && progress>=50){ tone50=true; tone(520,140);} if(!tone100 && progress>=100){ tone100=true; tone(740,220);} };
       const bumpHalf=()=>{ progress=Math.min(100,progress+8); render(); };
       const bumpFull=()=>{ progress=Math.min(100,progress+20); render(); };
       render();
@@ -610,28 +638,28 @@
       name?.addEventListener('input', ()=> setTextFrom(), {passive:true});
       area?.addEventListener('input', updateLinks, {passive:true});
 
-      function toast(msg='OK'){
-        const t=document.createElement('div'); t.textContent=msg; t.className='whisper';
-        const base=document.getElementById('whisper');
-        t.style.cssText= base ? base.style.cssText : 'position:fixed;left:18px;bottom:18px;z-index:75;background:#0b0f16;border:1px solid #333;color:#fff;border-radius:14px;padding:.6rem .8rem;opacity:0;transform:translateY(10px);transition:opacity .25s ease, transform .25s ease';
-        document.body.appendChild(t); requestAnimationFrame(()=>{t.style.opacity='1'; t.style.transform='translateY(0)';}); setTimeout(()=>t.remove(),1600);
-      }
+      function toast(msg='OK'){ const t=document.createElement('div'); t.textContent=msg; t.className='whisper'; const base=document.getElementById('whisper'); t.style.cssText= base ? base.style.cssText : 'position:fixed;left:18px;bottom:18px;z-index:75;background:#0b0f16;border:1px solid #333;color:#fff;border-radius:14px;padding:.6rem .8rem;opacity:0;transform:translateY(10px);transition:opacity .25s ease, transform .25s ease'; document.body.appendChild(t); requestAnimationFrame(()=>{t.style.opacity='1'; t.style.transform='translateY(0)';}); setTimeout(()=>t.remove(),1600); }
 
-      document.getElementById('readyMsg')?.addEventListener('click', ()=>{ setTextFrom(); bumpHalf(); toast('Fertiger Text eingefügt ✔️'); });
+      document.getElementById('readyMsg')?.addEventListener('click', ()=>{ setTextFrom(); bumpHalf(); toast('Fertiger Text eingefügt ✔️'); setTimeout(()=> document.getElementById('waShare')?.focus(), 50); });
       document.getElementById('magicLine')?.addEventListener('click', ()=>{ const line='Hey, hab das gerade gesehen – dachte sofort an dich.'; const cur=(area.value||'').trim(); area.value = cur ? line+'\n\n'+cur : line+'\n\n'+buildURL(); updateLinks(); bumpHalf(); });
       document.getElementById('addPersonal')?.addEventListener('click', ()=>{ const alias=(name?.value||'').trim()||'Hey'; area.value = (area.value||'') + `\n\n${alias.split(' ')[0]}, dachte an dich, weil …`; updateLinks(); bumpHalf(); });
 
-      copy?.addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(ensureURL(area.value)); toast('Kopiert 📋'); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); } bumpFull(); });
-      document.getElementById('waShare')?.addEventListener('click', ()=> bumpFull());
-      document.getElementById('mailShare')?.addEventListener('click', ()=> bumpFull());
+      copy?.addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(ensureURL(area.value)); toast('Kopiert 📋'); celebrate(copy); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); } bumpFull(); });
+      document.getElementById('waShare')?.addEventListener('click', ()=>{ bumpFull(); celebrate(document.getElementById('waShare')); });
+      document.getElementById('mailShare')?.addEventListener('click', ()=>{ bumpFull(); celebrate(document.getElementById('mailShare')); });
       document.getElementById('nativeShare')?.addEventListener('click', async ()=>{
         const t=ensureURL(plain()); const url=buildURL();
-        if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); bumpFull(); }catch(_){ } }
+        if(navigator.share){ try{ await navigator.share({title:'2-Minuten-Blick', text:t, url}); bumpFull(); celebrate(document.getElementById('nativeShare')); }catch(_){ } }
         else{ try{ await navigator.clipboard.writeText(t); toast('Link kopiert 📋'); bumpHalf(); }catch(_){} }
       });
 
       document.getElementById('shareFast')?.addEventListener('click', ()=>{ setTextFrom(); bumpHalf(); });
-      render();
+
+      // Zielgruppen per 1..6 auswählbar
+      addEventListener('keydown',(e)=>{ const map={'1':'eltern','2':'kollegen','3':'freunde','4':'selbst','5':'partner','6':'neutral'}; if(map[e.key]){ document.querySelector(`.seg-btn[data-seg="${map[e.key]}"]`)?.click(); }});
+
+      // Trust details toggle
+      document.getElementById('trustMore')?.addEventListener('click',()=>{ const d=document.getElementById('trustDetails'); const on=d.style.display!=='none'; d.style.display=on?'none':'block'; });
     })();
   })();
   </script>
