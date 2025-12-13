@@ -21,7 +21,7 @@
   <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- LCP image preload (Hero/Brand) -->
+  <!-- LCP image preload -->
   <link rel="preload" as="image"
         href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
         imagesrcset="
@@ -43,6 +43,9 @@
 <body class="godmode">
 <a href="#slides" class="skip">Zum Inhalt springen</a>
 
+<!-- Cinematic cut overlay -->
+<div class="cut-overlay" aria-hidden="true"></div>
+
 <!-- CINEMATIC LAYERS -->
 <div class="cinema-bars" aria-hidden="true"></div>
 <div class="film-grain" aria-hidden="true"></div>
@@ -56,6 +59,10 @@
   <!-- ACT I — OPENING -->
   <section class="slide hero fade-up" data-beat="1" aria-labelledby="t1">
     <div class="inner">
+
+      <!-- Opening Shot -->
+      <div class="opening-shot" aria-hidden="true"><span class="breath-line"></span></div>
+
       <p class="eyebrow">Kein Gespräch · Keine Entscheidung · Nur Klarheit</p>
 
       <h1 id="t1" class="kinetic">
@@ -83,6 +90,14 @@
       </div>
     </div>
 
+    <!-- Hero Media -->
+    <div class="hero-media" aria-hidden="true">
+      <video class="hero-video" playsinline muted loop autoplay preload="metadata"
+             poster="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
+        <source src="https://video.wixstatic.com/video/4e46cf_6fc6da8b5b26415db4354bd72bd5f8f4/480p/mp4/file.mp4" type="video/mp4">
+      </video>
+    </div>
+
     <div class="stage" aria-hidden="true">
       <div class="glow glow-a"></div>
       <div class="glow glow-b"></div>
@@ -99,16 +114,31 @@
         <article class="card parallax">
           <h3>22:47 · Eltern</h3>
           <p>Die Kinder schlafen. „Haben wir eigentlich alles geregelt?“</p>
+          <picture>
+            <img src="https://static.wixstatic.com/media/4e46cf_a4ddba89cb8b48e58f20432680f8abde~mv2.png"
+                 alt="Eltern – ruhiger Blick nach dem Zubettbringen"
+                 loading="lazy" decoding="async" width="1200" height="800">
+          </picture>
         </article>
 
         <article class="card parallax">
           <h3>Paare</h3>
           <p>Zukunft, Verantwortung, Entscheidungen. Nichts brennt – aber alles hängt zusammen.</p>
+          <picture>
+            <img src="https://static.wixstatic.com/media/4e46cf_a4ddba89cb8b48e58f20432680f8abde~mv2.png"
+                 alt="Paare – gemeinsam Entscheidungen treffen"
+                 loading="lazy" decoding="async" width="1200" height="800">
+          </picture>
         </article>
 
         <article class="card parallax">
           <h3>Selbstständige</h3>
           <p>Wenn du ausfällst – trägt dein System dich dann?</p>
+          <picture>
+            <img src="https://static.wixstatic.com/media/4e46cf_cfdf02af54b2430d96bf844b08d08428~mv2.png"
+                 alt="Selbstständige – Ausfallrisiko im Blick"
+                 loading="lazy" decoding="async" width="1200" height="800">
+          </picture>
         </article>
       </div>
 
@@ -130,6 +160,12 @@
         <article class="card parallax"><h3>Rücklagen</h3><p>Wochen? Monate? Oder Hoffnung?</p></article>
       </div>
 
+      <picture>
+        <img class="exist-img" src="https://static.wixstatic.com/media/4e46cf_a314641973ba44aba9e40fe8134211b9~mv2.png"
+             alt="Wenn du morgen nicht kannst – ruhige Einordnung"
+             loading="lazy" decoding="async" width="1600" height="900">
+      </picture>
+
       <p class="micro">Die meisten merken erst im Ernstfall, was wirklich fehlt.</p>
 
       <div class="cta">
@@ -149,6 +185,12 @@
         <li>Kein Rechtfertigen</li>
         <li>Ein klares Signal</li>
       </ul>
+
+      <picture>
+        <img class="why-img" src="https://static.wixstatic.com/media/4e46cf_166412eae49949bca1880b550f6a159a~mv2.png"
+             alt="Ungewissheit – Einordnung beruhigt"
+             loading="lazy" decoding="async" width="1600" height="900">
+      </picture>
 
       <div class="cta">
         <button class="btn btn-primary" data-earn-ampel aria-controls="b4" aria-expanded="false">
