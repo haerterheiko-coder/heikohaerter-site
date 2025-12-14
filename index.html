@@ -1,23 +1,53 @@
 <!DOCTYPE html>
-<html lang="de" translate="no">
+<html lang="de" class="no-js" translate="no">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="robots" content="index,follow" />
-  <meta name="theme-color" content="#05070E" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
 
-  <title>Der ruhige Finanz-Kompass</title>
+  <title>Der ruhige Finanz-Kompass · 2-Minuten-Ampel</title>
   <meta name="description" content="Ein kurzer Blick. Kein Urteil. Die 2-Minuten-Ampel für diesen Moment." />
+  <link rel="canonical" href="https://heikohaerter.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Der ruhige Finanz-Kompass" />
+  <meta property="og:title" content="Ein ruhiger Blick für diesen Moment" />
+  <meta property="og:description" content="Anonym. Ohne Unterlagen. Ohne Verkauf. Kein Urteil – nur eine Ampel für jetzt." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://heikohaerter.com" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- LCP -->
+  <link rel="preload" as="image"
+    href="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+    fetchpriority="high" />
+
+  <!-- Schema: bewusst NUR Person -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Heiko Haerter",
+    "url":"https://heikohaerter.com"
+  }
+  </script>
 
   <style>
     :root{
-      --bg:#05070E;
-      --text:#F1F3FA;
-      --muted:#A8B1C5;
+      --bg:#05070E; --bg-soft:#0A0F1E;
+      --surface:rgba(255,255,255,.05);
+      --text:#F7F8FC; --muted:#A8B1C5;
+      --gold:#C8A44B; --gold-soft:#E9D394;
+      --green:#55b76b; --yellow:#d6c45a; --red:#c85151;
       --line:rgba(255,255,255,.12);
-      --green:#55b76b;
-      --yellow:#d6c45a;
-      --red:#c85151;
       --ease:cubic-bezier(.25,.46,.25,1);
       font-size:clamp(16px,1vw+8px,20px);
     }
@@ -25,127 +55,129 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 15% -10%,rgba(200,164,75,.18),transparent 55%),
+        radial-gradient(circle at 85% 10%,rgba(120,150,255,.14),transparent 60%),
+        linear-gradient(180deg,#04050A,#02040A 60%);
       color:var(--text);
-      background:linear-gradient(180deg,#04060E,#060915);
       -webkit-font-smoothing:antialiased;
+      line-height:1.45;
     }
 
-    main{
-      max-width:920px;
-      margin:0 auto;
-      padding:clamp(28px,6vw,84px);
+    main{max-width:1120px;margin:0 auto;padding:clamp(32px,6vw,84px)}
+    section{margin-bottom:4.5rem}
+    h1,h2,h3{margin:0 0 .8rem;line-height:1.15}
+    h1{font-size:clamp(2rem,4vw,3rem)}
+    h2{font-size:clamp(1.5rem,3vw,2.1rem)}
+    h3{font-size:1.05rem}
+    p{margin:0 0 .6rem;color:var(--muted);max-width:44ch}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(5,8,22,.92);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .header-bar{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:.9rem 0;
+    }
+    .brand-top{display:flex;align-items:center;gap:.55rem;font-weight:700}
+    .brand-dot{
+      width:.8rem;height:.8rem;border-radius:999px;
+      background:conic-gradient(from 210deg,var(--gold),var(--gold-soft),var(--gold));
+      box-shadow:0 0 18px rgba(200,164,75,.65);
     }
 
-    section{margin-bottom:4rem}
-    h1,h3{margin:0 0 1rem;line-height:1.15}
-    h1{font-size:clamp(34px,5vw,58px);font-weight:800}
-    h3{font-size:1.1rem;font-weight:600}
-    p{margin:0 0 .9rem;max-width:44ch}
-    .muted{color:var(--muted);font-size:.95rem}
+    /* Hero */
+    .hero-grid{display:grid;gap:2rem}
+    @media(min-width:1024px){.hero-grid{grid-template-columns:1.1fr .9fr}}
+    .hero-micro{font-size:.95rem;color:#8F97AA}
 
-    /* AMPEL */
+    /* Ampel */
     .ampel-wrap{text-align:center;margin:4rem 0 2rem}
-    .ampel{
-      display:inline-flex;
-      gap:1.8rem;
-    }
+    .ampel{display:inline-flex;gap:1.8rem}
     .dot{
       width:30px;height:30px;border-radius:50%;
-      opacity:.22;
-      transition:.5s var(--ease);
+      opacity:.22;transition:.45s var(--ease)
     }
     .green{background:var(--green)}
     .yellow{background:var(--yellow)}
     .red{background:var(--red)}
-    .active{
-      opacity:1;
-      box-shadow:0 0 32px currentColor;
-      transform:scale(1.08);
-    }
+    .active{opacity:1;box-shadow:0 0 32px currentColor;transform:scale(1.08)}
 
     .non-diagnose{
-      margin-top:1rem;
+      margin-top:.9rem;
       font-size:.9rem;
       color:var(--muted);
     }
 
-    /* INSELN */
-    .islands{
-      display:grid;
-      gap:2rem;
-      margin-top:3rem;
-    }
-    .island{
-      border-bottom:1px solid var(--line);
-      padding-bottom:2rem;
-    }
-
-    .options{
-      display:flex;
-      gap:.6rem;
-      flex-wrap:wrap;
-      margin-top:.6rem;
-    }
+    /* Insel-Fragen */
+    .islands{display:grid;gap:2rem}
+    .island{border-bottom:1px solid var(--line);padding-bottom:2rem}
+    .options{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem}
     button{
       background:rgba(255,255,255,.06);
       border:1px solid var(--line);
       color:var(--text);
       border-radius:999px;
-      padding:.5rem .95rem;
+      padding:.5rem .9rem;
       cursor:pointer;
-      font-size:.9rem;
     }
 
-    /* ECHO */
-    .echo p{margin-bottom:.4rem}
-
-    /* RESULT */
-    .result{
-      text-align:center;
-      margin-top:3rem;
-      opacity:0;
-      transition:.6s var(--ease);
-    }
+    /* Ergebnis */
+    .result{text-align:center;margin-top:3rem;opacity:0;transition:.6s var(--ease)}
     .result.visible{opacity:1}
     .result.fade{opacity:.35}
 
-    footer{
-      margin-top:4rem;
-      font-size:.85rem;
-      color:var(--muted);
-    }
+    /* Cards */
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1rem}
+
+    footer{margin-top:4rem;font-size:.85rem;color:var(--muted)}
   </style>
 </head>
 
 <body>
+<header>
+  <div class="header-bar">
+    <div class="brand-top">
+      <span class="brand-dot"></span>
+      Heiko Haerter
+    </div>
+  </div>
+</header>
+
 <main>
 
-  <!-- SZENE -->
+  <!-- Szene -->
   <section>
-    <p>
-      Es ist spät.<br>
-      Eigentlich ist alles erledigt.
-    </p>
-    <p>
-      Und trotzdem dieser Gedanke:<br>
-      <strong>Übersehe ich etwas?</strong>
-    </p>
+    <p>Es ist spät.</p>
+    <p>Eigentlich ist alles erledigt.</p>
+    <p><strong>Und trotzdem dieser Gedanke:</strong></p>
+    <p><strong>Übersehe ich etwas?</strong></p>
   </section>
 
-  <!-- HERO -->
-  <section>
-    <h1>
-      Ein ruhiger Blick<br>
-      für diesen Moment.
-    </h1>
-    <p class="muted">
-      Der ruhige Finanz-Kompass.<br>
-      Anonym. Ohne Unterlagen. Ohne Verkauf.
-    </p>
+  <!-- Hero -->
+  <section class="hero-grid">
+    <div>
+      <h1>Ein ruhiger Blick<br>für diesen Moment.</h1>
+      <p class="hero-micro">
+        Der ruhige Finanz-Kompass.<br>
+        Anonym. Ohne Unterlagen. Ohne Verkauf.
+      </p>
+      <p class="hero-micro">
+        Wenn du magst: zwei ruhige Minuten.
+      </p>
+    </div>
+    <div>
+      <img src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+           alt="Ruhiger Überblick"
+           loading="eager" />
+    </div>
   </section>
 
-  <!-- AMPEL -->
+  <!-- Ampel -->
   <div class="ampel-wrap">
     <div class="ampel" aria-hidden="true">
       <div class="dot green"></div>
@@ -157,11 +189,11 @@
     </div>
   </div>
 
-  <!-- INSEL-FRAGEN -->
+  <!-- Insel-Fragen -->
   <section class="islands">
     <div class="island">
       <h3>Wenn du heute ausfallen würdest –</h3>
-      <p class="muted">wie ruhig fühlt sich euer Alltag an?</p>
+      <p>wie ruhig fühlt sich euer Alltag an?</p>
       <div class="options">
         <button data-v="3">Ruhig</button>
         <button data-v="2">Unklar</button>
@@ -171,7 +203,7 @@
 
     <div class="island">
       <h3>Wie leicht findest du Wichtiges,</h3>
-      <p class="muted">wenn es gebraucht wird?</p>
+      <p>wenn es gebraucht wird?</p>
       <div class="options">
         <button data-v="3">Leicht</button>
         <button data-v="2">Mit Suchen</button>
@@ -181,7 +213,7 @@
 
     <div class="island">
       <h3>Wenn du an später denkst –</h3>
-      <p class="muted">wie klar fühlt sich das an?</p>
+      <p>wie klar fühlt sich das an?</p>
       <div class="options">
         <button data-v="3">Klar</button>
         <button data-v="2">Diffus</button>
@@ -190,27 +222,34 @@
     </div>
   </section>
 
-  <!-- ERGEBNIS -->
+  <!-- Ergebnis -->
   <section class="result" id="result">
     <h3 id="rTitle"></h3>
-    <p class="muted" id="rText"></p>
-    <p class="muted">Gilt nur für jetzt.</p>
+    <p id="rText"></p>
+    <p>Gilt nur für jetzt.</p>
   </section>
 
-  <!-- ECHO -->
-  <section class="echo">
-    <p class="muted">„Tat gut, kurz draufzuschauen.“</p>
-    <p class="muted">„War beruhigend.“</p>
-    <p class="muted">„Hat den Kopf etwas freigemacht.“</p>
-  </section>
-
-  <!-- MENSCH -->
+  <!-- Echo -->
   <section>
-    <p class="muted">
+    <p>„Tat gut, kurz draufzuschauen.“</p>
+    <p>„War beruhigend.“</p>
+    <p>„Hat den Kopf etwas freigemacht.“</p>
+  </section>
+
+  <!-- Mensch -->
+  <section class="card">
+    <p>
       Ich bin Heiko.<br>
       Ich habe dieses Instrument gebaut,<br>
       weil ich diesen Gedanken kenne.
     </p>
+  </section>
+
+  <!-- Share -->
+  <section class="card">
+    <p><strong>Weitergeben – ohne Verantwortung.</strong></p>
+    <p>Du teilst hier keine Meinung. Nur einen kurzen Blick.</p>
+    <input type="text" value="https://heikohaerter.com" readonly />
   </section>
 
   <footer>
@@ -221,43 +260,34 @@
 
 <script>
 (() => {
-  const dots = document.querySelectorAll('.dot');
-  const result = document.getElementById('result');
-  const rTitle = document.getElementById('rTitle');
-  const rText  = document.getElementById('rText');
-  let values = [];
-  let timer;
+  const dots=[...document.querySelectorAll('.dot')];
+  const r=document.getElementById('result');
+  const t=document.getElementById('rTitle');
+  const p=document.getElementById('rText');
+  let vals=[],timer;
 
   function update(){
-    const sum = values.reduce((a,b)=>a+b,0);
+    const s=vals.reduce((a,b)=>a+b,0);
     dots.forEach(d=>d.classList.remove('active'));
-    if(!sum) return;
-
-    let c,t,p;
-    if(sum <= 4){
-      c='red'; t='🔴 Heute wichtig'; p='Ein Bereich braucht Aufmerksamkeit.';
-    }else if(sum <= 7){
-      c='yellow'; t='🟡 Bald wichtig'; p='Ein paar Dinge stehen an.';
-    }else{
-      c='green'; t='🟢 Für heute stabil'; p='Für diesen Moment wirkt alles ruhig.';
-    }
-
+    if(!s){r.classList.remove('visible');return;}
+    let c,tt,pp;
+    if(s<=4){c='red';tt='🔴 Heute wichtig';pp='Ein Bereich braucht Aufmerksamkeit.'}
+    else if(s<=7){c='yellow';tt='🟡 Bald wichtig';pp='Ein paar Dinge stehen an.'}
+    else{c='green';tt='🟢 Für heute stabil';pp='Für diesen Moment wirkt alles ruhig.'}
     document.querySelector('.'+c).classList.add('active');
-    rTitle.textContent=t;
-    rText.textContent=p;
-    result.classList.add('visible');
-    result.classList.remove('fade');
+    t.textContent=tt;p.textContent=pp;
+    r.classList.add('visible');r.classList.remove('fade');
     clearTimeout(timer);
-    timer=setTimeout(()=>result.classList.add('fade'),60000);
+    timer=setTimeout(()=>r.classList.add('fade'),60000);
   }
 
-  document.querySelectorAll('button[data-v]').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const v=Number(btn.dataset.v);
-      const i=values.indexOf(v);
-      i>-1 ? values.splice(i,1) : values.push(v);
+  document.querySelectorAll('button[data-v]').forEach(b=>{
+    b.onclick=()=>{
+      const v=+b.dataset.v;
+      const i=vals.indexOf(v);
+      i>-1?vals.splice(i,1):vals.push(v);
       update();
-    });
+    };
   });
 })();
 </script>
