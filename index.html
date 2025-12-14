@@ -6,26 +6,30 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#05070E" />
+  <meta name="robots" content="index,follow" />
   <title>Heiko Haerter – Ruhiger 2-Minuten-Blick (2026)</title>
   <meta name="description" content="Ein ruhiger 2-Minuten-Blick: zeigt heute Rot/Gelb/Grün – anonym, ohne Verkauf. Plan: Jetzt · Als Nächstes · Später." />
   <link rel="icon" href="/favicon.ico" />
+  <link rel="preload" as="image" href="assets/hero.jpg" imagesrcset="assets/hero.jpg" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <noscript><style>.site-header{opacity:1;transform:none}.sticky-cta{display:block}</style></noscript>
+
   <!-- Header: erst nach Hero via IntersectionObserver -->
   <header id="hdr" class="site-header is-gated" aria-hidden="true">
     <a class="brand" href="/" aria-label="Start">HH·2026</a>
     <nav class="nav" aria-label="Hauptnavigation">
       <a href="#ampel" class="nav-link">Ampel</a>
       <a href="#fuer-wen" class="nav-link">Für wen?</a>
-      <a href="#sicherheit" class="nav-link">Sicherheit</a>
+      <a href="#grenze" class="nav-link">Erwartungsgrenze</a>
       <a href="#stories" class="nav-link">Stories</a>
       <a href="/arbeitgeber.html" class="nav-link">Arbeitgeber</a>
     </nav>
-    <button id="ctaTop" class="btn btn-primary">⚡ Ampel starten</button>
+    <button id="ctaTop" class="btn btn-primary" type="button">⚡ Ampel starten</button>
   </header>
 
-  <main>
+  <main id="main">
     <!-- BLOCK 1 — Permission (Gefühl > Funktion) -->
     <section id="hero" class="hero hero-cinema" aria-label="Einstieg">
       <div class="hero-art" role="img" aria-label="Ruhige Szene bei Abendlicht"></div>
@@ -40,7 +44,7 @@
         </h1>
         <p class="micro fx-fade-delayed">Kein Drama. Nur kurz einordnen.</p>
         <div class="cta-row fx-fade-delayed">
-          <button id="ctaHero" class="btn btn-primary btn-lg">⚡ 2&nbsp;Minuten ansehen</button>
+          <button id="ctaHero" class="btn btn-primary btn-lg" type="button">⚡ 2&nbsp;Minuten ansehen</button>
           <a href="#exit" class="btn btn-ghost">Später. Einfach schließen.</a>
         </div>
       </div>
@@ -74,36 +78,36 @@
     <!-- BLOCK 5 — Der Moment selbst (App) -->
     <section id="check" class="section">
       <h2>In 2 Minuten sehen, wo du heute stehst</h2>
-      <div id="ampelApp" class="card app">
-        <div class="progress"><div id="progressBar" class="progress-bar" style="width:0%"></div></div>
+      <div id="ampelApp" class="card app" role="region" aria-label="Ampel-Check">
+        <div class="progress" aria-hidden="true"><div id="progressBar" class="progress-bar" style="width:0%"></div></div>
 
         <div id="step1" class="step active" data-step="1">
           <p class="step-hint">Intuition reicht.</p>
           <h3>6&nbsp;Monate Ausfall – wie sicher wäre euer Einkommen?</h3>
-          <div class="options">
-            <button class="opt" data-score="2">Sehr sicher</button>
-            <button class="opt" data-score="1">Teils/unsicher</button>
-            <button class="opt" data-score="0">Keine Ahnung</button>
+          <div class="options" role="group" aria-label="Einkommen">
+            <button class="opt" data-score="2" type="button">Sehr sicher</button>
+            <button class="opt" data-score="1" type="button">Teils/unsicher</button>
+            <button class="opt" data-score="0" type="button">Keine Ahnung</button>
           </div>
         </div>
 
         <div id="step2" class="step" data-step="2">
           <p class="step-hint">Intuition reicht.</p>
           <h3>Wer hängt finanziell an dir?</h3>
-          <div class="options">
-            <button class="opt" data-score="0">Nur ich</button>
-            <button class="opt" data-score="1">Partner</button>
-            <button class="opt" data-score="2">Partner + Kind(er)/Team</button>
+          <div class="options" role="group" aria-label="Abhängige">
+            <button class="opt" data-score="0" type="button">Nur ich</button>
+            <button class="opt" data-score="1" type="button">Partner</button>
+            <button class="opt" data-score="2" type="button">Partner + Kind(er)/Team</button>
           </div>
         </div>
 
         <div id="step3" class="step" data-step="3">
           <p class="step-hint">Intuition reicht.</p>
           <h3>Notgroschen / Puffer – wie viele Monate?</h3>
-          <div class="options">
-            <button class="opt" data-score="2">6+ Monate</button>
-            <button class="opt" data-score="1">2–5 Monate</button>
-            <button class="opt" data-score="0">Unter 2 Monate</button>
+          <div class="options" role="group" aria-label="Puffer">
+            <button class="opt" data-score="2" type="button">6+ Monate</button>
+            <button class="opt" data-score="1" type="button">2–5 Monate</button>
+            <button class="opt" data-score="0" type="button">Unter 2 Monate</button>
           </div>
         </div>
 
@@ -131,9 +135,9 @@
     <section class="section">
       <h2>Wenn dein Ergebnis Fragen öffnet</h2>
       <div class="cta-row">
-        <button class="btn btn-primary" data-book>20-Minuten in Ruhe</button>
-        <button class="btn btn-secondary" data-whatsapp>WhatsApp-Kurzfrage</button>
-        <button class="btn" data-ref>Weitergeben</button>
+        <button class="btn btn-primary" data-book type="button">20-Minuten in Ruhe</button>
+        <button class="btn btn-secondary" data-whatsapp type="button">WhatsApp-Kurzfrage</button>
+        <button class="btn" data-ref type="button">Weitergeben</button>
       </div>
       <p class="micro muted">Nur, wenn <em>du</em> willst.</p>
     </section>
@@ -159,14 +163,14 @@
 
   <!-- Sticky CTA: erst nach Hero -->
   <div id="stickyCta" class="sticky-cta" hidden>
-    <button class="btn btn-primary btn-block" data-start>⚡ Ampel starten</button>
+    <button class="btn btn-primary btn-block" data-start type="button">⚡ Ampel starten</button>
   </div>
 
   <!-- Referral Modal (segmentiert) -->
-  <dialog id="refDialog" class="dialog">
+  <dialog id="refDialog" class="dialog" aria-labelledby="refTitle">
     <form method="dialog">
-      <h3>Weitergeben – in 2 Klicks</h3>
-      <div class="seg-row">
+      <h3 id="refTitle">Weitergeben – in 2 Klicks</h3>
+      <div class="seg-row" role="tablist" aria-label="Zielgruppe wählen">
         <button class="seg" data-seg="neutral" type="button">Für alle</button>
         <button class="seg" data-seg="eltern" type="button">Eltern</button>
         <button class="seg" data-seg="kollegen" type="button">Kolleg:innen</button>
@@ -174,9 +178,10 @@
         <button class="seg" data-seg="selbst" type="button">Selbstständige</button>
         <button class="seg" data-seg="partner" type="button">Partner</button>
       </div>
+      <label class="micro" for="refText">Nachricht</label>
       <textarea id="refText" class="input" rows="5"></textarea>
       <div class="dialog-actions">
-        <button class="btn" value="cancel">Schließen</button>
+        <button class="btn" value="cancel" type="button" onclick="this.closest('dialog').close()">Schließen</button>
         <a id="waShare" class="btn btn-primary" target="_blank" rel="noopener">Per WhatsApp teilen</a>
       </div>
       <p class="micro muted" style="margin-top:.6rem">Optional. Kein Vorteil nötig.</p>
@@ -195,8 +200,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#05070E" />
+  <meta name="robots" content="index,follow" />
   <title>Weitergeben – Ruhiger 2-Minuten-Blick</title>
   <meta name="description" content="In 2 Klicks teilen. Keine Rewards nötig. Einfach helfen." />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -207,11 +214,11 @@
     </nav>
   </header>
 
-  <main class="section">
+  <main id="main" class="section">
     <h1>Weitergeben – in 2 Klicks</h1>
     <p class="lead">Wenn es dir geholfen hat, schick den ruhigen Blick weiter. <strong>Kein Vorteil nötig.</strong> Einfach teilen.</p>
 
-    <div class="seg-row mt">
+    <div class="seg-row mt" role="tablist" aria-label="Zielgruppe wählen">
       <button class="seg" data-seg="neutral" type="button">Für alle</button>
       <button class="seg" data-seg="eltern" type="button">Eltern</button>
       <button class="seg" data-seg="kollegen" type="button">Kolleg:innen</button>
@@ -220,22 +227,23 @@
       <button class="seg" data-seg="partner" type="button">Partner</button>
     </div>
 
+    <label class="micro" for="refText">Nachricht</label>
     <textarea id="refText" class="input" rows="6" aria-label="Nachricht zum Teilen"></textarea>
     <div class="cta-row">
       <a id="waShare" class="btn btn-primary" target="_blank" rel="noopener">Per WhatsApp teilen</a>
-      <button class="btn" id="copyBtn">In Zwischenablage</button>
+      <button class="btn" id="copyBtn" type="button">In Zwischenablage</button>
     </div>
 
-    <section class="section-alt mt">
+    <section class="section-alt mt" aria-label="Was hier nicht passiert">
       <h2>Was hier nicht passiert</h2>
       <ul class="list-clean cols-2">
         <li>kein Gespräch</li><li>kein Kontakt</li><li>keine Daten</li><li>kein Nachfassen</li><li>kein Verkauf</li>
       </ul>
     </section>
 
-    <section class="section">
+    <section class="section" aria-label="Beispiele">
       <h2>Was andere weitergegeben haben</h2>
-      <ul class="cards">
+      <ul class="cards" role="list">
         <li class="card"><p>„In 2 Minuten wussten wir, wo wir stehen.“</p><p class="micro muted">Eltern</p></li>
         <li class="card"><p>„Ruhig, hilfreich, null Druck.“</p><p class="micro muted">Freunde</p></li>
       </ul>
@@ -255,8 +263,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#05070E" />
+  <meta name="robots" content="index,follow" />
   <title>Arbeitgeber – Ruhiger 60-Sekunden-Blick fürs Team</title>
   <meta name="description" content="60-Sekunden-Team-Blick: ruhig, anonym, ohne Verkauf. Rot/Gelb/Grün – mehr nicht." />
+  <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -267,13 +277,13 @@
     </nav>
   </header>
 
-  <main>
-    <section class="hero hero-compact">
+  <main id="main">
+    <section class="hero hero-compact" aria-label="Einstieg">
       <div class="hero-layer">
         <h1>Ein ruhiger 60-Sekunden-Blick für Teams, die keine Zeit haben.</h1>
         <p class="micro">Keine Gespräche. Keine Daten. Kein Verkauf.</p>
         <div class="cta-row">
-          <button class="btn btn-primary btn-lg" data-team-start>⚡ Team-Check ansehen</button>
+          <button class="btn btn-primary btn-lg" data-team-start type="button">⚡ Team-Check ansehen</button>
           <a href="/" class="btn btn-ghost">Später. Einfach schließen.</a>
         </div>
       </div>
@@ -284,36 +294,36 @@
     </section>
 
     <section class="section">
-      <div id="teamApp" class="card app">
-        <div class="progress"><div id="teamProgress" class="progress-bar" style="width:0%"></div></div>
+      <div id="teamApp" class="card app" role="region" aria-label="Team-Check">
+        <div class="progress" aria-hidden="true"><div id="teamProgress" class="progress-bar" style="width:0%"></div></div>
 
         <div id="tstep1" class="step active" data-step="1">
           <p class="step-hint">20 Sekunden</p>
           <h3>Wenn A heute 6 Wochen fehlen würde – wie sehr träfe es das Team?</h3>
-          <div class="options">
-            <button class="opt" data-score="0">Hart</button>
-            <button class="opt" data-score="1">Merklich</button>
-            <button class="opt" data-score="2">Abfangbar</button>
+          <div class="options" role="group" aria-label="Ausfall">
+            <button class="opt" data-score="0" type="button">Hart</button>
+            <button class="opt" data-score="1" type="button">Merklich</button>
+            <button class="opt" data-score="2" type="button">Abfangbar</button>
           </div>
         </div>
 
         <div id="tstep2" class="step" data-step="2">
           <p class="step-hint">20 Sekunden</p>
           <h3>Wie sicher ist heute die wichtigste Schnittstelle?</h3>
-          <div class="options">
-            <button class="opt" data-score="0">Unsicher</button>
-            <button class="opt" data-score="1">Teils</button>
-            <button class="opt" data-score="2">Sicher</button>
+          <div class="options" role="group" aria-label="Schnittstelle">
+            <button class="opt" data-score="0" type="button">Unsicher</button>
+            <button class="opt" data-score="1" type="button">Teils</button>
+            <button class="opt" data-score="2" type="button">Sicher</button>
           </div>
         </div>
 
         <div id="tstep3" class="step" data-step="3">
           <p class="step-hint">20 Sekunden</p>
           <h3>Wie lang reicht euer finanzieller Puffer?</h3>
-          <div class="options">
-            <button class="opt" data-score="0">&lt; 2 Monate</button>
-            <button class="opt" data-score="1">2–5 Monate</button>
-            <button class="opt" data-score="2">6+ Monate</button>
+          <div class="options" role="group" aria-label="Puffer">
+            <button class="opt" data-score="0" type="button">&lt; 2 Monate</button>
+            <button class="opt" data-score="1" type="button">2–5 Monate</button>
+            <button class="opt" data-score="2" type="button">6+ Monate</button>
           </div>
         </div>
 
@@ -321,16 +331,16 @@
       </div>
     </section>
 
-    <section class="section section-alt">
+    <section class="section section-alt" aria-label="Nächste Schritte">
       <h2>Wenn das Resultat Fragen öffnet</h2>
       <div class="cta-row">
-        <button class="btn btn-primary" data-book>20-Minuten Struktur-Call</button>
-        <button class="btn btn-secondary" data-whatsapp>WhatsApp-Kurzfrage</button>
+        <button class="btn btn-primary" data-book type="button">20-Minuten Struktur-Call</button>
+        <button class="btn btn-secondary" data-whatsapp type="button">WhatsApp-Kurzfrage</button>
       </div>
       <p class="micro muted">Nur, wenn ihr wollt.</p>
     </section>
 
-    <section class="section">
+    <section class="section" aria-label="Absender">
       <h2>Wer dahintersteht</h2>
       <p>Heiko. Gebaut, weil Teams selten Zeit haben – aber Folgen teuer werden können.</p>
     </section>
@@ -440,7 +450,7 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
 .result.amber{background:linear-gradient(180deg, color-mix(in srgb,var(--amber) 12%, var(--surface)), var(--surface))}
 .result.green{background:linear-gradient(180deg, color-mix(in srgb,var(--green) 12%, var(--surface)), var(--surface))}
 
-/* Dopamin begrenzt auf Ampel-Chips */
+/* Dopamin begrenzt auf Ampel-Chips (nur 1 leicht pulsend, Budget) */
 .ampel-chips{display:flex;gap:var(--g3);padding:0;list-style:none}
 .chip{display:inline-block;border-radius:999px;padding:2px 10px;font-weight:600;font-size:.95rem}
 .chip-red{background:color-mix(in srgb,var(--red) 20%, var(--surface))}
@@ -464,6 +474,11 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
   background:rgba(7,10,18,.88); border-top:1px solid var(--line);
 }
 
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important}
+}
+
 /* Responsive */
 @media (max-width:960px){
   .hero-layer{align-content:end; padding:calc(var(--g6) + 12vh) var(--g5) var(--g6)}
@@ -472,12 +487,11 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
 <!-- ====================== /app.js ====================== -->
 // Minimalkommentare: nur „warum“-Stellen.
 
-/* Router-Helpers */
 const $ = (s, c=document)=>c.querySelector(s);
 const $$ = (s, c=document)=>Array.from(c.querySelectorAll(s));
 const on = (el,ev,fn,opt)=>el && el.addEventListener(ev,fn,opt);
 
-/* IO-Gate: schützt den Kino-Moment */
+/* IO-Gate: schützt den Kino-Moment (Header/Sticky erst nach Hero) */
 function gateHeaderAndSticky(){
   const hero = $('#hero'); const hdr = $('#hdr'); const sticky = $('#stickyCta');
   if(!hero || !hdr) return;
@@ -493,8 +507,7 @@ function gateHeaderAndSticky(){
 
 /* A/B (ohne Tracking): ?ab=functional schaltet Funktions-Hero */
 function heroAB(){
-  const qp = new URLSearchParams(location.search);
-  const mode = qp.get('ab');
+  const mode = new URLSearchParams(location.search).get('ab');
   const emo = $('.js-hero-emotional');
   const fun = $('.js-hero-functional');
   if(!emo || !fun) return;
@@ -523,9 +536,9 @@ function finishAmpel(){
     <p><strong>Als Nächstes:</strong> ${next}</p>
     <p><strong>Später:</strong> ${later}</p>
     <div class="cta-row" style="margin-top:16px">
-      <button class="btn btn-primary" data-book>20-Minuten in Ruhe</button>
-      <button class="btn btn-secondary" data-whatsapp>WhatsApp-Kurzfrage</button>
-      <button class="btn" data-ref>Weitergeben</button>
+      <button class="btn btn-primary" data-book type="button">20-Minuten in Ruhe</button>
+      <button class="btn btn-secondary" data-whatsapp type="button">WhatsApp-Kurzfrage</button>
+      <button class="btn" data-ref type="button">Weitergeben</button>
     </div>`;
   r.classList.remove('hidden'); setTimeout(()=>r.focus(),40);
   if(tier==='green'){ try{ confetti(24);}catch{} } // Dopamin nur bei „grün“
@@ -534,8 +547,8 @@ function bindAmpel(){
   $$('#ampelApp .opt').forEach(b=>on(b,'click',()=>{
     const v=Number(b.dataset.score||0); state.score+=v; state.answers.push(v);
     const next=state.step+1; if(next<=state.maxStep) goStep(next); else { const bar=$('#progressBar'); if(bar) bar.style.width='100%'; finishAmpel(); }
-  }));
-  const startBtns = ['#ctaTop','#ctaHero','[data-start]']; startBtns.forEach(sel=>{
+  }, {passive:true}));
+  ['#ctaTop','#ctaHero','[data-start]'].forEach(sel=>{
     $$(sel).forEach(el=>on(el,'click',()=>{
       state.step=1; state.score=0; state.answers.length=0;
       const r=$('#result'); if(r) r.classList.add('hidden');
@@ -564,8 +577,8 @@ function finishTeam(){
     <p><strong>Als Nächstes:</strong> kurze Ablauf-Skizze.</p>
     <p><strong>Später:</strong> Review in 3 Monaten.</p>
     <div class="cta-row" style="margin-top:16px">
-      <button class="btn btn-primary" data-book>20-Minuten Struktur-Call</button>
-      <button class="btn btn-secondary" data-whatsapp>WhatsApp-Kurzfrage</button>
+      <button class="btn btn-primary" data-book type="button">20-Minuten Struktur-Call</button>
+      <button class="btn btn-secondary" data-whatsapp type="button">WhatsApp-Kurzfrage</button>
     </div>`;
   r.classList.remove('hidden'); setTimeout(()=>r.focus(),40);
   if(tier==='green'){ try{ confetti(24);}catch{} }
@@ -574,7 +587,7 @@ function bindTeam(){
   $$('#teamApp .opt').forEach(b=>on(b,'click',()=>{
     const v=Number(b.dataset.score||0); tstate.score+=v;
     const next=tstate.step+1; if(next<=tstate.max) goTeam(next); else { const bar=$('#teamProgress'); if(bar) bar.style.width='100%'; finishTeam(); }
-  }));
+  }, {passive:true}));
   $$('[data-team-start]').forEach(el=>on(el,'click',()=>{
     tstate.step=1; tstate.score=0;
     const r=$('#teamResult'); if(r) r.classList.add('hidden');
@@ -589,21 +602,11 @@ const SEGMENTS = {
     "2-Minuten-Blick, völlig anonym – sagt dir nur, wo du heute stehst. {{URL}}",
     "Ruhig & ohne Druck: schneller Status. {{URL}}"
   ],
-  eltern: [
-    "Kurz & ruhig: zeigt, ob heute etwas Wichtiges fehlt – ohne Verkauf. {{URL}}"
-  ],
-  kollegen: [
-    "Fixer Blick für die To-do-Liste – sofort sehen, ob was fehlt. {{URL}}"
-  ],
-  freunde: [
-    "Null Druck, nur Orientierung in 2 Minuten. {{URL}}"
-  ],
-  selbst: [
-    "Kurzer Status heute, ohne Papierkram. {{URL}}"
-  ],
-  partner: [
-    "Magst du 2 Minuten schauen? Ampel zeigt nur den Status. {{URL}}"
-  ]
+  eltern: [ "Kurz & ruhig: zeigt, ob heute etwas Wichtiges fehlt – ohne Verkauf. {{URL}}" ],
+  kollegen: [ "Fixer Blick für die To-do-Liste – sofort sehen, ob was fehlt. {{URL}}" ],
+  freunde: [ "Null Druck, nur Orientierung in 2 Minuten. {{URL}}" ],
+  selbst:   [ "Kurzer Status heute, ohne Papierkram. {{URL}}" ],
+  partner:  [ "Magst du 2 Minuten schauen? Ampel zeigt nur den Status. {{URL}}" ]
 };
 function openReferral(seg='neutral'){
   const dlg = $('#refDialog'); const wa = $('#waShare'); const ta = $('#refText');
@@ -622,8 +625,10 @@ function bindReferral(){
       if(ta){ ta.value = (SEGMENTS[seg][0]||SEGMENTS.neutral[0]).replace('{{URL}}', url); }
       if(wa){ wa.href = `https://wa.me/?text=${encodeURIComponent(ta.value)}`; }
     }
-    const copy = e.target.id==='copyBtn'; if(copy){
-      const ta=$('#refText'); if(ta){ ta.select(); document.execCommand('copy'); }
+    if(e.target && e.target.id==='copyBtn'){
+      const ta=$('#refText'); if(ta){
+        navigator.clipboard?.writeText(ta.value).then(()=>{ e.target.textContent='Kopiert'; setTimeout(()=>e.target.textContent='In Zwischenablage',1200); });
+      }
     }
   });
 }
@@ -652,15 +657,17 @@ function confetti(count=20){
   setTimeout(()=>root.remove(),1800);
 }
 
-/* DEV-Linter (optional): warnt bei Autoverkäufer-Vokabular */
+/* DEV-Linter (optional): warnt bei Autoverkäufer-/Sales-Vokabular */
 const BANNED = /\b(Allfinanz|Coach(?:ing)?|Vermittl|Tarif|bAV|Abschluss|Makler|Provision|Produktverkauf)\b/i;
 function devLinter(){
   if(!/localhost|127\.0\.0\.1/.test(location.host)) return;
-  const bad = Array.from(document.body.querySelectorAll('*')).filter(n=>{
-    const t=(n.childNodes[0]&&n.childNodes[0].nodeType===3)? n.textContent : '';
-    return t && BANNED.test(t);
-  });
-  if(bad.length){ console.warn('[Linter] Sales-Vokabular gefunden:', bad.map(n=>n.textContent.trim()).slice(0,6)); }
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  const offenders=[];
+  while(walker.nextNode()){
+    const t = walker.currentNode.nodeValue || '';
+    if(BANNED.test(t)) offenders.push(t.trim().slice(0,120));
+  }
+  if(offenders.length){ console.warn('[Linter] Sales-Vokabular gefunden:', offenders.slice(0,8)); }
 }
 
 /* Init */
@@ -674,4 +681,4 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if($('#teamApp')){ updateTeam(); bindTeam(); }
 
   devLinter(); // nur lokal relevant
-});
+}, {once:true});
