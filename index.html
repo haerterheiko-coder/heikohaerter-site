@@ -9,11 +9,12 @@
   <meta name="theme-color" content="#05070E" />
 
   <title>Der ruhige Finanz-Kompass · 2-Minuten-Ampel</title>
-  <meta name="description" content="2 Minuten. Ein ruhiger Blick. Die Ampel zeigt, was für diesen Moment wichtig wirkt. Anonym. Ohne Unterlagen. Ohne Verkauf." />
+  <meta name="description" content="Ein ruhiger Moment. Eine Ampel. Kein Verkauf. Kein Urteil." />
 
   <style>
     :root{
       --bg:#05070E;
+      --bg-soft:#0B0F19;
       --text:#F1F3FA;
       --muted:#A8B1C5;
       --line:rgba(255,255,255,.12);
@@ -26,9 +27,9 @@
 
       --g1:.5rem;
       --g2:1rem;
-      --g3:1.5rem;
-      --g4:2.5rem;
-      --g5:4rem;
+      --g3:1.75rem;
+      --g4:3rem;
+      --g5:5rem;
 
       font-size:clamp(16px,1vw+8px,20px);
     }
@@ -38,7 +39,9 @@
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
       color:var(--text);
-      background:linear-gradient(180deg,#04060E,#060915);
+      background:
+        radial-gradient(1200px 500px at 50% -10%, rgba(200,164,75,.08), transparent 60%),
+        linear-gradient(180deg,#04060E,#060915);
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
     }
@@ -46,47 +49,54 @@
     main{
       max-width:900px;
       margin:0 auto;
-      padding:clamp(28px,6vw,84px);
+      padding:clamp(32px,7vw,96px);
     }
-
-    h1,h2,h3{margin:0 0 var(--g2);line-height:1.15}
-    h1{font-size:clamp(34px,5vw,60px);font-weight:800}
-    h3{font-size:clamp(18px,2.2vw,24px);font-weight:600}
-
-    p{margin:0 0 var(--g2);max-width:42ch}
-    .muted{color:var(--muted);font-size:.95rem}
 
     section{margin-bottom:var(--g5)}
 
-    .hero p{font-size:1.05rem}
+    h1,h2,h3{margin:0 0 var(--g2);line-height:1.15}
+    h1{font-size:clamp(36px,5.5vw,64px);font-weight:800}
+    h3{font-size:clamp(18px,2.2vw,24px);font-weight:600}
+
+    p{margin:0 0 var(--g2);max-width:44ch}
+    .muted{color:var(--muted);font-size:.95rem}
+
+    /* EMOTIONAL ANCHOR */
+    .scene{
+      max-width:520px;
+      margin-bottom:var(--g4);
+      font-size:1.05rem;
+      line-height:1.6;
+    }
+
+    .scene span{
+      display:block;
+      color:var(--muted);
+      margin-top:.5rem;
+      font-size:.9rem;
+    }
 
     /* AMPEL */
     .ampel{
       display:flex;
       justify-content:center;
-      gap:1.6rem;
+      gap:1.8rem;
       margin:var(--g5) 0;
     }
 
     .dot{
-      width:28px;
-      height:28px;
-      border-radius:50%;
-      opacity:.25;
-      transition:
-        opacity .45s var(--ease),
-        box-shadow .45s var(--ease),
-        transform .45s var(--ease);
+      width:30px;height:30px;border-radius:50%;
+      opacity:.22;
+      transition:opacity .5s var(--ease), box-shadow .5s var(--ease), transform .5s var(--ease);
     }
-
     .dot.green{background:var(--green)}
     .dot.yellow{background:var(--yellow)}
     .dot.red{background:var(--red)}
 
     .dot.active{
       opacity:1;
-      box-shadow:0 0 28px currentColor;
-      transform:scale(1.06);
+      box-shadow:0 0 34px currentColor;
+      transform:scale(1.08);
     }
 
     /* FRAGEN */
@@ -124,17 +134,13 @@
       margin-top:var(--g4);
       opacity:0;
       transform:scale(.94);
-      transition:.45s var(--ease);
+      transition:.5s var(--ease);
     }
-
     .result.visible{
       opacity:1;
       transform:scale(1);
     }
-
-    .result.fade{
-      opacity:.35;
-    }
+    .result.fade{opacity:.3}
 
     footer{
       margin-top:var(--g5);
@@ -147,16 +153,29 @@
 <body>
 <main>
 
+  <!-- EMOTIONALER EINSTIEG -->
+  <section class="scene">
+    <p>
+      Es ist spät.<br>
+      Der Tag war voll.<br>
+      Eigentlich ist alles erledigt.
+    </p>
+    <p>
+      Und trotzdem bleibt dieser kurze Gedanke:<br>
+      <strong>Hoffentlich übersehe ich nichts.</strong>
+    </p>
+    <span>Genau für diesen Moment.</span>
+  </section>
+
   <!-- HERO -->
-  <section class="hero">
+  <section>
     <h1>
-      Wenn du abends im Bett liegst<br>
-      und kurz denkst,<br>
-      ob du etwas Wichtiges übersiehst –
+      Ein ruhiger Blick,<br>
+      bevor der Tag endet.
     </h1>
     <p>
-      zeigt dir diese Ampel in 2 Minuten,<br>
-      wie stabil euer Alltag <strong>jetzt</strong> wirkt.
+      Diese Ampel zeigt in 2 Minuten,<br>
+      wie stabil sich euer Alltag <strong>jetzt</strong> anfühlt.
     </p>
     <p class="muted">
       Der ruhige Finanz-Kompass.<br>
@@ -205,7 +224,7 @@
   </section>
 
   <!-- ERGEBNIS -->
-  <section class="result" id="result" aria-live="polite">
+  <section class="result" id="result">
     <h3 id="resultTitle"></h3>
     <p class="muted" id="resultText"></p>
     <p class="muted" style="margin-top:.75rem">
@@ -214,11 +233,11 @@
     </p>
   </section>
 
-  <!-- SOCIAL -->
+  <!-- STIMMEN -->
   <section>
-    <p class="muted">„Tat gut, kurz draufzuschauen.“</p>
-    <p class="muted">„Hat den Kopf etwas freigemacht.“</p>
-    <p class="muted">„War beruhigend.“</p>
+    <p class="muted">„Es hat mich runtergebracht.“</p>
+    <p class="muted">„Endlich kurz Ruhe im Kopf.“</p>
+    <p class="muted">„Genau der richtige Moment.“</p>
   </section>
 
   <!-- MENSCH -->
@@ -226,7 +245,7 @@
     <p class="muted">
       Ich bin Heiko.<br>
       Ich habe dieses Instrument gebaut,<br>
-      weil ich diese Unruhe kenne.
+      weil ich diesen Gedanken kenne.
     </p>
   </section>
 
@@ -264,17 +283,16 @@
       const q = btn.closest('.question');
       if(q.dataset.done) return;
       q.dataset.done = "1";
-
       score += Number(btn.dataset.v);
       answered++;
 
       if(answered === 3){
         if(score <= 4){
-          reveal('red','🔴 Heute wichtig','Ein Bereich braucht Aufmerksamkeit – ruhig, ohne Druck.');
+          reveal('red','🔴 Heute wichtig','Ein Bereich braucht Aufmerksamkeit. Ruhig hinschauen.');
         }else if(score <= 7){
           reveal('yellow','🟡 Bald wichtig','Ein paar Dinge stehen an. Heute nichts entscheiden.');
         }else{
-          reveal('green','🟢 Passt für heute','Für diesen Moment wirkt alles stabil.');
+          reveal('green','🟢 Für heute stabil','Für diesen Moment wirkt alles getragen.');
         }
         result.scrollIntoView({behavior:'smooth',block:'center'});
       }
@@ -283,10 +301,10 @@
 
   addEventListener('keydown',e=>{
     if(e.key==='1'||e.key==='2'||e.key==='3'){
-      const open = document.querySelector('.question:not([data-done])');
+      const open=document.querySelector('.question:not([data-done])');
       if(!open) return;
-      const btn = open.querySelector(`button[data-v="${e.key}"]`);
-      btn && btn.click();
+      const b=open.querySelector(`button[data-v="${e.key}"]`);
+      b && b.click();
     }
   });
 })();
