@@ -10,13 +10,13 @@
   <title>Heiko Haerter – Ruhiger 2-Minuten-Blick (2026)</title>
   <meta name="description" content="Ein ruhiger 2-Minuten-Blick: zeigt heute Rot/Gelb/Grün – anonym, ohne Verkauf. Plan: Jetzt · Als Nächstes · Später." />
   <link rel="icon" href="/favicon.ico" />
-  <link rel="preload" as="image" href="assets/hero.jpg" imagesrcset="assets/hero.jpg" />
+  <link rel="preload" as="image" href="assets/hero.jpg" imagesrcset="assets/hero.jpg" fetchpriority="high" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
   <noscript><style>.site-header{opacity:1;transform:none}.sticky-cta{display:block}</style></noscript>
 
-  <!-- Header: erst nach Hero via IntersectionObserver -->
   <header id="hdr" class="site-header is-gated" aria-hidden="true">
     <a class="brand" href="/" aria-label="Start">HH·2026</a>
     <nav class="nav" aria-label="Hauptnavigation">
@@ -30,7 +30,6 @@
   </header>
 
   <main id="main">
-    <!-- BLOCK 1 — Permission (Gefühl > Funktion) -->
     <section id="hero" class="hero hero-cinema" aria-label="Einstieg">
       <div class="hero-art" role="img" aria-label="Ruhige Szene bei Abendlicht"></div>
       <div class="hero-layer">
@@ -50,12 +49,10 @@
       </div>
     </section>
 
-    <!-- BLOCK 2 — Moment -->
     <section class="section section-alt">
       <p class="lead">Manche Dinge trägt man lange mit sich herum – ohne Zeit, sie anzusehen. Heute nicht alles lösen. Nur sehen, <strong>wo</strong> man steht.</p>
     </section>
 
-    <!-- BLOCK 3 — Erwartungsgrenze -->
     <section id="grenze" class="section">
       <h2>Was hier nicht passiert</h2>
       <ul class="list-clean cols-2">
@@ -64,7 +61,6 @@
       <p class="micro muted">Nur Orientierung für heute. Nicht mehr.</p>
     </section>
 
-    <!-- BLOCK 4 — System (Ampel) -->
     <section id="ampel" class="section section-alt">
       <h2>Der kurze Blick</h2>
       <p>In <strong>2 Minuten</strong>, <strong>3 Fragen</strong>. Ergebnis für <strong>heute</strong>: <strong>Rot</strong>, <strong>Gelb</strong> oder <strong>Grün</strong> – plus ein kleiner Plan: <em>Jetzt · Als Nächstes · Später</em>.</p>
@@ -75,7 +71,6 @@
       </ul>
     </section>
 
-    <!-- BLOCK 5 — Der Moment selbst (App) -->
     <section id="check" class="section">
       <h2>In 2 Minuten sehen, wo du heute stehst</h2>
       <div id="ampelApp" class="card app" role="region" aria-label="Ampel-Check">
@@ -84,39 +79,41 @@
         <div id="step1" class="step active" data-step="1">
           <p class="step-hint">Intuition reicht.</p>
           <h3>6&nbsp;Monate Ausfall – wie sicher wäre euer Einkommen?</h3>
-          <div class="options" role="group" aria-label="Einkommen">
-            <button class="opt" data-score="2" type="button">Sehr sicher</button>
-            <button class="opt" data-score="1" type="button">Teils/unsicher</button>
-            <button class="opt" data-score="0" type="button">Keine Ahnung</button>
+          <div class="options" role="radiogroup" aria-label="Einkommen">
+            <button class="opt" role="radio" aria-checked="false" data-score="2" type="button">Sehr sicher</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="1" type="button">Teils/unsicher</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="0" type="button">Keine Ahnung</button>
           </div>
         </div>
 
         <div id="step2" class="step" data-step="2">
           <p class="step-hint">Intuition reicht.</p>
           <h3>Wer hängt finanziell an dir?</h3>
-          <div class="options" role="group" aria-label="Abhängige">
-            <button class="opt" data-score="0" type="button">Nur ich</button>
-            <button class="opt" data-score="1" type="button">Partner</button>
-            <button class="opt" data-score="2" type="button">Partner + Kind(er)/Team</button>
+          <div class="options" role="radiogroup" aria-label="Abhängige">
+            <button class="opt" role="radio" aria-checked="false" data-score="0" type="button">Nur ich</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="1" type="button">Partner</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="2" type="button">Partner + Kind(er)/Team</button>
           </div>
         </div>
 
         <div id="step3" class="step" data-step="3">
           <p class="step-hint">Intuition reicht.</p>
           <h3>Notgroschen / Puffer – wie viele Monate?</h3>
-          <div class="options" role="group" aria-label="Puffer">
-            <button class="opt" data-score="2" type="button">6+ Monate</button>
-            <button class="opt" data-score="1" type="button">2–5 Monate</button>
-            <button class="opt" data-score="0" type="button">Unter 2 Monate</button>
+          <div class="options" role="radiogroup" aria-label="Puffer">
+            <button class="opt" role="radio" aria-checked="false" data-score="2" type="button">6+ Monate</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="1" type="button">2–5 Monate</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="0" type="button">Unter 2 Monate</button>
           </div>
         </div>
 
         <div id="result" class="result hidden" tabindex="-1" aria-live="polite"></div>
+        <div class="cta-row row-end">
+          <button class="btn btn-secondary" id="restartAmpel" type="button">Neu starten</button>
+        </div>
       </div>
       <p class="micro muted" id="exit">„Nichts tun ist ok. Hauptsache, du weißt, wo du stehst.“</p>
     </section>
 
-    <!-- BLOCK 6 — Für wen -->
     <section id="fuer-wen" class="section section-alt grid">
       <div>
         <h2>Für wen ist das?</h2>
@@ -131,7 +128,6 @@
       </ul>
     </section>
 
-    <!-- BLOCK 7 — Optionaler nächster Schritt -->
     <section class="section">
       <h2>Wenn dein Ergebnis Fragen öffnet</h2>
       <div class="cta-row">
@@ -142,13 +138,11 @@
       <p class="micro muted">Nur, wenn <em>du</em> willst.</p>
     </section>
 
-    <!-- BLOCK 8 — Absender minimal -->
     <section id="sicherheit" class="section section-alt">
       <h2>Wer dahintersteht</h2>
       <p>Ich bin Heiko. Ich mochte diese Gespräche nie. Deshalb gibt es diesen ruhigen Blick – ohne Verkauf.</p>
     </section>
 
-    <!-- Stories -->
     <section id="stories" class="section">
       <h2>Stimmen von Menschen wie dir</h2>
       <ul class="cards" role="list">
@@ -161,12 +155,10 @@
 
   <footer class="site-footer"><p class="micro muted">Zero-Sales. 100 % Kontrolle.</p></footer>
 
-  <!-- Sticky CTA: erst nach Hero -->
   <div id="stickyCta" class="sticky-cta" hidden>
     <button class="btn btn-primary btn-block" data-start type="button">⚡ Ampel starten</button>
   </div>
 
-  <!-- Referral Modal (segmentiert) -->
   <dialog id="refDialog" class="dialog" aria-labelledby="refTitle">
     <form method="dialog">
       <h3 id="refTitle">Weitergeben – in 2 Klicks</h3>
@@ -182,9 +174,10 @@
       <textarea id="refText" class="input" rows="5"></textarea>
       <div class="dialog-actions">
         <button class="btn" value="cancel" type="button" onclick="this.closest('dialog').close()">Schließen</button>
-        <a id="waShare" class="btn btn-primary" target="_blank" rel="noopener">Per WhatsApp teilen</a>
+        <a id="waShare" class="btn btn-primary" target="_blank" rel="noopener" href="#">Per WhatsApp teilen</a>
+        <button class="btn btn-secondary" id="sysShare" type="button">Teilen…</button>
       </div>
-      <p class="micro muted" style="margin-top:.6rem">Optional. Kein Vorteil nötig.</p>
+      <p class="micro muted" style="margin-top:.6rem" id="shareStatus" aria-live="polite"></p>
     </form>
   </dialog>
 
@@ -207,6 +200,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
   <header id="hdr" class="site-header revealed">
     <a class="brand" href="/" aria-label="Start">HH·2026</a>
     <nav class="nav" aria-label="Hauptnavigation">
@@ -230,8 +224,10 @@
     <label class="micro" for="refText">Nachricht</label>
     <textarea id="refText" class="input" rows="6" aria-label="Nachricht zum Teilen"></textarea>
     <div class="cta-row">
-      <a id="waShare" class="btn btn-primary" target="_blank" rel="noopener">Per WhatsApp teilen</a>
-      <button class="btn" id="copyBtn" type="button">In Zwischenablage</button>
+      <a id="waShare" class="btn btn-primary" target="_blank" rel="noopener" href="#">Per WhatsApp teilen</a>
+      <button class="btn btn-secondary" id="sysShare" type="button">Teilen…</button>
+      <button class="btn" id="copyBtn" type="button" aria-describedby="copyStatus">In Zwischenablage</button>
+      <span id="copyStatus" class="micro muted" aria-live="polite"></span>
     </div>
 
     <section class="section-alt mt" aria-label="Was hier nicht passiert">
@@ -270,6 +266,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
   <header id="hdr" class="site-header revealed">
     <a class="brand" href="/" aria-label="Start">HH·2026</a>
     <nav class="nav" aria-label="Hauptnavigation">
@@ -300,34 +297,37 @@
         <div id="tstep1" class="step active" data-step="1">
           <p class="step-hint">20 Sekunden</p>
           <h3>Wenn A heute 6 Wochen fehlen würde – wie sehr träfe es das Team?</h3>
-          <div class="options" role="group" aria-label="Ausfall">
-            <button class="opt" data-score="0" type="button">Hart</button>
-            <button class="opt" data-score="1" type="button">Merklich</button>
-            <button class="opt" data-score="2" type="button">Abfangbar</button>
+          <div class="options" role="radiogroup" aria-label="Ausfall">
+            <button class="opt" role="radio" aria-checked="false" data-score="0" type="button">Hart</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="1" type="button">Merklich</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="2" type="button">Abfangbar</button>
           </div>
         </div>
 
         <div id="tstep2" class="step" data-step="2">
           <p class="step-hint">20 Sekunden</p>
           <h3>Wie sicher ist heute die wichtigste Schnittstelle?</h3>
-          <div class="options" role="group" aria-label="Schnittstelle">
-            <button class="opt" data-score="0" type="button">Unsicher</button>
-            <button class="opt" data-score="1" type="button">Teils</button>
-            <button class="opt" data-score="2" type="button">Sicher</button>
+          <div class="options" role="radiogroup" aria-label="Schnittstelle">
+            <button class="opt" role="radio" aria-checked="false" data-score="0" type="button">Unsicher</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="1" type="button">Teils</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="2" type="button">Sicher</button>
           </div>
         </div>
 
         <div id="tstep3" class="step" data-step="3">
           <p class="step-hint">20 Sekunden</p>
           <h3>Wie lang reicht euer finanzieller Puffer?</h3>
-          <div class="options" role="group" aria-label="Puffer">
-            <button class="opt" data-score="0" type="button">&lt; 2 Monate</button>
-            <button class="opt" data-score="1" type="button">2–5 Monate</button>
-            <button class="opt" data-score="2" type="button">6+ Monate</button>
+          <div class="options" role="radiogroup" aria-label="Puffer">
+            <button class="opt" role="radio" aria-checked="false" data-score="0" type="button">&lt; 2 Monate</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="1" type="button">2–5 Monate</button>
+            <button class="opt" role="radio" aria-checked="false" data-score="2" type="button">6+ Monate</button>
           </div>
         </div>
 
         <div id="teamResult" class="result hidden" tabindex="-1" aria-live="polite"></div>
+        <div class="cta-row row-end">
+          <button class="btn btn-secondary" id="restartTeam" type="button">Neu starten</button>
+        </div>
       </div>
     </section>
 
@@ -356,10 +356,10 @@
   --bg:#05070E; --bg-alt:#0B0F19; --surface:#15161a;
   --text:#F1F3FA; --muted:#A8B1C5;
   --red:#ff4d4d; --amber:#ffcc33; --green:#2ecc71;
-  --line:rgba(255,255,255,.12); --glass:rgba(255,255,255,.06);
-  --hero-img:url('assets/hero.jpg'); /* austauschbar */
+  --line:rgba(255,255,255,.14); --glass:rgba(255,255,255,.06);
+  --hero-img:url('assets/hero.jpg');
   --g1:8px; --g2:12px; --g3:16px; --g4:24px; --g5:32px; --g6:48px; --g7:64px;
-  --t:280ms; --bezier:cubic-bezier(.2,.8,.2,1);
+  --t:220ms; --bezier:cubic-bezier(.2,.8,.2,1);
 }
 *{box-sizing:border-box}
 html,body{height:auto}
@@ -388,7 +388,14 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
 .muted{color:var(--muted)}
 .hidden{display:none}
 
-/* Header (IO-gated) */
+/* Accessibility helpers */
+.skip-link{
+  position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+}
+.skip-link:focus{left:8px; top:8px; width:auto; height:auto; padding:8px 12px; background:#222; color:#fff; border-radius:8px; z-index:999}
+:focus-visible{outline:2px solid #9fb3ff; outline-offset:3px; border-radius:10px}
+
+/* Header */
 .site-header{
   position:sticky; top:0; z-index:50;
   display:flex; align-items:center; justify-content:space-between;
@@ -401,13 +408,13 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
 .brand{font-weight:700; letter-spacing:.4px}
 .nav{display:flex; gap:var(--g3)} .nav-link{opacity:.9} .nav-link:hover{opacity:1}
 
-/* Hero (cinematic, Motion-Budget: Fade + Button-Hover) */
+/* Hero */
 .hero{position:relative; min-height:88svh; display:grid; place-items:stretch; overflow:clip}
 .hero-compact{min-height:60svh}
 .hero-art{
   position:absolute; inset:0;
   background:
-    linear-gradient(180deg, rgba(5,7,14,.66), rgba(5,7,14,.85) 60%, rgba(5,7,14,.96)),
+    linear-gradient(180deg, rgba(5,7,14,.66), rgba(5,7,14,.88) 60%, rgba(5,7,14,.96)),
     var(--hero-img) center/cover no-repeat;
   filter:saturate(1.05) contrast(1.02);
 }
@@ -422,6 +429,7 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
 .fx-fade-delayed{opacity:0; transform:translateY(10px); animation:fadeIn var(--t) var(--bezier) .18s forwards}
 @keyframes fadeIn{to{opacity:1; transform:none}}
 .cta-row{display:flex; gap:var(--g3); flex-wrap:wrap}
+.row-end{justify-content:flex-end}
 
 /* Buttons */
 .btn{
@@ -435,7 +443,7 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
 .btn-ghost{background:transparent; border-color:transparent; opacity:.9}
 .btn-block{width:100%}
 
-/* Ampel + Team Apps */
+/* Apps */
 .app{max-width:720px;margin:auto}
 .progress{height:8px;background:#20222a;border-radius:999px;overflow:hidden;margin:0 0 var(--g4)}
 .progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--green))}
@@ -445,17 +453,18 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
 .options{display:grid;gap:var(--g3);grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
 .opt{background:#1a1c21;border:1px solid #2b2e35;padding:14px;border-radius:14px;cursor:pointer;transition:transform var(--t)}
 .opt:hover{transform:translateY(-2px)}
+.opt[aria-checked="true"]{outline:2px solid #8aa2ff; outline-offset:2px}
 .result{padding:var(--g5);border-radius:18px;border:1px solid #2b2e35;margin-top:var(--g3)}
-.result.red{background:linear-gradient(180deg, color-mix(in srgb,var(--red) 12%, var(--surface)), var(--surface))}
-.result.amber{background:linear-gradient(180deg, color-mix(in srgb,var(--amber) 12%, var(--surface)), var(--surface))}
-.result.green{background:linear-gradient(180deg, color-mix(in srgb,var(--green) 12%, var(--surface)), var(--surface))}
+.result.red{background:linear-gradient(180deg, color-mix(in srgb,var(--red) 18%, var(--surface)), var(--surface))}
+.result.amber{background:linear-gradient(180deg, color-mix(in srgb,var(--amber) 24%, var(--surface)), var(--surface))}
+.result.green{background:linear-gradient(180deg, color-mix(in srgb,var(--green) 24%, var(--surface)), var(--surface))}
 
-/* Dopamin begrenzt auf Ampel-Chips (nur 1 leicht pulsend, Budget) */
+/* Chips */
 .ampel-chips{display:flex;gap:var(--g3);padding:0;list-style:none}
 .chip{display:inline-block;border-radius:999px;padding:2px 10px;font-weight:600;font-size:.95rem}
-.chip-red{background:color-mix(in srgb,var(--red) 20%, var(--surface))}
-.chip-amber{background:color-mix(in srgb,var(--amber) 30%, var(--surface))}
-.chip-green{background:color-mix(in srgb,var(--green) 30%, var(--surface))}
+.chip-red{background:color-mix(in srgb,var(--red) 24%, var(--surface))}
+.chip-amber{background:color-mix(in srgb,var(--amber) 32%, var(--surface))}
+.chip-green{background:color-mix(in srgb,var(--green) 32%, var(--surface))}
 .pulse-soft{animation:pulse 3.2s infinite ease-in-out}
 @keyframes pulse{0%,100%{filter:saturate(1)}50%{filter:saturate(1.25)}}
 
@@ -468,13 +477,13 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
 .seg{border:1px solid #2a2b31; background:#171a21; color:var(--text); padding:8px 12px; border-radius:999px; cursor:pointer}
 .mt{margin-top:var(--g5)}
 
-/* Sticky CTA erst nach Hero sichtbar */
+/* Sticky CTA */
 .sticky-cta{
   position:fixed; left:0; right:0; bottom:0; padding:var(--g3);
   background:rgba(7,10,18,.88); border-top:1px solid var(--line);
 }
 
-/* Reduced motion support */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important; transition:none !important}
 }
@@ -487,198 +496,387 @@ p{margin:0 0 var(--g3)} a{color:inherit; text-decoration:none}
 <!-- ====================== /app.js ====================== -->
 // Minimalkommentare: nur „warum“-Stellen.
 
-const $ = (s, c=document)=>c.querySelector(s);
-const $$ = (s, c=document)=>Array.from(c.querySelectorAll(s));
-const on = (el,ev,fn,opt)=>el && el.addEventListener(ev,fn,opt);
+(() => {
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const on = (el, ev, fn, opt) => el && el.addEventListener(ev, fn, opt);
 
-/* IO-Gate: schützt den Kino-Moment (Header/Sticky erst nach Hero) */
-function gateHeaderAndSticky(){
-  const hero = $('#hero'); const hdr = $('#hdr'); const sticky = $('#stickyCta');
-  if(!hero || !hdr) return;
-  const io = new IntersectionObserver(([e])=>{
-    const showUI = !e.isIntersecting;
-    hdr.classList.toggle('revealed', showUI);
-    hdr.classList.toggle('is-gated', !showUI);
-    hdr.setAttribute('aria-hidden', String(!showUI));
-    if(sticky) sticky.hidden = !showUI;
-  }, {threshold:0.12});
-  io.observe(hero);
-}
+  const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* A/B (ohne Tracking): ?ab=functional schaltet Funktions-Hero */
-function heroAB(){
-  const mode = new URLSearchParams(location.search).get('ab');
-  const emo = $('.js-hero-emotional');
-  const fun = $('.js-hero-functional');
-  if(!emo || !fun) return;
-  const functional = mode === 'functional';
-  emo.classList.toggle('hidden', functional);
-  fun.classList.toggle('hidden', !functional);
-}
+  /* IO-Gate: schützt den Kino-Moment (Header/Sticky erst nach Hero) */
+  function gateHeaderAndSticky(){
+    const hero = $('#hero'); const hdr = $('#hdr'); const sticky = $('#stickyCta');
+    if(!hero || !hdr) return;
+    const io = new IntersectionObserver(([e])=>{
+      const showUI = !e.isIntersecting;
+      hdr.classList.toggle('revealed', showUI);
+      hdr.classList.toggle('is-gated', !showUI);
+      hdr.setAttribute('aria-hidden', String(!showUI));
+      if(sticky) sticky.hidden = !showUI;
+    }, {threshold:0.12});
+    io.observe(hero);
+  }
 
-/* Ampel (Startseite) */
-const state = { step:1, maxStep:3, score:0, answers:[] };
-function updateProgress(){ const bar=$('#progressBar'); if(bar) bar.style.width = `${((state.step-1)/state.maxStep)*100}%`; }
-function goStep(n){
-  $$('#ampelApp .step').forEach(s=>s.classList.remove('active'));
-  const el = $(`#step${n}`); if(el){ el.classList.add('active'); state.step=n; updateProgress(); }
-}
-function finishAmpel(){
-  const sum=state.score;
-  let tier='red', title='Rot – Jetzt handeln', now='1–2 Themen zuerst klären.', next='Dann kleine Schritte (30–60 Min).', later='Später Feinschliff.';
-  if(sum>=5){ tier='green'; title='Grün – Entspannt bleiben'; now='Alles Wichtige wirkt stabil.'; next='Optional: kleiner Feinschliff.'; later='In 6–12 Monaten erneut prüfen.'; }
-  else if(sum>=3){ tier='amber'; title='Gelb – Gut unterwegs'; now='2 Dinge verdienen kurz Fokus.'; next='Kleiner Plan bringt Ruhe.'; later='Danach entspannt laufen lassen.'; }
-  const r = $('#result'); if(!r) return;
-  r.className = `result ${tier}`;
-  r.innerHTML = `
-    <h3>${title}</h3>
-    <p><strong>Jetzt:</strong> ${now}</p>
-    <p><strong>Als Nächstes:</strong> ${next}</p>
-    <p><strong>Später:</strong> ${later}</p>
-    <div class="cta-row" style="margin-top:16px">
-      <button class="btn btn-primary" data-book type="button">20-Minuten in Ruhe</button>
-      <button class="btn btn-secondary" data-whatsapp type="button">WhatsApp-Kurzfrage</button>
-      <button class="btn" data-ref type="button">Weitergeben</button>
-    </div>`;
-  r.classList.remove('hidden'); setTimeout(()=>r.focus(),40);
-  if(tier==='green'){ try{ confetti(24);}catch{} } // Dopamin nur bei „grün“
-}
-function bindAmpel(){
-  $$('#ampelApp .opt').forEach(b=>on(b,'click',()=>{
-    const v=Number(b.dataset.score||0); state.score+=v; state.answers.push(v);
-    const next=state.step+1; if(next<=state.maxStep) goStep(next); else { const bar=$('#progressBar'); if(bar) bar.style.width='100%'; finishAmpel(); }
-  }, {passive:true}));
-  ['#ctaTop','#ctaHero','[data-start]'].forEach(sel=>{
-    $$(sel).forEach(el=>on(el,'click',()=>{
-      state.step=1; state.score=0; state.answers.length=0;
-      const r=$('#result'); if(r) r.classList.add('hidden');
-      goStep(1);
-      const check=$('#check'); if(check) window.scrollTo({top:check.offsetTop-60, behavior:'smooth'});
-    }));
-  });
-}
+  /* A/B (ohne Tracking): ?ab=functional schaltet Funktions-Hero */
+  function heroAB(){
+    const mode = new URLSearchParams(location.search).get('ab');
+    const emo = $('.js-hero-emotional');
+    const fun = $('.js-hero-functional');
+    if(!emo || !fun) return;
+    const functional = mode === 'functional';
+    emo.classList.toggle('hidden', functional);
+    fun.classList.toggle('hidden', !functional);
+  }
 
-/* Team-Check (Arbeitgeber) */
-const tstate = { step:1, max:3, score:0 };
-function updateTeam(){ const bar=$('#teamProgress'); if(bar) bar.style.width = `${((tstate.step-1)/tstate.max)*100}%`; }
-function goTeam(n){
-  $$('#teamApp .step').forEach(s=>s.classList.remove('active'));
-  const el = $(`#tstep${n}`); if(el){ el.classList.add('active'); tstate.step=n; updateTeam(); }
-}
-function finishTeam(){
-  const sum=tstate.score; let tier='red', title='Rot – Jetzt handeln';
-  if(sum>=5){ tier='green'; title='Grün – Entspannt bleiben'; }
-  else if(sum>=3){ tier='amber'; title='Gelb – Gut unterwegs'; }
-  const r=$('#teamResult'); if(!r) return;
-  r.className=`result ${tier}`;
-  r.innerHTML = `
-    <h3>${title}</h3>
-    <p><strong>Jetzt:</strong> 1–2 Engpässe priorisieren.</p>
-    <p><strong>Als Nächstes:</strong> kurze Ablauf-Skizze.</p>
-    <p><strong>Später:</strong> Review in 3 Monaten.</p>
-    <div class="cta-row" style="margin-top:16px">
-      <button class="btn btn-primary" data-book type="button">20-Minuten Struktur-Call</button>
-      <button class="btn btn-secondary" data-whatsapp type="button">WhatsApp-Kurzfrage</button>
-    </div>`;
-  r.classList.remove('hidden'); setTimeout(()=>r.focus(),40);
-  if(tier==='green'){ try{ confetti(24);}catch{} }
-}
-function bindTeam(){
-  $$('#teamApp .opt').forEach(b=>on(b,'click',()=>{
-    const v=Number(b.dataset.score||0); tstate.score+=v;
-    const next=tstate.step+1; if(next<=tstate.max) goTeam(next); else { const bar=$('#teamProgress'); if(bar) bar.style.width='100%'; finishTeam(); }
-  }, {passive:true}));
-  $$('[data-team-start]').forEach(el=>on(el,'click',()=>{
-    tstate.step=1; tstate.score=0;
+  /* ---------- Ampel (Startseite) ---------- */
+  const AMPEL_KEY = 'ampel-state-v1';
+  const state = { step:1, maxStep:3, score:0, answers:[] };
+
+  function saveState(){ try{ sessionStorage.setItem(AMPEL_KEY, JSON.stringify(state)); }catch{} }
+  function loadState(){
+    try{
+      const raw = sessionStorage.getItem(AMPEL_KEY);
+      if(!raw) return;
+      const s = JSON.parse(raw);
+      if(typeof s?.step === 'number' && Array.isArray(s?.answers)){
+        Object.assign(state, s);
+      }
+    }catch{}
+  }
+
+  function updateProgress(){
+    const bar = $('#progressBar');
+    if(!bar) return;
+    const pct = ((state.step - 1) / state.maxStep) * 100;
+    bar.style.width = `${pct}%`;
+  }
+
+  function setRadioSelection(stepEl, index){
+    const opts = $$('.opt', stepEl);
+    opts.forEach((b,i)=>{
+      const checked = i === index;
+      b.setAttribute('aria-checked', String(checked));
+      b.tabIndex = checked ? 0 : -1;
+    });
+  }
+
+  function goStep(n){
+    $$('#ampelApp .step').forEach(s=>s.classList.remove('active'));
+    const el = $(`#step${n}`);
+    if(el){
+      el.classList.add('active'); state.step = n; updateProgress(); saveState();
+      // Focus first option for accessibility
+      const first = $('.opt', el);
+      if(first){ first.focus(); setRadioSelection(el, 0); }
+    }
+  }
+
+  function finishAmpel(){
+    const sum = state.score;
+    let tier='red', title='Rot – Jetzt handeln', now='1–2 Themen zuerst klären.', next='Dann kleine Schritte (30–60 Min).', later='Später Feinschliff.';
+    if(sum>=5){ tier='green'; title='Grün – Entspannt bleiben'; now='Alles Wichtige wirkt stabil.'; next='Optional: kleiner Feinschliff.'; later='In 6–12 Monaten erneut prüfen.'; }
+    else if(sum>=3){ tier='amber'; title='Gelb – Gut unterwegs'; now='2 Dinge verdienen kurz Fokus.'; next='Kleiner Plan bringt Ruhe.'; later='Danach entspannt laufen lassen.'; }
+    const r = $('#result'); if(!r) return;
+    r.className = `result ${tier}`;
+    r.innerHTML = `
+      <h3>${title}</h3>
+      <p><strong>Jetzt:</strong> ${now}</p>
+      <p><strong>Als Nächstes:</strong> ${next}</p>
+      <p><strong>Später:</strong> ${later}</p>
+      <div class="cta-row" style="margin-top:16px">
+        <button class="btn btn-primary" data-book type="button">20-Minuten in Ruhe</button>
+        <button class="btn btn-secondary" data-whatsapp type="button">WhatsApp-Kurzfrage</button>
+        <button class="btn" data-ref type="button">Weitergeben</button>
+      </div>`;
+    r.classList.remove('hidden');
+    setTimeout(()=>r.focus(),40);
+    if(tier==='green' && !prefersReducedMotion){ try{ confetti(24);}catch{} }
+    saveState();
+  }
+
+  function restartAmpel(){
+    state.step=1; state.score=0; state.answers.length=0; saveState();
+    const r=$('#result'); if(r) r.classList.add('hidden');
+    goStep(1);
+    const check=$('#check'); if(check) window.scrollTo({top:check.offsetTop-60, behavior:'smooth'});
+  }
+
+  function handleOptionClick(b, which){
+    const v = Number(b.dataset.score||0);
+    state.score += v; state.answers.push(v);
+    const stepEl = b.closest('.step');
+    if(stepEl){
+      const idx = $$('.opt', stepEl).indexOf(b);
+      setRadioSelection(stepEl, idx);
+    }
+    const next = state.step + 1;
+    if(next <= state.maxStep){
+      goStep(next);
+    } else {
+      const bar=$('#progressBar'); if(bar) bar.style.width='100%';
+      finishAmpel();
+    }
+  }
+
+  function bindAmpel(){
+    if(!$('#ampelApp')) return;
+
+    // Clicks
+    on($('#ampelApp'),'click',(e)=>{
+      const btn = e.target.closest('.opt');
+      if(btn) handleOptionClick(btn, 'click');
+    });
+
+    // Keyboard for radiogroups
+    $$('#ampelApp .step').forEach(step=>{
+      on(step,'keydown',(e)=>{
+        if(!step.classList.contains('active')) return;
+        const opts = $$('.opt', step); if(!opts.length) return;
+        let idx = opts.findIndex(b => b.getAttribute('aria-checked') === 'true');
+        if(idx<0) idx=0;
+        if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){ e.preventDefault(); idx = (idx+1)%opts.length; opts[idx].focus(); setRadioSelection(step, idx); }
+        if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){ e.preventDefault(); idx = (idx-1+opts.length)%opts.length; opts[idx].focus(); setRadioSelection(step, idx); }
+        if(e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); handleOptionClick(opts[idx], 'kb'); }
+        if(e.key === 'Escape'){ e.preventDefault(); $('#restartAmpel')?.focus(); }
+      });
+    });
+
+    // Start buttons
+    ['#ctaTop','#ctaHero','[data-start]','#restartAmpel'].forEach(sel=>{
+      $$(sel).forEach(el=>on(el,'click',restartAmpel));
+    });
+
+    // Restore state if any
+    loadState();
+    updateProgress();
+    goStep(state.step);
+    if(state.answers.length === state.maxStep){ finishAmpel(); }
+  }
+
+  /* ---------- Team-Check ---------- */
+  const TKEY = 'team-state-v1';
+  const tstate = { step:1, max:3, score:0 };
+
+  function saveTeam(){ try{ sessionStorage.setItem(TKEY, JSON.stringify(tstate)); }catch{} }
+  function loadTeam(){
+    try{
+      const raw = sessionStorage.getItem(TKEY);
+      if(!raw) return;
+      const s = JSON.parse(raw);
+      if(typeof s?.step === 'number'){ Object.assign(tstate, s); }
+    }catch{}
+  }
+  function updateTeam(){ const bar=$('#teamProgress'); if(bar) bar.style.width = `${((tstate.step-1)/tstate.max)*100}%`; }
+  function setTeamSelection(stepEl, index){
+    const opts = $$('.opt', stepEl);
+    opts.forEach((b,i)=>{ const checked = i===index; b.setAttribute('aria-checked', String(checked)); b.tabIndex = checked ? 0 : -1; });
+  }
+  function goTeam(n){
+    $$('#teamApp .step').forEach(s=>s.classList.remove('active'));
+    const el = $(`#tstep${n}`); if(el){ el.classList.add('active'); tstate.step=n; updateTeam(); saveTeam();
+      const first=$('.opt', el); if(first){ first.focus(); setTeamSelection(el,0); }
+    }
+  }
+  function finishTeam(){
+    const sum=tstate.score; let tier='red', title='Rot – Jetzt handeln';
+    if(sum>=5){ tier='green'; title='Grün – Entspannt bleiben'; }
+    else if(sum>=3){ tier='amber'; title='Gelb – Gut unterwegs'; }
+    const r=$('#teamResult'); if(!r) return;
+    r.className=`result ${tier}`;
+    r.innerHTML = `
+      <h3>${title}</h3>
+      <p><strong>Jetzt:</strong> 1–2 Engpässe priorisieren.</p>
+      <p><strong>Als Nächstes:</strong> kurze Ablauf-Skizze.</p>
+      <p><strong>Später:</strong> Review in 3 Monaten.</p>
+      <div class="cta-row" style="margin-top:16px">
+        <button class="btn btn-primary" data-book type="button">20-Minuten Struktur-Call</button>
+        <button class="btn btn-secondary" data-whatsapp type="button">WhatsApp-Kurzfrage</button>
+      </div>`;
+    r.classList.remove('hidden'); setTimeout(()=>r.focus(),40);
+    if(tier==='green' && !prefersReducedMotion){ try{ confetti(24);}catch{} }
+    saveTeam();
+  }
+  function restartTeam(){
+    tstate.step=1; tstate.score=0; saveTeam();
     const r=$('#teamResult'); if(r) r.classList.add('hidden');
     goTeam(1);
     const app=$('#teamApp'); if(app) window.scrollTo({top:app.offsetTop-60, behavior:'smooth'});
-  }));
-}
+  }
+  function handleTeamOption(b){
+    const v=Number(b.dataset.score||0); tstate.score+=v;
+    const stepEl = b.closest('.step'); if(stepEl){ const idx = $$('.opt', stepEl).indexOf(b); setTeamSelection(stepEl, idx); }
+    const next=tstate.step+1;
+    if(next<=tstate.max){ goTeam(next); }
+    else { const bar=$('#teamProgress'); if(bar) bar.style.width='100%'; finishTeam(); }
+  }
+  function bindTeam(){
+    if(!$('#teamApp')) return;
 
-/* Referral Composer (segmentiert) */
-const SEGMENTS = {
-  neutral: [
-    "2-Minuten-Blick, völlig anonym – sagt dir nur, wo du heute stehst. {{URL}}",
-    "Ruhig & ohne Druck: schneller Status. {{URL}}"
-  ],
-  eltern: [ "Kurz & ruhig: zeigt, ob heute etwas Wichtiges fehlt – ohne Verkauf. {{URL}}" ],
-  kollegen: [ "Fixer Blick für die To-do-Liste – sofort sehen, ob was fehlt. {{URL}}" ],
-  freunde: [ "Null Druck, nur Orientierung in 2 Minuten. {{URL}}" ],
-  selbst:   [ "Kurzer Status heute, ohne Papierkram. {{URL}}" ],
-  partner:  [ "Magst du 2 Minuten schauen? Ampel zeigt nur den Status. {{URL}}" ]
-};
-function openReferral(seg='neutral'){
-  const dlg = $('#refDialog'); const wa = $('#waShare'); const ta = $('#refText');
-  const url = location.origin + '/';
-  const pick = arr => arr[Math.floor(Math.random()*arr.length)];
-  if(ta) ta.value = pick(SEGMENTS[seg]||SEGMENTS.neutral).replace('{{URL}}', url);
-  if(wa) wa.href = `https://wa.me/?text=${encodeURIComponent(ta.value)}`;
-  if(dlg && typeof dlg.showModal==='function'){ dlg.showModal(); } else if(wa){ window.open(wa.href,'_blank','noopener'); }
-}
-function bindReferral(){
-  on(document,'click',e=>{
-    const w=e.target.closest('[data-ref]'); if(w){ openReferral(); }
-    const s=e.target.closest('.seg'); if(s){
-      const seg=s.dataset.seg||'neutral'; const ta=$('#refText'); const wa=$('#waShare');
-      const url = location.href;
-      if(ta){ ta.value = (SEGMENTS[seg][0]||SEGMENTS.neutral[0]).replace('{{URL}}', url); }
-      if(wa){ wa.href = `https://wa.me/?text=${encodeURIComponent(ta.value)}`; }
-    }
-    if(e.target && e.target.id==='copyBtn'){
-      const ta=$('#refText'); if(ta){
-        navigator.clipboard?.writeText(ta.value).then(()=>{ e.target.textContent='Kopiert'; setTimeout(()=>e.target.textContent='In Zwischenablage',1200); });
+    on($('#teamApp'),'click',(e)=>{
+      const btn = e.target.closest('.opt');
+      if(btn) handleTeamOption(btn);
+    });
+
+    $$('#teamApp .step').forEach(step=>{
+      on(step,'keydown',(e)=>{
+        if(!step.classList.contains('active')) return;
+        const opts = $$('.opt', step); if(!opts.length) return;
+        let idx = opts.findIndex(b => b.getAttribute('aria-checked') === 'true');
+        if(idx<0) idx=0;
+        if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){ e.preventDefault(); idx=(idx+1)%opts.length; opts[idx].focus(); setTeamSelection(step, idx); }
+        if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){ e.preventDefault(); idx=(idx-1+opts.length)%opts.length; opts[idx].focus(); setTeamSelection(step, idx); }
+        if(e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); handleTeamOption(opts[idx]); }
+        if(e.key === 'Escape'){ e.preventDefault(); $('#restartTeam')?.focus(); }
+      });
+    });
+
+    $$('[data-team-start]').forEach(el=>on(el,'click',restartTeam));
+    on($('#restartTeam'),'click',restartTeam);
+
+    loadTeam(); updateTeam(); goTeam(tstate.step);
+    if(tstate.step>tstate.max){ finishTeam(); }
+  }
+
+  /* Referral Composer (segmentiert) */
+  const SEGMENTS = {
+    neutral: [
+      "2-Minuten-Blick, völlig anonym – sagt dir nur, wo du heute stehst. {{URL}}",
+      "Ruhig & ohne Druck: schneller Status. {{URL}}"
+    ],
+    eltern: [ "Kurz & ruhig: zeigt, ob heute etwas Wichtiges fehlt – ohne Verkauf. {{URL}}" ],
+    kollegen: [ "Fixer Blick für die To-do-Liste – sofort sehen, ob was fehlt. {{URL}}" ],
+    freunde: [ "Null Druck, nur Orientierung in 2 Minuten. {{URL}}" ],
+    selbst:   [ "Kurzer Status heute, ohne Papierkram. {{URL}}" ],
+    partner:  [ "Magst du 2 Minuten schauen? Ampel zeigt nur den Status. {{URL}}" ]
+  };
+
+  function openReferral(seg='neutral'){
+    const dlg = $('#refDialog'); const wa = $('#waShare'); const ta = $('#refText'); const sys = $('#sysShare'); const status = $('#shareStatus');
+    const url = new URL('/', location.origin).toString();
+    const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+    const text = (SEGMENTS[seg]||SEGMENTS.neutral);
+    const value = (Array.isArray(text)? pick(text): text).replace('{{URL}}', url);
+    if(ta) ta.value = value;
+    const waHref = `https://wa.me/?text=${encodeURIComponent(value)}`;
+    if(wa) wa.href = waHref;
+
+    on(sys,'click', async ()=>{
+      try{
+        if(navigator.share){
+          await navigator.share({ text:value, url:url });
+          if(status) status.textContent = 'Geteilt.';
+        }else{
+          window.open(waHref,'_blank','noopener');
+        }
+      }catch(err){
+        if(status) status.textContent = 'Teilen abgebrochen.';
       }
+    }, { once:true });
+
+    if(dlg && typeof dlg.showModal==='function'){ dlg.showModal(); dlg.addEventListener('keydown', e=>{ if(e.key==='Escape') dlg.close(); }, { once:true }); }
+    else if(wa){ window.open(wa.href,'_blank','noopener'); }
+  }
+
+  function bindReferral(){
+    on(document,'click',e=>{
+      const w=e.target.closest('[data-ref]'); if(w){ openReferral(); }
+      const s=e.target.closest('.seg'); if(s){
+        const seg=s.dataset.seg||'neutral'; const ta=$('#refText'); const wa=$('#waShare');
+        const url = location.href;
+        const base = SEGMENTS[seg] || SEGMENTS.neutral;
+        const msg = (Array.isArray(base)? base[0]: base).replace('{{URL}}', url);
+        if(ta){ ta.value = msg; }
+        if(wa){ wa.href = `https://wa.me/?text=${encodeURIComponent(msg)}`; }
+      }
+      if(e.target && e.target.id==='copyBtn'){
+        const ta=$('#refText'); const live = $('#copyStatus');
+        if(ta){
+          navigator.clipboard?.writeText(ta.value).then(()=>{
+            if(live){ live.textContent='Kopiert.'; setTimeout(()=>live.textContent='',1200); }
+            if(e.target instanceof HTMLButtonElement){ e.target.textContent='Kopiert'; setTimeout(()=>e.target.textContent='In Zwischenablage',1200); }
+          });
+        }
+      }
+    });
+  }
+
+  /* WhatsApp / Booking */
+  function bindHelpers(){
+    on(document,'click',e=>{
+      const w=e.target.closest('[data-whatsapp]');
+      if(w){
+        const msg=encodeURIComponent('Hi Heiko, kurze Frage zu meiner Ampel. Hast du 2–3 freie Slots?');
+        window.open(`https://wa.me/?text=${msg}`,'_blank','noopener');
+      }
+      const b=e.target.closest('[data-book]');
+      if(b){ alert('Terminbuchung: Hier dein Tool (z. B. Calendly) einbinden.'); }
+    });
+  }
+
+  /* Confetti: klein, bewusst nur auf positive Enden */
+  function confetti(count=20){
+    const root=document.createElement('div'); Object.assign(root.style,{position:'fixed',inset:'0',pointerEvents:'none',overflow:'hidden'}); document.body.append(root);
+    for(let i=0;i<count;i++){
+      const s=document.createElement('span'); s.textContent='•';
+      Object.assign(s.style,{position:'absolute',left:Math.random()*100+'%',top:'-10px',fontSize:(10+Math.random()*12)+'px',color:['#8efb','lime','gold','#fff'][i%4]});
+      root.append(s);
+      const dur=700+Math.random()*700;
+      s.animate([{transform:'translateY(0)'},{transform:`translateY(${innerHeight}px)`}],{duration:dur,easing:'ease-out'});
+      setTimeout(()=>s.remove(),dur+100);
     }
-  });
-}
-
-/* WhatsApp / Booking */
-function bindHelpers(){
-  on(document,'click',e=>{
-    const w=e.target.closest('[data-whatsapp]');
-    if(w){ const msg=encodeURIComponent('Hi Heiko, kurze Frage zu meiner Ampel. Hast du 2–3 freie Slots?'); window.open(`https://wa.me/?text=${msg}`,'_blank','noopener'); }
-    const b=e.target.closest('[data-book]');
-    if(b){ alert('Terminbuchung: Hier dein Tool (z. B. Calendly) einbinden.'); }
-  });
-}
-
-/* Confetti: klein, bewusst nur auf positive Enden */
-function confetti(count=20){
-  const root=document.createElement('div'); Object.assign(root.style,{position:'fixed',inset:'0',pointerEvents:'none',overflow:'hidden'}); document.body.append(root);
-  for(let i=0;i<count;i++){
-    const s=document.createElement('span'); s.textContent='•';
-    Object.assign(s.style,{position:'absolute',left:Math.random()*100+'%',top:'-10px',fontSize:(10+Math.random()*12)+'px',color:['#8efb','lime','gold','#fff'][i%4]});
-    root.append(s);
-    const dur=700+Math.random()*700;
-    s.animate([{transform:'translateY(0)'},{transform:`translateY(${innerHeight}px)`}],{duration:dur,easing:'ease-out'});
-    setTimeout(()=>s.remove(),dur+100);
+    setTimeout(()=>root.remove(),1800);
   }
-  setTimeout(()=>root.remove(),1800);
-}
 
-/* DEV-Linter (optional): warnt bei Autoverkäufer-/Sales-Vokabular */
-const BANNED = /\b(Allfinanz|Coach(?:ing)?|Vermittl|Tarif|bAV|Abschluss|Makler|Provision|Produktverkauf)\b/i;
-function devLinter(){
-  if(!/localhost|127\.0\.0\.1/.test(location.host)) return;
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
-  const offenders=[];
-  while(walker.nextNode()){
-    const t = walker.currentNode.nodeValue || '';
-    if(BANNED.test(t)) offenders.push(t.trim().slice(0,120));
+  /* Dev Linter (nur lokal) */
+  const BANNED = /\b(Allfinanz|Coach(?:ing)?|Vermittl|Tarif|bAV|Abschluss|Makler|Provision|Produktverkauf)\b/i;
+  function devLinter(){
+    if(!/localhost|127\.0\.0\.1/.test(location.host)) return;
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+    const offenders=[];
+    while(walker.nextNode()){
+      const t = walker.currentNode.nodeValue || '';
+      if(BANNED.test(t)) offenders.push(t.trim().slice(0,120));
+    }
+    if(offenders.length){ console.warn('[Linter] Sales-Vokabular gefunden:', offenders.slice(0,8)); }
   }
-  if(offenders.length){ console.warn('[Linter] Sales-Vokabular gefunden:', offenders.slice(0,8)); }
-}
 
-/* Init */
-document.addEventListener('DOMContentLoaded', ()=>{
-  heroAB();
-  gateHeaderAndSticky();
-  bindHelpers();
-  bindReferral();
+  /* Scroll spy (aria-current) – nur simple Sichtbarkeit */
+  function navSpy(){
+    const links = $$('.nav a[href^="#"]'); if(!links.length) return;
+    const sections = links.map(a => $(a.getAttribute('href')));
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        const idx = sections.indexOf(entry.target);
+        if(idx>=0){
+          const a = links[idx];
+          if(entry.isIntersecting){ a.setAttribute('aria-current','page'); }
+          else { a.removeAttribute('aria-current'); }
+        }
+      });
+    }, { rootMargin:'-40% 0px -50% 0px', threshold:0.01 });
+    sections.filter(Boolean).forEach(sec=>io.observe(sec));
+  }
 
-  if($('#ampelApp')){ updateProgress(); bindAmpel(); }
-  if($('#teamApp')){ updateTeam(); bindTeam(); }
+  /* Deep links & query start */
+  function autoStartFromURL(){
+    const qs = new URLSearchParams(location.search);
+    const start = qs.get('start'); // 'ampel' | 'team'
+    if(start==='ampel' && $('#ampelApp')) restartAmpel();
+    if(start==='team' && $('#teamApp')) restartTeam();
+    if(location.hash==='#ampel' && $('#ampelApp')) restartAmpel();
+  }
 
-  devLinter(); // nur lokal relevant
-}, {once:true});
+  document.addEventListener('DOMContentLoaded', ()=>{
+    heroAB();
+    gateHeaderAndSticky();
+    bindHelpers();
+    bindReferral();
+    navSpy();
+
+    if($('#ampelApp')){ bindAmpel(); }
+    if($('#teamApp')){ bindTeam(); }
+
+    autoStartFromURL();
+    devLinter(); // nur lokal
+  }, {once:true});
+})();
