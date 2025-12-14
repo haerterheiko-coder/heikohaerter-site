@@ -1,4 +1,4 @@
-<!-- ====================== index-inline-max.html ====================== -->
+<!-- /index.html (self-contained: CSS + JS inline) -->
 <!doctype html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -7,141 +7,43 @@
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#05070E" />
   <meta name="robots" content="index,follow" />
-  <title>Heiko Haerter – Ruhiger 2-Minuten-Blick (Inline)</title>
-  <meta name="description" content="Ein ruhiger 2-Minuten-Blick: Rot/Gelb/Grün – anonym, ohne Verkauf. Plan: Jetzt · Als Nächstes · Später." />
+  <title>Heiko Haerter – Ruhiger 2-Minuten-Blick</title>
+  <meta name="description" content="2 Minuten · 3 Fragen · Rot/Gelb/Grün – anonym, ohne Verkauf. Plan: Jetzt · Als Nächstes · Später." />
   <link rel="icon" href="/favicon.ico" />
   <style>
-    :root{
-      --bg:#05070E; --bg-alt:#0B0F19; --surface:#15161a;
-      --text:#F1F3FA; --muted:#A8B1C5;
-      --red:#ff4d4d; --amber:#ffcc33; --green:#2ecc71;
-      --line:rgba(255,255,255,.14); --glass:rgba(255,255,255,.06);
-      --hero-img:linear-gradient(180deg, rgba(5,7,14,.66), rgba(5,7,14,.88) 60%, rgba(5,7,14,.96)), url('assets/hero.jpg');
-      --g1:8px; --g2:12px; --g3:16px; --g4:24px; --g5:32px; --g6:48px; --g7:64px;
-      --t:220ms; --bezier:cubic-bezier(.2,.8,.2,1);
-    }
-    *{box-sizing:border-box}
-    html,body{height:auto}
-    body{
-      margin:0;
-      background:
-        radial-gradient(1200px 600px at 14% -8%, rgba(200,164,75,.10), transparent 60%),
-        radial-gradient(900px 600px at 88% -6%, rgba(130,150,255,.08), transparent 65%),
-        linear-gradient(180deg,#04060E,#060915);
-      color:var(--text);
-      font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    }
-    h1,h2,h3{line-height:1.2;margin:0 0 var(--g3)}
-    p{margin:0 0 var(--g3)} a{color:inherit;text-decoration:none}
-    .lead{font-size:1.1rem;opacity:.95}
-    .mt{margin-top:var(--g5)}
-    .section{padding:var(--g7) var(--g5)}
-    .section-alt{background:var(--bg-alt)}
-    .grid{display:grid;gap:var(--g5)}
+    :root{--bg:#05070E;--bg-alt:#0B0F19;--surface:#15161a;--text:#F1F3FA;--muted:#A8B1C5;--red:#ff4d4d;--amber:#ffcc33;--green:#2ecc71;--line:rgba(255,255,255,.14);--glass:rgba(255,255,255,.06);--hero-img:linear-gradient(180deg,rgba(5,7,14,.66),rgba(5,7,14,.88) 60%,rgba(5,7,14,.96)),url('assets/hero.jpg');--g1:8px;--g2:12px;--g3:16px;--g4:24px;--g5:32px;--g6:48px;--g7:64px;--t:220ms;--bezier:cubic-bezier(.2,.8,.2,1)}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 14% -8%,rgba(200,164,75,.10),transparent 60%),radial-gradient(900px 600px at 88% -6%,rgba(130,150,255,.08),transparent 65%),linear-gradient(180deg,#04060E,#060915);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    h1,h2,h3{line-height:1.2;margin:0 0 var(--g3)}p{margin:0 0 var(--g3)}a{color:inherit;text-decoration:none}
+    .lead{font-size:1.1rem;opacity:.95}.section{padding:var(--g7) var(--g5)}.section-alt{background:var(--bg-alt)}.grid{display:grid;gap:var(--g5)}
     .cards{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--g4)}
-    .list-clean{list-style:none;padding:0;margin:0;display:grid;gap:var(--g2)}
-    .cols-2{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-    .card{background:var(--surface);border:1px solid #24262c;border-radius:18px;padding:var(--g5)}
-    .micro{font-size:.92rem;color:var(--muted)}
-    .muted{color:var(--muted)}
-    .hidden{display:none}
-
-    /* Accessibility helpers */
-    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip-link:focus{left:8px;top:8px;width:auto;height:auto;padding:8px 12px;background:#222;color:#fff;border-radius:8px;z-index:999}
+    .list-clean{list-style:none;padding:0;margin:0;display:grid;gap:var(--g2)}.cols-2{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+    .card{background:var(--surface);border:1px solid #24262c;border-radius:18px;padding:var(--g5)}.micro{font-size:.92rem;color:var(--muted)}.hidden{display:none}
+    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{left:8px;top:8px;width:auto;height:auto;padding:8px 12px;background:#222;color:#fff;border-radius:8px;z-index:999}
     :focus-visible{outline:2px solid #9fb3ff;outline-offset:3px;border-radius:10px}
-
-    /* Header */
-    .site-header{
-      position:sticky; top:0; z-index:50;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:var(--g3) var(--g5); border-bottom:1px solid var(--line);
-      background:rgba(7,10,18,.86); backdrop-filter:blur(10px);
-      transition:opacity var(--t) var(--bezier), transform var(--t) var(--bezier);
-    }
-    .site-header.is-gated{opacity:0; transform:translateY(-16px); pointer-events:none}
-    .site-header.revealed{opacity:1; transform:translateY(0); pointer-events:auto}
-    .brand{font-weight:700; letter-spacing:.4px}
-    .nav{display:flex; gap:var(--g3)} .nav-link{opacity:.9} .nav-link:hover{opacity:1}
-
-    /* Hero */
-    .hero{position:relative; min-height:88svh; display:grid; place-items:stretch; overflow:clip}
-    .hero-art{
-      position:absolute; inset:0;
-      background:
-        linear-gradient(180deg, rgba(5,7,14,.66), rgba(5,7,14,.88) 60%, rgba(5,7,14,.96)),
-        var(--hero-img) center/cover no-repeat;
-      filter:saturate(1.05) contrast(1.02);
-    }
-    .hero-layer{
-      position:relative; z-index:1; padding:calc(var(--g7) + 8vh) var(--g5) var(--g7);
-      display:grid; gap:var(--g4); align-content:end; max-width:1200px; margin-inline:auto;
-    }
-    .hero h1{font-size:clamp(32px,5vw,56px); font-weight:700}
-    .hero h1 em{font-style:normal; color:#E7E9FF}
-    .fx-fade{opacity:0; transform:translateY(8px); animation:fadeIn var(--t) var(--bezier) .04s forwards}
-    .fx-fade-delayed{opacity:0; transform:translateY(10px); animation:fadeIn var(--t) var(--bezier) .18s forwards}
-    @keyframes fadeIn{to{opacity:1; transform:none}}
-    .cta-row{display:flex; gap:var(--g3); flex-wrap:wrap}
-    .row-end{justify-content:flex-end}
-
-    /* Buttons */
-    .btn{
-      appearance:none; border:1px solid #2a2b31; background:var(--glass); color:var(--text);
-      padding:10px 16px; border-radius:12px; transition:transform var(--t), background var(--t);
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn-lg{padding:14px 20px; font-size:1.05rem}
-    .btn-primary{border-color:#47495a; background:#2d2e36; color:#e6e6ff}
-    .btn-secondary{background:#1b1d22; border-color:#2b2e35}
-    .btn-ghost{background:transparent; border-color:transparent; opacity:.9}
-    .btn-block{width:100%}
-
-    /* Apps */
-    .app{max-width:720px;margin:auto}
-    .progress{height:8px;background:#20222a;border-radius:999px;overflow:hidden;margin:0 0 var(--g4)}
-    .progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--green))}
-    .step{display:none}
-    .step.active{display:block}
-    .step-hint{color:var(--muted);margin-bottom:var(--g2)}
+    .site-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:var(--g3) var(--g5);border-bottom:1px solid var(--line);background:rgba(7,10,18,.86);backdrop-filter:blur(10px);transition:opacity var(--t) var(--bezier),transform var(--t) var(--bezier)}
+    .site-header.is-gated{opacity:0;transform:translateY(-16px);pointer-events:none}.site-header.revealed{opacity:1;transform:translateY(0);pointer-events:auto}
+    .nav{display:flex;gap:var(--g3)}
+    .hero{position:relative;min-height:88svh;display:grid;place-items:stretch;overflow:clip}
+    .hero-art{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,14,.66),rgba(5,7,14,.85) 60%,rgba(5,7,14,.96)),var(--hero-img) center/cover no-repeat;filter:saturate(1.05) contrast(1.02)}
+    .hero-layer{position:relative;z-index:1;padding:calc(var(--g7) + 8vh) var(--g5) var(--g7);display:grid;gap:var(--g4);align-content:end;max-width:1200px;margin-inline:auto}
+    .hero h1{font-size:clamp(32px,5vw,56px);font-weight:700}.hero h1 em{font-style:normal;color:#E7E9FF}
+    .fx-fade{opacity:0;transform:translateY(8px);animation:fadeIn var(--t) var(--bezier) .04s forwards}.fx-fade-delayed{opacity:0;transform:translateY(10px);animation:fadeIn var(--t) var(--bezier) .18s forwards}
+    @keyframes fadeIn{to{opacity:1;transform:none}}.cta-row{display:flex;gap:var(--g3);flex-wrap:wrap}.row-end{justify-content:flex-end}
+    .btn{appearance:none;border:1px solid #2a2b31;background:var(--glass);color:var(--text);padding:10px 16px;border-radius:12px;transition:transform var(--t),background var(--t)}.btn:hover{transform:translateY(-1px)}
+    .btn-lg{padding:14px 20px;font-size:1.05rem}.btn-primary{border-color:#47495a;background:#2d2e36;color:#e6e6ff}.btn-secondary{background:#1b1d22;border-color:#2b2e35}.btn-ghost{background:transparent;border-color:transparent;opacity:.9}.btn-block{width:100%}
+    .app{max-width:720px;margin:auto}.progress{height:8px;background:#20222a;border-radius:999px;overflow:hidden;margin:0 0 var(--g4)}.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--green))}
+    .step{display:none}.step.active{display:block}.step-hint{color:var(--muted);margin-bottom:var(--g2)}
     .options{display:grid;gap:var(--g3);grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-    .opt{background:#1a1c21;border:1px solid #2b2e35;padding:14px;border-radius:14px;cursor:pointer;transition:transform var(--t)}
-    .opt:hover{transform:translateY(-2px)}
-    .opt[aria-checked="true"]{outline:2px solid #8aa2ff; outline-offset:2px}
+    .opt{background:#1a1c21;border:1px solid #2b2e35;padding:14px;border-radius:14px;cursor:pointer;transition:transform var(--t)}.opt:hover{transform:translateY(-2px)}.opt[aria-checked="true"]{outline:2px solid #8aa2ff;outline-offset:2px}
     .result{padding:var(--g5);border-radius:18px;border:1px solid #2b2e35;margin-top:var(--g3)}
-    .result.red{background:linear-gradient(180deg, color-mix(in srgb,var(--red) 18%, var(--surface)), var(--surface))}
-    .result.amber{background:linear-gradient(180deg, color-mix(in srgb,var(--amber) 24%, var(--surface)), var(--surface))}
-    .result.green{background:linear-gradient(180deg, color-mix(in srgb,var(--green) 24%, var(--surface)), var(--surface))}
-
-    /* Chips */
-    .ampel-chips{display:flex;gap:var(--g3);padding:0;list-style:none}
-    .chip{display:inline-block;border-radius:999px;padding:2px 10px;font-weight:600;font-size:.95rem}
-    .chip-red{background:color-mix(in srgb,var(--red) 24%, var(--surface))}
-    .chip-amber{background:color-mix(in srgb,var(--amber) 32%, var(--surface))}
-    .chip-green{background:color-mix(in srgb,var(--green) 32%, var(--surface))}
-    .pulse-soft{animation:pulse 3.2s infinite ease-in-out}
-    @keyframes pulse{0%,100%{filter:saturate(1)}50%{filter:saturate(1.25)}}
-
-    /* Inputs / Dialog */
-    .input{width:100%; padding:12px 14px; border-radius:12px; border:1px solid #2b2e35; background:#0f1115; color:var(--text)}
-    .dialog::backdrop{background:rgba(0,0,0,.6)}
-    .dialog{border:none; border-radius:16px; padding:var(--g5); background:#121419; color:var(--text); width:min(640px,92vw)}
-    .dialog-actions{display:flex; gap:var(--g3); justify-content:flex-end}
-    .seg-row{display:flex; gap:var(--g2); flex-wrap:wrap}
-    .seg{border:1px solid #2a2b31; background:#171a21; color:var(--text); padding:8px 12px; border-radius:999px; cursor:pointer}
-
-    /* Sticky CTA */
-    .sticky-cta{
-      position:fixed; left:0; right:0; bottom:0; padding:var(--g3);
-      background:rgba(7,10,18,.88); border-top:1px solid var(--line);
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      *{animation:none !important; transition:none !important}
-    }
-    @media (max-width:960px){
-      .hero-layer{align-content:end; padding:calc(var(--g6) + 12vh) var(--g5) var(--g6)}
-    }
+    .result.red{background:linear-gradient(180deg,color-mix(in srgb,var(--red) 18%,var(--surface)),var(--surface))}
+    .result.amber{background:linear-gradient(180deg,color-mix(in srgb,var(--amber) 24%,var(--surface)),var(--surface))}
+    .result.green{background:linear-gradient(180deg,color-mix(in srgb,var(--green) 24%,var(--surface)),var(--surface))}
+    .ampel-chips{display:flex;gap:var(--g3);padding:0;list-style:none}.chip{display:inline-block;border-radius:999px;padding:2px 10px;font-weight:600;font-size:.95rem}
+    .chip-red{background:color-mix(in srgb,var(--red) 24%,var(--surface))}.chip-amber{background:color-mix(in srgb,var(--amber) 32%,var(--surface))}.chip-green{background:color-mix(in srgb,var(--green) 32%,var(--surface))}
+    .sticky-cta{position:fixed;left:0;right:0;bottom:0;padding:var(--g3);background:rgba(7,10,18,.88);border-top:1px solid var(--line)}
+    @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+    @media (max-width:960px){.hero-layer{align-content:end;padding:calc(var(--g6) + 12vh) var(--g5) var(--g6)}}
   </style>
 </head>
 <body>
@@ -161,16 +63,11 @@
   </header>
 
   <main id="main">
-    <!-- Hero -->
     <section id="hero" class="hero hero-cinema" aria-label="Einstieg">
       <div class="hero-art" role="img" aria-label="Ruhige Szene bei Abendlicht"></div>
       <div class="hero-layer">
-        <h1 class="fx-fade js-hero-emotional">
-          Es gibt diesen Moment,<br />in dem man still denkt:<br /><em>Da fehlt noch etwas.</em>
-        </h1>
-        <h1 class="fx-fade js-hero-functional hidden">
-          2&nbsp;Minuten. 3&nbsp;Fragen. Ergebnis: <em>Rot · Gelb · Grün</em>
-        </h1>
+        <h1 class="fx-fade js-hero-emotional">Es gibt diesen Moment,<br/>in dem man still denkt:<br/><em>Da fehlt noch etwas.</em></h1>
+        <h1 class="fx-fade js-hero-functional hidden">2&nbsp;Minuten. 3&nbsp;Fragen. Ergebnis: <em>Rot · Gelb · Grün</em></h1>
         <p class="micro fx-fade-delayed">Kein Drama. Nur kurz einordnen.</p>
         <div class="cta-row fx-fade-delayed">
           <button id="ctaHero" class="btn btn-primary btn-lg" type="button">⚡ 2&nbsp;Minuten ansehen</button>
@@ -179,12 +76,8 @@
       </div>
     </section>
 
-    <!-- Intro -->
-    <section class="section section-alt">
-      <p class="lead">Manche Dinge trägt man lange mit sich herum – ohne Zeit, sie anzusehen. Heute nicht alles lösen. Nur sehen, <strong>wo</strong> man steht.</p>
-    </section>
+    <section class="section section-alt"><p class="lead">Heute nicht alles lösen. Nur sehen, <strong>wo</strong> man steht.</p></section>
 
-    <!-- Expectations -->
     <section id="grenze" class="section">
       <h2>Was hier nicht passiert</h2>
       <ul class="list-clean cols-2">
@@ -193,18 +86,16 @@
       <p class="micro muted">Nur Orientierung für heute. Nicht mehr.</p>
     </section>
 
-    <!-- System -->
     <section id="ampel" class="section section-alt">
       <h2>Der kurze Blick</h2>
-      <p>In <strong>2 Minuten</strong>, <strong>3 Fragen</strong>. Ergebnis für <strong>heute</strong>: <strong>Rot</strong>, <strong>Gelb</strong> oder <strong>Grün</strong> – plus Plan: <em>Jetzt · Als Nächstes · Später</em>.</p>
+      <p>In <strong>2 Minuten</strong>, <strong>3 Fragen</strong>. Ergebnis: <strong>Rot</strong>, <strong>Gelb</strong> oder <strong>Grün</strong> – plus Plan: <em>Jetzt · Als Nächstes · Später</em>.</p>
       <ul class="ampel-chips" role="list">
-        <li class="chip chip-red pulse-soft">Rot · Jetzt handeln</li>
+        <li class="chip chip-red">Rot · Jetzt handeln</li>
         <li class="chip chip-amber">Gelb · Im Blick</li>
         <li class="chip chip-green">Grün · Entspannt</li>
       </ul>
     </section>
 
-    <!-- App -->
     <section id="check" class="section">
       <h2>In 2 Minuten sehen, wo du heute stehst</h2>
       <div id="ampelApp" class="card app" role="region" aria-label="Ampel-Check">
@@ -241,29 +132,26 @@
         </div>
 
         <div id="result" class="result hidden" tabindex="-1" aria-live="polite"></div>
-        <div class="cta-row row-end">
-          <button class="btn btn-secondary" id="restartAmpel" type="button">Neu starten</button>
-        </div>
+
+        <div class="cta-row row-end"><button class="btn btn-secondary" id="restartAmpel" type="button">Neu starten</button></div>
       </div>
       <p class="micro muted" id="exit">„Nichts tun ist ok. Hauptsache, du weißt, wo du stehst.“</p>
     </section>
 
-    <!-- For whom -->
     <section id="fuer-wen" class="section section-alt grid">
       <div>
         <h2>Für wen ist das?</h2>
-        <p>Für Eltern, Paare vor Entscheidungen, Selbstständige, ADHS/Overthinker & Skeptiker – <em>Klarheit ohne Verkauf</em>.</p>
+        <p>Eltern, Paare, Selbstständige, ADHS/Overthinker & Skeptiker – <em>Klarheit ohne Verkauf</em>.</p>
       </div>
       <ul class="cards" role="list">
-        <li class="card"><h3>Eltern</h3><p>Safety-Loop beruhigen: in 2 Minuten wissen, wo ihr steht.</p></li>
-        <li class="card"><h3>Paare</h3><p>Gemeinsam entscheiden – ohne Druck, ohne Tarif-Gerede.</p></li>
-        <li class="card"><h3>Selbstständige</h3><p>Ausfall-Risiko im Blick; klare To-Dos statt Bürokratie.</p></li>
-        <li class="card"><h3>ADHS/Overthinker</h3><p>1 Gedanke pro Screen – klare Schritte.</p></li>
-        <li class="card"><h3>Skeptiker</h3><p>Transparenz, Kontrolle, „Was NICHT passiert“ – ganz oben.</p></li>
+        <li class="card"><h3>Eltern</h3><p>Safety-Loop beruhigen.</p></li>
+        <li class="card"><h3>Paare</h3><p>Gemeinsam entscheiden.</p></li>
+        <li class="card"><h3>Selbstständige</h3><p>Ausfall-Risiko im Blick.</p></li>
+        <li class="card"><h3>ADHS/Overthinker</h3><p>1 Gedanke pro Screen.</p></li>
+        <li class="card"><h3>Skeptiker</h3><p>Transparenz & Kontrolle.</p></li>
       </ul>
     </section>
 
-    <!-- Next steps -->
     <section class="section">
       <h2>Wenn dein Ergebnis Fragen öffnet</h2>
       <div class="cta-row">
@@ -274,18 +162,16 @@
       <p class="micro muted">Nur, wenn <em>du</em> willst.</p>
     </section>
 
-    <!-- Minimal sender -->
     <section id="sicherheit" class="section section-alt">
       <h2>Wer dahintersteht</h2>
-      <p>Ich bin Heiko. Ich mochte diese Gespräche nie. Deshalb gibt es diesen ruhigen Blick – ohne Verkauf.</p>
+      <p>Ich bin Heiko. Ruhiger Blick – ohne Verkauf.</p>
     </section>
 
-    <!-- Stories -->
     <section id="stories" class="section">
-      <h2>Stimmen von Menschen wie dir</h2>
+      <h2>Stimmen</h2>
       <ul class="cards" role="list">
-        <li class="card"><p>„In 2 Minuten wussten wir, wo wir stehen.“</p><p class="micro muted">Eltern, 2 Kinder</p></li>
-        <li class="card"><p>„Endlich Struktur ohne Verkaufsdruck.“</p><p class="micro muted">Selbstständig, 6 MA</p></li>
+        <li class="card"><p>„In 2 Minuten wussten wir, wo wir stehen.“</p><p class="micro muted">Eltern</p></li>
+        <li class="card"><p>„Endlich Struktur ohne Verkaufsdruck.“</p><p class="micro muted">Selbstständig</p></li>
         <li class="card"><p>„Null Bullshit. Nur Orientierung.“</p><p class="micro muted">Skeptiker</p></li>
       </ul>
     </section>
@@ -293,12 +179,10 @@
 
   <footer class="site-footer"><p class="micro muted">Zero-Sales. 100 % Kontrolle.</p></footer>
 
-  <!-- Sticky CTA -->
   <div id="stickyCta" class="sticky-cta" hidden>
     <button class="btn btn-primary btn-block" data-start type="button">⚡ Ampel starten</button>
   </div>
 
-  <!-- Referral Modal -->
   <dialog id="refDialog" class="dialog" aria-labelledby="refTitle">
     <form method="dialog">
       <h3 id="refTitle">Weitergeben – in 2 Klicks</h3>
@@ -322,221 +206,68 @@
   </dialog>
 
   <script>
-    // Hilfsfunktionen
-    const $ = (s, c=document)=>c.querySelector(s);
-    const $$ = (s, c=document)=>Array.from(c.querySelectorAll(s));
-    const on = (el,ev,fn,opt)=>el && el.addEventListener(ev,fn,opt);
+    const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+    const on=(el,ev,fn,opt)=>el&&el.addEventListener(ev,fn,opt);
     const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* Header/Sticky erst nach Hero */
     function gateHeaderAndSticky(){
-      const hero = $('#hero'); const hdr = $('#hdr'); const sticky = $('#stickyCta');
-      if(!hero || !hdr) return;
-      const io = new IntersectionObserver(([e])=>{
-        const showUI = !e.isIntersecting;
-        hdr.classList.toggle('revealed', showUI);
-        hdr.classList.toggle('is-gated', !showUI);
-        hdr.setAttribute('aria-hidden', String(!showUI));
-        if(sticky) sticky.hidden = !showUI;
-      }, {threshold:0.12});
-      io.observe(hero);
+      const hero=$('#hero'),hdr=$('#hdr'),sticky=$('#stickyCta'); if(!hero||!hdr) return;
+      const io=new IntersectionObserver(([e])=>{ const show=!e.isIntersecting;
+        hdr.classList.toggle('revealed',show); hdr.classList.toggle('is-gated',!show);
+        hdr.setAttribute('aria-hidden',String(!show)); if(sticky) sticky.hidden=!show;
+      },{threshold:0.12}); io.observe(hero);
     }
-
-    /* A/B Hero */
-    function heroAB(){
-      const mode = new URLSearchParams(location.search).get('ab');
-      const emo = $('.js-hero-emotional');
-      const fun = $('.js-hero-functional');
-      if(!emo || !fun) return;
-      const functional = mode === 'functional';
-      emo.classList.toggle('hidden', functional);
-      fun.classList.toggle('hidden', !functional);
-    }
-
-    /* Ampel-Logik mit A11y & Tastatur */
-    const AMPEL_KEY = 'ampel-state-v1';
-    const state = { step:1, maxStep:3, score:0, answers:[] };
-
-    function saveState(){ try{ sessionStorage.setItem(AMPEL_KEY, JSON.stringify(state)); }catch{} }
-    function loadState(){
-      try{
-        const raw = sessionStorage.getItem(AMPEL_KEY);
-        if(!raw) return;
-        const s = JSON.parse(raw);
-        if(typeof s?.step === 'number' && Array.isArray(s?.answers)){ Object.assign(state, s); }
-      }catch{}
-    }
-    function updateProgress(){ const bar=$('#progressBar'); if(bar) bar.style.width = `${((state.step-1)/state.maxStep)*100}%`; }
-    function setRadioSelection(stepEl, index){
-      const opts = $$('.opt', stepEl);
-      opts.forEach((b,i)=>{ const checked = i === index; b.setAttribute('aria-checked', String(checked)); b.tabIndex = checked ? 0 : -1; });
-    }
-    function goStep(n){
-      $$('#ampelApp .step').forEach(s=>s.classList.remove('active'));
-      const el = $(`#step${n}`); if(el){
-        el.classList.add('active'); state.step=n; updateProgress(); saveState();
-        const first=$('.opt', el); if(first){ first.focus(); setRadioSelection(el,0); }
-      }
-    }
-    function finishAmpel(){
-      const sum=state.score;
-      let tier='red', title='Rot – Jetzt handeln', now='1–2 Themen zuerst klären.', next='Dann kleine Schritte (30–60 Min).', later='Später Feinschliff.';
-      if(sum>=5){ tier='green'; title='Grün – Entspannt bleiben'; now='Alles Wichtige wirkt stabil.'; next='Optional: kleiner Feinschliff.'; later='In 6–12 Monaten erneut prüfen.'; }
-      else if(sum>=3){ tier='amber'; title='Gelb – Gut unterwegs'; now='2 Dinge verdienen kurz Fokus.'; next='Kleiner Plan bringt Ruhe.'; later='Danach entspannt laufen lassen.'; }
-      const r=$('#result'); if(!r) return;
-      r.className=`result ${tier}`;
-      r.innerHTML = `
-        <h3>${title}</h3>
-        <p><strong>Jetzt:</strong> ${now}</p>
-        <p><strong>Als Nächstes:</strong> ${next}</p>
-        <p><strong>Später:</strong> ${later}</p>
+    const state={step:1,maxStep:3,score:0,answers:[]};
+    function updateProgress(){ const bar=$('#progressBar'); if(bar) bar.style.width=`${((state.step-1)/state.maxStep)*100}%`; }
+    function setRadioSelection(stepEl, i){ const opts=$$('.opt',stepEl); opts.forEach((b,idx)=>{ const on=idx===i; b.setAttribute('aria-checked',String(on)); b.tabIndex=on?0:-1; }); }
+    function goStep(n){ $$('#ampelApp .step').forEach(s=>s.classList.remove('active')); const el=$('#step'+n);
+      if(el){ el.classList.add('active'); state.step=n; updateProgress(); const first=$('.opt',el); if(first){ first.focus(); setRadioSelection(el,0); } } }
+    function finish(){ const s=state.score; let tier='red',title='Rot – Jetzt handeln',now='1–2 Themen zuerst klären.',next='Dann kleine Schritte (30–60 Min).',later='Später Feinschliff.';
+      if(s>=5){ tier='green'; title='Grün – Entspannt bleiben'; now='Alles Wichtige wirkt stabil.'; next='Optional: kleiner Feinschliff.'; later='In 6–12 Monaten erneut prüfen.'; }
+      else if(s>=3){ tier='amber'; title='Gelb – Gut unterwegs'; now='2 Dinge verdienen kurz Fokus.'; next='Kleiner Plan bringt Ruhe.'; later='Danach entspannt laufen lassen.'; }
+      const r=$('#result'); if(!r) return; r.className=`result ${tier}`; r.innerHTML=`<h3>${title}</h3>
+        <p><strong>Jetzt:</strong> ${now}</p><p><strong>Als Nächstes:</strong> ${next}</p><p><strong>Später:</strong> ${later}</p>
         <div class="cta-row" style="margin-top:16px">
           <button class="btn btn-primary" data-book type="button">20-Minuten in Ruhe</button>
           <button class="btn btn-secondary" data-whatsapp type="button">WhatsApp-Kurzfrage</button>
           <button class="btn" data-ref type="button">Weitergeben</button>
-        </div>`;
-      r.classList.remove('hidden'); setTimeout(()=>r.focus(),40);
+        </div>`; r.classList.remove('hidden'); setTimeout(()=>r.focus(),40);
       if(tier==='green' && !prefersReducedMotion){ try{ confetti(24);}catch{} }
-      saveState();
     }
-    function restartAmpel(){
-      state.step=1; state.score=0; state.answers.length=0; saveState();
-      $('#result')?.classList.add('hidden'); goStep(1);
-      const check=$('#check'); if(check) window.scrollTo({top:check.offsetTop-60, behavior:'smooth'});
-    }
-    function handleOptionClick(b){
-      const v=Number(b.dataset.score||0); state.score+=v; state.answers.push(v);
-      const stepEl = b.closest('.step'); if(stepEl){ const idx = $$('.opt', stepEl).indexOf(b); setRadioSelection(stepEl, idx); }
-      const next=state.step+1;
-      if(next<=state.maxStep){ goStep(next); }
-      else { $('#progressBar')?.style && ($('#progressBar').style.width='100%'); finishAmpel(); }
-    }
+    function handleOptionClick(b){ const v=Number(b.dataset.score||0); state.score+=v; state.answers.push(v);
+      const stepEl=b.closest('.step'); if(stepEl){ const idx=$$('.opt',stepEl).indexOf(b); setRadioSelection(stepEl,idx); }
+      const next=state.step+1; if(next<=state.maxStep){ goStep(next); } else { $('#progressBar').style.width='100%'; finish(); } }
     function bindAmpel(){
       if(!$('#ampelApp')) return;
-      on($('#ampelApp'),'click',e=>{ const btn = e.target.closest('.opt'); if(btn) handleOptionClick(btn); });
+      on($('#ampelApp'),'click',e=>{ const btn=e.target.closest('.opt'); if(btn) handleOptionClick(btn); });
       $$('#ampelApp .step').forEach(step=>{
         on(step,'keydown',e=>{
-          if(!step.classList.contains('active')) return;
-          const opts = $$('.opt', step); if(!opts.length) return;
-          let idx = opts.findIndex(b => b.getAttribute('aria-checked') === 'true'); if(idx<0) idx=0;
-          if(e.key==='ArrowRight'||e.key==='ArrowDown'){ e.preventDefault(); idx=(idx+1)%opts.length; opts[idx].focus(); setRadioSelection(step, idx); }
-          if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); idx=(idx-1+opts.length)%opts.length; opts[idx].focus(); setRadioSelection(step, idx); }
+          if(!step.classList.contains('active')) return; const opts=$$('.opt',step); if(!opts.length) return;
+          let idx=opts.findIndex(b=>b.getAttribute('aria-checked')==='true'); if(idx<0) idx=0;
+          if(e.key==='ArrowRight'||e.key==='ArrowDown'){ e.preventDefault(); idx=(idx+1)%opts.length; opts[idx].focus(); setRadioSelection(step,idx); }
+          if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); idx=(idx-1+opts.length)%opts.length; opts[idx].focus(); setRadioSelection(step,idx); }
           if(e.key===' '||e.key==='Enter'){ e.preventDefault(); handleOptionClick(opts[idx]); }
           if(e.key==='Escape'){ e.preventDefault(); $('#restartAmpel')?.focus(); }
         });
       });
-      ['#ctaTop','#ctaHero','[data-start]','#restartAmpel'].forEach(sel=>{
-        $$(sel).forEach(el=>on(el,'click',restartAmpel));
-      });
-      loadState(); updateProgress(); goStep(state.step);
-      if(state.answers.length===state.maxStep){ finishAmpel(); }
+      ['#ctaTop','#ctaHero','[data-start]','#restartAmpel'].forEach(sel=>{ $$(sel).forEach(el=>on(el,'click',()=>{ state.step=1; state.score=0; state.answers.length=0; $('#result')?.classList.add('hidden'); goStep(1); const check=$('#check'); if(check) scrollTo({top:check.offsetTop-60,behavior:'smooth'}); })); });
+      updateProgress(); goStep(1);
     }
-
-    /* Referral / Teilen */
-    const SEGMENTS = {
-      neutral:["2-Minuten-Blick, anonym – sagt dir nur, wo du heute stehst. {{URL}}","Ruhig & ohne Druck: schneller Status. {{URL}}"],
-      eltern:["Kurz & ruhig: zeigt, ob heute etwas fehlt – ohne Verkauf. {{URL}}"],
-      kollegen:["Fixer Blick für die To-do-Liste – sofort sehen, ob was fehlt. {{URL}}"],
-      freunde:["Null Druck, nur Orientierung in 2 Minuten. {{URL}}"],
-      selbst:["Kurzer Status heute, ohne Papierkram. {{URL}}"],
-      partner:["Magst du 2 Minuten schauen? Ampel zeigt nur den Status. {{URL}}"]
-    };
+    const SEGMENTS={neutral:["2-Minuten-Blick, anonym – sagt dir nur, wo du heute stehst. {{URL}}","Ruhig & ohne Druck: schneller Status. {{URL}}"],eltern:["Kurz & ruhig: zeigt, ob heute etwas fehlt – ohne Verkauf. {{URL}}"],kollegen:["Fixer Blick für die To-do-Liste – sofort sehen, ob was fehlt. {{URL}}"],freunde:["Null Druck, nur Orientierung in 2 Minuten. {{URL}}"],selbst:["Kurzer Status heute, ohne Papierkram. {{URL}}"],partner:["Magst du 2 Minuten schauen? Ampel zeigt nur den Status. {{URL}}"]};
     function openReferral(seg='neutral'){
-      const dlg=$('#refDialog'), wa=$('#waShare'), ta=$('#refText'), sys=$('#sysShare'), status=$('#shareStatus');
-      const url = new URL('/', location.origin).toString();
-      const pick = arr => arr[Math.floor(Math.random()*arr.length)];
-      const text = (SEGMENTS[seg]||SEGMENTS.neutral);
-      const value = (Array.isArray(text)? pick(text): text).replace('{{URL}}', url);
-      if(ta) ta.value=value;
-      const waHref = `https://wa.me/?text=${encodeURIComponent(value)}`;
-      if(wa) wa.href = waHref;
-      on(sys,'click', async ()=>{
-        try{
-          if(navigator.share){ await navigator.share({ text:value, url:url }); status && (status.textContent='Geteilt.'); }
-          else{ window.open(waHref,'_blank','noopener'); }
-        }catch{ status && (status.textContent='Teilen abgebrochen.'); }
-      }, { once:true });
-      if(dlg && typeof dlg.showModal==='function'){ dlg.showModal(); dlg.addEventListener('keydown', e=>{ if(e.key==='Escape') dlg.close(); }, { once:true }); }
-      else if(wa){ window.open(wa.href,'_blank','noopener'); }
+      const dlg=$('#refDialog'),wa=$('#waShare'),ta=$('#refText'),sys=$('#sysShare'),status=$('#shareStatus');
+      const url=new URL('/',location.origin).toString(); const pick=a=>a[Math.floor(Math.random()*a.length)];
+      const text=(SEGMENTS[seg]||SEGMENTS.neutral),value=(Array.isArray(text)?pick(text):text).replace('{{URL}}',url);
+      if(ta) ta.value=value; const waHref=`https://wa.me/?text=${encodeURIComponent(value)}`; if(wa) wa.href=waHref;
+      on(sys,'click',async()=>{ try{ if(navigator.share){ await navigator.share({text:value,url}); status&&(status.textContent='Geteilt.'); } else { window.open(waHref,'_blank','noopener'); } }catch{ status&&(status.textContent='Teilen abgebrochen.'); } },{once:true});
+      if(dlg&&dlg.showModal){ dlg.showModal(); dlg.addEventListener('keydown',e=>{ if(e.key==='Escape') dlg.close(); },{once:true}); } else if(wa){ window.open(wa.href,'_blank','noopener'); }
     }
-    function bindReferral(){
-      on(document,'click',e=>{
-        const w=e.target.closest('[data-ref]'); if(w){ openReferral(); }
-        const s=e.target.closest('.seg'); if(s){
-          const seg=s.dataset.seg||'neutral'; const ta=$('#refText'); const wa=$('#waShare');
-          const msg = (SEGMENTS[seg]?.[0]||SEGMENTS.neutral[0]).replace('{{URL}}', location.href);
-          if(ta) ta.value=msg; if(wa) wa.href=`https://wa.me/?text=${encodeURIComponent(msg)}`;
-        }
-      });
-    }
-
-    /* WhatsApp / Booking */
-    function bindHelpers(){
-      on(document,'click',e=>{
-        const w=e.target.closest('[data-whatsapp]');
-        if(w){ const msg=encodeURIComponent('Hi Heiko, kurze Frage zu meiner Ampel. Hast du 2–3 freie Slots?'); window.open(`https://wa.me/?text=${msg}`,'_blank','noopener'); }
-        const b=e.target.closest('[data-book]'); if(b){ alert('Terminbuchung: Hier dein Tool (z. B. Calendly) einbinden.'); }
-      });
-    }
-
-    /* Confetti klein */
-    function confetti(count=20){
-      const root=document.createElement('div'); Object.assign(root.style,{position:'fixed',inset:'0',pointerEvents:'none',overflow:'hidden'}); document.body.append(root);
-      for(let i=0;i<count;i++){
-        const s=document.createElement('span'); s.textContent='•';
-        Object.assign(s.style,{position:'absolute',left:Math.random()*100+'%',top:'-10px',fontSize:(10+Math.random()*12)+'px',color:['#8efb','lime','gold','#fff'][i%4]});
-        root.append(s);
-        const dur=700+Math.random()*700;
-        s.animate([{transform:'translateY(0)'},{transform:`translateY(${innerHeight}px)`}],{duration:dur,easing:'ease-out'});
-        setTimeout(()=>s.remove(),dur+120);
-      }
-      setTimeout(()=>root.remove(),1800);
-    }
-
-    /* Dev-Linter (nur lokal) */
-    const BANNED = /\b(Allfinanz|Coach(?:ing)?|Vermittl|Tarif|bAV|Abschluss|Makler|Provision|Produktverkauf)\b/i;
-    function devLinter(){
-      if(!/localhost|127\.0\.0\.1/.test(location.host)) return;
-      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
-      const offenders=[]; while(walker.nextNode()){ const t=walker.currentNode.nodeValue||''; if(BANNED.test(t)) offenders.push(t.trim().slice(0,120)); }
-      if(offenders.length){ console.warn('[Linter] Sales-Vokabular gefunden:', offenders.slice(0,8)); }
-    }
-
-    /* Nav-Spy (aria-current) */
-    function navSpy(){
-      const links = $$('.nav a[href^="#"]'); if(!links.length) return;
-      const sections = links.map(a => $(a.getAttribute('href')));
-      const io = new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{
-          const idx = sections.indexOf(entry.target);
-          if(idx>=0){
-            const a = links[idx];
-            if(entry.isIntersecting){ a.setAttribute('aria-current','page'); }
-            else { a.removeAttribute('aria-current'); }
-          }
-        });
-      }, { rootMargin:'-40% 0px -50% 0px', threshold:0.01 });
-      sections.filter(Boolean).forEach(sec=>io.observe(sec));
-    }
-
-    /* Deep links & query start */
-    function autoStartFromURL(){
-      const qs = new URLSearchParams(location.search);
-      const start = qs.get('start'); // 'ampel'
-      if(start==='ampel' && $('#ampelApp')) restartAmpel();
-      if(location.hash==='#ampel' && $('#ampelApp')) restartAmpel();
-    }
-
-    document.addEventListener('DOMContentLoaded', ()=>{
-      heroAB();
-      gateHeaderAndSticky();
-      bindHelpers();
-      bindReferral();
-      navSpy();
-      if($('#ampelApp')){ bindAmpel(); }
-      autoStartFromURL();
-      devLinter(); // nur lokal
-    }, {once:true});
+    function bindReferral(){ on(document,'click',e=>{ const w=e.target.closest('[data-ref]'); if(w) openReferral(); const s=e.target.closest('.seg'); if(s){ const seg=s.dataset.seg||'neutral',ta=$('#refText'),wa=$('#waShare'); const msg=(SEGMENTS[seg]?.[0]||SEGMENTS.neutral[0]).replace('{{URL}}',location.href); if(ta) ta.value=msg; if(wa) wa.href=`https://wa.me/?text=${encodeURIComponent(msg)}`; } }); }
+    function bindHelpers(){ on(document,'click',e=>{ const w=e.target.closest('[data-whatsapp]'); if(w){ const msg=encodeURIComponent('Hi Heiko, kurze Frage zu meiner Ampel. Hast du 2–3 freie Slots?'); window.open(`https://wa.me/?text=${msg}`,'_blank','noopener'); } const b=e.target.closest('[data-book]'); if(b){ alert('Terminbuchung: Hier dein Tool (z. B. Calendly) einbinden.'); } }); }
+    function confetti(n=20){ if(prefersReducedMotion) return; const root=document.createElement('div'); Object.assign(root.style,{position:'fixed',inset:'0',pointerEvents:'none',overflow:'hidden'}); document.body.append(root);
+      for(let i=0;i<n;i++){ const s=document.createElement('span'); s.textContent='•'; Object.assign(s.style,{position:'absolute',left:Math.random()*100+'%',top:'-10px',fontSize:(10+Math.random()*12)+'px',color:['#8efb','lime','gold','#fff'][i%4]}); root.append(s); const dur=700+Math.random()*700;
+        s.animate([{transform:'translateY(0)'},{transform:`translateY(${innerHeight}px)`}],{duration:dur,easing:'ease-out'}); setTimeout(()=>s.remove(),dur+120); } setTimeout(()=>root.remove(),1800); }
+    document.addEventListener('DOMContentLoaded',()=>{ gateHeaderAndSticky(); bindHelpers(); bindReferral(); bindAmpel(); },{once:true});
   </script>
 </body>
 </html>
