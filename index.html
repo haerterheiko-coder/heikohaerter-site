@@ -3,34 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#05070E" />
 
-  <title>Der ruhige Finanz-Kompass · 2-Minuten-Ampel</title>
-  <meta name="description" content="Ein ruhiger Moment. Eine Ampel. Kein Verkauf. Kein Urteil." />
+  <title>Der ruhige Finanz-Kompass</title>
+  <meta name="description" content="Ein kurzer Blick. Kein Urteil. Die 2-Minuten-Ampel für diesen Moment." />
 
   <style>
     :root{
       --bg:#05070E;
-      --bg-soft:#0B0F19;
       --text:#F1F3FA;
       --muted:#A8B1C5;
       --line:rgba(255,255,255,.12);
-
       --green:#55b76b;
       --yellow:#d6c45a;
       --red:#c85151;
-
       --ease:cubic-bezier(.25,.46,.25,1);
-
-      --g1:.5rem;
-      --g2:1rem;
-      --g3:1.75rem;
-      --g4:3rem;
-      --g5:5rem;
-
       font-size:clamp(16px,1vw+8px,20px);
     }
 
@@ -39,113 +27,93 @@
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(1200px 500px at 50% -10%, rgba(200,164,75,.08), transparent 60%),
-        linear-gradient(180deg,#04060E,#060915);
+      background:linear-gradient(180deg,#04060E,#060915);
       -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
     }
 
     main{
-      max-width:900px;
+      max-width:920px;
       margin:0 auto;
-      padding:clamp(32px,7vw,96px);
+      padding:clamp(28px,6vw,84px);
     }
 
-    section{margin-bottom:var(--g5)}
-
-    h1,h2,h3{margin:0 0 var(--g2);line-height:1.15}
-    h1{font-size:clamp(36px,5.5vw,64px);font-weight:800}
-    h3{font-size:clamp(18px,2.2vw,24px);font-weight:600}
-
-    p{margin:0 0 var(--g2);max-width:44ch}
+    section{margin-bottom:4rem}
+    h1,h3{margin:0 0 1rem;line-height:1.15}
+    h1{font-size:clamp(34px,5vw,58px);font-weight:800}
+    h3{font-size:1.1rem;font-weight:600}
+    p{margin:0 0 .9rem;max-width:44ch}
     .muted{color:var(--muted);font-size:.95rem}
 
-    /* EMOTIONAL ANCHOR */
-    .scene{
-      max-width:520px;
-      margin-bottom:var(--g4);
-      font-size:1.05rem;
-      line-height:1.6;
-    }
-
-    .scene span{
-      display:block;
-      color:var(--muted);
-      margin-top:.5rem;
-      font-size:.9rem;
-    }
-
     /* AMPEL */
+    .ampel-wrap{text-align:center;margin:4rem 0 2rem}
     .ampel{
-      display:flex;
-      justify-content:center;
+      display:inline-flex;
       gap:1.8rem;
-      margin:var(--g5) 0;
     }
-
     .dot{
       width:30px;height:30px;border-radius:50%;
       opacity:.22;
-      transition:opacity .5s var(--ease), box-shadow .5s var(--ease), transform .5s var(--ease);
+      transition:.5s var(--ease);
     }
-    .dot.green{background:var(--green)}
-    .dot.yellow{background:var(--yellow)}
-    .dot.red{background:var(--red)}
-
-    .dot.active{
+    .green{background:var(--green)}
+    .yellow{background:var(--yellow)}
+    .red{background:var(--red)}
+    .active{
       opacity:1;
-      box-shadow:0 0 34px currentColor;
+      box-shadow:0 0 32px currentColor;
       transform:scale(1.08);
     }
 
-    /* FRAGEN */
-    .question{
-      margin-bottom:var(--g3);
-      padding-bottom:var(--g3);
+    .non-diagnose{
+      margin-top:1rem;
+      font-size:.9rem;
+      color:var(--muted);
+    }
+
+    /* INSELN */
+    .islands{
+      display:grid;
+      gap:2rem;
+      margin-top:3rem;
+    }
+    .island{
       border-bottom:1px solid var(--line);
+      padding-bottom:2rem;
     }
 
     .options{
       display:flex;
-      gap:.75rem;
+      gap:.6rem;
       flex-wrap:wrap;
-      margin-top:.75rem;
+      margin-top:.6rem;
     }
-
     button{
       background:rgba(255,255,255,.06);
       border:1px solid var(--line);
       color:var(--text);
       border-radius:999px;
-      padding:.6rem 1rem;
-      font-size:.95rem;
+      padding:.5rem .95rem;
       cursor:pointer;
+      font-size:.9rem;
     }
 
-    button:focus-visible{
-      outline:2px solid #90C2FF;
-      outline-offset:3px;
-    }
+    /* ECHO */
+    .echo p{margin-bottom:.4rem}
 
-    /* ERGEBNIS */
+    /* RESULT */
     .result{
       text-align:center;
-      margin-top:var(--g4);
+      margin-top:3rem;
       opacity:0;
-      transform:scale(.94);
-      transition:.5s var(--ease);
+      transition:.6s var(--ease);
     }
-    .result.visible{
-      opacity:1;
-      transform:scale(1);
-    }
-    .result.fade{opacity:.3}
+    .result.visible{opacity:1}
+    .result.fade{opacity:.35}
 
     footer{
-      margin-top:var(--g5);
-      color:var(--muted);
+      margin-top:4rem;
       font-size:.85rem;
+      color:var(--muted);
     }
   </style>
 </head>
@@ -153,30 +121,24 @@
 <body>
 <main>
 
-  <!-- EMOTIONALER EINSTIEG -->
-  <section class="scene">
+  <!-- SZENE -->
+  <section>
     <p>
       Es ist spät.<br>
-      Der Tag war voll.<br>
       Eigentlich ist alles erledigt.
     </p>
     <p>
-      Und trotzdem bleibt dieser kurze Gedanke:<br>
-      <strong>Hoffentlich übersehe ich nichts.</strong>
+      Und trotzdem dieser Gedanke:<br>
+      <strong>Übersehe ich etwas?</strong>
     </p>
-    <span>Genau für diesen Moment.</span>
   </section>
 
   <!-- HERO -->
   <section>
     <h1>
-      Ein ruhiger Blick,<br>
-      bevor der Tag endet.
+      Ein ruhiger Blick<br>
+      für diesen Moment.
     </h1>
-    <p>
-      Diese Ampel zeigt in 2 Minuten,<br>
-      wie stabil sich euer Alltag <strong>jetzt</strong> anfühlt.
-    </p>
     <p class="muted">
       Der ruhige Finanz-Kompass.<br>
       Anonym. Ohne Unterlagen. Ohne Verkauf.
@@ -184,15 +146,20 @@
   </section>
 
   <!-- AMPEL -->
-  <div class="ampel" aria-hidden="true">
-    <div class="dot green"></div>
-    <div class="dot yellow"></div>
-    <div class="dot red"></div>
+  <div class="ampel-wrap">
+    <div class="ampel" aria-hidden="true">
+      <div class="dot green"></div>
+      <div class="dot yellow"></div>
+      <div class="dot red"></div>
+    </div>
+    <div class="non-diagnose">
+      Kein Urteil. Nur ein kurzer Blick für diesen Moment.
+    </div>
   </div>
 
-  <!-- FRAGEN -->
-  <section>
-    <div class="question">
+  <!-- INSEL-FRAGEN -->
+  <section class="islands">
+    <div class="island">
       <h3>Wenn du heute ausfallen würdest –</h3>
       <p class="muted">wie ruhig fühlt sich euer Alltag an?</p>
       <div class="options">
@@ -202,9 +169,9 @@
       </div>
     </div>
 
-    <div class="question">
+    <div class="island">
       <h3>Wie leicht findest du Wichtiges,</h3>
-      <p class="muted">wenn es plötzlich gebraucht wird?</p>
+      <p class="muted">wenn es gebraucht wird?</p>
       <div class="options">
         <button data-v="3">Leicht</button>
         <button data-v="2">Mit Suchen</button>
@@ -212,7 +179,7 @@
       </div>
     </div>
 
-    <div class="question">
+    <div class="island">
       <h3>Wenn du an später denkst –</h3>
       <p class="muted">wie klar fühlt sich das an?</p>
       <div class="options">
@@ -225,19 +192,16 @@
 
   <!-- ERGEBNIS -->
   <section class="result" id="result">
-    <h3 id="resultTitle"></h3>
-    <p class="muted" id="resultText"></p>
-    <p class="muted" style="margin-top:.75rem">
-      Kein Urteil. Nur dieser Moment.<br>
-      Gilt nur für jetzt.
-    </p>
+    <h3 id="rTitle"></h3>
+    <p class="muted" id="rText"></p>
+    <p class="muted">Gilt nur für jetzt.</p>
   </section>
 
-  <!-- STIMMEN -->
-  <section>
-    <p class="muted">„Es hat mich runtergebracht.“</p>
-    <p class="muted">„Endlich kurz Ruhe im Kopf.“</p>
-    <p class="muted">„Genau der richtige Moment.“</p>
+  <!-- ECHO -->
+  <section class="echo">
+    <p class="muted">„Tat gut, kurz draufzuschauen.“</p>
+    <p class="muted">„War beruhigend.“</p>
+    <p class="muted">„Hat den Kopf etwas freigemacht.“</p>
   </section>
 
   <!-- MENSCH -->
@@ -256,56 +220,44 @@
 </main>
 
 <script>
-(function(){
-  const buttons = document.querySelectorAll('button[data-v]');
+(() => {
   const dots = document.querySelectorAll('.dot');
   const result = document.getElementById('result');
-  const title = document.getElementById('resultTitle');
-  const text  = document.getElementById('resultText');
+  const rTitle = document.getElementById('rTitle');
+  const rText  = document.getElementById('rText');
+  let values = [];
+  let timer;
 
-  let score = 0;
-  let answered = 0;
-  let fadeTimer;
-
-  function reveal(color, t, p){
+  function update(){
+    const sum = values.reduce((a,b)=>a+b,0);
     dots.forEach(d=>d.classList.remove('active'));
-    document.querySelector('.dot.'+color).classList.add('active');
-    title.textContent = t;
-    text.textContent = p;
+    if(!sum) return;
+
+    let c,t,p;
+    if(sum <= 4){
+      c='red'; t='🔴 Heute wichtig'; p='Ein Bereich braucht Aufmerksamkeit.';
+    }else if(sum <= 7){
+      c='yellow'; t='🟡 Bald wichtig'; p='Ein paar Dinge stehen an.';
+    }else{
+      c='green'; t='🟢 Für heute stabil'; p='Für diesen Moment wirkt alles ruhig.';
+    }
+
+    document.querySelector('.'+c).classList.add('active');
+    rTitle.textContent=t;
+    rText.textContent=p;
     result.classList.add('visible');
     result.classList.remove('fade');
-    clearTimeout(fadeTimer);
-    fadeTimer = setTimeout(()=> result.classList.add('fade'), 12000);
+    clearTimeout(timer);
+    timer=setTimeout(()=>result.classList.add('fade'),60000);
   }
 
-  buttons.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const q = btn.closest('.question');
-      if(q.dataset.done) return;
-      q.dataset.done = "1";
-      score += Number(btn.dataset.v);
-      answered++;
-
-      if(answered === 3){
-        if(score <= 4){
-          reveal('red','🔴 Heute wichtig','Ein Bereich braucht Aufmerksamkeit. Ruhig hinschauen.');
-        }else if(score <= 7){
-          reveal('yellow','🟡 Bald wichtig','Ein paar Dinge stehen an. Heute nichts entscheiden.');
-        }else{
-          reveal('green','🟢 Für heute stabil','Für diesen Moment wirkt alles getragen.');
-        }
-        result.scrollIntoView({behavior:'smooth',block:'center'});
-      }
+  document.querySelectorAll('button[data-v]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const v=Number(btn.dataset.v);
+      const i=values.indexOf(v);
+      i>-1 ? values.splice(i,1) : values.push(v);
+      update();
     });
-  });
-
-  addEventListener('keydown',e=>{
-    if(e.key==='1'||e.key==='2'||e.key==='3'){
-      const open=document.querySelector('.question:not([data-done])');
-      if(!open) return;
-      const b=open.querySelector(`button[data-v="${e.key}"]`);
-      b && b.click();
-    }
   });
 })();
 </script>
