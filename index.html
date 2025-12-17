@@ -11,28 +11,26 @@
   <meta name="theme-color" content="#05070E" />
 
   <title>Klarheit, bevor Entscheidungen teuer werden.</title>
-  <meta name="description" content="Ein System für Geld, Schutz & Zukunft – privat und unternehmerisch. Ruhig, ganzheitlich, DVAG-Backbone. Ampel ansehen in 2 Minuten, ohne Druck." />
+  <meta name="description" content="Ein System für Geld, Schutz & Zukunft – ruhig, ganzheitlich, mit DVAG-Backbone. In 2 Minuten einordnen – ohne Druck, ohne Produktshow." />
   <link rel="canonical" href="https://heikohaerter.com" />
 
-  <!-- OG -->
+  <!-- Open Graph -->
   <meta property="og:site_name" content="Heiko Haerter – Allfinanz & Entscheidungsarchitektur" />
   <meta property="og:title" content="Klarheit, bevor Entscheidungen teuer werden." />
-  <meta property="og:description" content="Ein System für Geld, Schutz & Zukunft – privat und unternehmerisch. Ampel ansehen in 2 Minuten." />
+  <meta property="og:description" content="Ein System für Geld, Schutz & Zukunft – privat und unternehmerisch. Einordnung in 2 Minuten." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://heikohaerter.com" />
   <meta property="og:locale" content="de_DE" />
   <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Perf -->
+  <!-- Perf Hints -->
   <link rel="dns-prefetch" href="https://outlook.office.com">
   <link rel="preconnect" href="https://outlook.office.com" crossorigin>
   <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
   <link rel="preconnect" href="https://wa.me" crossorigin>
-  <!-- Font preload (falls lokal vorhanden) -->
-  <link rel="preload" href="/fonts/Inter.var.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- LCP -->
+  <!-- LCP Preload -->
   <link rel="preload" as="image"
         href="https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png"
         imagesrcset="
@@ -50,33 +48,44 @@
     "@type":"LocalBusiness",
     "name":"Heiko Haerter – Allfinanz & Entscheidungsarchitektur",
     "image":"https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png",
-    "address":{"@type":"PostalAddress","streetAddress":"Robert-Bosch-Str. 1","postalCode":"71277","addressLocality":"Rutesheim","addressCountry":"DE"},
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"Robert-Bosch-Str. 1",
+      "postalCode":"71277",
+      "addressLocality":"Rutesheim",
+      "addressCountry":"DE"
+    },
     "url":"https://heikohaerter.com",
-    "telephone":"+49 176 60408380"
+    "telephone":"+49 176 60408380",
+    "sameAs":[
+      "https://www.linkedin.com/in/heiko-haerter-3755b2260/",
+      "https://www.xing.com/profile/Heiko_Haerter3",
+      "https://www.instagram.com/heiko.haerter.coach/"
+    ],
+    "areaServed":"DE"
   }
   </script>
 
   <style>
     :root{
       --bg:#05070E; --bg2:#02040A;
-      --surface:rgba(255,255,255,.035);
-      --surface2:rgba(255,255,255,.06);
+      --surface:rgba(255,255,255,.035); --surface2:rgba(255,255,255,.06);
       --text:#F7F8FC; --muted:#A8B1C5; --muted2:#8F97AA;
       --gold:#C8A44B; --gold2:#E9D394;
       --focus:#90C2FF;
       --elev-1:0 18px 40px rgba(0,0,0,.35);
       --ease:cubic-bezier(.25,.46,.25,1);
-      --glow1:radial-gradient(circle at 15% -10%,rgba(200,164,75,.18),transparent 55%);
-      --glow2:radial-gradient(circle at 85% 10%,rgba(120,150,255,.15),transparent 60%);
       --danger:#c85151; --warn:#d6c45a; --ok:#55b76b;
       --radius:20px;
+      --glow1:radial-gradient(circle at 15% -10%,rgba(200,164,75,.18),transparent 55%);
+      --glow2:radial-gradient(circle at 85% 10%,rgba(120,150,255,.15),transparent 60%);
     }
+
     *,*::before,*::after{box-sizing:border-box}
     html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
     body{
       margin:0;background:var(--glow1),var(--glow2),linear-gradient(180deg,var(--bg),var(--bg2) 60%);
-      color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Inter","SF Pro Text",system-ui,sans-serif;
+      color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Inter","SF Pro Text",system-ui,sans-serif;
       -webkit-font-smoothing:antialiased; line-height:1.4; overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
@@ -88,15 +97,17 @@
     .stack{display:flex;flex-direction:column;gap:clamp(.55rem,1.8vw,1rem)}
     .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
 
-    /* TYPO UPGRADE */
+    /* Type scale */
     h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em}
     h1{font-size:clamp(2.2rem,4.6vw,3.8rem);font-weight:850;line-height:1.06}
     h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800}
     h3{font-size:clamp(1.1rem,2vw,1.28rem);font-weight:700}
     p{margin:0 0 .6rem;color:var(--muted);font-size:clamp(1rem,1.15vw,1.08rem)}
-    .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.04em;text-transform:uppercase}
+    .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.02em;text-transform:none}
+    .kicker{font-size:.95rem;color:var(--muted2);letter-spacing:.04em;text-transform:uppercase}
+    .hero-sub{font-size:1.05rem;color:var(--muted);margin-top:.2rem}
 
-    /* BUTTONS – ruhiger CTA */
+    /* Buttons */
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;
          padding:.9rem 1.4rem;border-radius:999px;border:1px solid transparent;
          font-weight:800;background:rgba(255,255,255,.06);color:var(--text);
@@ -107,7 +118,7 @@
     .btn.small{min-height:44px;padding:.6rem 1rem}
     @media (max-width:767px){ .btn{width:100%} }
 
-    /* HEADER */
+    /* Header */
     header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(6px)}
     .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:.85rem 0;gap:1rem}
     .brand{display:flex;flex-direction:column}
@@ -118,64 +129,69 @@
     .nav a.link:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
     @media (max-width:940px){ .nav a.link{display:none} }
 
-    /* CARDS – reduziert */
+    /* Cards */
     .card,.panel,.quote{
       background:var(--surface);
       border:none; border-radius:var(--radius);
-      box-shadow:var(--elev-1); padding:1.05rem 1.15rem;
+      box-shadow:0 10px 28px rgba(0,0,0,.28);
+      padding:1.05rem 1.15rem;
     }
     .panel{background:var(--surface2)}
     .quote{background:rgba(255,255,255,.05)}
 
-    /* HERO */
+    /* Hero */
     .hero{position:relative;padding-top:clamp(26px,4vw,64px);padding-bottom:clamp(18px,2.5vw,30px)}
     .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
     @media (min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center} }
-    .hero-sub{font-size:1.05rem;color:var(--muted);margin-top:.2rem}
 
-    /* Collage (optional) */
+    /* Collage */
     .collage{display:grid;gap:.9rem}
     @media (min-width:1024px){ .collage{grid-template-columns:1.2fr .8fr} }
     .tile{position:relative;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);box-shadow:var(--elev-1)}
     .tile--big{aspect-ratio:3/2}
     .tile img{width:100%;height:100%;object-fit:cover;transform:scale(1.035)}
 
-    /* Cinematic fade (Blur + inertial) */
+    /* Cinematic reveal */
     .fade-up{opacity:0;transform:translateY(32px) scale(.985);filter:blur(2px)}
     .fade-up.visible{opacity:1;transform:none;filter:none;transition:
       opacity .6s ease,
       transform .6s cubic-bezier(.2,.8,.2,1),
       filter .6s ease}
 
-    /* Ampel */
+    /* Ampel results */
     .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
     .result-red{background:#2b1111;border:1px solid var(--danger)}
     .result-yellow{background:#2b2b11;border:1px solid var(--warn)}
     .result-green{background:#0f1b12;border:1px solid var(--ok)}
 
-    /* Sticky CTA Mobile */
+    /* Sticky CTA (mobile) */
     .sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
     .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
     @media (max-width:1023px){ .sticky-cta{display:flex} }
     @supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
 
-    /* Ambient light (nur im Hero aktiv) */
-    .ambient{position:absolute;inset:-20vh -10vw auto -10vw;height:60vh;pointer-events:none;filter:blur(40px);opacity:.28;transition:opacity .5s var(--ease)}
+    /* Ambient (nur im Hero) */
+    .ambient{position:absolute;inset:-20vh -10vw auto -10vw;height:60vh;pointer-events:none;filter:blur(40px);opacity:.22;transition:opacity .5s var(--ease)}
     .ambient::before{content:"";position:absolute;inset:0;background:
       radial-gradient(50% 50% at 15% 20%, rgba(200,164,75,.28) 0%, transparent 60%),
-      radial-gradient(50% 50% at 80% 10%, rgba(120,150,255,.22) 0%, transparent 60%);
-      mix-blend-mode:screen}
+      radial-gradient(50% 50% at 80% 10%, rgba(120,150,255,.22) 0%, transparent 60%);mix-blend-mode:screen}
 
-    footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 60px}
-    .footer-links{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
-    .footer-links a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:var(--muted2)}
-    .footer-links a:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
-    .tiny{font-size:.88rem;color:var(--muted2);line-height:1.45}
+    /* A11y */
+    .visually-hidden{
+      position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
+    .visually-hidden:focus{
+      position:fixed!important;left:16px;top:16px;width:auto;height:auto;margin:0;clip:auto;overflow:visible;
+      padding:.7rem 1rem;border-radius:999px;background:rgba(10,14,22,.95);
+      border:1px solid rgba(255,255,255,.18);z-index:9999;
+    }
+    a:focus-visible,button:focus-visible{ outline:3px solid var(--focus); outline-offset:3px; border-radius:14px }
   </style>
 </head>
 
 <body>
-  <a href="#main" class="visually-hidden" style="position:absolute;left:-9999px">Zum Inhalt springen</a>
+  <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
 
   <header>
     <div class="container header-bar">
@@ -187,7 +203,7 @@
         <a class="link" href="#lebenslagen">Lebenslagen</a>
         <a class="link" href="#privat">Privat</a>
         <a class="link" href="#firma">Firmen</a>
-        <a class="btn btn-primary" href="#ampel-check">Ampel ansehen</a>
+        <a class="btn btn-primary" href="#ampel-check">Einordnung starten</a>
       </nav>
     </div>
   </header>
@@ -199,11 +215,21 @@
       <div class="container hero-grid">
         <div class="stack">
           <h1 id="hero-title">Klarheit, bevor Entscheidungen teuer werden.</h1>
-          <p class="hero-sub">Ein System für Geld, Schutz &amp; Zukunft – privat und unternehmerisch.</p>
+          <p class="hero-sub">Ein System für Geld, Schutz &amp; Zukunft.</p>
 
           <div class="stack" style="margin-top:.4rem">
-            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">Klarheit starten</a>
-            <small class="micro" style="opacity:.9">Keine Produktshow · Kein Druck · Orientierung zuerst</small>
+            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">Einordnung starten</a>
+            <small class="micro" style="opacity:.9">Orientierung vor Entscheidung · Ruhe vor Aktion</small>
+          </div>
+
+          <div class="grid auto-grid" style="margin-top:.5rem">
+            <div class="panel"><p class="micro" style="margin:0;opacity:.95">🧭 Ganzheitlich statt fragmentiert</p></div>
+            <div class="panel"><p class="micro" style="margin:0;opacity:.95">🤝 Aus einer Hand · 1 Ansprechpartner</p></div>
+            <div class="panel"><p class="micro" style="margin:0;opacity:.95">🛡️ Gebundener Vermittler (§ 34d Abs. 7 GewO)</p></div>
+          </div>
+
+          <div class="quote" style="margin-top:.8rem">
+            <p style="margin:0">Viele kommen nicht, weil sie etwas kaufen wollen – sondern weil sie wieder ruhig schlafen möchten.</p>
           </div>
         </div>
 
@@ -223,7 +249,7 @@
       </div>
     </section>
 
-    <!-- LEBENSLAGEN -->
+    <!-- Lebenslagen -->
     <section id="lebenslagen" class="section fade-up" aria-labelledby="life-h">
       <div class="container">
         <h2 id="life-h">Nicht jeder braucht das Gleiche – aber jeder braucht Orientierung</h2>
@@ -232,10 +258,17 @@
           <div class="card"><h3>Paare</h3><p>„Zwei Perspektiven, ein Alltag. Jetzt · Als Nächstes · Später.“</p></div>
           <div class="card"><h3>Selbstständige & Unternehmer</h3><p>„Privat und Firma greifen ineinander. Sicherheit entsteht im Zusammenspiel.“</p></div>
         </div>
+
+        <!-- Dezente Beispiele -->
+        <div class="grid auto-grid" style="margin-top:.6rem">
+          <div class="card"><p><strong>Familie aus Esslingen</strong>: „Wir wollten wissen, ob heute etwas fehlt – ohne Verkauf.“</p></div>
+          <div class="card"><p><strong>Unternehmer aus Böblingen</strong>: „Privat &amp; Firma endlich zusammen gedacht.“</p></div>
+          <div class="card"><p><strong>Paar aus Stuttgart</strong>: „Jetzt · Als Nächstes · Später – ohne Streit.“</p></div>
+        </div>
       </div>
     </section>
 
-    <!-- BENEFITS (kompakt) -->
+    <!-- Benefits -->
     <section class="section fade-up" aria-labelledby="benefits">
       <div class="container">
         <h2 id="benefits">Was du bei mir bekommst</h2>
@@ -250,7 +283,19 @@
       </div>
     </section>
 
-    <!-- PRIVAT -->
+    <!-- Formate / Startwege -->
+    <section class="section fade-up" aria-labelledby="formate-h">
+      <div class="container">
+        <h2 id="formate-h">Wie wir sinnvoll starten</h2>
+        <div class="grid auto-grid" style="margin-top:.6rem">
+          <div class="card"><h3>Klarheitsgespräch (30–45)</h3><p>Einordnung & Prioritäten – ohne Unterlagen, ohne Druck.</p></div>
+          <div class="card"><h3>Deep Dive (90)</h3><p>Struktur sauber aufsetzen – Entscheidungen vorbereiten.</p></div>
+          <div class="card"><h3>Begleitung (60–90 Tage)</h3><p>Umsetzungsschritte, Dokumentation, Ruhe im Alltag.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privat -->
     <section id="privat" class="section fade-up" aria-labelledby="privat-h">
       <div class="container">
         <h2 id="privat-h">Für Privatkunden</h2>
@@ -263,7 +308,7 @@
       </div>
     </section>
 
-    <!-- FIRMEN -->
+    <!-- Firmen -->
     <section id="firma" class="section fade-up" aria-labelledby="firma-h">
       <div class="container">
         <h2 id="firma-h">Für Firmenkunden</h2>
@@ -273,11 +318,13 @@
           <div class="card"><h3>Bausteine</h3><p>GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p></div>
           <div class="card"><h3>Unternehmer-Ampel</h3><p>Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p></div>
         </div>
-        <div class="quote" style="margin-top:1rem"><p class="micro"><strong>Backbone:</strong> Das System im Hintergrund sorgt dafür, dass Lösungen auch in 10, 20, 30 Jahren betreut werden können.</p></div>
+        <div class="quote" style="margin-top:1rem">
+          <p class="micro"><strong>Backbone:</strong> Das System im Hintergrund sorgt dafür, dass Lösungen auch in 10, 20, 30 Jahren betreut werden können.</p>
+        </div>
       </div>
     </section>
 
-    <!-- STRUKTUR-LANDKARTE -->
+    <!-- Struktur-Landkarte -->
     <section id="produkte" class="section fade-up" aria-labelledby="land-h">
       <div class="container">
         <h2 id="land-h">Struktur-Landkarte</h2>
@@ -287,11 +334,12 @@
           <div class="card"><h3>Als Nächstes</h3><p>Familie absichern · Rücklagen & Liquidität · Firma stabilisieren</p></div>
           <div class="card"><h3>Später</h3><p>Vorsorge & Vermögensstruktur · Übergaben · Ruhestand</p></div>
         </div>
-        <p class="tiny" style="margin-top:.8rem">Die dargestellten Bereiche stellen keine Angebotsübersicht dar, sondern eine strukturelle Einordnung möglicher Themenfelder.</p>
+        <p class="micro" style="margin-top:.8rem">Nach 3 Jahren: Wir prüfen, ob das, was trägt, noch trägt – und passen an, wenn Leben oder Gesetz sich ändern.</p>
+        <p class="tiny" style="margin-top:.4rem">Die dargestellten Bereiche stellen keine Angebotsübersicht dar, sondern eine strukturelle Einordnung möglicher Themenfelder.</p>
       </div>
     </section>
 
-    <!-- PROZESS (kompakt) -->
+    <!-- Prozess -->
     <section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
       <div class="container">
         <h2 id="prozess-h">System statt Zufall</h2>
@@ -305,7 +353,7 @@
       </div>
     </section>
 
-    <!-- FÜR WEN NICHT -->
+    <!-- Für wen nicht -->
     <section class="section fade-up" aria-labelledby="notfor-h">
       <div class="container">
         <h2 id="notfor-h">Nicht passend, wenn …</h2>
@@ -317,13 +365,13 @@
       </div>
     </section>
 
-    <!-- AMPel CHECK -->
+    <!-- Ampel -->
     <section id="ampel-check" class="section fade-up" aria-labelledby="check-h">
       <div class="container" style="max-width:760px">
         <div class="stack" id="check-start">
           <h2 id="check-h">2-Minuten-Ampel</h2>
           <p class="micro">3 Fragen · sofort ein Gefühl für Heute</p>
-          <a class="btn btn-primary" id="startCheckBtn" href="#ampel-check">Ampel ansehen</a>
+          <a class="btn btn-primary" id="startCheckBtn" href="#ampel-check">Einordnung starten</a>
           <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder du nimmst nur Klarheit mit.</small>
         </div>
 
@@ -376,7 +424,7 @@
       </div>
     </section>
 
-    <!-- RECRUITING -->
+    <!-- Recruiting -->
     <section id="recruiting" class="section fade-up" aria-labelledby="team-h">
       <div class="container">
         <h2 id="team-h">Teamaufbau (Werte + Leistung)</h2>
@@ -392,20 +440,18 @@
           </div>
         </div>
         <div class="panel" style="margin-top:1rem">
-          <p class="micro" style="margin:0">
-            Nicht passend, wenn du <strong>schnellen Umsatz über saubere Arbeit</strong> stellst.
-          </p>
+          <p class="micro" style="margin:0">Nicht passend, wenn du <strong>schnellen Umsatz über saubere Arbeit</strong> stellst.</p>
         </div>
       </div>
     </section>
 
-    <!-- FINAL CTA -->
+    <!-- Final CTA -->
     <section class="section fade-up" aria-labelledby="final-h">
       <div class="container" style="text-align:center;max-width:860px">
         <h2 id="final-h">Klarheit ist ein Wettbewerbsvorteil.</h2>
-        <p>Starte klein: Ampel ansehen. Danach entscheidest du selbst.</p>
+        <p>Starte klein: Einordnung starten. Danach entscheidest du selbst.</p>
         <div class="stack" style="align-items:center">
-          <a class="btn btn-primary" href="#ampel-check" id="ctaFinal">Ampel ansehen</a>
+          <a class="btn btn-primary" href="#ampel-check" id="ctaFinal">Einordnung starten</a>
           <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%3A%20" target="_blank" rel="noopener">WhatsApp (kurz)</a>
         </div>
         <p class="micro" style="margin-top:.7rem">Ich arbeite im System der Deutschen Vermögensberatung – weil langfristige Verantwortung Struktur braucht, die bleibt.</p>
@@ -430,7 +476,8 @@
       </div>
 
       <div class="tiny" style="max-width:980px;margin-inline:auto">
-        <strong>Status/Transparenz:</strong> Gebundener Vermittler gem. § 34d Abs. 7 GewO. Tätigkeit auf Provisionsbasis (Generali-Gruppe, ADVOCARD). Keine Kundengelderannahme. Chancen & Risiken ausgewogen. Entscheidungen erst nach vollständiger Datenlage.
+        <strong>Status/Transparenz:</strong> Gebundener Vermittler gem. § 34d Abs. 7 GewO. Tätigkeit auf Provisionsbasis (Generali-Gruppe, ADVOCARD).
+        Keine Kundengelderannahme. Chancen & Risiken ausgewogen. Entscheidungen erst nach vollständiger Datenlage.
       </div>
     </div>
   </footer>
@@ -438,15 +485,18 @@
   <!-- Sticky Mobile CTA -->
   <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
     <div class="inner">
-      <a href="#ampel-check" class="btn btn-primary" data-ctx="sticky">Ampel ansehen</a>
+      <a href="#ampel-check" class="btn btn-primary" data-ctx="sticky">Einordnung starten</a>
     </div>
   </div>
 
   <!-- Lightbox -->
   <dialog id="zoom" aria-label="Bildanzeige" aria-modal="true" role="dialog">
-    <div class="zoom-frame">
-      <button class="zoom-close" type="button" autofocus aria-label="Schließen" style="position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);color:#fff;border-radius:999px;padding:.4rem .7rem;cursor:pointer">Schließen ✕</button>
-      <img class="zoom-img" alt="">
+    <div class="zoom-frame" style="position:relative;border-radius:18px;overflow:hidden">
+      <button class="zoom-close" type="button" autofocus aria-label="Schließen"
+              style="position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);color:#fff;border-radius:999px;padding:.4rem .7rem;cursor:pointer">
+        Schließen ✕
+      </button>
+      <img class="zoom-img" alt="" style="display:block;width:100%;height:auto" />
     </div>
   </dialog>
 
@@ -455,7 +505,7 @@
 
   <script>
     document.documentElement.classList.remove('no-js');
-    document.querySelectorAll('#yearNow').forEach(el => el.textContent=new Date().getFullYear());
+    document.querySelectorAll('#yearNow').forEach(el => el.textContent = new Date().getFullYear());
 
     /* Cinematic reveal */
     (function(){
@@ -489,7 +539,7 @@
       const hero = document.getElementById('hero');
       if(!amb || !hero || !('IntersectionObserver' in window)) return;
       const io = new IntersectionObserver(entries => {
-        entries.forEach(e => { amb.style.opacity = e.isIntersecting ? '.28' : '0'; });
+        entries.forEach(e => { amb.style.opacity = e.isIntersecting ? '.22' : '0'; });
       }, { threshold:.1 });
       io.observe(hero);
     })();
@@ -514,8 +564,13 @@
     (function(){
       const boot = () => {
         if(!window.Lenis) return;
-        const lenis = new Lenis({ duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-        function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          smoothTouch: false
+        });
+        function raf(time){ lenis.raf(time); requestAnimationFrame(raf) }
         requestAnimationFrame(raf);
       };
       if(document.readyState==='complete') boot(); else addEventListener('load', boot);
