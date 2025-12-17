@@ -7,15 +7,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#05070E" />
 
-  <title>Allfinanz aus einer Hand – Klarheit für Privat & Unternehmen in 14 Tagen.</title>
-  <meta name="description" content="Ganzheitliche Allfinanzberatung: Privat & Firmenkunden, lebensphasenübergreifend – strukturiert statt produktgetrieben. Starte mit dem 2-Minuten-Check – ohne Unterlagen, ohne Verpflichtung." />
+  <title>Klarheit, bevor Entscheidungen teuer werden.</title>
+  <meta name="description" content="Ein System für Geld, Schutz & Zukunft – privat und unternehmerisch. Ruhig, ganzheitlich, DVAG-Backbone. Ampel ansehen in 2 Minuten, ohne Druck." />
   <link rel="canonical" href="https://heikohaerter.com" />
 
-  <!-- Open Graph -->
+  <!-- OG -->
   <meta property="og:site_name" content="Heiko Haerter – Allfinanz & Entscheidungsarchitektur" />
-  <meta property="og:title" content="Allfinanz aus einer Hand – Klarheit für Privat & Unternehmen." />
-  <meta property="og:description" content="Ein Ansprechpartner. Ein System. Langfristige Struktur statt Produktshow." />
+  <meta property="og:title" content="Klarheit, bevor Entscheidungen teuer werden." />
+  <meta property="og:description" content="Ein System für Geld, Schutz & Zukunft – privat und unternehmerisch. Ampel ansehen in 2 Minuten." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://heikohaerter.com" />
   <meta property="og:locale" content="de_DE" />
@@ -27,8 +29,10 @@
   <link rel="preconnect" href="https://outlook.office.com" crossorigin>
   <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
   <link rel="preconnect" href="https://wa.me" crossorigin>
+  <!-- Font preload (falls lokal vorhanden) -->
+  <link rel="preload" href="/fonts/Inter.var.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- LCP Preload -->
+  <!-- LCP -->
   <link rel="preload" as="image"
         href="https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png"
         imagesrcset="
@@ -37,7 +41,7 @@
           https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=1200 1200w
         "
         imagesizes="(min-width: 1024px) 44vw, 92vw"
-        fetchpriority="high" />
+        fetchpriority="high">
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
@@ -48,43 +52,35 @@
     "image":"https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png",
     "address":{"@type":"PostalAddress","streetAddress":"Robert-Bosch-Str. 1","postalCode":"71277","addressLocality":"Rutesheim","addressCountry":"DE"},
     "url":"https://heikohaerter.com",
-    "telephone":"+49 176 60408380",
-    "areaServed":"DE",
-    "sameAs":[
-      "https://www.linkedin.com/in/heiko-haerter-3755b2260/",
-      "https://www.xing.com/profile/Heiko_Haerter3",
-      "https://www.instagram.com/heiko.haerter.coach/"
-    ]
+    "telephone":"+49 176 60408380"
   }
   </script>
 
   <style>
     :root{
       --bg:#05070E; --bg2:#02040A;
-      --surface:rgba(255,255,255,.06); --surface2:rgba(255,255,255,.045);
+      --surface:rgba(255,255,255,.035);
+      --surface2:rgba(255,255,255,.06);
       --text:#F7F8FC; --muted:#A8B1C5; --muted2:#8F97AA;
-      --gold:#C8A44B; --gold2:#E9D394; --focus:#90C2FF;
-      --radius-xl:28px; --radius-lg:20px; --radius-md:16px;
+      --gold:#C8A44B; --gold2:#E9D394;
+      --focus:#90C2FF;
       --elev-1:0 18px 40px rgba(0,0,0,.35);
-      --elev-2:0 30px 80px rgba(0,0,0,.55);
       --ease:cubic-bezier(.25,.46,.25,1);
       --glow1:radial-gradient(circle at 15% -10%,rgba(200,164,75,.18),transparent 55%);
       --glow2:radial-gradient(circle at 85% 10%,rgba(120,150,255,.15),transparent 60%);
       --danger:#c85151; --warn:#d6c45a; --ok:#55b76b;
+      --radius:20px;
     }
     *,*::before,*::after{box-sizing:border-box}
     html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
     body{
       margin:0;background:var(--glow1),var(--glow2),linear-gradient(180deg,var(--bg),var(--bg2) 60%);
-      color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;
-      -webkit-font-smoothing:antialiased;line-height:1.4;overflow-x:hidden;
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Inter","SF Pro Text",system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased; line-height:1.4; overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
-    img,video,svg{display:block;max-width:100%;height:auto}
-    a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:12px}
-    @media (prefers-reduced-motion:reduce){
-      *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-    }
+    img,svg,video{display:block;max-width:100%;height:auto}
 
     .section{padding:clamp(34px,6vw,84px) 0}
     .container{max-width:1140px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
@@ -92,61 +88,64 @@
     .stack{display:flex;flex-direction:column;gap:clamp(.55rem,1.8vw,1rem)}
     .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
 
-    h1,h2,h3{margin:0 0 .85rem;font-weight:800;letter-spacing:-.015em}
-    h1{font-size:clamp(2rem,4.4vw,3.5rem);line-height:1.08}
-    h2{font-size:clamp(1.6rem,3vw,2.2rem)}
-    h3{font-size:clamp(1.1rem,2vw,1.28rem)}
-    p{margin:0 0 .6rem;color:var(--muted);font-size:clamp(1rem,1.2vw,1.08rem)}
-    .micro{font-size:clamp(.94rem,1.05vw,1rem);color:var(--muted2);letter-spacing:.02em}
+    /* TYPO UPGRADE */
+    h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em}
+    h1{font-size:clamp(2.2rem,4.6vw,3.8rem);font-weight:850;line-height:1.06}
+    h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800}
+    h3{font-size:clamp(1.1rem,2vw,1.28rem);font-weight:700}
+    p{margin:0 0 .6rem;color:var(--muted);font-size:clamp(1rem,1.15vw,1.08rem)}
+    .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.04em;text-transform:uppercase}
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:clamp(.9rem,1.2vw,1rem) clamp(1.2rem,2vw,1.7rem);border-radius:999px;border:1px solid transparent;cursor:pointer;min-height:48px;font-weight:800;transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease);background:rgba(255,255,255,.06);color:var(--text);will-change:transform}
+    /* BUTTONS – ruhiger CTA */
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;
+         padding:.9rem 1.4rem;border-radius:999px;border:1px solid transparent;
+         font-weight:800;background:rgba(255,255,255,.06);color:var(--text);
+         transition:transform .18s var(--ease),box-shadow .18s var(--ease)}
+    .btn:hover{transform:translateY(-1px)}
     .btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
-    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 18px 40px rgba(200,164,75,.40)}
-    .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
-    .btn.small{min-height:44px;padding:.65rem 1rem;font-weight:800}
+    .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+    .btn.small{min-height:44px;padding:.6rem 1rem}
     @media (max-width:767px){ .btn{width:100%} }
 
+    /* HEADER */
     header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(6px)}
     .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:.85rem 0;gap:1rem}
-    .brand{display:flex;flex-direction:column;gap:.15rem}
+    .brand{display:flex;flex-direction:column}
     .brand-top{display:flex;align-items:center;gap:.55rem;font-weight:800}
     .brand-dot{width:.95rem;height:.95rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold2),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.65)}
-    .nav{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;justify-content:flex-end}
+    .nav{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
     .nav a.link{padding:.55rem .7rem;border-radius:999px;color:var(--muted2);border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
     .nav a.link:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
     @media (max-width:940px){ .nav a.link{display:none} }
 
-    .chipbar{display:flex;flex-wrap:wrap;gap:.55rem}
-    .chip{display:inline-flex;align-items:center;gap:.45rem;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:999px;padding:.4rem .7rem;font-size:.92rem;color:var(--muted2)}
+    /* CARDS – reduziert */
+    .card,.panel,.quote{
+      background:var(--surface);
+      border:none; border-radius:var(--radius);
+      box-shadow:var(--elev-1); padding:1.05rem 1.15rem;
+    }
+    .panel{background:var(--surface2)}
+    .quote{background:rgba(255,255,255,.05)}
 
-    .card,.panel,.quote{position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;box-shadow:var(--elev-1);padding:1.05rem 1.15rem;transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease)}
-    .card:hover,.panel:hover{transform:translateY(-2px)}
-    /* lebender Rahmen */
-    .card::before,.panel::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(120deg,rgba(233,211,148,.28),transparent 25%,transparent 75%,rgba(233,211,148,.28));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.0;transition:opacity .35s var(--ease)}
-    .card:hover::before,.panel:hover::before{opacity:.6}
-
-    .kicker{letter-spacing:.14em;text-transform:uppercase;opacity:.92}
-
-    /* Hero */
-    .hero{padding-top:clamp(22px,4vw,64px);padding-bottom:clamp(18px,2.5vw,30px)}
+    /* HERO */
+    .hero{position:relative;padding-top:clamp(26px,4vw,64px);padding-bottom:clamp(18px,2.5vw,30px)}
     .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
     @media (min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center} }
+    .hero-sub{font-size:1.05rem;color:var(--muted);margin-top:.2rem}
 
-    .collage{display:grid;gap:.9rem;transform-style:preserve-3d}
+    /* Collage (optional) */
+    .collage{display:grid;gap:.9rem}
     @media (min-width:1024px){ .collage{grid-template-columns:1.2fr .8fr} }
-    .tile{position:relative;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);box-shadow:var(--elev-1);overflow:hidden;cursor:zoom-in;will-change:transform}
+    .tile{position:relative;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);box-shadow:var(--elev-1)}
     .tile--big{aspect-ratio:3/2}
-    .tile--stack{display:grid;gap:.9rem}
-    .tile--stack .tile{aspect-ratio:4/3}
-    .tile img{width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
-    .cap{position:absolute;left:10px;bottom:10px;padding:.32rem .62rem;border-radius:999px;background:rgba(0,0,0,.42);backdrop-filter:blur(4px);font-size:.86rem;color:#EDEFF7;border:1px solid rgba(255,255,255,.18);pointer-events:none}
-    @keyframes ken{0%{transform:scale(1.04) translate3d(0,0,0)}60%{transform:scale(1.02) translate3d(0,-2%,0)}100%{transform:scale(1.00) translate3d(0,0,0)}}
-    .kb img{animation:ken 8s var(--ease) 1 both}
-    @media (prefers-reduced-motion:reduce){ .kb img{animation:none;transform:none} }
+    .tile img{width:100%;height:100%;object-fit:cover;transform:scale(1.035)}
 
-    /* Reveal */
-    .fade-up{opacity:0;transform:translateY(18px)}
-    .fade-up.visible{opacity:1;transform:none;transition:opacity .55s var(--ease),transform .55s var(--ease)}
+    /* Cinematic fade (Blur + inertial) */
+    .fade-up{opacity:0;transform:translateY(32px) scale(.985);filter:blur(2px)}
+    .fade-up.visible{opacity:1;transform:none;filter:none;transition:
+      opacity .6s ease,
+      transform .6s cubic-bezier(.2,.8,.2,1),
+      filter .6s ease}
 
     /* Ampel */
     .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
@@ -154,34 +153,19 @@
     .result-yellow{background:#2b2b11;border:1px solid var(--warn)}
     .result-green{background:#0f1b12;border:1px solid var(--ok)}
 
-    /* Form */
-    input,textarea{width:100%;padding:.85rem .95rem;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:var(--text)}
-    input::placeholder,textarea::placeholder{color:#cbd3e6}
-
-    /* Details */
-    details{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:.8rem 1rem;background:rgba(255,255,255,.05)}
-    details + details{margin-top:.6rem}
-    summary{cursor:pointer;font-weight:700;list-style:none}
-    summary::-webkit-details-marker{display:none}
-
-    /* Sticky CTA */
+    /* Sticky CTA Mobile */
     .sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
     .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
     @media (max-width:1023px){ .sticky-cta{display:flex} }
     @supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
 
-    /* Lightbox */
-    dialog#zoom{width:min(92vw,1100px);max-width:1100px;border:none;padding:0;background:transparent}
-    dialog#zoom::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(2px)}
-    .zoom-frame{position:relative;border-radius:18px;overflow:hidden}
-    .zoom-img{width:100%;height:auto;display:block}
-    .zoom-close{position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);color:#fff;border-radius:999px;padding:.4rem .7rem;cursor:pointer}
+    /* Ambient light (nur im Hero aktiv) */
+    .ambient{position:absolute;inset:-20vh -10vw auto -10vw;height:60vh;pointer-events:none;filter:blur(40px);opacity:.28;transition:opacity .5s var(--ease)}
+    .ambient::before{content:"";position:absolute;inset:0;background:
+      radial-gradient(50% 50% at 15% 20%, rgba(200,164,75,.28) 0%, transparent 60%),
+      radial-gradient(50% 50% at 80% 10%, rgba(120,150,255,.22) 0%, transparent 60%);
+      mix-blend-mode:screen}
 
-    /* Ambient Spotlight (WOW) */
-    .ambient{position:fixed;inset:0;pointer-events:none;mix-blend-mode:soft-light;opacity:.35;z-index:5;background:radial-gradient(600px 600px at var(--x,50%) var(--y,30%), rgba(233,211,148,.15), transparent 55%)}
-    @media (prefers-reduced-motion:reduce){ .ambient{display:none} }
-
-    /* Footer */
     footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 60px}
     .footer-links{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
     .footer-links a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:var(--muted2)}
@@ -191,23 +175,19 @@
 </head>
 
 <body>
-  <div class="ambient" aria-hidden="true"></div>
   <a href="#main" class="visually-hidden" style="position:absolute;left:-9999px">Zum Inhalt springen</a>
 
   <header>
     <div class="container header-bar">
       <a class="brand" href="#hero" aria-label="Startseite">
         <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
-        <span class="micro" style="letter-spacing:.10em;text-transform:uppercase">Allfinanz · Entscheidungsarchitektur · Region Stuttgart</span>
+        <span class="micro">Allfinanz · Entscheidungsarchitektur · Region Stuttgart</span>
       </a>
-
-      <!-- Navigation reduziert: Lebenslagen · Privat · Firmen · System · Ampel -->
       <nav class="nav" aria-label="Hauptnavigation">
         <a class="link" href="#lebenslagen">Lebenslagen</a>
         <a class="link" href="#privat">Privat</a>
         <a class="link" href="#firma">Firmen</a>
-        <a class="link" href="#prozess">System</a>
-        <a class="btn btn-primary" href="#ampel-check">⚡ Ampel starten</a>
+        <a class="btn btn-primary" href="#ampel-check">Ampel ansehen</a>
       </nav>
     </div>
   </header>
@@ -215,303 +195,135 @@
   <main id="main">
     <!-- HERO -->
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
+      <div class="ambient" id="ambient"></div>
       <div class="container hero-grid">
         <div class="stack">
-          <p class="micro kicker">Ein Ansprechpartner · Privat & Firma · Lebensphasenübergreifend</p>
-          <h1 id="hero-title">In 2 Minuten sehen, was heute offen ist – bevor es im Alltag Druck macht.</h1>
-          <p class="micro" style="max-width:640px">
-            Keine Produktshow. <strong>Einordnung</strong>: Was ist jetzt relevant, was später, was kann warten – und wie alles zusammenhängt.
-          </p>
+          <h1 id="hero-title">Klarheit, bevor Entscheidungen teuer werden.</h1>
+          <p class="hero-sub">Ein System für Geld, Schutz &amp; Zukunft – privat und unternehmerisch.</p>
 
-          <!-- Lydia-Layer -->
-          <div class="quote">
-            <p class="micro" style="margin:0">Viele kommen nicht, weil sie etwas kaufen wollen – sondern weil sie wieder ruhig schlafen möchten.</p>
-          </div>
-          <p class="micro" style="opacity:.9">Diese Struktur ist nicht für jeden – sondern für Menschen, die Verantwortung tragen und Klarheit erwarten.</p>
-
-          <div class="panel" role="note" aria-label="Startpunkt 2-Minuten-Check">
-            <p class="micro" style="margin:0">
-              <strong>Startpunkt:</strong> 2-Minuten-Check → Ampel (Grün/Gelb/Rot) → optionaler Termin.
-              <br><span style="opacity:.9">Ohne Unterlagen. Ohne Verpflichtung. Gespräch nur, wenn es Sinn ergibt.</span>
-            </p>
-          </div>
-
-          <div class="chipbar" aria-label="Sofort-Trust">
-            <span class="chip">🧭 Ganzheitlich statt fragmentiert</span>
-            <span class="chip">🤝 Aus einer Hand · 1 Ansprechpartner</span>
-            <span class="chip">🛡️ Gebundener Vermittler (§ 34d Abs. 7 GewO)</span>
-          </div>
-
-          <div class="stack" style="margin-top:.2rem">
-            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">⚡ 2&nbsp;Minuten · Ampel starten</a>
-            <div class="grid auto-grid">
-              <a class="btn btn-ghost" href="#firma">🏢 Für Unternehmen</a>
-              <a class="btn btn-ghost" href="/entscheidungsarchitektur.html">🎬 Brand-Story</a>
-            </div>
-            <small class="micro">Hinweis: Keine individuelle Anlageberatung ohne vollständige Datenlage. Diese Seite dient der Orientierung.</small>
+          <div class="stack" style="margin-top:.4rem">
+            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">Klarheit starten</a>
+            <small class="micro" style="opacity:.9">Keine Produktshow · Kein Druck · Orientierung zuerst</small>
           </div>
         </div>
 
-        <!-- Collage (Parallax subtile) -->
-        <div class="collage" data-parallax>
-          <figure class="tile tile--big kb" data-tilt>
-            <img
-              data-zoom
-              src="https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=1200"
-              srcset="
-                https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=640 640w,
-                https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=960 960w,
-                https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=1200 1200w
-              "
-              sizes="(min-width:1024px) 44vw, 92vw"
-              alt="Heiko Haerter beim Arbeiten – Fokus & Struktur"
-              loading="eager" fetchpriority="high" decoding="async" />
-            <figcaption class="cap">Beim Arbeiten</figcaption>
+        <!-- Collage -->
+        <div class="collage">
+          <figure class="tile tile--big">
+            <img data-zoom
+                 src="https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=1200"
+                 alt="Arbeiten mit Struktur" loading="eager" decoding="async" fetchpriority="high">
           </figure>
-
-          <div class="tile--stack">
-            <figure class="tile kb" data-tilt>
-              <img data-zoom
-                   src="https://static.wixstatic.com/media/4e46cf_91f73cf2a52540c3a9a6c3791f2eec49~mv2.png?width=960"
-                   alt="In der Beratung – ruhig & verständlich" loading="lazy" decoding="async" />
-              <figcaption class="cap">In der Beratung</figcaption>
-            </figure>
-            <figure class="tile kb" data-tilt>
-              <img data-zoom
-                   src="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=960"
-                   alt="Locker & authentisch" loading="lazy" decoding="async" />
-              <figcaption class="cap">Locker & authentisch</figcaption>
-            </figure>
-          </div>
+          <figure class="tile">
+            <img data-zoom
+                 src="https://static.wixstatic.com/media/4e46cf_91f73cf2a52540c3a9a6c3791f2eec49~mv2.png?width=960"
+                 alt="Ruhige Beratung" loading="lazy" decoding="async">
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- Lebenslagen -->
+    <!-- LEBENSLAGEN -->
     <section id="lebenslagen" class="section fade-up" aria-labelledby="life-h">
       <div class="container">
-        <h2 id="life-h">Nicht jeder braucht das Gleiche – aber jeder braucht Orientierung.</h2>
+        <h2 id="life-h">Nicht jeder braucht das Gleiche – aber jeder braucht Orientierung</h2>
         <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>Familie</h3><p class="micro">Kinder, Verantwortung, wenig Zeit. Entscheidungen müssen halten – auch wenn man müde ist.</p></div>
-          <div class="card"><h3>Paare</h3><p class="micro">Zwei Perspektiven, ein Alltag. Nicht alles gleichzeitig klären – aber nichts verdrängen.</p></div>
-          <div class="card"><h3>Selbstständige & Unternehmer</h3><p class="micro">Privat und Firma greifen ineinander. Sicherheit entsteht nur, wenn beides zusammen gedacht wird.</p></div>
+          <div class="card"><h3>Familie</h3><p>„Entscheidungen müssen halten – auch wenn man müde ist.“</p></div>
+          <div class="card"><h3>Paare</h3><p>„Zwei Perspektiven, ein Alltag. Jetzt · Als Nächstes · Später.“</p></div>
+          <div class="card"><h3>Selbstständige & Unternehmer</h3><p>„Privat und Firma greifen ineinander. Sicherheit entsteht im Zusammenspiel.“</p></div>
         </div>
       </div>
     </section>
 
-    <!-- Was du bekommst -->
+    <!-- BENEFITS (kompakt) -->
     <section class="section fade-up" aria-labelledby="benefits">
       <div class="container">
         <h2 id="benefits">Was du bei mir bekommst</h2>
         <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>Entscheidungsarchitektur</h3><p class="micro">Ein System, das Themen verbindet (Einkommen → Absicherung → Vermögen → Vorsorge → Haftung).</p></div>
-          <div class="card"><h3>Ganzheitliche Allfinanz</h3><p class="micro">Privat &amp; Firma aus einer Hand. Ein Ansprechpartner, klare Prioritäten, saubere Doku.</p></div>
-          <div class="card"><h3>Langfristig statt produktgetrieben</h3><p class="micro">Du bekommst eine Roadmap. Wenn du umsetzt: Schritt für Schritt. Wenn nicht: nimm Klarheit mit.</p></div>
+          <div class="card"><h3>Entscheidungsarchitektur</h3><p>Vom Einkommen über Absicherung bis Vorsorge – verbunden statt fragmentiert.</p></div>
+          <div class="card"><h3>Ganzheitliche Allfinanz</h3><p>Privat & Firma aus einer Hand. Ein Ansprechpartner. Saubere Dokumentation.</p></div>
+          <div class="card"><h3>Langfristige Betreuung</h3><p>Jahres-Check & Ereignis-Trigger: Wir prüfen, ob das, was trägt, noch trägt.</p></div>
         </div>
-
-        <!-- Coaching ≠ Struktur -->
         <div class="panel" style="margin-top:1rem">
-          <p class="micro" style="margin:.1rem 0">
-            <strong>Wichtig zu unterscheiden:</strong> Coaching verändert dein Denken. <strong>Struktur</strong> verändert deinen Alltag.
-            Ich arbeite strukturell: Was fehlt? Was trägt? Was kann warten?
-          </p>
+          <p class="micro" style="margin:0">Ich arbeite strukturell: Was ist heute wichtig? Was trägt? Was kann warten? Viele nennen das Coaching – für mich ist es Strukturarbeit mit Verantwortung.</p>
         </div>
       </div>
     </section>
 
-    <!-- Privat -->
+    <!-- PRIVAT -->
     <section id="privat" class="section fade-up" aria-labelledby="privat-h">
       <div class="container">
         <h2 id="privat-h">Für Privatkunden</h2>
-        <p class="micro" style="max-width:860px">Für Menschen mit Verantwortung: Familie, Immobilie, Karriere, Selbstständigkeit im Nebenjob – ohne fünf Ansprechstellen.</p>
-
+        <p>Für Menschen, die Verantwortung tragen – und Klarheit höher bewerten als schnelle Abschlüsse.</p>
         <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>Dein Ziel</h3><p class="micro">„Ich will wissen, ob heute etwas fehlt – ohne Verkaufsdruck.“</p></div>
-          <div class="card"><h3>Unser Output</h3><p class="micro">„Jetzt / Als Nächstes / Später“ – inkl. Abhängigkeiten zwischen den Themen.</p></div>
-          <div class="card"><h3>Typische Hebel</h3><p class="micro">Arbeitskraft/Einkommen, Gesundheit, Haftung, Eigentum, Altersvorsorge, strukturierter Vermögensaufbau.</p></div>
+          <div class="card"><h3>Wenn du sagst</h3><p>„Ich will wissen, ob heute etwas fehlt – ohne Verkauf.“</p></div>
+          <div class="card"><h3>Dann bekommst du</h3><p>Jetzt / Als Nächstes / Später – mit Blick auf Zusammenhänge.</p></div>
+          <div class="card"><h3>Beziehungszusage</h3><p>Du musst hier nichts beweisen – wir sortieren gemeinsam.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- Firmen -->
+    <!-- FIRMEN -->
     <section id="firma" class="section fade-up" aria-labelledby="firma-h">
       <div class="container">
         <h2 id="firma-h">Für Firmenkunden</h2>
-        <p class="micro" style="max-width:880px">
-          Unternehmer denken nicht in „Produkten“, sondern in <strong>Ausfall</strong>, <strong>Mitarbeiterbindung</strong> und <strong>Liquiditätsruhe</strong>.
-          Genau so ordnen wir – und übersetzen erst dann in Instrumente.
-        </p>
-        <p class="micro" style="margin:.4rem 0 0"><em>Firmenentscheidungen wirken immer privat – und private Risiken immer unternehmerisch.</em></p>
-
+        <p>Firmenentscheidungen wirken immer privat – und private Risiken immer unternehmerisch.</p>
         <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>Firmensafe-Sprint</h3><p class="micro">Ist-Analyse → Prioritäten → Sofortmaßnahmen → Roadmap. Ziel: weniger Reibung & klare Verantwortlichkeiten.</p></div>
-          <div class="card"><h3>Bausteine (typisch)</h3><p class="micro">GF-Absicherung, bAV/bKV, Sach/Haftpflicht, Rechtsschutz, Cyber, Mitarbeitenden-Benefits.</p></div>
-          <div class="card"><h3>Erster Schritt</h3>
-            <div class="stack" style="margin-top:.4rem">
-              <a class="btn btn-primary" href="#ampel-check">⚡ Unternehmer-Ampel</a>
-              <a class="btn btn-ghost" href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">📅 15-Min-Discovery</a>
-            </div>
-          </div>
+          <div class="card"><h3>Firmensafe-Sprint</h3><p>Ist-Analyse → Prioritäten → Sofortmaßnahmen → Roadmap.</p></div>
+          <div class="card"><h3>Bausteine</h3><p>GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p></div>
+          <div class="card"><h3>Unternehmer-Ampel</h3><p>Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p></div>
         </div>
-
-        <div class="quote" style="margin-top:1rem">
-          <p class="micro" style="margin:0">
-            <strong>Unternehmer-Realität:</strong> Krankheit, Ausfall oder Wachstum treffen nicht nur dich – sondern Team, Familien und Verantwortung.
-            Die Ampel sortiert zuerst, bevor irgendetwas entschieden wird.
-          </p>
-        </div>
-
-        <div class="panel" style="margin-top:1rem"><p class="micro" style="margin:0">
-          <strong>Transparenz:</strong> Keine Kundengelderannahme. Tätigkeit auf Provisionsbasis. Empfehlungen stets regelkonform & datenbasiert.
-        </p></div>
+        <div class="quote" style="margin-top:1rem"><p class="micro"><strong>Backbone:</strong> Das System im Hintergrund sorgt dafür, dass Lösungen auch in 10, 20, 30 Jahren betreut werden können.</p></div>
       </div>
     </section>
 
-    <!-- Struktur-Landkarte (ehem. Produkte) -->
-    <section id="landkarte" class="section fade-up" aria-labelledby="prod-h">
+    <!-- STRUKTUR-LANDKARTE -->
+    <section id="produkte" class="section fade-up" aria-labelledby="land-h">
       <div class="container">
-        <h2 id="prod-h">Struktur-Landkarte (geordnet statt gestückelt)</h2>
-        <p class="micro">Wir ordnen zuerst. Danach entscheidest du, was wann dran ist.</p>
-
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-top:.8rem">
-          <div class="panel">
-            <h3>🧍 Privat · Leben</h3>
-            <details open><summary>Absicherung & Zukunft</summary>
-              <ul class="micro">
-                <li>Arbeitskraft & Einkommensschutz</li>
-                <li>Renten-/Altersvorsorge (inkl. geförderte Varianten)</li>
-                <li>Pflege- & Hinterbliebenenschutz</li>
-                <li>Vermögensaufbau („Sicherheitsplan“)</li>
-              </ul>
-            </details>
-            <details><summary>Gesundheit</summary>
-              <ul class="micro">
-                <li>GKV · PKV · betriebliche KV</li>
-                <li>Zahn/Stationär/Zusatz</li>
-              </ul>
-            </details>
-          </div>
-
-          <div class="panel">
-            <h3>🏠 Privat · Sach/Basis</h3>
-            <details open><summary>Haushalt & Haftung</summary>
-              <ul class="micro">
-                <li>Privathaftpflicht · Rechtsschutz</li>
-                <li>Hausrat · Wohngebäude · Unfall</li>
-                <li>Reise · Glas · PV · KFZ</li>
-              </ul>
-            </details>
-            <details><summary>Bank & Finanzierung</summary>
-              <ul class="micro">
-                <li>Konto/Karte, Kredite, Bausparen</li>
-                <li>Immobilie/Eigenheimfinanzierung</li>
-              </ul>
-            </details>
-            <details><summary>Investment</summary>
-              <ul class="micro">
-                <li>Depot, Risikoklasse, Anlageformen</li>
-              </ul>
-            </details>
-          </div>
-
-          <div class="panel">
-            <h3>🏢 Firmen · Schutz & Benefits</h3>
-            <details open><summary>Absicherung</summary>
-              <ul class="micro">
-                <li>GF-Absicherung (BU/Key-Person)</li>
-                <li>Sach/Haftpflicht · Cyber · Rechtsschutz</li>
-              </ul>
-            </details>
-            <details><summary>Mitarbeitende & Liquidität</summary>
-              <ul class="micro">
-                <li>bAV · bKV · Benefits</li>
-                <li>Liquidität & Risiko-Priorisierung</li>
-              </ul>
-            </details>
-          </div>
-        </div>
-
-        <div class="quote" style="margin-top:1rem"><p class="micro" style="margin:0">
-          <strong>Hinweis:</strong> Konkrete Produktempfehlungen erst nach Datenerhebung & Geeignetheitsprüfung.
-        </p></div>
-      </div>
-    </section>
-
-    <!-- Wie wir sinnvoll starten (ehem. Pakete) -->
-    <section id="pakete" class="section fade-up" aria-labelledby="pakete-h">
-      <div class="container">
-        <h2 id="pakete-h">Wie wir sinnvoll starten</h2>
+        <h2 id="land-h">Struktur-Landkarte</h2>
+        <p>Was wir sortieren – ohne es aufzublähen.</p>
         <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="panel">
-            <h3>1) Klarheitsgespräch · 30–45 Min</h3>
-            <p class="micro">Einordnung & Erwartungsabgleich. Ergebnis: Ampel, nächste sinnvolle Schritte.</p>
-            <div class="stack"><a class="btn btn-ghost" href="#ampel-check">⚡ Mit 2-Minuten-Ampel starten</a></div>
-          </div>
-          <div class="panel">
-            <h3>2) Deep-Dive · 90 Min</h3>
-            <p class="micro">Struktur & Priorisierung mit ersten Sofort-Hebeln. Geeignet, wenn viel gleichzeitig auf dem Tisch liegt.</p>
-            <div class="stack"><a class="btn btn-ghost" href="mailto:Heiko.Haerter@dvag.de?subject=Deep-Dive%20anfragen" rel="noopener">✉️ Anfragen</a></div>
-          </div>
-          <div class="panel">
-            <h3>3) Begleitung · 60–90 Tage</h3>
-            <p class="micro">Umsetzung in Etappen: Dokumentation, To-Dos, Kontrolle. Ziel: Ruhe + verlässliche Zuständigkeit.</p>
-            <div class="stack"><a class="btn btn-ghost" href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">📅 Kennenlernen</a></div>
-          </div>
+          <div class="card"><h3>Jetzt</h3><p>Einkommen stabil · Arbeitskraft · Haftung & Existenz</p></div>
+          <div class="card"><h3>Als Nächstes</h3><p>Familie absichern · Rücklagen & Liquidität · Firma stabilisieren</p></div>
+          <div class="card"><h3>Später</h3><p>Vorsorge & Vermögensstruktur · Übergaben · Ruhestand</p></div>
         </div>
+        <p class="tiny" style="margin-top:.8rem">Die dargestellten Bereiche stellen keine Angebotsübersicht dar, sondern eine strukturelle Einordnung möglicher Themenfelder.</p>
       </div>
     </section>
 
-    <!-- Prozess -->
+    <!-- PROZESS (kompakt) -->
     <section id="prozess" class="section fade-up" aria-labelledby="prozess-h">
       <div class="container">
-        <h2 id="prozess-h">So arbeite ich (System statt Zufall)</h2>
+        <h2 id="prozess-h">System statt Zufall</h2>
         <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>1) Einordnung</h3><p class="micro">Wo stehst du? Was ist wirklich relevant – was ist nur „Lärm“?</p></div>
-          <div class="card"><h3>2) Priorisierung</h3><p class="micro">Jetzt / Als Nächstes / Später. Kein Aktionismus.</p></div>
-          <div class="card"><h3>3) Optionen</h3><p class="micro">Wenn sinnvoll: Alternativen mit Chancen/Risiken.</p></div>
-          <div class="card"><h3>4) Umsetzung</h3><p class="micro">Schlank, dokumentiert, verständlich.</p></div>
-          <div class="card"><h3>5) Betreuung</h3><p class="micro">Lebensphasenübergreifend. Struktur wächst mit.</p></div>
-        </div>
-
-        <!-- leiser DVAG-Anker -->
-        <div class="micro" style="opacity:.9;margin-top:.8rem">
-          Ich arbeite im System der Deutschen Vermögensberatung – weil langfristige Verantwortung Struktur braucht, die bleibt.
+          <div class="card"><h3>1) Einordnung</h3><p>Relevanz statt Lärm.</p></div>
+          <div class="card"><h3>2) Priorisierung</h3><p>Jetzt / Als Nächstes / Später.</p></div>
+          <div class="card"><h3>3) Optionen</h3><p>Chancen & Risiken offen gelegt.</p></div>
+          <div class="card"><h3>4) Umsetzung</h3><p>Schlank, dokumentiert, verständlich.</p></div>
+          <div class="card"><h3>5) Betreuung</h3><p>Jahres-Check & Ereignis-Trigger.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- Ordnungs-Ebene (Heute/Als Nächstes/Später) -->
-    <section id="ordnung" class="section fade-up" aria-labelledby="ord-h">
+    <!-- FÜR WEN NICHT -->
+    <section class="section fade-up" aria-labelledby="notfor-h">
       <div class="container">
-        <h2 id="ord-h">Was wir gemeinsam ordnen</h2>
-        <p class="micro" style="max-width:880px">Nicht alles auf einmal. Nicht alles heute. Sondern so, dass dein Alltag ruhig bleibt.</p>
+        <h2 id="notfor-h">Nicht passend, wenn …</h2>
         <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>Heute</h3><p class="micro">Einkommen, Ausfall, Haftung – alles, was sofort wirkt.</p></div>
-          <div class="card"><h3>Als Nächstes</h3><p class="micro">Gesundheit, Vorsorge, Benefits – stabilisieren, bevor es drängt.</p></div>
-          <div class="card"><h3>Später</h3><p class="micro">Vermögen, Struktur, Übergaben – wenn der Kopf frei ist.</p></div>
+          <div class="card"><p>… du schnelle Renditeversprechen suchst.</p></div>
+          <div class="card"><p>… du keine Verantwortung übernehmen willst.</p></div>
+          <div class="card"><p>… du jemanden willst, der entscheidet statt einordnet.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- Social Proof (seriös) -->
-    <section class="section fade-up" aria-labelledby="proof-h">
-      <div class="container">
-        <h2 id="proof-h">Woran du Qualität erkennst (ohne Marketing-Getöse)</h2>
-        <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>Weniger, aber echt</h3><p class="micro">Keine „Siegel-Wand“. Lieber wenige Belege + klare Aussagen.</p></div>
-          <div class="card"><h3>Problem → Struktur → Ergebnis</h3><p class="micro">Nicht Floskeln, sondern nachvollziehbare Veränderung im Alltag.</p></div>
-          <div class="card"><h3>Transparenz</h3><p class="micro">Provisionsbasis offen benannt. Keine Heilsversprechen.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Ampel -->
+    <!-- AMPel CHECK -->
     <section id="ampel-check" class="section fade-up" aria-labelledby="check-h">
       <div class="container" style="max-width:760px">
         <div class="stack" id="check-start">
-          <h2 id="check-h">2-Minuten-Check</h2>
-          <p class="micro">3 Fragen → sofort eine Ampel. Kein Login. Keine Unterlagen. Kein Abschlusszwang.</p>
-          <a class="btn btn-primary" id="startCheckBtn" href="#ampel-check">⚡ Jetzt starten</a>
+          <h2 id="check-h">2-Minuten-Ampel</h2>
+          <p class="micro">3 Fragen · sofort ein Gefühl für Heute</p>
+          <a class="btn btn-primary" id="startCheckBtn" href="#ampel-check">Ampel ansehen</a>
           <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder du nimmst nur Klarheit mit.</small>
         </div>
 
@@ -527,7 +339,7 @@
           </div>
 
           <div class="panel step" data-step="1" style="display:none">
-            <h3>1 · Wenn du 6 Monate ausfallen würdest — wie stabil wäre euer Einkommen?</h3>
+            <h3>1 · Wenn du 6 Monate ausfallen würdest – wie stabil wäre euer Einkommen?</h3>
             <div class="stack">
               <button class="btn small" data-value="1" type="button">Wir hätten ein echtes Problem</button>
               <button class="btn small" data-value="2" type="button">Wir würden klarkommen, aber es wäre eng</button>
@@ -536,7 +348,7 @@
           </div>
 
           <div class="panel step" data-step="2" style="display:none">
-            <h3>2 · Wie leicht findest du wichtige Unterlagen, wenn du sie brauchst?</h3>
+            <h3>2 · Wie <em>leicht</em> findest du wichtige Unterlagen, wenn du sie brauchst?</h3>
             <div class="stack">
               <button class="btn small" data-value="1" type="button">Ich suche lange / finde nichts</button>
               <button class="btn small" data-value="2" type="button">Ich finde das Meiste</button>
@@ -559,26 +371,30 @@
         <div class="panel" style="margin-top:1.2rem">
           <h3 style="margin:.1rem 0 .45rem">Wenig Zeit?</h3>
           <p class="micro" style="margin-top:.1rem">Kurzmodus: in 12 Sekunden ein Gefühl für <em>Jetzt · Als Nächstes · Später</em>.</p>
-          <a href="#ampel-check" class="btn btn-ghost" id="startShort">⏱️ Kurzmodus starten</a>
+          <a href="#ampel-check" class="btn btn-ghost" id="startShort">Kurzmodus</a>
         </div>
       </div>
     </section>
 
-    <!-- Recruiting -->
+    <!-- RECRUITING -->
     <section id="recruiting" class="section fade-up" aria-labelledby="team-h">
       <div class="container">
-        <h2 id="team-h">Teamaufbau (wenn du „Werte + Leistung“ willst)</h2>
-        <p class="micro" style="max-width:900px">Nicht passend, wenn du schnelle Abschlüsse suchst – oder Druck für ein Werkzeug hältst. <strong>Wir arbeiten langfristig. Wer schnelle Erfolge versprochen haben möchte, wird hier nicht glücklich.</strong></p>
-
+        <h2 id="team-h">Teamaufbau (Werte + Leistung)</h2>
+        <p>Onboarding, System, Sparring – keine „Motivation“, sondern Fähigkeiten.</p>
         <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>Passt, wenn du…</h3><p class="micro">selbstständig arbeiten willst, Lernkurve suchst, Feedback willst und auf Integrität Wert legst.</p></div>
-          <div class="card"><h3>Du bekommst…</h3><p class="micro">Onboarding, System, Sparring. Keine „Motivation“, sondern Fähigkeiten.</p></div>
+          <div class="card"><h3>Passt, wenn du …</h3><p>… selbstständig arbeiten willst, Lernkurve suchst und auf Integrität Wert legst.</p></div>
+          <div class="card"><h3>Du bekommst …</h3><p>Struktur, Mentoring, Verantwortung – Schritt für Schritt.</p></div>
           <div class="card"><h3>Start</h3>
             <div class="stack" style="margin-top:.4rem">
-              <a class="btn btn-primary" href="mailto:Heiko.Haerter@dvag.de?subject=Team%20%2F%20Mentoring%20Anfrage" rel="noopener">✉️ Kurz anfragen</a>
-              <a class="btn btn-ghost" href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">📅 Kennenlernen buchen</a>
+              <a class="btn btn-primary" href="mailto:Heiko.Haerter@dvag.de?subject=Team%20%2F%20Mentoring%20Anfrage" rel="noopener">Kurz anfragen</a>
+              <a class="btn btn-ghost" href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">Kennenlernen buchen</a>
             </div>
           </div>
+        </div>
+        <div class="panel" style="margin-top:1rem">
+          <p class="micro" style="margin:0">
+            Nicht passend, wenn du <strong>schnellen Umsatz über saubere Arbeit</strong> stellst.
+          </p>
         </div>
       </div>
     </section>
@@ -587,12 +403,12 @@
     <section class="section fade-up" aria-labelledby="final-h">
       <div class="container" style="text-align:center;max-width:860px">
         <h2 id="final-h">Klarheit ist ein Wettbewerbsvorteil.</h2>
-        <p class="micro">Primär: 2-Minuten-Ampel. Sekundär: Termin. Tertiär: Teilen.</p>
+        <p>Starte klein: Ampel ansehen. Danach entscheidest du selbst.</p>
         <div class="stack" style="align-items:center">
-          <a class="btn btn-primary" href="#ampel-check" id="ctaFinal">⚡ 2&nbsp;Minuten · Ampel starten</a>
-          <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%3A%20" target="_blank" rel="noopener">💬 WhatsApp (kurz)</a>
+          <a class="btn btn-primary" href="#ampel-check" id="ctaFinal">Ampel ansehen</a>
+          <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%3A%20" target="_blank" rel="noopener">WhatsApp (kurz)</a>
         </div>
-        <p class="micro" style="margin-top:.7rem">Anschrift: Robert-Bosch-Str. 1, 71277 Rutesheim</p>
+        <p class="micro" style="margin-top:.7rem">Ich arbeite im System der Deutschen Vermögensberatung – weil langfristige Verantwortung Struktur braucht, die bleibt.</p>
       </div>
     </section>
   </main>
@@ -604,7 +420,7 @@
         <a href="https://www.linkedin.com/in/heiko-haerter-3755b2260/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://www.xing.com/profile/Heiko_Haerter3" target="_blank" rel="noopener">Xing</a>
         <a href="https://www.instagram.com/heiko.haerter.coach/" target="_blank" rel="noopener">Instagram</a>
-        <a href="#ampel-check">⚡ Ampel</a>
+        <a href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">Termin</a>
       </div>
 
       <div class="tiny" style="margin-bottom:8px">
@@ -613,38 +429,35 @@
         <a href="mailto:Heiko.Haerter@dvag.de">Heiko.Haerter@dvag.de</a>
       </div>
 
-      <!-- Rechtstext in Details gekapselt (visuelle Last runter) -->
-      <details class="tiny" style="max-width:980px;margin:0 auto">
-        <summary>Rechtlicher Hinweis / Status</summary>
-        <div style="margin-top:.6rem">
-          Gebundener Vermittler gem. § 34d Abs. 7 GewO. Tätigkeit auf Provisionsbasis für:
-          Generali Deutschland Leben/Versicherung/Kranken, Generali Pensionskasse, ADVOCARD Rechtsschutz.
-          Keine Kundengelderannahme. Chancen &amp; Risiken ausgewogen. Keine individuelle Anlageberatung ohne vollständige Datenlage.
-        </div>
-      </details>
+      <div class="tiny" style="max-width:980px;margin-inline:auto">
+        <strong>Status/Transparenz:</strong> Gebundener Vermittler gem. § 34d Abs. 7 GewO. Tätigkeit auf Provisionsbasis (Generali-Gruppe, ADVOCARD). Keine Kundengelderannahme. Chancen & Risiken ausgewogen. Entscheidungen erst nach vollständiger Datenlage.
+      </div>
     </div>
   </footer>
 
   <!-- Sticky Mobile CTA -->
   <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
     <div class="inner">
-      <a href="#ampel-check" class="btn btn-primary" data-ctx="sticky">⚡ 2&nbsp;Minuten · Ampel</a>
+      <a href="#ampel-check" class="btn btn-primary" data-ctx="sticky">Ampel ansehen</a>
     </div>
   </div>
 
   <!-- Lightbox -->
   <dialog id="zoom" aria-label="Bildanzeige" aria-modal="true" role="dialog">
     <div class="zoom-frame">
-      <button class="zoom-close" type="button" autofocus aria-label="Schließen">Schließen ✕</button>
-      <img class="zoom-img" alt="" />
+      <button class="zoom-close" type="button" autofocus aria-label="Schließen" style="position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);color:#fff;border-radius:999px;padding:.4rem .7rem;cursor:pointer">Schließen ✕</button>
+      <img class="zoom-img" alt="">
     </div>
   </dialog>
 
+  <!-- Lenis (optional; non-blocking) -->
+  <script src="https://unpkg.com/@studio-freight/lenis" defer></script>
+
   <script>
     document.documentElement.classList.remove('no-js');
-    document.querySelectorAll('#yearNow').forEach(el => el.textContent = new Date().getFullYear());
+    document.querySelectorAll('#yearNow').forEach(el => el.textContent=new Date().getFullYear());
 
-    /* Reveal */
+    /* Cinematic reveal */
     (function(){
       const pref = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const els = [...document.querySelectorAll('.fade-up')];
@@ -655,23 +468,6 @@
         }), { threshold:.12, rootMargin:'0px 0px -10% 0px' });
         els.forEach(el => io.observe(el));
       } else { els.forEach(el => el.classList.add('visible')); }
-    })();
-
-    /* Ambient spotlight (Cursor-getrieben) */
-    (function(){
-      const spot = document.querySelector('.ambient');
-      if(!spot) return;
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      function move(e){
-        let x = e.clientX || innerWidth/2;
-        let y = e.clientY || innerHeight/3;
-        spot.style.setProperty('--x', x + 'px');
-        spot.style.setProperty('--y', y + 'px');
-      }
-      if(!reduce){
-        window.addEventListener('pointermove', move, {passive:true});
-        window.addEventListener('touchmove', e => e.touches[0] && move(e.touches[0]), {passive:true});
-      }
     })();
 
     /* Sticky CTA mobile */
@@ -687,39 +483,42 @@
       } else { addEventListener('scroll', () => show(scrollY > 220), { passive:true }); }
     })();
 
-    /* Mikro-Parallax + Tilt (WOW, aber subtil) */
+    /* Ambient spotlight nur im Hero */
     (function(){
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduce) return;
-      const group = document.querySelector('[data-parallax]');
-      if(!group) return;
-      const tiles = group.querySelectorAll('[data-tilt]');
-      function onMove(e){
-        const rect = group.getBoundingClientRect();
-        const mx = (e.clientX - rect.left) / rect.width - .5;
-        const my = (e.clientY - rect.top) / rect.height - .5;
-        tiles.forEach((t, i)=>{
-          const depth = (i+1) * 2.5; // leichte Staffelung
-          t.style.transform = `translate3d(${mx*depth}px, ${my*depth}px, 0) rotateX(${my*2}deg) rotateY(${-mx*2}deg)`;
-        });
-      }
-      group.addEventListener('pointermove', onMove, {passive:true});
-      group.addEventListener('pointerleave', ()=> tiles.forEach(t=> t.style.transform=''), {passive:true});
+      const amb = document.getElementById('ambient');
+      const hero = document.getElementById('hero');
+      if(!amb || !hero || !('IntersectionObserver' in window)) return;
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { amb.style.opacity = e.isIntersecting ? '.28' : '0'; });
+      }, { threshold:.1 });
+      io.observe(hero);
     })();
 
-    /* Magnetische Buttons (sanft) */
+    /* Lightbox */
     (function(){
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduce) return;
-      document.querySelectorAll('.btn').forEach(btn=>{
-        btn.addEventListener('pointermove', e=>{
-          const r = btn.getBoundingClientRect();
-          const x = (e.clientX - r.left - r.width/2)/r.width;
-          const y = (e.clientY - r.top - r.height/2)/r.height;
-          btn.style.transform = `translate(${x*6}px, ${y*6}px)`;
-        }, {passive:true});
-        btn.addEventListener('pointerleave', ()=> btn.style.transform='', {passive:true});
+      const dlg=document.getElementById('zoom');
+      if(!dlg) return;
+      const img=dlg.querySelector('.zoom-img');
+      document.addEventListener('click',e=>{
+        const t=e.target.closest('[data-zoom]');
+        if(!t) return;
+        img.src=t.currentSrc||t.src; img.alt=t.alt||'';
+        dlg.showModal();
       });
+      dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
+      dlg.querySelector('.zoom-close').onclick=()=>dlg.close();
+      document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&dlg.open) dlg.close(); });
+    })();
+
+    /* Lenis – smooth inertia (falls geladen) */
+    (function(){
+      const boot = () => {
+        if(!window.Lenis) return;
+        const lenis = new Lenis({ duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+      };
+      if(document.readyState==='complete') boot(); else addEventListener('load', boot);
     })();
 
     /* Ampel-Check */
@@ -745,46 +544,40 @@
         if(t){ t.style.display='block'; t.scrollIntoView({behavior:'smooth', block:'start'}); }
         updateHead();
       }
-
       function renderCTA(color){
         const book = 'https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled';
         const wa = 'https://wa.me/4917660408380?text=';
         if(color==='red') return `
           <div class="stack" style="text-align:center">
-            <a href="${wa}Hi%20Heiko%2C%20ich%20habe%20Ampel%20Rot%20%E2%80%93%20kurz%20sortieren%3F" target="_blank" rel="noopener" class="btn btn-primary">💬 10 Minuten sortieren</a>
-            <a href="${book}" class="btn btn-ghost" rel="nofollow noopener">📅 Termin buchen</a>
-            <small class="micro">Kein Druck. Nur Klarheit.</small>
+            <a href="${wa}Kurz%2010%20Minuten%20sortieren" target="_blank" rel="noopener" class="btn btn-primary">Kurz sprechen</a>
+            <a href="${book}" class="btn btn-ghost" rel="nofollow noopener">Termin buchen</a>
           </div>`;
         if(color==='yellow') return `
           <div class="stack" style="text-align:center">
-            <a href="${book}" class="btn btn-primary" rel="nofollow noopener">🧭 Nächster Schritt (optional)</a>
-            <a href="${wa}Hi%20Heiko%2C%20kurze%20Frage%20zu%20Ampel%20Gelb%3A%20" target="_blank" rel="noopener" class="btn btn-ghost">💬 Kurze Frage</a>
-            <small class="micro">Wir priorisieren — du entscheidest.</small>
+            <a href="${book}" class="btn btn-primary" rel="nofollow noopener">Nächster Schritt</a>
+            <a href="${wa}Kurze%20Frage" target="_blank" rel="noopener" class="btn btn-ghost">Kurze Frage</a>
           </div>`;
         return `
           <div class="stack" style="text-align:center">
-            <a href="${book}" class="btn btn-primary" rel="nofollow noopener">✨ Grün stabil halten (optional)</a>
-            <a href="/entscheidungsarchitektur.html" class="btn btn-ghost">🎬 Prinzip verstehen</a>
-            <small class="micro">Wenn’s passt: leicht optimieren.</small>
+            <a href="${book}" class="btn btn-primary" rel="nofollow noopener">Grün stabil halten</a>
+            <a href="/entscheidungsarchitektur.html" class="btn btn-ghost">Prinzip ansehen</a>
           </div>`;
       }
-
       function finish(){
         stepsWrap.style.display = 'none';
         resultBox.style.display = 'block';
         let html = '';
         if(score <= 4){
-          html = `<div class="result-card result-red"><h3>🔴 Heute wichtig</h3><p class="micro">Mindestens ein Bereich wirkt akut. Lass uns kurz priorisieren — ohne Drama.</p>${renderCTA('red')}</div>`;
+          html = `<div class="result-card result-red"><h3>🔴 Heute wichtig</h3><p>Mindestens ein Bereich ist akut. Erst ordnen, dann handeln.</p>${renderCTA('red')}</div>`;
         } else if(score <= 7){
-          html = `<div class="result-card result-yellow"><h3>🟡 Bald wichtig</h3><p class="micro">Ein paar Themen sind „bald relevant“. Jetzt sauber einordnen, bevor es stresst.</p>${renderCTA('yellow')}</div>`;
+          html = `<div class="result-card result-yellow"><h3>🟡 Bald wichtig</h3><p>Einige Themen stehen an. In Ruhe priorisieren.</p>${renderCTA('yellow')}</div>`;
         } else {
-          html = `<div class="result-card result-green"><h3>🟢 Stabil</h3><p class="micro">Für heute wirkt es rund. Wenn du willst: wir bauen eine Roadmap, damit es so bleibt.</p>${renderCTA('green')}</div>`;
+          html = `<div class="result-card result-green"><h3>🟢 Stabil</h3><p>Für heute wirkt es rund. Optional feinjustieren.</p>${renderCTA('green')}</div>`;
         }
-        html += `<p class="micro" style="margin-top:.85rem;opacity:.9">Hinweis: Dieser Check ersetzt keine individuelle Beratung. Entscheidungen erfolgen erst nach vollständiger Datenlage.</p>`;
+        html += `<p class="micro" style="margin-top:.85rem;opacity:.9">Hinweis: Orientierung ersetzt keine individuelle Beratung. Entscheidungen erfolgen erst nach vollständiger Datenlage.</p>`;
         resultBox.innerHTML = html;
         resultBox.scrollIntoView({behavior:'smooth', block:'start'});
       }
-
       function start(){
         document.getElementById('check-start').style.display = 'none';
         stepsWrap.style.display = 'block';
@@ -812,23 +605,6 @@
           });
         });
       });
-    })();
-
-    /* Lightbox */
-    (function(){
-      const dlg = document.getElementById('zoom');
-      if(!dlg) return;
-      const imgEl = dlg.querySelector('.zoom-img');
-      const close = dlg.querySelector('.zoom-close');
-      function open(src, alt){ imgEl.src = src; imgEl.alt = alt || ''; dlg.showModal(); }
-      function handleClick(e){
-        const t = e.target.closest('[data-zoom]'); if(!t) return;
-        const src = t.currentSrc || t.src; open(src, t.alt || '');
-      }
-      document.addEventListener('click', handleClick);
-      close.addEventListener('click', () => dlg.close());
-      dlg.addEventListener('click', (e) => { if(e.target === dlg) dlg.close(); });
-      document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && dlg.open) dlg.close(); });
     })();
   </script>
 </body>
