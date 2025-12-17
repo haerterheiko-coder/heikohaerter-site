@@ -1,3 +1,4 @@
+<!-- /index.html -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -9,19 +10,18 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#05070E" />
-
   <title>Entscheidungen, die tragen.</title>
   <meta name="description" content="Überblick, Handlungsfähigkeit, Stabilität – privat und unternehmerisch. In 2 Minuten Status prüfen. Ruhig, ganzheitlich, DVAG-Backbone." />
   <link rel="canonical" href="https://heikohaerter.com" />
 
-  <!-- OG -->
+  <!-- OG/Twitter -->
   <meta property="og:site_name" content="Heiko Haerter – Allfinanz & Entscheidungslogik" />
   <meta property="og:title" content="Entscheidungen, die tragen." />
   <meta property="og:description" content="Status prüfen in 2 Minuten. Robust aufgestellt für Alltag, Ausfall, Zukunft." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://heikohaerter.com" />
   <meta property="og:locale" content="de_DE" />
-  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png" />
+  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Perf -->
@@ -30,15 +30,15 @@
   <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
   <link rel="preconnect" href="https://wa.me" crossorigin>
 
-  <!-- LCP Preload -->
+  <!-- LCP Preload (neues Hero-Bild) -->
   <link
     rel="preload"
     as="image"
-    href="https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png"
+    href="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400"
     imagesrcset="
-      https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=960 960w,
-      https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=1400 1400w,
-      https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=2000 2000w
+      https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=960 960w,
+      https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400 1400w,
+      https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=2000 2000w
     "
     imagesizes="(min-width:1024px) 52vw, 92vw"
     fetchpriority="high"
@@ -49,8 +49,8 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- Klaviyo Onsite (lädt nur bei Bedarf; Tracking via explizites Opt-in im Ergebnis) -->
-  <script async src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=T7wryA"></script>
+  <!-- Klaviyo Onsite: async; Tracking nur via Opt-in -->
+  <script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=T7wryA" async></script>
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
@@ -58,7 +58,7 @@
     "@context":"https://schema.org",
     "@type":"LocalBusiness",
     "name":"Heiko Haerter – Allfinanz & Entscheidungslogik",
-    "image":"https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png",
+    "image":"https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png",
     "address":{"@type":"PostalAddress","streetAddress":"Robert-Bosch-Str. 1","postalCode":"71277","addressLocality":"Rutesheim","addressCountry":"DE"},
     "url":"https://heikohaerter.com",
     "telephone":"+49 176 60408380",
@@ -106,7 +106,6 @@
     .stack{display:flex;flex-direction:column;gap:clamp(.55rem,1.8vw,1rem)}
     .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
 
-    /* Typo – große Aussagen, kleine Erklärungen */
     h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em}
     h1{font-size:clamp(2.8rem,6.3vw,4.6rem);font-weight:900;line-height:1.03}
     h2{font-size:clamp(1.9rem,3.5vw,2.7rem);font-weight:850;line-height:1.08}
@@ -115,18 +114,16 @@
     .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.02em}
     .hero-sub{font-size:1.08rem;color:var(--muted);margin-top:.35rem}
 
-    /* Buttons – flach, ruhig */
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;
          padding:.9rem 1.4rem;border-radius:999px;border:1px solid transparent;
          font-weight:800;background:rgba(255,255,255,.06);color:var(--text);
          transition:transform .18s var(--ease)}
     .btn:hover{transform:translateY(-1px)}
-    .btn-primary{background:var(--gold);color:#111;box-shadow:none;border-color:rgba(230,208,138,.25)}
+    .btn-primary{background:var(--gold);color:#111;border-color:rgba(230,208,138,.25)}
     .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
     .btn.small{min-height:44px;padding:.55rem 1rem}
     @media (max-width:767px){ .btn{width:100%} }
 
-    /* Header */
     header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(6px)}
     .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:.85rem 0;gap:1rem}
     .brand{display:flex;flex-direction:column}
@@ -137,7 +134,6 @@
     .nav a.link:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
     @media (max-width:940px){ .nav a.link{display:none} }
 
-    /* Reduzierte Cards/Panels – nur wo nötig */
     .card,.panel,.quote{
       background:var(--surface);
       border:none; border-radius:var(--radius);
@@ -147,69 +143,67 @@
     .panel{background:var(--surface2)}
     .quote{background:rgba(255,255,255,.05);margin-top:1.1rem;opacity:.92}
 
-    /* Hero */
     .hero{position:relative;padding-top:clamp(26px,4vw,64px);padding-bottom:clamp(18px,2.5vw,30px)}
     .hero-grid{display:grid;gap:clamp(1.4rem,3.4vw,2.8rem)}
     @media (min-width:1024px){ .hero-grid{grid-template-columns:1.1fr .9fr;align-items:center} }
 
-    /* Collage – robust & scharf (keine künstliche Skalierung) */
-    .collage{display:grid;gap:1rem}
-    @media (min-width:1024px){ .collage{grid-template-columns:1.3fr .9fr;align-items:start} }
-    .tile{position:relative;border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);box-shadow:var(--elev-1)}
-    .tile--big{aspect-ratio:5/3}
-    .tile--square{aspect-ratio:1/1}
-    .tile img{
-      width:100%;height:100%;
-      object-fit:cover;object-position:center;
-      transform:none;image-rendering:auto;
-    }
+    /* Bildrahmen rechts */
+    .hero-figure{border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);box-shadow:var(--elev-1)}
+    .hero-figure img{width:100%;height:auto;display:block}
 
-    /* Statement-Blöcke – Text + Raum */
-    .statement{padding:clamp(26px,4vw,44px) 0}
+    .statement{padding:clamp(34px,6vw,56px) 0}
     .statement .container{max-width:920px}
-    .statement h2{margin-bottom:.4rem}
-    .statement p{font-size:clamp(1.05rem,1.18vw,1.1rem)}
+    .statement h2{margin-bottom:.6rem}
 
-    /* Reveal */
     .fade-up{opacity:0;transform:translateY(32px) scale(.985);filter:blur(2px)}
     .fade-up.visible{opacity:1;transform:none;filter:none;transition:
       opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1), filter .6s ease}
 
-    /* Ergebnisfarben */
     .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
     .result-red{background:#2b1111;border:1px solid var(--danger)}
     .result-yellow{background:#2b2b11;border:1px solid var(--warn)}
     .result-green{background:#0f1b12;border:1px solid var(--ok)}
 
-    /* Sticky CTA */
     .sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
     .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
     @media (max-width:1023px){ .sticky-cta{display:flex} }
     @supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
 
-    /* Ambient light */
     .ambient{position:absolute;inset:-20vh -10vw auto -10vw;height:60vh;pointer-events:none;filter:blur(40px);opacity:.22;transition:opacity .5s var(--ease)}
     .ambient::before{content:"";position:absolute;inset:0;background:
       radial-gradient(50% 50% at 15% 20%, rgba(200,164,75,.24) 0%, transparent 60%),
       radial-gradient(50% 50% at 80% 10%, rgba(120,150,255,.18) 0%, transparent 60%);mix-blend-mode:screen}
 
-    /* A11y */
     .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .visually-hidden:focus{position:fixed!important;left:16px;top:16px;width:auto;height:auto;margin:0;clip:auto;overflow:visible;padding:.7rem 1rem;border-radius:999px;background:rgba(10,14,22,.95);border:1px solid rgba(255,255,255,.18);z-index:9999}
-    a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
+    a:focus-visible,button:focus-visible,[role="dialog"]:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
 
-    /* Dialog */
     dialog#zoom{width:min(92vw,1100px);border:none;padding:0;background:transparent}
     dialog#zoom::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(2px)}
     .zoom-frame{position:relative;border-radius:18px;overflow:hidden}
     .zoom-img{width:100%;height:auto;display:block}
 
-    /* Footer */
     footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 60px}
     .footer-links{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
     .footer-links a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:var(--muted2)}
     .footer-links a:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
     .tiny{font-size:.88rem;color:var(--muted2);line-height:1.45}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* Progress */
+    progress{appearance:none;-webkit-appearance:none;height:10px;width:100%;
+      background:rgba(255,255,255,.08);border-radius:999px;border:1px solid rgba(255,255,255,.12);overflow:hidden}
+    progress::-webkit-progress-bar{background:transparent}
+    progress::-webkit-progress-value{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+    progress::-moz-progress-bar{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+
+    /* Radio-Fokus/Checked */
+    label.btn.small{position:relative;isolation:isolate}
+    label.btn.small:focus-within{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
+    label.btn.small input:checked + span{ text-decoration:underline; text-underline-offset:.18em; }
+
+    /* inert wenn Dialog offen */
+    [inert]{pointer-events:none;user-select:none}
   </style>
 </head>
 
@@ -226,59 +220,46 @@
         <a class="link" href="#lebenslagen">Lebenslagen</a>
         <a class="link" href="#privat">Privat</a>
         <a class="link" href="#firma">Firmen</a>
-        <a class="btn btn-primary" href="#ampel-check">Status prüfen</a>
+        <a class="btn btn-primary" href="#ampel-check" data-start>Überblick</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO – radikal reduziert -->
+    <!-- HERO -->
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
-      <div class="ambient" id="ambient"></div>
+      <div class="ambient" id="ambient" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="stack">
           <h1 id="hero-title">Entscheidungen,<br>die tragen.</h1>
-          <!-- Sub erst nach Scroll – aber hier leicht sichtbar für Web-User -->
           <p class="hero-sub">Privat · Unternehmerisch · Langfristig</p>
 
           <div class="stack" style="margin-top:.6rem">
-            <a class="btn btn-primary" href="#ampel-check" id="startCheckHero">2 Minuten · Status prüfen</a>
+            <button class="btn btn-primary" id="startCheckHero" type="button" data-start>2 Minuten · Überblick</button>
             <small class="micro" style="opacity:.9">Erst Überblick. Dann Entscheidung.</small>
-            <small class="micro" style="opacity:.75">3 Fragen · ohne Unterlagen</small>
           </div>
 
-          <!-- leiser Beweis -->
           <div class="grid auto-grid" style="margin-top:.6rem">
             <div class="panel"><p class="micro" style="margin:0;opacity:.95">Ganzheitlich statt fragmentiert</p></div>
             <div class="panel"><p class="micro" style="margin:0;opacity:.95">Ein Ansprechpartner · Ein System</p></div>
           </div>
         </div>
 
-        <!-- Collage – scharf + ratiofest -->
-        <div class="collage">
-          <figure class="tile tile--big">
-            <img data-zoom
-                 src="https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=1400"
-                 srcset="
-                   https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=960  960w,
-                   https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=1400 1400w,
-                   https://static.wixstatic.com/media/4e46cf_bd301a4701c74192b07aa76286a50956~mv2.png?width=2000 2000w
-                 "
-                 sizes="(min-width:1024px) 52vw, 92vw"
-                 alt="Arbeiten mit Struktur" loading="eager" decoding="async" fetchpriority="high">
-          </figure>
-          <figure class="tile tile--square">
-            <img data-zoom
-                 src="https://static.wixstatic.com/media/4e46cf_91f73cf2a52540c3a9a6c3791f2eec49~mv2.png?width=960"
-                 srcset="
-                   https://static.wixstatic.com/media/4e46cf_91f73cf2a52540c3a9a6c3791f2eec49~mv2.png?width=640 640w,
-                   https://static.wixstatic.com/media/4e46cf_91f73cf2a52540c3a9a6c3791f2eec49~mv2.png?width=960 960w,
-                   https://static.wixstatic.com/media/4e46cf_91f73cf2a52540c3a9a6c3791f2eec49~mv2.png?width=1280 1280w
-                 "
-                 sizes="(min-width:1024px) 28vw, 46vw"
-                 alt="Ruhige Beratung" loading="lazy" decoding="async">
-          </figure>
-        </div>
+        <!-- EINZELNES HERO-BILD -->
+        <figure class="hero-figure">
+          <img
+            data-zoom
+            src="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400"
+            srcset="
+              https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=960 960w,
+              https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400 1400w,
+              https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=2000 2000w
+            "
+            sizes="(min-width:1024px) 52vw, 92vw"
+            alt="Ruhige, fokussierte Beratung im Büro"
+            width="1400" height="840"
+            loading="eager" decoding="async" fetchpriority="high">
+        </figure>
       </div>
     </section>
 
@@ -290,7 +271,7 @@
       </div>
     </section>
 
-    <!-- LEBENSLAGEN (gekürzt) -->
+    <!-- LEBENSLAGEN -->
     <section id="lebenslagen" class="section fade-up" aria-labelledby="life-h">
       <div class="container">
         <h2 id="life-h">Wer hier richtig ist</h2>
@@ -309,7 +290,7 @@
       </div>
     </section>
 
-    <!-- STARTWEGE (kompakt) -->
+    <!-- STARTWEGE -->
     <section class="section fade-up" aria-labelledby="formate-h">
       <div class="container">
         <h2 id="formate-h">Sinnvoll starten</h2>
@@ -321,22 +302,42 @@
       </div>
     </section>
 
-    <!-- FIRMA -->
+    <!-- FIRMA (+ optionales Bild) -->
     <section id="firma" class="section fade-up" aria-labelledby="firma-h">
       <div class="container">
-        <h2 id="firma-h">Für Firmenkunden</h2>
-        <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>Firmensafe-Sprint</h3><p>Ist-Analyse → Prioritäten → Sofortmaßnahmen → Roadmap.</p></div>
-          <div class="card"><h3>Bausteine</h3><p>GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p></div>
-          <div class="card"><h3>Unternehmer-Ampel</h3><p>Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p></div>
-        </div>
-        <div class="quote" style="margin-top:1rem">
-          <p class="micro" style="margin:0"><strong>Backbone:</strong> Betreubar in 10, 20, 30 Jahren – das System im Hintergrund macht’s möglich.</p>
+        <div class="grid" style="grid-template-columns:1fr;gap:clamp(1rem,2.8vw,1.6rem)">
+          <div class="stack">
+            <h2 id="firma-h">Für Firmenkunden</h2>
+            <div class="grid auto-grid" style="margin-top:.6rem">
+              <div class="card"><h3>Firmensafe-Sprint</h3><p>Ist-Analyse → Prioritäten → Sofortmaßnahmen → Roadmap.</p></div>
+              <div class="card"><h3>Bausteine</h3><p>GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p></div>
+              <div class="card"><h3>Unternehmer-Ampel</h3><p>Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p></div>
+            </div>
+            <div class="quote" style="margin-top:1rem">
+              <p class="micro" style="margin:0"><strong>Backbone:</strong> Betreubar in 10, 20, 30 Jahren – das System im Hintergrund macht’s möglich.</p>
+            </div>
+          </div>
+
+          <!-- passt hier gut als visuelle Ruhe – lazy -->
+          <figure class="hero-figure" style="max-width:720px; margin:0 auto">
+            <img
+              data-zoom
+              src="https://static.wixstatic.com/media/4e46cf_2bb27617932d43d6a2224ebaa4e21621~mv2.png?width=1200"
+              srcset="
+                https://static.wixstatic.com/media/4e46cf_2bb27617932d43d6a2224ebaa4e21621~mv2.png?width=640 640w,
+                https://static.wixstatic.com/media/4e46cf_2bb27617932d43d6a2224ebaa4e21621~mv2.png?width=960 960w,
+                https://static.wixstatic.com/media/4e46cf_2bb27617932d43d6a2224ebaa4e21621~mv2.png?width=1200 1200w
+              "
+              sizes="(min-width:1024px) 60vw, 92vw"
+              alt="Unterwegs organisiert: Unternehmer zwischen Terminen"
+              width="1200" height="800"
+              loading="lazy" decoding="async">
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- LANDKARTE (Text statt Boxen) -->
+    <!-- LANDKARTE -->
     <section id="produkte" class="statement fade-up" aria-labelledby="land-h">
       <div class="container">
         <h2 id="land-h">Landkarte</h2>
@@ -347,7 +348,7 @@
       </div>
     </section>
 
-    <!-- NICHT PASSEND – bewusst unbequem -->
+    <!-- NICHT PASSEND -->
     <section class="statement fade-up" aria-labelledby="notfor-h">
       <div class="container">
         <h2 id="notfor-h">Nicht passend, wenn …</h2>
@@ -361,56 +362,67 @@
         <div class="stack" id="check-start">
           <h2 id="check-h">2-Minuten-Status</h2>
           <p class="micro">3 Fragen · sofort ein Gefühl für Heute</p>
-          <a class="btn btn-primary" id="startCheckBtn" href="#ampel-check">Status prüfen</a>
+          <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Überblick</button>
           <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder du nimmst nur Überblick mit.</small>
         </div>
 
-        <div id="check-steps" style="display:none;margin-top:1.2rem">
-          <div class="panel" style="margin-bottom:.8rem" aria-live="polite">
+        <form id="check-steps" style="display:none;margin-top:1.2rem" aria-describedby="stepHint">
+          <div class="panel" style="margin-bottom:.8rem">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
               <strong id="stepLabel">Schritt 1 von 3</strong>
-              <span class="micro" id="stepHint">Kurzer Eindruck reicht.</span>
+              <span class="micro" id="stepHint" role="status" aria-live="polite">Kurzer Eindruck reicht.</span>
             </div>
-            <div style="width:100%;height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.12)" aria-hidden="true">
-              <span id="progressBar" style="display:block;height:10px;width:0;background:var(--gold);transition:width .35s var(--ease)"></span>
-            </div>
+            <progress id="progressBar" max="3" value="0" style="width:100%" aria-live="off"></progress>
           </div>
 
-          <div class="panel step" data-step="1" style="display:none">
-            <h3>1 · 6 Monate Ausfall – wie stabil wäre euer Einkommen?</h3>
-            <div class="stack">
-              <button class="btn small" data-value="1" type="button">Wir hätten ein echtes Problem</button>
-              <button class="btn small" data-value="2" type="button">Wir kämen durch, aber eng</button>
-              <button class="btn small" data-value="3" type="button">Stabil aufgestellt</button>
+          <fieldset class="panel step" data-step="1" style="display:none">
+            <legend><h3 id="q1label">1 · 6 Monate Ausfall – wie stabil wäre euer Einkommen?</h3></legend>
+            <div class="stack" role="radiogroup" aria-labelledby="q1label">
+              <label class="btn small"><input class="sr-only" type="radio" name="q1" value="1"> <span>Wir hätten ein echtes Problem</span></label>
+              <label class="btn small"><input class="sr-only" type="radio" name="q1" value="2"> <span>Wir kämen durch, aber eng</span></label>
+              <label class="btn small"><input class="sr-only" type="radio" name="q1" value="3"> <span>Stabil aufgestellt</span></label>
             </div>
-          </div>
+          </fieldset>
 
-          <div class="panel step" data-step="2" style="display:none">
-            <h3>2 · Wie <em>leicht</em> findest du wichtige Unterlagen?</h3>
-            <div class="stack">
-              <button class="btn small" data-value="1" type="button">Ich suche lange</button>
-              <button class="btn small" data-value="2" type="button">Meistens</button>
-              <button class="btn small" data-value="3" type="button">Zuverlässig</button>
+          <fieldset class="panel step" data-step="2" style="display:none">
+            <legend><h3 id="q2label">2 · Wie <em>leicht</em> findest du wichtige Unterlagen?</h3></legend>
+            <div class="stack" role="radiogroup" aria-labelledby="q2label">
+              <label class="btn small"><input class="sr-only" type="radio" name="q2" value="1"> <span>Ich suche lange</span></label>
+              <label class="btn small"><input class="sr-only" type="radio" name="q2" value="2"> <span>Meistens</span></label>
+              <label class="btn small"><input class="sr-only" type="radio" name="q2" value="3"> <span>Zuverlässig</span></label>
             </div>
-          </div>
+          </fieldset>
 
-          <div class="panel step" data-step="3" style="display:none">
-            <h3>3 · „Zukunft &amp; Alter“ – wie fühlt es sich an?</h3>
-            <div class="stack">
-              <button class="btn small" data-value="1" type="button">Unsicher</button>
-              <button class="btn small" data-value="2" type="button">Teilweise rund</button>
-              <button class="btn small" data-value="3" type="button">Gut</button>
+          <fieldset class="panel step" data-step="3" style="display:none">
+            <legend><h3 id="q3label">3 · „Zukunft &amp; Alter“ – wie fühlt es sich an?</h3></legend>
+            <div class="stack" role="radiogroup" aria-labelledby="q3label">
+              <label class="btn small"><input class="sr-only" type="radio" name="q3" value="1"> <span>Unsicher</span></label>
+              <label class="btn small"><input class="sr-only" type="radio" name="q3" value="2"> <span>Teilweise rund</span></label>
+              <label class="btn small"><input class="sr-only" type="radio" name="q3" value="3"> <span>Gut</span></label>
             </div>
-          </div>
-        </div>
+          </fieldset>
 
-        <div id="check-result" style="display:none;margin-top:1.4rem"></div>
+          <div class="stack" style="flex-direction:row;gap:.6rem;margin-top:.8rem">
+            <button class="btn btn-primary small" id="nextBtn" type="button">Weiter</button>
+            <button class="btn btn-ghost small" id="backBtn" type="button" aria-disabled="true">Zurück</button>
+            <button class="btn small" id="startShort" type="button">Kurzmodus</button>
+          </div>
+        </form>
+
+        <div id="check-result" style="display:none;margin-top:1.4rem" aria-live="polite"></div>
 
         <div class="panel" style="margin-top:1.2rem">
           <h3 style="margin:.1rem 0 .45rem">Wenig Zeit?</h3>
           <p class="micro" style="margin-top:.1rem">Kurzmodus: in 12 Sekunden ein Gefühl für <em>Jetzt · Als Nächstes · Später</em>.</p>
-          <a href="#ampel-check" class="btn btn-ghost" id="startShort">Kurzmodus</a>
+          <button class="btn btn-ghost" id="startShort2" type="button">Kurzmodus</button>
         </div>
+
+        <noscript>
+          <div class="panel" style="margin-top:1rem">
+            <p class="micro">JavaScript ist deaktiviert. Direkt sprechen?</p>
+            <p><a class="btn btn-primary" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%20zum%20Status%3A%20" target="_blank" rel="noopener">WhatsApp</a></p>
+          </div>
+        </noscript>
       </div>
     </section>
 
@@ -418,9 +430,9 @@
     <section class="statement fade-up" aria-labelledby="final-h">
       <div class="container" style="text-align:center;max-width:860px">
         <h2 id="final-h">Souverän entscheiden – ohne Aktionismus.</h2>
-        <p>Starte klein: Status prüfen. Danach entscheidest du selbst.</p>
+        <p>Starte klein: Überblick. Danach entscheidest du selbst.</p>
         <div class="stack" style="align-items:center;margin-top:.4rem">
-          <a class="btn btn-primary" href="#ampel-check" id="ctaFinal">Status prüfen</a>
+          <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Überblick</button>
           <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%20zum%20Status%3A%20" target="_blank" rel="noopener">WhatsApp (kurz)</a>
         </div>
         <p class="micro" style="margin-top:.7rem">Ich arbeite im System der Deutschen Vermögensberatung – Verantwortung braucht Struktur, die bleibt.</p>
@@ -454,9 +466,9 @@
   </footer>
 
   <!-- Sticky Mobile CTA -->
-  <div class="sticky-cta" id="stickyCTA">
+  <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
     <div class="inner">
-      <a href="#ampel-check" class="btn btn-primary" data-ctx="sticky">Status prüfen</a>
+      <button class="btn btn-primary" type="button" data-start data-ctx="sticky">Überblick</button>
     </div>
   </div>
 
@@ -473,25 +485,25 @@
     document.documentElement.classList.remove('no-js');
     document.querySelectorAll('#yearNow').forEach(el => el.textContent = new Date().getFullYear());
 
-    /* Reveal */
+    // Reveal
     (function(){
-      const pref = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const els = [...document.querySelectorAll('.fade-up')];
-      if(pref){ els.forEach(el => el.classList.add('visible')); return; }
-      if('IntersectionObserver' in window){
-        const io = new IntersectionObserver(entries => entries.forEach(e => {
-          if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
-        }), { threshold:.12, rootMargin:'0px 0px -10% 0px' });
+      try{
+        const pref = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const els = Array.from(document.querySelectorAll('.fade-up'));
+        if(pref || !('IntersectionObserver' in window)){ els.forEach(el => el.classList.add('visible')); return; }
+        const io = new IntersectionObserver(entries => {
+          for (const e of entries){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target);} }
+        }, { threshold:.12, rootMargin:'0px 0px -10% 0px' });
         els.forEach(el => io.observe(el));
-      } else { els.forEach(el => el.classList.add('visible')); }
+      }catch(_){}
     })();
 
-    /* Sticky CTA mobile */
+    // Sticky CTA (mobile)
     (function(){
       const el = document.getElementById('stickyCTA');
       const hero = document.getElementById('hero');
       if(!el || !hero || innerWidth >= 1024) return;
-      const show = v => { el.style.transform = v ? 'translateY(0)' : 'translateY(100%)'; el.style.opacity = v ? '1' : '0'; };
+      const show = v => { el.style.transform = v ? 'translateY(0)' : 'translateY(100%)'; el.style.opacity = v ? '1' : '0'; el.setAttribute('aria-hidden', v? 'false':'true'); };
       if('IntersectionObserver' in window){
         const io = new IntersectionObserver(entries => entries.forEach(e => show(!e.isIntersecting)), { threshold:.35 });
         io.observe(hero);
@@ -499,7 +511,7 @@
       } else { addEventListener('scroll', () => show(scrollY > 220), { passive:true }); }
     })();
 
-    /* Ambient im Hero */
+    // Ambient fade
     (function(){
       const amb = document.getElementById('ambient');
       const hero = document.getElementById('hero');
@@ -510,55 +522,70 @@
       io.observe(hero);
     })();
 
-    /* Lightbox */
+    // Lightbox (Seite inert, solange Dialog offen)
     (function(){
-      const dlg=document.getElementById('zoom');
-      if(!dlg) return;
+      const dlg=document.getElementById('zoom'); if(!dlg) return;
       const img=dlg.querySelector('.zoom-img');
+      const main=document.getElementById('main');
       document.addEventListener('click',e=>{
         const t=e.target.closest('[data-zoom]'); if(!t) return;
-        img.src=t.currentSrc||t.src; img.alt=t.alt||''; dlg.showModal();
-      });
+        img.src=t.currentSrc||t.src; img.alt=t.alt||''; dlg.showModal(); main?.setAttribute('inert','');
+      }, { passive:true });
       dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
       dlg.querySelector('.zoom-close').onclick=()=>dlg.close();
+      dlg.addEventListener('close',()=> main?.removeAttribute('inert'));
+      dlg.addEventListener('cancel',()=> main?.removeAttribute('inert'));
       document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&dlg.open) dlg.close(); });
     })();
 
-    /* Lenis nur ohne reduce-motion */
+    // Lenis: lazy / idle
     (function(){
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(reduce) return;
-      const s=document.createElement('script'); s.src='https://unpkg.com/@studio-freight/lenis'; s.defer=true;
-      s.onload=() => {
-        if(!window.Lenis) return;
-        const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, smoothTouch: false });
-        const raf = (time)=>{ lenis.raf(time); requestAnimationFrame(raf); };
-        requestAnimationFrame(raf);
-      };
-      document.head.appendChild(s);
+      let loaded=false;
+      function loadLenis(){
+        if(loaded) return; loaded=true;
+        const s=document.createElement('script'); s.src='https://unpkg.com/@studio-freight/lenis'; s.defer=true;
+        s.onload=() => {
+          if(!window.Lenis) return;
+          const lenis = new Lenis({ duration: 1.2, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, smoothTouch: false });
+          const raf = (time)=>{ lenis.raf(time); requestAnimationFrame(raf); };
+          requestAnimationFrame(raf);
+        };
+        document.head.appendChild(s);
+      }
+      document.querySelectorAll('[data-start]').forEach(b=> b.addEventListener('click', loadLenis, {once:true}));
+      if('requestIdleCallback' in window){ requestIdleCallback(loadLenis); } else { setTimeout(loadLenis, 4000); }
     })();
 
-    /* Ampel + optionales Klaviyo-Tracking (Opt-in per Klick im Ergebnis) */
+    // Ampel-Form Wizard + optionales Klaviyo-Tracking (nur Opt-in)
     (function(){
-      let step = 1, score = 0;
-      const max = 3;
-      const stepsWrap = document.getElementById('check-steps');
+      const startBtns = document.querySelectorAll('[data-start]');
+      const wrap = document.getElementById('check-steps');
       const resultBox = document.getElementById('check-result');
+      const startBox = document.getElementById('check-start');
       const stepLabel = document.getElementById('stepLabel');
       const progress = document.getElementById('progressBar');
       const stepHint = document.getElementById('stepHint');
+      const nextBtn = document.getElementById('nextBtn');
+      const backBtn = document.getElementById('backBtn');
+      const shortBtns = [document.getElementById('startShort'), document.getElementById('startShort2')].filter(Boolean);
+
+      const steps = Array.from(document.querySelectorAll('#check-steps .step'));
+      const max = steps.length;
+      let step = 1;
+      let score = 0;
 
       function updateHead(){
         stepLabel.textContent = `Schritt ${Math.min(step,max)} von ${max}`;
-        const pct = ((Math.min(step-1,max-1)) / (max-1)) * 100;
-        progress.style.width = (max===1 ? 100 : pct) + '%';
+        progress.value = Math.max(0, step-1);
         stepHint.textContent = step===1 ? 'Kurzer Eindruck reicht.' : (step===2 ? 'Fast geschafft.' : 'Letzter Klick.');
+        backBtn.toggleAttribute('aria-disabled', step===1);
       }
       function showStep(n){
-        document.querySelectorAll('#check-steps .step').forEach(s => s.style.display='none');
-        const t = document.querySelector(`#check-steps .step[data-step="${n}"]`);
-        if(t){ t.style.display='block'; t.scrollIntoView({behavior:'smooth', block:'start'}); }
+        steps.forEach(s => s.style.display='none');
+        const t = steps[n-1];
+        if(t){ t.style.display='block'; t.querySelector('input')?.focus(); }
         updateHead();
+        wrap.scrollIntoView({behavior:'smooth', block:'start'});
       }
       function waLink(text){ return 'https://wa.me/4917660408380?text=' + encodeURIComponent(text); }
       function renderCTA(color){
@@ -580,20 +607,20 @@
           </div>`;
       }
 
-      /* Klaviyo-Event – wird NUR gesendet, wenn Nutzer im Ergebnis zustimmt */
       function trackAmpelResult(status, score) {
-        if (!window.klaviyo || !Array.isArray(window.klaviyo)) return;
-        window.klaviyo.push(['track','Ampel Ergebnis',{
-          ampel_status: status,
-          ampel_score: score,
-          lead_source: 'ampel',
-          intent_level: status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig'),
-          last_ampel_at: new Date().toISOString()
-        }]);
+        // nur nach Opt-in
+        try{
+          if (!window.klaviyo || !Array.isArray(window.klaviyo)) return;
+          window.klaviyo.push(['track','Ampel Ergebnis',{
+            ampel_status: status, ampel_score: score, lead_source: 'ampel',
+            intent_level: status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig'),
+            last_ampel_at: new Date().toISOString()
+          }]);
+        }catch(_){}
       }
 
       function finish(){
-        stepsWrap.style.display = 'none';
+        wrap.style.display = 'none';
         resultBox.style.display = 'block';
 
         let html = '', status = 'gruen';
@@ -601,32 +628,30 @@
         else if(score <= 7){ status = 'gelb'; html = `<div class="result-card result-yellow"><h3>🟡 Bald wichtig</h3><p>Einige Themen stehen an. In Ruhe priorisieren.</p>${renderCTA('yellow')}</div>`; }
         else { status = 'gruen'; html = `<div class="result-card result-green"><h3>🟢 Stabil</h3><p>Für heute wirkt es rund. Optional feinjustieren.</p>${renderCTA('green')}</div>`; }
 
-        /* dezentes Opt-in für anonymes Merken */
         html += `
           <div class="panel" style="margin-top:.9rem">
             <p class="micro" style="margin:.1rem 0 .6rem">
-              Möchtest du dein Ergebnis <em>anonym</em> merken, um später schneller anzuknüpfen?
+              Anonym merken? So kannst du später schneller anknüpfen. Kein Versand, keine Werbung.
             </p>
             <div class="stack" style="flex-direction:row;gap:.6rem">
               <button class="btn small" id="rememberYes" type="button">Ergebnis merken</button>
               <button class="btn small btn-ghost" id="rememberNo" type="button">Nicht merken</button>
             </div>
           </div>
-          <p class="micro" style="margin-top:.85rem;opacity:.9">
+          <p class="micro" id="privacyNote" style="margin-top:.85rem;opacity:.9">
             Hinweis: Es erfolgt kein E-Mail-Versand ohne ausdrückliche Einwilligung.
           </p>`;
 
         resultBox.innerHTML = html;
 
-        // Opt-in Handler
         const sendIfOk = ok => {
-          if(ok){ try{ trackAmpelResult(status, score); }catch(e){} }
-          document.querySelector('.panel + .micro')?.remove(); // Hinweis entfernen
+          document.getElementById('privacyNote')?.remove();
           const info = document.createElement('p');
           info.className = 'micro';
           info.style.marginTop = '.8rem';
           info.textContent = ok ? 'Gespeichert (anonym).' : 'Nicht gespeichert.';
           resultBox.appendChild(info);
+          if(ok){ trackAmpelResult(status, score); }
         };
         document.getElementById('rememberYes')?.addEventListener('click', ()=>sendIfOk(true));
         document.getElementById('rememberNo')?.addEventListener('click', ()=>sendIfOk(false));
@@ -634,37 +659,54 @@
         resultBox.scrollIntoView({behavior:'smooth', block:'start'});
       }
 
-      function start(){
-        document.getElementById('check-start').style.display = 'none';
-        stepsWrap.style.display = 'block';
-        resultBox.style.display = 'none';
-        step = 1; score = 0;
-        showStep(step);
+      function ensureAnswered(n){
+        const fs = steps[n-1];
+        if(!fs) return false;
+        return !!fs.querySelector('input[type="radio"]:checked');
       }
 
-      // Alle „Status prüfen“-CTAs starten den Flow
-      document.querySelectorAll('a[href="#ampel-check"]').forEach(a=>{
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'});
-          setTimeout(()=>start(), 120);
+      function start(short=false){
+        startBox.style.display = 'none';
+        wrap.style.display = 'block';
+        resultBox.style.display = 'none';
+        step = 1; score = 0;
+        Array.from(wrap.querySelectorAll('input[type="radio"]')).forEach(i => i.checked=false);
+        showStep(step);
+        if(short){
+          setTimeout(()=>{ score += 2; step = 2; showStep(step); }, 150);
+          setTimeout(()=>{ score += 2; step = 3; showStep(step); }, 350);
+        }
+      }
+
+      startBtns.forEach(b => b.addEventListener('click', () => {
+        document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'});
+        setTimeout(()=>start(false), 120);
+      }));
+      shortBtns.forEach(b => b.addEventListener('click', () => {
+        document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'});
+        setTimeout(()=>start(true), 120);
+      }));
+
+      // Radio-Klicks: advance on choice
+      steps.forEach((fs, idx) => {
+        fs.addEventListener('change', e => {
+          const val = Number((e.target && e.target.value) || 0);
+          score += val;
+          if(idx+1 >= max){ finish(); }
+          else { step = idx+2; showStep(step); }
         });
       });
 
-      document.getElementById('startShort')?.addEventListener('click', e => {
-        e.preventDefault(); start();
-        setTimeout(() => { score += 2; step = 2; showStep(step); }, 150);
-        setTimeout(() => { score += 2; step = 3; showStep(step); }, 350);
+      nextBtn.addEventListener('click', () => {
+        if(!ensureAnswered(step)) { stepHint.textContent='Bitte eine Option wählen.'; return; }
+        if(step >= max){ finish(); } else { step++; showStep(step); }
+      });
+      backBtn.addEventListener('click', () => {
+        if(step <= 1) return;
+        step--; showStep(step);
       });
 
-      document.querySelectorAll('#check-steps .step').forEach(s => {
-        s.querySelectorAll('button').forEach(btn => {
-          btn.addEventListener('click', () => {
-            score += Number(btn.getAttribute('data-value')) || 0;
-            step++; if(step > 3) finish(); else showStep(step);
-          });
-        });
-      });
+      updateHead();
     })();
   </script>
 </body>
