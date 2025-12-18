@@ -1,268 +1,316 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="no-js" translate="no">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
 
 <title>Datenschutzerklärung | Heiko Haerter</title>
-<meta name="description" content="Datenschutzhinweise gemäß DSGVO & BDSG: Verantwortlicher, Hosting (Wix), Server-Logs, Cookies, Kontaktaufnahme, Formulare (Tally), DVAG-Beratung, Social Media, KI-Hinweis, Rechte, Beschwerde, Sicherheit.">
+<meta name="description" content="Datenschutzhinweise gemäß DSGVO & BDSG: Verantwortlicher, Hosting (Wix), Server-Logs, Cookies, Kontaktaufnahme, Formulare (Tally), DVAG-Beratung, Social Media, KI-Hinweis, Rechte, Beschwerde, Sicherheit." />
+<link rel="canonical" href="https://heikohaerter.com/datenschutz" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 
 <style>
 :root{
-  --bg:#ffffff;--surface:#f7f9fc;--card:#ffffff;
-  --text:#111316;--muted:#5f6572;--line:#e3e7ef;
-  --gold:#C8A44B;--gold-soft:#E9D394;
-  --radius:20px;--radius-soft:12px;--shadow:0 12px 28px rgba(0,0,0,.06);
-  --font:'Inter',system-ui,sans-serif;
+  /* Farben & Effekte – passend zur Hauptseite */
+  --bg:#05070E; --bg2:#02040A;
+  --text:#F7F8FC; --muted:#A8B1C5; --muted2:#8F97AA;
+  --line:rgba(255,255,255,.12);
+  --surface:rgba(255,255,255,.06);
+  --surface-soft:rgba(255,255,255,.045);
+  --gold:#E6D08A; --focus:#90C2FF;
+  --radius:20px; --radius-sm:14px;
+  --shadow:0 24px 60px rgba(0,0,0,.35);
+  --ease:cubic-bezier(.25,.46,.25,1);
+  --container:980px; --gutter:clamp(16px,5vw,32px);
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{overflow-x:hidden}
-body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.68;-webkit-font-smoothing:antialiased}
-.wrap{max-width:900px;margin:0 auto;padding:0 1.4rem}
 
-h1{font-size:2.35rem;font-weight:900;line-height:1.2;margin:0 0 .8rem}
-h2{font-size:1.55rem;font-weight:800;margin:0 0 .7rem}
-h3{font-size:1.15rem;font-weight:900;margin:1.2rem 0 .35rem}
-p{margin:.55rem 0;color:var(--muted)}
+*{box-sizing:border-box}
+html,body{width:100%;overflow-x:hidden}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0; background:linear-gradient(180deg,var(--bg),var(--bg2) 60%);
+  color:var(--text); font-family:"IBM Plex Sans","Inter",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased; line-height:1.55;
+}
+
 a{color:inherit;text-decoration:none}
-a:hover{color:var(--gold)}
-strong{color:var(--text)}
+a:hover{color:var(--text); text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus); outline-offset:3px; border-radius:12px}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:2rem 1.8rem;margin:1.6rem 0;box-shadow:var(--shadow)}
-.subcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.1rem;margin:.8rem 0}
-.grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-.list{padding-left:1.2rem}
-.list li{margin:.3rem 0}
-.kicker{font-size:.92rem;color:var(--muted);font-weight:600;margin-bottom:.35rem}
+.wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.section{padding-block:clamp(40px,7vw,92px)}
+.grid{display:grid;gap:clamp(.8rem,2vw,1.2rem);grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 
-.badge{display:inline-flex;gap:.45rem;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.45rem .75rem;font-size:.82rem;color:#465169;margin:.25rem .25rem 0 0}
-.badge::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:linear-gradient(120deg,var(--gold),var(--gold-soft))}
+h1,h2,h3{margin:0 0 .8rem;letter-spacing:-.02em}
+h1{font-size:clamp(2rem,4.8vw,3rem);font-weight:700;line-height:1.12}
+h2{font-size:clamp(1.45rem,3vw,2rem);font-weight:600}
+h3{font-size:clamp(1.05rem,1.8vw,1.22rem);font-weight:700}
 
-.fade{opacity:0;transform:translateY(14px);transition:.55s}
-.fade.visible{opacity:1;transform:translateY(0)}
+p,li{color:var(--muted);font-size:clamp(1rem,1.05vw,1.06rem)}
+.kicker{font-size:.95rem;color:var(--muted2);margin:.1rem 0 .8rem}
 
-footer{background:#f5f6f8;border-top:1px solid var(--line);padding:2rem 0;color:var(--muted);font-size:.85rem;text-align:center;opacity:0;transform:translateY(10px);transition:.55s}
-footer.visible{opacity:1;transform:translateY(0)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(1.2rem,2.4vw,1.6rem);box-shadow:var(--shadow)}
+.subcard{background:var(--surface-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:1rem}
+.list{padding-left:1.2rem} .list li{margin:.25rem 0}
+
+.badges{margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.badge{display:inline-flex;align-items:center;gap:.45rem;border:1px solid var(--line);border-radius:999px;padding:.35rem .7rem;font-size:.9rem;color:var(--muted2);background:rgba(255,255,255,.04)}
+.badge::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:conic-gradient(from 210deg,var(--gold),var(--gold));box-shadow:0 0 0 3px rgba(230,208,138,.15)}
+
+hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent)}
+
+.footer{border-top:1px solid var(--line);padding:22px 0 52px;text-align:center;color:var(--muted2);font-size:.95rem}
+
+.fade{opacity:0;transform:translateY(18px);filter:blur(2px)}
+.fade.visible{opacity:1;transform:none;filter:none;transition:opacity .55s var(--ease), transform .55s var(--ease), filter .55s var(--ease)}
+
+@media (max-width:520px){
+  .grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
 <body>
+<a href="#main" class="visually-hidden" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">Zum Inhalt springen</a>
 
-<main class="wrap">
+<main id="main" class="wrap">
 
   <!-- HERO -->
-  <section class="card fade" aria-labelledby="ds-title">
-    <h1 id="ds-title">Datenschutzerklärung</h1>
-    <p class="kicker">Informationen gemäß DSGVO & BDSG</p>
+  <section class="section fade" aria-labelledby="ds-title">
+    <div class="card">
+      <h1 id="ds-title">Datenschutzerklärung</h1>
+      <p class="kicker">Informationen gemäß DSGVO &amp; BDSG</p>
 
-    <div class="grid">
-      <div class="subcard">
-        <h3>1. Verantwortlicher</h3>
-        <p>
-          <strong>Heiko Haerter</strong><br>
-          Selbstständiger Handelsvertreter gemäß § 84 HGB<br>
-          Deutsche Vermögensberatung AG
-        </p>
-        <p>Robert-Bosch-Str. 1 · 71277 Rutesheim</p>
-        <p>
-          Telefon: <a href="tel:+4917660408380">+49 176 60408380</a><br>
-          E-Mail: <a href="mailto:Heiko.Haerter@dvag.de">Heiko.Haerter@dvag.de</a>
-        </p>
-        <div>
-          <span class="badge">SSL-verschlüsselt</span>
-          <span class="badge">Datenminimierung</span>
+      <div class="grid">
+        <div class="subcard">
+          <h3>1. Verantwortlicher</h3>
+          <p>
+            <strong style="color:#fff">Heiko Haerter</strong><br>
+            Selbstständiger Handelsvertreter gemäß § 84 HGB<br>
+            Deutsche Vermögensberatung AG
+          </p>
+          <p>Robert-Bosch-Str. 1 · 71277 Rutesheim</p>
+          <p>
+            Telefon: <a href="tel:+4917660408380">+49 176 60408380</a><br>
+            E-Mail: <a href="mailto:Heiko.Haerter@dvag.de">Heiko.Haerter@dvag.de</a>
+          </p>
+          <div class="badges">
+            <span class="badge">SSL-verschlüsselt</span>
+            <span class="badge">Datenminimierung</span>
+          </div>
         </div>
-      </div>
 
-      <div class="subcard">
-        <h3>2. Allgemeine Hinweise</h3>
-        <p>Ich nehme den Schutz Ihrer personenbezogenen Daten sehr ernst. Ihre Daten werden vertraulich und gemäß DSGVO, BDSG sowie dieser Datenschutzerklärung verarbeitet.</p>
-        <p>Die Nutzung dieser Website ist grundsätzlich ohne Angabe personenbezogener Daten möglich. Soweit Daten erhoben werden, erfolgt dies auf freiwilliger Basis.</p>
+        <div class="subcard">
+          <h3>2. Allgemeine Hinweise</h3>
+          <p>Ich nehme den Schutz Ihrer personenbezogenen Daten sehr ernst. Ihre Daten werden vertraulich und gemäß DSGVO, BDSG sowie dieser Datenschutzerklärung verarbeitet.</p>
+          <p>Die Nutzung dieser Website ist grundsätzlich ohne Angabe personenbezogener Daten möglich. Soweit Daten erhoben werden, erfolgt dies auf freiwilliger Basis.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- HOSTING / LOGS -->
-  <section class="card fade">
-    <div class="grid">
-      <div class="subcard">
-        <h3>3. Hosting & technische Bereitstellung</h3>
-        <p>Diese Website wird über <strong>Wix.com Ltd.</strong> bereitgestellt.</p>
-        <p><strong>Dienstanbieter:</strong><br>Wix.com Ltd., 40 Namal Tel Aviv St., Tel Aviv 6350671, Israel</p>
-        <p>Datenverarbeitung erfolgt auf EU-Servern und teilweise in Israel (EU-Angemessenheitsbeschluss liegt vor).</p>
-        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an sicherem, effizientem Hosting)</p>
-      </div>
+  <section class="section fade">
+    <div class="card">
+      <div class="grid">
+        <div class="subcard">
+          <h3>3. Hosting &amp; technische Bereitstellung</h3>
+          <p>Diese Website wird über <strong style="color:#fff">Wix.com Ltd.</strong> bereitgestellt.</p>
+          <p><strong style="color:#fff">Dienstanbieter:</strong><br>Wix.com Ltd., 40 Namal Tel Aviv St., Tel Aviv 6350671, Israel</p>
+          <p>Datenverarbeitung erfolgt auf EU-Servern und teilweise in Israel (EU-Angemessenheitsbeschluss liegt vor).</p>
+          <p><strong style="color:#fff">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an sicherem, effizientem Hosting)</p>
+        </div>
 
-      <div class="subcard">
-        <h3>4. Erhebung von Zugriffsdaten (Server-Logs)</h3>
-        <p>Beim Besuch dieser Website erfasst Wix automatisch:</p>
-        <ul class="list">
-          <li>IP-Adresse</li>
-          <li>Datum & Uhrzeit</li>
-          <li>Besuchte Seiten</li>
-          <li>Browser & Betriebssystem</li>
-          <li>Referrer-URL</li>
-          <li>HTTP-Statuscodes</li>
-        </ul>
-        <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO · Die Daten werden automatisch gelöscht.</p>
+        <div class="subcard">
+          <h3>4. Erhebung von Zugriffsdaten (Server-Logs)</h3>
+          <p>Beim Besuch dieser Website erfasst Wix automatisch:</p>
+          <ul class="list">
+            <li>IP-Adresse</li>
+            <li>Datum &amp; Uhrzeit</li>
+            <li>Besuchte Seiten</li>
+            <li>Browser &amp; Betriebssystem</li>
+            <li>Referrer-URL</li>
+            <li>HTTP-Statuscodes</li>
+          </ul>
+          <p><strong style="color:#fff">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO · Die Daten werden automatisch gelöscht.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- COOKIES -->
-  <section class="card fade">
-    <div class="grid">
-      <div class="subcard">
-        <h3>5. Cookies & Einwilligungen</h3>
-        <p>Diese Website verwendet Cookies. Für Analyse- und Marketing-Cookies ist Ihre Einwilligung erforderlich.</p>
-        <p><strong>Rechtsgrundlagen:</strong></p>
-        <ul class="list">
-          <li>Notwendige Cookies: Art. 6 Abs. 1 lit. f DSGVO</li>
-          <li>Analyse/Marketing: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)</li>
-        </ul>
-        <p>Sie können Ihre Zustimmung jederzeit über „Cookies bearbeiten“ ändern.</p>
-      </div>
+  <section class="section fade">
+    <div class="card">
+      <div class="grid">
+        <div class="subcard">
+          <h3>5. Cookies &amp; Einwilligungen</h3>
+          <p>Diese Website verwendet Cookies. Für Analyse- und Marketing-Cookies ist Ihre Einwilligung erforderlich.</p>
+          <p><strong style="color:#fff">Rechtsgrundlagen:</strong></p>
+          <ul class="list">
+            <li>Notwendige Cookies: Art. 6 Abs. 1 lit. f DSGVO</li>
+            <li>Analyse/Marketing: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)</li>
+          </ul>
+          <p>Sie können Ihre Zustimmung jederzeit über „Cookies bearbeiten“ ändern.</p>
+        </div>
 
-      <div class="subcard">
-        <h3>6. Kontaktaufnahme (E-Mail, Telefon, WhatsApp)</h3>
-        <p>Wenn Sie mich kontaktieren, werden Ihre Angaben zur Bearbeitung gespeichert.</p>
-        <p><strong>WhatsApp-Hinweis:</strong> WhatsApp Ireland Ltd. ist europäischer Anbieter, dennoch kann eine Datenübertragung in die USA erfolgen. Bitte senden Sie keine Gesundheitsdaten über WhatsApp.</p>
-        <p><strong>Rechtsgrundlagen:</strong></p>
-        <ul class="list">
-          <li>Art. 6 Abs. 1 lit. b DSGVO (Vertrag / Anfrage)</li>
-          <li>Art. 6 Abs. 1 lit. f DSGVO (Kommunikation)</li>
-        </ul>
+        <div class="subcard">
+          <h3>6. Kontaktaufnahme (E-Mail, Telefon, WhatsApp)</h3>
+          <p>Wenn Sie mich kontaktieren, werden Ihre Angaben zur Bearbeitung gespeichert.</p>
+          <p><strong style="color:#fff">WhatsApp-Hinweis:</strong> WhatsApp Ireland Ltd. ist europäischer Anbieter, dennoch kann eine Datenübertragung in die USA erfolgen. Bitte senden Sie keine Gesundheitsdaten über WhatsApp.</p>
+          <p><strong style="color:#fff">Rechtsgrundlagen:</strong></p>
+          <ul class="list">
+            <li>Art. 6 Abs. 1 lit. b DSGVO (Vertrag / Anfrage)</li>
+            <li>Art. 6 Abs. 1 lit. f DSGVO (Kommunikation)</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FORMULARE / BERATUNG -->
-  <section class="card fade">
-    <div class="grid">
-      <div class="subcard">
-        <h3>7. Online-Formulare (Tally.so – Kurz-Check & Empfehlung)</h3>
-        <p><strong>Dienstanbieter:</strong> Tally BV, Ajuinlei 1, 9000 Gent, Belgien – <a href="https://tally.so" target="_blank" rel="noopener">tally.so</a></p>
-        <p>Tally verarbeitet z. B.:</p>
-        <ul class="list">
-          <li>Formulardaten (Name, Angaben zur Situation)</li>
-          <li>Metadaten (IP-Adresse, Zeitstempel, Browser)</li>
-        </ul>
-        <p><strong>Rechtsgrundlagen:</strong></p>
-        <ul class="list">
-          <li>Art. 6 Abs. 1 lit. b DSGVO</li>
-          <li>Art. 6 Abs. 1 lit. a DSGVO (freiwillige Angaben)</li>
-        </ul>
-        <p>Mit Tally besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO.</p>
-      </div>
+  <section class="section fade">
+    <div class="card">
+      <div class="grid">
+        <div class="subcard">
+          <h3>7. Online-Formulare (Tally.so – Kurz-Check &amp; Empfehlung)</h3>
+          <p><strong style="color:#fff">Dienstanbieter:</strong> Tally BV, Ajuinlei 1, 9000 Gent, Belgien – <a href="https://tally.so" target="_blank" rel="noopener">tally.so</a></p>
+          <p>Tally verarbeitet z.&nbsp;B.:</p>
+          <ul class="list">
+            <li>Formulardaten (Name, Angaben zur Situation)</li>
+            <li>Metadaten (IP-Adresse, Zeitstempel, Browser)</li>
+          </ul>
+          <p><strong style="color:#fff">Rechtsgrundlagen:</strong></p>
+          <ul class="list">
+            <li>Art. 6 Abs. 1 lit. b DSGVO</li>
+            <li>Art. 6 Abs. 1 lit. a DSGVO (freiwillige Angaben)</li>
+          </ul>
+          <p>Mit Tally besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO.</p>
+        </div>
 
-      <div class="subcard">
-        <h3>8. Verarbeitung im Rahmen der DVAG-Beratung</h3>
-        <p>Im Beratungsprozess können u. a. folgende Daten verarbeitet werden:</p>
-        <ul class="list">
-          <li>Stamm- und Kontaktdaten</li>
-          <li>Vertrags- & Vorsorgedaten</li>
-          <li>Einkommens- & Vermögensdaten</li>
-          <li>Gesundheitsdaten (mit Einwilligung)</li>
-        </ul>
-        <p><strong>Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. b DSGVO (Beratungsvertrag), Art. 9 Abs. 2 lit. a DSGVO (Gesundheitsdaten)</p>
+        <div class="subcard">
+          <h3>8. Verarbeitung im Rahmen der DVAG-Beratung</h3>
+          <p>Im Beratungsprozess können u.&nbsp;a. folgende Daten verarbeitet werden:</p>
+          <ul class="list">
+            <li>Stamm- und Kontaktdaten</li>
+            <li>Vertrags- &amp; Vorsorgedaten</li>
+            <li>Einkommens- &amp; Vermögensdaten</li>
+            <li>Gesundheitsdaten (mit Einwilligung)</li>
+          </ul>
+          <p><strong style="color:#fff">Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. b DSGVO (Beratungsvertrag), Art. 9 Abs. 2 lit. a DSGVO (Gesundheitsdaten)</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- SOCIAL / KI -->
-  <section class="card fade">
-    <div class="grid">
-      <div class="subcard">
-        <h3>9. Social-Media-Links</h3>
-        <p>Auf dieser Website werden ausschließlich Links, keine Plugins, zu folgenden Anbietern gesetzt:</p>
-        <ul class="list">
-          <li>LinkedIn · XING · Instagram · Facebook · WhatsApp</li>
-        </ul>
-        <p>Erst beim Anklicken gelten die Datenschutzrichtlinien der jeweiligen Anbieter. Es findet keine automatische Datenübertragung statt.</p>
-      </div>
+  <section class="section fade">
+    <div class="card">
+      <div class="grid">
+        <div class="subcard">
+          <h3>9. Social-Media-Links</h3>
+          <p>Auf dieser Website werden ausschließlich Links, keine Plugins, zu folgenden Anbietern gesetzt:</p>
+          <ul class="list">
+            <li>LinkedIn · XING · Instagram · Facebook · WhatsApp</li>
+          </ul>
+          <p>Erst beim Anklicken gelten die Datenschutzrichtlinien der jeweiligen Anbieter. Es findet keine automatische Datenübertragung statt.</p>
+        </div>
 
-      <div class="subcard">
-        <h3>10. KI-generierte Inhalte (EU-AI-Act Hinweis)</h3>
-        <p>Diese Website kann KI-generierte Texte oder Bilder verwenden. Sie dienen ausschließlich der Illustration und stellen keine realen Personen dar.</p>
+        <div class="subcard">
+          <h3>10. KI-generierte Inhalte (EU-AI-Act Hinweis)</h3>
+          <p>Diese Website kann KI-generierte Texte oder Bilder verwenden. Sie dienen ausschließlich der Illustration und stellen keine realen Personen dar.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- WEITERGABE / DAUER -->
-  <section class="card fade">
-    <div class="grid">
-      <div class="subcard">
-        <h3>11. Datenweitergabe</h3>
-        <p>Eine Weitergabe erfolgt nur bei:</p>
-        <ul class="list">
-          <li>Vertragserfüllung</li>
-          <li>gesetzlicher Pflicht</li>
-          <li>Einwilligung</li>
-          <li>Auftragsverarbeitung</li>
-        </ul>
-        <p>Keine Weitergabe für Werbezwecke.</p>
-      </div>
+  <section class="section fade">
+    <div class="card">
+      <div class="grid">
+        <div class="subcard">
+          <h3>11. Datenweitergabe</h3>
+          <p>Eine Weitergabe erfolgt nur bei:</p>
+          <ul class="list">
+            <li>Vertragserfüllung</li>
+            <li>gesetzlicher Pflicht</li>
+            <li>Einwilligung</li>
+            <li>Auftragsverarbeitung</li>
+          </ul>
+          <p>Keine Weitergabe für Werbezwecke.</p>
+        </div>
 
-      <div class="subcard">
-        <h3>12. Speicherdauer</h3>
-        <p>Daten werden nur so lange gespeichert, wie es für den jeweiligen Zweck nötig ist. Beratungsunterlagen können aufgrund gesetzlicher Pflichten bis zu 10 Jahre aufbewahrt werden.</p>
+        <div class="subcard">
+          <h3>12. Speicherdauer</h3>
+          <p>Daten werden nur so lange gespeichert, wie es für den jeweiligen Zweck nötig ist. Beratungsunterlagen können aufgrund gesetzlicher Pflichten bis zu 10 Jahre aufbewahrt werden.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- RECHTE / BESCHWERDE / SICHERHEIT -->
-  <section class="card fade">
-    <div class="grid">
-      <div class="subcard">
-        <h3>13. Ihre Rechte</h3>
-        <p>Sie haben jederzeit folgende Rechte:</p>
-        <ul class="list">
-          <li>Auskunft (Art. 15 DSGVO)</li>
-          <li>Berichtigung (Art. 16 DSGVO)</li>
-          <li>Löschung (Art. 17 DSGVO)</li>
-          <li>Einschränkung (Art. 18 DSGVO)</li>
-          <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
-          <li>Widerspruch (Art. 21 DSGVO)</li>
-          <li>Widerruf erteilter Einwilligungen</li>
-        </ul>
-        <p>Anfragen bitte an: <a href="mailto:Heiko.Haerter@dvag.de">Heiko.Haerter@dvag.de</a></p>
+  <section class="section fade">
+    <div class="card">
+      <div class="grid">
+        <div class="subcard">
+          <h3>13. Ihre Rechte</h3>
+          <p>Sie haben jederzeit folgende Rechte:</p>
+          <ul class="list">
+            <li>Auskunft (Art. 15 DSGVO)</li>
+            <li>Berichtigung (Art. 16 DSGVO)</li>
+            <li>Löschung (Art. 17 DSGVO)</li>
+            <li>Einschränkung (Art. 18 DSGVO)</li>
+            <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+            <li>Widerspruch (Art. 21 DSGVO)</li>
+            <li>Widerruf erteilter Einwilligungen</li>
+          </ul>
+          <p>Anfragen bitte an: <a href="mailto:Heiko.Haerter@dvag.de">Heiko.Haerter@dvag.de</a></p>
+        </div>
+
+        <div class="subcard">
+          <h3>14. Beschwerderecht</h3>
+          <p>Zuständige Datenschutzbehörde:<br>
+            Landesbeauftragter für den Datenschutz Baden-Württemberg<br>
+            Königstraße 10 a, 70173 Stuttgart</p>
+        </div>
+
+        <div class="subcard">
+          <h3>15. Datensicherheit</h3>
+          <p>Diese Website nutzt SSL-Verschlüsselung. Daten werden ausschließlich über gesicherte Verbindungen übertragen.</p>
+        </div>
       </div>
 
       <div class="subcard">
-        <h3>14. Beschwerderecht</h3>
-        <p>Zuständige Datenschutzbehörde:<br>
-          Landesbeauftragter für den Datenschutz Baden-Württemberg<br>
-          Königstraße 10 a, 70173 Stuttgart</p>
+        <h3>16. Aktualität</h3>
+        <p>Diese Datenschutzerklärung ist aktuell gültig und wird bei Bedarf angepasst.</p>
       </div>
-
-      <div class="subcard">
-        <h3>15. Datensicherheit</h3>
-        <p>Diese Website nutzt SSL-Verschlüsselung. Daten werden ausschließlich über gesicherte Verbindungen übertragen.</p>
-      </div>
-    </div>
-
-    <div class="subcard">
-      <h3>16. Aktualität</h3>
-      <p>Diese Datenschutzerklärung ist aktuell gültig und wird bei Bedarf angepasst.</p>
     </div>
   </section>
 
+  <hr class="divider" aria-hidden="true" />
+
+  <section class="section fade" aria-label="Footer">
+    <div class="footer">© <span id="yearNow">2026</span> Heiko Haerter · DVAG</div>
+  </section>
 </main>
 
-<footer class="fade">© <span id="yearNow"></span> Heiko Haerter · DVAG</footer>
-
 <script>
-/* Fade-in */
-const io=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:.18});
-document.querySelectorAll('.card, footer').forEach(el=>io.observe(el));
+document.documentElement.classList.remove('no-js');
+document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
 
-/* Year */
-document.getElementById('yearNow').textContent=new Date().getFullYear();
+/* Fade-in on view */
+(function(){
+  const els=[...document.querySelectorAll('.fade')];
+  const pref=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(pref || !('IntersectionObserver' in window)){ els.forEach(el=>el.classList.add('visible')); return; }
+  const io=new IntersectionObserver(ents=>{
+    ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+  },{threshold:.12, rootMargin:'0px 0px -10% 0px'});
+  els.forEach(el=>io.observe(el));
+})();
 </script>
-
 </body>
 </html>
