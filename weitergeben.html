@@ -4,17 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <title>2 Minuten – zeigt sofort, was heute wichtig ist.</title>
-<meta name="description" content="Kennst du jemanden mit „Ich müsste mal…“? Link weitergeben → 2 Minuten – zeigt sofort, was heute wichtig ist. Kein Verkauf. Deine Wertschätzung (25–150 € oder VIP) zählt ab Erstgespräch. Zero-Risk: kein Vorteil → 25 €.">
+<meta name="description" content="Kennst du jemanden mit „Ich müsste mal…“? 2 Minuten – zeigt sofort, was heute wichtig ist. 100 % anonym, kein Verkauf. Kein Vorteil? → 25 € Wertschätzung.">
 <link rel="canonical" href="https://heikohaerter.com/weitergeben">
 
 <meta property="og:site_name" content="Heiko Haerter – Persönliche Finanzbegleitung">
 <meta property="og:title" content="2 Minuten – zeigt sofort, was heute wichtig ist.">
-<meta property="og:description" content="Ein kurzer Blick, der sofort zeigt, wo man steht. Anonym & ohne irgendetwas zu müssen. Deine Wertschätzung zählt ab Erstgespräch.">
+<meta property="og:description" content="2-Minuten-Ampel: anonym, kein Verkauf. Zeigt sofort, was heute wichtig ist. Kein Vorteil? → 25 € Wertschätzung.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heikohaerter.com/weitergeben">
 <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
@@ -95,9 +94,10 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 /* ===== BUTTONS ===== */
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.95rem 1.5rem;border-radius:999px;font-weight:800;border:1px solid transparent;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease);background:rgba(255,255,255,.06);color:var(--text);white-space:normal}
 .btn:hover{transform:translateY(-1px)}
-.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#111;box-shadow:0 12px 28px rgba(200,164,75,.35)}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-soft));color:#111;box-shadow:0 16px 36px rgba(200,164,75,.42)} /* dominant */
 .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16)}
 .btn.small{padding:.6rem 1rem;min-height:44px}
+.btn:not(.btn-primary){opacity:.9} /* sekundärer CTA optisch leichter */
 @media (max-width:767.98px){ .btn,.btn-primary,.btn-ghost{width:100%} }
 @keyframes pulse{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(0) scale(1.02)}}
 .pulse{animation:pulse 1600ms ease-in-out 1}
@@ -180,7 +180,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         <ul class="hero-micro" style="margin:.2rem 0 0; padding-left:1.05rem">
           <li>2 Minuten – zeigt sofort, was heute wichtig ist</li>
           <li>100 % anonym · kein Verkauf</li>
-          <li>Kein Vorteil → 25 € (Zero-Risk)</li>
+          <li>Kein Vorteil? → 25 € Wertschätzung</li>
         </ul>
 
         <p class="hero-micro" style="margin:.5rem 0 0;"><strong>⭐ Über 250 Menschen haben damit schon Klarheit gewonnen.</strong></p>
@@ -194,7 +194,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
           ✨ In 7 Sekunden weitergeben
         </a>
 
-        <p class="hero-micro quote">„Danke, dass du mir das geschickt hast – ich hätte das schon viel früher gebraucht.“</p>
+        <p class="hero-micro quote">„Danke fürs Weiterschicken – das hätte ich früher gebraucht.“</p>
       </div>
 
       <div class="hero-media stack">
@@ -210,7 +210,12 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
 
         <picture>
           <img
-            src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png"
+            src="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1200"
+            srcset="
+              https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=720 720w,
+              https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=960 960w,
+              https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png?width=1400 1400w"
+            sizes="(min-width:1000px) 40vw, 92vw"
             alt="Weitergeben: 2 Minuten – anonym & ohne irgendetwas zu müssen"
             width="1200" height="900" loading="eager" fetchpriority="high" decoding="async">
         </picture>
@@ -223,7 +228,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
     <div class="wrap stack">
 
       <div class="premium-card">
-        <h3 id="s-title" style="margin:.2rem 0 .25rem">So geht’s in 10 Sekunden</h3>
+        <h3 id="s-title" style="margin:.2rem 0 .25rem">So geht’s in 10 Sekunden (ohne Erklären)</h3>
         <ol class="hero-micro" style="margin:.2rem 0 0; padding-left:1.2rem">
           <li>Deinen Vornamen eintragen</li>
           <li>„✨ Fertigen Text übernehmen“ tippen</li>
@@ -262,17 +267,17 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
         </div>
 
         <!-- Segment-Buttons (Choice Architecture) -->
-        <div class="inline" style="margin-top:.4rem">
-          <button class="btn seg-btn" data-seg="eltern">Eltern</button>
-          <button class="btn seg-btn" data-seg="kollegen">Kolleg:innen</button>
-          <button class="btn seg-btn" data-seg="freunde">Freunde</button>
-          <button class="btn seg-btn" data-seg="selbst">Selbstständige</button>
-          <button class="btn seg-btn" data-seg="partner">Partner</button>
-          <button class="btn seg-btn" data-seg="neutral">Für alle</button>
+        <div class="inline" style="margin-top:.4rem" role="tablist" aria-label="Texte nach Situation">
+          <button class="btn seg-btn" role="tab" aria-selected="true" data-seg="neutral">Für alle</button>
+          <button class="btn seg-btn" role="tab" aria-selected="false" data-seg="eltern">Eltern</button>
+          <button class="btn seg-btn" role="tab" aria-selected="false" data-seg="kollegen">Kolleg:innen</button>
+          <button class="btn seg-btn" role="tab" aria-selected="false" data-seg="freunde">Freunde</button>
+          <button class="btn seg-btn" role="tab" aria-selected="false" data-seg="selbst">Selbstständige</button>
+          <button class="btn seg-btn" role="tab" aria-selected="false" data-seg="partner">Partner</button>
         </div>
 
         <label for="refName" style="display:block;font-size:.92rem;color:#DDE3F4;margin:.6rem 0 .35rem">Dein Vorname (optional):</label>
-        <input id="refName" name="ref" inputmode="text" autocapitalize="words" autocomplete="nickname given-name" placeholder="z. B. Alex (Papa) / Dani – Chef">
+        <input id="refName" name="ref" inputmode="text" autocapitalize="words" autocomplete="off" placeholder="z. B. Alex (Papa) / Dani – Chef">
 
         <textarea rows="6" id="refText" inputmode="text" spellcheck="false"
           data-variants='{
@@ -329,10 +334,9 @@ header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.92);border-botto
       <div class="premium-card" style="border-left:4px solid var(--gold)">
         <h3 style="margin:0 0 .4rem;">Was NICHT passiert, wenn du empfiehlst</h3>
         <ul class="hero-micro" style="margin:0; padding-left:1.2rem;">
-          <li>🙅 Kein peinliches Verkaufsgespräch</li>
+          <li>🙅 Kein Verkaufsgespräch</li>
           <li>🤫 Du erfährst keine Details</li>
-          <li>📞 Ich melde mich nur, wenn sie wirklich will</li>
-          <li>💬 Empfehlung ohne Verpflichtung</li>
+          <li>📞 Rückmeldung nur auf Wunsch</li>
         </ul>
       </div>
 
@@ -548,18 +552,6 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   function getRefId(){ try{ return localStorage.getItem(KEY_REFID) || (localStorage.setItem(KEY_REFID,randomId()), localStorage.getItem(KEY_REFID)); }catch(_){ return randomId(); } }
   function sanitize(n){ return n ? n.replace(/[^a-z0-9]/gi,'').toLowerCase() : ''; }
 
-  function buildURL(){
-    const base=new URL('https://heikohaerter.com');
-    base.searchParams.set('utm_source','weitergeben');
-    base.searchParams.set('utm_medium','share');
-    base.searchParams.set('utm_campaign','check');
-    const rid=getRefId(); base.searchParams.set('rid', rid);
-    const alias=sanitize((name?.value||'').trim());
-    if(alias) base.searchParams.set('ref', alias+'.'+rid.slice(0,5));
-    return base.toString();
-  }
-
-  function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
   function detectSeg(){
     const raw=(name?.value||'').toLowerCase();
     if(/(papa|mama|vater|mutter|eltern)/.test(raw)) return 'eltern';
@@ -569,6 +561,22 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
     if(/(partner|ehefrau|ehemann|verlobt)/.test(raw)) return 'partner';
     return 'neutral';
   }
+
+  function buildURL(){
+    const base=new URL('https://heikohaerter.com');
+    base.searchParams.set('utm_source','weitergeben');
+    base.searchParams.set('utm_medium','share');
+    base.searchParams.set('utm_campaign','check');
+    const rid=getRefId(); base.searchParams.set('rid', rid);
+    const aliasRaw=(name?.value||'').trim();
+    const alias=sanitize(aliasRaw);
+    if(alias) base.searchParams.set('ref', alias+'.'+rid.slice(0,5));
+    base.searchParams.set('seg', detectSeg());
+    if(aliasRaw) base.searchParams.set('ref_name', aliasRaw);
+    return base.toString();
+  }
+
+  function variants(){ try{ return JSON.parse(area.getAttribute('data-variants')); }catch(_){ return {neutral:[]}; } }
   function pick(seg){ const sets=variants(); const pool=(sets[seg]||sets.neutral||[]); if(!pool.length) return ''; const i=Math.floor(Math.random()*pool.length); return pool[i]; }
   function ensureURL(text){ return /\bhttps?:\/\/\S+/i.test(text) ? text : (text.trim()+' '+buildURL()); }
   function setTextFrom(seg){ const tmpl=pick(seg||detectSeg()); if(!tmpl) return; area.value=tmpl.replace(/\{\{URL\}\}/g, buildURL()); updateLinks(); }
@@ -585,9 +593,14 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   name?.addEventListener('input', ()=> setTextFrom(), {passive:true});
   area?.addEventListener('input', updateLinks, {passive:true});
 
-  // Segment Buttons
+  // Segment Buttons + A11y state
   document.querySelectorAll('.seg-btn').forEach(b=>{
-    b.addEventListener('click', ()=>{ setTextFrom(b.getAttribute('data-seg')); window._bumpRefHalf?.(); });
+    b.addEventListener('click', ()=>{
+      setTextFrom(b.getAttribute('data-seg'));
+      document.querySelectorAll('.seg-btn').forEach(x=>x.setAttribute('aria-selected','false'));
+      b.setAttribute('aria-selected','true');
+      window._bumpRefHalf?.();
+    });
   });
 
   // Actions
@@ -616,7 +629,15 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   });
 
   document.getElementById('copyBtn')?.addEventListener('click', async ()=>{
-    try{ await navigator.clipboard.writeText(ensureURL(area.value)); }catch(_){ area.select(); document.execCommand && document.execCommand('copy'); }
+    const t = ensureURL(area.value);
+    try{
+      if(navigator.clipboard?.writeText){ await navigator.clipboard.writeText(t); }
+      else{
+        const ta=document.createElement('textarea');
+        ta.value=t; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      }
+    }catch(_){}
     window._bumpRefHalf?.();
   });
 
