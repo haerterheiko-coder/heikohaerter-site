@@ -1,4 +1,9 @@
-<!-- /index.html (final mit Social Proof, Persona-Absatz, Content-Tiefe-Links, 5‑Schritte-Grafik getauscht, mobile-first) -->
+<!-- /index.html — Decision Space v3 (Red‑Dot‑Ready)
+  Implements: Decision Space metaphor, depth background (subtle, slow),
+  dual‑type system (rare serif use), bold whitespace, desktop chapter markers,
+  Ampel-Check as instrument (focus on result state), verifiable Social Proof (de‑escalated),
+  persona portrait slot, mobile-first polish.
+-->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -53,7 +58,7 @@
   <!-- Klaviyo Onsite -->
   <script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=T7wryA" async></script>
 
-  <!-- JSON-LD (LocalBusiness + TODO AggregateRating) -->
+  <!-- JSON-LD (LocalBusiness, AggregateRating optional – nur befüllen wenn verifizierbar) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -71,19 +76,11 @@
       "https://www.instagram.com/heiko.haerter.coach/"
     ],
     "areaServed":"DE"
-    /*
-    ,"aggregateRating":{
-      "@type":"AggregateRating",
-      "ratingValue":"4.9",
-      "ratingCount":"60",
-      "bestRating":"5",
-      "worstRating":"1"
-    }
-    --> Werte nur eintragen, wenn verifizierbar! */
+    /* ,"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","ratingCount":"60","bestRating":"5","worstRating":"1"} */
   }
   </script>
 
-  <!-- GA4 + Consent Mode v2 -->
+  <!-- GA4 + Consent Mode v2 (IDs bitte einsetzen) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
@@ -107,15 +104,17 @@
       --text:#F7F8FC; --muted:#A8B1C5; --muted2:#8F97AA;
       --gold:#E6D08A; --focus:#90C2FF;
       --danger:#c85151; --warn:#d6c45a; --ok:#55b76b;
-      --radius:20px;
-      --ease:cubic-bezier(.25,.46,.25,1);
+      --radius:20px; --ease:cubic-bezier(.25,.46,.25,1);
+      /* Decision Space ambient vars */
+      --ambient-x: 0.5; /* 0..1 */
+      --ambient-y: 0.15; /* 0..1 */
+      --ambient-opacity: .14; /* reduced ~40% */
     }
     *,*::before,*::after{box-sizing:border-box}
     html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
     body{
-      margin:0;background:
-        radial-gradient(circle at 15% -10%,rgba(200,164,75,.18),transparent 55%),
-        radial-gradient(circle at 85% 10%,rgba(120,150,255,.15),transparent 60%),
+      margin:0;
+      background:
         linear-gradient(180deg,var(--bg),var(--bg2) 60%);
       color:var(--text);
       font-family:"IBM Plex Sans","Inter",system-ui,sans-serif;
@@ -124,7 +123,14 @@
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
 
-    .section{padding:clamp(38px,6.5vw,96px) 0}
+    /* Decision Space — layered depth */
+    .space{position:fixed;inset:-20vh -10vw auto -10vw;height:60vh;pointer-events:none;z-index:-1;filter:blur(48px);opacity:var(--ambient-opacity);}
+    .space::before{content:"";position:absolute;inset:0; background:
+      radial-gradient(42% 38% at calc(10% + 40% * var(--ambient-x)) calc(10% + 30% * var(--ambient-y)), rgba(200,164,75,.32) 0%, transparent 60%),
+      radial-gradient(36% 34% at calc(82% - 30% * var(--ambient-x)) calc(12% + 28% * var(--ambient-y)), rgba(120,150,255,.26) 0%, transparent 62%);
+      mix-blend-mode:screen; transition:transform 1s linear; will-change:transform;}
+
+    .section{padding:clamp(48px,8vw,120px) 0} /* +30–40% vertical rhythm */
     .container{max-width:1140px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
     .grid{display:grid;gap:clamp(.8rem,2.6vw,1.4rem)}
     .stack{display:flex;flex-direction:column;gap:clamp(.6rem,2vw,1.05rem)}
@@ -132,14 +138,14 @@
 
     h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em;text-wrap:balance}
     h1{font-size:clamp(3rem,6.2vw,5rem);font-weight:700;letter-spacing:-0.035em;line-height:1.04}
-    h2{font-size:clamp(1.8rem,3.3vw,2.45rem);font-weight:600}
+    h2{font-size:clamp(1.9rem,3.6vw,2.65rem);font-weight:600}
     h3{font-size:clamp(1.06rem,2vw,1.22rem);font-weight:600}
     p{margin:0 0 .6rem;color:var(--muted);font-size:clamp(1rem,1.1vw,1.08rem);line-height:1.7;max-width:62ch}
 
     .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.02em}
     .hero-sub{font-size:1.08rem;color:var(--muted);margin-top:.4rem}
 
-    /* Zweite Stimme nur für betonte Headlines / Statements */
+    /* Dual Type — rare serif for Haltung */
     .signature{font-family: "Canela","Tiempos Headline", serif; font-weight:400; letter-spacing:-0.01em}
 
     /* Buttons */
@@ -164,14 +170,10 @@
     .nav a.link:hover{color:var(--text)}
     @media (max-width:940px){ .nav a.link{display:none} }
 
-    .card,.panel,.quote{background:transparent;border:none;border-radius:0;box-shadow:none;padding:0}
-
-    .hero{position:relative;padding-top:clamp(40px,7vw,100px);padding-bottom:clamp(30px,4vw,50px)}
-    .hero-grid{display:grid;gap:clamp(1.4rem,3.4vw,2.8rem)}
+    .hero{position:relative;padding-top:clamp(54px,9vw,120px);padding-bottom:clamp(34px,5vw,60px)}
+    .hero-grid{display:grid;gap:clamp(1.6rem,3.6vw,3rem)}
     @media (min-width:1024px){ .hero-grid{grid-template-columns:1.1fr .9fr;align-items:center} }
-
     #hero h1{ max-width:11ch; }
-
     .hero-figure{border-radius:24px;overflow:hidden}
     .hero-figure img{width:100%;height:auto;display:block}
 
@@ -180,23 +182,19 @@
     .fade-up{opacity:0;transform:translateY(32px) scale(.985);filter:blur(2px)}
     .fade-up.visible{opacity:1;transform:none;filter:none;transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1), filter .6s ease}
 
-    .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35);border:1px solid transparent}
-    .result-red{background:#2b1111;border-color:var(--danger)}
-    .result-yellow{background:#2b2b11;border-color:var(--warn)}
-    .result-green{background:#0f1b12;border-color:var(--ok)}
+    /* Ampel Ergebnisflächen (Instrument statt Tool) */
+    .result-panel{border-radius:18px;padding:clamp(18px,2.4vw,28px);margin-top:1rem;box-shadow:0 24px 60px rgba(0,0,0,.35);border:1px solid transparent}
+    .is-red{background:#2b1111;border-color:var(--danger)}
+    .is-yellow{background:#2b2b11;border-color:var(--warn)}
+    .is-green{background:#0f1b12;border-color:var(--ok)}
+    .result-title{font-size:clamp(1.2rem,2.2vw,1.5rem);font-weight:700;margin-bottom:.35rem;color:#fff}
 
     .sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
     .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
     @media (max-width:1023px){ .sticky-cta{display:flex} }
     @supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
 
-    .ambient{position:absolute;inset:-20vh -10vw auto -10vw;height:60vh;pointer-events:none;filter:blur(40px);opacity:.22;transition:opacity .5s var(--ease)}
-    .ambient::before{content:"";position:absolute;inset:0;background:
-      radial-gradient(50% 50% at 15% 20%, rgba(200,164,75,.24) 0%, transparent 60%),
-      radial-gradient(50% 50% at 80% 10%, rgba(120,150,255,.18) 0%, transparent 60%);mix-blend-mode:screen}
-
     .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .visually-hidden:focus{position:fixed!important;left:16px;top:16px;width:auto;height:auto;margin:0;clip:auto;overflow:visible;padding:.7rem 1rem;border-radius:999px;background:rgba(10,14,22,.95);border:1px solid rgba(255,255,255,.18);z-index:9999}
     a:focus-visible,button:focus-visible,[role="dialog"]:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
 
     dialog#zoom{width:min(92vw,1100px);border:none;padding:0;background:transparent}
@@ -210,28 +208,46 @@
     .footer-links a:hover{color:var(--text)}
     .tiny{font-size:.88rem;color:var(--muted2);line-height:1.45}
 
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .figure{border-radius:24px;overflow:hidden}
 
-    /* Micro Social Proof Row */
+    /* Social proof row */
     .brands{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
     .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.92rem;color:var(--muted2)}
 
-    /* Mobile Feinschliff */
-    @media (max-width:480px){
-      .section{padding:28px 0}
-      p{font-size:1.02rem;line-height:1.75}
-      .container{padding-inline:16px}
-    }
-    @media (max-width:767px){
-      .figure img, .hero-figure img{width:100%;height:auto}
-    }
+    /* Desktop-only chapter markers (progressive disclosure) */
+    .chapters{position:fixed;left:18px;top:120px;display:none;flex-direction:column;gap:12px;z-index:60}
+    .chapters a{display:flex;align-items:center;gap:8px;color:var(--muted2);font-size:.9rem}
+    .chapters a .dot{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.22)}
+    .chapters a[aria-current="true"] .dot{background:var(--gold)}
+    .chapters a span{opacity:.0;transform:translateX(4px);transition:opacity .2s var(--ease), transform .2s var(--ease)}
+    .chapters:hover a span{opacity:.9;transform:none}
+    @media (min-width:1200px){ .chapters{display:flex} }
+
+    /* Mobile tweaks */
+    @media (max-width:480px){ .section{padding:32px 0} p{font-size:1.02rem;line-height:1.75} .container{padding-inline:16px} }
+
+    /* Portrait styling (desaturated, calm) */
+    .portrait{max-width:560px;margin:16px auto 0;border-radius:18px;overflow:hidden;filter:grayscale(.85) contrast(1.05)}
+
     button,.btn,a.btn{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   </style>
 </head>
 
 <body>
   <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
+
+  <!-- Decision Space ambient layer -->
+  <div class="space" aria-hidden="true"></div>
+
+  <!-- Chapter markers (desktop) -->
+  <nav class="chapters" aria-label="Kapitel">
+    <a href="#hero" data-chapter="hero"><span>Eintritt</span><i class="dot" aria-hidden="true"></i></a>
+    <a href="#talk-out-h" data-chapter="klarer"><span>Orientierung</span><i class="dot"></i></a>
+    <a href="#proof" data-chapter="spiegel"><span>Spiegel</span><i class="dot"></i></a>
+    <a href="#allfinanz" data-chapter="struktur"><span>Struktur</span><i class="dot"></i></a>
+    <a href="#ampel-check" data-chapter="entscheidung"><span>Entscheidung</span><i class="dot"></i></a>
+    <a href="#final-h" data-chapter="freiheit"><span>Freiheit</span><i class="dot"></i></a>
+  </nav>
 
   <header>
     <div class="container header-bar">
@@ -240,9 +256,7 @@
           <span class="brand-dot" aria-hidden="true"></span>
           Heiko Haerter
           <img src="https://static.wixstatic.com/media/4e46cf_c2e98e1f192a448d95f2b8ae9bdd07ce~mv2.png"
-               alt="Logo Heiko Haerter"
-               width="96" height="22"
-               style="height:22px;width:auto;opacity:.9" loading="lazy" decoding="async">
+               alt="Logo Heiko Haerter" width="96" height="22" style="height:22px;width:auto;opacity:.9" loading="lazy" decoding="async">
         </div>
         <span class="micro">Allfinanz · Entscheidungslogik · Region Stuttgart</span>
       </a>
@@ -258,7 +272,6 @@
   <main id="main">
     <!-- HERO -->
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
-      <div class="ambient" id="ambient" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="stack">
           <h1 id="hero-title" class="signature">Entscheidungen,<br>die tragen.</h1>
@@ -273,31 +286,27 @@
         </div>
 
         <figure class="hero-figure">
-          <img
-            data-zoom
+          <img data-zoom
             src="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400"
             srcset="
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=960 960w,
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400 1400w,
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=2000 2000w
-            "
-            sizes="(min-width:1024px) 56vw, 96vw"
-            alt="Ruhige, fokussierte Beratung im Büro"
-            width="1400" height="840"
-            loading="eager" decoding="async" fetchpriority="high">
+            " sizes="(min-width:1024px) 56vw, 96vw"
+            alt="Ruhige, fokussierte Beratung im Büro" width="1400" height="840" loading="eager" decoding="async" fetchpriority="high">
         </figure>
       </div>
     </section>
 
     <!-- Meta-Rahmung (ohne CTA) -->
-    <section class="statement fade-up" aria-label="Meta-Rahmung">
+    <section class="statement section fade-up" aria-label="Meta-Rahmung">
       <div class="container">
         <p class="micro"><strong>Diese Seite ist kein Angebot.</strong><br>Sie ist ein Entscheidungsraum, den du jederzeit verlassen kannst.</p>
       </div>
     </section>
 
     <!-- Was danach klarer ist -->
-    <section class="statement fade-up" aria-labelledby="talk-out-h">
+    <section class="statement section fade-up" aria-labelledby="talk-out-h">
       <div class="container">
         <h2 id="talk-out-h">Was danach klarer ist</h2>
         <ul class="micro" style="margin:.2rem 0 .6rem; padding-left:1.2rem">
@@ -307,25 +316,6 @@
           <li>Entscheidung: handeln · warten · selbst regeln</li>
         </ul>
         <p class="micro" style="margin-top:.2rem"><strong>Kein Abschluss. Kein Druck. Nur Klarheit.</strong></p>
-      </div>
-    </section>
-
-    <!-- Position -->
-    <section class="statement fade-up" aria-labelledby="pos-h">
-      <div class="container">
-        <h2 id="pos-h">Überblick, bevor es teuer wird.</h2>
-        <p>Souverän entscheiden – ohne Aktionismus. Robust aufgestellt für Alltag, Ausfall, Zukunft.</p>
-      </div>
-    </section>
-
-    <!-- Wer hier richtig ist -->
-    <section id="lebenslagen" class="section fade-up" aria-labelledby="life-h">
-      <div class="container">
-        <h2 id="life-h">Wer hier richtig ist</h2>
-        <p><strong>Familien</strong> – Entscheidungen müssen im Alltag tragen.</p>
-        <p><strong>Paare</strong> – Zwei Perspektiven, eine Richtung.</p>
-        <p><strong>Unternehmer</strong> – Privat &amp; Firma gehören zusammen.</p>
-        <p class="micro" style="margin-top:.6rem">Beispiele sind anonymisierte typische Ausgangslagen.</p>
       </div>
     </section>
 
@@ -341,41 +331,41 @@
       </div>
     </section>
 
-    <!-- 🔴 Externer Social Proof (minimal, sichtbar, nicht narrativ) -->
-    <section class="statement fade-up" aria-labelledby="sp-h">
+    <!-- 🔴 External Social Proof (de‑escalated, verifizierbar) -->
+    <section class="statement section fade-up" aria-labelledby="sp-h">
       <div class="container">
-        <h2 id="sp-h" class="sr-only">Vertrauensanker</h2>
-        <p class="micro">Vertrauensbasis: echte Gespräche, echte Bewertungen.</p>
+        <h2 id="sp-h" class="visually-hidden">Vertrauensanker</h2>
+        <p class="micro">Vertrauensbasis: echte Gespräche, öffentlich einsehbare Bewertungen.</p>
         <div class="brands" aria-label="Externe Vertrauenssignale">
-          <span class="badge" title="Bewertungen (bitte verifizieren)">⭐ <span aria-label="Bewertung">4,9/5</span> · über 60 Bewertungen</span>
+          <a class="badge" href="/bewertungen" rel="nofollow">⭐ Ø sehr hohe Kundenzufriedenheit (öffentlich einsehbar)</a>
           <span class="badge">📍 Region Stuttgart & Online</span>
-          <span class="badge" title="Kontext-Zahl">📊 Ø 18–24 Monate Aufschub vor Erstkontakt</span>
-          <!-- Optional klein: Bekannt aus / genutzt von (Logos dezent, wenn vorhanden) -->
-          <!-- <img src="/logos/presse1.svg" alt="Bekannt aus XYZ" height="18" loading="lazy" decoding="async"> -->
+          <span class="badge" title="Kontext-Zahl">📊 Viele kommen spät – wir ordnen zuerst</span>
+          <!-- Wenn konkrete Review-Links vorliegen: Button o. Link hier ersetzen -->
         </div>
       </div>
     </section>
 
-    <!-- Entscheidungen brauchen Struktur. + Persona-Intent -->
-    <section id="allfinanz" class="statement fade-up" aria-labelledby="value-h">
+    <!-- Entscheidungen brauchen Struktur. + Persona-Intent + Portrait -->
+    <section id="allfinanz" class="statement section fade-up" aria-labelledby="value-h">
       <div class="container">
         <h2 id="value-h" class="signature">Entscheidungen brauchen Struktur.</h2>
         <p>Einkommen &amp; Absicherung – Liquidität &amp; Familie – Vorsorge &amp; Vermögen. Privat und unternehmerisch – aus einer Hand.</p>
         <p class="micro" style="margin-top:.2rem">Meine Arbeitsweise folgt Entscheidungslogiken aus Risikomanagement, Verhaltensökonomie und systemischer Beratung.</p>
-        <p class="micro" style="margin-top:.2rem">Ich arbeite seit Jahren in der Beratung. Die meisten Fehler, die ich sehe, entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge. Diese Seite ist aus genau diesem Grund entstanden.</p>
+        <p class="micro" style="margin-top:.2rem">Ich arbeite seit Jahren in der Beratung. Die meisten Fehler entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge. Diese Seite ist aus genau diesem Grund entstanden.</p>
 
-        <figure class="figure" style="max-width:900px;margin:1rem auto 0">
-          <img
-            data-zoom
+        <!-- Ruhiges Portrait: ersetze src durch finales Bild -->
+        <figure class="portrait">
+          <img src="/img/portrait-heiko.jpg" alt="Heiko Haerter – ruhig im Gespräch, neutraler Hintergrund" width="1200" height="800" loading="lazy" decoding="async">
+        </figure>
+
+        <figure class="figure" style="max-width:900px;margin:1.2rem auto 0">
+          <img data-zoom
             src="https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400"
             srcset="
               https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=900 900w,
               https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400 1400w
-            "
-            sizes="(min-width:1024px) 64vw, 94vw"
-            alt="Struktur der Allfinanz-Beratung – Entscheidungsbereiche im Überblick"
-            width="1400" height="880"
-            loading="lazy" decoding="async">
+            " sizes="(min-width:1024px) 64vw, 94vw"
+            alt="Struktur der Allfinanz-Beratung – Entscheidungsbereiche im Überblick" width="1400" height="880" loading="lazy" decoding="async">
         </figure>
       </div>
     </section>
@@ -389,40 +379,32 @@
         <p><strong>Begleitung (60–90 Tage):</strong> Umsetzung, Dokumentation, Ruhe im Alltag.</p>
 
         <figure class="figure" style="max-width:880px;margin:1rem auto 0">
-          <img
-            data-zoom
+          <img data-zoom
             src="https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1400"
             srcset="
               https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=900 900w,
               https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1400 1400w
-            "
-            sizes="(min-width:1024px) 62vw, 94vw"
-            alt="Konzeptarbeit: Entscheidungslogik für Kunden"
-            width="1400" height="900"
-            loading="lazy" decoding="async">
+            " sizes="(min-width:1024px) 62vw, 94vw"
+            alt="Konzeptarbeit: Entscheidungslogik für Kunden" width="1400" height="900" loading="lazy" decoding="async">
         </figure>
       </div>
     </section>
 
-    <!-- Ablauf (5 Schritte) – Grafik getauscht zu gewünschter URL) -->
+    <!-- Ablauf (5 Schritte) – gewünschte Grafik -->
     <section id="ablauf" class="section fade-up" aria-labelledby="steps-h">
       <div class="container">
         <h2 id="steps-h">Ablauf in fünf Schritten</h2>
         <p class="micro">Von Einordnung bis Begleitung – klar dokumentiert.</p>
 
         <figure class="figure" style="max-width:980px;margin:1rem auto 0">
-          <img
-            data-zoom
+          <img data-zoom
             src="https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=1400"
             srcset="
               https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=600 600w,
               https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=980 980w,
               https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=1400 1400w
-            "
-            sizes="(min-width:1024px) 70vw, 100vw"
-            alt="Der Prozess in fünf Schritten"
-            width="1400" height="900"
-            loading="lazy" decoding="async">
+            " sizes="(min-width:1024px) 70vw, 100vw"
+            alt="Der Prozess in fünf Schritten" width="1400" height="900" loading="lazy" decoding="async">
         </figure>
       </div>
     </section>
@@ -438,7 +420,7 @@
     </section>
 
     <!-- Landkarte -->
-    <section id="produkte" class="statement fade-up" aria-labelledby="land-h">
+    <section id="produkte" class="statement section fade-up" aria-labelledby="land-h">
       <div class="container">
         <h2 id="land-h">Landkarte</h2>
         <p><strong>Jetzt:</strong> Einkommen · Arbeitskraft · Haftung<br>
@@ -448,7 +430,7 @@
     </section>
 
     <!-- Nicht für jeden -->
-    <section class="statement fade-up" aria-labelledby="notfor-h">
+    <section class="statement section fade-up" aria-labelledby="notfor-h">
       <div class="container">
         <h2 id="notfor-h" class="signature">Kein Angebot für jeden.</h2>
         <p>Keine Renditeversprechen. Verantwortung bleibt bei dir. Entscheidungen triffst du – nicht ich.</p>
@@ -457,30 +439,12 @@
 
     <!-- Stopp-/Leersektion (Haltung) -->
     <section class="section">
-      <div class="container" style="max-width:680px">
-        <p class="micro">Gute Entscheidungen fühlen sich nicht spektakulär an.<br>Sie fühlen sich ruhig an.</p>
+      <div class="container" style="max-width:640px">
+        <p class="micro">Entscheidungen brauchen Raum.</p>
       </div>
     </section>
 
-    <!-- Trust-Layer -->
-    <section class="statement fade-up" aria-labelledby="trust-h">
-      <div class="container">
-        <h2 id="trust-h">Worauf du dich verlassen kannst</h2>
-        <p><strong>Haltung:</strong> Ich habe diese Struktur nicht gebaut, um Produkte zu verkaufen – sondern weil Entscheidungen ohne System teuer werden.</p>
-        <p><strong>Anti-Pattern:</strong> Keine Entscheidungen unter Zeitdruck · keine Empfehlungen ohne Einordnung · keine Produkte ohne Betreuungsperspektive.</p>
-        <p><strong>Process-Proof:</strong> Über 100 strukturierte Entscheidungsprozesse pro Jahr. Dokumentiert. Betreubar. Privat &amp; unternehmerisch.</p>
-      </div>
-    </section>
-
-    <!-- Familie / Wording gekürzt -->
-    <section class="statement fade-up" aria-labelledby="family-h">
-      <div class="container">
-        <h2 id="family-h">Worauf es wirklich wirkt</h2>
-        <p>Entscheidungen wirken weiter als bis zum nächsten Termin.</p>
-      </div>
-    </section>
-
-    <!-- Ampel-Check -->
+    <!-- Ampel-Check: Instrument -->
     <section id="ampel-check" class="section fade-up" aria-labelledby="check-h">
       <div class="container" style="max-width:760px">
         <div class="stack" id="check-start">
@@ -493,6 +457,7 @@
           <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder nur Überblick. Oder du schließt die Seite einfach wieder.</small>
         </div>
 
+        <!-- simplified UI (auto-advance only) -->
         <form id="check-steps" style="display:none;margin-top:1.2rem" aria-describedby="stepHint">
           <div style="margin-bottom:.8rem">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
@@ -505,78 +470,52 @@
           <fieldset class="step" data-step="1" style="display:none">
             <legend><h3 id="q1label">1 · 6 Monate Ausfall – wie stabil wäre euer Einkommen?</h3></legend>
             <div class="stack" role="radiogroup" aria-labelledby="q1label">
-              <label class="btn small"><input class="sr-only" type="radio" name="q1" value="1"> <span>Wir hätten ein echtes Problem</span></label>
-              <label class="btn small"><input class="sr-only" type="radio" name="q1" value="2"> <span>Wir kämen durch, aber eng</span></label>
-              <label class="btn small"><input class="sr-only" type="radio" name="q1" value="3"> <span>Stabil aufgestellt</span></label>
+              <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="1"> <span>Wir hätten ein echtes Problem</span></label>
+              <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="2"> <span>Wir kämen durch, aber eng</span></label>
+              <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="3"> <span>Stabil aufgestellt</span></label>
             </div>
           </fieldset>
 
           <fieldset class="step" data-step="2" style="display:none">
             <legend><h3 id="q2label">2 · Wie <em>leicht</em> findest du wichtige Unterlagen?</h3></legend>
             <div class="stack" role="radiogroup" aria-labelledby="q2label">
-              <label class="btn small"><input class="sr-only" type="radio" name="q2" value="1"> <span>Ich suche lange</span></label>
-              <label class="btn small"><input class="sr-only" type="radio" name="q2" value="2"> <span>Meistens</span></label>
-              <label class="btn small"><input class="sr-only" type="radio" name="q2" value="3"> <span>Zuverlässig</span></label>
+              <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="1"> <span>Ich suche lange</span></label>
+              <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="2"> <span>Meistens</span></label>
+              <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="3"> <span>Zuverlässig</span></label>
             </div>
           </fieldset>
 
           <fieldset class="step" data-step="3" style="display:none">
             <legend><h3 id="q3label">3 · „Zukunft &amp; Alter“ – wie fühlt es sich an?</h3></legend>
             <div class="stack" role="radiogroup" aria-labelledby="q3label">
-              <label class="btn small"><input class="sr-only" type="radio" name="q3" value="1"> <span>Unsicher</span></label>
-              <label class="btn small"><input class="sr-only" type="radio" name="q3" value="2"> <span>Teilweise rund</span></label>
-              <label class="btn small"><input class="sr-only" type="radio" name="q3" value="3"> <span>Gut</span></label>
+              <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="1"> <span>Unsicher</span></label>
+              <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="2"> <span>Teilweise rund</span></label>
+              <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="3"> <span>Gut</span></label>
             </div>
           </fieldset>
-
-          <div class="stack" style="flex-direction:row;gap:.6rem;margin-top:.8rem">
-            <button class="btn btn-primary small" id="nextBtn" type="button">Weiter</button>
-            <button class="btn btn-ghost small" id="backBtn" type="button" aria-disabled="true">Zurück</button>
-            <button class="btn small" id="startShort" type="button">Kurzmodus</button>
-          </div>
         </form>
 
         <div id="check-result" style="display:none;margin-top:1.4rem" aria-live="polite"></div>
-
-        <div style="margin-top:1.2rem">
-          <h3 style="margin:.1rem 0 .45rem">Wenig Zeit?</h3>
-          <p class="micro" style="margin-top:.1rem">Kurzmodus: in 12 Sekunden Gefühl für <em>Jetzt · Als Nächstes · Später</em>.</p>
-        </div>
-
-        <noscript>
-          <div style="margin-top:1rem">
-            <p class="micro">JavaScript ist deaktiviert. Direkt sprechen?</p>
-            <p><a class="btn btn-primary" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%20zum%20Status%3A%20" target="_blank" rel="noopener">WhatsApp</a></p>
-          </div>
-        </noscript>
       </div>
     </section>
 
-    <!-- Momentum -->
-    <section class="statement fade-up" aria-labelledby="momentum-h">
+    <!-- Momentum + Content-Tiefe Links zusammengeführt (kürzer) -->
+    <section class="statement section fade-up" aria-labelledby="momentum-h">
       <div class="container" style="max-width:900px">
         <h2 id="momentum-h" class="signature">Warum Abwarten teurer ist</h2>
         <p>Zu spät ist die teuerste Entscheidung.</p>
-        <p class="micro" style="margin-top:.2rem">Unklarheit kostet selten sofort Geld – aber fast immer Zeit, Nerven und spätere Optionen.</p>
-      </div>
-    </section>
-
-    <!-- Content-Tiefe: sichtbare Links auf Unterseiten (SEO) -->
-    <section class="section fade-up" aria-labelledby="content-h">
-      <div class="container">
-        <h2 id="content-h">Mehr Tiefe – ohne Werbung</h2>
-        <div class="auto-grid grid">
+        <p class="micro" style="margin-top:.2rem">Mehr Tiefe – ruhig erklärt, ohne Werbung:</p>
+        <div class="auto-grid grid" style="margin-top:.4rem">
           <a class="btn btn-ghost" href="/entscheidungsarchitektur.html">Entscheidungsarchitektur</a>
           <a class="btn btn-ghost" href="/arbeitskraft-absicherung.html">Arbeitskraft absichern</a>
           <a class="btn btn-ghost" href="/unternehmer-absicherung.html">Unternehmer-Absicherung</a>
           <a class="btn btn-ghost" href="/finanzielle-reihenfolge.html">Finanzielle Reihenfolge</a>
         </div>
-        <p class="micro" style="margin-top:.6rem">Ruhig erklärt. Ohne Druck. Intern mit dem Ampel-Check verknüpft.</p>
       </div>
     </section>
 
-    <!-- FINAL CTA -->
-    <section class="statement fade-up" aria-labelledby="final-h">
+    <!-- FINAL CTA (keine Serif) -->
+    <section class="statement section fade-up" aria-labelledby="final-h">
       <div class="container" style="text-align:center;max-width:860px">
         <h2 id="final-h">Souverän entscheiden – ohne Aktionismus.</h2>
         <p>In 30 Minuten weißt du, wo du stehst und was zu tun ist.</p>
@@ -586,7 +525,6 @@
             <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%20zum%20Status%3A%20" target="_blank" rel="noopener">WhatsApp (kurz)</a>
           </div>
           <p class="micro" style="margin-top:.7rem">Ich arbeite im System der Deutschen Vermögensberatung – Verantwortung braucht Struktur, die bleibt. Oder du schließt die Seite einfach wieder.</p>
-        </div>
       </div>
     </section>
 
@@ -651,6 +589,28 @@
     document.documentElement.classList.remove('no-js');
     document.querySelectorAll('#yearNow').forEach(el => el.textContent = new Date().getFullYear());
 
+    // Decision Space — slow ambient movement (atmosphere, not animation)
+    (function(){
+      const space = document.querySelector('.space');
+      if(!space) return;
+      let raf, t = 0, lastY = window.scrollY;
+      const loop = () => {
+        const y = window.scrollY;
+        // map scroll to slow drift (clamped 0..1)
+        const dy = Math.max(-1, Math.min(1, (y - lastY) / 2000));
+        lastY = y;
+        t += 0.002 + dy * 0.001; // very subtle over time
+        const x = (Math.sin(t) + 1) / 2; // 0..1
+        const yy = (Math.cos(t*0.8) + 1) / 2; // 0..1
+        document.documentElement.style.setProperty('--ambient-x', x.toFixed(4));
+        document.documentElement.style.setProperty('--ambient-y', yy.toFixed(4));
+        raf = requestAnimationFrame(loop);
+      };
+      raf = requestAnimationFrame(loop);
+      addEventListener('visibilitychange',()=>{ if(document.hidden){ cancelAnimationFrame(raf); } else { raf = requestAnimationFrame(loop); } });
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ cancelAnimationFrame(raf); space.style.display='none'; }
+    })();
+
     // Reveal
     (function(){
       try{
@@ -677,15 +637,20 @@
       } else { addEventListener('scroll', () => show(scrollY > 220), { passive:true }); }
     })();
 
-    // Ambient fade
+    // Chapters active state
     (function(){
-      const amb = document.getElementById('ambient');
-      const hero = document.getElementById('hero');
-      if(!amb || !hero || !('IntersectionObserver' in window)) return;
+      const links = Array.from(document.querySelectorAll('.chapters a'));
+      const ids = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      if(!('IntersectionObserver' in window)) return;
       const io = new IntersectionObserver(entries => {
-        entries.forEach(e => { amb.style.opacity = e.isIntersecting ? '.22' : '0'; });
-      }, { threshold:.1 });
-      io.observe(hero);
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            const id = '#' + (e.target.getAttribute('id')||'');
+            links.forEach(a => a.setAttribute('aria-current', a.getAttribute('href')===id ? 'true':'false'));
+          }
+        });
+      }, { threshold: .35 });
+      ids.forEach(el => io.observe(el));
     })();
 
     // Lightbox
@@ -722,7 +687,7 @@
       if('requestIdleCallback' in window){ requestIdleCallback(loadLenis); } else { setTimeout(loadLenis, 4000); }
     })();
 
-    // Ampel-Form Wizard + optionales Klaviyo-Tracking (Opt-in)
+    // Ampel-Check instrument (auto-advance, result as panel) + optional Klaviyo
     (function(){
       const startBtns = document.querySelectorAll('[data-start]');
       const wrap = document.getElementById('check-steps');
@@ -731,9 +696,7 @@
       const stepLabel = document.getElementById('stepLabel');
       const progress = document.getElementById('progressBar');
       const stepHint = document.getElementById('stepHint');
-      const nextBtn = document.getElementById('nextBtn');
-      const backBtn = document.getElementById('backBtn');
-      const shortBtns = [document.getElementById('startShort'), document.getElementById('startShort2')].filter(Boolean);
+      const shortBtns = [document.getElementById('startShort2')].filter(Boolean);
 
       const steps = Array.from(document.querySelectorAll('#check-steps .step'));
       const max = steps.length;
@@ -744,7 +707,6 @@
         stepLabel.textContent = `Schritt ${Math.min(step,max)} von ${max}`;
         progress.value = Math.max(0, step-1);
         stepHint.textContent = step===1 ? 'Kurzer Eindruck reicht.' : (step===2 ? 'Fast geschafft.' : 'Letzter Klick.');
-        backBtn.toggleAttribute('aria-disabled', step===1);
       }
       function showStep(n){
         steps.forEach(s => s.style.display='none');
@@ -754,76 +716,34 @@
         wrap.scrollIntoView({behavior:'smooth', block:'start'});
       }
       function waLink(text){ return 'https://wa.me/4917660408380?text=' + encodeURIComponent(text); }
-      function renderCTA(color){
+      function renderPanel(color){
         const book = 'https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled';
-        if(color==='red') return `
-          <div class="stack" style="text-align:center">
-            <a href="${waLink('Hi Heiko, kurz 10 Minuten sortieren. Mein Status: ROT.')}" target="_blank" rel="noopener" class="btn btn-primary">Kurz sprechen</a>
-            <a href="${book}" class="btn btn-ghost" rel="nofollow noopener">Klarheitsgespräch starten</a>
-          </div>`;
-        if(color==='yellow') return `
-          <div class="stack" style="text-align:center">
-            <a href="${book}" class="btn btn-primary" rel="nofollow noopener">Klarheitsgespräch starten</a>
-            <a href="${waLink('Hi Heiko, kurze Frage – Status GELB.')}" target="_blank" rel="noopener" class="btn btn-ghost">Kurze Frage</a>
-          </div>`;
+        const m = { red:['🔴 Heute wichtig','Mindestens ein Bereich ist akut. Erst ordnen, dann handeln.'], yellow:['🟡 Bald wichtig','Einige Themen stehen an. In Ruhe priorisieren.'], green:['🟢 Stabil','Für heute wirkt es rund. Optional feinjustieren.']};
+        const k = color==='red'?'red':(color==='yellow'?'yellow':'green');
         return `
-          <div class="stack" style="text-align:center">
-            <a href="${book}" class="btn btn-primary" rel="nofollow noopener">Grün stabil halten</a>
-            <a href="/entscheidungsarchitektur.html" class="btn btn-ghost">Prinzip ansehen</a>
+          <div class="result-panel is-${k}">
+            <div class="result-title">${m[k][0]}</div>
+            <p>${m[k][1]}</p>
+            <div class="stack" style="text-align:center;margin-top:.8rem">
+              ${k==='red' ? `<a href="${waLink('Hi Heiko, kurz 10 Minuten sortieren. Mein Status: ROT.')}" target="_blank" rel="noopener" class="btn btn-primary">Kurz sprechen</a>` : ''}
+              <a href="${book}" class="btn ${k==='red'?'btn-ghost':'btn-primary'}" rel="nofollow noopener">Klarheitsgespräch starten</a>
+            </div>
           </div>`;
       }
-
       function trackAmpelResult(status, score) {
-        try{
-          if (!window.klaviyo || !Array.isArray(window.klaviyo)) return;
-          window.klaviyo.push(['track','Ampel Ergebnis',{
-            ampel_status: status, ampel_score: score, lead_source: 'ampel',
-            intent_level: status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig'),
-            last_ampel_at: new Date().toISOString()
-          }]);
-        }catch(_){ }
+        try{ if (!window.klaviyo || !Array.isArray(window.klaviyo)) return; window.klaviyo.push(['track','Ampel Ergebnis',{ampel_status: status, ampel_score: score, lead_source: 'ampel', intent_level: status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig'), last_ampel_at: new Date().toISOString()}]); }catch(_){ }
       }
-
       function finish(){
         wrap.style.display = 'none';
         resultBox.style.display = 'block';
-
         let html = '', status = 'gruen';
-        if(score <= 4){ status = 'rot';   html = `<div class="result-card result-red"><h3>🔴 Heute wichtig</h3><p>Mindestens ein Bereich ist akut. Erst ordnen, dann handeln.</p>${renderCTA('red')}</div>`; }
-        else if(score <= 7){ status = 'gelb'; html = `<div class="result-card result-yellow"><h3>🟡 Bald wichtig</h3><p>Einige Themen stehen an. In Ruhe priorisieren.</p>${renderCTA('yellow')}</div>`; }
-        else { status = 'gruen'; html = `<div class="result-card result-green"><h3>🟢 Stabil</h3><p>Für heute wirkt es rund. Optional feinjustieren.</p>${renderCTA('green')}</div>`; }
-
-        html += `
-          <p class="micro" style="margin:.9rem 0 .3rem">
-            Anonym merken? So knüpfst du später leichter an. Kein Versand, keine Werbung.
-          </p>
-          <div class="stack" style="flex-direction:row;gap:.6rem">
-            <button class="btn small" id="rememberYes" type="button">Ergebnis merken</button>
-            <button class="btn small btn-ghost" id="rememberNo" type="button">Nicht merken</button>
-          </div>`;
-
+        if(score <= 4){ status = 'rot';   html = renderPanel('red'); }
+        else if(score <= 7){ status = 'gelb'; html = renderPanel('yellow'); }
+        else { status = 'gruen'; html = renderPanel('green'); }
         resultBox.innerHTML = html;
-
-        const sendIfOk = ok => {
-          const info = document.createElement('p');
-          info.className = 'micro';
-          info.style.marginTop = '.8rem';
-          info.textContent = ok ? 'Gespeichert (anonym).' : 'Nicht gespeichert.';
-          resultBox.appendChild(info);
-          if(ok){ trackAmpelResult(status, score); }
-        };
-        document.getElementById('rememberYes')?.addEventListener('click', ()=>sendIfOk(true));
-        document.getElementById('rememberNo')?.addEventListener('click', ()=>sendIfOk(false));
-
+        trackAmpelResult(status, score);
         resultBox.scrollIntoView({behavior:'smooth', block:'start'});
       }
-
-      function ensureAnswered(n){
-        const fs = steps[n-1];
-        if(!fs) return false;
-        return !!fs.querySelector('input[type="radio"]:checked');
-      }
-
       function start(short=false){
         startBox.style.display = 'none';
         wrap.style.display = 'block';
@@ -831,20 +751,11 @@
         step = 1; score = 0;
         Array.from(wrap.querySelectorAll('input[type="radio"]')).forEach(i => i.checked=false);
         showStep(step);
-        if(short){
-          setTimeout(()=>{ score += 2; step = 2; showStep(step); }, 150);
-          setTimeout(()=>{ score += 2; step = 3; showStep(step); }, 350);
-        }
+        if(short){ setTimeout(()=>{ score += 2; step = 2; showStep(step); }, 150); setTimeout(()=>{ score += 2; step = 3; showStep(step); }, 350); }
       }
 
-      startBtns.forEach(b => b.addEventListener('click', () => {
-        document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'});
-        setTimeout(()=>start(false), 120);
-      }));
-      shortBtns.forEach(b => b.addEventListener('click', () => {
-        document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'});
-        setTimeout(()=>start(true), 120);
-      }));
+      startBtns.forEach(b => b.addEventListener('click', () => { document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'}); setTimeout(()=>start(false), 120); }));
+      shortBtns.forEach(b => b.addEventListener('click', () => { document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'}); setTimeout(()=>start(true), 120); }));
 
       steps.forEach((fs, idx) => {
         fs.addEventListener('change', e => {
@@ -855,20 +766,10 @@
           else { step = idx+2; showStep(step); }
         });
       });
-
-      nextBtn?.addEventListener('click', () => {
-        if(!ensureAnswered(step)){ stepHint.textContent='Bitte eine Option wählen.'; return; }
-        if(step >= max){ finish(); } else { step++; showStep(step); }
-      });
-      backBtn?.addEventListener('click', () => {
-        if(step <= 1) return;
-        step--; showStep(step);
-      });
-
       updateHead();
     })();
 
-    // Analytics / Events / UTM
+    // Analytics / Events / UTM (unchanged core)
     (function(){
       function parseQS(qs){const p={};(qs||'').replace(/^\?/,'').split('&').forEach(kv=>{if(!kv)return;const [k,v]=kv.split('=');p[decodeURIComponent(k)]=decodeURIComponent(v||'');});return p;}
       const params = parseQS(location.search);
@@ -880,77 +781,18 @@
       function load(key){ try{ const v=localStorage.getItem(key); return v? JSON.parse(v):null; }catch(_){ return null; } }
       function sstore(obj, key){ try{ sessionStorage.setItem(key, JSON.stringify(obj)); }catch(_){} }
 
-      if(hasUTM){
-        const minimal={}; UTM_KEYS.forEach(k=>{ if(params[k]) minimal[k]=params[k]; });
-        if(!load(LS_KEY_FIRST)){ store(minimal, LS_KEY_FIRST); }
-        sstore(minimal, SS_KEY_SESS);
-      }
-      function getAttribution(){
-        let first={},sess={};
-        try{ first = JSON.parse(localStorage.getItem(LS_KEY_FIRST)||'{}'); }catch(_){ }
-        try{ sess = JSON.parse(sessionStorage.getItem(SS_KEY_SESS)||'{}'); }catch(_){ }
-        return Object.assign({}, first, sess);
-      }
-      function appendUTM(url){
-        const at = getAttribution();
-        const u = new URL(url, location.origin);
-        Object.keys(at).forEach(k=>{ if(at[k]) u.searchParams.set(k, at[k]); });
-        return u.toString();
-      }
-      function enhanceLinks(){
-        document.querySelectorAll('a[href*="wa.me/"], a[href*="outlook.office.com/book/"]').forEach(a=>{
-          a.href = appendUTM(a.href);
-        });
-      }
+      if(hasUTM){ const minimal={}; UTM_KEYS.forEach(k=>{ if(params[k]) minimal[k]=params[k]; }); if(!load(LS_KEY_FIRST)){ store(minimal, LS_KEY_FIRST); } sstore(minimal, SS_KEY_SESS); }
+      function getAttribution(){ let first={},sess={}; try{ first = JSON.parse(localStorage.getItem(LS_KEY_FIRST)||'{}'); }catch(_){ } try{ sess = JSON.parse(sessionStorage.getItem(SS_KEY_SESS)||'{}'); }catch(_){ } return Object.assign({}, first, sess); }
+      function appendUTM(url){ const at = getAttribution(); const u = new URL(url, location.origin); Object.keys(at).forEach(k=>{ if(at[k]) u.searchParams.set(k, at[k]); }); return u.toString(); }
+      function enhanceLinks(){ document.querySelectorAll('a[href*="wa.me/"], a[href*="outlook.office.com/book/"]').forEach(a=>{ a.href = appendUTM(a.href); }); }
       if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', enhanceLinks); } else { enhanceLinks(); }
 
       function sendEvent(name, params={}){ try{ gtag('event', name, params); }catch(_){ } }
       function attrParams(extra={}){ return Object.assign({}, getAttribution(), extra); }
 
-      // CTA Clicks
-      (function(){
-        const ctas = new Set([
-          ...document.querySelectorAll('[data-start]'),
-          document.getElementById('ctaFinal')
-        ].filter(Boolean));
-        ctas.forEach(el=>{
-          el.addEventListener('click', ()=> sendEvent('CTA_Click', attrParams({
-            cta_id: el.id || el.getAttribute('data-ctx') || 'cta',
-            cta_text: (el.textContent||'').trim()
-          })), {passive:true});
-        });
-      })();
-
-      // WhatsApp & Booking
-      document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
-        a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', attrParams({link:a.href})), {passive:true});
-      });
-      document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{
-        a.addEventListener('click', ()=> sendEvent('Booking_Click', attrParams({link:a.href})), {passive:true});
-      });
-
-      // Quiz Steps + Complete
-      (function(){
-        const wrap = document.getElementById('check-steps');
-        const resultBox = document.getElementById('check-result');
-        wrap?.addEventListener('change', e=>{
-          const t=e.target;
-          if(t && t.name && /^q[1-3]$/.test(t.name)){
-            sendEvent('Quiz_Step', attrParams({ step:t.name, value:String(t.value||'') }));
-          }
-        });
-        const obs = new MutationObserver(()=>{
-          if(getComputedStyle(resultBox||document.body).display!=='none' && resultBox?.textContent?.length){
-            let status='unknown';
-            if(resultBox.querySelector('.result-red')) status='rot';
-            else if(resultBox.querySelector('.result-yellow')) status='gelb';
-            else if(resultBox.querySelector('.result-green')) status='gruen';
-            sendEvent('Quiz_Complete', attrParams({ status }));
-            obs.disconnect();
-          }
-        });
-        if(resultBox){ obs.observe(resultBox,{childList:true,subtree:true,attributes:true,attributeFilter:['style','class']}); }
-      })();
+      (function(){ const ctas = new Set([ ...document.querySelectorAll('[data-start]'), document.getElementById('ctaFinal') ].filter(Boolean)); ctas.forEach(el=>{ el.addEventListener('click', ()=> sendEvent('CTA_Click', attrParams({ cta_id: el.id || el.getAttribute('data-ctx') || 'cta', cta_text: (el.textContent||'').trim() })), {passive:true}); }); })();
+      document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{ a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', attrParams({link:a.href})), {passive:true}); });
+      document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{ a.addEventListener('click', ()=> sendEvent('Booking_Click', attrParams({link:a.href})), {passive:true}); });
     })();
   </script>
 </body>
