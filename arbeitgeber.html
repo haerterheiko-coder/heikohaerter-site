@@ -1,392 +1,390 @@
-<!-- /arbeitgeber.html -->
+<!-- /arbeitgeber.html — v2.0 (Match index style + stronger story + wow micro-interactions + employer check) -->
 <!DOCTYPE html>
 <html lang="de" translate="no" class="no-js">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="color-scheme" content="dark light" />
-<meta name="theme-color" content="#05070E" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#05070E" />
 
-<title>Arbeitgeber-Architektur – 60 Sekunden Überblick für Bau & Handwerk</title>
-<meta name="description" content="Ein kurzer, anonymer Arbeitgeber-Check für Bau- und Handwerksbetriebe. Zeigt in 60 Sekunden, ob Strukturen tragen – ohne Daten, ohne Verkauf.">
-<link rel="canonical" href="https://heikohaerter.com/arbeitgeber.html" />
+  <title>Arbeitgeber-Architektur – 60 Sekunden Überblick für Bau & Handwerk</title>
+  <meta name="description" content="Ein kurzer, anonymer Arbeitgeber-Check für Bau- und Handwerksbetriebe. Zeigt in 60 Sekunden, ob Strukturen heute tragen – ohne Daten, ohne Verkauf." />
+  <link rel="canonical" href="https://heikohaerter.com/arbeitgeber.html" />
 
-<!-- OG -->
-<meta property="og:site_name" content="Heiko Haerter – Arbeitgeber-Architektur">
-<meta property="og:title" content="Arbeitgeber-Architektur – 60 Sekunden Überblick">
-<meta property="og:description" content="Drei ruhige Fragen zeigen, ob Strukturen heute tragen – anonym, ohne Verkauf.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://heikohaerter.com/arbeitgeber.html">
-<meta property="og:locale" content="de_DE">
-<meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_b23cf1a26a0f40a9a7e4e12f2b0174a9~mv2.png">
-<meta name="twitter:card" content="summary_large_image">
+  <!-- OG -->
+  <meta property="og:site_name" content="Heiko Haerter – Arbeitgeber-Architektur" />
+  <meta property="og:title" content="Arbeitgeber-Architektur – 60 Sekunden Überblick" />
+  <meta property="og:description" content="Drei ruhige Fragen zeigen, ob Strukturen heute tragen – anonym, ohne Verkauf." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://heikohaerter.com/arbeitgeber.html" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:image" content="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-<noscript><style>.fade-up{opacity:1!important;transform:none!important}</style></noscript>
+  <!-- Perf / Fonts -->
+  <link rel="preconnect" href="https://static.wixstatic.com" crossorigin />
+  <link rel="preconnect" href="https://wa.me" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
-<!-- ===== Inline styles.css ===== -->
-<style>
-:root{
-  --bg:#05070E; --bg2:#0B0F19; --text:#F3F6FF; --muted:#A7B1C6; --muted2:#90A0B8;
-  --line:rgba(255,255,255,.14); --glass:rgba(255,255,255,.06);
-  --gold:#C8A44B; --gold2:#EADCA8; --focus:#8FC2FF;
-  --container:1120px; --gutter:clamp(16px,5vw,32px);
-  --ease:cubic-bezier(.25,.46,.25,1);
-  color-scheme: dark;
-}
-@media (prefers-color-scheme:light){
-  :root{ --bg:#f7f8fb; --bg2:#ffffff; --text:#0c1220; --muted:#51607a; --muted2:#6a7792; --line:rgba(0,0,0,.12); --glass:rgba(0,0,0,.04); color-scheme: light; }
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body.godmode{margin:0;background:
-  radial-gradient(1200px 600px at 15% -10%, rgba(200,164,75,.12), transparent 60%),
-  radial-gradient(900px 600px at 90% -6%, rgba(130,150,255,.10), transparent 65%),
-  linear-gradient(180deg,#04060E,#060915);
-color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;line-height:1.45;-webkit-font-smoothing:antialiased}
-@media (prefers-color-scheme:light){
-  body.godmode{background:
-    radial-gradient(1200px 600px at 15% -10%, rgba(200,164,75,.10), transparent 60%),
-    radial-gradient(900px 600px at 90% -6%, rgba(120,140,230,.10), transparent 65%),
-    linear-gradient(180deg,#ffffff,#f5f7fb)}
-}
-img{display:block;max-width:100%;height:auto}
-a{color:inherit;text-decoration:none}
-a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
-.skip{position:absolute;left:-9999px;top:auto}
-.fade-up{opacity:0;transform:translateY(16px)}
-.fade-up.visible{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+  <!-- LCP image (use same hero as index.html for coherence) -->
+  <link
+    rel="preload"
+    as="image"
+    href="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400"
+    imagesrcset="
+      https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=960 960w,
+      https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400 1400w,
+      https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=2000 2000w
+    "
+    imagesizes="(min-width:1024px) 48vw, 94vw"
+    fetchpriority="high"
+  />
 
-.slide{padding:clamp(28px,6vw,80px) 0}
-.inner{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
-.narrow{max-width:780px}
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Arbeitgeber-Architektur – 60 Sekunden Überblick",
+    "description":"Anonymer Kurz-Check für Bau & Handwerk. 3 Fragen, klare Einordnung, kein Verkauf.",
+    "url":"https://heikohaerter.com/arbeitgeber.html"
+  }
+  </script>
 
-h1,h2{margin:0 0 .8rem;letter-spacing:-.01em}
-h1{font-weight:900;font-size:clamp(1.9rem,4.2vw,3rem);line-height:1.12}
-h2{font-weight:800;font-size:clamp(1.45rem,3.1vw,2.1rem)}
-.lead{color:var(--muted);font-size:clamp(1.02rem,1.2vw,1.08rem);max-width:820px}
-.micro{color:var(--muted2);font-size:clamp(.94rem,1.05vw,.98rem)}
-.eyebrow{letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);font-weight:700;font-size:.86rem;margin:0 0 .35rem}
+  <style>
+    :root{
+      --bg:#05070E; --bg2:#02040A;
+      --text:#F7F8FC; --muted:#A8B1C5; --muted2:#8F97AA;
+      --line:rgba(255,255,255,.12);
+      --surface:rgba(255,255,255,.06); --surface2:rgba(255,255,255,.04);
+      --gold:#E6D08A; --focus:#90C2FF;
+      --radius:20px; --ease:cubic-bezier(.25,.46,.25,1);
+      --shadow:0 24px 60px rgba(0,0,0,.35);
+      --container:1120px; --gutter:clamp(16px,5vw,32px);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(800px 600px at 20% 0%, rgba(120,150,255,.12), transparent 60%),
+        radial-gradient(800px 600px at 80% 20%, rgba(200,164,75,.10), transparent 60%),
+        linear-gradient(180deg,var(--bg),var(--bg2) 60%);
+      color:var(--text);
+      font-family:"IBM Plex Sans","Inter",system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased; line-height:1.48; overflow-x:hidden;
+    }
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:12px}
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.7rem 0 0}
-.chips span{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--glass);border-radius:999px;padding:.42rem .9rem;font-weight:650;font-size:.92rem}
+    .section{padding-block:clamp(48px,8vw,120px)}
+    .wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+    .grid{display:grid;gap:clamp(.8rem,2.6vw,1.4rem)}
+    .stack{display:flex;flex-direction:column;gap:clamp(.6rem,2vw,1.05rem)}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:.9rem 1.4rem;border-radius:999px;border:1px solid var(--line);background:var(--glass);font-weight:850;cursor:pointer;transition:transform .16s var(--ease),box-shadow .16s var(--ease)}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;box-shadow:0 14px 34px rgba(200,164,75,.35)}
-.btn-ghost{background:transparent}
-.cta{display:flex;flex-wrap:wrap;gap:.7rem;align-items:flex-start;margin-top:1rem}
-.trust{display:block;color:var(--muted2);font-size:.95rem;margin:.2rem 0 0}
+    h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em;text-wrap:balance}
+    h1{font-size:clamp(2.1rem,4.6vw,3.3rem);font-weight:800;line-height:1.08}
+    h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:700}
+    h3{font-size:clamp(1.06rem,1.8vw,1.22rem);font-weight:700}
+    p,li{color:var(--muted);font-size:clamp(1rem,1.05vw,1.06rem)}
+    .micro{font-size:.95rem;color:var(--muted2)}
+    .eyebrow{font-size:.9rem;letter-spacing:.08em;color:var(--muted2);text-transform:uppercase;font-weight:700}
 
-.hero-employer{position:relative;overflow:hidden}
-.hero-employer .stage{position:absolute;inset:0;pointer-events:none;z-index:-1}
-.glow{position:absolute;border-radius:50%;filter:blur(52px);opacity:.46;transform:translateZ(0)}
-.glow-a{width:50vw;height:50vw;left:-16vw;top:-18vw;background:radial-gradient(circle,rgba(200,164,75,.28),transparent 62%)}
-.glow-b{width:56vw;height:56vw;right:-18vw;top:-16vw;background:radial-gradient(circle,rgba(136,153,255,.26),transparent 62%)}
-.particles{position:absolute;inset:0}
-.opening-shot{position:absolute;top:clamp(18px,4vw,42px);left:50%;transform:translateX(-50%);width:min(72vw,420px);height:2px;opacity:.65}
-.breath-line{display:block;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:breath 4.7s ease-in-out infinite}
-@keyframes breath{0%,100%{opacity:.16}50%{opacity:.62}}
+    header{position:sticky;top:0;z-index:60;background:rgba(5,8,22,.86);border-bottom:1px solid var(--line);backdrop-filter:saturate(120%) blur(8px)}
+    .header-bar{max-width:var(--container);margin:0 auto;padding:.85rem var(--gutter);display:flex;align-items:center;justify-content:space-between;min-height:64px}
+    .brand{display:flex;flex-direction:column}
+    .brand-top{display:flex;align-items:center;gap:.65rem;font-weight:800}
+    .brand-dot{width:.95rem;height:.95rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.55); animation:pulse 2.4s ease-in-out infinite}
+    .brand-sub{font-size:.82rem;color:var(--muted2)}
+    @keyframes pulse{0%,100%{filter:drop-shadow(0 0 0 rgba(230,208,138,0))}50%{filter:drop-shadow(0 0 10px rgba(230,208,138,.5))}}
 
-.employer-proof{display:grid;gap:.9rem;margin-top:.6rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.employer-proof-card{border:1px solid var(--line);background:var(--glass);border-radius:16px;padding:.9rem 1.05rem;box-shadow:0 16px 40px rgba(0,0,0,.28)}
-footer{padding:clamp(24px,4vw,42px) 0;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(0,0,0,.12))}
-footer a{text-decoration:underline;text-underline-offset:3px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.9rem 1.4rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);font-weight:800;background:rgba(255,255,255,.06);color:var(--text);transition:transform .18s var(--ease), box-shadow .25s var(--ease)}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 28px rgba(0,0,0,.35)}
+    .btn-primary{background:var(--gold);color:#111;border-color:rgba(230,208,138,.25)}
+    .btn-ghost{background:transparent;border-color:rgba(255,255,255,.16)}
+    @media (max-width:980px){ .btn{width:100%} }
 
-.card{border:1px solid var(--line);background:var(--glass);border-radius:16px;padding:1rem 1.1rem;box-shadow:0 16px 40px rgba(0,0,0,.22)}
-.safety{margin-top:.5rem}
-#employer-check-steps{margin-top:1rem}
-.progress{width:100%;height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
-.progress > span{display:block;height:10px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .35s var(--ease)}
-.result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35);border:1px solid var(--line);background:var(--glass)}
-.result-red{border-left:4px solid #E88}
-.result-yellow{border-left:4px solid #F5E38F}
-.result-green{border-left:4px solid #86E3A7}
+    .panel{background:var(--surface2);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,2.4vw,28px);box-shadow:var(--shadow)}
+    .note{border-left:4px solid var(--gold)}
+    .chips{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.6rem}
+    .chip{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);border-radius:999px;padding:.42rem .8rem;font-weight:650;font-size:.92rem;background:rgba(255,255,255,.05);color:var(--muted2)}
 
-.cut-overlay{position:fixed;inset:0;background:rgba(5,7,14,.72);opacity:0;pointer-events:none;z-index:200;transition:opacity .22s var(--ease)}
-.cut-overlay.on{opacity:1}
-.cinema-bars{position:fixed;inset:0;pointer-events:none;z-index:60;background:linear-gradient(#000c,transparent 11%,transparent 89%,#000c)}
-.film-grain{position:fixed;inset:0;pointer-events:none;z-index:55;opacity:.14;
-  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity=".7"/></svg>');
-  animation:grain 2.2s steps(2,end) infinite}
-@keyframes grain{to{transform:translate3d(-5%,3%,0)}}
-</style>
+    .hero{padding-top:clamp(54px,9vw,120px);padding-bottom:clamp(34px,5vw,60px)}
+    .hero-grid{display:grid;gap:clamp(1.2rem,3vw,2.4rem)}
+    @media (min-width:1024px){ .hero-grid{grid-template-columns:1.1fr .9fr;align-items:center} }
+    .hero-figure{border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+    .hero-figure img{transition:transform 6s ease;filter:saturate(1.04) contrast(1.02)}
+    .hero-figure:hover img{transform:scale(1.035)}
+
+    .employer-proof{display:grid;gap:.9rem;margin-top:.6rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .card{border:1px solid var(--line);background:var(--surface2);border-radius:16px;padding:1rem 1.1rem;box-shadow:0 16px 40px rgba(0,0,0,.22)}
+
+    .progress{width:100%;height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+    .progress > span{display:block;height:10px;width:0;background:linear-gradient(90deg,var(--gold),#fff1b7);transition:width .35s var(--ease)}
+
+    .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35);border:1px solid var(--line);background:var(--surface2)}
+    .result-red{border-left:4px solid #e88}
+    .result-yellow{border-left:4px solid #f5e38f}
+    .result-green{border-left:4px solid #86e3a7}
+
+    .fade-up{opacity:0;transform:translateY(18px) scale(.99);filter:blur(2px)}
+    .fade-up.visible{opacity:1;transform:none;filter:none;transition:opacity .55s var(--ease), transform .55s var(--ease), filter .55s var(--ease)}
+
+    hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent)}
+    footer{border-top:1px solid var(--line);padding:26px 0 60px;text-align:center}
+  </style>
 </head>
 
-<body class="godmode">
-<a href="#content" class="skip">Zum Inhalt springen</a>
+<body>
+  <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
 
-<!-- Cinematic overlay & layers -->
-<div class="cut-overlay" aria-hidden="true"></div>
-<div class="cinema-bars" aria-hidden="true"></div>
-<div class="film-grain" aria-hidden="true"></div>
-
-<main id="content">
-  <!-- HERO -->
-  <section class="slide hero hero-employer fade-up" aria-labelledby="t-hero">
-    <div class="inner">
-      <div class="opening-shot" aria-hidden="true"><span class="breath-line"></span></div>
-
-      <p class="eyebrow">Ein ruhiger Blick für Inhaber</p>
-      <h1 id="t-hero">
-        In 60&nbsp;Sekunden sehen,<br>ob Ihr Betrieb heute stabil aufgestellt ist.
-      </h1>
-      <p class="lead">Drei kurze Fragen zeigen, ob Strukturen tragen – oder ob etwas unbemerkt wackelt.</p>
-
-      <div class="chips" aria-label="Kontext">
-        <span>💼 Bau · Handwerk</span><span>👷‍♂️ 5–100 Mitarbeiter</span><span>🔒 Anonym · Kein Verkauf</span>
-      </div>
-
-      <div class="cta">
-        <a class="btn btn-primary" href="#arbeitgeber-check">⚡ Arbeitgeber-Check starten</a>
-        <span class="trust">Ohne Daten · Jederzeit abbrechbar</span>
-      </div>
+  <header>
+    <div class="header-bar">
+      <a class="brand" href="/" aria-label="Startseite">
+        <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
+        <span class="brand-sub">Allfinanz · Entscheidungslogik · Region Stuttgart</span>
+      </a>
+      <nav class="visually-hidden" aria-label="Navigation"> <!-- reserved for future links --></nav>
     </div>
+  </header>
 
-    <div class="stage" aria-hidden="true">
-      <div class="glow glow-a"></div>
-      <div class="glow glow-b"></div>
-      <canvas id="particles" class="particles"></canvas>
-    </div>
-  </section>
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero section fade-up" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="stack">
+          <p class="eyebrow">Ein ruhiger Blick für Inhaber</p>
+          <h1 id="hero-title">In 60&nbsp;Sekunden sehen, ob Ihr Betrieb heute stabil aufgestellt ist.</h1>
+          <p>3 kurze Fragen zeigen, ob Strukturen tragen – oder ob etwas unbemerkt wackelt.</p>
 
-  <!-- CHECK -->
-  <section id="arbeitgeber-check" class="slide fade-up" aria-labelledby="t-check">
-    <div class="inner narrow">
-      <h2 id="t-check">Der 60-Sekunden-Arbeitgeber-Check</h2>
-      <p class="micro">Drei Fragen. Eine klare Einordnung. Kein Gespräch, keine Verpflichtung.</p>
-
-      <div id="employer-start">
-        <div class="cta">
-          <button class="btn btn-primary" id="startEmployerBtn">⚡ Jetzt starten</button>
-        </div>
-        <p class="micro safety">Anonym · Keine Unterlagen nötig</p>
-      </div>
-
-      <div id="employer-check-steps" aria-live="polite"></div>
-      <div id="employer-check-result" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <!-- PROOF / Praxis -->
-  <section class="slide fade-up" aria-labelledby="t-proof">
-    <div class="inner">
-      <h2 id="t-proof">Aus der Praxis</h2>
-      <div class="employer-proof">
-        <article class="employer-proof-card"><strong>Tiefbau · 35 MA</strong><p class="micro">Weniger Kündigungen · Ruhigere Teams</p></article>
-        <article class="employer-proof-card"><strong>SHK · 18 MA</strong><p class="micro">Sauberes Onboarding · Klare Zuständigkeiten</p></article>
-        <article class="employer-proof-card"><strong>Elektro · 50 MA</strong><p class="micro">Sicherheit bei bAV & Haftung</p></article>
-      </div>
-      <div class="cta"><a class="btn" href="#arbeitgeber-check">Erneut prüfen</a></div>
-    </div>
-  </section>
-
-  <!-- FINAL -->
-  <section class="slide fade-up" aria-labelledby="t-final">
-    <div class="inner narrow" style="text-align:center">
-      <h2 id="t-final">Ordnung schafft Ruhe.</h2>
-      <p class="micro">Der Check zeigt, ob Ihr Betrieb heute trägt.</p>
-      <div class="cta" style="align-items:center">
-        <a class="btn btn-primary" href="#arbeitgeber-check">Arbeitgeber-Check starten</a>
-        <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="fade-up" role="contentinfo">
-  <div class="inner narrow" style="text-align:center">
-    <p class="micro">© <span id="yNow"></span> Heiko Haerter · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></p>
-    <p class="micro" style="opacity:.82">Hinweis: Weitergabe über externe Dienste (z. B. WhatsApp). Es gelten deren Datenschutz-Bestimmungen.</p>
-  </div>
-</footer>
-
-<!-- ===== Inline app.js ===== -->
-<script>
-(function(){
-  "use strict";
-  document.documentElement.classList.remove('no-js');
-  // Year
-  document.getElementById('yNow')?.appendChild(document.createTextNode(String(new Date().getFullYear())));
-
-  // Fade-in
-  (function(){
-    const pref = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const els = Array.from(document.querySelectorAll('.fade-up'));
-    if(pref){ els.forEach(el=>{ el.classList.add('visible'); }); return; }
-    if('IntersectionObserver' in window){
-      const io=new IntersectionObserver(ents=>{
-        ents.forEach(e=>{
-          if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
-        });
-      },{threshold:.12, rootMargin:'0px 0px -10% 0px'});
-      els.forEach(el=> io.observe(el));
-    }else{ els.forEach(el=> el.classList.add('visible')); }
-  })();
-
-  // Smooth anchor scroll + cinematic cut
-  (function(){
-    const cut = document.querySelector('.cut-overlay');
-    const pref = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const id=a.getAttribute('href'); if(!id||id==='#') return;
-        const t=document.querySelector(id); if(!t) return;
-        e.preventDefault();
-        cut?.classList.add('on');
-        setTimeout(()=> t.scrollIntoView({behavior: pref?'auto':'smooth', block:'start'}), 90);
-        setTimeout(()=> cut?.classList.remove('on'), 360);
-      },{passive:false});
-    });
-  })();
-
-  // Particles (subtil)
-  (function(){
-    const canvas=document.getElementById('particles'); if(!canvas) return;
-    const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(prefersReduced) return;
-    const ctx=canvas.getContext('2d'); const DPR=Math.min(devicePixelRatio||1,2);
-    let W=1,H=1,pts=[];
-    function resize(){
-      const b=canvas.getBoundingClientRect();
-      canvas.width = Math.max(1, Math.floor(b.width*DPR));
-      canvas.height= Math.max(1, Math.floor(b.height*DPR));
-      ctx.setTransform(DPR,0,0,DPR,0,0);
-      W=b.width; H=b.height;
-      pts = Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,s:.2+Math.random()}));
-    }
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      ctx.fillStyle="rgba(233,211,148,.28)";
-      pts.forEach(p=>{ p.y+=p.s*.25; if(p.y>H) p.y=-10; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); });
-      requestAnimationFrame(draw);
-    }
-    resize(); addEventListener('resize', resize, {passive:true}); draw();
-  })();
-
-  // ===== Arbeitgeber-Check (3 Fragen) =====
-  (function(){
-    const startBtn = document.getElementById('startEmployerBtn');
-    const stepsBox = document.getElementById('employer-check-steps');
-    const resultBox= document.getElementById('employer-check-result');
-
-    if(!startBtn || !stepsBox || !resultBox) return;
-
-    const QUESTIONS = [
-      {
-        t: "1 · „Wenn 2 Schlüsselpersonen 6 Wochen ausfallen – wie stabil läuft es weiter?“",
-        opts: [
-          ["Wir hätten echte Engpässe",1],
-          ["Wir würden es irgendwie auffangen",2],
-          ["Es ist vorbereitet & dokumentiert",3],
-        ]
-      },
-      {
-        t: "2 · Onboarding & Zuständigkeiten: Wie klar ist es heute?",
-        opts: [
-          ["Kein Standard – je nach Tagesform",1],
-          ["Teilweise klar, aber Lücken",2],
-          ["Klar geregelt & gelebt",3],
-        ]
-      },
-      {
-        t: "3 · Sicherheit (bAV/Haftung/Arbeitsunfälle): Bauchgefühl?",
-        opts: [
-          ["Unsicher / hier könnte es knallen",1],
-          ["Teils okay, teils unklar",2],
-          ["Sauber dokumentiert & geprüft",3],
-        ]
-      }
-    ];
-
-    let step=0, score=0, max=QUESTIONS.length;
-
-    function renderProgress(){
-      const pct = max===1 ? 100 : (step/max)*100;
-      return `<div class="card" style="margin-bottom:.8rem">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
-          <strong>Schritt ${Math.min(step+1,max)} von ${max}</strong>
-          <span class="micro">${step===0?'Kurzer Eindruck reicht.': step===1?'Fast geschafft.':'Letzter Klick.'}</span>
-        </div>
-        <div class="progress"><span style="width:${pct}%"></span></div>
-      </div>`;
-    }
-
-    function renderStep(){
-      const q = QUESTIONS[step];
-      stepsBox.innerHTML = renderProgress() + `
-        <div class="card">
-          <h3 style="margin:.1rem 0 .6rem;font-size:1.06rem">${q.t}</h3>
-          <div class="cta">
-            ${q.opts.map(([label,val])=>`<button class="btn" data-v="${val}">${label}</button>`).join('')}
+          <div class="chips" aria-label="Kontext">
+            <span class="chip">💼 Bau · Handwerk</span>
+            <span class="chip">👷‍♂️ 5–100 Mitarbeitende</span>
+            <span class="chip">🔒 Anonym · Kein Verkauf</span>
           </div>
-        </div>`;
-      resultBox.innerHTML = '';
-      stepsBox.scrollIntoView({behavior:'smooth', block:'start'});
-      stepsBox.querySelectorAll('button[data-v]').forEach(b=>{
-        b.addEventListener('click',()=>{
-          score += Number(b.getAttribute('data-v'))||0;
-          step++; (step>=max) ? finish() : renderStep();
-        });
+
+          <div class="stack" style="margin-top:.6rem">
+            <div class="grid" style="gap:.55rem;max-width:520px">
+              <a class="btn btn-primary" href="#arbeitgeber-check">⚡ Arbeitgeber-Check starten</a>
+              <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
+            </div>
+            <span class="micro">Ohne Daten · Jederzeit abbrechbar</span>
+          </div>
+        </div>
+
+        <figure class="hero-figure" aria-label="Ruhige, fokussierte Beratungsszene">
+          <img
+            src="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400"
+            srcset="
+              https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=960 960w,
+              https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400 1400w,
+              https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=2000 2000w
+            "
+            sizes="(min-width:1024px) 44vw, 94vw"
+            alt="Ruhige, fokussierte Besprechung – Klarheit ohne Verkaufsdruck"
+            width="1400" height="840" loading="eager" decoding="async" fetchpriority="high">
+        </figure>
+      </div>
+    </section>
+
+    <!-- CHECK -->
+    <section id="arbeitgeber-check" class="section fade-up" aria-labelledby="check-title">
+      <div class="wrap" style="max-width:780px">
+        <h2 id="check-title">Der 60-Sekunden-Arbeitgeber-Check</h2>
+        <p class="micro">Drei Fragen. Eine klare Einordnung. Kein Gespräch, keine Verpflichtung.</p>
+
+        <div id="employer-start" class="panel">
+          <div class="grid" style="gap:.6rem;max-width:520px">
+            <button class="btn btn-primary" id="startEmployerBtn">⚡ Jetzt starten</button>
+            <a class="btn btn-ghost" href="#check-why">Was bringt das?</a>
+          </div>
+          <p class="micro" style="margin-top:.5rem">Anonym · Keine Unterlagen nötig</p>
+        </div>
+
+        <div id="employer-check-steps" aria-live="polite"></div>
+        <div id="employer-check-result" aria-live="polite"></div>
+
+        <div id="check-why" class="panel" style="margin-top:1rem">
+          <h3 style="margin:0 0 .35rem">Warum das Sinn macht</h3>
+          <p class="micro" style="margin:0">Die meisten Probleme entstehen nicht, weil Führungskräfte nichts tun – sondern weil Dinge <em>einzeln</em> geregelt werden. Der Check zeigt in einer Minute, ob Reihenfolge & Zuständigkeiten heute tragen.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF / Praxis -->
+    <section class="section fade-up" aria-labelledby="proof-title">
+      <div class="wrap">
+        <h2 id="proof-title">Aus der Praxis</h2>
+        <div class="employer-proof">
+          <article class="card"><strong>Tiefbau · 35 MA</strong><p class="micro">Weniger Kündigungen · Ruhigere Teams</p></article>
+          <article class="card"><strong>SHK · 18 MA</strong><p class="micro">Sauberes Onboarding · Klare Zuständigkeiten</p></article>
+          <article class="card"><strong>Elektro · 50 MA</strong><p class="micro">Sicherheit bei bAV & Haftung</p></article>
+        </div>
+        <div style="margin-top:.8rem"><a class="btn btn-ghost" href="#arbeitgeber-check">Erneut prüfen</a></div>
+      </div>
+    </section>
+
+    <hr class="divider" aria-hidden="true" />
+
+    <!-- FINAL -->
+    <section class="section fade-up" aria-labelledby="final-title">
+      <div class="wrap" style="max-width:780px;text-align:center">
+        <h2 id="final-title">Ordnung schafft Ruhe.</h2>
+        <p class="micro">Der Check zeigt, ob Ihr Betrieb heute trägt.</p>
+        <div class="grid" style="gap:.55rem;max-width:520px;margin-inline:auto">
+          <a class="btn btn-primary" href="#arbeitgeber-check">Arbeitgeber-Check starten</a>
+          <a class="btn btn-ghost" href="./weitergeben.html">Ruhig weitergeben</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="wrap">
+      <p class="micro" style="text-align:center;margin-bottom:.4rem">© <span id="yNow">2026</span> Heiko Haerter · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></p>
+      <p class="micro" style="text-align:center;opacity:.85">Hinweis: Weitergabe über externe Dienste (z. B. WhatsApp). Es gelten deren Datenschutz-Bestimmungen.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    "use strict";
+    document.documentElement.classList.remove('no-js');
+    document.querySelectorAll('#yNow').forEach(el=> el.textContent=new Date().getFullYear());
+
+    // Reveal
+    (function(){
+      const pref = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els = [...document.querySelectorAll('.fade-up')];
+      if(pref || !('IntersectionObserver' in window)){ els.forEach(el=>el.classList.add('visible')); return; }
+      const io = new IntersectionObserver(ents=>{
+        for (const e of ents){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } }
+      }, { threshold:.12, rootMargin:'0px 0px -10% 0px' });
+      els.forEach(el => io.observe(el));
+    })();
+
+    // Smooth anchor scroll
+    (function(){
+      const pref = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click',e=>{
+          const id=a.getAttribute('href'); if(!id||id==='#') return;
+          const t=document.querySelector(id); if(!t) return;
+          e.preventDefault();
+          t.scrollIntoView({behavior: pref?'auto':'smooth', block:'start'});
+        },{passive:false});
       });
-    }
+    })();
 
-    function cta(color){
-      const wa='https://wa.me/4917660408380?text=';
-      if(color==='red') return `<div class="cta" style="margin-top:.8rem">
-        <a class="btn btn-primary" href="${wa}Kurz%2010%20Minuten%20sprechen">💬 Kurz sprechen – 10 Minuten</a>
-        <a class="btn btn-ghost" href="${wa}Kurze%20Frage%20senden">🛟 Frage senden</a>
-      </div>`;
-      if(color==='yellow') return `<div class="cta" style="margin-top:.8rem">
-        <a class="btn btn-primary" href="${wa}Als%20N%C3%A4chstes%20angehen">🧭 Als Nächstes angehen</a>
-        <a class="btn btn-ghost" href="${wa}Kurze%20Frage%20senden">💬 Frage senden</a>
-      </div>`;
-      return `<div class="cta" style="margin-top:.8rem">
-        <a class="btn btn-primary" href="${wa}Sauber%20halten%20%26%20ruhig%20planen">✨ Sauber halten & ruhig planen</a>
-        <a class="btn btn-ghost" href="./weitergeben.html">🔗 Ruhig weitergeben</a>
-      </div>`;
-    }
+    // Arbeitgeber-Check (3 Fragen)
+    (function(){
+      const startBtn = document.getElementById('startEmployerBtn');
+      const stepsBox = document.getElementById('employer-check-steps');
+      const resultBox= document.getElementById('employer-check-result');
+      const startPanel= document.getElementById('employer-start');
+      if(!startBtn || !stepsBox || !resultBox) return;
 
-    function finish(){
-      stepsBox.innerHTML='';
-      const total = score;
-      let html='';
-      if(total<=4){
-        html = `<div class="result-card result-red">
-          <h3>🔴 Heute wichtig</h3>
-          <p class="micro">Mindestens ein Bereich braucht kurzfristig Aufmerksamkeit (Schlüsselpersonen · Zuständigkeiten · Sicherheit).</p>
-          ${cta('red')}
-        </div>`;
-      }else if(total<=7){
-        html = `<div class="result-card result-yellow">
-          <h3>🟡 Bald wichtig</h3>
-          <p class="micro">Einige Grundlagen sind da. Ein paar Lücken solltest du zeitnah schließen.</p>
-          ${cta('yellow')}
-        </div>`;
-      }else{
-        html = `<div class="result-card result-green">
-          <h3>🟢 Passt für heute</h3>
-          <p class="micro">Für heute wirkt die Struktur stabil. Plane in Ruhe die nächsten sauberen Schritte.</p>
-          ${cta('green')}
+      const Q = [
+        { t: "1 · Wenn 2 Schlüsselpersonen 6 Wochen ausfallen – wie stabil läuft es weiter?",
+          opts: [["Wir hätten echte Engpässe",1],["Wir würden es irgendwie auffangen",2],["Es ist vorbereitet & dokumentiert",3]] },
+        { t: "2 · Onboarding & Zuständigkeiten: Wie klar ist es heute?",
+          opts: [["Kein Standard – je nach Tagesform",1],["Teilweise klar, aber Lücken",2],["Klar geregelt & gelebt",3]] },
+        { t: "3 · Sicherheit (bAV/Haftung/Unfälle): Bauchgefühl?",
+          opts: [["Unsicher / hier könnte es knallen",1],["Teils okay, teils unklar",2],["Sauber dokumentiert & geprüft",3]] }
+      ];
+
+      let step=0, score=0, max=Q.length;
+
+      function head(){
+        const pct = (step/max)*100;
+        const hint = step===0?'Kurzer Eindruck reicht.':(step===1?'Fast geschafft.':'Letzter Klick.');
+        return `<div class="card" style="margin-bottom:.8rem">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
+            <strong>Schritt ${Math.min(step+1,max)} von ${max}</strong>
+            <span class="micro">${hint}</span>
+          </div>
+          <div class="progress"><span style="width:${pct}%"></span></div>
         </div>`;
       }
-      resultBox.innerHTML = html + `<p class="micro" style="margin-top:.7rem;opacity:.9">Anonym · Kein Verkauf · Du entscheidest in Ruhe.</p>`;
-      resultBox.scrollIntoView({behavior:'smooth', block:'start'});
-    }
 
-    function start(){
-      step=0; score=0;
-      document.getElementById('employer-start').style.display='none';
-      renderStep();
-    }
+      function render(){
+        const q=Q[step];
+        stepsBox.innerHTML = head() + `
+          <div class="card">
+            <h3 style="margin:.1rem 0 .6rem;font-size:1.06rem">${q.t}</h3>
+            <div class="grid" style="gap:.55rem">
+              ${q.opts.map(([label,val])=>`<button class="btn" data-v="${val}">${label}</button>`).join('')}
+            </div>
+          </div>`;
+        resultBox.innerHTML='';
+        stepsBox.scrollIntoView({behavior:'smooth', block:'start'});
+        stepsBox.querySelectorAll('button[data-v]').forEach(b=>{
+          b.addEventListener('click',()=>{
+            score += Number(b.getAttribute('data-v'))||0;
+            step++; (step>=max)? finish() : render();
+          });
+        });
+      }
 
-    startBtn.addEventListener('click', start);
-    // allow CTA in Hero to start
-    document.querySelector('a[href="#arbeitgeber-check"]')?.addEventListener('click', (e)=>{
-      // delay ensures scroll first
-      setTimeout(()=>{ if(document.getElementById('employer-start')?.style.display!=='none') start(); }, 220);
-    }, {passive:true});
+      function ctas(color){
+        const wa='https://wa.me/4917660408380?text=';
+        if(color==='red') return `<div class="grid" style="gap:.55rem;max-width:520px">
+          <a class="btn btn-primary" href="${wa}Kurz%2010%20Minuten%20sortieren%20–%20Status:%20ROT.">💬 Kurz sprechen – 10 Minuten</a>
+          <a class="btn btn-ghost" href="${wa}Kurze%20Frage%20aus%20dem%20Check">🛟 Frage senden</a>
+        </div>`;
+        if(color==='yellow') return `<div class="grid" style="gap:.55rem;max-width:520px">
+          <a class="btn btn-primary" href="${wa}Als%20N%C3%A4chstes%20angehen%20–%20Status:%20GELB.">🧭 Als Nächstes angehen</a>
+          <a class="btn btn-ghost" href="${wa}Kurze%20Frage%20aus%20dem%20Check">💬 Frage senden</a>
+        </div>`;
+        return `<div class="grid" style="gap:.55rem;max-width:520px">
+          <a class="btn btn-primary" href="${wa}Sauber%20halten%20%26%20ruhig%20planen%20–%20Status:%20GR%C3%9CN.">✨ Sauber halten & ruhig planen</a>
+          <a class="btn btn-ghost" href="./weitergeben.html">🔗 Ruhig weitergeben</a>
+        </div>`;
+      }
+
+      function finish(){
+        stepsBox.innerHTML='';
+        const total = score;
+        let html='';
+        if(total<=4){
+          html = `<div class="result-card result-red">
+            <h3>🔴 Heute wichtig</h3>
+            <p class="micro">Mindestens ein Bereich braucht kurzfristig Aufmerksamkeit (Schlüsselpersonen · Zuständigkeiten · Sicherheit).</p>
+            ${ctas('red')}
+          </div>`;
+        }else if(total<=7){
+          html = `<div class="result-card result-yellow">
+            <h3>🟡 Bald wichtig</h3>
+            <p class="micro">Einige Grundlagen sind da. Ein paar Lücken solltest du zeitnah schließen.</p>
+            ${ctas('yellow')}
+          </div>`;
+        }else{
+          html = `<div class="result-card result-green">
+            <h3>🟢 Passt für heute</h3>
+            <p class="micro">Für heute wirkt die Struktur stabil. Plane in Ruhe die nächsten sauberen Schritte.</p>
+            ${ctas('green')}
+          </div>`;
+        }
+        resultBox.innerHTML = html + `<p class="micro" style="margin-top:.7rem;opacity:.9">Anonym · Kein Verkauf · Du entscheidest in Ruhe.</p>`;
+        resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+
+      function start(){
+        step=0; score=0;
+        startPanel.style.display='none';
+        render();
+      }
+
+      startBtn.addEventListener('click', start);
+      document.querySelectorAll('a[href="#arbeitgeber-check"]').forEach(a=>{
+        a.addEventListener('click',()=> setTimeout(()=>{ if(startPanel.style.display!=='none') start(); }, 220), {passive:true});
+      });
+    })();
   })();
-})();
-</script>
+  </script>
 </body>
 </html>
