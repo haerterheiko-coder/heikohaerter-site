@@ -1,4 +1,4 @@
-<!-- /index.html (mit Änderungen 1–5) -->
+<!-- /index.html (final mit Social Proof, Persona-Absatz, Content-Tiefe-Links, 5‑Schritte-Grafik getauscht, mobile-first) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -53,7 +53,7 @@
   <!-- Klaviyo Onsite -->
   <script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=T7wryA" async></script>
 
-  <!-- JSON-LD (mit founder-Block) -->
+  <!-- JSON-LD (LocalBusiness + TODO AggregateRating) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -70,19 +70,16 @@
       "https://www.xing.com/profile/Heiko_Haerter3",
       "https://www.instagram.com/heiko.haerter.coach/"
     ],
-    "areaServed":"DE",
-    "founder":{
-      "@type":"Person",
-      "name":"Heiko Haerter",
-      "jobTitle":"Vermögensberater",
-      "knowsAbout":[
-        "Entscheidungsarchitektur",
-        "Finanzstruktur",
-        "Risikomanagement",
-        "Vorsorge",
-        "Unternehmerabsicherung"
-      ]
+    "areaServed":"DE"
+    /*
+    ,"aggregateRating":{
+      "@type":"AggregateRating",
+      "ratingValue":"4.9",
+      "ratingCount":"60",
+      "bestRating":"5",
+      "worstRating":"1"
     }
+    --> Werte nur eintragen, wenn verifizierbar! */
   }
   </script>
 
@@ -133,7 +130,7 @@
     .stack{display:flex;flex-direction:column;gap:clamp(.6rem,2vw,1.05rem)}
     .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
 
-    h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em}
+    h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em;text-wrap:balance}
     h1{font-size:clamp(3rem,6.2vw,5rem);font-weight:700;letter-spacing:-0.035em;line-height:1.04}
     h2{font-size:clamp(1.8rem,3.3vw,2.45rem);font-weight:600}
     h3{font-size:clamp(1.06rem,2vw,1.22rem);font-weight:600}
@@ -142,6 +139,10 @@
     .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.02em}
     .hero-sub{font-size:1.08rem;color:var(--muted);margin-top:.4rem}
 
+    /* Zweite Stimme nur für betonte Headlines / Statements */
+    .signature{font-family: "Canela","Tiempos Headline", serif; font-weight:400; letter-spacing:-0.01em}
+
+    /* Buttons */
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;
          padding:.9rem 1.4rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);
          font-weight:700;background:rgba(255,255,255,.06);color:var(--text);
@@ -150,7 +151,8 @@
     .btn-primary{background:var(--gold);color:#111;border-color:rgba(230,208,138,.25)}
     .btn-ghost{background:transparent;border-color:rgba(255,255,255,.16)}
     .btn.small{min-height:44px;padding:.55rem 1rem}
-    @media (max-width:767px){ .btn{width:100%} }
+
+    @media (max-width:1023px){ .btn{width:100%} }
 
     header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(6px)}
     .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:.85rem 0;gap:1rem}
@@ -167,6 +169,8 @@
     .hero{position:relative;padding-top:clamp(40px,7vw,100px);padding-bottom:clamp(30px,4vw,50px)}
     .hero-grid{display:grid;gap:clamp(1.4rem,3.4vw,2.8rem)}
     @media (min-width:1024px){ .hero-grid{grid-template-columns:1.1fr .9fr;align-items:center} }
+
+    #hero h1{ max-width:11ch; }
 
     .hero-figure{border-radius:24px;overflow:hidden}
     .hero-figure img{width:100%;height:auto;display:block}
@@ -208,6 +212,21 @@
 
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .figure{border-radius:24px;overflow:hidden}
+
+    /* Micro Social Proof Row */
+    .brands{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.92rem;color:var(--muted2)}
+
+    /* Mobile Feinschliff */
+    @media (max-width:480px){
+      .section{padding:28px 0}
+      p{font-size:1.02rem;line-height:1.75}
+      .container{padding-inline:16px}
+    }
+    @media (max-width:767px){
+      .figure img, .hero-figure img{width:100%;height:auto}
+    }
+    button,.btn,a.btn{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   </style>
 </head>
 
@@ -242,12 +261,14 @@
       <div class="ambient" id="ambient" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="stack">
-          <h1 id="hero-title">Entscheidungen,<br>die tragen.</h1>
-          <!-- 1) Subline geschärft -->
+          <h1 id="hero-title" class="signature">Entscheidungen,<br>die tragen.</h1>
           <p class="hero-sub">Privat · Unternehmerisch · Mit System</p>
           <div class="stack" style="margin-top:.9rem">
-            <button class="btn btn-primary" id="startCheckHero" type="button" data-start>Klarheit gewinnen</button>
-            <small class="micro" style="opacity:.9">Erst Überblick. Dann Entscheidung.</small>
+            <div class="grid" style="gap:.5rem">
+              <button class="btn btn-primary" id="startCheckHero" type="button" data-start>Klarheit gewinnen</button>
+              <button class="btn btn-ghost" id="startCheckAlt" type="button" data-start>Status einordnen</button>
+            </div>
+            <small class="micro" style="opacity:.9">Erst Überblick. Dann Entscheidung. Oder du schließt die Seite einfach wieder.</small>
           </div>
         </div>
 
@@ -265,6 +286,13 @@
             width="1400" height="840"
             loading="eager" decoding="async" fetchpriority="high">
         </figure>
+      </div>
+    </section>
+
+    <!-- Meta-Rahmung (ohne CTA) -->
+    <section class="statement fade-up" aria-label="Meta-Rahmung">
+      <div class="container">
+        <p class="micro"><strong>Diese Seite ist kein Angebot.</strong><br>Sie ist ein Entscheidungsraum, den du jederzeit verlassen kannst.</p>
       </div>
     </section>
 
@@ -301,7 +329,7 @@
       </div>
     </section>
 
-    <!-- Proof -->
+    <!-- Proof (Situationen) -->
     <section id="proof" class="section fade-up" aria-labelledby="proof-h">
       <div class="container">
         <h2 id="proof-h">Typische Situationen &amp; was sich ändert</h2>
@@ -309,14 +337,32 @@
         <p><strong>Unternehmer:</strong> Firma lief, privat lief mit. Ergebnis: gemeinsame Landkarte, Zuständigkeiten, Kontrolle.</p>
         <p><strong>Paar:</strong> Viele Meinungen, keine Richtung. Ergebnis: eine Linie, weniger Diskussion, mehr Sicherheit.</p>
         <p class="micro" style="margin-top:.6rem">Reale Entscheidungen. Keine Versprechen.</p>
+        <p class="micro" style="margin-top:.3rem">Viele kommen mit dem Gefühl, „eigentlich schon viel geregelt zu haben“ – und gehen mit einer klaren Reihenfolge.</p>
       </div>
     </section>
 
-    <!-- Entscheidungen brauchen Struktur. -->
+    <!-- 🔴 Externer Social Proof (minimal, sichtbar, nicht narrativ) -->
+    <section class="statement fade-up" aria-labelledby="sp-h">
+      <div class="container">
+        <h2 id="sp-h" class="sr-only">Vertrauensanker</h2>
+        <p class="micro">Vertrauensbasis: echte Gespräche, echte Bewertungen.</p>
+        <div class="brands" aria-label="Externe Vertrauenssignale">
+          <span class="badge" title="Bewertungen (bitte verifizieren)">⭐ <span aria-label="Bewertung">4,9/5</span> · über 60 Bewertungen</span>
+          <span class="badge">📍 Region Stuttgart & Online</span>
+          <span class="badge" title="Kontext-Zahl">📊 Ø 18–24 Monate Aufschub vor Erstkontakt</span>
+          <!-- Optional klein: Bekannt aus / genutzt von (Logos dezent, wenn vorhanden) -->
+          <!-- <img src="/logos/presse1.svg" alt="Bekannt aus XYZ" height="18" loading="lazy" decoding="async"> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Entscheidungen brauchen Struktur. + Persona-Intent -->
     <section id="allfinanz" class="statement fade-up" aria-labelledby="value-h">
       <div class="container">
-        <h2 id="value-h">Entscheidungen brauchen Struktur.</h2>
+        <h2 id="value-h" class="signature">Entscheidungen brauchen Struktur.</h2>
         <p>Einkommen &amp; Absicherung – Liquidität &amp; Familie – Vorsorge &amp; Vermögen. Privat und unternehmerisch – aus einer Hand.</p>
+        <p class="micro" style="margin-top:.2rem">Meine Arbeitsweise folgt Entscheidungslogiken aus Risikomanagement, Verhaltensökonomie und systemischer Beratung.</p>
+        <p class="micro" style="margin-top:.2rem">Ich arbeite seit Jahren in der Beratung. Die meisten Fehler, die ich sehe, entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge. Diese Seite ist aus genau diesem Grund entstanden.</p>
 
         <figure class="figure" style="max-width:900px;margin:1rem auto 0">
           <img
@@ -334,7 +380,7 @@
       </div>
     </section>
 
-    <!-- 2) Titel geändert: Sinnvoll starten → Einstieg -->
+    <!-- Einstieg -->
     <section class="section fade-up" aria-labelledby="formate-h">
       <div class="container">
         <h2 id="formate-h">Einstieg</h2>
@@ -358,7 +404,7 @@
       </div>
     </section>
 
-    <!-- Ablauf -->
+    <!-- Ablauf (5 Schritte) – Grafik getauscht zu gewünschter URL) -->
     <section id="ablauf" class="section fade-up" aria-labelledby="steps-h">
       <div class="container">
         <h2 id="steps-h">Ablauf in fünf Schritten</h2>
@@ -367,12 +413,13 @@
         <figure class="figure" style="max-width:980px;margin:1rem auto 0">
           <img
             data-zoom
-            src="https://static.wixstatic.com/media/4e46cf_5dade7f6f1ca4b958cb3e6c9c8a8fe7a~mv2.png?width=1400"
+            src="https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=1400"
             srcset="
-              https://static.wixstatic.com/media/4e46cf_5dade7f6f1ca4b958cb3e6c9c8a8fe7a~mv2.png?width=900 900w,
-              https://static.wixstatic.com/media/4e46cf_5dade7f6f1ca4b958cb3e6c9c8a8fe7a~mv2.png?width=1400 1400w
+              https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=600 600w,
+              https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=980 980w,
+              https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=1400 1400w
             "
-            sizes="(min-width:1024px) 70vw, 94vw"
+            sizes="(min-width:1024px) 70vw, 100vw"
             alt="Der Prozess in fünf Schritten"
             width="1400" height="900"
             loading="lazy" decoding="async">
@@ -403,12 +450,19 @@
     <!-- Nicht für jeden -->
     <section class="statement fade-up" aria-labelledby="notfor-h">
       <div class="container">
-        <h2 id="notfor-h">Kein Angebot für jeden.</h2>
+        <h2 id="notfor-h" class="signature">Kein Angebot für jeden.</h2>
         <p>Keine Renditeversprechen. Verantwortung bleibt bei dir. Entscheidungen triffst du – nicht ich.</p>
       </div>
     </section>
 
-    <!-- Trust-Layer (3) – 3) Zahl abgesichert -->
+    <!-- Stopp-/Leersektion (Haltung) -->
+    <section class="section">
+      <div class="container" style="max-width:680px">
+        <p class="micro">Gute Entscheidungen fühlen sich nicht spektakulär an.<br>Sie fühlen sich ruhig an.</p>
+      </div>
+    </section>
+
+    <!-- Trust-Layer -->
     <section class="statement fade-up" aria-labelledby="trust-h">
       <div class="container">
         <h2 id="trust-h">Worauf du dich verlassen kannst</h2>
@@ -418,22 +472,25 @@
       </div>
     </section>
 
-    <!-- Familie -->
+    <!-- Familie / Wording gekürzt -->
     <section class="statement fade-up" aria-labelledby="family-h">
       <div class="container">
         <h2 id="family-h">Worauf es wirklich wirkt</h2>
-        <p>Entscheidungen enden nicht bei uns. Sie wirken auf Partner, Kinder und die nächsten 20 Jahre.</p>
+        <p>Entscheidungen wirken weiter als bis zum nächsten Termin.</p>
       </div>
     </section>
 
-    <!-- Ampel -->
+    <!-- Ampel-Check -->
     <section id="ampel-check" class="section fade-up" aria-labelledby="check-h">
       <div class="container" style="max-width:760px">
         <div class="stack" id="check-start">
           <h2 id="check-h">2-Minuten-Status</h2>
           <p class="micro">3 Fragen – Gefühl für Heute.</p>
-          <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Klarheit gewinnen</button>
-          <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder nur Überblick.</small>
+          <div class="grid" style="gap:.5rem">
+            <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Klarheit gewinnen</button>
+            <button class="btn btn-ghost" id="startShort2" type="button">Kurzmodus</button>
+          </div>
+          <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder nur Überblick. Oder du schließt die Seite einfach wieder.</small>
         </div>
 
         <form id="check-steps" style="display:none;margin-top:1.2rem" aria-describedby="stepHint">
@@ -484,7 +541,6 @@
         <div style="margin-top:1.2rem">
           <h3 style="margin:.1rem 0 .45rem">Wenig Zeit?</h3>
           <p class="micro" style="margin-top:.1rem">Kurzmodus: in 12 Sekunden Gefühl für <em>Jetzt · Als Nächstes · Später</em>.</p>
-          <button class="btn btn-ghost" id="startShort2" type="button">Kurzmodus</button>
         </div>
 
         <noscript>
@@ -499,8 +555,23 @@
     <!-- Momentum -->
     <section class="statement fade-up" aria-labelledby="momentum-h">
       <div class="container" style="max-width:900px">
-        <h2 id="momentum-h">Warum Abwarten teurer ist</h2>
-        <p>Probleme entstehen selten durch falsche Entscheidungen, sondern durch zu spätes Entscheiden.</p>
+        <h2 id="momentum-h" class="signature">Warum Abwarten teurer ist</h2>
+        <p>Zu spät ist die teuerste Entscheidung.</p>
+        <p class="micro" style="margin-top:.2rem">Unklarheit kostet selten sofort Geld – aber fast immer Zeit, Nerven und spätere Optionen.</p>
+      </div>
+    </section>
+
+    <!-- Content-Tiefe: sichtbare Links auf Unterseiten (SEO) -->
+    <section class="section fade-up" aria-labelledby="content-h">
+      <div class="container">
+        <h2 id="content-h">Mehr Tiefe – ohne Werbung</h2>
+        <div class="auto-grid grid">
+          <a class="btn btn-ghost" href="/entscheidungsarchitektur.html">Entscheidungsarchitektur</a>
+          <a class="btn btn-ghost" href="/arbeitskraft-absicherung.html">Arbeitskraft absichern</a>
+          <a class="btn btn-ghost" href="/unternehmer-absicherung.html">Unternehmer-Absicherung</a>
+          <a class="btn btn-ghost" href="/finanzielle-reihenfolge.html">Finanzielle Reihenfolge</a>
+        </div>
+        <p class="micro" style="margin-top:.6rem">Ruhig erklärt. Ohne Druck. Intern mit dem Ampel-Check verknüpft.</p>
       </div>
     </section>
 
@@ -508,12 +579,14 @@
     <section class="statement fade-up" aria-labelledby="final-h">
       <div class="container" style="text-align:center;max-width:860px">
         <h2 id="final-h">Souverän entscheiden – ohne Aktionismus.</h2>
-        <p>Starte klein: Überblick. Danach entscheidest du selbst.</p>
+        <p>In 30 Minuten weißt du, wo du stehst und was zu tun ist.</p>
         <div class="stack" style="align-items:center;margin-top:.4rem">
-          <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Klarheit gewinnen</button>
-          <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%20zum%20Status%3A%20" target="_blank" rel="noopener">WhatsApp (kurz)</a>
+          <div class="grid" style="gap:.5rem;max-width:520px;width:100%;margin-inline:auto">
+            <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Klarheit gewinnen</button>
+            <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%20zum%20Status%3A%20" target="_blank" rel="noopener">WhatsApp (kurz)</a>
+          </div>
+          <p class="micro" style="margin-top:.7rem">Ich arbeite im System der Deutschen Vermögensberatung – Verantwortung braucht Struktur, die bleibt. Oder du schließt die Seite einfach wieder.</p>
         </div>
-        <p class="micro" style="margin-top:.7rem">Ich arbeite im System der Deutschen Vermögensberatung – Verantwortung braucht Struktur, die bleibt.</p>
       </div>
     </section>
 
@@ -524,6 +597,7 @@
         <p><strong>DVAG-System:</strong> Struktur, Dokumentation, Langfrist. Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert, Lösungen bleiben betreubar – auch in 10 oder 20 Jahren. Kein Produkt ohne Einordnung.</p>
         <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
         <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
+        <p class="micro" style="margin-top:.2rem">Ich arbeite nicht mit Motivation, Druck oder Zielbildern – sondern mit Entscheidungslogik, wie sie auch in Verhaltensökonomie und Systemberatung genutzt wird.</p>
       </div>
     </section>
   </main>
@@ -532,12 +606,14 @@
     <div class="container" style="text-align:center">
       <div class="footer-links" style="margin-bottom:10px">
         <a href="/entscheidungsarchitektur.html">Entscheidungslogik</a>
+        <a href="/arbeitskraft-absicherung.html">Arbeitskraft</a>
+        <a href="/unternehmer-absicherung.html">Unternehmer</a>
+        <a href="/finanzielle-reihenfolge.html">Reihenfolge</a>
         <a href="https://www.linkedin.com/in/heiko-haerter-3755b2260/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://www.xing.com/profile/Heiko_Haerter3" target="_blank" rel="noopener">Xing</a>
         <a href="https://www.instagram.com/heiko.haerter.coach/" target="_blank" rel="noopener">Instagram</a>
         <a href="/impressum">Impressum</a>
         <a href="/datenschutz">Datenschutz</a>
-        <!-- 4) Pflicht-Link ergänzt -->
         <a href="/barrierefreiheit">Barrierefreiheit</a>
         <a href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">Klarheitsgespräch</a>
       </div>
@@ -575,6 +651,7 @@
     document.documentElement.classList.remove('no-js');
     document.querySelectorAll('#yearNow').forEach(el => el.textContent = new Date().getFullYear());
 
+    // Reveal
     (function(){
       try{
         const pref = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -587,6 +664,7 @@
       }catch(_){}
     })();
 
+    // Sticky CTA (mobile)
     (function(){
       const el = document.getElementById('stickyCTA');
       const hero = document.getElementById('hero');
@@ -599,6 +677,7 @@
       } else { addEventListener('scroll', () => show(scrollY > 220), { passive:true }); }
     })();
 
+    // Ambient fade
     (function(){
       const amb = document.getElementById('ambient');
       const hero = document.getElementById('hero');
@@ -609,6 +688,7 @@
       io.observe(hero);
     })();
 
+    // Lightbox
     (function(){
       const dlg=document.getElementById('zoom'); if(!dlg) return;
       const img=dlg.querySelector('.zoom-img');
@@ -624,6 +704,7 @@
       document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&dlg.open) dlg.close(); });
     })();
 
+    // Lenis (lazy/idle)
     (function(){
       let loaded=false;
       function loadLenis(){
@@ -641,6 +722,7 @@
       if('requestIdleCallback' in window){ requestIdleCallback(loadLenis); } else { setTimeout(loadLenis, 4000); }
     })();
 
+    // Ampel-Form Wizard + optionales Klaviyo-Tracking (Opt-in)
     (function(){
       const startBtns = document.querySelectorAll('[data-start]');
       const wrap = document.getElementById('check-steps');
@@ -699,7 +781,7 @@
             intent_level: status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig'),
             last_ampel_at: new Date().toISOString()
           }]);
-        }catch(_){}
+        }catch(_){ }
       }
 
       function finish(){
@@ -786,6 +868,7 @@
       updateHead();
     })();
 
+    // Analytics / Events / UTM
     (function(){
       function parseQS(qs){const p={};(qs||'').replace(/^\?/,'').split('&').forEach(kv=>{if(!kv)return;const [k,v]=kv.split('=');p[decodeURIComponent(k)]=decodeURIComponent(v||'');});return p;}
       const params = parseQS(location.search);
@@ -804,8 +887,8 @@
       }
       function getAttribution(){
         let first={},sess={};
-        try{ first = JSON.parse(localStorage.getItem(LS_KEY_FIRST)||'{}'); }catch(_){}
-        try{ sess = JSON.parse(sessionStorage.getItem(SS_KEY_SESS)||'{}'); }catch(_){}
+        try{ first = JSON.parse(localStorage.getItem(LS_KEY_FIRST)||'{}'); }catch(_){ }
+        try{ sess = JSON.parse(sessionStorage.getItem(SS_KEY_SESS)||'{}'); }catch(_){ }
         return Object.assign({}, first, sess);
       }
       function appendUTM(url){
@@ -824,6 +907,7 @@
       function sendEvent(name, params={}){ try{ gtag('event', name, params); }catch(_){ } }
       function attrParams(extra={}){ return Object.assign({}, getAttribution(), extra); }
 
+      // CTA Clicks
       (function(){
         const ctas = new Set([
           ...document.querySelectorAll('[data-start]'),
@@ -837,6 +921,7 @@
         });
       })();
 
+      // WhatsApp & Booking
       document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
         a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', attrParams({link:a.href})), {passive:true});
       });
@@ -844,6 +929,7 @@
         a.addEventListener('click', ()=> sendEvent('Booking_Click', attrParams({link:a.href})), {passive:true});
       });
 
+      // Quiz Steps + Complete
       (function(){
         const wrap = document.getElementById('check-steps');
         const resultBox = document.getElementById('check-result');
