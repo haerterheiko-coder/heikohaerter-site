@@ -1,4 +1,4 @@
-<!-- /index.html — Decision Space v4.2 (2026-Wording final, meta gebündelt, persona + seals, refined CTAs) -->
+<!-- /index.html — Decision Space v4.3 (2026-Wording final, Meta gebündelt, Personas + weiße Seals, feinere CTAs, Eyecatcher/Animationen) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -129,18 +129,22 @@
     .hero-sub{font-size:1.08rem;color:var(--muted);margin-top:.4rem}
     .signature{font-family: "Canela","Tiempos Headline", serif; font-weight:400; letter-spacing:-0.01em}
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.9rem 1.4rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);font-weight:700;background:rgba(255,255,255,.06);color:var(--text);transition:transform .18s var(--ease)}
-    .btn:hover{transform:translateY(-1px)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.9rem 1.4rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);font-weight:700;background:rgba(255,255,255,.06);color:var(--text);transition:transform .18s var(--ease), box-shadow .25s var(--ease)}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 28px rgba(0,0,0,.35)}
     .btn-primary{background:var(--gold);color:#111;border-color:rgba(230,208,138,.25)}
     .btn-ghost{background:transparent;border-color:rgba(255,255,255,.16)}
     .btn.small{min-height:44px;padding:.55rem 1rem}
+    .btn.secondary{opacity:.9;transform:none}
     @media (max-width:1023px){ .btn{width:100%} }
 
     header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(6px)}
     .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:.85rem 0;gap:1rem}
     .brand{display:flex;flex-direction:column}
     .brand-top{display:flex;align-items:center;gap:.65rem;font-weight:700}
-    .brand-dot{width:.95rem;height:.95rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.55)}
+    .brand-dot{width:.95rem;height:.95rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.55); animation: pulse 2.4s ease-in-out infinite }
+
+    @keyframes pulse{0%,100%{filter:drop-shadow(0 0 0 rgba(230,208,138,.0))}50%{filter:drop-shadow(0 0 10px rgba(230,208,138,.5))}}
+
     .nav{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
     .nav a.link{padding:.35rem .6rem;border-radius:999px;color:var(--muted2)}
     .nav a.link:hover{color:var(--text)}
@@ -150,7 +154,9 @@
     .hero-grid{display:grid;gap:clamp(1.6rem,3.6vw,3rem)}
     @media (min-width:1024px){ .hero-grid{grid-template-columns:1.15fr .85fr;align-items:center} }
     #hero h1{ max-width:16ch; }
-    .hero-figure{border-radius:24px;overflow:hidden}
+    .hero-figure{border-radius:24px;overflow:hidden; transform:translateZ(0)}
+    .hero-figure img{transition:transform 6s ease;}
+    .hero-figure:hover img{transform:scale(1.04)}
 
     .statement .container{max-width:920px}
 
@@ -185,6 +191,9 @@
 
     .brands{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
     .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.92rem;color:var(--muted2)}
+
+    /* Weiß hinterlegte Siegel, damit schwarze Schrift lesbar bleibt */
+    .seal{background:#fff;border-radius:10px;padding:6px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 0 rgba(255,255,255,.05), 0 8px 24px rgba(0,0,0,.28)}
 
     .chapters{position:fixed;left:18px;top:120px;display:none;flex-direction:column;gap:12px;z-index:60}
     .chapters a{display:flex;align-items:center;gap:8px;color:var(--muted2);font-size:.9rem}
@@ -244,19 +253,21 @@
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="stack">
-          <p class="micro eyebrow">Finanz- &amp; Absicherungsberatung für Menschen mit Verantwortung</p>
+          <p class="micro eyebrow">Für Menschen mit Verantwortung – privat &amp; unternehmerisch</p>
           <h1 id="hero-title" class="signature">Damit Finanzen nicht ständig im Kopf sind.</h1>
           <p class="hero-sub">Privat · Familie · Verantwortung</p>
+          <p class="micro" style="margin-top:.1rem">Die meisten merken erst zu spät, dass sie etwas Wichtiges übersehen haben.</p>
           <div class="stack" style="margin-top:.9rem">
             <div class="grid" style="gap:.5rem">
               <button class="btn btn-primary" id="startCheckHero" type="button" data-start>Kurz prüfen, ob alles passt</button>
-              <button class="btn btn-ghost" id="startCheckAlt" type="button" data-start>Einmal sauber durchgehen</button>
+              <button class="btn btn-ghost secondary" id="startCheckAlt" type="button" data-start>Einmal sauber durchgehen</button>
             </div>
+            <small class="micro" style="opacity:.9">Keine Zeit? → 2 Minuten Überblick reichen.</small>
             <small class="micro" style="opacity:.9">Wenn nichts zu tun ist, ist das das Ergebnis.</small>
           </div>
         </div>
 
-        <figure class="hero-figure">
+        <figure class="hero-figure" aria-label="Ruhige Beratungsszene">
           <img data-zoom
             src="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400"
             srcset="
@@ -273,7 +284,7 @@
     <section class="statement section fade-up" aria-labelledby="ichbin-h">
       <div class="container">
         <h2 id="ichbin-h">Ich bin Heiko Haerter.</h2>
-        <p>Ich begleite Menschen und Unternehmer dabei, ihre Finanzen so zu ordnen, dass Entscheidungen leichter werden – nicht schwerer.</p>
+        <p>Ich begleite Menschen und Unternehmer dabei, ihre Finanzen so zu ordnen, dass Entscheidungen leichter werden – und nicht ständig im Hinterkopf bleiben.</p>
       </div>
     </section>
 
@@ -291,7 +302,9 @@
       <div class="container">
         <h2 id="warum-begleitung-h">Warum Begleitung hier Sinn macht</h2>
         <p>Die meisten Probleme entstehen nicht, weil Menschen zu wenig tun – sondern weil Themen einzeln geregelt werden und Zusammenhänge fehlen.</p>
+        <p class="micro">Besonders dann, wenn Familie, Einkommen oder Firma voneinander abhängen.</p>
         <p class="micro">Ein Vermögensberater ist kein Entscheider. Sondern jemand, der mitdenkt, Reihenfolge hält und dafür sorgt, dass nichts Wichtiges untergeht.</p>
+        <p class="micro">Allein übersieht man selten alles – aber fast immer die Reihenfolge.</p>
       </div>
     </section>
 
@@ -330,7 +343,7 @@
           </figure>
           <figure class="card">
             <img src="https://static.wixstatic.com/media/4e46cf_11b2987a8b88423da19e51813b3f8e8f~mv2.jpeg?width=1200" alt="Selbstständiger" width="1200" height="800" loading="lazy" decoding="async">
-            <figcaption class="cap"><strong>Der Selbstständige</strong><span class="micro">Firma läuft, privat läuft mit. Ergebnis: gemeinsame Landkarte, Zuständigkeiten.</span></figcaption>
+            <figcaption class="cap"><strong>Der Selbstständige</strong><span class="micro">Lief jahrelang gut – bis ein Ausfall alles gleichzeitig betroffen hätte. Ergebnis: gemeinsame Landkarte, Zuständigkeiten.</span></figcaption>
           </figure>
           <figure class="card">
             <img src="https://static.wixstatic.com/media/4e46cf_f7b7f5c276c64948819f37adcf33b813~mv2.jpeg?width=1200" alt="Sicherheitsorientierte Person" width="1200" height="800" loading="lazy" decoding="async">
@@ -349,9 +362,9 @@
           <a class="badge" href="/bewertungen" rel="nofollow">⭐ Ø sehr hohe Kundenzufriedenheit (einsehbar)</a>
           <span class="badge">📍 Region Stuttgart & Online</span>
           <span class="badge" title="Kontext-Zahl">📊 Viele kommen spät – wir ordnen zuerst</span>
-          <img src="https://static.wixstatic.com/shapes/4e46cf_077e599467a543daa505ac661e0366a2.svg" alt="Deutschlands Kundenchampions 2025 Siegel" width="120" height="36" loading="lazy" decoding="async" style="opacity:.9">
-          <img src="https://static.wixstatic.com/media/4e46cf_bb291e43f4e548aead72419e831d68cf~mv2.png" alt="Bundesverband Deutscher Vermögensberater Siegel" width="120" height="36" loading="lazy" decoding="async" style="opacity:.9">
-          <img src="https://static.wixstatic.com/shapes/4e46cf_d0b890250e294c1984485c6a8d90edb0.svg" alt="Sehr guter Kundenservice – Testsiegel" width="120" height="36" loading="lazy" decoding="async" style="opacity:.9">
+          <span class="seal"><img src="https://static.wixstatic.com/shapes/4e46cf_077e599467a543daa505ac661e0366a2.svg" alt="Deutschlands Kundenchampions 2025 Siegel" width="120" height="36" loading="lazy" decoding="async"></span>
+          <span class="seal"><img src="https://static.wixstatic.com/media/4e46cf_bb291e43f4e548aead72419e831d68cf~mv2.png" alt="Bundesverband Deutscher Vermögensberater Siegel" width="120" height="36" loading="lazy" decoding="async"></span>
+          <span class="seal"><img src="https://static.wixstatic.com/shapes/4e46cf_d0b890250e294c1984485c6a8d90edb0.svg" alt="Sehr guter Kundenservice – Testsiegel" width="120" height="36" loading="lazy" decoding="async"></span>
         </div>
       </div>
     </section>
@@ -366,7 +379,7 @@
 
         <!-- Portrait (ruhig) -->
         <figure class="portrait">
-          <img src="/img/portrait-heiko.jpg" alt="Heiko Haerter – ruhig im Gespräch, neutraler Hintergrund" width="1200" height="800" loading="lazy" decoding="async">
+          <img src="https://static.wixstatic.com/media/4e46cf_e4d34f1837d445c7afee054525608197~mv2.png" alt="Heiko Haerter – ruhig im Gespräch, neutraler Hintergrund" width="1200" height="800" loading="lazy" decoding="async">
         </figure>
 
         <!-- Visual: Entscheidungsbereiche -->
@@ -382,7 +395,7 @@
       </div>
     </section>
 
-    <!-- Einstieg / Formate (Feinschliff) + FIX: fehlendes Bild -->
+    <!-- Einstieg / Formate (Feinschliff) -->
     <section class="section fade-up" aria-labelledby="formate-h">
       <div class="container">
         <h2 id="formate-h">Einstieg</h2>
@@ -470,6 +483,7 @@
         <div class="stack" id="check-start">
           <h2 id="check-h">Kurz-Check für deine finanzielle Lage</h2>
           <p class="micro">3 Fragen. Bauchgefühl reicht.</p>
+          <p class="micro">Keine Vorbereitung. Keine Daten. Kein Verkauf.</p>
           <div class="grid" style="gap:.5rem">
             <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Kurz prüfen, ob alles passt</button>
             <button class="btn btn-ghost" id="startShort2" type="button">Einmal sauber durchgehen</button>
@@ -550,7 +564,7 @@
         <p><strong>DVAG-System:</strong> Struktur, Dokumentation, Langfrist. Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert, Lösungen bleiben betreubar – auch in 10 oder 20 Jahren. Kein Produkt ohne Einordnung.</p>
         <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
         <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
-        <p class="micro" style="margin-top:.2rem">Ich arbeite nicht mit Motivation, Druck oder Zielbildern – sondern mit Entscheidungslogik, wie sie auch in Verhaltensökonomie und Systemberatung genutzt wird.</p>
+        <!-- Erklärende Theorie bewusst gestrichen, wie empfohlen -->
       </div>
     </section>
   </main>
@@ -719,7 +733,7 @@
             <div class="result-title">${m[k][0]}</div>
             <p>${m[k][1]}</p>
             <div class="stack" style="text-align:center;margin-top:.8rem">
-              ${k==='red' ? `<a href="${waLink('Hi Heiko, kurz 10 Minuten sortieren. Mein Status: ROT.')}` + `" target="_blank" rel="noopener" class="btn btn-primary">Kurz sprechen</a>` : ``}
+              ${k==='red' ? `<a href="${waLink('Hi Heiko, kurz 10 Minuten sortieren. Mein Status: ROT.')}" target="_blank" rel="noopener" class="btn btn-primary">Kurz sprechen</a>` : ``}
               <a href="${book}" class="btn ${k==='red'?'btn-ghost':'btn-primary'}" rel="nofollow noopener">Kurz prüfen, ob alles passt</a>
             </div>
           </div>`;
@@ -755,12 +769,8 @@
       function attrParams(extra={}){ return Object.assign({}, getAttribution(), extra); }
 
       (function(){ const ctas = new Set([ ...document.querySelectorAll('[data-start]'), document.getElementById('ctaFinal') ].filter(Boolean)); ctas.forEach(el=>{ el.addEventListener('click', ()=> sendEvent('CTA_Click', attrParams({ cta_id: el.id || el.getAttribute('data-ctx') || 'cta', cta_text: (el.textContent||'').trim() })), {passive:true}); }); })();
-      document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
-        a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', attrParams({link:a.href})), {passive:true});
-      });
-      document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{
-        a.addEventListener('click', ()=> sendEvent('Booking_Click', attrParams({link:a.href})), {passive:true});
-      });
+      document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{ a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', attrParams({link:a.href})), {passive:true}); });
+      document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{ a.addEventListener('click', ()=> sendEvent('Booking_Click', attrParams({link:a.href})), {passive:true}); });
     })();
   </script>
 </body>
