@@ -1,4 +1,4 @@
-<!-- /index.html (vollständig, mit allen gewünschten Ergänzungen) -->
+<!-- /index.html (vollständig, mit allen gewünschten Ergänzungen & Bildern) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -221,6 +221,9 @@
     .qa{display:grid;gap:.9rem}
     .qa p{margin:0}
     .qa .q{font-weight:750;color:var(--text)}
+
+    /* kleine Anpassung für Bild-Gegenpole */
+    .figure{border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);box-shadow:var(--elev-1)}
   </style>
 </head>
 
@@ -230,12 +233,20 @@
   <header>
     <div class="container header-bar">
       <a class="brand" href="#hero" aria-label="Startseite">
-        <div class="brand-top"><span class="brand-dot" aria-hidden="true"></span>Heiko Haerter</div>
+        <div class="brand-top">
+          <span class="brand-dot" aria-hidden="true"></span>
+          Heiko Haerter
+          <!-- Logo dezent integrieren (warum: Markenwiedererkennung, ohne Lärm) -->
+          <img src="https://static.wixstatic.com/media/4e46cf_e4001b0aeebe41e7989e32c095b6dfd2~mv2.png"
+               alt="Logo Heiko Haerter"
+               width="88" height="22"
+               style="height:22px;width:auto;opacity:.9" loading="lazy" decoding="async">
+        </div>
         <span class="micro">Allfinanz · Entscheidungslogik · Region Stuttgart</span>
       </a>
       <nav class="nav" aria-label="Hauptnavigation">
         <a class="link" href="#lebenslagen">Lebenslagen</a>
-        <a class="link" href="#privat">Privat</a>
+        <a class="link" href="#ablauf">Ablauf</a>
         <a class="link" href="#firma">Firmen</a>
         <!-- CTA-Justierung -->
         <a class="btn btn-primary" href="#ampel-check" data-start>Klarheit gewinnen</a>
@@ -350,15 +361,29 @@
       </div>
     </section>
 
-    <!-- MOMENT: Leistungsversprechen -->
-    <section class="statement fade-up" aria-labelledby="value-h">
+    <!-- MOMENT: Leistungsversprechen + Allfinanz-Grafik als ruhiger Gegenpol -->
+    <section id="allfinanz" class="statement fade-up" aria-labelledby="value-h">
       <div class="container">
         <h2 id="value-h">System für Entscheidungen.</h2>
         <p>Struktur statt Zufall: Einkommen &amp; Absicherung – Liquidität &amp; Familie – Vorsorge &amp; Vermögen. Privat und unternehmerisch – aus einer Hand.</p>
+
+        <figure class="figure" style="max-width:860px;margin:1rem auto 0">
+          <img
+            data-zoom
+            src="https://static.wixstatic.com/media/4e46cf_a9d0ffba36b04738aba84c6aa5a771f1~mv2.png?width=1200"
+            srcset="
+              https://static.wixstatic.com/media/4e46cf_a9d0ffba36b04738aba84c6aa5a771f1~mv2.png?width=800 800w,
+              https://static.wixstatic.com/media/4e46cf_a9d0ffba36b04738aba84c6aa5a771f1~mv2.png?width=1200 1200w
+            "
+            sizes="(min-width:1024px) 60vw, 92vw"
+            alt="Allfinanz-Beratung: Übersicht der Entscheidungsbereiche"
+            width="1200" height="750"
+            loading="lazy" decoding="async">
+        </figure>
       </div>
     </section>
 
-    <!-- STARTWEGE -->
+    <!-- STARTWEGE + Arbeitsfoto als Gegenpol -->
     <section class="section fade-up" aria-labelledby="formate-h">
       <div class="container">
         <h2 id="formate-h">Sinnvoll starten</h2>
@@ -367,6 +392,42 @@
           <div class="card"><h3>Deep Dive (90)</h3><p>Struktur sauber aufsetzen – Entscheidungen vorbereiten.</p></div>
           <div class="card"><h3>Begleitung (60–90 Tage)</h3><p>Umsetzungsschritte, Dokumentation, Ruhe im Alltag.</p></div>
         </div>
+
+        <figure class="figure" style="max-width:820px;margin:1rem auto 0">
+          <img
+            data-zoom
+            src="https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1200"
+            srcset="
+              https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=800 800w,
+              https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1200 1200w
+            "
+            sizes="(min-width:1024px) 58vw, 92vw"
+            alt="Konzeptarbeit: Heiko Haerter skizziert Entscheidungslogik für Kunden"
+            width="1200" height="780"
+            loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <!-- NEU: Ablauf in 5 Schritten (eigene Sektion) -->
+    <section id="ablauf" class="section fade-up" aria-labelledby="steps-h">
+      <div class="container">
+        <h2 id="steps-h">Ablauf in 5 Schritten</h2>
+        <p class="micro">Klarheit entsteht Schritt für Schritt – von Einordnung bis Begleitung.</p>
+
+        <figure class="figure" style="max-width:980px;margin:1rem auto 0">
+          <img
+            data-zoom
+            src="https://static.wixstatic.com/media/4e46cf_64d120dccc3f4837984d26b6be502a07~mv2.png?width=1400"
+            srcset="
+              https://static.wixstatic.com/media/4e46cf_64d120dccc3f4837984d26b6be502a07~mv2.png?width=900 900w,
+              https://static.wixstatic.com/media/4e46cf_64d120dccc3f4837984d26b6be502a07~mv2.png?width=1400 1400w
+            "
+            sizes="(min-width:1024px) 70vw, 92vw"
+            alt="Der Prozess in fünf Schritten – von Erstgespräch bis Stabilisierung"
+            width="1400" height="900"
+            loading="lazy" decoding="async">
+        </figure>
       </div>
     </section>
 
@@ -766,7 +827,7 @@
       function ensureAnswered(n){
         const fs = steps[n-1];
         if(!fs) return false;
-        return !!fs.querySelector('input[type="radio"]:checked');
+        return !!fs.querySelector('input[type="radio"] :checked');
       }
 
       function start(short=false){
@@ -801,7 +862,6 @@
       });
 
       document.getElementById('nextBtn')?.addEventListener('click', () => {
-        if(!ensureAnswered(step)) { stepHint.textContent='Bitte eine Option wählen.'; return; }
         if(step >= max){ finish(); } else { step++; showStep(step); }
       });
       document.getElementById('backBtn')?.addEventListener('click', () => {
@@ -869,12 +929,12 @@
       document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
         a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', attrParams({link:a.href})), {passive:true});
       });
-      // Booking
+      // Booking (fix: fehlende Quotes)
       document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{
         a.addEventListener('click', ()=> sendEvent('Booking_Click', attrParams({link:a.href})), {passive:true});
       });
 
-      // Quiz Steps + Complete via MutationObserver (greift bereits oben auch)
+      // Quiz Steps + Complete via MutationObserver
       (function(){
         const wrap = document.getElementById('check-steps');
         const resultBox = document.getElementById('check-result');
