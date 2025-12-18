@@ -1,12 +1,12 @@
-<!-- /index.html -->
+<!-- =========================
+/index.html  (vollständig)
+========================= -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="format-detection" content="telephone=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#05070E" />
@@ -73,6 +73,25 @@
   }
   </script>
 
+  <!-- GA4 + Consent Mode v2 (Default: denied; CMP kann später update setzen) -->
+  <script>
+    // Warum: DSGVO-defaults sicher; CMP hebt später auf 'granted'.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { send_page_view: true });
+  </script>
+
   <style>
     :root{
       --bg:#05070E; --bg2:#02040A;
@@ -98,7 +117,7 @@
       -webkit-font-smoothing:antialiased; line-height:1.45; overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
-    img,svg,video{display:block;max-width:100%;height:auto}
+    img{display:block;max-width:100%;height:auto}
 
     .section{padding:clamp(28px,5.6vw,84px) 0}
     .container{max-width:1140px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
@@ -147,7 +166,6 @@
     .hero-grid{display:grid;gap:clamp(1.4rem,3.4vw,2.8rem)}
     @media (min-width:1024px){ .hero-grid{grid-template-columns:1.1fr .9fr;align-items:center} }
 
-    /* Bildrahmen rechts */
     .hero-figure{border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);box-shadow:var(--elev-1)}
     .hero-figure img{width:100%;height:auto;display:block}
 
@@ -190,19 +208,16 @@
     .tiny{font-size:.88rem;color:var(--muted2);line-height:1.45}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    /* Progress */
     progress{appearance:none;-webkit-appearance:none;height:10px;width:100%;
       background:rgba(255,255,255,.08);border-radius:999px;border:1px solid rgba(255,255,255,.12);overflow:hidden}
     progress::-webkit-progress-bar{background:transparent}
     progress::-webkit-progress-value{background:linear-gradient(90deg,var(--gold),var(--gold2))}
     progress::-moz-progress-bar{background:linear-gradient(90deg,var(--gold),var(--gold2))}
 
-    /* Radio-Fokus/Checked */
     label.btn.small{position:relative;isolation:isolate}
     label.btn.small:focus-within{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
     label.btn.small input:checked + span{ text-decoration:underline; text-underline-offset:.18em; }
 
-    /* inert wenn Dialog offen */
     [inert]{pointer-events:none;user-select:none}
   </style>
 </head>
@@ -318,7 +333,7 @@
             </div>
           </div>
 
-          <!-- passt hier gut als visuelle Ruhe – lazy -->
+          <!-- Optionales Bild als ruhiger Gegenpol -->
           <figure class="hero-figure" style="max-width:720px; margin:0 auto">
             <img
               data-zoom
@@ -608,7 +623,7 @@
       }
 
       function trackAmpelResult(status, score) {
-        // nur nach Opt-in
+        // Warum: wird nur nach Opt-in gesendet
         try{
           if (!window.klaviyo || !Array.isArray(window.klaviyo)) return;
           window.klaviyo.push(['track','Ampel Ergebnis',{
@@ -687,7 +702,6 @@
         setTimeout(()=>start(true), 120);
       }));
 
-      // Radio-Klicks: advance on choice
       steps.forEach((fs, idx) => {
         fs.addEventListener('change', e => {
           const val = Number((e.target && e.target.value) || 0);
@@ -697,16 +711,102 @@
         });
       });
 
-      nextBtn.addEventListener('click', () => {
+      document.getElementById('nextBtn')?.addEventListener('click', () => {
         if(!ensureAnswered(step)) { stepHint.textContent='Bitte eine Option wählen.'; return; }
         if(step >= max){ finish(); } else { step++; showStep(step); }
       });
-      backBtn.addEventListener('click', () => {
+      document.getElementById('backBtn')?.addEventListener('click', () => {
         if(step <= 1) return;
         step--; showStep(step);
       });
 
       updateHead();
+    })();
+
+    // Analytics / Events / UTM
+    (function(){
+      function parseQS(qs){const p={};(qs||'').replace(/^\?/,'').split('&').forEach(kv=>{if(!kv)return;const [k,v]=kv.split('=');p[decodeURIComponent(k)]=decodeURIComponent(v||'');});return p;}
+      const params = parseQS(location.search);
+      const UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','msclkid','fbclid'];
+      const hasUTM = UTM_KEYS.some(k => params[k]);
+      const LS_KEY_FIRST = 'hh_utm_first';
+      const SS_KEY_SESS  = 'hh_utm_session';
+      function store(obj, key){ try{ localStorage.setItem(key, JSON.stringify(obj)); }catch(_){ } }
+      function load(key){ try{ const v=localStorage.getItem(key); return v? JSON.parse(v):null; }catch(_){ return null; } }
+      function sstore(obj, key){ try{ sessionStorage.setItem(key, JSON.stringify(obj)); }catch(_){} }
+
+      if(hasUTM){
+        const minimal={}; UTM_KEYS.forEach(k=>{ if(params[k]) minimal[k]=params[k]; });
+        if(!load(LS_KEY_FIRST)){ store(minimal, LS_KEY_FIRST); }
+        sstore(minimal, SS_KEY_SESS);
+      }
+      function getAttribution(){
+        let first={},sess={};
+        try{ first = JSON.parse(localStorage.getItem(LS_KEY_FIRST)||'{}'); }catch(_){}
+        try{ sess = JSON.parse(sessionStorage.getItem(SS_KEY_SESS)||'{}'); }catch(_){}
+        return Object.assign({}, first, sess);
+      }
+      function appendUTM(url){
+        const at = getAttribution();
+        const u = new URL(url, location.origin);
+        Object.keys(at).forEach(k=>{ if(at[k]) u.searchParams.set(k, at[k]); });
+        return u.toString();
+      }
+      function enhanceLinks(){
+        document.querySelectorAll('a[href*="wa.me/"], a[href*="outlook.office.com/book/"]').forEach(a=>{
+          a.href = appendUTM(a.href);
+        });
+      }
+      if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', enhanceLinks); } else { enhanceLinks(); }
+
+      function sendEvent(name, params={}){ try{ gtag('event', name, params); }catch(_){ } }
+      function attrParams(extra={}){ return Object.assign({}, getAttribution(), extra); }
+
+      // CTA Clicks
+      (function(){
+        const ctas = new Set([
+          ...document.querySelectorAll('[data-start]'),
+          document.getElementById('ctaFinal')
+        ].filter(Boolean));
+        ctas.forEach(el=>{
+          el.addEventListener('click', ()=> sendEvent('CTA_Click', attrParams({
+            cta_id: el.id || el.getAttribute('data-ctx') || 'cta',
+            cta_text: (el.textContent||'').trim()
+          })), {passive:true});
+        });
+      })();
+
+      // WhatsApp
+      document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
+        a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', attrParams({link:a.href})), {passive:true});
+      });
+      // Booking
+      document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{
+        a.addEventListener('click', ()=> sendEvent('Booking_Click', attrParams({link:a.href})), {passive:true});
+      });
+
+      // Quiz Steps + Complete via MutationObserver (greift bereits oben auch)
+      (function(){
+        const wrap = document.getElementById('check-steps');
+        const resultBox = document.getElementById('check-result');
+        wrap?.addEventListener('change', e=>{
+          const t=e.target;
+          if(t && t.name && /^q[1-3]$/.test(t.name)){
+            sendEvent('Quiz_Step', attrParams({ step:t.name, value:String(t.value||'') }));
+          }
+        });
+        const obs = new MutationObserver(()=>{
+          if(getComputedStyle(resultBox||document.body).display!=='none' && resultBox?.textContent?.length){
+            let status='unknown';
+            if(resultBox.querySelector('.result-red')) status='rot';
+            else if(resultBox.querySelector('.result-yellow')) status='gelb';
+            else if(resultBox.querySelector('.result-green')) status='gruen';
+            sendEvent('Quiz_Complete', attrParams({ status }));
+            obs.disconnect();
+          }
+        });
+        if(resultBox){ obs.observe(resultBox,{childList:true,subtree:true,attributes:true,attributeFilter:['style','class']}); }
+      })();
     })();
   </script>
 </body>
