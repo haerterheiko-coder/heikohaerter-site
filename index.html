@@ -1,6 +1,4 @@
-<!-- =========================
-/index.html  (vollständig)
-========================= -->
+<!-- /index.html (vollständig, mit allen gewünschten Ergänzungen) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -75,7 +73,6 @@
 
   <!-- GA4 + Consent Mode v2 (Default: denied; CMP kann später update setzen) -->
   <script>
-    // Warum: DSGVO-defaults sicher; CMP hebt später auf 'granted'.
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
     gtag('consent', 'default', {
@@ -219,6 +216,11 @@
     label.btn.small input:checked + span{ text-decoration:underline; text-underline-offset:.18em; }
 
     [inert]{pointer-events:none;user-select:none}
+
+    /* kleine Layouthilfe für Q&A in DVAG-Sektion */
+    .qa{display:grid;gap:.9rem}
+    .qa p{margin:0}
+    .qa .q{font-weight:750;color:var(--text)}
   </style>
 </head>
 
@@ -235,7 +237,8 @@
         <a class="link" href="#lebenslagen">Lebenslagen</a>
         <a class="link" href="#privat">Privat</a>
         <a class="link" href="#firma">Firmen</a>
-        <a class="btn btn-primary" href="#ampel-check" data-start>Überblick</a>
+        <!-- CTA-Justierung -->
+        <a class="btn btn-primary" href="#ampel-check" data-start>Klarheit gewinnen</a>
       </nav>
     </div>
   </header>
@@ -250,7 +253,8 @@
           <p class="hero-sub">Privat · Unternehmerisch · Langfristig</p>
 
           <div class="stack" style="margin-top:.6rem">
-            <button class="btn btn-primary" id="startCheckHero" type="button" data-start>2 Minuten · Überblick</button>
+            <!-- CTA-Justierung -->
+            <button class="btn btn-primary" id="startCheckHero" type="button" data-start>2 Minuten · Klarheit</button>
             <small class="micro" style="opacity:.9">Erst Überblick. Dann Entscheidung.</small>
           </div>
 
@@ -278,6 +282,20 @@
       </div>
     </section>
 
+    <!-- NEU: Mini-Sektion „Was du aus einem Gespräch mitnimmst“ (direkt vor starkem CTA) -->
+    <section class="statement fade-up" aria-labelledby="talk-out-h">
+      <div class="container">
+        <h2 id="talk-out-h">Was ein Gespräch bringt – unabhängig vom Ergebnis</h2>
+        <ul class="micro" style="margin:.2rem 0 .6rem; padding-left:1.2rem">
+          <li>Eine klare Einordnung, wo du heute stehst</li>
+          <li>Eine Prioritäten-Reihenfolge (jetzt · später · lassen)</li>
+          <li>Eine Risiko-Ampel, die Entscheidungen erleichtert</li>
+          <li>Eine klare Entscheidung: 👉 handeln · warten · selbst regeln</li>
+        </ul>
+        <p class="micro" style="margin-top:.4rem"><strong>Kein Abschluss. Kein Druck.<br>Nur Klarheit, die bleibt.</strong></p>
+      </div>
+    </section>
+
     <!-- MOMENT: Position -->
     <section class="statement fade-up" aria-labelledby="pos-h">
       <div class="container">
@@ -294,6 +312,41 @@
         <p><strong>Paare</strong> – Zwei Perspektiven, eine Richtung.</p>
         <p><strong>Unternehmer</strong> – Privat &amp; Firma sind kein Widerspruch.</p>
         <p class="micro" style="margin-top:.6rem">Beispiele sind anonymisierte typische Ausgangslagen (keine Bewertungen/Versprechen).</p>
+      </div>
+    </section>
+
+    <!-- NEU: PROOF-SCHICHT (direkt nach „Wer hier richtig ist“) -->
+    <section id="proof" class="section fade-up" aria-labelledby="proof-h">
+      <div class="container">
+        <h2 id="proof-h">Typische Ausgangslagen – und was sich danach verändert</h2>
+        <p class="micro" style="margin-top:.2rem">Keine Bewertungen. Keine Versprechen. Sondern reale Entscheidungssituationen.</p>
+
+        <div class="grid auto-grid" style="margin-top:.8rem">
+          <div class="card">
+            <h3>Familie</h3>
+            <p><strong>Ausgangslage:</strong><br>Viel geregelt – aber niemand wusste genau, ob es im Ernstfall reicht.</p>
+            <p><strong>Was gefehlt hat:</strong><br>Ein klarer Überblick, der auch im Alltag trägt.</p>
+            <p><strong>Ergebnis:</strong><br>Entscheidungen wurden sortiert, Prioritäten klar.<br>Kein Aktionismus mehr – sondern Ruhe.</p>
+          </div>
+
+          <div class="card">
+            <h3>Unternehmer</h3>
+            <p><strong>Ausgangslage:</strong><br>Firma lief. Privat lief mit. Niemand wusste, was wirklich zusammenhängt.</p>
+            <p><strong>Was gefehlt hat:</strong><br>Eine gemeinsame Landkarte für Privat &amp; Unternehmen.</p>
+            <p><strong>Ergebnis:</strong><br>Klare Reihenfolge. Klare Zuständigkeiten.<br>Entscheidungen fühlen sich heute kontrollierbar an.</p>
+          </div>
+
+          <div class="card">
+            <h3>Paar</h3>
+            <p><strong>Ausgangslage:</strong><br>Zwei Perspektiven, viele Meinungen – keine gemeinsame Richtung.</p>
+            <p><strong>Was gefehlt hat:</strong><br>Ein neutraler Rahmen für Entscheidungen.</p>
+            <p><strong>Ergebnis:</strong><br>Eine Linie. Weniger Diskussion. Mehr Sicherheit.</p>
+          </div>
+        </div>
+
+        <p class="micro" style="margin-top:.8rem">
+          Die Beispiele beschreiben typische Entscheidungssituationen. Keine Erfolgs- oder Leistungsversprechen.
+        </p>
       </div>
     </section>
 
@@ -377,7 +430,8 @@
         <div class="stack" id="check-start">
           <h2 id="check-h">2-Minuten-Status</h2>
           <p class="micro">3 Fragen · sofort ein Gefühl für Heute</p>
-          <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Überblick</button>
+          <!-- CTA-Justierung -->
+          <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Klarheit gewinnen</button>
           <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder du nimmst nur Überblick mit.</small>
         </div>
 
@@ -441,16 +495,50 @@
       </div>
     </section>
 
+    <!-- NEU: MOMENTUM-TRIGGER (vor Final-CTA) -->
+    <section class="statement fade-up" aria-labelledby="momentum-h">
+      <div class="container" style="max-width:900px">
+        <h2 id="momentum-h">Warum Abwarten oft teurer ist als ein Gespräch</h2>
+        <p>Die meisten Probleme entstehen nicht durch falsche Entscheidungen.<br>Sondern durch zu spätes Entscheiden.</p>
+        <p>Ein Gespräch ändert noch nichts.<br>Nicht sprechen kann später viel ändern.</p>
+        <p class="micro" style="margin-top:.4rem">Das ist High-Level-Loss-Aversion – ohne Drama.</p>
+      </div>
+    </section>
+
     <!-- FINAL CTA -->
     <section class="statement fade-up" aria-labelledby="final-h">
       <div class="container" style="text-align:center;max-width:860px">
         <h2 id="final-h">Souverän entscheiden – ohne Aktionismus.</h2>
         <p>Starte klein: Überblick. Danach entscheidest du selbst.</p>
         <div class="stack" style="align-items:center;margin-top:.4rem">
-          <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Überblick</button>
+          <!-- CTA-Justierung -->
+          <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Klarheit gewinnen</button>
           <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%20zum%20Status%3A%20" target="_blank" rel="noopener">WhatsApp (kurz)</a>
         </div>
         <p class="micro" style="margin-top:.7rem">Ich arbeite im System der Deutschen Vermögensberatung – Verantwortung braucht Struktur, die bleibt.</p>
+      </div>
+    </section>
+
+    <!-- NEU: DVAG-EINWAND (eigene Sektion, souverän) -->
+    <section id="transparenz" class="section fade-up" aria-labelledby="dvag-h">
+      <div class="container">
+        <h2 id="dvag-h">Transparenz – bevor wir sprechen</h2>
+        <div class="qa" style="margin-top:.6rem">
+          <p class="q">„Du arbeitest im DVAG-System – was heißt das für mich?“</p>
+          <p>Ich arbeite im System der Deutschen Vermögensberatung, weil Struktur, Dokumentation und Langfristigkeit dort verpflichtend sind.</p>
+          <p><strong>Für dich heißt das:</strong></p>
+          <ul class="micro" style="margin:.2rem 0 .6rem; padding-left:1.2rem">
+            <li>Entscheidungen werden nachvollziehbar dokumentiert</li>
+            <li>Lösungen müssen betreubar bleiben – auch in 10 oder 20 Jahren</li>
+            <li>Kein Produkt ohne saubere Einordnung</li>
+          </ul>
+
+          <p class="q">„Bekomme ich hier etwas verkauft?“</p>
+          <p>Nein.<br>Ein Gespräch endet immer mit einer Entscheidung – auch mit der Entscheidung, nichts zu tun.</p>
+
+          <p class="q">„Was, wenn ich skeptisch bin?“</p>
+          <p>Dann ist ein Gespräch besonders sinnvoll.<br>Skepsis ist kein Problem – Unklarheit schon.</p>
+        </div>
       </div>
     </section>
   </main>
@@ -464,7 +552,8 @@
         <a href="https://www.instagram.com/heiko.haerter.coach/" target="_blank" rel="noopener">Instagram</a>
         <a href="/impressum">Impressum</a>
         <a href="/datenschutz">Datenschutz</a>
-        <a href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">Termin</a>
+        <!-- dezente Anpassung der Beschriftung -->
+        <a href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">Klarheitsgespräch</a>
       </div>
 
       <div class="tiny" style="margin-bottom:8px">
@@ -483,7 +572,8 @@
   <!-- Sticky Mobile CTA -->
   <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
     <div class="inner">
-      <button class="btn btn-primary" type="button" data-start data-ctx="sticky">Überblick</button>
+      <!-- CTA-Justierung -->
+      <button class="btn btn-primary" type="button" data-start data-ctx="sticky">Klarheit gewinnen</button>
     </div>
   </div>
 
@@ -608,11 +698,11 @@
         if(color==='red') return `
           <div class="stack" style="text-align:center">
             <a href="${waLink('Hi Heiko, kurz 10 Minuten sortieren. Mein Status: ROT.')}" target="_blank" rel="noopener" class="btn btn-primary">Kurz sprechen</a>
-            <a href="${book}" class="btn btn-ghost" rel="nofollow noopener">Termin buchen</a>
+            <a href="${book}" class="btn btn-ghost" rel="nofollow noopener">Klarheitsgespräch starten</a>
           </div>`;
         if(color==='yellow') return `
           <div class="stack" style="text-align:center">
-            <a href="${book}" class="btn btn-primary" rel="nofollow noopener">Nächster Schritt</a>
+            <a href="${book}" class="btn btn-primary" rel="nofollow noopener">Klarheitsgespräch starten</a>
             <a href="${waLink('Hi Heiko, kurze Frage – Status GELB.')}" target="_blank" rel="noopener" class="btn btn-ghost">Kurze Frage</a>
           </div>`;
         return `
@@ -623,7 +713,6 @@
       }
 
       function trackAmpelResult(status, score) {
-        // Warum: wird nur nach Opt-in gesendet
         try{
           if (!window.klaviyo || !Array.isArray(window.klaviyo)) return;
           window.klaviyo.push(['track','Ampel Ergebnis',{
