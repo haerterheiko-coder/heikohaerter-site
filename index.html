@@ -1,4 +1,4 @@
-<!-- /index.html (vollständig, mit allen gewünschten Ergänzungen & Bildern) -->
+<!-- /index.html (final – Bilder getauscht, radikal entschlackt, Typo/Headlines, Trust-Layer & Haltung integriert) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -27,8 +27,11 @@
   <link rel="preconnect" href="https://outlook.office.com" crossorigin>
   <link rel="preconnect" href="https://static.wixstatic.com" crossorigin>
   <link rel="preconnect" href="https://wa.me" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- LCP Preload (neues Hero-Bild) -->
+  <!-- LCP Preload (Hero-Bild) -->
   <link
     rel="preload"
     as="image"
@@ -71,7 +74,7 @@
   }
   </script>
 
-  <!-- GA4 + Consent Mode v2 (Default: denied; CMP kann später update setzen) -->
+  <!-- GA4 + Consent Mode v2 (Default: denied) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
@@ -92,15 +95,11 @@
   <style>
     :root{
       --bg:#05070E; --bg2:#02040A;
-      --surface:rgba(255,255,255,.035);
-      --surface2:rgba(255,255,255,.06);
       --text:#F7F8FC; --muted:#A8B1C5; --muted2:#8F97AA;
-      --gold:#E6D08A; --gold2:#E6D08A;
-      --focus:#90C2FF;
-      --elev-1:0 18px 40px rgba(0,0,0,.35);
-      --ease:cubic-bezier(.25,.46,.25,1);
+      --gold:#E6D08A; --focus:#90C2FF;
       --danger:#c85151; --warn:#d6c45a; --ok:#55b76b;
       --radius:20px;
+      --ease:cubic-bezier(.25,.46,.25,1);
     }
     *,*::before,*::after{box-sizing:border-box}
     html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -110,74 +109,72 @@
         radial-gradient(circle at 85% 10%,rgba(120,150,255,.15),transparent 60%),
         linear-gradient(180deg,var(--bg),var(--bg2) 60%);
       color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Inter","SF Pro Text",system-ui,sans-serif;
+      font-family:"IBM Plex Sans","Inter",system-ui,sans-serif; /* STEP 2: neue Typo */
       -webkit-font-smoothing:antialiased; line-height:1.45; overflow-x:hidden;
     }
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
 
-    .section{padding:clamp(28px,5.6vw,84px) 0}
+    /* Layout */
+    .section{padding:clamp(38px,6.5vw,96px) 0} /* mehr Weißraum */
     .container{max-width:1140px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
-    .grid{display:grid;gap:clamp(.7rem,2.2vw,1.2rem)}
-    .stack{display:flex;flex-direction:column;gap:clamp(.55rem,1.8vw,1rem)}
+    .grid{display:grid;gap:clamp(.8rem,2.6vw,1.4rem)}
+    .stack{display:flex;flex-direction:column;gap:clamp(.6rem,2vw,1.05rem)}
     .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
 
+    /* STEP 2: Headlines ruhiger, Autorität */
     h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em}
-    h1{font-size:clamp(2.8rem,6.3vw,4.6rem);font-weight:900;line-height:1.03}
-    h2{font-size:clamp(1.9rem,3.5vw,2.7rem);font-weight:850;line-height:1.08}
-    h3{font-size:clamp(1.12rem,2.1vw,1.28rem);font-weight:750}
-    p{margin:0 0 .6rem;color:var(--muted);font-size:clamp(1rem,1.12vw,1.06rem);line-height:1.6}
-    .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.02em}
-    .hero-sub{font-size:1.08rem;color:var(--muted);margin-top:.35rem}
+    h1{font-size:clamp(3rem,6.2vw,5rem);font-weight:700;letter-spacing:-0.035em;line-height:1.04}
+    h2{font-size:clamp(1.8rem,3.3vw,2.45rem);font-weight:600}
+    h3{font-size:clamp(1.06rem,2vw,1.22rem);font-weight:600}
+    p{margin:0 0 .6rem;color:var(--muted);font-size:clamp(1rem,1.1vw,1.08rem);line-height:1.7;max-width:62ch} /* 62ch */
 
+    .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.02em}
+    .hero-sub{font-size:1.08rem;color:var(--muted);margin-top:.4rem}
+
+    /* Buttons & interaktive Elemente: EINZIG erlaubte “Boxen” */
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;
-         padding:.9rem 1.4rem;border-radius:999px;border:1px solid transparent;
-         font-weight:800;background:rgba(255,255,255,.06);color:var(--text);
+         padding:.9rem 1.4rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);
+         font-weight:700;background:rgba(255,255,255,.06);color:var(--text);
          transition:transform .18s var(--ease)}
     .btn:hover{transform:translateY(-1px)}
     .btn-primary{background:var(--gold);color:#111;border-color:rgba(230,208,138,.25)}
-    .btn-ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+    .btn-ghost{background:transparent;border-color:rgba(255,255,255,.16)}
     .btn.small{min-height:44px;padding:.55rem 1rem}
     @media (max-width:767px){ .btn{width:100%} }
 
     header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.92);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(6px)}
     .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:.85rem 0;gap:1rem}
     .brand{display:flex;flex-direction:column}
-    .brand-top{display:flex;align-items:center;gap:.55rem;font-weight:800}
+    .brand-top{display:flex;align-items:center;gap:.65rem;font-weight:700}
     .brand-dot{width:.95rem;height:.95rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.55)}
     .nav{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-    .nav a.link{padding:.55rem .7rem;border-radius:999px;color:var(--muted2);border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
-    .nav a.link:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+    .nav a.link{padding:.35rem .6rem;border-radius:999px;color:var(--muted2)}
+    .nav a.link:hover{color:var(--text)}
     @media (max-width:940px){ .nav a.link{display:none} }
 
-    .card,.panel,.quote{
-      background:var(--surface);
-      border:none; border-radius:var(--radius);
-      padding:1.05rem 1.15rem;
-      box-shadow:0 6px 20px rgba(0,0,0,.18);
-    }
-    .panel{background:var(--surface2)}
-    .quote{background:rgba(255,255,255,.05);margin-top:1.1rem;opacity:.92}
+    /* STEP 1: “KEINE BOX”, außer Buttons/Form/Result */
+    .card,.panel,.quote{background:transparent;border:none;border-radius:0;box-shadow:none;padding:0}
 
-    .hero{position:relative;padding-top:clamp(26px,4vw,64px);padding-bottom:clamp(18px,2.5vw,30px)}
+    /* Hero */
+    .hero{position:relative;padding-top:clamp(40px,7vw,100px);padding-bottom:clamp(30px,4vw,50px)}
     .hero-grid{display:grid;gap:clamp(1.4rem,3.4vw,2.8rem)}
     @media (min-width:1024px){ .hero-grid{grid-template-columns:1.1fr .9fr;align-items:center} }
 
-    .hero-figure{border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);box-shadow:var(--elev-1)}
+    .hero-figure{border-radius:24px;overflow:hidden}
     .hero-figure img{width:100%;height:auto;display:block}
 
-    .statement{padding:clamp(34px,6vw,56px) 0}
     .statement .container{max-width:920px}
-    .statement h2{margin-bottom:.6rem}
 
+    /* Reveal */
     .fade-up{opacity:0;transform:translateY(32px) scale(.985);filter:blur(2px)}
-    .fade-up.visible{opacity:1;transform:none;filter:none;transition:
-      opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1), filter .6s ease}
+    .fade-up.visible{opacity:1;transform:none;filter:none;transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1), filter .6s ease}
 
-    .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
-    .result-red{background:#2b1111;border:1px solid var(--danger)}
-    .result-yellow{background:#2b2b11;border:1px solid var(--warn)}
-    .result-green{background:#0f1b12;border:1px solid var(--ok)}
+    /* Ergebnisse (dürfen “Box” haben) */
+    .result-card{border-radius:18px;padding:1.1rem 1.2rem;margin-top:1rem;box-shadow:0 18px 40px rgba(0,0,0,.35);border:1px solid transparent}
+    .result-red{background:#2b1111;border-color:var(--danger)}
+    .result-yellow{background:#2b2b11;border-color:var(--warn)}
+    .result-green{background:#0f1b12;border-color:var(--ok)}
 
     .sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
     .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
@@ -200,30 +197,25 @@
 
     footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 60px}
     .footer-links{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
-    .footer-links a{padding:.45rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:var(--muted2)}
-    .footer-links a:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+    .footer-links a{padding:.35rem .6rem;border-radius:999px;color:var(--muted2)}
+    .footer-links a:hover{color:var(--text)}
     .tiny{font-size:.88rem;color:var(--muted2);line-height:1.45}
+
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
     progress{appearance:none;-webkit-appearance:none;height:10px;width:100%;
       background:rgba(255,255,255,.08);border-radius:999px;border:1px solid rgba(255,255,255,.12);overflow:hidden}
-    progress::-webkit-progress-bar{background:transparent}
-    progress::-webkit-progress-value{background:linear-gradient(90deg,var(--gold),var(--gold2))}
-    progress::-moz-progress-bar{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+    progress::-webkit-progress-value{background:linear-gradient(90deg,var(--gold),var(--gold))}
+    progress::-moz-progress-bar{background:linear-gradient(90deg,var(--gold),var(--gold))}
 
     label.btn.small{position:relative;isolation:isolate}
     label.btn.small:focus-within{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
-    label.btn.small input:checked + span{ text-decoration:underline; text-underline-offset:.18em; }
+    label.btn.small input:checked + span{text-decoration:underline;text-underline-offset:.18em}
 
     [inert]{pointer-events:none;user-select:none}
 
-    /* kleine Layouthilfe für Q&A in DVAG-Sektion */
-    .qa{display:grid;gap:.9rem}
-    .qa p{margin:0}
-    .qa .q{font-weight:750;color:var(--text)}
-
-    /* kleine Anpassung für Bild-Gegenpole */
-    .figure{border-radius:20px;overflow:hidden;background:rgba(255,255,255,.05);box-shadow:var(--elev-1)}
+    /* Bilder als ruhige Gegenpole */
+    .figure{border-radius:24px;overflow:hidden}
   </style>
 </head>
 
@@ -236,10 +228,10 @@
         <div class="brand-top">
           <span class="brand-dot" aria-hidden="true"></span>
           Heiko Haerter
-          <!-- Logo dezent integrieren (warum: Markenwiedererkennung, ohne Lärm) -->
-          <img src="https://static.wixstatic.com/media/4e46cf_e4001b0aeebe41e7989e32c095b6dfd2~mv2.png"
+          <!-- LOGO getauscht -->
+          <img src="https://static.wixstatic.com/media/4e46cf_c2e98e1f192a448d95f2b8ae9bdd07ce~mv2.png"
                alt="Logo Heiko Haerter"
-               width="88" height="22"
+               width="96" height="22"
                style="height:22px;width:auto;opacity:.9" loading="lazy" decoding="async">
         </div>
         <span class="micro">Allfinanz · Entscheidungslogik · Region Stuttgart</span>
@@ -248,34 +240,25 @@
         <a class="link" href="#lebenslagen">Lebenslagen</a>
         <a class="link" href="#ablauf">Ablauf</a>
         <a class="link" href="#firma">Firmen</a>
-        <!-- CTA-Justierung -->
-        <a class="btn btn-primary" href="#ampel-check" data-start>Klarheit gewinnen</a>
+        <a class="btn btn-primary" href="#ampel-check" data-start>2 Minuten · Klarheit</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- HERO -->
+    <!-- HERO (entkernt: 1 CTA, keine Mini-Panels) -->
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
       <div class="ambient" id="ambient" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="stack">
           <h1 id="hero-title">Entscheidungen,<br>die tragen.</h1>
           <p class="hero-sub">Privat · Unternehmerisch · Langfristig</p>
-
-          <div class="stack" style="margin-top:.6rem">
-            <!-- CTA-Justierung -->
-            <button class="btn btn-primary" id="startCheckHero" type="button" data-start>2 Minuten · Klarheit</button>
+          <div class="stack" style="margin-top:.9rem">
+            <button class="btn btn-primary" id="startCheckHero" type="button" data-start>Klarheit gewinnen</button>
             <small class="micro" style="opacity:.9">Erst Überblick. Dann Entscheidung.</small>
-          </div>
-
-          <div class="grid auto-grid" style="margin-top:.6rem">
-            <div class="panel"><p class="micro" style="margin:0;opacity:.95">Ganzheitlich statt fragmentiert</p></div>
-            <div class="panel"><p class="micro" style="margin:0;opacity:.95">Ein Ansprechpartner · Ein System</p></div>
           </div>
         </div>
 
-        <!-- EINZELNES HERO-BILD -->
         <figure class="hero-figure">
           <img
             data-zoom
@@ -285,7 +268,7 @@
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400 1400w,
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=2000 2000w
             "
-            sizes="(min-width:1024px) 52vw, 92vw"
+            sizes="(min-width:1024px) 56vw, 96vw"
             alt="Ruhige, fokussierte Beratung im Büro"
             width="1400" height="840"
             loading="eager" decoding="async" fetchpriority="high">
@@ -293,21 +276,21 @@
       </div>
     </section>
 
-    <!-- NEU: Mini-Sektion „Was du aus einem Gespräch mitnimmst“ (direkt vor starkem CTA) -->
+    <!-- Was danach klarer ist (Titel verkürzt) -->
     <section class="statement fade-up" aria-labelledby="talk-out-h">
       <div class="container">
-        <h2 id="talk-out-h">Was ein Gespräch bringt – unabhängig vom Ergebnis</h2>
+        <h2 id="talk-out-h">Was danach klarer ist</h2>
         <ul class="micro" style="margin:.2rem 0 .6rem; padding-left:1.2rem">
-          <li>Eine klare Einordnung, wo du heute stehst</li>
-          <li>Eine Prioritäten-Reihenfolge (jetzt · später · lassen)</li>
-          <li>Eine Risiko-Ampel, die Entscheidungen erleichtert</li>
-          <li>Eine klare Entscheidung: 👉 handeln · warten · selbst regeln</li>
+          <li>Wo du heute stehst</li>
+          <li>Priorität: jetzt · später · lassen</li>
+          <li>Risiko-Ampel für Entscheidungen</li>
+          <li>Entscheidung: handeln · warten · selbst regeln</li>
         </ul>
-        <p class="micro" style="margin-top:.4rem"><strong>Kein Abschluss. Kein Druck.<br>Nur Klarheit, die bleibt.</strong></p>
+        <p class="micro" style="margin-top:.2rem"><strong>Kein Abschluss. Kein Druck. Nur Klarheit.</strong></p>
       </div>
     </section>
 
-    <!-- MOMENT: Position -->
+    <!-- Position -->
     <section class="statement fade-up" aria-labelledby="pos-h">
       <div class="container">
         <h2 id="pos-h">Überblick, bevor es teuer wird.</h2>
@@ -315,189 +298,154 @@
       </div>
     </section>
 
-    <!-- LEBENSLAGEN -->
+    <!-- Wer hier richtig ist (ohne Karten) -->
     <section id="lebenslagen" class="section fade-up" aria-labelledby="life-h">
       <div class="container">
         <h2 id="life-h">Wer hier richtig ist</h2>
-        <p><strong>Familien</strong> – Entscheidungen müssen auch im Alltag tragen.</p>
+        <p><strong>Familien</strong> – Entscheidungen müssen im Alltag tragen.</p>
         <p><strong>Paare</strong> – Zwei Perspektiven, eine Richtung.</p>
-        <p><strong>Unternehmer</strong> – Privat &amp; Firma sind kein Widerspruch.</p>
-        <p class="micro" style="margin-top:.6rem">Beispiele sind anonymisierte typische Ausgangslagen (keine Bewertungen/Versprechen).</p>
+        <p><strong>Unternehmer</strong> – Privat &amp; Firma gehören zusammen.</p>
+        <p class="micro" style="margin-top:.6rem">Beispiele sind anonymisierte typische Ausgangslagen.</p>
       </div>
     </section>
 
-    <!-- NEU: PROOF-SCHICHT (direkt nach „Wer hier richtig ist“) -->
+    <!-- Proof-Schicht (ohne Cards) -->
     <section id="proof" class="section fade-up" aria-labelledby="proof-h">
       <div class="container">
-        <h2 id="proof-h">Typische Ausgangslagen – und was sich danach verändert</h2>
-        <p class="micro" style="margin-top:.2rem">Keine Bewertungen. Keine Versprechen. Sondern reale Entscheidungssituationen.</p>
-
-        <div class="grid auto-grid" style="margin-top:.8rem">
-          <div class="card">
-            <h3>Familie</h3>
-            <p><strong>Ausgangslage:</strong><br>Viel geregelt – aber niemand wusste genau, ob es im Ernstfall reicht.</p>
-            <p><strong>Was gefehlt hat:</strong><br>Ein klarer Überblick, der auch im Alltag trägt.</p>
-            <p><strong>Ergebnis:</strong><br>Entscheidungen wurden sortiert, Prioritäten klar.<br>Kein Aktionismus mehr – sondern Ruhe.</p>
-          </div>
-
-          <div class="card">
-            <h3>Unternehmer</h3>
-            <p><strong>Ausgangslage:</strong><br>Firma lief. Privat lief mit. Niemand wusste, was wirklich zusammenhängt.</p>
-            <p><strong>Was gefehlt hat:</strong><br>Eine gemeinsame Landkarte für Privat &amp; Unternehmen.</p>
-            <p><strong>Ergebnis:</strong><br>Klare Reihenfolge. Klare Zuständigkeiten.<br>Entscheidungen fühlen sich heute kontrollierbar an.</p>
-          </div>
-
-          <div class="card">
-            <h3>Paar</h3>
-            <p><strong>Ausgangslage:</strong><br>Zwei Perspektiven, viele Meinungen – keine gemeinsame Richtung.</p>
-            <p><strong>Was gefehlt hat:</strong><br>Ein neutraler Rahmen für Entscheidungen.</p>
-            <p><strong>Ergebnis:</strong><br>Eine Linie. Weniger Diskussion. Mehr Sicherheit.</p>
-          </div>
-        </div>
-
-        <p class="micro" style="margin-top:.8rem">
-          Die Beispiele beschreiben typische Entscheidungssituationen. Keine Erfolgs- oder Leistungsversprechen.
-        </p>
+        <h2 id="proof-h">Typische Situationen &amp; was sich ändert</h2>
+        <p><strong>Familie:</strong> Viel geregelt – keiner wusste, ob es reicht. Ergebnis: Reihenfolge, Ruhe, kein Aktionismus.</p>
+        <p><strong>Unternehmer:</strong> Firma lief, privat lief mit. Ergebnis: gemeinsame Landkarte, Zuständigkeiten, Kontrolle.</p>
+        <p><strong>Paar:</strong> Viele Meinungen, keine Richtung. Ergebnis: eine Linie, weniger Diskussion, mehr Sicherheit.</p>
+        <p class="micro" style="margin-top:.6rem">Keine Leistungsversprechen – reale Entscheidungssituationen.</p>
       </div>
     </section>
 
-    <!-- MOMENT: Leistungsversprechen + Allfinanz-Grafik als ruhiger Gegenpol -->
+    <!-- Entscheidungen brauchen Struktur. (Allfinanz-Grafik getauscht) -->
     <section id="allfinanz" class="statement fade-up" aria-labelledby="value-h">
       <div class="container">
-        <h2 id="value-h">System für Entscheidungen.</h2>
-        <p>Struktur statt Zufall: Einkommen &amp; Absicherung – Liquidität &amp; Familie – Vorsorge &amp; Vermögen. Privat und unternehmerisch – aus einer Hand.</p>
+        <h2 id="value-h">Entscheidungen brauchen Struktur.</h2>
+        <p>Einkommen &amp; Absicherung – Liquidität &amp; Familie – Vorsorge &amp; Vermögen. Privat und unternehmerisch – aus einer Hand.</p>
 
-        <figure class="figure" style="max-width:860px;margin:1rem auto 0">
+        <figure class="figure" style="max-width:900px;margin:1rem auto 0">
           <img
             data-zoom
-            src="https://static.wixstatic.com/media/4e46cf_a9d0ffba36b04738aba84c6aa5a771f1~mv2.png?width=1200"
+            src="https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400"
             srcset="
-              https://static.wixstatic.com/media/4e46cf_a9d0ffba36b04738aba84c6aa5a771f1~mv2.png?width=800 800w,
-              https://static.wixstatic.com/media/4e46cf_a9d0ffba36b04738aba84c6aa5a771f1~mv2.png?width=1200 1200w
+              https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=900 900w,
+              https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400 1400w
             "
-            sizes="(min-width:1024px) 60vw, 92vw"
-            alt="Allfinanz-Beratung: Übersicht der Entscheidungsbereiche"
-            width="1200" height="750"
+            sizes="(min-width:1024px) 64vw, 94vw"
+            alt="Struktur der Allfinanz-Beratung – Entscheidungsbereiche im Überblick"
+            width="1400" height="880"
             loading="lazy" decoding="async">
         </figure>
       </div>
     </section>
 
-    <!-- STARTWEGE + Arbeitsfoto als Gegenpol -->
+    <!-- Sinnvoll starten (ohne Cards) + Arbeitsfoto -->
     <section class="section fade-up" aria-labelledby="formate-h">
       <div class="container">
         <h2 id="formate-h">Sinnvoll starten</h2>
-        <div class="grid auto-grid" style="margin-top:.6rem">
-          <div class="card"><h3>Klarheitsgespräch (30–45)</h3><p>Einordnung &amp; Prioritäten – ohne Unterlagen, ohne Druck.</p></div>
-          <div class="card"><h3>Deep Dive (90)</h3><p>Struktur sauber aufsetzen – Entscheidungen vorbereiten.</p></div>
-          <div class="card"><h3>Begleitung (60–90 Tage)</h3><p>Umsetzungsschritte, Dokumentation, Ruhe im Alltag.</p></div>
-        </div>
+        <p><strong>Klarheitsgespräch (30–45):</strong> Einordnung &amp; Prioritäten.</p>
+        <p><strong>Deep Dive (90):</strong> Struktur aufsetzen – Entscheidungen vorbereiten.</p>
+        <p><strong>Begleitung (60–90 Tage):</strong> Umsetzung, Dokumentation, Ruhe im Alltag.</p>
 
-        <figure class="figure" style="max-width:820px;margin:1rem auto 0">
+        <figure class="figure" style="max-width:880px;margin:1rem auto 0">
           <img
             data-zoom
-            src="https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1200"
+            src="https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1400"
             srcset="
-              https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=800 800w,
-              https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1200 1200w
+              https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=900 900w,
+              https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1400 1400w
             "
-            sizes="(min-width:1024px) 58vw, 92vw"
-            alt="Konzeptarbeit: Heiko Haerter skizziert Entscheidungslogik für Kunden"
-            width="1200" height="780"
-            loading="lazy" decoding="async">
-        </figure>
-      </div>
-    </section>
-
-    <!-- NEU: Ablauf in 5 Schritten (eigene Sektion) -->
-    <section id="ablauf" class="section fade-up" aria-labelledby="steps-h">
-      <div class="container">
-        <h2 id="steps-h">Ablauf in 5 Schritten</h2>
-        <p class="micro">Klarheit entsteht Schritt für Schritt – von Einordnung bis Begleitung.</p>
-
-        <figure class="figure" style="max-width:980px;margin:1rem auto 0">
-          <img
-            data-zoom
-            src="https://static.wixstatic.com/media/4e46cf_64d120dccc3f4837984d26b6be502a07~mv2.png?width=1400"
-            srcset="
-              https://static.wixstatic.com/media/4e46cf_64d120dccc3f4837984d26b6be502a07~mv2.png?width=900 900w,
-              https://static.wixstatic.com/media/4e46cf_64d120dccc3f4837984d26b6be502a07~mv2.png?width=1400 1400w
-            "
-            sizes="(min-width:1024px) 70vw, 92vw"
-            alt="Der Prozess in fünf Schritten – von Erstgespräch bis Stabilisierung"
+            sizes="(min-width:1024px) 62vw, 94vw"
+            alt="Konzeptarbeit: Entscheidungslogik für Kunden"
             width="1400" height="900"
             loading="lazy" decoding="async">
         </figure>
       </div>
     </section>
 
-    <!-- FIRMA (+ optionales Bild) -->
-    <section id="firma" class="section fade-up" aria-labelledby="firma-h">
+    <!-- Ablauf (5 Schritte Grafik getauscht) -->
+    <section id="ablauf" class="section fade-up" aria-labelledby="steps-h">
       <div class="container">
-        <div class="grid" style="grid-template-columns:1fr;gap:clamp(1rem,2.8vw,1.6rem)">
-          <div class="stack">
-            <h2 id="firma-h">Für Firmenkunden</h2>
-            <div class="grid auto-grid" style="margin-top:.6rem">
-              <div class="card"><h3>Firmensafe-Sprint</h3><p>Ist-Analyse → Prioritäten → Sofortmaßnahmen → Roadmap.</p></div>
-              <div class="card"><h3>Bausteine</h3><p>GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p></div>
-              <div class="card"><h3>Unternehmer-Ampel</h3><p>Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p></div>
-            </div>
-            <div class="quote" style="margin-top:1rem">
-              <p class="micro" style="margin:0"><strong>Backbone:</strong> Betreubar in 10, 20, 30 Jahren – das System im Hintergrund macht’s möglich.</p>
-            </div>
-          </div>
+        <h2 id="steps-h">Ablauf in fünf Schritten</h2>
+        <p class="micro">Von Einordnung bis Begleitung – klar dokumentiert.</p>
 
-          <!-- Optionales Bild als ruhiger Gegenpol -->
-          <figure class="hero-figure" style="max-width:720px; margin:0 auto">
-            <img
-              data-zoom
-              src="https://static.wixstatic.com/media/4e46cf_2bb27617932d43d6a2224ebaa4e21621~mv2.png?width=1200"
-              srcset="
-                https://static.wixstatic.com/media/4e46cf_2bb27617932d43d6a2224ebaa4e21621~mv2.png?width=640 640w,
-                https://static.wixstatic.com/media/4e46cf_2bb27617932d43d6a2224ebaa4e21621~mv2.png?width=960 960w,
-                https://static.wixstatic.com/media/4e46cf_2bb27617932d43d6a2224ebaa4e21621~mv2.png?width=1200 1200w
-              "
-              sizes="(min-width:1024px) 60vw, 92vw"
-              alt="Unterwegs organisiert: Unternehmer zwischen Terminen"
-              width="1200" height="800"
-              loading="lazy" decoding="async">
-          </figure>
-        </div>
+        <figure class="figure" style="max-width:980px;margin:1rem auto 0">
+          <img
+            data-zoom
+            src="https://static.wixstatic.com/media/4e46cf_5dade7f6f1ca4b958cb3e6c9c8a8fe7a~mv2.png?width=1400"
+            srcset="
+              https://static.wixstatic.com/media/4e46cf_5dade7f6f1ca4b958cb3e6c9c8a8fe7a~mv2.png?width=900 900w,
+              https://static.wixstatic.com/media/4e46cf_5dade7f6f1ca4b958cb3e6c9c8a8fe7a~mv2.png?width=1400 1400w
+            "
+            sizes="(min-width:1024px) 70vw, 94vw"
+            alt="Der Prozess in fünf Schritten"
+            width="1400" height="900"
+            loading="lazy" decoding="async">
+        </figure>
       </div>
     </section>
 
-    <!-- LANDKARTE -->
+    <!-- Firmen (ohne Cards) -->
+    <section id="firma" class="section fade-up" aria-labelledby="firma-h">
+      <div class="container">
+        <h2 id="firma-h">Für Firmenkunden</h2>
+        <p><strong>Firmensafe-Sprint:</strong> Ist-Analyse → Prioritäten → Sofortmaßnahmen → Roadmap.</p>
+        <p><strong>Bausteine:</strong> GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p>
+        <p><strong>Unternehmer-Ampel:</strong> Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p>
+      </div>
+    </section>
+
+    <!-- Landkarte (kurz) -->
     <section id="produkte" class="statement fade-up" aria-labelledby="land-h">
       <div class="container">
         <h2 id="land-h">Landkarte</h2>
-        <p><strong>Jetzt:</strong> Einkommen stabil · Arbeitskraft · Haftung/Existenz<br>
+        <p><strong>Jetzt:</strong> Einkommen · Arbeitskraft · Haftung<br>
            <strong>Als Nächstes:</strong> Familie · Rücklagen · Firma<br>
            <strong>Später:</strong> Vorsorge · Vermögen · Übergaben</p>
-        <p class="tiny" style="margin-top:.6rem">Die Bereiche sind eine strukturelle Einordnung – keine Angebotsliste.</p>
       </div>
     </section>
 
-    <!-- NICHT PASSEND -->
+    <!-- Kein Angebot für jeden. (Titel geändert) -->
     <section class="statement fade-up" aria-labelledby="notfor-h">
       <div class="container">
-        <h2 id="notfor-h">Nicht passend, wenn …</h2>
-        <p>… du Renditeversprechen suchst · … keine Verantwortung übernehmen willst · … jemand entscheiden soll statt du.</p>
+        <h2 id="notfor-h">Kein Angebot für jeden.</h2>
+        <p>Keine Renditeversprechen. Verantwortung bleibt bei dir. Entscheidungen triffst du – nicht ich.</p>
       </div>
     </section>
 
-    <!-- AMPEL -->
+    <!-- 3 fehlende Trust-Layer -->
+    <section class="statement fade-up" aria-labelledby="trust-h">
+      <div class="container">
+        <h2 id="trust-h">Worauf du dich verlassen kannst</h2>
+        <p><strong>Haltung:</strong> Ich habe diese Struktur nicht gebaut, um Produkte zu verkaufen – sondern weil Entscheidungen ohne System teuer werden.</p>
+        <p><strong>Anti-Pattern:</strong> Keine Entscheidungen unter Zeitdruck · keine Empfehlungen ohne Einordnung · keine Produkte ohne Betreuungsperspektive.</p>
+        <p><strong>Process-Proof:</strong> Über 120 strukturierte Entscheidungsprozesse pro Jahr. Dokumentiert. Betreubar. Privat &amp; unternehmerisch.</p>
+      </div>
+    </section>
+
+    <!-- Kidz & Familie Haltung -->
+    <section class="statement fade-up" aria-labelledby="family-h">
+      <div class="container">
+        <h2 id="family-h">Worauf es wirklich wirkt</h2>
+        <p>Entscheidungen enden nicht bei uns. Sie wirken auf Partner, Kinder und die nächsten 20 Jahre.</p>
+      </div>
+    </section>
+
+    <!-- AMPEL (Form darf “Box”) -->
     <section id="ampel-check" class="section fade-up" aria-labelledby="check-h">
       <div class="container" style="max-width:760px">
         <div class="stack" id="check-start">
           <h2 id="check-h">2-Minuten-Status</h2>
-          <p class="micro">3 Fragen · sofort ein Gefühl für Heute</p>
-          <!-- CTA-Justierung -->
+          <p class="micro">3 Fragen – Gefühl für Heute.</p>
           <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Klarheit gewinnen</button>
-          <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder du nimmst nur Überblick mit.</small>
+          <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder nur Überblick.</small>
         </div>
 
         <form id="check-steps" style="display:none;margin-top:1.2rem" aria-describedby="stepHint">
-          <div class="panel" style="margin-bottom:.8rem">
+          <div style="margin-bottom:.8rem">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
               <strong id="stepLabel">Schritt 1 von 3</strong>
               <span class="micro" id="stepHint" role="status" aria-live="polite">Kurzer Eindruck reicht.</span>
@@ -505,7 +453,7 @@
             <progress id="progressBar" max="3" value="0" style="width:100%" aria-live="off"></progress>
           </div>
 
-          <fieldset class="panel step" data-step="1" style="display:none">
+          <fieldset class="step" data-step="1" style="display:none">
             <legend><h3 id="q1label">1 · 6 Monate Ausfall – wie stabil wäre euer Einkommen?</h3></legend>
             <div class="stack" role="radiogroup" aria-labelledby="q1label">
               <label class="btn small"><input class="sr-only" type="radio" name="q1" value="1"> <span>Wir hätten ein echtes Problem</span></label>
@@ -514,7 +462,7 @@
             </div>
           </fieldset>
 
-          <fieldset class="panel step" data-step="2" style="display:none">
+          <fieldset class="step" data-step="2" style="display:none">
             <legend><h3 id="q2label">2 · Wie <em>leicht</em> findest du wichtige Unterlagen?</h3></legend>
             <div class="stack" role="radiogroup" aria-labelledby="q2label">
               <label class="btn small"><input class="sr-only" type="radio" name="q2" value="1"> <span>Ich suche lange</span></label>
@@ -523,7 +471,7 @@
             </div>
           </fieldset>
 
-          <fieldset class="panel step" data-step="3" style="display:none">
+          <fieldset class="step" data-step="3" style="display:none">
             <legend><h3 id="q3label">3 · „Zukunft &amp; Alter“ – wie fühlt es sich an?</h3></legend>
             <div class="stack" role="radiogroup" aria-labelledby="q3label">
               <label class="btn small"><input class="sr-only" type="radio" name="q3" value="1"> <span>Unsicher</span></label>
@@ -541,14 +489,14 @@
 
         <div id="check-result" style="display:none;margin-top:1.4rem" aria-live="polite"></div>
 
-        <div class="panel" style="margin-top:1.2rem">
+        <div style="margin-top:1.2rem">
           <h3 style="margin:.1rem 0 .45rem">Wenig Zeit?</h3>
-          <p class="micro" style="margin-top:.1rem">Kurzmodus: in 12 Sekunden ein Gefühl für <em>Jetzt · Als Nächstes · Später</em>.</p>
+          <p class="micro" style="margin-top:.1rem">Kurzmodus: in 12 Sekunden Gefühl für <em>Jetzt · Als Nächstes · Später</em>.</p>
           <button class="btn btn-ghost" id="startShort2" type="button">Kurzmodus</button>
         </div>
 
         <noscript>
-          <div class="panel" style="margin-top:1rem">
+          <div style="margin-top:1rem">
             <p class="micro">JavaScript ist deaktiviert. Direkt sprechen?</p>
             <p><a class="btn btn-primary" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%20zum%20Status%3A%20" target="_blank" rel="noopener">WhatsApp</a></p>
           </div>
@@ -556,13 +504,11 @@
       </div>
     </section>
 
-    <!-- NEU: MOMENTUM-TRIGGER (vor Final-CTA) -->
+    <!-- Momentum -->
     <section class="statement fade-up" aria-labelledby="momentum-h">
       <div class="container" style="max-width:900px">
-        <h2 id="momentum-h">Warum Abwarten oft teurer ist als ein Gespräch</h2>
-        <p>Die meisten Probleme entstehen nicht durch falsche Entscheidungen.<br>Sondern durch zu spätes Entscheiden.</p>
-        <p>Ein Gespräch ändert noch nichts.<br>Nicht sprechen kann später viel ändern.</p>
-        <p class="micro" style="margin-top:.4rem">Das ist High-Level-Loss-Aversion – ohne Drama.</p>
+        <h2 id="momentum-h">Warum Abwarten teurer ist</h2>
+        <p>Probleme entstehen selten durch falsche Entscheidungen, sondern durch zu spätes Entscheiden.</p>
       </div>
     </section>
 
@@ -572,7 +518,6 @@
         <h2 id="final-h">Souverän entscheiden – ohne Aktionismus.</h2>
         <p>Starte klein: Überblick. Danach entscheidest du selbst.</p>
         <div class="stack" style="align-items:center;margin-top:.4rem">
-          <!-- CTA-Justierung -->
           <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Klarheit gewinnen</button>
           <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurze%20Frage%20zum%20Status%3A%20" target="_blank" rel="noopener">WhatsApp (kurz)</a>
         </div>
@@ -580,26 +525,13 @@
       </div>
     </section>
 
-    <!-- NEU: DVAG-EINWAND (eigene Sektion, souverän) -->
+    <!-- Transparenz -->
     <section id="transparenz" class="section fade-up" aria-labelledby="dvag-h">
       <div class="container">
         <h2 id="dvag-h">Transparenz – bevor wir sprechen</h2>
-        <div class="qa" style="margin-top:.6rem">
-          <p class="q">„Du arbeitest im DVAG-System – was heißt das für mich?“</p>
-          <p>Ich arbeite im System der Deutschen Vermögensberatung, weil Struktur, Dokumentation und Langfristigkeit dort verpflichtend sind.</p>
-          <p><strong>Für dich heißt das:</strong></p>
-          <ul class="micro" style="margin:.2rem 0 .6rem; padding-left:1.2rem">
-            <li>Entscheidungen werden nachvollziehbar dokumentiert</li>
-            <li>Lösungen müssen betreubar bleiben – auch in 10 oder 20 Jahren</li>
-            <li>Kein Produkt ohne saubere Einordnung</li>
-          </ul>
-
-          <p class="q">„Bekomme ich hier etwas verkauft?“</p>
-          <p>Nein.<br>Ein Gespräch endet immer mit einer Entscheidung – auch mit der Entscheidung, nichts zu tun.</p>
-
-          <p class="q">„Was, wenn ich skeptisch bin?“</p>
-          <p>Dann ist ein Gespräch besonders sinnvoll.<br>Skepsis ist kein Problem – Unklarheit schon.</p>
-        </div>
+        <p><strong>DVAG-System:</strong> Struktur, Dokumentation, Langfrist. Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert, Lösungen bleiben betreubar – auch in 10 oder 20 Jahren. Kein Produkt ohne Einordnung.</p>
+        <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
+        <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
       </div>
     </section>
   </main>
@@ -613,7 +545,6 @@
         <a href="https://www.instagram.com/heiko.haerter.coach/" target="_blank" rel="noopener">Instagram</a>
         <a href="/impressum">Impressum</a>
         <a href="/datenschutz">Datenschutz</a>
-        <!-- dezente Anpassung der Beschriftung -->
         <a href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">Klarheitsgespräch</a>
       </div>
 
@@ -633,7 +564,6 @@
   <!-- Sticky Mobile CTA -->
   <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
     <div class="inner">
-      <!-- CTA-Justierung -->
       <button class="btn btn-primary" type="button" data-start data-ctx="sticky">Klarheit gewinnen</button>
     </div>
   </div>
@@ -688,7 +618,7 @@
       io.observe(hero);
     })();
 
-    // Lightbox (Seite inert, solange Dialog offen)
+    // Lightbox
     (function(){
       const dlg=document.getElementById('zoom'); if(!dlg) return;
       const img=dlg.querySelector('.zoom-img');
@@ -704,7 +634,7 @@
       document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&dlg.open) dlg.close(); });
     })();
 
-    // Lenis: lazy / idle
+    // Lenis (lazy/idle)
     (function(){
       let loaded=false;
       function loadLenis(){
@@ -722,7 +652,7 @@
       if('requestIdleCallback' in window){ requestIdleCallback(loadLenis); } else { setTimeout(loadLenis, 4000); }
     })();
 
-    // Ampel-Form Wizard + optionales Klaviyo-Tracking (nur Opt-in)
+    // Ampel-Form Wizard + optionales Klaviyo-Tracking (Opt-in)
     (function(){
       const startBtns = document.querySelectorAll('[data-start]');
       const wrap = document.getElementById('check-steps');
@@ -794,23 +724,17 @@
         else { status = 'gruen'; html = `<div class="result-card result-green"><h3>🟢 Stabil</h3><p>Für heute wirkt es rund. Optional feinjustieren.</p>${renderCTA('green')}</div>`; }
 
         html += `
-          <div class="panel" style="margin-top:.9rem">
-            <p class="micro" style="margin:.1rem 0 .6rem">
-              Anonym merken? So kannst du später schneller anknüpfen. Kein Versand, keine Werbung.
-            </p>
-            <div class="stack" style="flex-direction:row;gap:.6rem">
-              <button class="btn small" id="rememberYes" type="button">Ergebnis merken</button>
-              <button class="btn small btn-ghost" id="rememberNo" type="button">Nicht merken</button>
-            </div>
-          </div>
-          <p class="micro" id="privacyNote" style="margin-top:.85rem;opacity:.9">
-            Hinweis: Es erfolgt kein E-Mail-Versand ohne ausdrückliche Einwilligung.
-          </p>`;
+          <p class="micro" style="margin:.9rem 0 .3rem">
+            Anonym merken? So knüpfst du später leichter an. Kein Versand, keine Werbung.
+          </p>
+          <div class="stack" style="flex-direction:row;gap:.6rem">
+            <button class="btn small" id="rememberYes" type="button">Ergebnis merken</button>
+            <button class="btn small btn-ghost" id="rememberNo" type="button">Nicht merken</button>
+          </div>`;
 
         resultBox.innerHTML = html;
 
         const sendIfOk = ok => {
-          document.getElementById('privacyNote')?.remove();
           const info = document.createElement('p');
           info.className = 'micro';
           info.style.marginTop = '.8rem';
@@ -827,7 +751,7 @@
       function ensureAnswered(n){
         const fs = steps[n-1];
         if(!fs) return false;
-        return !!fs.querySelector('input[type="radio"] :checked');
+        return !!fs.querySelector('input[type="radio"]:checked'); /* fix: kein Leerzeichen vor :checked */
       }
 
       function start(short=false){
@@ -855,16 +779,18 @@
       steps.forEach((fs, idx) => {
         fs.addEventListener('change', e => {
           const val = Number((e.target && e.target.value) || 0);
+          if(!val) return;
           score += val;
           if(idx+1 >= max){ finish(); }
           else { step = idx+2; showStep(step); }
         });
       });
 
-      document.getElementById('nextBtn')?.addEventListener('click', () => {
+      nextBtn?.addEventListener('click', () => {
+        if(!ensureAnswered(step)){ stepHint.textContent='Bitte eine Option wählen.'; return; }
         if(step >= max){ finish(); } else { step++; showStep(step); }
       });
-      document.getElementById('backBtn')?.addEventListener('click', () => {
+      backBtn?.addEventListener('click', () => {
         if(step <= 1) return;
         step--; showStep(step);
       });
@@ -929,12 +855,12 @@
       document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
         a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', attrParams({link:a.href})), {passive:true});
       });
-      // Booking (fix: fehlende Quotes)
+      // Booking (fix)
       document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{
         a.addEventListener('click', ()=> sendEvent('Booking_Click', attrParams({link:a.href})), {passive:true});
       });
 
-      // Quiz Steps + Complete via MutationObserver
+      // Quiz Steps + Complete
       (function(){
         const wrap = document.getElementById('check-steps');
         const resultBox = document.getElementById('check-result');
