@@ -1,4 +1,4 @@
-<!-- /index.html — Decision Space v4.3.1 (Hero-Satz, Begleitung konkret, Personas 3, 2 Seals, Typo-Fine, Allfinanz straighter) -->
+<!-- /index.html — Decision Space v4.3.1 (Hero-Satz, Begleitung konkret, Personas 3, 2 Seals, Typo-Fine, Allfinanz straighter) + LEGAL/CMP -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -50,9 +50,6 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- Klaviyo Onsite -->
-  <script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=T7wryA" async></script>
-
   <!-- JSON-LD -->
   <script type="application/ld+json">
   {
@@ -74,7 +71,7 @@
   }
   </script>
 
-  <!-- GA4 + Consent Mode v2 (IDs einsetzen) -->
+  <!-- LEGAL/CMP: Consent Mode v2 (Default: abgelehnt) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
@@ -85,11 +82,8 @@
       analytics_storage: 'denied',
       wait_for_update: 500
     });
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX', { send_page_view: true });
+    // Zustandscontainer für CMP
+    window.__cmpState = { analytics: false, marketing: false, ts: null, src: {} };
   </script>
 
   <style>
@@ -211,6 +205,23 @@
     .card{border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden}
     .card .cap{padding:.6rem .8rem}
     .card .cap strong{display:block;margin-bottom:.2rem;color:#fff}
+
+    /* LEGAL/CMP: Cookie Banner */
+    .cmp-wrap{position:fixed;inset:auto 12px 12px 12px;z-index:1000;max-width:820px;margin-left:auto;margin-right:auto;background:rgba(10,14,22,.98);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px;box-shadow:0 16px 48px rgba(0,0,0,.6);display:none}
+    .cmp-wrap.visible{display:block}
+    .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.4rem}
+    .cmp-title{font-weight:700}
+    .cmp-text{font-size:.95rem;color:var(--muted);margin:.35rem 0}
+    .cmp-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+    .cmp-actions .btn{min-height:42px}
+    .cmp-toggle{display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:.6rem .8rem;margin-top:.4rem}
+    .cmp-toggle label{display:flex;flex-direction:column;gap:.15rem}
+    .switch{position:relative;width:46px;height:26px;background:#333;border-radius:999px}
+    .switch input{position:absolute;opacity:0}
+    .switch i{position:absolute;top:3px;left:3px;width:20px;height:20px;background:#aaa;border-radius:50%;transition:.2s}
+    .switch input:checked + i{left:23px;background:#111}
+    .cmp-links{font-size:.9rem;color:var(--muted2);margin-top:.5rem}
+    .cmp-links a{text-decoration:underline}
   </style>
 </head>
 
@@ -242,6 +253,8 @@
         <a class="link" href="#lebenslagen">Lebenslagen</a>
         <a class="link" href="#ablauf">Ablauf</a>
         <a class="link" href="#firma">Firmen</a>
+        <a class="link" href="/impressum">Impressum</a><!-- LEGAL: Header-Shortcut -->
+        <a class="link" href="/datenschutz">Datenschutz</a><!-- LEGAL: Header-Shortcut -->
         <a class="btn btn-primary" href="#ampel-check" data-start>Kurz prüfen, ob alles passt</a>
       </nav>
     </div>
@@ -327,7 +340,7 @@
       </div>
     </section>
 
-    <!-- Personas (auf 3 reduziert) -->
+    <!-- Personas -->
     <section id="proof" class="section fade-up" aria-labelledby="proof-h">
       <div class="container">
         <h2 id="proof-h">Typische Situationen &amp; wer hier landet</h2>
@@ -348,7 +361,7 @@
       </div>
     </section>
 
-    <!-- Externe Vertrauenssignale (max. 2 Siegel sichtbar) -->
+    <!-- Vertrauensanker -->
     <section class="statement section fade-up" aria-labelledby="sp-h">
       <div class="container">
         <h2 id="sp-h" class="visually-hidden">Vertrauensanker</h2>
@@ -362,7 +375,7 @@
       </div>
     </section>
 
-    <!-- Allfinanz-Abschnitt -->
+    <!-- Allfinanz -->
     <section id="allfinanz" class="statement section fade-up" aria-labelledby="value-h">
       <div class="container">
         <h2 id="value-h" class="signature">Finanzen sollten das Leben einfacher machen – nicht komplizierter.</h2>
@@ -370,12 +383,10 @@
         <p class="micro" style="margin-top:.2rem">Ich arbeite strukturiert – damit Entscheidungen ruhig getroffen werden können.</p>
         <p class="micro" style="margin-top:.2rem">Die meisten Fehler entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge. Diese Seite ist aus genau diesem Grund entstanden.</p>
 
-        <!-- Portrait -->
         <figure class="portrait">
           <img src="https://static.wixstatic.com/media/4e46cf_e4d34f1837d445c7afee054525608197~mv2.png" alt="Heiko Haerter – ruhig im Gespräch, neutraler Hintergrund" width="1200" height="800" loading="lazy" decoding="async">
         </figure>
 
-        <!-- Visual: Entscheidungsbereiche -->
         <figure class="figure" style="max-width:900px;margin:1.2rem auto 0">
           <img data-zoom
             src="https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400"
@@ -388,7 +399,7 @@
       </div>
     </section>
 
-    <!-- Einstieg / Formate -->
+    <!-- Einstieg -->
     <section class="section fade-up" aria-labelledby="formate-h">
       <div class="container">
         <h2 id="formate-h">Einstieg</h2>
@@ -557,6 +568,7 @@
         <p><strong>DVAG-System:</strong> Struktur, Dokumentation, Langfrist. Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert, Lösungen bleiben betreubar – auch in 10 oder 20 Jahren. Kein Produkt ohne Einordnung.</p>
         <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
         <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
+        <p class="micro" style="margin-top:.6rem"><strong>Hinweis:</strong> Diese Seite ersetzt keine rechtliche oder steuerliche Beratung. Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.</p>
       </div>
     </section>
   </main>
@@ -575,6 +587,7 @@
         <a href="/datenschutz">Datenschutz</a>
         <a href="/barrierefreiheit">Barrierefreiheit</a>
         <a href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">Kurz-Check buchen</a>
+        <a href="#" id="openCmp">Cookie-Einstellungen</a>
       </div>
 
       <div class="tiny" style="margin-bottom:8px">
@@ -605,6 +618,120 @@
       <img class="zoom-img" alt="" />
     </div>
   </dialog>
+
+  <!-- LEGAL/CMP: Consent Banner -->
+  <div class="cmp-wrap" id="cmp" role="dialog" aria-modal="true" aria-labelledby="cmpTitle" aria-describedby="cmpText">
+    <div class="cmp-head">
+      <div class="cmp-title" id="cmpTitle">Datenschutz & Cookies</div>
+      <button class="btn btn-ghost small" id="cmpClose" aria-label="Schließen">✕</button>
+    </div>
+    <div class="cmp-text" id="cmpText">
+      Wir verwenden notwendige Cookies, um diese Seite zu betreiben. Für <strong>Statistik (Analytics)</strong> und <strong>Marketing</strong> bitten wir um Ihre Einwilligung.
+      Sie können diese jederzeit unter „Cookie-Einstellungen“ widerrufen. Details in unserer <a href="/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+    </div>
+    <div class="cmp-toggle">
+      <label><strong>Notwendig</strong><span class="micro">immer aktiv – technisch erforderlich</span></label>
+      <span class="switch" aria-hidden="true"><input type="checkbox" checked disabled><i></i></span>
+    </div>
+    <div class="cmp-toggle">
+      <label for="cmpAnalytics"><strong>Statistik (Analytics)</strong><span class="micro">anonymisierte Nutzungsstatistik</span></label>
+      <span class="switch"><input id="cmpAnalytics" type="checkbox"><i></i></span>
+    </div>
+    <div class="cmp-toggle">
+      <label for="cmpMarketing"><strong>Marketing</strong><span class="micro">z. B. Klaviyo Onsite</span></label>
+      <span class="switch"><input id="cmpMarketing" type="checkbox"><i></i></span>
+    </div>
+    <div class="cmp-actions">
+      <button class="btn btn-ghost" id="cmpReject">Nur notwendig</button>
+      <button class="btn" id="cmpSave">Auswahl speichern</button>
+      <button class="btn btn-primary" id="cmpAccept">Alle akzeptieren</button>
+    </div>
+    <div class="cmp-links">
+      <a href="/impressum" target="_blank" rel="noopener">Impressum</a> ·
+      <a href="/datenschutz" target="_blank" rel="noopener">Datenschutz</a>
+    </div>
+  </div>
+
+  <!-- LEGAL/CMP: Skripte erst nach Einwilligung laden -->
+  <script>
+    // Helper
+    function loadScriptOnce(url, attrs = {}) {
+      if (document.querySelector('script[data-src="'+url+'"], script[src="'+url+'"]')) return;
+      const s = document.createElement('script');
+      s.src = url; s.async = true;
+      Object.entries(attrs).forEach(([k,v]) => s.setAttribute(k, v));
+      s.setAttribute('data-src', url);
+      document.head.appendChild(s);
+    }
+
+    // GA4 erst nach Analytics-Einwilligung
+    function initGA() {
+      if (window.__cmpState.src.ga) return;
+      loadScriptOnce('https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX');
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', { send_page_view: true });
+      window.__cmpState.src.ga = true;
+    }
+
+    // Klaviyo erst nach Marketing-Einwilligung
+    function initKlaviyo(){
+      if (window.__cmpState.src.klaviyo) return;
+      loadScriptOnce('https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=T7wryA');
+      window.__cmpState.src.klaviyo = true;
+    }
+
+    // Consent anwenden
+    function applyConsent(opts) {
+      const { analytics, marketing } = opts;
+      window.__cmpState.analytics = !!analytics;
+      window.__cmpState.marketing = !!marketing;
+      window.__cmpState.ts = new Date().toISOString();
+
+      gtag('consent', 'update', {
+        analytics_storage: analytics ? 'granted' : 'denied',
+        ad_storage: marketing ? 'granted' : 'denied',
+        ad_user_data: marketing ? 'granted' : 'denied',
+        ad_personalization: marketing ? 'granted' : 'denied'
+      });
+
+      if (analytics) initGA();
+      if (marketing) initKlaviyo();
+
+      try { localStorage.setItem('hh_cmp', JSON.stringify(window.__cmpState)); } catch(_) {}
+    }
+
+    // CMP UI
+    (function(){
+      const LS_KEY = 'hh_cmp';
+      const cmp = document.getElementById('cmp');
+      const openBtn = document.getElementById('openCmp');
+      const closeBtn = document.getElementById('cmpClose');
+      const a = document.getElementById('cmpAnalytics');
+      const m = document.getElementById('cmpMarketing');
+      const accept = document.getElementById('cmpAccept');
+      const reject = document.getElementById('cmpReject');
+      const save = document.getElementById('cmpSave');
+
+      function show(v){ cmp.classList.toggle('visible', !!v); if(v){ cmp.focus?.(); } }
+      function read(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||''); }catch(_){ return null; } }
+
+      const stored = read();
+      if (stored) {
+        a.checked = !!stored.analytics;
+        m.checked = !!stored.marketing;
+        applyConsent(stored);
+      } else {
+        show(true);
+      }
+
+      accept.addEventListener('click', ()=>{ a.checked = true; m.checked = true; applyConsent({analytics:true, marketing:true}); show(false); });
+      reject.addEventListener('click', ()=>{ a.checked = false; m.checked = false; applyConsent({analytics:false, marketing:false}); show(false); });
+      save.addEventListener('click', ()=>{ applyConsent({analytics:a.checked, marketing:m.checked}); show(false); });
+
+      openBtn?.addEventListener('click', (e)=>{ e.preventDefault(); show(true); });
+      closeBtn?.addEventListener('click', ()=> show(false));
+    })();
+  </script>
 
   <script>
     document.documentElement.classList.remove('no-js');
@@ -695,7 +822,7 @@
       if('requestIdleCallback' in window){ requestIdleCallback(loadLenis); } else { setTimeout(loadLenis, 4000); }
     })();
 
-    // Ampel-Check + optional Klaviyo
+    // Ampel-Check + optional Klaviyo (nur wenn Marketing-Opt-in)
     (function(){
       const startBtns = document.querySelectorAll('[data-start]');
       const wrap = document.getElementById('check-steps');
