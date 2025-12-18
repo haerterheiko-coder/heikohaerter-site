@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark" />
 
 <title>Datenschutzerklärung | Heiko Haerter</title>
-<meta name="description" content="Datenschutzhinweise gemäß DSGVO & BDSG: Verantwortlicher, Hosting (Wix), Server-Logs, Cookies, Kontaktaufnahme, Formulare (Tally), DVAG-Beratung, Social Media, KI-Hinweis, Rechte, Beschwerde, Sicherheit." />
+<meta name="description" content="Datenschutzhinweise gemäß DSGVO, BDSG und TTDSG: Verantwortlicher, Rechtsgrundlagen, Hosting (Wix), Server-Logs, Cookies & Consent, Google Analytics, Klaviyo, Kontakt/WhatsApp, Formulare (Tally), DVAG-Beratung, Social Links, Empfänger, Drittlandtransfer, Speicherdauer, Rechte, Sicherheit." />
 <link rel="canonical" href="https://heikohaerter.com/datenschutz" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -71,6 +71,11 @@ hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-
 @media (max-width:520px){
   .grid{grid-template-columns:1fr}
 }
+.small{font-size:.92rem;color:var(--muted2)}
+.table{width:100%;border-collapse:separate;border-spacing:0;margin:.4rem 0;overflow:auto}
+.table th,.table td{padding:.55rem .7rem;border-bottom:1px solid var(--line);text-align:left}
+.table th{color:#fff;font-weight:600}
+.tip{font-size:.9rem;color:var(--muted2);margin-top:.35rem}
 </style>
 </head>
 
@@ -83,11 +88,11 @@ hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-
   <section class="section fade" aria-labelledby="ds-title">
     <div class="card">
       <h1 id="ds-title">Datenschutzerklärung</h1>
-      <p class="kicker">Informationen gemäß DSGVO &amp; BDSG</p>
+      <p class="kicker">Informationen gemäß DSGVO, BDSG &amp; TTDSG</p>
 
       <div class="grid">
         <div class="subcard">
-          <h3>1. Verantwortlicher</h3>
+          <h3>1. Verantwortlicher (Art. 4 Nr. 7 DSGVO)</h3>
           <p>
             <strong style="color:#fff">Heiko Haerter</strong><br>
             Selbstständiger Handelsvertreter gemäß § 84 HGB<br>
@@ -98,6 +103,7 @@ hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-
             Telefon: <a href="tel:+4917660408380">+49 176 60408380</a><br>
             E-Mail: <a href="mailto:Heiko.Haerter@dvag.de">Heiko.Haerter@dvag.de</a>
           </p>
+          <p class="small">Ein Datenschutzbeauftragter ist gesetzlich nicht bestellt. Anfragen gern per E-Mail.</p>
           <div class="badges">
             <span class="badge">SSL-verschlüsselt</span>
             <span class="badge">Datenminimierung</span>
@@ -105,9 +111,15 @@ hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-
         </div>
 
         <div class="subcard">
-          <h3>2. Allgemeine Hinweise</h3>
-          <p>Ich nehme den Schutz Ihrer personenbezogenen Daten sehr ernst. Ihre Daten werden vertraulich und gemäß DSGVO, BDSG sowie dieser Datenschutzerklärung verarbeitet.</p>
-          <p>Die Nutzung dieser Website ist grundsätzlich ohne Angabe personenbezogener Daten möglich. Soweit Daten erhoben werden, erfolgt dies auf freiwilliger Basis.</p>
+          <h3>2. Grundsätze &amp; Rechtsgrundlagen</h3>
+          <p>Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung dieser Website, zur Kommunikation oder zur Durchführung vorvertraglicher/vertraglicher Maßnahmen erforderlich ist.</p>
+          <ul class="list">
+            <li>Art. 6 Abs. 1 lit. b DSGVO – Vertrag/Anfrage</li>
+            <li>Art. 6 Abs. 1 lit. f DSGVO – berechtigtes Interesse (sichere, effiziente Webbereitstellung, Missbrauchsabwehr)</li>
+            <li>Art. 6 Abs. 1 lit. a DSGVO i. V. m. § 25 Abs. 1 TTDSG – Einwilligung (nicht essenzielle Cookies/Tools)</li>
+            <li>Art. 9 Abs. 2 lit. a DSGVO – Einwilligung für besondere Kategorien (z. B. Gesundheitsdaten im Beratungsprozess)</li>
+          </ul>
+          <p class="tip">Einwilligungen können Sie jederzeit mit Wirkung für die Zukunft über <a href="#" id="openCmp">Cookie-Einstellungen</a> widerrufen/ändern.</p>
         </div>
       </div>
     </div>
@@ -119,133 +131,161 @@ hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-
       <div class="grid">
         <div class="subcard">
           <h3>3. Hosting &amp; technische Bereitstellung</h3>
-          <p>Diese Website wird über <strong style="color:#fff">Wix.com Ltd.</strong> bereitgestellt.</p>
-          <p><strong style="color:#fff">Dienstanbieter:</strong><br>Wix.com Ltd., 40 Namal Tel Aviv St., Tel Aviv 6350671, Israel</p>
-          <p>Datenverarbeitung erfolgt auf EU-Servern und teilweise in Israel (EU-Angemessenheitsbeschluss liegt vor).</p>
-          <p><strong style="color:#fff">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an sicherem, effizientem Hosting)</p>
+          <p>Diese Website wird über <strong style="color:#fff">Wix.com Ltd.</strong> bereitgestellt (40 Namal Tel Aviv St., Tel Aviv 6350671, Israel).</p>
+          <p>Die Verarbeitung erfolgt auf Servern in der EU und teilweise in Israel. Für Israel liegt ein Angemessenheitsbeschluss der EU vor.</p>
+          <p><strong style="color:#fff">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (sichere, effiziente Bereitstellung der Website).</p>
         </div>
 
         <div class="subcard">
-          <h3>4. Erhebung von Zugriffsdaten (Server-Logs)</h3>
-          <p>Beim Besuch dieser Website erfasst Wix automatisch:</p>
+          <h3>4. Zugriffsdaten (Server-Logs)</h3>
+          <p>Beim Aufruf der Seiten werden technisch notwendige Daten verarbeitet:</p>
           <ul class="list">
-            <li>IP-Adresse</li>
-            <li>Datum &amp; Uhrzeit</li>
-            <li>Besuchte Seiten</li>
-            <li>Browser &amp; Betriebssystem</li>
-            <li>Referrer-URL</li>
+            <li>IP-Adresse (gekürzt/gekürzt gespeichert, soweit möglich)</li>
+            <li>Datum &amp; Uhrzeit, Zeitzone</li>
+            <li>abgerufene URLs/Seiten</li>
             <li>HTTP-Statuscodes</li>
+            <li>Referrer-URL</li>
+            <li>Browser, Betriebssystem, Endgerät</li>
           </ul>
-          <p><strong style="color:#fff">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO · Die Daten werden automatisch gelöscht.</p>
+          <p>Zweck: technische Auslieferung, Stabilität, Sicherheit (z. B. Fehlerdiagnose). Die Daten werden automatisch gelöscht, sobald sie für den Zweck nicht mehr erforderlich sind.</p>
+          <p><strong style="color:#fff">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COOKIES -->
+  <!-- COOKIES / CONSENT -->
   <section class="section fade">
     <div class="card">
       <div class="grid">
         <div class="subcard">
-          <h3>5. Cookies &amp; Einwilligungen</h3>
-          <p>Diese Website verwendet Cookies. Für Analyse- und Marketing-Cookies ist Ihre Einwilligung erforderlich.</p>
-          <p><strong style="color:#fff">Rechtsgrundlagen:</strong></p>
-          <ul class="list">
-            <li>Notwendige Cookies: Art. 6 Abs. 1 lit. f DSGVO</li>
-            <li>Analyse/Marketing: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)</li>
-          </ul>
-          <p>Sie können Ihre Zustimmung jederzeit über „Cookies bearbeiten“ ändern.</p>
+          <h3>5. Cookies, Local Storage &amp; Consent (TTDSG/DSGVO)</h3>
+          <p>Wir nutzen essenzielle Cookies/ähnliche Technologien für die technische Bereitstellung sowie – nur mit Einwilligung – Analyse/Marketing-Technologien.</p>
+          <table class="table" role="table" aria-label="Cookie-Kategorien">
+            <thead><tr><th>Kategorie</th><th>Zweck</th><th>Speicherdauer</th><th>Rechtsgrundlage</th></tr></thead>
+            <tbody>
+              <tr><td>Essentiell</td><td>Grundfunktionen, Sicherheit, Consent-Speicher</td><td>Sitzung bis dauerhaft</td><td>Art. 6 Abs. 1 lit. f DSGVO, § 25 Abs. 2 TTDSG</td></tr>
+              <tr><td>Analyse</td><td>Nutzung verstehen, Reichweite messen</td><td>je nach Tool (z. B. 1–24 Monate)</td><td>Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TTDSG</td></tr>
+              <tr><td>Marketing</td><td>Optionale Kommunikation/Onsite-Funktionen</td><td>je nach Tool</td><td>Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TTDSG</td></tr>
+            </tbody>
+          </table>
+          <p><a href="#" id="openCmp2">Cookie-Einstellungen öffnen</a> – Einwilligungen können dort jederzeit angepasst oder widerrufen werden.</p>
         </div>
 
         <div class="subcard">
-          <h3>6. Kontaktaufnahme (E-Mail, Telefon, WhatsApp)</h3>
-          <p>Wenn Sie mich kontaktieren, werden Ihre Angaben zur Bearbeitung gespeichert.</p>
-          <p><strong style="color:#fff">WhatsApp-Hinweis:</strong> WhatsApp Ireland Ltd. ist europäischer Anbieter, dennoch kann eine Datenübertragung in die USA erfolgen. Bitte senden Sie keine Gesundheitsdaten über WhatsApp.</p>
-          <p><strong style="color:#fff">Rechtsgrundlagen:</strong></p>
+          <h3>6. Google Analytics&nbsp;4 (nur mit Einwilligung)</h3>
+          <p>Wir setzen Google Analytics 4 zur Reichweitenmessung ein. IP-Adressen werden standardmäßig anonymisiert, es werden keine geräteübergreifenden IDs ohne Einwilligung genutzt. Consent Mode v2 ist implementiert.</p>
           <ul class="list">
-            <li>Art. 6 Abs. 1 lit. b DSGVO (Vertrag / Anfrage)</li>
-            <li>Art. 6 Abs. 1 lit. f DSGVO (Kommunikation)</li>
+            <li>Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland</li>
+            <li>Datenarten: Nutzungsdaten, Geräteinformationen, gekürzte IP, Consent-Signale</li>
+            <li>Aufbewahrung: nach Tool-Konfiguration (z. B. 2–14 Monate)</li>
+            <li>Übermittlung in Drittländer (z. B. USA) möglich; geeignete Garantien (Standardvertragsklauseln) vorgesehen</li>
           </ul>
+          <p><strong style="color:#fff">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TTDSG. Widerruf über Cookie-Einstellungen.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FORMULARE / BERATUNG -->
+  <!-- KLAVIYO / KONTAKT -->
   <section class="section fade">
     <div class="card">
       <div class="grid">
         <div class="subcard">
-          <h3>7. Online-Formulare (Tally.so – Kurz-Check &amp; Empfehlung)</h3>
+          <h3>7. Klaviyo Onsite (nur mit Einwilligung)</h3>
+          <p>Für optionale Onsite-Funktionen/Kommunikation wird Klaviyo eingesetzt.</p>
+          <ul class="list">
+            <li>Anbieter: Klaviyo, Inc. (EU-Niederlassung vorhanden)</li>
+            <li>Zwecke: Onsite-Formulare, Events, optionale Personalisierung</li>
+            <li>Datenarten: Nutzungsdaten, Interaktionen, ggf. Kontaktangaben (nur bei Eingabe)</li>
+            <li>Drittlandübermittlung möglich; Standardvertragsklauseln vorgesehen</li>
+          </ul>
+          <p><strong style="color:#fff">Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TTDSG.</p>
+        </div>
+
+        <div class="subcard">
+          <h3>8. Kontaktaufnahme (E-Mail, Telefon, WhatsApp)</h3>
+          <p>Bei Kontaktaufnahme verarbeiten wir Ihre Angaben zur Bearbeitung der Anfrage und für Anschlussfragen.</p>
+          <p><strong style="color:#fff">WhatsApp-Hinweis:</strong> Anbieterin für EU: WhatsApp Ireland Ltd. Eine Datenübertragung in unsichere Drittländer (z. B. USA) kann nicht ausgeschlossen werden. Bitte keine Gesundheitsdaten über WhatsApp senden.</p>
+          <p><strong style="color:#fff">Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. b DSGVO (Anfragen/Vertrag), Art. 6 Abs. 1 lit. f DSGVO (Kommunikation).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULARE / DVAG -->
+  <section class="section fade">
+    <div class="card">
+      <div class="grid">
+        <div class="subcard">
+          <h3>9. Online-Formulare (Tally.so – Kurz-Check &amp; Empfehlung)</h3>
           <p><strong style="color:#fff">Dienstanbieter:</strong> Tally BV, Ajuinlei 1, 9000 Gent, Belgien – <a href="https://tally.so" target="_blank" rel="noopener">tally.so</a></p>
-          <p>Tally verarbeitet z.&nbsp;B.:</p>
+          <p>Verarbeitete Daten:</p>
           <ul class="list">
-            <li>Formulardaten (Name, Angaben zur Situation)</li>
+            <li>Formulardaten (z. B. Name, Angaben zur Situation – freiwillig)</li>
             <li>Metadaten (IP-Adresse, Zeitstempel, Browser)</li>
           </ul>
-          <p><strong style="color:#fff">Rechtsgrundlagen:</strong></p>
-          <ul class="list">
-            <li>Art. 6 Abs. 1 lit. b DSGVO</li>
-            <li>Art. 6 Abs. 1 lit. a DSGVO (freiwillige Angaben)</li>
-          </ul>
-          <p>Mit Tally besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO.</p>
+          <p>Es besteht ein Auftragsverarbeitungsvertrag gem. Art. 28 DSGVO.</p>
+          <p><strong style="color:#fff">Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. b DSGVO (Durchführung/Anbahnung), Art. 6 Abs. 1 lit. a DSGVO (freiwillige Angaben).</p>
         </div>
 
         <div class="subcard">
-          <h3>8. Verarbeitung im Rahmen der DVAG-Beratung</h3>
-          <p>Im Beratungsprozess können u.&nbsp;a. folgende Daten verarbeitet werden:</p>
+          <h3>10. Verarbeitung im Rahmen der DVAG-Beratung</h3>
+          <p>Im Beratungsprozess können u. a. folgende Daten verarbeitet werden:</p>
           <ul class="list">
             <li>Stamm- und Kontaktdaten</li>
-            <li>Vertrags- &amp; Vorsorgedaten</li>
-            <li>Einkommens- &amp; Vermögensdaten</li>
-            <li>Gesundheitsdaten (mit Einwilligung)</li>
+            <li>Vertrags- und Vorsorgedaten</li>
+            <li>Einkommens- und Vermögensdaten</li>
+            <li>Gesundheitsdaten (nur mit ausdrücklicher Einwilligung)</li>
           </ul>
-          <p><strong style="color:#fff">Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. b DSGVO (Beratungsvertrag), Art. 9 Abs. 2 lit. a DSGVO (Gesundheitsdaten)</p>
+          <p>Empfänger: Produktpartner (z. B. Gesellschaften der Generali-Gruppe, ADVOCARD) soweit erforderlich.</p>
+          <p><strong style="color:#fff">Rechtsgrundlagen:</strong> Art. 6 Abs. 1 lit. b DSGVO (Beratung/Vertrag), Art. 6 Abs. 1 lit. c DSGVO (gesetzliche Pflichten), Art. 9 Abs. 2 lit. a DSGVO (Gesundheitsdaten).</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SOCIAL / KI -->
+  <!-- SOCIAL / EMPFÄNGER / TRANSFER -->
   <section class="section fade">
     <div class="card">
       <div class="grid">
         <div class="subcard">
-          <h3>9. Social-Media-Links</h3>
-          <p>Auf dieser Website werden ausschließlich Links, keine Plugins, zu folgenden Anbietern gesetzt:</p>
-          <ul class="list">
-            <li>LinkedIn · XING · Instagram · Facebook · WhatsApp</li>
-          </ul>
-          <p>Erst beim Anklicken gelten die Datenschutzrichtlinien der jeweiligen Anbieter. Es findet keine automatische Datenübertragung statt.</p>
+          <h3>11. Social-Media-Links</h3>
+          <p>Auf dieser Website werden ausschließlich Links (keine Plugins) zu folgenden Anbietern gesetzt: LinkedIn · XING · Instagram · Facebook · WhatsApp. Erst beim Anklicken gelten die Datenschutzrichtlinien der jeweiligen Anbieter.</p>
         </div>
 
         <div class="subcard">
-          <h3>10. KI-generierte Inhalte (EU-AI-Act Hinweis)</h3>
-          <p>Diese Website kann KI-generierte Texte oder Bilder verwenden. Sie dienen ausschließlich der Illustration und stellen keine realen Personen dar.</p>
+          <h3>12. Empfänger &amp; Kategorien</h3>
+          <p>Je nach Zweck erhalten Daten die folgenden Kategorien von Empfängern:</p>
+          <ul class="list">
+            <li>Hosting/IT-Dienstleister (z. B. Wix)</li>
+            <li>Analyse/Kommunikations-Dienstleister (z. B. Google, Klaviyo)</li>
+            <li>Formular-Dienstleister (Tally)</li>
+            <li>Produktpartner/Versicherer im Rahmen der Beratung</li>
+            <li>Behörden/öffentliche Stellen, soweit rechtlich erforderlich</li>
+          </ul>
+        </div>
+
+        <div class="subcard">
+          <h3>13. Drittlandübermittlungen</h3>
+          <p>Bei einzelnen Anbietern kann eine Verarbeitung in Drittländern (u. a. Israel, USA) stattfinden. Für Israel besteht ein EU-Angemessenheitsbeschluss. Bei sonstigen Drittländern werden geeignete Garantien (z. B. EU-Standardvertragsklauseln) eingesetzt. Gleichwohl kann ein Restrisiko nicht vollständig ausgeschlossen werden.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WEITERGABE / DAUER -->
+  <!-- SPEICHERDAUER / PFLICHT / ADM -->
   <section class="section fade">
     <div class="card">
       <div class="grid">
         <div class="subcard">
-          <h3>11. Datenweitergabe</h3>
-          <p>Eine Weitergabe erfolgt nur bei:</p>
-          <ul class="list">
-            <li>Vertragserfüllung</li>
-            <li>gesetzlicher Pflicht</li>
-            <li>Einwilligung</li>
-            <li>Auftragsverarbeitung</li>
-          </ul>
-          <p>Keine Weitergabe für Werbezwecke.</p>
+          <h3>14. Speicherdauer</h3>
+          <p>Daten werden nur so lange gespeichert, wie es für den jeweiligen Zweck erforderlich ist. Gesetzliche Aufbewahrungspflichten (z. B. aus HGB/AO) können bis zu 10 Jahre betragen.</p>
         </div>
 
         <div class="subcard">
-          <h3>12. Speicherdauer</h3>
-          <p>Daten werden nur so lange gespeichert, wie es für den jeweiligen Zweck nötig ist. Beratungsunterlagen können aufgrund gesetzlicher Pflichten bis zu 10 Jahre aufbewahrt werden.</p>
+          <h3>15. Pflicht zur Bereitstellung / Automatisierte Entscheidungen</h3>
+          <p>Die Bereitstellung personenbezogener Daten ist für den bloßen Website-Besuch nicht erforderlich. Für Beratungen/Verträge können bestimmte Angaben notwendig sein. Eine automatisierte Entscheidungsfindung einschließlich Profiling findet nicht statt.</p>
         </div>
       </div>
     </div>
@@ -256,7 +296,7 @@ hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-
     <div class="card">
       <div class="grid">
         <div class="subcard">
-          <h3>13. Ihre Rechte</h3>
+          <h3>16. Ihre Rechte</h3>
           <p>Sie haben jederzeit folgende Rechte:</p>
           <ul class="list">
             <li>Auskunft (Art. 15 DSGVO)</li>
@@ -264,28 +304,28 @@ hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-
             <li>Löschung (Art. 17 DSGVO)</li>
             <li>Einschränkung (Art. 18 DSGVO)</li>
             <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
-            <li>Widerspruch (Art. 21 DSGVO)</li>
-            <li>Widerruf erteilter Einwilligungen</li>
+            <li>Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. e/f DSGVO (Art. 21 DSGVO)</li>
+            <li>Widerruf erteilter Einwilligungen (Art. 7 Abs. 3 DSGVO)</li>
           </ul>
-          <p>Anfragen bitte an: <a href="mailto:Heiko.Haerter@dvag.de">Heiko.Haerter@dvag.de</a></p>
+          <p>Anfragen bitte an: <a href="mailto:Heiko.Haerter@dvag.de">Heiko.Haerter@dvag.de</a>. Wir verifizieren Anfragen und beantworten sie innerhalb der gesetzlichen Fristen.</p>
         </div>
 
         <div class="subcard">
-          <h3>14. Beschwerderecht</h3>
-          <p>Zuständige Datenschutzbehörde:<br>
-            Landesbeauftragter für den Datenschutz Baden-Württemberg<br>
+          <h3>17. Beschwerderecht</h3>
+          <p>Zuständige Aufsichtsbehörde:<br>
+            Landesbeauftragter für den Datenschutz und die Informationsfreiheit Baden-Württemberg,<br>
             Königstraße 10 a, 70173 Stuttgart</p>
         </div>
 
         <div class="subcard">
-          <h3>15. Datensicherheit</h3>
-          <p>Diese Website nutzt SSL-Verschlüsselung. Daten werden ausschließlich über gesicherte Verbindungen übertragen.</p>
+          <h3>18. Sicherheit</h3>
+          <p>Diese Website nutzt SSL/TLS-Verschlüsselung. Wir treffen technische und organisatorische Maßnahmen, um Daten gegen Verlust, Missbrauch oder unbefugten Zugriff zu schützen.</p>
         </div>
       </div>
 
       <div class="subcard">
-        <h3>16. Aktualität</h3>
-        <p>Diese Datenschutzerklärung ist aktuell gültig und wird bei Bedarf angepasst.</p>
+        <h3>19. Änderungen</h3>
+        <p>Diese Datenschutzerklärung wird bei Bedarf aktualisiert. <span class="small">Stand: <span id="ds-stand">01.01.2025</span></span></p>
       </div>
     </div>
   </section>
@@ -293,13 +333,20 @@ hr.divider{border:0;height:18px;margin:clamp(28px,6vw,48px) 0;background:linear-
   <hr class="divider" aria-hidden="true" />
 
   <section class="section fade" aria-label="Footer">
-    <div class="footer">© <span id="yearNow">2026</span> Heiko Haerter · DVAG</div>
+    <div class="footer">
+      © <span id="yearNow">2026</span> Heiko Haerter · DVAG ·
+      <a href="/">Startseite</a> ·
+      <a href="/impressum">Impressum</a> ·
+      <a href="/barrierefreiheit">Barrierefreiheit</a> ·
+      <a href="#" id="openCmpFooter">Cookie-Einstellungen</a>
+    </div>
   </section>
 </main>
 
 <script>
 document.documentElement.classList.remove('no-js');
 document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().getFullYear());
+document.getElementById('ds-stand').textContent = new Date().toISOString().slice(0,10);
 
 /* Fade-in on view */
 (function(){
@@ -311,6 +358,25 @@ document.querySelectorAll('#yearNow').forEach(el=> el.textContent=new Date().get
   },{threshold:.12, rootMargin:'0px 0px -10% 0px'});
   els.forEach(el=>io.observe(el));
 })();
+
+/* Cookie-Einstellungen öffnen – erwartet ein CMP mit #cmp auf der Seite/App */
+function openCMP(ev){
+  ev?.preventDefault?.();
+  try{
+    // 1) Versuch: lokales CMP-Element anzeigen
+    const local = document.getElementById('cmp');
+    if(local){ local.classList.add('visible'); return; }
+    // 2) Versuch: CMP im Opener (falls als Popup geöffnet)
+    const openerCmp = window.opener?.document?.getElementById?.('cmp');
+    if(openerCmp){ openerCmp.classList.add('visible'); opener?.focus?.(); return; }
+    // 3) Fallback: Consent API Trigger (falls vorhanden)
+    if(window.gtag){ gtag('consent', 'update', { ad_storage: 'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied' }); }
+    alert('Cookie-Einstellungen können hier angepasst werden, sobald der Consent-Manager geladen ist.');
+  }catch(_){}
+}
+document.getElementById('openCmp')?.addEventListener('click', openCMP);
+document.getElementById('openCmp2')?.addEventListener('click', openCMP);
+document.getElementById('openCmpFooter')?.addEventListener('click', openCMP);
 </script>
 </body>
 </html>
