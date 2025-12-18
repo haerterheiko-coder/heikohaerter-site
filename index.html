@@ -1,4 +1,4 @@
-<!-- /index.html — Decision Space v4.3 (2026-Wording final, Meta gebündelt, Personas + weiße Seals, feinere CTAs, Eyecatcher/Animationen) -->
+<!-- /index.html — Decision Space v4.3.1 (Hero-Satz, Begleitung konkret, Personas 3, 2 Seals, Typo-Fine, Allfinanz straighter) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -121,9 +121,9 @@
 
     h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em;text-wrap:balance}
     h1{font-size:clamp(2.6rem,5.8vw,4.6rem);font-weight:700;letter-spacing:-0.035em;line-height:1.04}
-    h2{font-size:clamp(1.9rem,3.6vw,2.65rem);font-weight:600}
+    h2{font-size:clamp(1.9rem,3.6vw,2.65rem);font-weight:600;letter-spacing:-0.03em}
     h3{font-size:clamp(1.06rem,2vw,1.22rem);font-weight:600}
-    p{margin:0 0 .6rem;color:var(--muted);font-size:clamp(1rem,1.1vw,1.08rem);line-height:1.7;max-width:62ch}
+    p{margin:0 0 .6rem;color:var(--muted);font-size:clamp(1rem,1.1vw,1.08rem);line-height:1.7;max-width:60ch}
 
     .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.02em}
     .hero-sub{font-size:1.08rem;color:var(--muted);margin-top:.4rem}
@@ -142,7 +142,6 @@
     .brand{display:flex;flex-direction:column}
     .brand-top{display:flex;align-items:center;gap:.65rem;font-weight:700}
     .brand-dot{width:.95rem;height:.95rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.55); animation: pulse 2.4s ease-in-out infinite }
-
     @keyframes pulse{0%,100%{filter:drop-shadow(0 0 0 rgba(230,208,138,.0))}50%{filter:drop-shadow(0 0 10px rgba(230,208,138,.5))}}
 
     .nav{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
@@ -192,7 +191,7 @@
     .brands{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
     .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.92rem;color:var(--muted2)}
 
-    /* Weiß hinterlegte Siegel, damit schwarze Schrift lesbar bleibt */
+    /* Weiß hinterlegte Siegel */
     .seal{background:#fff;border-radius:10px;padding:6px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 0 rgba(255,255,255,.05), 0 8px 24px rgba(0,0,0,.28)}
 
     .chapters{position:fixed;left:18px;top:120px;display:none;flex-direction:column;gap:12px;z-index:60}
@@ -256,7 +255,7 @@
           <p class="micro eyebrow">Für Menschen mit Verantwortung – privat &amp; unternehmerisch</p>
           <h1 id="hero-title" class="signature">Damit Finanzen nicht ständig im Kopf sind.</h1>
           <p class="hero-sub">Privat · Familie · Verantwortung</p>
-          <p class="micro" style="margin-top:.1rem">Die meisten merken erst zu spät, dass sie etwas Wichtiges übersehen haben.</p>
+          <p class="micro" style="margin-top:.1rem">Die meisten merken erst im Nachhinein, dass sie etwas Wichtiges übersehen haben.</p>
           <div class="stack" style="margin-top:.9rem">
             <div class="grid" style="gap:.5rem">
               <button class="btn btn-primary" id="startCheckHero" type="button" data-start>Kurz prüfen, ob alles passt</button>
@@ -280,7 +279,7 @@
       </div>
     </section>
 
-    <!-- Ich bin ... (klare Selbstverortung) -->
+    <!-- Ich bin ... -->
     <section class="statement section fade-up" aria-labelledby="ichbin-h">
       <div class="container">
         <h2 id="ichbin-h">Ich bin Heiko Haerter.</h2>
@@ -288,7 +287,7 @@
       </div>
     </section>
 
-    <!-- 🟢 SCHICHT 1 – Was ich für Menschen mache (2026) -->
+    <!-- Was ich für Menschen mache -->
     <section class="statement section fade-up" aria-labelledby="what-h">
       <div class="container">
         <h2 id="what-h">Was ich für Menschen mache</h2>
@@ -297,25 +296,25 @@
       </div>
     </section>
 
-    <!-- Warum Begleitung Sinn macht (einmalige Legitimation) -->
+    <!-- Warum Begleitung Sinn macht -->
     <section class="statement section fade-up" aria-labelledby="warum-begleitung-h">
       <div class="container">
         <h2 id="warum-begleitung-h">Warum Begleitung hier Sinn macht</h2>
         <p>Die meisten Probleme entstehen nicht, weil Menschen zu wenig tun – sondern weil Themen einzeln geregelt werden und Zusammenhänge fehlen.</p>
-        <p class="micro">Besonders dann, wenn Familie, Einkommen oder Firma voneinander abhängen.</p>
+        <p class="micro">Besonders dann, wenn Einkommen, Familie und Absicherung voneinander abhängen.</p>
         <p class="micro">Ein Vermögensberater ist kein Entscheider. Sondern jemand, der mitdenkt, Reihenfolge hält und dafür sorgt, dass nichts Wichtiges untergeht.</p>
         <p class="micro">Allein übersieht man selten alles – aber fast immer die Reihenfolge.</p>
       </div>
     </section>
 
-    <!-- Meta-Rahmung (einmal, gebündelt) -->
+    <!-- Meta-Rahmung -->
     <section class="statement section fade-up" aria-label="Hinweis">
       <div class="container">
         <p class="micro"><strong>Diese Seite ist kein Angebot.</strong><br>Sie hilft dir einzuschätzen, ob gerade überhaupt etwas zu tun ist.</p>
       </div>
     </section>
 
-    <!-- Was danach klarer ist (2026) -->
+    <!-- Was danach klarer ist -->
     <section class="statement section fade-up" aria-labelledby="talk-out-h">
       <div class="container">
         <h2 id="talk-out-h">Was du danach nicht mehr im Kopf haben musst</h2>
@@ -328,56 +327,50 @@
       </div>
     </section>
 
-    <!-- Proof + Personas -->
+    <!-- Personas (auf 3 reduziert) -->
     <section id="proof" class="section fade-up" aria-labelledby="proof-h">
       <div class="container">
         <h2 id="proof-h">Typische Situationen &amp; wer hier landet</h2>
         <div class="personas">
           <figure class="card">
             <img src="https://static.wixstatic.com/media/4e46cf_47b12c3342f14ee6a4e44033f122ff04~mv2.jpeg?width=1200" alt="Junges Paar" width="1200" height="800" loading="lazy" decoding="async">
-            <figcaption class="cap"><strong>Junges Paar</strong><span class="micro">Viel geregelt – aber ständig im Hinterkopf: „Hoffentlich haben wir nichts vergessen.“ Ergebnis: Reihenfolge, Ruhe, kein Aktionismus.</span></figcaption>
+            <figcaption class="cap"><strong>Junges Paar</strong><span class="micro">Viel geregelt – aber ohne klares Gefühl für Vollständigkeit. Ergebnis: Reihenfolge, Ruhe, kein Aktionismus.</span></figcaption>
           </figure>
           <figure class="card">
             <img src="https://static.wixstatic.com/media/4e46cf_29faaeeebc8949a39d678147a16fb488~mv2.jpeg?width=1200" alt="Berufliche Aufsteigerin" width="1200" height="800" loading="lazy" decoding="async">
-            <figcaption class="cap"><strong>Berufliche Aufsteigerin</strong><span class="micro">Mehr Verantwortung. Ergebnis: klare Prioritäten, passende Absicherung.</span></figcaption>
+            <figcaption class="cap"><strong>Berufliche Aufsteigerin</strong><span class="micro">Mehr Verantwortung – klare Prioritäten, passende Absicherung.</span></figcaption>
           </figure>
           <figure class="card">
             <img src="https://static.wixstatic.com/media/4e46cf_11b2987a8b88423da19e51813b3f8e8f~mv2.jpeg?width=1200" alt="Selbstständiger" width="1200" height="800" loading="lazy" decoding="async">
-            <figcaption class="cap"><strong>Der Selbstständige</strong><span class="micro">Lief jahrelang gut – bis ein Ausfall alles gleichzeitig betroffen hätte. Ergebnis: gemeinsame Landkarte, Zuständigkeiten.</span></figcaption>
-          </figure>
-          <figure class="card">
-            <img src="https://static.wixstatic.com/media/4e46cf_f7b7f5c276c64948819f37adcf33b813~mv2.jpeg?width=1200" alt="Sicherheitsorientierte Person" width="1200" height="800" loading="lazy" decoding="async">
-            <figcaption class="cap"><strong>Die Sicherheitsorientierte</strong><span class="micro">Nichts Wichtiges liegen lassen. Ergebnis: Übersicht, passende Reserve.</span></figcaption>
+            <figcaption class="cap"><strong>Der Selbstständige</strong><span class="micro">Lief jahrelang gut – bis klar wurde, dass ein Ausfall alles gleichzeitig getroffen hätte. Ergebnis: gemeinsame Landkarte, Zuständigkeiten.</span></figcaption>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- Externe Vertrauenssignale + Siegel -->
+    <!-- Externe Vertrauenssignale (max. 2 Siegel sichtbar) -->
     <section class="statement section fade-up" aria-labelledby="sp-h">
       <div class="container">
         <h2 id="sp-h" class="visually-hidden">Vertrauensanker</h2>
-        <p class="micro">Vertrauensbasis: echte Gespräche, öffentlich einsehbare Bewertungen.</p>
+        <p class="micro">Über viele Jahre begleitete Entscheidungen – öffentlich einsehbar.</p>
         <div class="brands" aria-label="Externe Vertrauenssignale">
-          <a class="badge" href="/bewertungen" rel="nofollow">⭐ Ø sehr hohe Kundenzufriedenheit (einsehbar)</a>
+          <a class="badge" href="/bewertungen" rel="nofollow">Bewertungen anschauen</a>
           <span class="badge">📍 Region Stuttgart & Online</span>
-          <span class="badge" title="Kontext-Zahl">📊 Viele kommen spät – wir ordnen zuerst</span>
           <span class="seal"><img src="https://static.wixstatic.com/shapes/4e46cf_077e599467a543daa505ac661e0366a2.svg" alt="Deutschlands Kundenchampions 2025 Siegel" width="120" height="36" loading="lazy" decoding="async"></span>
           <span class="seal"><img src="https://static.wixstatic.com/media/4e46cf_bb291e43f4e548aead72419e831d68cf~mv2.png" alt="Bundesverband Deutscher Vermögensberater Siegel" width="120" height="36" loading="lazy" decoding="async"></span>
-          <span class="seal"><img src="https://static.wixstatic.com/shapes/4e46cf_d0b890250e294c1984485c6a8d90edb0.svg" alt="Sehr guter Kundenservice – Testsiegel" width="120" height="36" loading="lazy" decoding="async"></span>
         </div>
       </div>
     </section>
 
-    <!-- Allfinanz-Abschnitt (2026) -->
+    <!-- Allfinanz-Abschnitt -->
     <section id="allfinanz" class="statement section fade-up" aria-labelledby="value-h">
       <div class="container">
         <h2 id="value-h" class="signature">Finanzen sollten das Leben einfacher machen – nicht komplizierter.</h2>
         <p>Einkommen, Absicherung, Rücklagen, Familie, Vorsorge. Nicht als einzelne Themen, sondern so, dass sie zusammenpassen.</p>
         <p class="micro" style="margin-top:.2rem">Ich arbeite strukturiert – damit Entscheidungen ruhig getroffen werden können.</p>
-        <p class="micro" style="margin-top:.2rem">Ich arbeite seit Jahren in der Beratung. Die meisten Fehler entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge. Diese Seite ist aus genau diesem Grund entstanden.</p>
+        <p class="micro" style="margin-top:.2rem">Die meisten Fehler entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge. Diese Seite ist aus genau diesem Grund entstanden.</p>
 
-        <!-- Portrait (ruhig) -->
+        <!-- Portrait -->
         <figure class="portrait">
           <img src="https://static.wixstatic.com/media/4e46cf_e4d34f1837d445c7afee054525608197~mv2.png" alt="Heiko Haerter – ruhig im Gespräch, neutraler Hintergrund" width="1200" height="800" loading="lazy" decoding="async">
         </figure>
@@ -395,7 +388,7 @@
       </div>
     </section>
 
-    <!-- Einstieg / Formate (Feinschliff) -->
+    <!-- Einstieg / Formate -->
     <section class="section fade-up" aria-labelledby="formate-h">
       <div class="container">
         <h2 id="formate-h">Einstieg</h2>
@@ -477,7 +470,7 @@
       </div>
     </section>
 
-    <!-- Ampel-Check (2026-Wording) -->
+    <!-- Ampel-Check -->
     <section id="ampel-check" class="section fade-up" aria-labelledby="check-h">
       <div class="container" style="max-width:760px">
         <div class="stack" id="check-start">
@@ -532,7 +525,7 @@
       </div>
     </section>
 
-    <!-- Neuro: entschärft -->
+    <!-- Neuro -->
     <section class="statement section fade-up" aria-labelledby="neuro-h">
       <div class="container" style="max-width:900px">
         <h2 id="neuro-h" class="signature">Zu lange nichts tun wird meist teurer als einmal sauber hinschauen.</h2>
@@ -564,7 +557,6 @@
         <p><strong>DVAG-System:</strong> Struktur, Dokumentation, Langfrist. Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert, Lösungen bleiben betreubar – auch in 10 oder 20 Jahren. Kein Produkt ohne Einordnung.</p>
         <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
         <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
-        <!-- Erklärende Theorie bewusst gestrichen, wie empfohlen -->
       </div>
     </section>
   </main>
@@ -703,7 +695,7 @@
       if('requestIdleCallback' in window){ requestIdleCallback(loadLenis); } else { setTimeout(loadLenis, 4000); }
     })();
 
-    // Ampel-Check (auto-advance, 2026 texts) + optional Klaviyo
+    // Ampel-Check + optional Klaviyo
     (function(){
       const startBtns = document.querySelectorAll('[data-start]');
       const wrap = document.getElementById('check-steps');
