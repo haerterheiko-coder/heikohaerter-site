@@ -1,22 +1,22 @@
-<!-- /index.html — Decision Space v5.3 (A11y+Perf Polish, Robust AMP-Check, Focus Mgmt, CMP UX, Micro-Details) -->
+<!-- /index.html — Decision Space v5.6 (2026-level: Bugs fixed + A11y/WCAG 2.2 + Perf/INP + Risk controls + Decision-Architecture polish) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="dark light" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#05070E" />
   <meta name="format-detection" content="telephone=no" />
   <title>Damit Finanzen nicht ständig im Kopf sind.</title>
-  <meta name="description" content="Privat · Familie · Verantwortung. Kurz prüfen, ob alles passt – ohne Druck. Einkommen, Absicherung, Rücklagen, Familie, Vorsorge: so geordnet, dass es im Alltag nicht ständig im Kopf ist." />
+  <meta name="description" content="Privat · Familie · Verantwortung. Kurz einordnen, ob alles passt – ohne Druck. Einkommen, Absicherung, Rücklagen, Familie, Vorsorge: so geordnet, dass es im Alltag nicht ständig im Kopf ist." />
   <link rel="canonical" href="https://heikohaerter.com" />
 
   <!-- OG/Twitter -->
   <meta property="og:site_name" content="Heiko Haerter – Allfinanz & Entscheidungslogik" />
   <meta property="og:title" content="Damit Finanzen nicht ständig im Kopf sind." />
-  <meta property="og:description" content="Kurz prüfen, ob alles passt. Privat · Familie · Verantwortung." />
+  <meta property="og:description" content="Kurz einordnen, ob alles passt. Privat · Familie · Verantwortung." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://heikohaerter.com" />
   <meta property="og:locale" content="de_DE" />
@@ -51,7 +51,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- JSON-LD: LocalBusiness + FAQ + Breadcrumbs -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -94,7 +94,7 @@
   }
   </script>
 
-  <!-- LEGAL/CMP: Consent Mode v2 (Default: abgelehnt) -->
+  <!-- Consent Mode v2 (Default denied) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
@@ -105,7 +105,6 @@
       analytics_storage: 'denied',
       wait_for_update: 500
     });
-    // CMP Zustand
     window.__cmpState = { analytics: false, marketing: false, ts: null, src: {} };
   </script>
 
@@ -113,12 +112,13 @@
     <style>
       .fade-up{opacity:1!important;transform:none!important;filter:none!important}
       .sticky-cta{display:none!important}
+      .space{display:none!important}
     </style>
   </noscript>
 
   <style>
     :root{
-      --bg:#05070E; --bg2:#02040A; --bg3:#0A0F22;
+      --bg:#05070E; --bg2:#02040A;
       --text:#F7F8FC; --muted:#A8B1C5; --muted2:#8F97AA;
       --gold:#E6D08A; --focus:#90C2FF;
       --danger:#c85151; --warn:#d6c45a; --ok:#55b76b;
@@ -126,23 +126,55 @@
       --ambient-x:.5; --ambient-y:.15; --ambient-opacity:.14;
       --line:rgba(255,255,255,.12);
     }
+
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto!important}
+    }
+
     *,*::before,*::after{box-sizing:border-box}
     html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-    body{ margin:0; background:
+    body{
+      margin:0;
+      background:
         radial-gradient(800px 600px at 20% 0%, rgba(120,150,255,.12), transparent 60%),
         radial-gradient(800px 600px at 80% 20%, rgba(200,164,75,.10), transparent 60%),
         linear-gradient(180deg,var(--bg),var(--bg2) 60%);
-      color:var(--text); font-family:"IBM Plex Sans","Inter",system-ui,sans-serif; -webkit-font-smoothing:antialiased; line-height:1.45; overflow-x:hidden; }
+      color:var(--text);
+      font-family:"IBM Plex Sans","Inter",system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+      overflow-x:hidden;
+    }
+
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
+
+    /* Skip link (visible on focus) */
+    .skip-link{
+      position:absolute; left:12px; top:10px;
+      padding:.6rem .8rem; border-radius:999px;
+      background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.2);
+      transform:translateY(-140%); transition:transform .2s var(--ease);
+      z-index:1001;
+    }
+    .skip-link:focus{ transform:translateY(0); outline:3px solid var(--focus); outline-offset:3px; }
 
     /* Scroll progress */
     .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),#fff);z-index:1000;box-shadow:0 0 12px rgba(230,208,138,.6)}
 
-    .space{position:fixed;inset:-20vh -10vw auto -10vw;height:60vh;pointer-events:none;z-index:-1;filter:blur(48px);opacity:var(--ambient-opacity)}
-    .space::before{content:"";position:absolute;inset:0; background:
-      radial-gradient(42% 38% at calc(10% + 40% * var(--ambient-x)) calc(10% + 30% * var(--ambient-y)), rgba(200,164,75,.32) 0%, transparent 60%),
-      radial-gradient(36% 34% at calc(82% - 30% * var(--ambient-x)) calc(12% + 28% * var(--ambient-y)), rgba(120,150,255,.26) 0%, transparent 62%); mix-blend-mode:screen; transition:transform 1s linear; will-change:transform }
+    .space{
+      position:fixed; inset:-20vh -10vw auto -10vw; height:60vh;
+      pointer-events:none; z-index:-1; filter:blur(48px); opacity:var(--ambient-opacity);
+    }
+    .space::before{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(42% 38% at calc(10% + 40% * var(--ambient-x)) calc(10% + 30% * var(--ambient-y)), rgba(200,164,75,.32) 0%, transparent 60%),
+        radial-gradient(36% 34% at calc(82% - 30% * var(--ambient-x)) calc(12% + 28% * var(--ambient-y)), rgba(120,150,255,.26) 0%, transparent 62%);
+      mix-blend-mode:screen;
+      transition:transform 1s linear;
+      will-change:transform;
+    }
 
     .section{padding:clamp(48px,8vw,120px) 0}
     .container{max-width:1140px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
@@ -160,7 +192,13 @@
     .hero-sub{font-size:1.12rem;color:#d9deef;margin-top:.5rem}
     .signature{font-family: "Canela","Tiempos Headline", serif; font-weight:400; letter-spacing:-0.01em}
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.95rem 1.45rem;border-radius:999px;border:1px solid rgba(255,255,255,.14);font-weight:800;background:rgba(255,255,255,.06);color:var(--text);transition:transform .18s var(--ease), box-shadow .25s var(--ease), background .2s}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:48px; padding:.95rem 1.45rem;
+      border-radius:999px; border:1px solid rgba(255,255,255,.14);
+      font-weight:800; background:rgba(255,255,255,.06); color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .25s var(--ease), background .2s;
+    }
     .btn:hover{transform:translateY(-1px); box-shadow:0 10px 28px rgba(0,0,0,.35); background:rgba(255,255,255,.08)}
     .btn-primary{background:var(--gold);color:#111;border-color:rgba(230,208,138,.25)}
     .btn-ghost{background:transparent;border-color:rgba(255,255,255,.16)}
@@ -168,6 +206,10 @@
     .btn.secondary{opacity:.95;transform:none}
     .btn[disabled]{opacity:.6;pointer-events:none}
     @media (max-width:1023px){ .btn{width:100%} }
+
+    /* Focus visible */
+    a:focus-visible,button:focus-visible,[role="dialog"]:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
+    label.btn.small:focus-within{outline:3px solid var(--focus);outline-offset:3px}
 
     header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.8);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(10px)}
     .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:.85rem 0;gap:1rem}
@@ -206,13 +248,17 @@
     .is-green{background:#0f1b12;border-color:var(--ok)}
     .result-title{font-size:clamp(1.2rem,2.2vw,1.5rem);font-weight:700;margin-bottom:.35rem;color:#fff}
 
-    .sticky-cta{position:fixed;left:0;right:0;bottom:18px;z-index:68;display:none;justify-content:center;transform:translateY(100%);opacity:0;transition:transform .25s var(--ease),opacity .25s var(--ease)}
+    .sticky-cta{
+      position:fixed; left:0; right:0; bottom:18px; z-index:68;
+      display:none; justify-content:center;
+      transform:translateY(100%); opacity:0;
+      transition:transform .25s var(--ease),opacity .25s var(--ease)
+    }
     .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
     @media (max-width:1023px){ .sticky-cta{display:flex} }
     @supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
 
     .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    a:focus-visible,button:focus-visible,[role="dialog"]:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
 
     dialog#zoom{width:min(92vw,1100px);border:none;padding:0;background:transparent}
     dialog#zoom::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(2px)}
@@ -282,7 +328,7 @@
 
 <body>
   <div class="progress" id="progress" aria-hidden="true"></div>
-  <a href="#main" class="visually-hidden">Zum Inhalt springen</a>
+  <a href="#main" class="skip-link">Zum Inhalt springen</a>
   <div class="space" aria-hidden="true"></div>
 
   <nav class="chapters" aria-label="Kapitel">
@@ -307,7 +353,7 @@
         <span class="micro">Allfinanz · Entscheidungslogik · Region Stuttgart</span>
       </a>
       <nav class="nav" aria-label="Hauptnavigation">
-        <a class="link" href="#lebenslagen">Lebenslagen</a>
+        <a class="link" href="#proof">Lebenslagen</a>
         <a class="link" href="#ablauf">Ablauf</a>
         <a class="link" href="#firma">Firmen</a>
         <a class="link" href="/impressum">Impressum</a>
@@ -325,15 +371,21 @@
           <p class="micro eyebrow">Für Menschen mit Verantwortung – privat &amp; unternehmerisch</p>
           <h1 id="hero-title" class="signature">Damit Finanzen nicht ständig im Kopf sind.</h1>
           <p class="hero-sub">Ordnung. Reihenfolge. Ruhe – statt To-do-Druck und Bauchgefühl.</p>
+
           <div class="kpis" aria-label="Vertrauenswerte">
             <div class="kpi"><strong data-count="1200">0</strong><span>begleitete Entscheidungen</span></div>
             <div class="kpi"><strong data-count="10">0</strong><span>Jahre verlässlich dokumentiert</span></div>
             <div class="kpi"><strong data-count="2">0</strong><span>Min. für einen ersten Eindruck</span></div>
           </div>
+          <p class="micro" style="margin-top:.45rem;opacity:.9">
+            Zählweise: interne Beratungsdokumentationen (anonymisiert) seit 2016.
+          </p>
+
           <div class="stack" style="margin-top:.9rem">
             <div class="grid" style="gap:.5rem">
-              <button class="btn btn-primary" id="startCheckHero" type="button" data-start data-hero>Kurz prüfen, ob alles passt</button>
-              <button class="btn btn-ghost secondary" id="startCheckAlt" type="button" data-start>Einmal sauber durchgehen</button>
+              <!-- Hebel 1: nur im Hero autonomer CTA -->
+              <button class="btn btn-primary" id="startCheckHero" type="button" data-start data-hero>Eigene Lage einordnen (2 Min)</button>
+              <a class="btn btn-ghost secondary" href="#transparenz">So läuft’s ab (mit Exit-Punkten)</a>
             </div>
             <small class="micro" style="opacity:.9">Kein Verkauf im Erstgespräch. Wenn nichts zu tun ist, ist das das Ergebnis.</small>
           </div>
@@ -361,7 +413,7 @@
       </div>
     </section>
 
-    <!-- Was ich für Menschen mache -->
+    <!-- Was hier passiert -->
     <section class="statement section fade-up" aria-labelledby="what-h">
       <div class="container">
         <h2 id="what-h">Was hier konkret passiert</h2>
@@ -381,7 +433,7 @@
       </div>
     </section>
 
-    <!-- Meta-Rahmung -->
+    <!-- Meta -->
     <section class="statement section fade-up" aria-label="Hinweis">
       <div class="container">
         <p class="micro"><strong>Diese Seite ist kein Angebot.</strong> Sie hilft dir einzuschätzen, ob gerade überhaupt etwas zu tun ist. Keine Rechts- oder Steuerberatung.</p>
@@ -480,7 +532,7 @@
       </div>
     </section>
 
-    <!-- Mini-Cases (Storytelling) -->
+    <!-- Mini-Cases -->
     <section class="section fade-up panel" aria-labelledby="cases-h">
       <div class="container">
         <h2 id="cases-h">Drei echte Veränderungen in wenigen Wochen</h2>
@@ -550,7 +602,7 @@
       </div>
     </section>
 
-    <!-- Wann ein Gespräch Sinn macht -->
+    <!-- Wann Sinn macht -->
     <section class="statement section fade-up" aria-labelledby="when-h">
       <div class="container">
         <h2 id="when-h">Wann ein Gespräch Sinn macht</h2>
@@ -569,20 +621,31 @@
         <div class="stack" id="check-start">
           <h2 id="check-h">Kurz-Check für deine finanzielle Lage</h2>
           <p class="micro">3 Fragen. Bauchgefühl reicht. 2 Minuten.</p>
+          <p class="micro" style="opacity:.92;margin-top:-.2rem">Du siehst am Ende nur <strong>ROT/GELB/GRÜN</strong>. Kein Termin-Screen, kein Funnel.</p>
+
           <div class="grid" style="gap:.5rem">
             <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Kurz prüfen, ob alles passt</button>
-            <button class="btn btn-ghost" id="startShort2" type="button">Einmal sauber durchgehen</button>
+            <a class="btn btn-ghost" href="#transparenz">So läuft’s ab (mit Exit-Punkten)</a>
           </div>
+
           <small class="micro" style="opacity:.85">Optional: Danach Termin. Oder nur Überblick.</small>
+          <div style="margin-top:.35rem">
+            <a class="micro" href="#what-h" style="text-decoration:underline">Nur lesen – ohne Check</a>
+          </div>
         </div>
 
         <form id="check-steps" style="display:none;margin-top:1.2rem" aria-describedby="stepHint">
-          <div style="margin-bottom:.8rem">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
-              <strong id="stepLabel">Schritt 1 von 3</strong>
-              <span class="micro" id="stepHint" role="status" aria-live="polite">Kurzer Eindruck reicht.</span>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
+            <strong id="stepLabel">Schritt 1 von 3</strong>
+            <div style="display:flex;gap:.5rem;align-items:center">
+              <button class="btn btn-ghost small" id="checkBack" type="button" disabled>Zurück</button>
+              <button class="btn btn-ghost small" id="checkCancel" type="button">Abbrechen</button>
             </div>
-            <progress id="progressBar" max="3" value="0" style="width:100%" aria-live="off"></progress>
+          </div>
+
+          <div style="margin-bottom:.8rem">
+            <span class="micro" id="stepHint" role="status" aria-live="polite">Kurzer Eindruck reicht.</span>
+            <progress id="progressBar" max="3" value="0" style="width:100%" aria-label="Fortschritt" aria-live="off"></progress>
           </div>
 
           <fieldset class="step" data-step="1" style="display:none">
@@ -665,7 +728,11 @@
     <section id="transparenz" class="section fade-up panel" aria-labelledby="dvag-h">
       <div class="container">
         <h2 id="dvag-h">Transparenz – bevor wir sprechen</h2>
-        <p><strong>DVAG-System:</strong> Struktur, Dokumentation, Langfrist. Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert, Lösungen bleiben betreubar – auch in 10 oder 20 Jahren. Kein Produkt ohne Einordnung.</p>
+
+        <!-- Hebel 4: Haltung statt Rechtfertigung -->
+        <p><strong>DVAG-System:</strong> Das DVAG-System gibt mir die Struktur, damit Entscheidungen langfristig betreubar bleiben. Nicht mehr – und nicht weniger.</p>
+        <p class="micro" style="margin-top:.35rem">Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert – und Lösungen bleiben betreubar, auch in 10 oder 20 Jahren.</p>
+
         <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
         <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
         <p class="micro" style="margin-top:.6rem"><strong>Hinweis:</strong> Diese Seite ersetzt keine rechtliche oder steuerliche Beratung. Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.</p>
@@ -703,10 +770,10 @@
     </div>
   </footer>
 
-  <!-- Sticky Mobile CTA -->
+  <!-- Sticky Mobile CTA (Hebel 5: controlled after Ampel result only) -->
   <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
     <div class="inner">
-      <button class="btn btn-primary" type="button" data-start data-ctx="sticky">Kurz prüfen, ob alles passt</button>
+      <button class="btn btn-primary" type="button" id="stickyBtn" data-ctx="sticky">Nächster Schritt</button>
     </div>
   </div>
 
@@ -719,7 +786,7 @@
     </div>
   </dialog>
 
-  <!-- LEGAL/CMP: Consent Banner -->
+  <!-- CMP -->
   <div class="cmp-wrap" id="cmp" role="dialog" aria-modal="true" aria-labelledby="cmpTitle" aria-describedby="cmpText">
     <div class="cmp-head">
       <div class="cmp-title" id="cmpTitle">Datenschutz & Cookies</div>
@@ -752,9 +819,8 @@
     </div>
   </div>
 
-  <!-- LEGAL/CMP: Skripte erst nach Einwilligung laden -->
+  <!-- Consent-gated script loaders -->
   <script>
-    // Helper
     function loadScriptOnce(url, attrs = {}) {
       if (document.querySelector('script[data-src="'+url+'"], script[src="'+url+'"]')) return;
       const s = document.createElement('script');
@@ -764,7 +830,6 @@
       document.head.appendChild(s);
     }
 
-    // GA4 erst nach Analytics-Einwilligung
     function initGA() {
       if (window.__cmpState.src.ga) return;
       loadScriptOnce('https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX');
@@ -773,14 +838,12 @@
       window.__cmpState.src.ga = true;
     }
 
-    // Klaviyo erst nach Marketing-Einwilligung
     function initKlaviyo(){
       if (window.__cmpState.src.klaviyo) return;
       loadScriptOnce('https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=T7wryA');
       window.__cmpState.src.klaviyo = true;
     }
 
-    // Consent anwenden
     function applyConsent(opts) {
       const { analytics, marketing } = opts;
       window.__cmpState.analytics = !!analytics;
@@ -800,7 +863,7 @@
       try { localStorage.setItem('hh_cmp', JSON.stringify(window.__cmpState)); } catch(_) {}
     }
 
-    // CMP UI + Fokussteuerung
+    // CMP UI + focus mgmt (Esc, outside click, trap)
     (function(){
       const LS_KEY = 'hh_cmp';
       const cmp = document.getElementById('cmp');
@@ -812,8 +875,10 @@
       const reject = document.getElementById('cmpReject');
       const save = document.getElementById('cmpSave');
 
-      const focusables = ()=> Array.from(cmp.querySelectorAll('button,[href],input:not([disabled])')).filter(el=>el.offsetParent!==null);
-      let lastFocus=null;
+      const focusables = () => Array.from(cmp.querySelectorAll('button,[href],input:not([disabled])'))
+        .filter(el => el.offsetParent !== null);
+
+      let lastFocus = null;
 
       function show(v){
         cmp.classList.toggle('visible', !!v);
@@ -826,15 +891,31 @@
           lastFocus && lastFocus.focus?.();
         }
       }
+
       function trap(e){
         if(!cmp.classList.contains('visible')) return;
-        if(e.key!=='Tab') return;
+
+        if(e.key === 'Escape'){
+          e.preventDefault();
+          show(false);
+          return;
+        }
+
+        if(e.key !== 'Tab') return;
         const f = focusables(); if(!f.length) return;
-        const first=f[0], last=f[f.length-1];
-        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
-        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+        const first = f[0], last = f[f.length-1];
+
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
       }
       document.addEventListener('keydown', trap);
+
+      function clickOutside(e){
+        if(!cmp.classList.contains('visible')) return;
+        if(cmp.contains(e.target)) return;
+        show(false);
+      }
+      document.addEventListener('pointerdown', clickOutside, { passive:true });
 
       function read(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||''); }catch(_){ return null; } }
 
@@ -864,8 +945,13 @@
     (function(){
       const bar = document.getElementById('progress');
       const max = () => document.documentElement.scrollHeight - innerHeight;
-      const run = () => { const p = Math.max(0, Math.min(1, scrollY / Math.max(1,max()))); bar.style.width = (p*100)+'%'; };
-      addEventListener('scroll', run, { passive:true }); addEventListener('resize', run); run();
+      const run = () => {
+        const p = Math.max(0, Math.min(1, scrollY / Math.max(1, max())));
+        bar.style.width = (p*100)+'%';
+      };
+      addEventListener('scroll', run, { passive:true });
+      addEventListener('resize', run);
+      run();
     })();
 
     // KPI Counter
@@ -875,32 +961,48 @@
       const io = new IntersectionObserver(entries=>{
         entries.forEach(e=>{
           if(!e.isIntersecting) return;
-          const el = e.target; const target = +el.getAttribute('data-count'); let n=0;
+          const el = e.target;
+          const target = +el.getAttribute('data-count');
+          let n = 0;
           const step = Math.max(1, Math.ceil(target/60));
-          const tick = () => { n += step; if(n>=target){ n = target; } el.textContent = n; if(n<target) requestAnimationFrame(tick); };
-          tick(); io.unobserve(el);
+          const tick = () => {
+            n += step;
+            if(n>=target) n = target;
+            el.textContent = n;
+            if(n<target) requestAnimationFrame(tick);
+          };
+          tick();
+          io.unobserve(el);
         });
       },{threshold:.6});
       els.forEach(el=>io.observe(el));
     })();
 
-    // Ambient movement
+    // Ambient movement (disabled in reduced motion)
     (function(){
       const space = document.querySelector('.space');
       if(!space) return;
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        space.style.display='none';
+        return;
+      }
       let raf, t = 0, lastY = window.scrollY;
       const loop = () => {
         const y = window.scrollY;
         const dy = Math.max(-1, Math.min(1, (y - lastY) / 2000));
-        lastY = y; t += 0.002 + dy * 0.001;
-        const x = (Math.sin(t) + 1) / 2; const yy = (Math.cos(t*0.8) + 1) / 2;
+        lastY = y;
+        t += 0.002 + dy * 0.001;
+        const x = (Math.sin(t) + 1) / 2;
+        const yy = (Math.cos(t*0.8) + 1) / 2;
         document.documentElement.style.setProperty('--ambient-x', x.toFixed(4));
         document.documentElement.style.setProperty('--ambient-y', yy.toFixed(4));
         raf = requestAnimationFrame(loop);
       };
       raf = requestAnimationFrame(loop);
-      addEventListener('visibilitychange',()=>{ if(document.hidden){ cancelAnimationFrame(raf); } else { raf = requestAnimationFrame(loop); } });
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ cancelAnimationFrame(raf); space.style.display='none'; }
+      addEventListener('visibilitychange',()=>{
+        if(document.hidden){ cancelAnimationFrame(raf); }
+        else { raf = requestAnimationFrame(loop); }
+      });
     })();
 
     // Reveal
@@ -910,23 +1012,15 @@
         const els = Array.from(document.querySelectorAll('.fade-up'));
         if(pref || !('IntersectionObserver' in window)){ els.forEach(el => el.classList.add('visible')); return; }
         const io = new IntersectionObserver(entries => {
-          for (const e of entries){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target);} }
+          for (const e of entries){
+            if(e.isIntersecting){
+              e.target.classList.add('visible');
+              io.unobserve(e.target);
+            }
+          }
         }, { threshold:.12, rootMargin:'0px 0px -10% 0px' });
         els.forEach(el => io.observe(el));
-      }catch(_){ }
-    })();
-
-    // Sticky CTA (mobile)
-    (function(){
-      const el = document.getElementById('stickyCTA');
-      const hero = document.getElementById('hero');
-      if(!el || !hero || innerWidth >= 1024) return;
-      const show = v => { el.style.transform = v ? 'translateY(0)' : 'translateY(100%)'; el.style.opacity = v ? '1' : '0'; el.setAttribute('aria-hidden', v? 'false':'true'); };
-      if('IntersectionObserver' in window){
-        const io = new IntersectionObserver(entries => entries.forEach(e => show(!e.isIntersecting)), { threshold:.35 });
-        io.observe(hero);
-        addEventListener('scroll', () => { if(scrollY > 220) show(true); }, { passive:true });
-      } else { addEventListener('scroll', () => show(scrollY > 220), { passive:true }); }
+      }catch(_){}
     })();
 
     // Chapters active state
@@ -945,132 +1039,463 @@
       ids.forEach(el => io.observe(el));
     })();
 
-    // Lightbox
+    /* Lightbox: inert + aria-hidden fallback */
     (function(){
-      const dlg=document.getElementById('zoom'); if(!dlg) return;
-      const img=dlg.querySelector('.zoom-img');
-      const main=document.getElementById('main');
-      document.addEventListener('click',e=>{
-        const t=e.target.closest('[data-zoom]'); if(!t) return;
-        img.src=t.currentSrc||t.src; img.alt=t.alt||''; dlg.showModal(); main?.setAttribute('inert','');
-      }, { passive:true });
-      dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
-      dlg.querySelector('.zoom-close').onclick=()=>dlg.close();
-      dlg.addEventListener('close',()=> main?.removeAttribute('inert'));
-      dlg.addEventListener('cancel',()=> main?.removeAttribute('inert'));
-      document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&dlg.open) dlg.close(); });
+      const dlg = document.getElementById('zoom');
+      if(!dlg) return;
+      const img = dlg.querySelector('.zoom-img');
+      const main = document.getElementById('main');
+
+      function lockMain(){
+        main?.setAttribute('inert','');
+        main?.setAttribute('aria-hidden','true');
+      }
+      function unlockMain(){
+        main?.removeAttribute('inert');
+        main?.removeAttribute('aria-hidden');
+      }
+
+      document.addEventListener('click', (e) => {
+        const t = e.target.closest('[data-zoom]');
+        if(!t) return;
+        img.src = t.currentSrc || t.src;
+        img.alt = t.alt || '';
+        dlg.showModal();
+        lockMain();
+      });
+
+      dlg.addEventListener('click', (e) => { if(e.target===dlg) dlg.close(); });
+      dlg.querySelector('.zoom-close').onclick = () => dlg.close();
+      dlg.addEventListener('close', unlockMain);
+      dlg.addEventListener('cancel', unlockMain);
+      document.addEventListener('keydown', (e) => { if(e.key==='Escape' && dlg.open) dlg.close(); });
     })();
 
-    // Lenis (idle)
+    /* Sticky CTA plumbing (shown only after Ampel result) */
     (function(){
-      let loaded=false;
-      function loadLenis(){ if(loaded) return; loaded=true; const s=document.createElement('script'); s.src='https://unpkg.com/@studio-freight/lenis'; s.defer=true; s.onload=()=>{ if(!window.Lenis) return; const lenis = new Lenis({ duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, smoothTouch: false }); const raf = (time)=>{ lenis.raf(time); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }; document.head.appendChild(s);} 
-      document.querySelectorAll('[data-start]').forEach(b=> b.addEventListener('click', loadLenis, {once:true}));
-      if('requestIdleCallback' in window){ requestIdleCallback(loadLenis); } else { setTimeout(loadLenis, 3500); }
+      const el = document.getElementById('stickyCTA');
+      const btn = document.getElementById('stickyBtn');
+      if(!el || !btn || innerWidth >= 1024) return;
+
+      const show = (v) => {
+        el.style.transform = v ? 'translateY(0)' : 'translateY(100%)';
+        el.style.opacity = v ? '1' : '0';
+        el.setAttribute('aria-hidden', v ? 'false' : 'true');
+      };
+      show(false);
+
+      window.__sticky = {
+        show,
+        set(label, onClick){
+          btn.textContent = label;
+          btn.onclick = onClick;
+        }
+      };
     })();
 
-    // Ampel-Check + Tastaturkomfort + optional Klaviyo
+    // UTM / Attribution (also exposed for dynamic links)
+    (function(){
+      function parseQS(qs){
+        const p = {};
+        (qs||'').replace(/^\?/,'').split('&').forEach(kv=>{
+          if(!kv) return;
+          const [k,v] = kv.split('=');
+          p[decodeURIComponent(k)] = decodeURIComponent(v||'');
+        });
+        return p;
+      }
+
+      const params = parseQS(location.search);
+      const UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','msclkid','fbclid'];
+      const hasUTM = UTM_KEYS.some(k => params[k]);
+
+      const LS_KEY_FIRST = 'hh_utm_first';
+      const SS_KEY_SESS  = 'hh_utm_session';
+
+      function store(obj, key){ try{ localStorage.setItem(key, JSON.stringify(obj)); }catch(_){ } }
+      function load(key){ try{ const v=localStorage.getItem(key); return v? JSON.parse(v):null; }catch(_){ return null; } }
+      function sstore(obj, key){ try{ sessionStorage.setItem(key, JSON.stringify(obj)); }catch(_){ } }
+
+      if(hasUTM){
+        const minimal = {};
+        UTM_KEYS.forEach(k=>{ if(params[k]) minimal[k]=params[k]; });
+        if(!load(LS_KEY_FIRST)) store(minimal, LS_KEY_FIRST);
+        sstore(minimal, SS_KEY_SESS);
+      }
+
+      function getAttribution(){
+        let first={}, sess={};
+        try{ first = JSON.parse(localStorage.getItem(LS_KEY_FIRST)||'{}'); }catch(_){}
+        try{ sess  = JSON.parse(sessionStorage.getItem(SS_KEY_SESS)||'{}'); }catch(_){}
+        return Object.assign({}, first, sess);
+      }
+
+      function appendUTM(url){
+        try{
+          const at = getAttribution();
+          const u = new URL(url, location.origin);
+          Object.keys(at).forEach(k=>{ if(at[k]) u.searchParams.set(k, at[k]); });
+          return u.toString();
+        }catch(_){
+          return url;
+        }
+      }
+
+      function enhanceLinks(){
+        document.querySelectorAll('a[href*="wa.me/"], a[href*="outlook.office.com/book/"]').forEach(a=>{
+          a.href = appendUTM(a.href);
+        });
+      }
+      if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', enhanceLinks);
+      else enhanceLinks();
+
+      function sendEvent(name, payload={}){ try{ gtag('event', name, payload); }catch(_){ } }
+
+      window.__getAttribution = getAttribution;
+      window.__appendUTM = appendUTM;
+      window.__sendEvent = sendEvent;
+
+      // CTA click tracking (works even if consent denied; gtag will no-op storage)
+      (function(){
+        const ctas = new Set([ ...document.querySelectorAll('[data-start]'), document.getElementById('ctaFinal') ].filter(Boolean));
+        ctas.forEach(el=>{
+          el.addEventListener('click', ()=> sendEvent('CTA_Click', Object.assign({}, getAttribution(), {
+            cta_id: el.id || el.getAttribute('data-ctx') || 'cta',
+            cta_text: (el.textContent||'').trim()
+          })), { passive:true });
+        });
+      })();
+
+      document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
+        a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', Object.assign({}, getAttribution(), { link: a.href })), { passive:true });
+      });
+      document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{
+        a.addEventListener('click', ()=> sendEvent('Booking_Click', Object.assign({}, getAttribution(), { link: a.href })), { passive:true });
+      });
+    })();
+
+    /* Lenis: optional, only after user interaction, disabled in reduced motion */
+    (function(){
+      const prefReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(prefReduce) return;
+
+      let loaded = false;
+      function loadLenis(){
+        if(loaded) return;
+        loaded = true;
+
+        const s = document.createElement('script');
+        s.src = 'https://unpkg.com/@studio-freight/lenis';
+        s.defer = true;
+        s.onload = () => {
+          if(!window.Lenis) return;
+          const lenis = new Lenis({
+            duration: 1.1,
+            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            smoothTouch: false
+          });
+          const raf = (time)=>{ lenis.raf(time); requestAnimationFrame(raf); };
+          requestAnimationFrame(raf);
+        };
+        document.head.appendChild(s);
+      }
+
+      const triggers = ['pointerdown','keydown','wheel','touchstart'];
+      const onFirst = () => { loadLenis(); triggers.forEach(t=>removeEventListener(t,onFirst,true)); };
+      triggers.forEach(t=>addEventListener(t,onFirst,true));
+
+      document.querySelectorAll('[data-start]').forEach(b=> b.addEventListener('click', loadLenis, { once:true }));
+    })();
+
+    /* Ampel-Check: delta scoring + arrow nav fix + bind once + back/cancel + status-specific next step + PDF for green */
     (function(){
       const startBtns = document.querySelectorAll('[data-start]');
       const wrap = document.getElementById('check-steps');
       const resultBox = document.getElementById('check-result');
       const startBox = document.getElementById('check-start');
+
       const stepLabel = document.getElementById('stepLabel');
       const progress = document.getElementById('progressBar');
       const stepHint = document.getElementById('stepHint');
-      const shortBtns = [document.getElementById('startShort2')].filter(Boolean);
+
+      const cancelBtn = document.getElementById('checkCancel');
+      const backBtn = document.getElementById('checkBack');
+
+      if(!wrap || !startBox || !resultBox) return;
 
       const steps = Array.from(document.querySelectorAll('#check-steps .step'));
-      const max = steps.length; let step = 1; let score = 0;
+      const max = steps.length;
 
-      function updateHead(){ stepLabel.textContent = `Schritt ${Math.min(step,max)} von ${max}`; progress.value = Math.max(0, step-1); stepHint.textContent = step===1 ? 'Kurzer Eindruck reicht.' : (step===2 ? 'Fast geschafft.' : 'Letzter Klick.'); }
-      function showStep(n){ steps.forEach(s => s.style.display='none'); const t = steps[n-1]; if(t){ t.style.display='block'; const first = t.querySelector('input'); if(first){ try{ first.focus({ preventScroll:true }); }catch(_){ first.focus(); } } } updateHead(); }
-      function waLink(text){ return 'https://wa.me/4917660408380?text=' + encodeURIComponent(text); }
+      const answers = { q1: 0, q2: 0, q3: 0 };
+      let step = 1;
+      let score = 0;
 
-      // Tastatur: Pfeile bewegen Auswahl innerhalb der aktuellen Frage
+      function resetState(){
+        score = 0; step = 1;
+        Object.keys(answers).forEach(k => answers[k] = 0);
+        Array.from(wrap.querySelectorAll('input[type="radio"]')).forEach(i => i.checked=false);
+      }
+
+      function updateHead(){
+        stepLabel.textContent = `Schritt ${Math.min(step,max)} von ${max}`;
+        progress.value = Math.max(0, step-1);
+        stepHint.textContent = step===1 ? 'Kurzer Eindruck reicht.' : (step===2 ? 'Fast geschafft.' : 'Letzter Klick.');
+        if(backBtn) backBtn.disabled = step <= 1;
+      }
+
+      function showStep(n){
+        steps.forEach(s => s.style.display='none');
+        const t = steps[n-1];
+        if(t){
+          t.style.display='block';
+          const first = t.querySelector('input');
+          if(first){
+            try{ first.focus({ preventScroll:true }); }catch(_){ first.focus(); }
+          }
+        }
+        updateHead();
+      }
+
+      function waLink(text){
+        const raw = 'https://wa.me/4917660408380?text=' + encodeURIComponent(text);
+        return window.__appendUTM ? window.__appendUTM(raw) : raw;
+      }
+
+      function bookLink(){
+        const raw = 'https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled';
+        return window.__appendUTM ? window.__appendUTM(raw) : raw;
+      }
+
+      function openPrintSheet(status, score){
+        const now = new Date();
+        const date = now.toLocaleDateString('de-DE', { year:'numeric', month:'2-digit', day:'2-digit' });
+
+        const map = {
+          rot:  { title:'ROT – kurzfristig sortieren',  next:'10 Minuten Einordnung: Was ist zuerst dran?' },
+          gelb: { title:'GELB – Reihenfolge klären',    next:'In Ruhe priorisieren – ohne Entscheidung.' },
+          gruen:{ title:'GRÜN – wirkt solide',          next:'Ergebnis sichern – als Erinnerung.' }
+        };
+        const meta = map[status] || map.gruen;
+
+        const w = window.open('', '_blank', 'noopener,noreferrer,width=720,height=840');
+        if(!w) return;
+
+        w.document.open();
+        w.document.write(`<!doctype html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ampel-Ergebnis</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45;margin:28px;color:#111}
+  h1{font-size:22px;margin:0 0 8px}
+  .muted{color:#444}
+  .box{border:1px solid #ddd;border-radius:12px;padding:14px 16px;margin:14px 0}
+  .tiny{font-size:12px;color:#555;margin-top:16px}
+  @media print{ a{display:none} }
+</style></head>
+<body>
+  <h1>Ampel-Ergebnis</h1>
+  <div class="muted">Datum: ${date}</div>
+  <div class="box">
+    <strong>Status:</strong> ${meta.title}<br>
+    <strong>Einordnung:</strong> ${meta.next}<br>
+    <strong>Score (intern):</strong> ${score}
+  </div>
+  <div class="tiny">
+    Hinweis: Dieses Merkblatt ist eine grobe Einordnung und ersetzt keine Rechts- oder Steuerberatung.
+    Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.
+  </div>
+  <p class="tiny"><a href="#" onclick="window.print();return false;">Drucken / als PDF speichern</a></p>
+</body></html>`);
+        w.document.close();
+        w.focus();
+        w.print();
+      }
+
+      function renderPanel(color){
+        const k = color==='red'?'red':(color==='yellow'?'yellow':'green');
+
+        const copy = {
+          red: {
+            title: '🔴 Rot: 10 Minuten sortieren – ohne Termin.',
+            text:  'Mindestens ein Bereich ist akut. Wir ordnen kurz, was jetzt wirklich zuerst kommt. Keine Entscheidung im Gespräch.',
+            primary: { kind:'wa', label:'10 Minuten sortieren (WhatsApp)', href: waLink('Hi Heiko, 10 Minuten sortieren. Mein Status: ROT. Kein Termin – nur Einordnung.') },
+            secondary:{ kind:'book', label:'Kurz-Check buchen', href: bookLink() }
+          },
+          yellow: {
+            title: '🟡 Gelb: Reihenfolge klären – ohne Entscheidung.',
+            text:  'Ein paar Themen stehen an. Wir priorisieren ruhig, was wann dran ist – ohne Produktdruck.',
+            primary: { kind:'book', label:'Reihenfolge klären (30–45 Min)', href: bookLink() },
+            secondary:{ kind:'link', label:'Transparenz ansehen', href:'#transparenz' }
+          },
+          green: {
+            title: '🟢 Grün: Ergebnis sichern.',
+            text:  'Wirkt aktuell solide. Wenn du magst: Ergebnis als Merkblatt sichern – damit es nicht wieder im Kopf hängt.',
+            primary: { kind:'save', label:'Ergebnis sichern (PDF)' },
+            secondary:{ kind:'link', label:'Transparenz ansehen', href:'#transparenz' }
+          }
+        };
+
+        const c = copy[k];
+
+        return `
+          <div class="result-panel is-${k}">
+            <div class="result-title">${c.title}</div>
+            <p>${c.text}</p>
+            <div class="stack" style="text-align:center;margin-top:.8rem">
+              ${
+                c.primary.kind === 'save'
+                  ? `<button type="button" class="btn btn-primary" data-save-result>${c.primary.label}</button>`
+                  : `<a href="${c.primary.href}" ${c.primary.kind==='wa'?'target="_blank" rel="noopener"':''} class="btn btn-primary">${c.primary.label}</a>`
+              }
+              ${
+                c.secondary
+                  ? (c.secondary.kind==='book'
+                      ? `<a href="${c.secondary.href}" class="btn btn-ghost" rel="nofollow noopener">${c.secondary.label}</a>`
+                      : `<a href="${c.secondary.href}" class="btn btn-ghost">${c.secondary.label}</a>`
+                    )
+                  : ''
+              }
+              ${k==='red' ? `<a href="#transparenz" class="btn btn-ghost">So läuft’s ab (Transparenz)</a>` : ``}
+            </div>
+          </div>`;
+      }
+
+      function trackAmpelResult(status, score){
+        try{
+          if (!window.klaviyo || !Array.isArray(window.klaviyo)) return;
+          window.klaviyo.push(['track','Ampel Ergebnis',{
+            ampel_status: status,
+            ampel_score: score,
+            lead_source: 'ampel',
+            intent_level: status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig'),
+            last_ampel_at: new Date().toISOString()
+          }]);
+        }catch(_){}
+      }
+
+      function finish(){
+        wrap.style.display = 'none';
+        resultBox.style.display = 'block';
+
+        let html = '';
+        let status = 'gruen';
+        if(score <= 4){ status = 'rot'; html = renderPanel('red'); }
+        else if(score <= 7){ status = 'gelb'; html = renderPanel('yellow'); }
+        else { status = 'gruen'; html = renderPanel('green'); }
+
+        resultBox.innerHTML = html;
+
+        const saveBtn = resultBox.querySelector('[data-save-result]');
+        if(saveBtn){
+          saveBtn.addEventListener('click', ()=> openPrintSheet(status, score));
+        }
+
+        trackAmpelResult(status, score);
+        resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+
+        // Hebel 5: Sticky CTA only after result
+        if(window.__sticky){
+          if(status === 'rot'){
+            window.__sticky.set('10 Minuten sortieren', ()=> window.open(waLink('Hi Heiko, 10 Minuten sortieren. Mein Status: ROT. Kein Termin – nur Einordnung.'), '_blank', 'noopener'));
+            window.__sticky.show(true);
+          } else if(status === 'gelb'){
+            const book = bookLink();
+            window.__sticky.set('Reihenfolge klären', ()=> { location.href = book; });
+            window.__sticky.show(true);
+          } else {
+            window.__sticky.set('Ergebnis sichern (PDF)', ()=> openPrintSheet(status, score));
+            window.__sticky.show(true);
+          }
+        }
+      }
+
+      function start(){
+        window.__sticky?.show(false);
+
+        document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'});
+        startBox.style.display = 'none';
+        wrap.style.display = 'block';
+        resultBox.style.display = 'none';
+        resetState();
+        showStep(step);
+      }
+
+      function cancel(){
+        window.__sticky?.show(false);
+
+        wrap.style.display = 'none';
+        resultBox.style.display = 'none';
+        startBox.style.display = 'block';
+        startBox.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+
+      function back(){
+        if(step <= 1) return;
+        step -= 1;
+        showStep(step);
+      }
+
+      // Arrow nav: bind once, idx fix, prevent scroll
+      const bound = new WeakSet();
       function enableArrowNav(fs){
-        fs.addEventListener('keydown',(e)=>{
+        if(bound.has(fs)) return;
+        bound.add(fs);
+
+        fs.addEventListener('keydown', (e) => {
           if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)) return;
           const inputs = Array.from(fs.querySelectorAll('input[type="radio"]'));
-          const idx = inputs.findIndex(x=>x.checked)||0;
-          let next = idx + (e.key==='ArrowRight'||e.key==='ArrowDown'?1:-1);
-          if(next<0) next = inputs.length-1; if(next>=inputs.length) next = 0;
+          if(!inputs.length) return;
+
+          e.preventDefault();
+
+          let idx = inputs.findIndex(x=>x.checked);
+          if(idx < 0) idx = 0;
+
+          let next = idx + ((e.key==='ArrowRight'||e.key==='ArrowDown') ? 1 : -1);
+          if(next < 0) next = inputs.length - 1;
+          if(next >= inputs.length) next = 0;
+
           inputs[next].checked = true;
           inputs[next].dispatchEvent(new Event('change',{bubbles:true}));
         });
       }
+      steps.forEach(enableArrowNav);
 
-      function renderPanel(color){
-        const book = 'https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled';
-        const m = {
-          red:['🔴 Hier solltest du nicht weiter warten.','Mindestens ein Bereich ist akut. Erst ordnen, dann handeln.'],
-          yellow:['🟡 Ein paar Dinge stehen an – ohne Stress.','In Ruhe priorisieren, dann abarbeiten.'],
-          green:['🟢 Wirkt aktuell gut aufgestellt.','Optional feinjustieren – oder einfach weitermachen.']
-        };
-        const k = color==='red'?'red':(color==='yellow'?'yellow':'green');
-        return `
-          <div class="result-panel is-${k}">
-            <div class="result-title">${m[k][0]}</div>
-            <p>${m[k][1]}</p>
-            <div class="stack" style="text-align:center;margin-top:.8rem">
-              ${k==='red' ? `<a href="${waLink('Hi Heiko, kurz 10 Minuten sortieren. Mein Status: ROT.')}" target="_blank" rel="noopener" class="btn btn-primary">Kurz sprechen</a>` : ``}
-              <a href="${book}" class="btn ${k==='red'?'btn-ghost':'btn-primary'}" rel="nofollow noopener">Kurz prüfen, ob alles passt</a>
-            </div>
-          </div>`;
-      }
-      function trackAmpelResult(status, score) { try{ if (!window.klaviyo || !Array.isArray(window.klaviyo)) return; window.klaviyo.push(['track','Ampel Ergebnis',{ampel_status: status, ampel_score: score, lead_source: 'ampel', intent_level: status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig'), last_ampel_at: new Date().toISOString()}]); }catch(_){ } }
-      function finish(){ wrap.style.display = 'none'; resultBox.style.display = 'block'; let html = '', status = 'gruen'; if(score <= 4){ status = 'rot'; html = renderPanel('red'); } else if(score <= 7){ status = 'gelb'; html = renderPanel('yellow'); } else { status = 'gruen'; html = renderPanel('green'); } resultBox.innerHTML = html; trackAmpelResult(status, score); resultBox.scrollIntoView({behavior:'smooth', block:'start'}); }
+      function onAnswerChange(e){
+        const input = e.target;
+        if(!input || input.type !== 'radio') return;
 
-      function start(short=false){
-        document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'});
-        startBox.style.display = 'none'; wrap.style.display = 'block'; resultBox.style.display = 'none';
-        step = 1; score = 0;
-        Array.from(wrap.querySelectorAll('input[type="radio"]')).forEach(i => i.checked=false);
-        steps.forEach(enableArrowNav);
-        showStep(step);
-        if(short){
-          setTimeout(()=>{ score += 2; step = 2; showStep(step); }, 150);
-          setTimeout(()=>{ score += 2; step = 3; showStep(step); }, 350);
-        }
+        const name = input.name;
+        const val = Number(input.value || 0);
+        if(!val) return;
+
+        const prev = Number(answers[name] || 0);
+        score += (val - prev);
+        answers[name] = val;
       }
-      startBtns.forEach(b => b.addEventListener('click', () => start(false)));
-      shortBtns.forEach(b => b.addEventListener('click', () => start(true)));
+
+      startBtns.forEach(b => b.addEventListener('click', start));
+      cancelBtn?.addEventListener('click', cancel);
+      backBtn?.addEventListener('click', back);
+
       steps.forEach((fs, idx) => {
-        fs.addEventListener('change', e => {
-          const val = Number((e.target && e.target.value) || 0);
-          if(!val) return;
-          score += val;
-          if(idx+1 >= max){ finish(); }
-          else { step = idx+2; showStep(step); }
+        fs.addEventListener('change', (e) => {
+          onAnswerChange(e);
+
+          // Auto-advance on answer
+          if(idx+1 >= max){
+            finish();
+          } else {
+            step = idx+2;
+            showStep(step);
+          }
         });
       });
+
       updateHead();
-    })();
-
-    // Analytics / UTM
-    (function(){
-      function parseQS(qs){const p={};(qs||'').replace(/^\?/,'').split('&').forEach(kv=>{if(!kv)return;const [k,v]=kv.split('=');p[decodeURIComponent(k)]=decodeURIComponent(v||'');});return p;}
-      const params = parseQS(location.search);
-      const UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','msclkid','fbclid'];
-      const hasUTM = UTM_KEYS.some(k => params[k]);
-      const LS_KEY_FIRST = 'hh_utm_first';
-      const SS_KEY_SESS  = 'hh_utm_session';
-      function store(obj, key){ try{ localStorage.setItem(key, JSON.stringify(obj)); }catch(_){ } }
-      function load(key){ try{ const v=localStorage.getItem(key); return v? JSON.parse(v):null; }catch(_){ return null; } }
-      function sstore(obj, key){ try{ sessionStorage.setItem(key, JSON.stringify(obj)); }catch(_){} }
-
-      if(hasUTM){ const minimal={}; UTM_KEYS.forEach(k=>{ if(params[k]) minimal[k]=params[k]; }); if(!load(LS_KEY_FIRST)){ store(minimal, LS_KEY_FIRST); } sstore(minimal, SS_KEY_SESS); }
-      function getAttribution(){ let first={},sess={}; try{ first = JSON.parse(localStorage.getItem(LS_KEY_FIRST)||'{}'); }catch(_){ } try{ sess = JSON.parse(sessionStorage.getItem(SS_KEY_SESS)||'{}'); }catch(_){ } return Object.assign({}, first, sess); }
-      function appendUTM(url){ const at = getAttribution(); const u = new URL(url, location.origin); Object.keys(at).forEach(k=>{ if(at[k]) u.searchParams.set(k, at[k]); }); return u.toString(); }
-      function enhanceLinks(){ document.querySelectorAll('a[href*="wa.me/"], a[href*="outlook.office.com/book/"]').forEach(a=>{ a.href = appendUTM(a.href); }); }
-      if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', enhanceLinks); } else { enhanceLinks(); }
-
-      function sendEvent(name, params={}){ try{ gtag('event', name, params); }catch(_){ } }
-      function attrParams(extra={}){ return Object.assign({}, getAttribution(), extra); }
-
-      (function(){ const ctas = new Set([ ...document.querySelectorAll('[data-start]'), document.getElementById('ctaFinal') ].filter(Boolean)); ctas.forEach(el=>{ el.addEventListener('click', ()=> sendEvent('CTA_Click', attrParams({ cta_id: el.id || el.getAttribute('data-ctx') || 'cta', cta_text: (el.textContent||'').trim() })), {passive:true}); }); })();
-      document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{ a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', attrParams({link:a.href})), {passive:true}); });
-      document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{ a.addEventListener('click', ()=> sendEvent('Booking_Click', attrParams({link:a.href})), {passive:true}); });
     })();
   </script>
 </body>
