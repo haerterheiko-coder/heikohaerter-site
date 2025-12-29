@@ -1,4 +1,4 @@
-<!-- /index.html — Decision Space v5.6 (2026-level: Bugs fixed + A11y/WCAG 2.2 + Perf/INP + Risk controls + Decision-Architecture polish) -->
+<!-- /index.html — Decision Space v6.0 (2026-level: WCAG 2.2 + Consent controls + Print robustness + pinned deps + Klaviyo Decision Archive / CRM-light) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -30,7 +30,11 @@
   <link rel="preconnect" href="https://wa.me" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Fonts (non render-blocking) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap"></noscript>
 
   <!-- LCP Preload (Hero-Bild) -->
   <link
@@ -211,6 +215,15 @@
     a:focus-visible,button:focus-visible,[role="dialog"]:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
     label.btn.small:focus-within{outline:3px solid var(--focus);outline-offset:3px}
 
+    /* Selected-state for radio labels (WCAG clarity).
+       Primary: :has() for modern browsers. Fallback: .is-selected via JS. */
+    label.btn.small:has(input:checked),
+    label.btn.small.is-selected{
+      border-color: rgba(230,208,138,.55);
+      box-shadow: 0 0 0 3px rgba(230,208,138,.18);
+      background: rgba(230,208,138,.08);
+    }
+
     header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.8);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(10px)}
     .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:.85rem 0;gap:1rem}
     .brand{display:flex;flex-direction:column}
@@ -307,8 +320,34 @@
     .faq summary::-webkit-details-marker{display:none}
     .faq .answer{margin-top:.45rem}
 
-    /* CMP */
-    .cmp-wrap{position:fixed;inset:auto 12px 12px 12px;z-index:1000;max-width:820px;margin-left:auto;margin-right:auto;background:rgba(10,14,22,.98);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px;box-shadow:0 16px 48px rgba(0,0,0,.6);display:none}
+    /* A11y: legends */
+    .legend-title{
+      font-size:clamp(1.08rem,2vw,1.26rem);
+      font-weight:700;
+      color:#fff;
+      padding:0;
+      margin:0 0 .55rem;
+    }
+
+    /* CMP backdrop + card */
+    .cmp-backdrop{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.55);
+      backdrop-filter:blur(2px);
+      z-index:999;
+      display:none;
+    }
+    .cmp-backdrop.visible{display:block}
+
+    .cmp-wrap{
+      position:fixed; inset:auto 12px 12px 12px; z-index:1000;
+      max-width:820px; margin-left:auto; margin-right:auto;
+      background:rgba(10,14,22,.98);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:16px; padding:14px;
+      box-shadow:0 16px 48px rgba(0,0,0,.6);
+      display:none
+    }
     .cmp-wrap.visible{display:block}
     .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.4rem}
     .cmp-title{font-weight:700}
@@ -317,12 +356,30 @@
     .cmp-actions .btn{min-height:42px}
     .cmp-toggle{display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:.6rem .8rem;margin-top:.4rem;background:rgba(255,255,255,.02)}
     .cmp-toggle label{display:flex;flex-direction:column;gap:.15rem}
-    .switch{position:relative;width:46px;height:26px;background:#333;border-radius:999px}
+
+    /* ✅ Switch contrast patch */
+    .switch{position:relative;width:46px;height:26px;background:rgba(255,255,255,.18);border-radius:999px}
     .switch input{position:absolute;opacity:0}
-    .switch i{position:absolute;top:3px;left:3px;width:20px;height:20px;background:#aaa;border-radius:50%;transition:.2s}
-    .switch input:checked + i{left:23px;background:#111}
+    .switch i{position:absolute;top:3px;left:3px;width:20px;height:20px;background:rgba(255,255,255,.7);border-radius:50%;transition:.2s}
+    .switch input:checked + i{left:23px;background:#111;box-shadow:0 0 0 2px rgba(230,208,138,.35)}
+
     .cmp-links{font-size:.9rem;color:var(--muted2);margin-top:.5rem}
     .cmp-links a{text-decoration:underline}
+
+    /* Decision chips (micro, non-funnel) */
+    .chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:.6rem}
+    .chip{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.5rem .8rem;border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.03);
+      color:var(--text); font-weight:800; cursor:pointer;
+    }
+    .chip[aria-pressed="true"]{
+      border-color: rgba(230,208,138,.55);
+      box-shadow: 0 0 0 3px rgba(230,208,138,.14);
+      background: rgba(230,208,138,.08);
+    }
   </style>
 </head>
 
@@ -358,7 +415,7 @@
         <a class="link" href="#firma">Firmen</a>
         <a class="link" href="/impressum">Impressum</a>
         <a class="link" href="/datenschutz">Datenschutz</a>
-        <a class="btn btn-primary" href="#ampel-check" data-start>Kurz prüfen, ob alles passt</a>
+        <a class="btn btn-primary" href="#ampel-check" data-start>Eigene Lage einordnen (2 Min)</a>
       </nav>
     </div>
   </header>
@@ -383,7 +440,6 @@
 
           <div class="stack" style="margin-top:.9rem">
             <div class="grid" style="gap:.5rem">
-              <!-- Hebel 1: nur im Hero autonomer CTA -->
               <button class="btn btn-primary" id="startCheckHero" type="button" data-start data-hero>Eigene Lage einordnen (2 Min)</button>
               <a class="btn btn-ghost secondary" href="#transparenz">So läuft’s ab (mit Exit-Punkten)</a>
             </div>
@@ -579,7 +635,7 @@
         <p><strong>Bausteine:</strong> GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p>
         <p><strong>Unternehmer-Ampel:</strong> Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p>
         <div style="margin-top:.6rem">
-          <a class="btn btn-ghost" href="#ampel-check" data-start>Finanziellen Überblick holen</a>
+          <a class="btn btn-ghost" href="#ampel-check" data-start>Eigene Lage einordnen (2 Min)</a>
         </div>
       </div>
     </section>
@@ -624,7 +680,7 @@
           <p class="micro" style="opacity:.92;margin-top:-.2rem">Du siehst am Ende nur <strong>ROT/GELB/GRÜN</strong>. Kein Termin-Screen, kein Funnel.</p>
 
           <div class="grid" style="gap:.5rem">
-            <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Kurz prüfen, ob alles passt</button>
+            <button class="btn btn-primary" id="startCheckBtn" type="button" data-start>Eigene Lage einordnen (2 Min)</button>
             <a class="btn btn-ghost" href="#transparenz">So läuft’s ab (mit Exit-Punkten)</a>
           </div>
 
@@ -635,10 +691,11 @@
         </div>
 
         <form id="check-steps" style="display:none;margin-top:1.2rem" aria-describedby="stepHint">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.6rem;flex-wrap:wrap">
             <strong id="stepLabel">Schritt 1 von 3</strong>
-            <div style="display:flex;gap:.5rem;align-items:center">
+            <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
               <button class="btn btn-ghost small" id="checkBack" type="button" disabled>Zurück</button>
+              <button class="btn btn-primary small" id="checkNext" type="button" disabled>Weiter</button>
               <button class="btn btn-ghost small" id="checkCancel" type="button">Abbrechen</button>
             </div>
           </div>
@@ -646,11 +703,18 @@
           <div style="margin-bottom:.8rem">
             <span class="micro" id="stepHint" role="status" aria-live="polite">Kurzer Eindruck reicht.</span>
             <progress id="progressBar" max="3" value="0" style="width:100%" aria-label="Fortschritt" aria-live="off"></progress>
+
+            <!-- WCAG 3.2.2: Nutzer steuert Kontextwechsel -->
+            <label class="micro" style="display:flex;gap:.55rem;align-items:center;margin-top:.55rem">
+              <input type="checkbox" id="autoAdvance" checked>
+              <span>Automatisch weiter nach Auswahl</span>
+            </label>
           </div>
 
           <fieldset class="step" data-step="1" style="display:none">
-            <legend><h3 id="q1label">1 · 6 Monate Ausfall – wie stabil wäre euer Einkommen?</h3></legend>
-            <div class="stack" role="radiogroup" aria-labelledby="q1label">
+            <legend id="q1label" class="legend-title">1 · 6 Monate Ausfall – wie stabil wäre euer Einkommen?</legend>
+            <p class="visually-hidden" id="q1hint">Wähle eine Option.</p>
+            <div class="stack" role="radiogroup" aria-labelledby="q1label" aria-describedby="q1hint">
               <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="1"> <span>Wir hätten ein echtes Problem</span></label>
               <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="2"> <span>Wir kämen durch, aber eng</span></label>
               <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="3"> <span>Stabil aufgestellt</span></label>
@@ -658,8 +722,9 @@
           </fieldset>
 
           <fieldset class="step" data-step="2" style="display:none">
-            <legend><h3 id="q2label">2 · Wie <em>leicht</em> findest du wichtige Unterlagen?</h3></legend>
-            <div class="stack" role="radiogroup" aria-labelledby="q2label">
+            <legend id="q2label" class="legend-title">2 · Wie <em>leicht</em> findest du wichtige Unterlagen?</legend>
+            <p class="visually-hidden" id="q2hint">Wähle eine Option.</p>
+            <div class="stack" role="radiogroup" aria-labelledby="q2label" aria-describedby="q2hint">
               <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="1"> <span>Ich suche lange</span></label>
               <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="2"> <span>Meistens</span></label>
               <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="3"> <span>Zuverlässig</span></label>
@@ -667,8 +732,9 @@
           </fieldset>
 
           <fieldset class="step" data-step="3" style="display:none">
-            <legend><h3 id="q3label">3 · „Zukunft &amp; Alter“ – wie fühlt es sich an?</h3></legend>
-            <div class="stack" role="radiogroup" aria-labelledby="q3label">
+            <legend id="q3label" class="legend-title">3 · „Zukunft &amp; Alter“ – wie fühlt es sich an?</legend>
+            <p class="visually-hidden" id="q3hint">Wähle eine Option.</p>
+            <div class="stack" role="radiogroup" aria-labelledby="q3label" aria-describedby="q3hint">
               <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="1"> <span>Unsicher</span></label>
               <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="2"> <span>Teilweise rund</span></label>
               <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="3"> <span>Gut</span></label>
@@ -701,7 +767,7 @@
         </details>
         <details>
           <summary>Kann das komplett online stattfinden?</summary>
-          <div class="answer micro">Ja. Online oder vor Ort in der Region Stuttgart – strukturiert dokumentiert.</div>
+          <div class="answer micro">Ja. Online oder vor Ort (Region Stuttgart) – strukturiert dokumentiert.</div>
         </details>
       </div>
     </section>
@@ -713,8 +779,8 @@
         <p>Einmal prüfen. Danach nicht mehr dran denken müssen.</p>
         <div class="stack" style="align-items:center;margin-top:.4rem">
           <div class="grid" style="gap:.5rem;max-width:520px;width:100%;margin-inline:auto">
-            <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Kurz prüfen, ob alles passt</button>
-            <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurz%20pr%C3%BCfen%2C%20ob%20alles%20passt." target="_blank" rel="noopener">WhatsApp (kurz)</a>
+            <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Eigene Lage einordnen (2 Min)</button>
+            <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurz%20pr%C3%BCfen%2C%20ob%20alles%20passt." target="_blank" rel="noopener noreferrer">WhatsApp (kurz)</a>
           </div>
           <p class="micro" style="margin-top:.7rem">
             Ich arbeite im System der Deutschen Vermögensberatung. Für dich heißt das:
@@ -728,11 +794,8 @@
     <section id="transparenz" class="section fade-up panel" aria-labelledby="dvag-h">
       <div class="container">
         <h2 id="dvag-h">Transparenz – bevor wir sprechen</h2>
-
-        <!-- Hebel 4: Haltung statt Rechtfertigung -->
         <p><strong>DVAG-System:</strong> Das DVAG-System gibt mir die Struktur, damit Entscheidungen langfristig betreubar bleiben. Nicht mehr – und nicht weniger.</p>
         <p class="micro" style="margin-top:.35rem">Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert – und Lösungen bleiben betreubar, auch in 10 oder 20 Jahren.</p>
-
         <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
         <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
         <p class="micro" style="margin-top:.6rem"><strong>Hinweis:</strong> Diese Seite ersetzt keine rechtliche oder steuerliche Beratung. Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.</p>
@@ -747,13 +810,13 @@
         <a href="/arbeitskraft-absicherung.html">Arbeitskraft</a>
         <a href="/unternehmer-absicherung.html">Unternehmer</a>
         <a href="/finanzielle-reihenfolge.html">Reihenfolge</a>
-        <a href="https://www.linkedin.com/in/heiko-haerter-3755b2260/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://www.xing.com/profile/Heiko_Haerter3" target="_blank" rel="noopener">Xing</a>
-        <a href="https://www.instagram.com/heiko.haerter.coach/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/heiko-haerter-3755b2260/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.xing.com/profile/Heiko_Haerter3" target="_blank" rel="noopener noreferrer">Xing</a>
+        <a href="https://www.instagram.com/heiko.haerter.coach/" target="_blank" rel="noopener noreferrer">Instagram</a>
         <a href="/impressum">Impressum</a>
         <a href="/datenschutz">Datenschutz</a>
         <a href="/barrierefreiheit">Barrierefreiheit</a>
-        <a href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener">Kurz-Check buchen</a>
+        <a href="https://outlook.office.com/book/HeikoHaerter@dvag02.onmicrosoft.com/?ismsaljsauthenabled" rel="nofollow noopener noreferrer">Kurz-Check buchen</a>
         <a href="#" id="openCmp">Cookie-Einstellungen</a>
       </div>
 
@@ -770,10 +833,10 @@
     </div>
   </footer>
 
-  <!-- Sticky Mobile CTA (Hebel 5: controlled after Ampel result only) -->
+  <!-- Sticky Mobile CTA (shown only after Ampel result) -->
   <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
     <div class="inner">
-      <button class="btn btn-primary" type="button" id="stickyBtn" data-ctx="sticky">Nächster Schritt</button>
+      <button class="btn btn-primary" type="button" id="stickyBtn" data-ctx="sticky" aria-label="Nächster Schritt" tabindex="-1">Nächster Schritt</button>
     </div>
   </div>
 
@@ -786,15 +849,18 @@
     </div>
   </dialog>
 
+  <!-- CMP Backdrop (deterministischer Outside-Click) -->
+  <div class="cmp-backdrop" id="cmpBackdrop" aria-hidden="true"></div>
+
   <!-- CMP -->
-  <div class="cmp-wrap" id="cmp" role="dialog" aria-modal="true" aria-labelledby="cmpTitle" aria-describedby="cmpText">
+  <div class="cmp-wrap" id="cmp" role="dialog" aria-modal="true" aria-labelledby="cmpTitle" aria-describedby="cmpText" aria-hidden="true">
     <div class="cmp-head">
       <div class="cmp-title" id="cmpTitle">Datenschutz & Cookies</div>
       <button class="btn btn-ghost small" id="cmpClose" aria-label="Schließen">✕</button>
     </div>
     <div class="cmp-text" id="cmpText">
       Wir verwenden notwendige Cookies, um diese Seite zu betreiben. Für <strong>Statistik (Analytics)</strong> und <strong>Marketing</strong> bitten wir um Ihre Einwilligung.
-      Sie können diese jederzeit unter „Cookie-Einstellungen“ widerrufen. Details in unserer <a href="/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+      Sie können diese jederzeit unter „Cookie-Einstellungen“ widerrufen. Details in unserer <a href="/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>.
     </div>
     <div class="cmp-toggle">
       <label><strong>Notwendig</strong><span class="micro">immer aktiv – technisch erforderlich</span></label>
@@ -814,13 +880,19 @@
       <button class="btn btn-primary" id="cmpAccept">Alle akzeptieren</button>
     </div>
     <div class="cmp-links">
-      <a href="/impressum" target="_blank" rel="noopener">Impressum</a> ·
-      <a href="/datenschutz" target="_blank" rel="noopener">Datenschutz</a>
+      <a href="/impressum" target="_blank" rel="noopener noreferrer">Impressum</a> ·
+      <a href="/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz</a>
     </div>
   </div>
 
   <!-- Consent-gated script loaders -->
   <script>
+    // ====== CONFIG (replace before live) ======
+    const GA_ID = 'G-XXXXXXXXXX'; // <-- set real ID; stays inert if left as placeholder
+    const KLAVIYO_COMPANY_ID = 'T7wryA';
+    const AMPEL_VERSION = 'v1';
+    const PAGE_VARIANT = 'decision-space-6.0';
+
     function loadScriptOnce(url, attrs = {}) {
       if (document.querySelector('script[data-src="'+url+'"], script[src="'+url+'"]')) return;
       const s = document.createElement('script');
@@ -831,17 +903,21 @@
     }
 
     function initGA() {
+      // Prevent useless requests if GA_ID not set
+      if (!GA_ID || String(GA_ID).includes('XXXX')) return;
       if (window.__cmpState.src.ga) return;
-      loadScriptOnce('https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX');
+
+      loadScriptOnce(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_ID)}`);
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX', { send_page_view: true, anonymize_ip: true });
+      gtag('config', GA_ID, { send_page_view: true, anonymize_ip: true });
       window.__cmpState.src.ga = true;
     }
 
     function initKlaviyo(){
       if (window.__cmpState.src.klaviyo) return;
-      loadScriptOnce('https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=T7wryA');
+      loadScriptOnce(`https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=${encodeURIComponent(KLAVIYO_COMPANY_ID)}`);
       window.__cmpState.src.klaviyo = true;
+      window.klaviyo = window.klaviyo || [];
     }
 
     function applyConsent(opts) {
@@ -863,10 +939,11 @@
       try { localStorage.setItem('hh_cmp', JSON.stringify(window.__cmpState)); } catch(_) {}
     }
 
-    // CMP UI + focus mgmt (Esc, outside click, trap)
+    // CMP UI + focus mgmt (Esc, backdrop click, trap) + inert rest of page
     (function(){
       const LS_KEY = 'hh_cmp';
       const cmp = document.getElementById('cmp');
+      const backdrop = document.getElementById('cmpBackdrop');
       const openBtn = document.getElementById('openCmp');
       const closeBtn = document.getElementById('cmpClose');
       const a = document.getElementById('cmpAnalytics');
@@ -875,21 +952,48 @@
       const reject = document.getElementById('cmpReject');
       const save = document.getElementById('cmpSave');
 
+      const main = document.getElementById('main');
+      const header = document.querySelector('header');
+      const footer = document.querySelector('footer');
+
       const focusables = () => Array.from(cmp.querySelectorAll('button,[href],input:not([disabled])'))
         .filter(el => el.offsetParent !== null);
 
       let lastFocus = null;
 
+      function setPageInert(on){
+        // Prevent navigating away while CMP is open (safer + clearer UX)
+        try{ main?.toggleAttribute('inert', !!on); }catch(_){}
+        try{ header?.toggleAttribute('inert', !!on); }catch(_){}
+        try{ footer?.toggleAttribute('inert', !!on); }catch(_){}
+        // Keep CMP itself interactive
+        try{ cmp?.removeAttribute('inert'); }catch(_){}
+      }
+
       function show(v){
-        cmp.classList.toggle('visible', !!v);
-        if(v){
+        const on = !!v;
+        cmp.classList.toggle('visible', on);
+        cmp.setAttribute('aria-hidden', on ? 'false' : 'true');
+
+        backdrop.classList.toggle('visible', on);
+        backdrop.setAttribute('aria-hidden', on ? 'false' : 'true');
+
+        if(on){
           lastFocus = document.activeElement;
-          const f = focusables()[0]; f && f.focus();
+          setPageInert(true);
           document.body.style.overflow='hidden';
+          const f = focusables()[0]; f && f.focus();
         }else{
+          setPageInert(false);
           document.body.style.overflow='';
           lastFocus && lastFocus.focus?.();
         }
+      }
+
+      function closeAsNecessary(){
+        a.checked = false; m.checked = false;
+        applyConsent({ analytics:false, marketing:false });
+        show(false);
       }
 
       function trap(e){
@@ -897,7 +1001,7 @@
 
         if(e.key === 'Escape'){
           e.preventDefault();
-          show(false);
+          closeAsNecessary();
           return;
         }
 
@@ -910,20 +1014,16 @@
       }
       document.addEventListener('keydown', trap);
 
-      function clickOutside(e){
-        if(!cmp.classList.contains('visible')) return;
-        if(cmp.contains(e.target)) return;
-        show(false);
-      }
-      document.addEventListener('pointerdown', clickOutside, { passive:true });
+      backdrop.addEventListener('click', closeAsNecessary);
 
       function read(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||''); }catch(_){ return null; } }
 
       const stored = read();
-      if (stored) {
+      if (stored && typeof stored === 'object') {
         a.checked = !!stored.analytics;
         m.checked = !!stored.marketing;
-        applyConsent(stored);
+        applyConsent({ analytics: !!stored.analytics, marketing: !!stored.marketing });
+        show(false);
       } else {
         show(true);
       }
@@ -933,7 +1033,7 @@
       save.addEventListener('click', ()=>{ applyConsent({analytics:a.checked, marketing:m.checked}); show(false); });
 
       openBtn?.addEventListener('click', (e)=>{ e.preventDefault(); show(true); });
-      closeBtn?.addEventListener('click', ()=> show(false));
+      closeBtn?.addEventListener('click', closeAsNecessary);
     })();
   </script>
 
@@ -1075,25 +1175,38 @@
     (function(){
       const el = document.getElementById('stickyCTA');
       const btn = document.getElementById('stickyBtn');
-      if(!el || !btn || innerWidth >= 1024) return;
+      if(!el || !btn) return;
+
+      function isMobile(){ return window.matchMedia('(max-width:1023px)').matches; }
+
+      let wanted = false;
 
       const show = (v) => {
-        el.style.transform = v ? 'translateY(0)' : 'translateY(100%)';
-        el.style.opacity = v ? '1' : '0';
-        el.setAttribute('aria-hidden', v ? 'false' : 'true');
+        wanted = !!v;
+        const on = wanted && isMobile();
+        el.style.transform = on ? 'translateY(0)' : 'translateY(100%)';
+        el.style.opacity = on ? '1' : '0';
+        el.style.pointerEvents = on ? 'auto' : 'none';
+        el.setAttribute('aria-hidden', on ? 'false' : 'true');
+        btn.tabIndex = on ? 0 : -1;
       };
       show(false);
+
+      addEventListener('resize', ()=> show(wanted), { passive:true });
 
       window.__sticky = {
         show,
         set(label, onClick){
           btn.textContent = label;
+          btn.setAttribute('aria-label', `Nächster Schritt: ${label}`);
           btn.onclick = onClick;
         }
       };
     })();
+  </script>
 
-    // UTM / Attribution (also exposed for dynamic links)
+  <!-- UTM / Attribution + Decision Archive SSoT + Minimal Tracking Policy -->
+  <script>
     (function(){
       function parseQS(qs){
         const p = {};
@@ -1155,38 +1268,251 @@
       window.__appendUTM = appendUTM;
       window.__sendEvent = sendEvent;
 
-      // CTA click tracking (works even if consent denied; gtag will no-op storage)
+      /* ================================
+        DECISION STATE (SSoT / CRM-light)
+        Core fields (10):
+        ampel_status, ampel_score, decision_context, intent_level,
+        trust_entry, decision_stage, last_ampel_at, returned_visitor_30d,
+        ampel_version, page_variant
+      ================================= */
+      const DECISION_LS = 'hh_decision_state_v2';
+      const defaults = {
+        ampel_status: '',
+        ampel_score: '',
+        decision_context: 'privat',
+        intent_level: '',
+        trust_entry: 'ampel_check',
+        decision_stage: 'einordnung',
+        last_ampel_at: '',
+        returned_visitor_30d: 'false',
+        ampel_version: (typeof AMPEL_VERSION !== 'undefined' ? AMPEL_VERSION : 'v1'),
+        page_variant: (typeof PAGE_VARIANT !== 'undefined' ? PAGE_VARIANT : 'decision-space')
+      };
+
+      function readDecision(){
+        try{
+          const v = JSON.parse(localStorage.getItem(DECISION_LS) || '{}');
+          return Object.assign({}, defaults, v || {});
+        }catch(_){
+          return Object.assign({}, defaults);
+        }
+      }
+
+      function writeDecision(state){
+        try{ localStorage.setItem(DECISION_LS, JSON.stringify(state)); }catch(_){}
+      }
+
+      function setHidden(name, val){
+        document.querySelectorAll(`input[name="${name}"]`).forEach(i=> i.value = val ?? '');
+      }
+
+      function syncDecisionFields(){
+        const s = window.__decision.state;
+
+        // Backwards-compatible + recommended prefixed names for Klaviyo segmentation
+        setHidden('ampel_status', s.ampel_status || '');
+        setHidden('ampel_score', s.ampel_score || '');
+        setHidden('decision_context', s.decision_context || 'privat');
+        setHidden('intent_level', s.intent_level || '');
+        setHidden('trust_entry', s.trust_entry || 'ampel_check');
+        setHidden('decision_stage', s.decision_stage || 'einordnung');
+        setHidden('last_ampel_at', s.last_ampel_at || '');
+        setHidden('returned_visitor_30d', String(s.returned_visitor_30d ?? 'false'));
+        setHidden('ampel_version', s.ampel_version || defaults.ampel_version);
+        setHidden('page_variant', s.page_variant || defaults.page_variant);
+
+        setHidden('hh_ampel_status', s.ampel_status || '');
+        setHidden('hh_ampel_score', s.ampel_score || '');
+        setHidden('hh_decision_context', s.decision_context || 'privat');
+        setHidden('hh_intent_level', s.intent_level || '');
+        setHidden('hh_trust_entry', s.trust_entry || 'ampel_check');
+        setHidden('hh_decision_stage', s.decision_stage || 'einordnung');
+        setHidden('hh_last_ampel_at', s.last_ampel_at || '');
+        setHidden('hh_returned_visitor_30d', String(s.returned_visitor_30d ?? 'false'));
+        setHidden('hh_ampel_version', s.ampel_version || defaults.ampel_version);
+        setHidden('hh_page_variant', s.page_variant || defaults.page_variant);
+      }
+
+      function setDecision(patch){
+        const s = Object.assign({}, window.__decision.state, patch || {});
+        window.__decision.state = s;
+        writeDecision(s);
+        syncDecisionFields();
+        return s;
+      }
+
+      window.__decision = {
+        state: readDecision(),
+        set: setDecision,
+        sync: syncDecisionFields
+      };
+      syncDecisionFields();
+
+      /* ================================
+        Tracking policy:
+        - GA events: ok (Consent Mode no-op if denied)
+        - Klaviyo onsite events: ONLY if marketing consent granted
+      ================================= */
+      window.__track = (function(){
+        const once = new Set();
+
+        function canKlaviyo(){
+          try{
+            return !!(window.__cmpState?.marketing && window.klaviyo && Array.isArray(window.klaviyo));
+          }catch(_){ return false; }
+        }
+
+        function base(props){
+          return Object.assign({}, getAttribution(), {
+            page_path: location.pathname,
+            page_hash: location.hash || '',
+            page_title: document.title,
+            ampel_version: window.__decision?.state?.ampel_version || defaults.ampel_version,
+            page_variant: window.__decision?.state?.page_variant || defaults.page_variant
+          }, props || {});
+        }
+
+        function ga(name, props){
+          sendEvent(name, base(props));
+        }
+
+        function kv(name, props){
+          if(!canKlaviyo()) return;
+          try{ window.klaviyo.push(['track', name, base(props)]); }catch(_){}
+        }
+
+        function onceGA(key, name, props){
+          if(once.has(key)) return;
+          once.add(key);
+          ga(name, props);
+        }
+
+        function onceKV(key, name, props){
+          if(once.has(key)) return;
+          once.add(key);
+          kv(name, props);
+        }
+
+        return { ga, kv, onceGA, onceKV, canKlaviyo };
+      })();
+
+      /* CTA click tracking */
       (function(){
         const ctas = new Set([ ...document.querySelectorAll('[data-start]'), document.getElementById('ctaFinal') ].filter(Boolean));
         ctas.forEach(el=>{
-          el.addEventListener('click', ()=> sendEvent('CTA_Click', Object.assign({}, getAttribution(), {
-            cta_id: el.id || el.getAttribute('data-ctx') || 'cta',
-            cta_text: (el.textContent||'').trim()
-          })), { passive:true });
+          el.addEventListener('click', ()=>{
+            window.__track.ga('CTA_Click', {
+              cta_id: el.id || el.getAttribute('data-ctx') || 'cta',
+              cta_text: (el.textContent||'').trim()
+            });
+          }, { passive:true });
         });
       })();
 
+      /* WhatsApp / Booking click tracking (GA) */
       document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
-        a.addEventListener('click', ()=> sendEvent('WhatsApp_Click', Object.assign({}, getAttribution(), { link: a.href })), { passive:true });
+        a.addEventListener('click', ()=>{
+          window.__track.ga('WhatsApp_Click', { link: a.href });
+        }, { passive:true });
       });
       document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{
-        a.addEventListener('click', ()=> sendEvent('Booking_Click', Object.assign({}, getAttribution(), { link: a.href })), { passive:true });
+        a.addEventListener('click', ()=>{
+          window.__track.ga('Booking_Click', { link: a.href });
+        }, { passive:true });
+      });
+
+    })();
+  </script>
+
+  <!-- Returned Visitor 30d (stilles Signal -> SSoT: returned_visitor_30d) -->
+  <script>
+    (function(){
+      const FIRST = 'hh_first_visit';
+      const LAST  = 'hh_last_visit';
+      const FIRED = 'hh_returned_30d_fired';
+      const now = Date.now();
+
+      try{
+        const first = Number(localStorage.getItem(FIRST) || 0);
+        const last  = Number(localStorage.getItem(LAST)  || 0);
+
+        if(!first) localStorage.setItem(FIRST, String(now));
+
+        const isReturn = !!first && (now - last) > (6 * 60 * 60 * 1000); // >6h
+        const within30d = !!first && (now - first) <= (30 * 24 * 60 * 60 * 1000);
+
+        if(isReturn && within30d && !localStorage.getItem(FIRED)){
+          window.__decision?.set({ returned_visitor_30d: 'true' });
+          window.__track?.onceGA('returned_30d', 'Returned_Visitor_30d', {
+            days_since_first: Math.round((now - first) / (24*60*60*1000))
+          });
+          localStorage.setItem(FIRED, '1');
+        }
+
+        localStorage.setItem(LAST, String(now));
+      }catch(_){}
+    })();
+  </script>
+
+  <!-- Section view events (once; GA always, Klaviyo only if marketing consent) -->
+  <script>
+    (function(){
+      if(!('IntersectionObserver' in window)) return;
+
+      const map = [
+        { id: 'transparenz', event: 'Viewed_Transparency', onceKey: 'view_transparenz' },
+        { id: 'firma',       event: 'Viewed_Firma_Section', onceKey: 'view_firma' },
+        { id: 'allfinanz',   event: 'Viewed_Allfinanz', onceKey: 'view_allfinanz' }
+      ];
+
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(!e.isIntersecting) return;
+          const cfg = map.find(x => x.id === e.target.id);
+          if(!cfg) return;
+
+          window.__track?.onceGA(cfg.onceKey, cfg.event, { section_id: cfg.id });
+
+          if(window.__track?.canKlaviyo?.()){
+            window.__track?.onceKV(cfg.onceKey + '_kv', cfg.event, { section_id: cfg.id });
+          }
+
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.55 });
+
+      map.forEach(cfg=>{
+        const el = document.getElementById(cfg.id);
+        if(el) io.observe(el);
       });
     })();
+  </script>
 
-    /* Lenis: optional, only after user interaction, disabled in reduced motion */
+  <!-- Lenis: optional, only after user interaction, disabled in reduced motion -->
+  <script>
     (function(){
       const prefReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if(prefReduce) return;
 
       let loaded = false;
+
+      // ✅ pinned / self-hosted
+      const LENIS_URL = '/assets/lenis-1.0.42.min.js';
+      const LENIS_INTEGRITY = ''; // optional: 'sha384-...' (only set if you know the correct hash)
+
       function loadLenis(){
         if(loaded) return;
         loaded = true;
 
         const s = document.createElement('script');
-        s.src = 'https://unpkg.com/@studio-freight/lenis';
+        s.src = LENIS_URL;
         s.defer = true;
+
+        if(LENIS_INTEGRITY){
+          s.integrity = LENIS_INTEGRITY;
+          s.crossOrigin = 'anonymous';
+        }
+
         s.onload = () => {
           if(!window.Lenis) return;
           const lenis = new Lenis({
@@ -1195,6 +1521,8 @@
             smoothWheel: true,
             smoothTouch: false
           });
+          window.__lenis = lenis;
+
           const raf = (time)=>{ lenis.raf(time); requestAnimationFrame(raf); };
           requestAnimationFrame(raf);
         };
@@ -1207,8 +1535,10 @@
 
       document.querySelectorAll('[data-start]').forEach(b=> b.addEventListener('click', loadLenis, { once:true }));
     })();
+  </script>
 
-    /* Ampel-Check: delta scoring + arrow nav fix + bind once + back/cancel + status-specific next step + PDF for green */
+  <!-- Ampel-Check (Decision Archive signals + chips + archive form) -->
+  <script>
     (function(){
       const startBtns = document.querySelectorAll('[data-start]');
       const wrap = document.getElementById('check-steps');
@@ -1221,8 +1551,10 @@
 
       const cancelBtn = document.getElementById('checkCancel');
       const backBtn = document.getElementById('checkBack');
+      const nextBtn = document.getElementById('checkNext');
+      const autoAdvance = document.getElementById('autoAdvance');
 
-      if(!wrap || !startBox || !resultBox) return;
+      if(!wrap || !startBox || !resultBox || !nextBtn || !autoAdvance) return;
 
       const steps = Array.from(document.querySelectorAll('#check-steps .step'));
       const max = steps.length;
@@ -1231,10 +1563,43 @@
       let step = 1;
       let score = 0;
 
+      // ✅ prevent double-finish
+      let finished = false;
+
+      // Decision context (SSoT)
+      let decisionContext = (window.__decision?.state?.decision_context) || 'privat';
+
+      function smartScrollTo(elOrId, block='start'){
+        const el = typeof elOrId === 'string' ? document.querySelector(elOrId) : elOrId;
+        if(!el) return;
+
+        // Avoid "double smooth" when Lenis is active
+        if(window.__lenis && typeof window.__lenis.scrollTo === 'function'){
+          window.__lenis.scrollTo(el, { offset: 0, immediate: false });
+        }else{
+          el.scrollIntoView({ behavior: 'smooth', block });
+        }
+      }
+
+      function setDecisionContext(v){
+        decisionContext = v || 'privat';
+        try{ sessionStorage.setItem('hh_decision_context', decisionContext); }catch(_){}
+        window.__decision?.set({ decision_context: decisionContext });
+        window.__track?.ga('Decision_Context_Selected', { decision_context: decisionContext });
+      }
+
       function resetState(){
         score = 0; step = 1;
         Object.keys(answers).forEach(k => answers[k] = 0);
         Array.from(wrap.querySelectorAll('input[type="radio"]')).forEach(i => i.checked=false);
+        wrap.querySelectorAll('label.btn.small').forEach(l => l.classList.remove('is-selected'));
+      }
+
+      function updateNextState(){
+        const fs = steps[step-1];
+        const hasChoice = !!fs?.querySelector('input[type="radio"]:checked');
+        nextBtn.disabled = !hasChoice;
+        nextBtn.textContent = (step >= max) ? 'Ergebnis anzeigen' : 'Weiter';
       }
 
       function updateHead(){
@@ -1242,6 +1607,7 @@
         progress.value = Math.max(0, step-1);
         stepHint.textContent = step===1 ? 'Kurzer Eindruck reicht.' : (step===2 ? 'Fast geschafft.' : 'Letzter Klick.');
         if(backBtn) backBtn.disabled = step <= 1;
+        updateNextState();
       }
 
       function showStep(n){
@@ -1269,7 +1635,14 @@
 
       function openPrintSheet(status, score){
         const now = new Date();
+        const safeDate = now.toISOString().slice(0,10); // ✅ robust filename date
         const date = now.toLocaleDateString('de-DE', { year:'numeric', month:'2-digit', day:'2-digit' });
+
+        window.__track?.ga('Downloaded_Ampel_Sheet', {
+          ampel_status: status,
+          ampel_score: score,
+          decision_context: decisionContext
+        });
 
         const map = {
           rot:  { title:'ROT – kurzfristig sortieren',  next:'10 Minuten Einordnung: Was ist zuerst dran?' },
@@ -1278,45 +1651,175 @@
         };
         const meta = map[status] || map.gruen;
 
-        const w = window.open('', '_blank', 'noopener,noreferrer,width=720,height=840');
-        if(!w) return;
-
-        w.document.open();
-        w.document.write(`<!doctype html>
+        const html = `<!doctype html>
 <html lang="de"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ampel-Ergebnis</title>
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45;margin:28px;color:#111}
+  @page { margin: 14mm; }
+  body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.45;margin:0;color:#111}
+  .wrap{padding:18px}
   h1{font-size:22px;margin:0 0 8px}
   .muted{color:#444}
   .box{border:1px solid #ddd;border-radius:12px;padding:14px 16px;margin:14px 0}
   .tiny{font-size:12px;color:#555;margin-top:16px}
-  @media print{ a{display:none} }
+  .no-print{display:block}
+  @media print{ .no-print{display:none!important} }
 </style></head>
 <body>
-  <h1>Ampel-Ergebnis</h1>
-  <div class="muted">Datum: ${date}</div>
-  <div class="box">
-    <strong>Status:</strong> ${meta.title}<br>
-    <strong>Einordnung:</strong> ${meta.next}<br>
-    <strong>Score (intern):</strong> ${score}
+  <div class="wrap">
+    <h1>Ampel-Ergebnis</h1>
+    <div class="muted">Datum: ${date}</div>
+    <div class="box">
+      <strong>Status:</strong> ${meta.title}<br>
+      <strong>Einordnung:</strong> ${meta.next}<br>
+      <strong>Score (intern):</strong> ${score}<br>
+      <strong>Kontext:</strong> ${decisionContext}<br>
+      <strong>Ampel-Version:</strong> ${typeof AMPEL_VERSION !== 'undefined' ? AMPEL_VERSION : 'v1'}<br>
+      <strong>Seiten-Variante:</strong> ${typeof PAGE_VARIANT !== 'undefined' ? PAGE_VARIANT : 'decision-space'}
+    </div>
+    <div class="tiny">
+      Hinweis: Dieses Merkblatt ist eine grobe Einordnung und ersetzt keine Rechts- oder Steuerberatung.
+      Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.
+    </div>
+    <p class="tiny no-print"><a href="#" onclick="window.print();return false;">Drucken / als PDF speichern</a></p>
   </div>
-  <div class="tiny">
-    Hinweis: Dieses Merkblatt ist eine grobe Einordnung und ersetzt keine Rechts- oder Steuerberatung.
-    Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.
-  </div>
-  <p class="tiny"><a href="#" onclick="window.print();return false;">Drucken / als PDF speichern</a></p>
-</body></html>`);
+</body></html>`;
+
+        const w = window.open('', '_blank', 'noopener,noreferrer,width=720,height=840');
+        if(!w){
+          try{
+            const blob = new Blob([html], { type:'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ampel-ergebnis-${status}-${safeDate}.html`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(()=>URL.revokeObjectURL(url), 8000);
+          }catch(_){}
+          return;
+        }
+
+        try{ w.opener = null; }catch(_){}
+
+        w.document.open();
+        w.document.write(html);
         w.document.close();
-        w.focus();
-        w.print();
+
+        let did = false;
+        const fire = () => {
+          if(did) return;
+          did = true;
+          try{ w.focus(); w.print(); }catch(_){}
+        };
+
+        try{ w.addEventListener('load', fire, { once:true }); }catch(_){}
+        setTimeout(fire, 250);
       }
 
-      function renderPanel(color){
-        const k = color==='red'?'red':(color==='yellow'?'yellow':'green');
+      function renderArchiveForm(status, score){
+        const returned30d = String(window.__decision?.state?.returned_visitor_30d || 'false');
+        const lastAmpel = (window.__decision?.state?.last_ampel_at) || new Date().toISOString();
+        const intent = (status === 'rot') ? 'hoch' : (status === 'gelb') ? 'mittel' : 'niedrig';
 
+        const copy = {
+          rot:   { title:'Entscheidungsarchiv (optional)', line:'2 E-Mails. Kein Newsletter. Kein Druck. Nur Ordnung + Entlastung.', consent:'Ich möchte mein Ergebnis + 1 Follow-up (max. 2 Mails) erhalten.' },
+          gelb:  { title:'Entscheidungsarchiv (optional)', line:'3 E-Mails über 21 Tage. Kein Termin-Link bis Mail 3. Reihenfolge halten.', consent:'Ich möchte mein Ergebnis + 2 Follow-ups (max. 3 Mails) erhalten.' },
+          gruen: { title:'Entscheidungsarchiv (optional)', line:'1 Mail mit Ergebnis + 1 Erinnerung in 12 Monaten. Kein Push.', consent:'Ich möchte mein Ergebnis erhalten (und eine Erinnerung in 12 Monaten).' }
+        };
+        const c = copy[status] || copy.gruen;
+
+        // ✅ LIST_ID fail-closed
+        const LIST_ID = 'LIST_ID_HIER_EINTRAGEN';
+        if (!LIST_ID || LIST_ID.includes('HIER')) {
+          return `<div class="panel" style="margin-top:1rem">
+            <h3 style="margin-bottom:.25rem">${c.title}</h3>
+            <p class="micro" style="margin:0">Archiv ist aktuell nicht aktiv.</p>
+          </div>`;
+        }
+
+        return `
+          <div class="panel" style="margin-top:1rem">
+            <h3 style="margin-bottom:.25rem">${c.title}</h3>
+            <p class="micro" style="margin:0 0 .6rem">${c.line}</p>
+
+            <form
+              action="https://manage.kmail-lists.com/subscriptions/subscribe"
+              method="POST"
+              target="_self"
+              style="display:grid;gap:.55rem;max-width:520px;margin:0 auto"
+              data-archive-form
+            >
+              <input type="hidden" name="a" value="${typeof KLAVIYO_COMPANY_ID !== 'undefined' ? KLAVIYO_COMPANY_ID : 'T7wryA'}">
+              <input type="hidden" name="g" value="${LIST_ID}">
+              <input type="hidden" name="redirect" value="https://heikohaerter.com/#ampel-check">
+
+              <!-- Backward-compatible names -->
+              <input type="hidden" name="ampel_status" value="${status}">
+              <input type="hidden" name="ampel_score" value="${score}">
+              <input type="hidden" name="decision_context" value="${decisionContext}">
+              <input type="hidden" name="intent_level" value="${intent}">
+              <input type="hidden" name="trust_entry" value="ampel_check">
+              <input type="hidden" name="decision_stage" value="einordnung">
+              <input type="hidden" name="last_ampel_at" value="${lastAmpel}">
+              <input type="hidden" name="returned_visitor_30d" value="${returned30d}">
+              <input type="hidden" name="ampel_version" value="${typeof AMPEL_VERSION !== 'undefined' ? AMPEL_VERSION : 'v1'}">
+              <input type="hidden" name="page_variant" value="${typeof PAGE_VARIANT !== 'undefined' ? PAGE_VARIANT : 'decision-space'}">
+
+              <!-- Recommended prefixed names (cleaner segmentation in Klaviyo) -->
+              <input type="hidden" name="hh_ampel_status" value="${status}">
+              <input type="hidden" name="hh_ampel_score" value="${score}">
+              <input type="hidden" name="hh_decision_context" value="${decisionContext}">
+              <input type="hidden" name="hh_intent_level" value="${intent}">
+              <input type="hidden" name="hh_trust_entry" value="ampel_check">
+              <input type="hidden" name="hh_decision_stage" value="einordnung">
+              <input type="hidden" name="hh_last_ampel_at" value="${lastAmpel}">
+              <input type="hidden" name="hh_returned_visitor_30d" value="${returned30d}">
+              <input type="hidden" name="hh_ampel_version" value="${typeof AMPEL_VERSION !== 'undefined' ? AMPEL_VERSION : 'v1'}">
+              <input type="hidden" name="hh_page_variant" value="${typeof PAGE_VARIANT !== 'undefined' ? PAGE_VARIANT : 'decision-space'}">
+
+              <!-- helper for your Segment 3 -->
+              <input type="hidden" name="archive_submitted" value="true">
+
+              <!-- ✅ honeypot -->
+              <input type="text" name="company" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true">
+
+              <label class="visually-hidden" for="archiveEmail">E-Mail</label>
+              <input
+                id="archiveEmail"
+                name="email"
+                type="email"
+                required
+                minlength="6"
+                autocomplete="email"
+                inputmode="email"
+                placeholder="E-Mail für dein Archiv"
+                style="min-height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:var(--text);padding:.8rem 1rem"
+              >
+
+              <label class="micro" style="display:flex;gap:.55rem;align-items:flex-start;text-align:left">
+                <input type="checkbox" name="$consent" value="email" required style="margin-top:.2rem">
+                <span>
+                  ${c.consent}
+                  Hinweise in der <a href="/datenschutz" target="_blank" rel="noopener noreferrer" style="text-decoration:underline">Datenschutzerklärung</a>.
+                </span>
+              </label>
+
+              <button class="btn btn-primary" type="submit">Ergebnis ins Archiv senden</button>
+              <div class="micro" style="opacity:.85;text-align:center">
+                Double-Opt-In: Du bestätigst die E-Mail anschließend einmal.
+              </div>
+
+              <!-- If your Klaviyo endpoint rejects POST: use your own /subscribe endpoint server-side and forward to Klaviyo. -->
+            </form>
+          </div>`;
+      }
+
+      function renderPanel(color, status, score){
+        const k = color==='red'?'red':(color==='yellow'?'yellow':'green');
         const copy = {
           red: {
             title: '🔴 Rot: 10 Minuten sortieren – ohne Termin.',
@@ -1337,66 +1840,122 @@
             secondary:{ kind:'link', label:'Transparenz ansehen', href:'#transparenz' }
           }
         };
-
         const c = copy[k];
 
         return `
           <div class="result-panel is-${k}">
             <div class="result-title">${c.title}</div>
             <p>${c.text}</p>
+
+            <div class="micro" style="text-align:center;opacity:.9;margin-top:.2rem">Worum geht’s bei dir eher?</div>
+            <div class="chips" data-decision-chips>
+              <button type="button" class="chip" data-dc="privat" aria-pressed="${decisionContext==='privat'}">Privat</button>
+              <button type="button" class="chip" data-dc="unternehmerisch" aria-pressed="${decisionContext==='unternehmerisch'}">Unternehmerisch</button>
+              <button type="button" class="chip" data-dc="beides" aria-pressed="${decisionContext==='beides'}">Beides</button>
+            </div>
+
             <div class="stack" style="text-align:center;margin-top:.8rem">
               ${
                 c.primary.kind === 'save'
                   ? `<button type="button" class="btn btn-primary" data-save-result>${c.primary.label}</button>`
-                  : `<a href="${c.primary.href}" ${c.primary.kind==='wa'?'target="_blank" rel="noopener"':''} class="btn btn-primary">${c.primary.label}</a>`
+                  : `<a href="${c.primary.href}" ${c.primary.kind==='wa'?'target="_blank" rel="noopener noreferrer"':''} class="btn btn-primary">${c.primary.label}</a>`
               }
               ${
                 c.secondary
                   ? (c.secondary.kind==='book'
-                      ? `<a href="${c.secondary.href}" class="btn btn-ghost" rel="nofollow noopener">${c.secondary.label}</a>`
+                      ? `<a href="${c.secondary.href}" class="btn btn-ghost" rel="nofollow noopener noreferrer">${c.secondary.label}</a>`
                       : `<a href="${c.secondary.href}" class="btn btn-ghost">${c.secondary.label}</a>`
                     )
                   : ''
               }
               ${k==='red' ? `<a href="#transparenz" class="btn btn-ghost">So läuft’s ab (Transparenz)</a>` : ``}
             </div>
+
+            ${renderArchiveForm(status, score)}
           </div>`;
       }
 
       function trackAmpelResult(status, score){
-        try{
-          if (!window.klaviyo || !Array.isArray(window.klaviyo)) return;
-          window.klaviyo.push(['track','Ampel Ergebnis',{
-            ampel_status: status,
-            ampel_score: score,
-            lead_source: 'ampel',
-            intent_level: status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig'),
-            last_ampel_at: new Date().toISOString()
-          }]);
-        }catch(_){}
+        const perceived = status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig');
+        const intent = status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig');
+        const nowIso = new Date().toISOString();
+
+        window.__decision?.set({
+          ampel_status: status,
+          ampel_score: String(score),
+          decision_context: decisionContext,
+          intent_level: intent,
+          trust_entry: 'ampel_check',
+          decision_stage: 'einordnung',
+          last_ampel_at: nowIso,
+          ampel_version: (typeof AMPEL_VERSION !== 'undefined' ? AMPEL_VERSION : 'v1'),
+          page_variant: (typeof PAGE_VARIANT !== 'undefined' ? PAGE_VARIANT : 'decision-space')
+        });
+
+        window.__track?.ga('Ampel_Ergebnis', {
+          ampel_status: status,
+          ampel_score: score,
+          decision_context: decisionContext,
+          intent_level: intent,
+          perceived_risk: perceived,
+          trust_entry: 'ampel_check',
+          decision_stage: 'einordnung',
+          last_ampel_at: nowIso,
+          returned_visitor_30d: window.__decision?.state?.returned_visitor_30d || 'false'
+        });
       }
 
       function finish(){
+        if(finished) return;
+        finished = true;
+
         wrap.style.display = 'none';
         resultBox.style.display = 'block';
 
-        let html = '';
         let status = 'gruen';
-        if(score <= 4){ status = 'rot'; html = renderPanel('red'); }
-        else if(score <= 7){ status = 'gelb'; html = renderPanel('yellow'); }
-        else { status = 'gruen'; html = renderPanel('green'); }
+        let color = 'green';
 
-        resultBox.innerHTML = html;
+        // Thresholds: ROT 1–3, GELB 4–6, GRÜN 7–9
+        if(score <= 3){ status = 'rot'; color = 'red'; }
+        else if(score <= 6){ status = 'gelb'; color = 'yellow'; }
+        else { status = 'gruen'; color = 'green'; }
+
+        resultBox.innerHTML = renderPanel(color, status, score);
+
+        const chips = resultBox.querySelector('[data-decision-chips]');
+        if(chips){
+          chips.addEventListener('click', (e)=>{
+            const b = e.target.closest('button[data-dc]');
+            if(!b) return;
+            const v = b.getAttribute('data-dc') || 'privat';
+            chips.querySelectorAll('button[data-dc]').forEach(x=>{
+              x.setAttribute('aria-pressed', x===b ? 'true' : 'false');
+            });
+            setDecisionContext(v);
+          });
+        }
 
         const saveBtn = resultBox.querySelector('[data-save-result]');
         if(saveBtn){
           saveBtn.addEventListener('click', ()=> openPrintSheet(status, score));
         }
 
-        trackAmpelResult(status, score);
-        resultBox.scrollIntoView({behavior:'smooth', block:'start'});
+        const archiveForm = resultBox.querySelector('[data-archive-form]');
+        if(archiveForm){
+          archiveForm.addEventListener('submit', (e)=>{
+            const hp = archiveForm.querySelector('input[name="company"]');
+            if (hp && hp.value) { e.preventDefault(); return; }
 
-        // Hebel 5: Sticky CTA only after result
+            window.__track?.ga('Archive_Submit', { ampel_status: status, ampel_score: score, decision_context: decisionContext });
+            window.__decision?.set({ decision_stage: 'archiv' });
+          });
+        }
+
+        trackAmpelResult(status, score);
+        window.__decision?.sync?.();
+
+        smartScrollTo(resultBox, 'start');
+
         if(window.__sticky){
           if(status === 'rot'){
             window.__sticky.set('10 Minuten sortieren', ()=> window.open(waLink('Hi Heiko, 10 Minuten sortieren. Mein Status: ROT. Kein Termin – nur Einordnung.'), '_blank', 'noopener'));
@@ -1413,9 +1972,9 @@
       }
 
       function start(){
+        finished = false;
         window.__sticky?.show(false);
-
-        document.getElementById('ampel-check').scrollIntoView({behavior:'smooth'});
+        smartScrollTo('#ampel-check');
         startBox.style.display = 'none';
         wrap.style.display = 'block';
         resultBox.style.display = 'none';
@@ -1424,12 +1983,12 @@
       }
 
       function cancel(){
+        finished = false;
         window.__sticky?.show(false);
-
         wrap.style.display = 'none';
         resultBox.style.display = 'none';
         startBox.style.display = 'block';
-        startBox.scrollIntoView({behavior:'smooth', block:'start'});
+        smartScrollTo(startBox, 'start');
       }
 
       function back(){
@@ -1438,7 +1997,16 @@
         showStep(step);
       }
 
-      // Arrow nav: bind once, idx fix, prevent scroll
+      function next(){
+        if(step < max){
+          step += 1;
+          showStep(step);
+        }else{
+          finish();
+        }
+      }
+
+      // Arrow nav + selection styling fallback
       const bound = new WeakSet();
       function enableArrowNav(fs){
         if(bound.has(fs)) return;
@@ -1464,6 +2032,13 @@
       }
       steps.forEach(enableArrowNav);
 
+      function updateSelectedStyles(fs){
+        fs.querySelectorAll('label.btn.small').forEach(l=>{
+          const inp = l.querySelector('input[type="radio"]');
+          l.classList.toggle('is-selected', !!inp?.checked);
+        });
+      }
+
       function onAnswerChange(e){
         const input = e.target;
         if(!input || input.type !== 'radio') return;
@@ -1480,20 +2055,26 @@
       startBtns.forEach(b => b.addEventListener('click', start));
       cancelBtn?.addEventListener('click', cancel);
       backBtn?.addEventListener('click', back);
+      nextBtn?.addEventListener('click', next);
 
       steps.forEach((fs, idx) => {
         fs.addEventListener('change', (e) => {
           onAnswerChange(e);
+          updateSelectedStyles(fs);
+          updateNextState();
 
-          // Auto-advance on answer
-          if(idx+1 >= max){
-            finish();
-          } else {
-            step = idx+2;
-            showStep(step);
+          // Auto-advance is user-controlled (WCAG 3.2.2)
+          if(autoAdvance.checked){
+            if(idx+1 >= max) finish();
+            else { step = idx+2; showStep(step); }
+          }else{
+            // bring attention to the next action without forcing context change
+            try{ nextBtn.focus({ preventScroll:true }); }catch(_){ nextBtn.focus(); }
           }
         });
       });
+
+      autoAdvance.addEventListener('change', updateNextState);
 
       updateHead();
     })();
