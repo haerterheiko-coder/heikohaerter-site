@@ -1,13 +1,11 @@
-<!-- /index.html — Decision Space v6.4 (2026 Premium / Desktop-Upgrade + Native Sheet) -->
+<!-- /index.html — Decision Space v6.5 (2026 Corporate-Light / Trust-First / Ampel + Native Sheet) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="theme-color" content="#05070E" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#F6F7FB" />
   <meta name="format-detection" content="telephone=no" />
 
   <title>Damit Finanzen nicht ständig im Kopf sind.</title>
@@ -42,12 +40,6 @@
     rel="preload"
     as="image"
     href="https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400"
-    imagesrcset="
-      https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=960 960w,
-      https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400 1400w,
-      https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=2000 2000w
-    "
-    imagesizes="(min-width:1024px) 52vw, 92vw"
     fetchpriority="high"
   />
 
@@ -93,46 +85,44 @@
 
   <noscript>
     <style>
-      .fade-up{opacity:1!important;transform:none!important;filter:none!important}
+      .fade-up{opacity:1!important;transform:none!important}
       .sticky-cta{display:none!important}
-      .space{display:none!important}
-      .mnav, .mnav-backdrop, .cmp-backdrop, .cmp-wrap{display:none!important}
+      .mnav, .mnav-backdrop, .cmp-backdrop, .cmp-wrap, .sheet, .sheet-backdrop{display:none!important}
     </style>
   </noscript>
 
   <style>
     :root{
-      --bg:#05070E; --bg2:#02040A;
-      --text:#F7F8FC; --muted:#A8B1C5; --muted2:#8F97AA;
-      --gold:#E6D08A; --focus:#90C2FF;
-      --danger:#c85151; --warn:#d6c45a; --ok:#55b76b;
+      /* Corporate-light palette */
+      --bg:#F6F7FB;
+      --bg2:#EEF1F8;
+      --card:#FFFFFF;
+      --text:#101323;
+      --muted:#4B5565;
+      --muted2:#6B7280;
+      --line:rgba(16,19,35,.12);
+      --line2:rgba(16,19,35,.18);
 
-      --radius:22px;
+      --gold:#C8A54A;
+      --gold2:#E5D18D;
+      --focus:#2F6BFF;
+
+      --danger:#C43C3C;
+      --warn:#D3A21C;
+      --ok:#1F8A4C;
+
+      --radius:18px;
+      --radius2:24px;
       --ease:cubic-bezier(.25,.46,.25,1);
 
-      --ambient-x:.5; --ambient-y:.15; --ambient-opacity:.14;
-
-      /* premium strokes */
-      --line:rgba(255,255,255,.10);
-      --line2:rgba(255,255,255,.18);
-      --glass:rgba(255,255,255,.03);
-      --glass2:rgba(255,255,255,.045);
-
-      /* shadows */
-      --shadow: 0 34px 110px rgba(0,0,0,.52);
-      --shadow2: 0 20px 70px rgba(0,0,0,.34);
+      --shadow: 0 18px 55px rgba(16,19,35,.10);
+      --shadow2: 0 10px 28px rgba(16,19,35,.10);
 
       --tap: 52px;
       --safe-b: env(safe-area-inset-bottom, 0px);
       --safe-t: env(safe-area-inset-top, 0px);
 
-      /* Desktop polish */
-      --maxw: 1260px;
-      --panelbg:
-        radial-gradient(120% 140% at 20% 0%, rgba(255,255,255,.075), transparent 58%),
-        linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.018));
-      --panelbd: rgba(255,255,255,.13);
-      --glow: 0 0 0 1px rgba(255,255,255,.07), 0 18px 80px rgba(0,0,0,.38);
+      --maxw: 1160px;
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -144,14 +134,13 @@
     body{
       margin:0;
       background:
-        radial-gradient(1100px 760px at 18% -6%, rgba(120,150,255,.16), transparent 60%),
-        radial-gradient(1000px 720px at 86% 6%, rgba(230,208,138,.12), transparent 58%),
-        radial-gradient(900px 800px at 55% 120%, rgba(120,150,255,.09), transparent 55%),
-        linear-gradient(180deg,var(--bg),var(--bg2) 62%);
+        radial-gradient(900px 520px at 12% -8%, rgba(47,107,255,.10), transparent 60%),
+        radial-gradient(780px 520px at 92% 2%, rgba(200,165,74,.10), transparent 60%),
+        linear-gradient(180deg,var(--bg),var(--bg2));
       color:var(--text);
-      font-family:"IBM Plex Sans","Inter",system-ui,sans-serif;
+      font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       -webkit-font-smoothing:antialiased;
-      line-height:1.5;
+      line-height:1.55;
       overflow-x:hidden;
       padding-bottom: var(--safe-b);
     }
@@ -159,92 +148,66 @@
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
 
-    /* Subtle premium grain overlay (desktop makes it look less “flat”) */
-    .grain{
-      position:fixed; inset:0;
-      pointer-events:none; z-index:-1;
-      opacity:.13;
-      mix-blend-mode:overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.36'/%3E%3C/svg%3E");
-      background-size:180px 180px;
-    }
-    @media (prefers-reduced-motion: reduce){ .grain{display:none} }
-
-    /* Skip link */
     .skip-link{
       position:absolute; left:12px; top:calc(10px + var(--safe-t));
-      padding:.65rem .9rem; border-radius:999px;
-      background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.2);
+      padding:.6rem .9rem; border-radius:999px;
+      background:rgba(255,255,255,.85);
+      border:1px solid var(--line);
       transform:translateY(-160%); transition:transform .2s var(--ease);
-      z-index:1101;
+      z-index:1201;
     }
     .skip-link:focus{ transform:translateY(0); outline:3px solid var(--focus); outline-offset:3px; }
 
-    /* Scroll progress */
     .progress{
       position:fixed;top:0;left:0;height:3px;width:0;
-      background:linear-gradient(90deg,var(--gold),#fff);
-      z-index:1100;box-shadow:0 0 14px rgba(230,208,138,.52)
+      background:linear-gradient(90deg,var(--gold),var(--gold2));
+      z-index:1200;
+      box-shadow:0 0 14px rgba(200,165,74,.28)
     }
 
-    /* ambient */
-    .space{
-      position:fixed; inset:-20vh -10vw auto -10vw; height:62vh;
-      pointer-events:none; z-index:-2; filter:blur(58px); opacity:var(--ambient-opacity);
-    }
-    .space::before{
-      content:""; position:absolute; inset:0;
-      background:
-        radial-gradient(44% 38% at calc(10% + 40% * var(--ambient-x)) calc(10% + 30% * var(--ambient-y)), rgba(230,208,138,.40) 0%, transparent 62%),
-        radial-gradient(40% 36% at calc(82% - 30% * var(--ambient-x)) calc(12% + 28% * var(--ambient-y)), rgba(120,150,255,.33) 0%, transparent 64%);
-      mix-blend-mode:screen;
-      will-change:transform;
-    }
-
-    .section{padding:clamp(52px,8.5vw,138px) 0}
+    .section{padding:clamp(46px,7.5vw,110px) 0}
     .container{
       max-width:var(--maxw);
       margin-inline:auto;
-      padding-inline:clamp(16px,5vw,44px);
+      padding-inline:clamp(16px,5vw,40px);
     }
-    .grid{display:grid;gap:clamp(.85rem,2.8vw,1.6rem)}
-    .stack{display:flex;flex-direction:column;gap:clamp(.6rem,2vw,1.1rem)}
+    .grid{display:grid;gap:clamp(.85rem,2.6vw,1.35rem)}
+    .stack{display:flex;flex-direction:column;gap:clamp(.55rem,2vw,1rem)}
     .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
 
-    h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em;text-wrap:balance}
-    h1{font-size:clamp(2.85rem,7.6vw,5.3rem);font-weight:900;letter-spacing:-0.05em;line-height:1.01}
-    h2{font-size:clamp(2.05rem,5.6vw,3.15rem);font-weight:900;letter-spacing:-0.04em}
-    h3{font-size:clamp(1.08rem,2.8vw,1.28rem);font-weight:900}
-    p{margin:0 0 .65rem;color:var(--muted);font-size:clamp(1.03rem,1.1vw,1.10rem);line-height:1.78;max-width:66ch}
+    h1,h2,h3{margin:0 0 .75rem;letter-spacing:-.02em;text-wrap:balance}
+    h1{font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:900;letter-spacing:-0.04em;line-height:1.04}
+    h2{font-size:clamp(1.65rem,4.3vw,2.4rem);font-weight:900;letter-spacing:-0.03em}
+    h3{font-size:clamp(1.06rem,2.4vw,1.18rem);font-weight:900}
+    p{margin:0 0 .65rem;color:var(--muted);font-size:clamp(1.03rem,1.1vw,1.10rem);line-height:1.75;max-width:70ch}
 
     .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.01em;line-height:1.6}
-    .hero-sub{font-size:1.16rem;color:#dbe0f4;margin-top:.55rem;max-width:60ch}
-    .signature{font-family: ui-serif, "Canela","Tiempos Headline", Georgia, serif; font-weight:650; letter-spacing:-0.01em}
+    .hero-sub{font-size:1.12rem;color:#2B3343;margin-top:.45rem;max-width:62ch}
+    .signature{font-family: ui-serif, Georgia, "Times New Roman", serif; font-weight:800; letter-spacing:-0.01em; color:#0E1220}
 
-    /* premium buttons */
+    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      min-height:var(--tap); padding:1.02rem 1.38rem;
+      min-height:var(--tap); padding:1rem 1.2rem;
       border-radius:999px; border:1px solid var(--line);
       font-weight:900; letter-spacing:.01em;
-      background:rgba(255,255,255,.055); color:var(--text);
-      transition:transform .18s var(--ease), box-shadow .25s var(--ease), background .2s, filter .2s, border-color .2s;
+      background:rgba(255,255,255,.92);
+      color:var(--text);
+      transition:transform .14s var(--ease), box-shadow .18s var(--ease), background .18s, border-color .18s;
       -webkit-tap-highlight-color: transparent;
       user-select:none;
-      box-shadow:0 12px 34px rgba(0,0,0,.18);
+      box-shadow:0 10px 26px rgba(16,19,35,.08);
     }
-    .btn:hover{filter:brightness(1.04);border-color:var(--line2)}
+    .btn:hover{border-color:var(--line2); box-shadow:0 14px 34px rgba(16,19,35,.10)}
     .btn:active{transform:translateY(1px) scale(.99)}
     .btn-primary{
-      background:
-        radial-gradient(120% 140% at 30% 10%, rgba(255,255,255,.35), transparent 40%),
-        linear-gradient(180deg, rgba(230,208,138,1), rgba(214,189,118,1));
-      color:#111;
-      border-color:rgba(230,208,138,.42);
-      box-shadow:0 18px 62px rgba(230,208,138,.16), 0 12px 28px rgba(0,0,0,.24);
+      background: linear-gradient(180deg, #111827, #0B1020);
+      color:#fff;
+      border-color: rgba(17,24,39,.35);
+      box-shadow:0 18px 44px rgba(16,19,35,.18);
     }
-    .btn-ghost{background:transparent;border-color:rgba(255,255,255,.16)}
-    .btn.small{min-height:44px;padding:.62rem 1.02rem;font-weight:900}
+    .btn-ghost{background:transparent}
+    .btn.small{min-height:44px;padding:.62rem 1.0rem;font-weight:900}
     .btn[disabled]{opacity:.55;pointer-events:none}
 
     @media (max-width:1023px){
@@ -260,35 +223,30 @@
     /* Selected-state for radio labels */
     label.btn.small:has(input:checked),
     label.btn.small.is-selected{
-      border-color: rgba(230,208,138,.62);
-      box-shadow: 0 0 0 3px rgba(230,208,138,.14);
-      background: rgba(230,208,138,.09);
+      border-color: rgba(200,165,74,.65);
+      box-shadow: 0 0 0 3px rgba(200,165,74,.14);
+      background: rgba(200,165,74,.08);
     }
 
     /* Header */
     header{
       position:sticky;top:0;z-index:900;
-      background:rgba(5,8,22,.78);
-      border-bottom:1px solid rgba(255,255,255,.08);
-      backdrop-filter:saturate(135%) blur(16px);
+      background:rgba(246,247,251,.86);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:saturate(135%) blur(10px);
       padding-top: var(--safe-t);
     }
-    .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:76px;padding:.78rem 0;gap:1rem}
+    .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:74px;padding:.72rem 0;gap:1rem}
     .brand{display:flex;flex-direction:column}
-    .brand-top{display:flex;align-items:center;gap:.65rem;font-weight:900}
+    .brand-top{display:flex;align-items:center;gap:.6rem;font-weight:900;color:#0F172A}
     .brand-dot{
-      width:.92rem;height:.92rem;border-radius:999px;
-      background:conic-gradient(from 210deg,var(--gold),#fff,var(--gold));
-      box-shadow:0 0 0 6px rgba(230,208,138,.16),0 0 30px rgba(230,208,138,.38);
-      animation:pulse 2.6s ease-in-out infinite
+      width:.78rem;height:.78rem;border-radius:999px;
+      background: conic-gradient(from 210deg,var(--gold),#fff,var(--gold));
+      box-shadow:0 0 0 6px rgba(200,165,74,.14);
     }
-    @keyframes pulse{
-      0%,100%{filter:drop-shadow(0 0 0 rgba(230,208,138,.0))}
-      50%{filter:drop-shadow(0 0 14px rgba(230,208,138,.50))}
-    }
-    .nav{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
-    .nav a.link{padding:.42rem .7rem;border-radius:999px;color:var(--muted2)}
-    .nav a.link:hover{color:var(--text);background:rgba(255,255,255,.05)}
+    .nav{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+    .nav a.link{padding:.42rem .66rem;border-radius:999px;color:#394150}
+    .nav a.link:hover{color:#0F172A;background:rgba(15,23,42,.06)}
     @media (max-width:980px){ .nav a.link{display:none} }
 
     /* Mobile menu button */
@@ -298,11 +256,11 @@
       min-height:var(--tap);
       border-radius:999px;
       border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
+      background:rgba(255,255,255,.9);
       color:var(--text);
       align-items:center;justify-content:center;
       -webkit-tap-highlight-color: transparent;
-      box-shadow:0 10px 26px rgba(0,0,0,.18);
+      box-shadow:0 10px 26px rgba(16,19,35,.10);
     }
     .menu-btn:hover{border-color:var(--line2)}
     .menu-btn svg{width:22px;height:22px}
@@ -311,7 +269,7 @@
     /* Mobile nav drawer */
     .mnav-backdrop{
       position:fixed; inset:0;
-      background:rgba(0,0,0,.56);
+      background:rgba(15,23,42,.40);
       backdrop-filter: blur(2px);
       z-index:980;
       display:none;
@@ -320,8 +278,8 @@
     .mnav{
       position:fixed; inset:calc(var(--safe-t) + 10px) 10px auto 10px;
       border-radius:22px;
-      background:rgba(10,14,22,.98);
-      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.98);
+      border:1px solid var(--line);
       box-shadow: var(--shadow);
       z-index:981;
       display:none;
@@ -332,264 +290,292 @@
     .mnav .head{
       display:flex;align-items:center;justify-content:space-between;
       padding:14px 14px;
-      border-bottom:1px solid rgba(255,255,255,.10);
+      border-bottom:1px solid var(--line);
     }
     .mnav .list{display:grid;gap:6px;padding:12px 12px 14px}
-    .mnav a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
-    .mnav a .t{font-weight:900}
-    .mnav a .s{color:var(--muted2);font-size:.9rem}
+    .mnav a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(15,23,42,.03)}
+    .mnav a .t{font-weight:900;color:#0F172A}
+    .mnav a .s{color:#667085;font-size:.9rem}
     .mnav .cta{margin-top:8px}
 
     /* Hero */
-    .hero{position:relative;padding-top:clamp(68px,10vw,146px);padding-bottom:clamp(34px,5vw,68px)}
-    .hero-grid{display:grid;gap:clamp(1.35rem,4vw,3.3rem)}
-    @media (min-width:1024px){ .hero-grid{grid-template-columns:1.06fr .94fr;align-items:center} }
-    #hero h1{max-width:17ch}
-    .hero-figure{
-      border-radius:32px;overflow:hidden; transform:translateZ(0);
-      box-shadow:0 56px 160px rgba(0,0,0,.56), inset 0 0 0 1px rgba(255,255,255,.09);
-      position:relative;
-    }
-    .hero-figure::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(90% 70% at 40% 10%, rgba(255,255,255,.12), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.14));
-      pointer-events:none;
-    }
-    .hero-figure img{transition:transform 7s ease; filter:saturate(1.08) contrast(1.04)}
-    @media (hover:hover){ .hero-figure:hover img{transform:scale(1.05)} }
+    .hero{position:relative;padding-top:clamp(56px,8vw,110px);padding-bottom:clamp(30px,4.8vw,56px)}
+    .hero-grid{display:grid;gap:clamp(1.2rem,3.5vw,2.6rem)}
+    @media (min-width:1024px){ .hero-grid{grid-template-columns:1.08fr .92fr;align-items:center} }
+    #hero h1{max-width:18ch}
 
-    /* Panels */
-    .statement .container{max-width:1040px}
-    .panel{
-      border:1px solid var(--panelbd);
-      border-radius:22px;
-      padding:clamp(18px,2.4vw,32px);
+    .hero-card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.92);
+      border-radius: var(--radius2);
+      padding: clamp(18px,2.4vw,28px);
       box-shadow: var(--shadow2);
-      background: var(--panelbg);
+    }
+
+    .hero-bullets{
+      display:grid; gap:.55rem; margin-top:.85rem;
+    }
+    .hero-bullets .b{
+      display:flex; gap:.6rem; align-items:flex-start;
+      padding:.6rem .75rem;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.02);
+    }
+    .hero-bullets .b i{
+      width:34px;height:34px;border-radius:12px;
+      display:inline-flex;align-items:center;justify-content:center;
+      background: rgba(200,165,74,.14);
+      border:1px solid rgba(200,165,74,.32);
+      font-style:normal;
+      font-weight:900;
+      color:#5A430B;
+      flex:0 0 auto;
+    }
+    .hero-bullets .b strong{display:block;color:#0F172A;margin-bottom:.1rem}
+    .hero-bullets .b span{color:#556072;font-size:.95rem;line-height:1.45}
+
+    .trustbar{
+      display:flex; flex-wrap:wrap; gap:.5rem;
+      margin-top:.9rem;
+    }
+    .trust{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.45rem .7rem;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      color:#3D4758;
+      font-size:.92rem;
+      box-shadow:0 8px 18px rgba(16,19,35,.06);
+      white-space:nowrap;
+    }
+    .trust b{color:#0F172A}
+    .trust .dot{
+      width:.55rem;height:.55rem;border-radius:50%;
+      background:conic-gradient(from 210deg,var(--gold),#fff,var(--gold));
+      box-shadow:0 0 0 3px rgba(200,165,74,.12);
+    }
+
+    .hero-figure{
+      border-radius: var(--radius2);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.9);
+    }
+    .hero-figure img{transition:transform 7s ease; }
+    @media (hover:hover){ .hero-figure:hover img{transform:scale(1.03)} }
+
+    /* Cards / Panels */
+    .panel{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding:clamp(18px,2.4vw,30px);
+      box-shadow: var(--shadow2);
+      background: rgba(255,255,255,.92);
     }
 
     /* Fade-up */
-    .fade-up{opacity:0;transform:translateY(28px) scale(.988);filter:blur(2px)}
-    .fade-up.visible{opacity:1;transform:none;filter:none;transition:opacity .6s ease, transform .65s cubic-bezier(.2,.8,.2,1), filter .6s ease}
+    .fade-up{opacity:0;transform:translateY(20px)}
+    .fade-up.visible{opacity:1;transform:none;transition:opacity .55s ease, transform .6s cubic-bezier(.2,.8,.2,1)}
 
-    /* KPIs */
-    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.85rem;margin-top:1.05rem}
+    /* KPI tiles */
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.75rem;margin-top:1.0rem}
     .kpi{
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid var(--line);
       border-radius:18px;padding:1rem 1rem;
-      background:
-        radial-gradient(120% 120% at 20% 0%, rgba(255,255,255,.07), transparent 55%),
-        rgba(255,255,255,.02);
+      background: rgba(15,23,42,.02);
       text-align:center;
-      box-shadow:0 16px 56px rgba(0,0,0,.20);
+      box-shadow:0 10px 26px rgba(16,19,35,.06);
     }
-    .kpi strong{display:block;font-size:1.62rem;color:#fff}
-    .kpi span{font-size:.95rem;color:var(--muted2)}
+    .kpi strong{display:block;font-size:1.55rem;color:#0F172A}
+    .kpi span{font-size:.95rem;color:#667085}
 
-    /* Results inline (desktop) — upgraded layout */
-    .result-panel{border-radius:22px;padding:clamp(18px,2.4vw,32px);margin-top:1rem;box-shadow: var(--shadow2);border:1px solid transparent}
-    .is-red{background:linear-gradient(180deg, rgba(200,81,81,.22), rgba(18,10,10,.58));border-color:rgba(200,81,81,.58)}
-    .is-yellow{background:linear-gradient(180deg, rgba(214,196,90,.18), rgba(20,18,8,.60));border-color:rgba(214,196,90,.55)}
-    .is-green{background:linear-gradient(180deg, rgba(85,183,107,.14), rgba(7,12,9,.67));border-color:rgba(85,183,107,.52)}
-    .result-title{font-size:clamp(1.26rem,2.2vw,1.68rem);font-weight:900;margin-bottom:.35rem;color:#fff}
+    /* Personas */
+    .personas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(.85rem,2vw,1.05rem);margin-top:.9rem}
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      overflow:hidden;
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--shadow2);
+    }
+    .card img{aspect-ratio: 3/2; object-fit:cover}
+    .card .cap{padding:.9rem .95rem}
+    .card .cap strong{display:block;margin-bottom:.25rem;color:#0F172A}
+
+    /* Cases */
+    .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(.85rem,2vw,1.05rem)}
+    .case{
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      padding:1.15rem;
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow2);
+    }
+    .case h3{margin-bottom:.35rem}
+    .case p{margin:0}
+
+    /* FAQ */
+    .faq{max-width:1020px;margin-inline:auto}
+    .faq details{
+      border:1px solid var(--line);
+      border-radius:16px;padding:.95rem 1.05rem;
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow2);
+    }
+    .faq details+details{margin-top:.75rem}
+    .faq summary{cursor:pointer;font-weight:900;color:#0F172A;list-style:none}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq .answer{margin-top:.55rem}
+
+    .legend-title{
+      font-size:clamp(1.06rem,2.4vw,1.22rem);
+      font-weight:900;
+      color:#0F172A;
+      margin:0 0 .6rem;
+    }
+
+    /* Ampel UI */
+    .ampel-shell{max-width:1040px;margin-inline:auto}
+    .ampel-meta{display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;justify-content:space-between;margin-top:.6rem}
+    .ampel-controls{display:flex;gap:.5rem;flex-wrap:wrap}
+    .ampel-controls .btn{min-height:46px}
+    .ampel-progress{display:flex;gap:.8rem;align-items:center}
+    progress{width:100%;height:10px;border-radius:999px;overflow:hidden}
+    progress::-webkit-progress-bar{background:rgba(15,23,42,.10);border-radius:999px}
+    progress::-webkit-progress-value{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+    .ampel-stepper{display:flex;align-items:center;justify-content:space-between;gap:.7rem;margin-top:.75rem}
+    .ampel-stepper .btn{min-height:46px}
+
+    input[type="email"]{
+      background:rgba(255,255,255,.96);
+      color:#0F172A;
+      border:1px solid var(--line);
+      outline:none;
+    }
+    input[type="email"]::placeholder{color:rgba(107,114,128,.80)}
+
+    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* Result panels (clean, trust-first) */
+    .result-panel{
+      border-radius: var(--radius2);
+      padding:clamp(18px,2.4vw,30px);
+      margin-top:1rem;
+      box-shadow: var(--shadow2);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.94);
+      position:relative;
+    }
+    .result-panel::before{
+      content:"";
+      position:absolute; left:0; top:0; bottom:0;
+      width:8px; border-radius: var(--radius2) 0 0 var(--radius2);
+      background: rgba(15,23,42,.12);
+    }
+    .is-red::before{background: rgba(196,60,60,.85)}
+    .is-yellow::before{background: rgba(211,162,28,.85)}
+    .is-green::before{background: rgba(31,138,76,.85)}
+    .result-title{font-size:clamp(1.22rem,2.1vw,1.55rem);font-weight:900;margin-bottom:.35rem;color:#0F172A}
     .result-grid{display:grid;gap:1rem;align-items:start}
     @media (min-width:1024px){
       .result-grid{grid-template-columns:1fr 360px;gap:1.1rem}
       .result-actions{
         position:sticky; top:104px;
-        border:1px solid rgba(255,255,255,.12);
+        border:1px solid var(--line);
         border-radius:18px;
         padding:14px;
-        background: rgba(10,14,22,.48);
-        backdrop-filter: blur(10px) saturate(120%);
-        box-shadow: var(--glow);
+        background: rgba(255,255,255,.96);
+        box-shadow: var(--shadow2);
       }
     }
     .result-actions .btn{width:100%}
-
-    /* Sticky CTA (mobile) */
-    .sticky-cta{
-      position:fixed; left:0; right:0; bottom:calc(14px + var(--safe-b)); z-index:860;
-      display:none; justify-content:center;
-      transform:translateY(100%); opacity:0;
-      transition:transform .25s var(--ease),opacity .25s var(--ease)
-    }
-    .sticky-cta .inner{
-      background:rgba(10,14,22,.98);
-      border:1px solid rgba(233,211,148,.30);
-      padding:.55rem;
-      border-radius:999px;
-      box-shadow:0 16px 54px rgba(0,0,0,.66)
-    }
-    @media (max-width:1023px){ .sticky-cta{display:flex} }
-
-    .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-    dialog#zoom{width:min(92vw,1100px);border:none;padding:0;background:transparent}
-    dialog#zoom::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(2px)}
-    .zoom-frame{position:relative;border-radius:18px;overflow:hidden;box-shadow: var(--shadow)}
-    .zoom-close{touch-action:manipulation}
-
-    footer{border-top:1px solid rgba(255,255,255,.08);padding:32px 0 72px}
-    .footer-links{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
-    .footer-links a{padding:.38rem .65rem;border-radius:999px;color:var(--muted2)}
-    .footer-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
-    .tiny{font-size:.9rem;color:var(--muted2);line-height:1.6}
-
-    .figure{border-radius:28px;overflow:hidden;box-shadow:0 28px 92px rgba(0,0,0,.36);border:1px solid rgba(255,255,255,.10)}
-    .portrait{
-      max-width:560px;margin:18px auto 0;border-radius:18px;overflow:hidden;
-      filter:grayscale(.82) contrast(1.06);
-      border:1px solid rgba(255,255,255,.09);
-      box-shadow:0 22px 78px rgba(0,0,0,.34)
-    }
-
-    .brands{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
-    .badge{
-      display:inline-flex;align-items:center;gap:.45rem;padding:.4rem .72rem;
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:999px;font-size:.92rem;color:var(--muted2);
-      background:rgba(255,255,255,.02)
-    }
-    .badge::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:conic-gradient(from 210deg,var(--gold),#fff,var(--gold));box-shadow:0 0 0 3px rgba(230,208,138,.14)}
-    .seal{background:#fff;border-radius:10px;padding:6px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 0 rgba(255,255,255,.05), 0 10px 30px rgba(0,0,0,.26)}
-
-    .chapters{position:fixed;left:18px;top:120px;display:none;flex-direction:column;gap:12px;z-index:120}
-    .chapters a{display:flex;align-items:center;gap:8px;color:var(--muted2);font-size:.9rem}
-    .chapters a .dot{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.22)}
-    .chapters a[aria-current="true"] .dot{background:var(--gold)}
-    .chapters a span{opacity:.0;transform:translateX(4px);transition:opacity .2s var(--ease), transform .2s var(--ease)}
-    .chapters:hover a span{opacity:.9;transform:none}
-    @media (min-width:1200px){ .chapters{display:flex} }
-
-    @media (max-width:480px){
-      .section{padding:36px 0}
-      p{font-size:1.04rem;line-height:1.8}
-      .container{padding-inline:16px}
-      .panel{padding:18px}
-    }
-
-    .personas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(.85rem,2.2vw,1.15rem);margin-top:.9rem}
-    .card{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:22px;overflow:hidden;background:rgba(255,255,255,.02);
-      box-shadow:0 20px 70px rgba(0,0,0,.30)
-    }
-    .card img{aspect-ratio: 3/2; object-fit:cover}
-    .card .cap{padding:.9rem .95rem}
-    .card .cap strong{display:block;margin-bottom:.25rem;color:#fff}
-
-    .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(.85rem,2.2vw,1.15rem)}
-    .case{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:22px;padding:1.15rem;
-      background: var(--panelbg);
-      box-shadow:0 20px 70px rgba(0,0,0,.30)
-    }
-    .case h3{margin-bottom:.35rem}
-    .case p{margin:0}
-
-    .faq{max-width:1020px;margin-inline:auto}
-    .faq details{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:16px;padding:.95rem 1.05rem;
-      background:rgba(255,255,255,.02);
-      box-shadow:0 18px 60px rgba(0,0,0,.24)
-    }
-    .faq details+details{margin-top:.75rem}
-    .faq summary{cursor:pointer;font-weight:900;color:#fff;list-style:none}
-    .faq summary::-webkit-details-marker{display:none}
-    .faq .answer{margin-top:.55rem}
-
-    .legend-title{
-      font-size:clamp(1.08rem,2.8vw,1.28rem);
-      font-weight:900;
-      color:#fff;
-      margin:0 0 .6rem;
-    }
-
-    /* CMP */
-    .cmp-backdrop{
-      position:fixed; inset:0;
-      background:rgba(0,0,0,.55);
-      backdrop-filter:blur(2px);
-      z-index:1000;
-      display:none;
-    }
-    .cmp-backdrop.visible{display:block}
-
-    .cmp-wrap{
-      position:fixed; inset:auto 12px calc(12px + var(--safe-b)) 12px; z-index:1001;
-      max-width:900px; margin-left:auto; margin-right:auto;
-      background:rgba(10,14,22,.98);
-      border:1px solid rgba(255,255,255,.16);
-      border-radius:18px; padding:14px;
-      box-shadow:0 18px 62px rgba(0,0,0,.62);
-      display:none
-    }
-    .cmp-wrap.visible{display:block}
-    .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.35rem}
-    .cmp-title{font-weight:900}
-    .cmp-text{font-size:.95rem;color:var(--muted);margin:.4rem 0}
-    .cmp-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem}
-    .cmp-actions .btn{min-height:44px}
-    .cmp-toggle{display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:.65rem .85rem;margin-top:.5rem;background:rgba(255,255,255,.02)}
-    .cmp-toggle label{display:flex;flex-direction:column;gap:.15rem}
-
-    /* Switch */
-    .switch{position:relative;width:48px;height:28px;background:rgba(255,255,255,.18);border-radius:999px}
-    .switch input{position:absolute;opacity:0}
-    .switch i{position:absolute;top:3px;left:3px;width:22px;height:22px;background:rgba(255,255,255,.72);border-radius:50%;transition:.2s}
-    .switch input:checked + i{left:23px;background:#111;box-shadow:0 0 0 2px rgba(230,208,138,.38)}
-
-    .cmp-links{font-size:.9rem;color:var(--muted2);margin-top:.55rem}
-    .cmp-links a{text-decoration:underline}
 
     /* Decision chips */
     .chips{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin-top:.65rem}
     .chip{
       display:inline-flex;align-items:center;gap:.45rem;
       padding:.58rem .94rem;border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(255,255,255,.03);
-      color:var(--text); font-weight:900; cursor:pointer;
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.03);
+      color:#0F172A; font-weight:900; cursor:pointer;
       min-height:44px;
       -webkit-tap-highlight-color: transparent;
     }
     .chip[aria-pressed="true"]{
-      border-color: rgba(230,208,138,.62);
-      box-shadow: 0 0 0 3px rgba(230,208,138,.14);
-      background: rgba(230,208,138,.08);
+      border-color: rgba(200,165,74,.70);
+      box-shadow: 0 0 0 3px rgba(200,165,74,.14);
+      background: rgba(200,165,74,.10);
     }
 
-    /* Ampel UI */
-    .ampel-shell{max-width:1040px;margin-inline:auto}
-    .ampel-head{display:flex;flex-direction:column;gap:.3rem}
-    .ampel-meta{display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;justify-content:space-between;margin-top:.6rem}
-    .ampel-controls{display:flex;gap:.5rem;flex-wrap:wrap}
-    .ampel-controls .btn{min-height:46px}
-    .ampel-progress{display:flex;gap:.8rem;align-items:center}
-    progress{width:100%;height:10px;border-radius:999px;overflow:hidden}
-    progress::-webkit-progress-bar{background:rgba(255,255,255,.10);border-radius:999px}
-    progress::-webkit-progress-value{background:linear-gradient(90deg,var(--gold),#fff)}
-    .ampel-stepper{display:flex;align-items:center;justify-content:space-between;gap:.7rem;margin-top:.75rem}
-    .ampel-stepper .btn{min-height:46px}
+    /* Footer */
+    footer{border-top:1px solid var(--line);padding:28px 0 72px}
+    .footer-links{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
+    .footer-links a{padding:.38rem .65rem;border-radius:999px;color:#4B5565;border:1px solid transparent}
+    .footer-links a:hover{color:#0F172A;background:rgba(15,23,42,.04);border-color:var(--line)}
+    .tiny{font-size:.9rem;color:#6B7280;line-height:1.6}
 
-    input[type="email"]{
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      border:1px solid rgba(255,255,255,.16);
-      outline:none;
+    /* Lightbox */
+    dialog#zoom{width:min(92vw,1100px);border:none;padding:0;background:transparent}
+    dialog#zoom::backdrop{background:rgba(15,23,42,.70);backdrop-filter:blur(2px)}
+    .zoom-frame{position:relative;border-radius:18px;overflow:hidden;box-shadow: var(--shadow)}
+    .zoom-close{touch-action:manipulation}
+
+    /* Sticky CTA (mobile) */
+    .sticky-cta{
+      position:fixed; left:0; right:0; bottom:calc(14px + var(--safe-b)); z-index:860;
+      display:none; justify-content:center;
+      transform:translateY(100%); opacity:0;
+      transition:transform .22s var(--ease),opacity .22s var(--ease)
     }
-    input[type="email"]::placeholder{color:rgba(210,220,245,.58)}
+    .sticky-cta .inner{
+      background:rgba(255,255,255,.96);
+      border:1px solid var(--line);
+      padding:.55rem;
+      border-radius:999px;
+      box-shadow:0 16px 54px rgba(16,19,35,.14)
+    }
+    @media (max-width:1023px){ .sticky-cta{display:flex} }
+
+    /* CMP */
+    .cmp-backdrop{
+      position:fixed; inset:0;
+      background:rgba(15,23,42,.45);
+      backdrop-filter:blur(2px);
+      z-index:1000;
+      display:none;
+    }
+    .cmp-backdrop.visible{display:block}
+    .cmp-wrap{
+      position:fixed; inset:auto 12px calc(12px + var(--safe-b)) 12px; z-index:1001;
+      max-width:900px; margin-left:auto; margin-right:auto;
+      background:rgba(255,255,255,.98);
+      border:1px solid var(--line);
+      border-radius:18px; padding:14px;
+      box-shadow: var(--shadow);
+      display:none
+    }
+    .cmp-wrap.visible{display:block}
+    .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.35rem}
+    .cmp-title{font-weight:900;color:#0F172A}
+    .cmp-text{font-size:.95rem;color:#4B5565;margin:.4rem 0}
+    .cmp-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem}
+    .cmp-actions .btn{min-height:44px}
+    .cmp-toggle{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:.65rem .85rem;margin-top:.5rem;background:rgba(15,23,42,.03)}
+    .cmp-toggle label{display:flex;flex-direction:column;gap:.15rem}
+    .switch{position:relative;width:48px;height:28px;background:rgba(15,23,42,.18);border-radius:999px}
+    .switch input{position:absolute;opacity:0}
+    .switch i{position:absolute;top:3px;left:3px;width:22px;height:22px;background:rgba(255,255,255,.95);border-radius:50%;transition:.2s}
+    .switch input:checked + i{left:23px;background:#0F172A;box-shadow:0 0 0 2px rgba(200,165,74,.35)}
+    .cmp-links{font-size:.9rem;color:#6B7280;margin-top:.55rem}
+    .cmp-links a{text-decoration:underline}
 
     /* ===== Native-like Bottom Sheet (mobile result) ===== */
     .sheet-backdrop{
       position:fixed; inset:0;
-      background:rgba(0,0,0,.62);
+      background:rgba(15,23,42,.52);
       backdrop-filter: blur(2px);
       z-index:2000;
       display:none;
@@ -610,41 +596,34 @@
       max-width: 740px;
       margin: 0 auto;
       border-radius: 28px;
-      border: 1px solid rgba(255,255,255,.16);
-      background:
-        radial-gradient(120% 120% at 20% 0%, rgba(255,255,255,.10), transparent 60%),
-        rgba(10,14,22,.98);
-      box-shadow: 0 28px 96px rgba(0,0,0,.70);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.98);
+      box-shadow: 0 28px 96px rgba(16,19,35,.22);
       overflow:hidden;
       transform: translateY(10px);
       will-change: transform;
     }
-    .sheet.visible .sheet-card{
-      animation: sheetIn .28s var(--ease) both;
-    }
-    @keyframes sheetIn{
-      from{transform: translateY(28px); opacity:0}
-      to{transform: translateY(0); opacity:1}
-    }
+    .sheet.visible .sheet-card{ animation: sheetIn .24s var(--ease) both; }
+    @keyframes sheetIn{ from{transform: translateY(22px); opacity:0} to{transform: translateY(0); opacity:1} }
     .sheet-handle{
       width: 54px; height: 5px;
       border-radius:999px;
-      background: rgba(255,255,255,.22);
+      background: rgba(15,23,42,.18);
       margin: 10px auto 8px;
     }
     .sheet-head{
       display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
       padding: 6px 16px 10px;
-      border-bottom:1px solid rgba(255,255,255,.10);
+      border-bottom:1px solid var(--line);
     }
-    .sheet-title{font-weight:900;color:#fff}
-    .sheet-sub{color:var(--muted2);font-size:.95rem;margin-top:.15rem}
+    .sheet-title{font-weight:900;color:#0F172A}
+    .sheet-sub{color:#6B7280;font-size:.95rem;margin-top:.15rem}
     .sheet-close{
       min-width:44px; min-height:44px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.05);
-      color:#fff;
+      border:1px solid var(--line);
+      background: rgba(15,23,42,.03);
+      color:#0F172A;
       cursor:pointer;
       -webkit-tap-highlight-color: transparent;
     }
@@ -652,7 +631,7 @@
     .sheet-actions{display:grid;gap:.55rem;margin-top:.85rem}
     .sheet-actions .btn{width:100%}
     .sheet-inline{margin-top:.8rem}
-    .sheet-note{font-size:.9rem;color:var(--muted2);line-height:1.55;text-align:center;margin-top:.8rem}
+    .sheet-note{font-size:.9rem;color:#6B7280;line-height:1.55;text-align:center;margin-top:.8rem}
 
     @media (min-width:1024px){
       .sheet, .sheet-backdrop{display:none!important}
@@ -663,18 +642,6 @@
 <body>
   <div class="progress" id="progress" aria-hidden="true"></div>
   <a href="#main" class="skip-link">Zum Inhalt springen</a>
-  <div class="space" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
-
-  <!-- Chapter dots (desktop) -->
-  <nav class="chapters" aria-label="Kapitel">
-    <a href="#hero" data-chapter="hero"><span>Eintritt</span><i class="dot" aria-hidden="true"></i></a>
-    <a href="#proof" data-chapter="spiegel"><span>Lebenslagen</span><i class="dot"></i></a>
-    <a href="#allfinanz" data-chapter="struktur"><span>Struktur</span><i class="dot"></i></a>
-    <a href="#ablauf" data-chapter="ablauf"><span>Ablauf</span><i class="dot"></i></a>
-    <a href="#ampel-check" data-chapter="check"><span>Check</span><i class="dot"></i></a>
-    <a href="#final-h" data-chapter="ruhe"><span>Ruhe</span><i class="dot"></i></a>
-  </nav>
 
   <header role="banner">
     <div class="container header-bar">
@@ -713,7 +680,7 @@
   <div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true">
     <div class="head">
       <div style="display:flex;flex-direction:column">
-        <div style="font-weight:900">Navigation</div>
+        <div style="font-weight:900;color:#0F172A">Navigation</div>
         <div class="micro">Schnell dorthin, wo’s wichtig ist.</div>
       </div>
       <button class="btn btn-ghost small" id="mnavClose" type="button" aria-label="Menü schließen">✕</button>
@@ -736,25 +703,39 @@
     <section id="hero" class="hero section fade-up" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="stack">
-          <p class="micro eyebrow">Für Menschen mit Verantwortung – privat &amp; unternehmerisch</p>
-          <h1 id="hero-title" class="signature">Damit Finanzen nicht ständig im Kopf sind.</h1>
-          <p class="hero-sub">Ordnung. Reihenfolge. Ruhe – statt To-do-Druck und Bauchgefühl.</p>
+          <div class="hero-card">
+            <p class="micro eyebrow">Für Menschen mit Verantwortung – privat &amp; unternehmerisch</p>
+            <h1 id="hero-title" class="signature">Damit Finanzen nicht ständig im Kopf sind.</h1>
+            <p class="hero-sub">Ordnung. Reihenfolge. Ruhe – statt To-do-Druck und Bauchgefühl.</p>
 
-          <div class="kpis" aria-label="Vertrauenswerte">
-            <div class="kpi"><strong data-count="1200">0</strong><span>begleitete Entscheidungen</span></div>
-            <div class="kpi"><strong data-count="10">0</strong><span>Jahre dokumentiert</span></div>
-            <div class="kpi"><strong data-count="2">0</strong><span>Min. für Einordnung</span></div>
-          </div>
-          <p class="micro" style="margin-top:.45rem;opacity:.9">
-            Zählweise: interne Beratungsdokumentationen (anonymisiert) seit 2016.
-          </p>
+            <div class="hero-bullets" aria-label="Kernnutzen">
+              <div class="b"><i>1</i><div><strong>In 30–45 Minuten Klarheit</strong><span>Ob gerade wirklich etwas fehlt – oder ob alles passt.</span></div></div>
+              <div class="b"><i>2</i><div><strong>Reihenfolge statt Aktionismus</strong><span>Einkommen, Absicherung, Rücklagen, Familie, Vorsorge – passend geordnet.</span></div></div>
+              <div class="b"><i>3</i><div><strong>Dokumentiert &amp; betreubar</strong><span>So, dass es auch in 10 Jahren nachvollziehbar bleibt.</span></div></div>
+            </div>
 
-          <div class="stack" style="margin-top:.95rem">
-            <div class="grid" style="gap:.55rem">
+            <div class="kpis" aria-label="Vertrauenswerte">
+              <div class="kpi"><strong data-count="1200">0</strong><span>begleitete Entscheidungen</span></div>
+              <div class="kpi"><strong data-count="10">0</strong><span>Jahre dokumentiert</span></div>
+              <div class="kpi"><strong data-count="2">0</strong><span>Min. für Einordnung</span></div>
+            </div>
+            <p class="micro" style="margin-top:.45rem;opacity:.95">
+              Zählweise: interne Beratungsdokumentationen (anonymisiert) seit 2016.
+            </p>
+
+            <div class="grid" style="gap:.55rem;margin-top:.85rem">
               <button class="btn btn-primary" id="startCheckHero" type="button" data-start data-hero>Eigene Lage einordnen (2 Min)</button>
               <a class="btn btn-ghost" href="#transparenz">So läuft’s ab (mit Exit-Punkten)</a>
             </div>
-            <small class="micro" style="opacity:.9">Kein Verkauf im Erstgespräch. Wenn nichts zu tun ist, ist das das Ergebnis.</small>
+
+            <!-- Trustbar moved into hero (big visual upgrade) -->
+            <div class="trustbar" aria-label="Trustbar">
+              <span class="trust"><span class="dot" aria-hidden="true"></span><b>Region Stuttgart</b> &amp; Online</span>
+              <a class="trust" href="/bewertungen" rel="nofollow"><span class="dot" aria-hidden="true"></span><b>Bewertungen</b> ansehen</a>
+              <span class="trust"><span class="dot" aria-hidden="true"></span><b>Dokumentiert</b> statt Bauchgefühl</span>
+            </div>
+
+            <small class="micro" style="display:block;margin-top:.7rem">Kein Verkauf im Erstgespräch. Wenn nichts zu tun ist, ist das das Ergebnis.</small>
           </div>
         </div>
 
@@ -766,40 +747,44 @@
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400 1400w,
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=2000 2000w
             "
-            sizes="(min-width:1024px) 56vw, 96vw"
+            sizes="(min-width:1024px) 44vw, 96vw"
             alt="Ruhige, fokussierte Beratung im Büro" width="1400" height="840"
             loading="eager" decoding="async" fetchpriority="high">
         </figure>
       </div>
     </section>
 
-    <section class="statement section fade-up panel" aria-labelledby="ichbin-h">
-      <div class="container">
+    <section class="section fade-up" aria-labelledby="ichbin-h">
+      <div class="container panel">
         <h2 id="ichbin-h">Ich bin Heiko Haerter.</h2>
         <p>Ich begleite Menschen und Unternehmer dabei, ihre Finanzen so zu ordnen, dass Entscheidungen leichter werden – und nicht ständig im Hinterkopf bleiben.</p>
         <p class="micro">Kein Lärm. Kein Produkt-Aktionismus. Sondern Reihenfolge, die trägt.</p>
       </div>
     </section>
 
-    <section class="statement section fade-up" aria-labelledby="what-h">
+    <section class="section fade-up" aria-labelledby="what-h">
       <div class="container">
-        <h2 id="what-h">Was hier konkret passiert</h2>
-        <p><strong>1 · Überblick:</strong> In 30–45 Minuten klären wir, ob gerade etwas Wichtiges fehlt – oder nicht.</p>
-        <p><strong>2 · Struktur:</strong> Einkommen, Absicherung, Rücklagen, Familie, Vorsorge so ordnen, dass sie zusammenpassen.</p>
-        <p><strong>3 · Begleitung:</strong> Umsetzung, Dokumentation, jährlicher Check – damit nichts untergeht.</p>
-        <p class="micro">Nicht mehr, nicht komplizierter – sondern passend zu deinem Leben.</p>
+        <div class="panel">
+          <h2 id="what-h">Was hier konkret passiert</h2>
+          <p><strong>1 · Überblick:</strong> In 30–45 Minuten klären wir, ob gerade etwas Wichtiges fehlt – oder nicht.</p>
+          <p><strong>2 · Struktur:</strong> Einkommen, Absicherung, Rücklagen, Familie, Vorsorge so ordnen, dass sie zusammenpassen.</p>
+          <p><strong>3 · Begleitung:</strong> Umsetzung, Dokumentation, jährlicher Check – damit nichts untergeht.</p>
+          <p class="micro">Nicht mehr, nicht komplizierter – sondern passend zu deinem Leben.</p>
+        </div>
       </div>
     </section>
 
-    <section class="statement section fade-up panel" aria-labelledby="warum-begleitung-h">
+    <section class="section fade-up" aria-labelledby="warum-begleitung-h">
       <div class="container">
-        <h2 id="warum-begleitung-h">Warum Begleitung hier Sinn macht</h2>
-        <p>Probleme entstehen selten, weil Menschen nichts tun – sondern weil Themen <em>einzeln</em> geregelt werden und die Reihenfolge fehlt.</p>
-        <p class="micro">Besonders dann, wenn Einkommen, Familie und Absicherung voneinander abhängen. Ein Vermögensberater entscheidet nicht für dich – er hält die Reihenfolge, denkt mit und sorgt dafür, dass nichts Wichtiges untergeht.</p>
+        <div class="panel">
+          <h2 id="warum-begleitung-h">Warum Begleitung hier Sinn macht</h2>
+          <p>Probleme entstehen selten, weil Menschen nichts tun – sondern weil Themen <em>einzeln</em> geregelt werden und die Reihenfolge fehlt.</p>
+          <p class="micro">Besonders dann, wenn Einkommen, Familie und Absicherung voneinander abhängen. Ein Vermögensberater entscheidet nicht für dich – er hält die Reihenfolge, denkt mit und sorgt dafür, dass nichts Wichtiges untergeht.</p>
+        </div>
       </div>
     </section>
 
-    <section class="statement section fade-up" aria-label="Hinweis">
+    <section class="section fade-up" aria-label="Hinweis">
       <div class="container">
         <p class="micro"><strong>Diese Seite ist kein Angebot.</strong> Sie hilft dir einzuschätzen, ob gerade überhaupt etwas zu tun ist. Keine Rechts- oder Steuerberatung.</p>
       </div>
@@ -822,80 +807,85 @@
             <figcaption class="cap"><strong>Der Selbstständige</strong><span class="micro">Lief jahrelang gut – bis klar wurde, dass ein Ausfall alles gleichzeitig getroffen hätte. Ergebnis: gemeinsame Landkarte, Zuständigkeiten.</span></figcaption>
           </figure>
         </div>
-      </div>
-    </section>
 
-    <section class="statement section fade-up" aria-labelledby="sp-h">
-      <div class="container">
-        <h2 id="sp-h" class="visually-hidden">Vertrauensanker</h2>
-        <p class="micro">Über viele Jahre begleitete Entscheidungen – öffentlich einsehbar.</p>
-        <div class="brands" aria-label="Externe Vertrauenssignale">
-          <a class="badge" href="/bewertungen" rel="nofollow">Bewertungen anschauen</a>
-          <span class="badge">📍 Region Stuttgart &amp; Online</span>
-          <span class="seal"><img src="https://static.wixstatic.com/shapes/4e46cf_077e599467a543daa505ac661e0366a2.svg" alt="Deutschlands Kundenchampions 2025 Siegel" width="120" height="36" loading="lazy" decoding="async"></span>
-          <span class="seal"><img src="https://static.wixstatic.com/media/4e46cf_bb291e43f4e548aead72419e831d68cf~mv2.png" alt="Bundesverband Deutscher Vermögensberater Siegel" width="120" height="36" loading="lazy" decoding="async"></span>
+        <div class="panel" style="margin-top:1rem">
+          <p class="micro" style="margin:0 0 .6rem"><strong>Vertrauensanker</strong> – öffentlich einsehbar &amp; nachvollziehbar.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center">
+            <a class="trust" href="/bewertungen" rel="nofollow"><span class="dot" aria-hidden="true"></span><b>Bewertungen</b> anschauen</a>
+            <span class="trust"><span class="dot" aria-hidden="true"></span>📍 <b>Region Stuttgart</b> &amp; Online</span>
+            <span class="trust"><span class="dot" aria-hidden="true"></span><b>DVAG-System</b> dokumentiert</span>
+            <span class="trust"><span class="dot" aria-hidden="true"></span><b>Keine Kundengelder</b></span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="allfinanz" class="statement section fade-up" aria-labelledby="value-h">
+    <section id="allfinanz" class="section fade-up" aria-labelledby="value-h">
       <div class="container">
-        <h2 id="value-h" class="signature">Finanzen sollten das Leben einfacher machen – nicht komplizierter.</h2>
-        <p>Einkommen, Absicherung, Rücklagen, Familie, Vorsorge. Nicht als einzelne Themen, sondern so, dass sie zusammenpassen.</p>
-        <p class="micro" style="margin-top:.2rem">Ich arbeite strukturiert – damit Entscheidungen ruhig getroffen werden können.</p>
-        <p class="micro" style="margin-top:.2rem">Die meisten Fehler entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge.</p>
+        <div class="panel">
+          <h2 id="value-h" class="signature">Finanzen sollten das Leben einfacher machen – nicht komplizierter.</h2>
+          <p>Einkommen, Absicherung, Rücklagen, Familie, Vorsorge. Nicht als einzelne Themen, sondern so, dass sie zusammenpassen.</p>
+          <p class="micro" style="margin-top:.2rem">Ich arbeite strukturiert – damit Entscheidungen ruhig getroffen werden können.</p>
+          <p class="micro" style="margin-top:.2rem">Die meisten Fehler entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge.</p>
 
-        <figure class="portrait">
-          <img src="https://static.wixstatic.com/media/4e46cf_e4d34f1837d445c7afee054525608197~mv2.png"
-               alt="Heiko Haerter – ruhig im Gespräch, neutraler Hintergrund" width="1200" height="800" loading="lazy" decoding="async">
-        </figure>
+          <div style="display:grid;gap:1rem;align-items:start;margin-top:1rem">
+            <figure style="margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow2);background:#fff">
+              <img src="https://static.wixstatic.com/media/4e46cf_e4d34f1837d445c7afee054525608197~mv2.png"
+                   alt="Heiko Haerter – ruhig im Gespräch, neutraler Hintergrund" width="1200" height="800" loading="lazy" decoding="async">
+            </figure>
 
-        <figure class="figure" style="max-width:940px;margin:1.25rem auto 0">
-          <img data-zoom
-            src="https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400"
-            srcset="
-              https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=900 900w,
-              https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400 1400w
-            " sizes="(min-width:1024px) 64vw, 94vw"
-            alt="Struktur der Allfinanz-Beratung – Entscheidungsbereiche im Überblick" width="1400" height="880" loading="lazy" decoding="async">
-        </figure>
+            <figure style="margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow2);background:#fff">
+              <img data-zoom
+                src="https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400"
+                srcset="
+                  https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=900 900w,
+                  https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400 1400w
+                " sizes="(min-width:1024px) 64vw, 94vw"
+                alt="Struktur der Allfinanz-Beratung – Entscheidungsbereiche im Überblick" width="1400" height="880" loading="lazy" decoding="async">
+            </figure>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="section fade-up" aria-labelledby="formate-h">
       <div class="container">
-        <h2 id="formate-h">Einstieg</h2>
-        <p><strong>Kurz-Check (30–45 Min.):</strong> Einmal gemeinsam durchgehen, ob alles Wesentliche geregelt ist.</p>
-        <p><strong>Finanz-Überblick (90 Min.):</strong> Struktur aufsetzen – damit nichts Wichtiges liegen bleibt.</p>
-        <p><strong>Laufende Entlastung:</strong> Umsetzung, Dokumentation, Ruhe im Alltag.</p>
+        <div class="panel">
+          <h2 id="formate-h">Einstieg</h2>
+          <p><strong>Kurz-Check (30–45 Min.):</strong> Einmal gemeinsam durchgehen, ob alles Wesentliche geregelt ist.</p>
+          <p><strong>Finanz-Überblick (90 Min.):</strong> Struktur aufsetzen – damit nichts Wichtiges liegen bleibt.</p>
+          <p><strong>Laufende Entlastung:</strong> Umsetzung, Dokumentation, Ruhe im Alltag.</p>
 
-        <figure class="figure" style="max-width:920px;margin:1rem auto 0">
-          <img data-zoom
-            src="https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1400"
-            srcset="
-              https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=900 900w,
-              https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1400 1400w
-            " sizes="(min-width:1024px) 62vw, 94vw"
-            alt="Konzeptarbeit: Entscheidungslogik für Kunden – diese Seite ist genau aus diesem Grund entstanden" width="1400" height="900" loading="lazy" decoding="async">
-        </figure>
+          <figure style="margin:1rem 0 0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow2);background:#fff">
+            <img data-zoom
+              src="https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1400"
+              srcset="
+                https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=900 900w,
+                https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1400 1400w
+              " sizes="(min-width:1024px) 62vw, 94vw"
+              alt="Konzeptarbeit: Entscheidungslogik für Kunden – diese Seite ist genau aus diesem Grund entstanden" width="1400" height="900" loading="lazy" decoding="async">
+          </figure>
+        </div>
       </div>
     </section>
 
-    <section class="section fade-up panel" aria-labelledby="cases-h">
+    <section class="section fade-up" aria-labelledby="cases-h">
       <div class="container">
-        <h2 id="cases-h">Drei echte Veränderungen in wenigen Wochen</h2>
-        <div class="cases">
-          <div class="case">
-            <h3>„Wir wussten endlich, was zuerst kommt.“</h3>
-            <p class="micro">Junges Paar · Arbeitskraft priorisiert, Haftung geklärt, Rücklagen automatisiert. Ergebnis: ruhiger schlafen.</p>
-          </div>
-          <div class="case">
-            <h3>„Endlich klar, was wir weglassen können.“</h3>
-            <p class="micro">Führungskraft · Vier Verträge zusammengeführt, doppelte Risiken raus, klare Unterlagenstruktur.</p>
-          </div>
-          <div class="case">
-            <h3>„Ein Ausfall hätte die Firma mitgerissen – jetzt nicht mehr.“</h3>
-            <p class="micro">Selbstständig · GF-Absicherung, Notfallplan, Zuständigkeiten. Ergebnis: Verantwortung tragfähig.</p>
+        <div class="panel">
+          <h2 id="cases-h">Drei echte Veränderungen in wenigen Wochen</h2>
+          <div class="cases">
+            <div class="case">
+              <h3>„Wir wussten endlich, was zuerst kommt.“</h3>
+              <p class="micro">Junges Paar · Arbeitskraft priorisiert, Haftung geklärt, Rücklagen automatisiert. Ergebnis: ruhiger schlafen.</p>
+            </div>
+            <div class="case">
+              <h3>„Endlich klar, was wir weglassen können.“</h3>
+              <p class="micro">Führungskraft · Vier Verträge zusammengeführt, doppelte Risiken raus, klare Unterlagenstruktur.</p>
+            </div>
+            <div class="case">
+              <h3>„Ein Ausfall hätte die Firma mitgerissen – jetzt nicht mehr.“</h3>
+              <p class="micro">Selbstständig · GF-Absicherung, Notfallplan, Zuständigkeiten. Ergebnis: Verantwortung tragfähig.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -903,37 +893,41 @@
 
     <section id="ablauf" class="section fade-up" aria-labelledby="steps-h">
       <div class="container">
-        <h2 id="steps-h">Ablauf in fünf Schritten</h2>
-        <p class="micro">Von Einordnung bis Begleitung – klar dokumentiert.</p>
+        <div class="panel">
+          <h2 id="steps-h">Ablauf in fünf Schritten</h2>
+          <p class="micro">Von Einordnung bis Begleitung – klar dokumentiert.</p>
 
-        <figure class="figure" style="max-width:1020px;margin:1rem auto 0">
-          <img data-zoom
-            src="https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=1400"
-            srcset="
-              https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=600 600w,
-              https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=980 980w,
-              https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=1400 1400w
-            " sizes="(min-width:1024px) 70vw, 100vw"
-            alt="Der Prozess in fünf Schritten" width="1400" height="900" loading="lazy" decoding="async">
-        </figure>
+          <figure style="margin:1rem 0 0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow2);background:#fff">
+            <img data-zoom
+              src="https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=1400"
+              srcset="
+                https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=600 600w,
+                https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=980 980w,
+                https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=1400 1400w
+              " sizes="(min-width:1024px) 70vw, 100vw"
+              alt="Der Prozess in fünf Schritten" width="1400" height="900" loading="lazy" decoding="async">
+          </figure>
+        </div>
       </div>
     </section>
 
     <section id="firma" class="section fade-up" aria-labelledby="firma-h">
       <div class="container">
-        <h2 id="firma-h">Für Firmenkunden</h2>
-        <p><strong>Firmensafe-Sprint:</strong> Ist-Analyse → Prioritäten → Sofortmaßnahmen → Roadmap.</p>
-        <p><strong>Bausteine:</strong> GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p>
-        <p><strong>Unternehmer-Ampel:</strong> Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p>
-        <div style="margin-top:.7rem">
-          <a class="btn btn-ghost" href="#ampel-check" data-start>Eigene Lage einordnen (2 Min)</a>
+        <div class="panel">
+          <h2 id="firma-h">Für Firmenkunden</h2>
+          <p><strong>Firmensafe-Sprint:</strong> Ist-Analyse → Prioritäten → Sofortmaßnahmen → Roadmap.</p>
+          <p><strong>Bausteine:</strong> GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p>
+          <p><strong>Unternehmer-Ampel:</strong> Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p>
+          <div style="margin-top:.7rem">
+            <a class="btn btn-ghost" href="#ampel-check" data-start>Eigene Lage einordnen (2 Min)</a>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="ampel-check" class="section fade-up" aria-labelledby="ampel-h">
       <div class="container ampel-shell">
-        <div class="ampel-head">
+        <div class="stack">
           <h2 id="ampel-h">2-Minuten-Check</h2>
           <p class="micro">Drei Fragen. Danach: Ampel + nächster Schritt. Kein Terminzwang, kein Push.</p>
         </div>
@@ -952,7 +946,7 @@
           <form id="check-steps" style="display:none" novalidate>
             <div class="ampel-meta" aria-label="Check Status">
               <div class="ampel-progress" style="width:min(560px,100%)">
-                <div class="micro" id="stepLabel" aria-live="polite" style="min-width:140px;font-weight:900">Schritt 1 von 3</div>
+                <div class="micro" id="stepLabel" aria-live="polite" style="min-width:140px;font-weight:900;color:#0F172A">Schritt 1 von 3</div>
                 <progress id="progressBar" value="0" max="3" aria-label="Fortschritt"></progress>
               </div>
               <div class="ampel-controls">
@@ -967,7 +961,7 @@
               <span>Automatisch weiter nach Auswahl</span>
             </label>
 
-            <fieldset class="step" data-step="1" style="display:none;margin-top:1rem">
+            <fieldset class="step" data-step="1" style="display:none;margin-top:1rem;border:0;padding:0">
               <legend id="q1label" class="legend-title">1 · 6 Monate Ausfall – wie stabil wäre euer Einkommen?</legend>
               <p class="visually-hidden" id="q1hint">Wähle eine Option.</p>
               <div class="stack" role="radiogroup" aria-labelledby="q1label" aria-describedby="q1hint">
@@ -977,7 +971,7 @@
               </div>
             </fieldset>
 
-            <fieldset class="step" data-step="2" style="display:none;margin-top:1rem">
+            <fieldset class="step" data-step="2" style="display:none;margin-top:1rem;border:0;padding:0">
               <legend id="q2label" class="legend-title">2 · Wie <em>leicht</em> findest du wichtige Unterlagen?</legend>
               <p class="visually-hidden" id="q2hint">Wähle eine Option.</p>
               <div class="stack" role="radiogroup" aria-labelledby="q2label" aria-describedby="q2hint">
@@ -987,7 +981,7 @@
               </div>
             </fieldset>
 
-            <fieldset class="step" data-step="3" style="display:none;margin-top:1rem">
+            <fieldset class="step" data-step="3" style="display:none;margin-top:1rem;border:0;padding:0">
               <legend id="q3label" class="legend-title">3 · „Zukunft &amp; Alter“ – wie fühlt es sich an?</legend>
               <p class="visually-hidden" id="q3hint">Wähle eine Option.</p>
               <div class="stack" role="radiogroup" aria-labelledby="q3label" aria-describedby="q3hint">
@@ -1009,9 +1003,11 @@
       </div>
     </section>
 
-    <section class="statement section fade-up" aria-labelledby="neuro-h">
-      <div class="container" style="max-width:960px">
-        <h2 id="neuro-h" class="signature">Zu lange nichts tun wird meist teurer als einmal sauber hinschauen.</h2>
+    <section class="section fade-up" aria-labelledby="neuro-h">
+      <div class="container">
+        <div class="panel" style="max-width:980px;margin-inline:auto">
+          <h2 id="neuro-h" class="signature">Zu lange nichts tun wird meist teurer als einmal sauber hinschauen.</h2>
+        </div>
       </div>
     </section>
 
@@ -1033,30 +1029,34 @@
       </div>
     </section>
 
-    <section class="statement section fade-up" aria-labelledby="final-h">
+    <section class="section fade-up" aria-labelledby="final-h">
       <div class="container" style="text-align:center;max-width:900px">
-        <h2 id="final-h">Einmal sauber sortieren. Dann wieder Ruhe haben.</h2>
-        <p>Einmal prüfen. Danach nicht mehr dran denken müssen.</p>
-        <div class="stack" style="align-items:center;margin-top:.5rem">
-          <div class="grid" style="gap:.55rem;max-width:560px;width:100%;margin-inline:auto">
-            <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Eigene Lage einordnen (2 Min)</button>
-            <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurz%20pr%C3%BCfen%2C%20ob%20alles%20passt." target="_blank" rel="noopener noreferrer">WhatsApp (kurz)</a>
+        <div class="panel">
+          <h2 id="final-h">Einmal sauber sortieren. Dann wieder Ruhe haben.</h2>
+          <p>Einmal prüfen. Danach nicht mehr dran denken müssen.</p>
+          <div class="stack" style="align-items:center;margin-top:.5rem">
+            <div class="grid" style="gap:.55rem;max-width:560px;width:100%;margin-inline:auto">
+              <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Eigene Lage einordnen (2 Min)</button>
+              <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurz%20pr%C3%BCfen%2C%20ob%20alles%20passt." target="_blank" rel="noopener noreferrer">WhatsApp (kurz)</a>
+            </div>
+            <p class="micro" style="margin-top:.85rem">
+              DVAG-System: Dokumentation, langfristige Betreuung, und Lösungen, die auch in 10 Jahren noch nachvollziehbar sind.
+            </p>
           </div>
-          <p class="micro" style="margin-top:.85rem">
-            DVAG-System: Dokumentation, langfristige Betreuung, und Lösungen, die auch in 10 Jahren noch nachvollziehbar sind.
-          </p>
         </div>
       </div>
     </section>
 
-    <section id="transparenz" class="section fade-up panel" aria-labelledby="dvag-h">
+    <section id="transparenz" class="section fade-up" aria-labelledby="dvag-h">
       <div class="container">
-        <h2 id="dvag-h">Transparenz – bevor wir sprechen</h2>
-        <p><strong>DVAG-System:</strong> Struktur, damit Entscheidungen langfristig betreubar bleiben.</p>
-        <p class="micro" style="margin-top:.35rem">Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert – und Lösungen bleiben betreubar, auch in 10 oder 20 Jahren.</p>
-        <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
-        <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
-        <p class="micro" style="margin-top:.7rem"><strong>Hinweis:</strong> Keine Rechts- oder Steuerberatung. Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.</p>
+        <div class="panel">
+          <h2 id="dvag-h">Transparenz – bevor wir sprechen</h2>
+          <p><strong>DVAG-System:</strong> Struktur, damit Entscheidungen langfristig betreubar bleiben.</p>
+          <p class="micro" style="margin-top:.35rem">Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert – und Lösungen bleiben betreubar, auch in 10 oder 20 Jahren.</p>
+          <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
+          <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
+          <p class="micro" style="margin-top:.7rem"><strong>Hinweis:</strong> Keine Rechts- oder Steuerberatung. Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.</p>
+        </div>
       </div>
     </section>
   </main>
@@ -1102,7 +1102,7 @@
   <dialog id="zoom" aria-label="Bildanzeige" aria-modal="true" role="dialog">
     <div class="zoom-frame">
       <button class="zoom-close" type="button" autofocus aria-label="Schließen"
-        style="position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);color:#fff;border-radius:999px;padding:.45rem .75rem;cursor:pointer">
+        style="position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.6);background:rgba(15,23,42,.65);color:#fff;border-radius:999px;padding:.45rem .75rem;cursor:pointer">
         Schließen ✕
       </button>
       <img class="zoom-img" alt="" />
@@ -1167,7 +1167,7 @@
     const GA_ID = 'G-XXXXXXXXXX'; // set real ID; stays inert if placeholder
     const KLAVIYO_COMPANY_ID = 'T7wryA';
     const AMPEL_VERSION = 'v1';
-    const PAGE_VARIANT = 'decision-space-6.4';
+    const PAGE_VARIANT = 'decision-space-6.5-corporate-light';
 
     function loadScriptOnce(url, attrs = {}) {
       if (document.querySelector('script[data-src="'+url+'"], script[src="'+url+'"]')) return;
@@ -1379,33 +1379,6 @@
       els.forEach(el=>io.observe(el));
     })();
 
-    // Ambient movement
-    (function(){
-      const space = document.querySelector('.space');
-      if(!space) return;
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        space.style.display='none';
-        return;
-      }
-      let raf, t = 0, lastY = window.scrollY;
-      const loop = () => {
-        const y = window.scrollY;
-        const dy = Math.max(-1, Math.min(1, (y - lastY) / 2000));
-        lastY = y;
-        t += 0.002 + dy * 0.001;
-        const x = (Math.sin(t) + 1) / 2;
-        const yy = (Math.cos(t*0.8) + 1) / 2;
-        document.documentElement.style.setProperty('--ambient-x', x.toFixed(4));
-        document.documentElement.style.setProperty('--ambient-y', yy.toFixed(4));
-        raf = requestAnimationFrame(loop);
-      };
-      raf = requestAnimationFrame(loop);
-      addEventListener('visibilitychange',()=>{
-        if(document.hidden){ cancelAnimationFrame(raf); }
-        else { raf = requestAnimationFrame(loop); }
-      });
-    })();
-
     // Reveal
     (function(){
       try{
@@ -1422,22 +1395,6 @@
         }, { threshold:.12, rootMargin:'0px 0px -10% 0px' });
         els.forEach(el => io.observe(el));
       }catch(_){}
-    })();
-
-    // Chapters active state
-    (function(){
-      const links = Array.from(document.querySelectorAll('.chapters a'));
-      const ids = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-      if(!('IntersectionObserver' in window)) return;
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if(e.isIntersecting){
-            const id = '#' + (e.target.getAttribute('id')||'');
-            links.forEach(a => a.setAttribute('aria-current', a.getAttribute('href')===id ? 'true':'false'));
-          }
-        });
-      }, { threshold: .35 });
-      ids.forEach(el => io.observe(el));
     })();
 
     // Lightbox
@@ -1499,7 +1456,7 @@
       };
     })();
 
-    // Bottom sheet controller (mobile) + swipe-to-close (native feel)
+    // Bottom sheet controller (mobile result) + swipe-to-close
     (function(){
       const bd = document.getElementById('sheetBackdrop');
       const sh = document.getElementById('sheet');
@@ -1550,7 +1507,7 @@
       bd.addEventListener('click', hide);
       document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && sh.classList.contains('visible')) hide(); });
 
-      // Swipe-to-close (pointer)
+      // Swipe-to-close
       (function(){
         let active = false;
         let startY = 0;
@@ -1559,7 +1516,6 @@
 
         function onDown(e){
           if(!sh.classList.contains('visible')) return;
-          // allow scroll inside body; only start drag when user grabs header/handle area
           const allow = e.target.closest('.sheet-head, .sheet-handle');
           if(!allow) return;
 
@@ -1575,7 +1531,6 @@
           const y = e.clientY || (e.touches && e.touches[0]?.clientY) || 0;
           lastY = y;
           const dy = Math.max(0, y - startY);
-          // resistance
           const eased = dy > 0 ? (dy * 0.92) : 0;
           card.style.transform = `translateY(${eased}px)`;
         }
@@ -1590,7 +1545,6 @@
 
           const shouldClose = (dy > 110) || (v > 0.9 && dy > 60);
           if(shouldClose){
-            // tiny “haptic”
             try{ navigator.vibrate?.(10); }catch(_){}
             hide();
           }else{
@@ -1671,8 +1625,17 @@
       window.__appendUTM = appendUTM;
       window.__sendEvent = sendEvent;
 
-      // Decision state SSoT
+      // ===== Decision state SSoT (v2) =====
       const DECISION_LS = 'hh_decision_state_v2';
+
+      const DECISION_STAGES = [
+        'einordnung',
+        'archiv',
+        'termin_interesse',
+        'termin_gebucht',
+        'mandant'
+      ];
+
       const defaults = {
         ampel_status: '',
         ampel_score: '',
@@ -1689,7 +1652,9 @@
       function readDecision(){
         try{
           const v = JSON.parse(localStorage.getItem(DECISION_LS) || '{}');
-          return Object.assign({}, defaults, v || {});
+          const merged = Object.assign({}, defaults, v || {});
+          if(!DECISION_STAGES.includes(merged.decision_stage)) merged.decision_stage = defaults.decision_stage;
+          return merged;
         }catch(_){
           return Object.assign({}, defaults);
         }
@@ -1701,12 +1666,31 @@
       window.__decision = {
         state: readDecision(),
         set(patch){
-          const s = Object.assign({}, window.__decision.state, patch || {});
-          window.__decision.state = s;
-          writeDecision(s);
-          return s;
-        }
+          const next = Object.assign({}, window.__decision.state, patch || {});
+          if('decision_stage' in (patch||{})){
+            if(!DECISION_STAGES.includes(next.decision_stage)){
+              next.decision_stage = window.__decision.state.decision_stage || defaults.decision_stage;
+            }
+          }
+          window.__decision.state = next;
+          writeDecision(next);
+          return next;
+        },
+        stages: DECISION_STAGES.slice()
       };
+
+      // Optional: allow stage update via URL
+      (function(){
+        try{
+          const qs = new URLSearchParams(location.search);
+          const stage = qs.get('stage');
+          if(stage && DECISION_STAGES.includes(stage)){
+            window.__decision.set({ decision_stage: stage });
+          }
+          if(qs.get('booked') === '1') window.__decision.set({ decision_stage: 'termin_gebucht' });
+          if(qs.get('mandant') === '1') window.__decision.set({ decision_stage: 'mandant' });
+        }catch(_){}
+      })();
 
       // Tracking policy
       window.__track = (function(){
@@ -1794,52 +1778,12 @@
     })();
   </script>
 
-  <!-- Optional smooth scroll (self-hosted) -->
-  <script>
-    (function(){
-      const prefReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(prefReduce) return;
-
-      let loaded = false;
-      const LENIS_URL = '/assets/lenis-1.0.42.min.js';
-
-      function loadLenis(){
-        if(loaded) return;
-        loaded = true;
-
-        const s = document.createElement('script');
-        s.src = LENIS_URL;
-        s.defer = true;
-
-        s.onload = () => {
-          if(!window.Lenis) return;
-          const lenis = new Lenis({
-            duration: 1.05,
-            easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true,
-            smoothTouch: false
-          });
-          window.__lenis = lenis;
-
-          const raf = (time)=>{ lenis.raf(time); requestAnimationFrame(raf); };
-          requestAnimationFrame(raf);
-        };
-        document.head.appendChild(s);
-      }
-
-      const triggers = ['pointerdown','keydown','wheel','touchstart'];
-      const onFirst = () => { loadLenis(); triggers.forEach(t=>removeEventListener(t,onFirst,true)); };
-      triggers.forEach(t=>addEventListener(t,onFirst,true));
-      document.querySelectorAll('[data-start]').forEach(b=> b.addEventListener('click', loadLenis, { once:true }));
-    })();
-  </script>
-
   <!-- ========= Klaviyo Identify after DOI (Option A, minimal & safe) ========= -->
   <script>
     (function(){
       const DOI_FLAG_KEY = 'hh_doi_pending_identify';
       const DOI_EMAIL_KEY = 'hh_doi_email_v1';
-      const DOI_EMAIL_TTL_MS = 21 * 24 * 60 * 60 * 1000; // 21 days
+      const DOI_EMAIL_TTL_MS = 14 * 24 * 60 * 60 * 1000; // ✅ 14 days (conservative)
 
       function readEmail(){
         try{
@@ -1909,7 +1853,6 @@
             }
           ]);
           window.__track?.ga('Klaviyo_Identify_After_DOI', { ampel_status: s.ampel_status, decision_context: s.decision_context });
-          // optional: also send a KV event for debugging / flow trigger
           window.__track?.kv('Klaviyo_Identify_After_DOI', { ampel_status: s.ampel_status, decision_context: s.decision_context });
         }catch(_){}
 
@@ -1960,12 +1903,7 @@
       function smartScrollTo(elOrId, block='start'){
         const el = typeof elOrId === 'string' ? document.querySelector(elOrId) : elOrId;
         if(!el) return;
-
-        if(window.__lenis && typeof window.__lenis.scrollTo === 'function'){
-          window.__lenis.scrollTo(el, { offset: -8, immediate: false });
-        }else{
-          el.scrollIntoView({ behavior: 'smooth', block });
-        }
+        el.scrollIntoView({ behavior: 'smooth', block });
       }
 
       function setDecisionContext(v){
@@ -2358,7 +2296,17 @@
               window.__applyConsent({ analytics: !!window.__cmpState.analytics, marketing: true });
             }
 
+            const intent = status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig');
+
             window.__track?.ga('Archive_Submit', { ampel_status: status, ampel_score: score, decision_context: decisionContext });
+
+            // ✅ Additional Klaviyo event after archive submit (flow trigger cleaner than list join)
+            window.__track?.kv('Decision_Archive_Subscribed', {
+              ampel_status: status,
+              intent_level: intent,
+              decision_context: decisionContext
+            });
+
             window.__decision?.set({ decision_stage: 'archiv' });
           });
         }
@@ -2453,7 +2401,7 @@
         }
       }
 
-      // Arrow nav + selection fallback
+      // Arrow nav
       const bound = new WeakSet();
       function enableArrowNav(fs){
         if(bound.has(fs)) return;
