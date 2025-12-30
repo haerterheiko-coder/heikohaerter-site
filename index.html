@@ -1,4 +1,4 @@
-<!-- /index.html — Decision Space v6.0 (2026-level: WCAG 2.2 + Consent controls + Print robustness + pinned deps + Klaviyo Decision Archive / CRM-light) -->
+<!-- /index.html — Decision Space v6.2 (2026 mobile-first benchmark: WCAG 2.2 + Consent controls + ultra-perf + Klaviyo Decision Archive / CRM-light) -->
 <!DOCTYPE html>
 <html lang="de" class="no-js" translate="no">
 <head>
@@ -9,6 +9,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#05070E" />
   <meta name="format-detection" content="telephone=no" />
+
   <title>Damit Finanzen nicht ständig im Kopf sind.</title>
   <meta name="description" content="Privat · Familie · Verantwortung. Kurz einordnen, ob alles passt – ohne Druck. Einkommen, Absicherung, Rücklagen, Familie, Vorsorge: so geordnet, dass es im Alltag nicht ständig im Kopf ist." />
   <link rel="canonical" href="https://heikohaerter.com" />
@@ -31,12 +32,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Google Fonts (non render-blocking) -->
+  <!-- Fonts -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap"></noscript>
 
-  <!-- LCP Preload (Hero-Bild) -->
+  <!-- LCP Preload (Hero) -->
   <link
     rel="preload"
     as="image"
@@ -117,6 +118,7 @@
       .fade-up{opacity:1!important;transform:none!important;filter:none!important}
       .sticky-cta{display:none!important}
       .space{display:none!important}
+      .mnav, .mnav-backdrop, .cmp-backdrop, .cmp-wrap{display:none!important}
     </style>
   </noscript>
 
@@ -129,10 +131,14 @@
       --radius:20px; --ease:cubic-bezier(.25,.46,.25,1);
       --ambient-x:.5; --ambient-y:.15; --ambient-opacity:.14;
       --line:rgba(255,255,255,.12);
+      --shadow: 0 24px 70px rgba(0,0,0,.42);
+      --tap: 52px;
+      --safe-b: env(safe-area-inset-bottom, 0px);
+      --safe-t: env(safe-area-inset-top, 0px);
     }
 
     @media (prefers-reduced-motion: reduce){
-      *{scroll-behavior:auto!important}
+      *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
     }
 
     *,*::before,*::after{box-sizing:border-box}
@@ -140,83 +146,95 @@
     body{
       margin:0;
       background:
-        radial-gradient(800px 600px at 20% 0%, rgba(120,150,255,.12), transparent 60%),
-        radial-gradient(800px 600px at 80% 20%, rgba(200,164,75,.10), transparent 60%),
-        linear-gradient(180deg,var(--bg),var(--bg2) 60%);
+        radial-gradient(900px 650px at 20% 0%, rgba(120,150,255,.12), transparent 62%),
+        radial-gradient(900px 650px at 82% 18%, rgba(200,164,75,.10), transparent 62%),
+        linear-gradient(180deg,var(--bg),var(--bg2) 62%);
       color:var(--text);
       font-family:"IBM Plex Sans","Inter",system-ui,sans-serif;
       -webkit-font-smoothing:antialiased;
-      line-height:1.45;
+      line-height:1.5;
       overflow-x:hidden;
+      padding-bottom: var(--safe-b);
     }
 
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%;height:auto}
 
-    /* Skip link (visible on focus) */
+    /* Skip link */
     .skip-link{
-      position:absolute; left:12px; top:10px;
-      padding:.6rem .8rem; border-radius:999px;
+      position:absolute; left:12px; top:calc(10px + var(--safe-t));
+      padding:.65rem .9rem; border-radius:999px;
       background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.2);
-      transform:translateY(-140%); transition:transform .2s var(--ease);
-      z-index:1001;
+      transform:translateY(-160%); transition:transform .2s var(--ease);
+      z-index:1101;
     }
     .skip-link:focus{ transform:translateY(0); outline:3px solid var(--focus); outline-offset:3px; }
 
     /* Scroll progress */
-    .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),#fff);z-index:1000;box-shadow:0 0 12px rgba(230,208,138,.6)}
+    .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),#fff);z-index:1100;box-shadow:0 0 14px rgba(230,208,138,.6)}
 
     .space{
       position:fixed; inset:-20vh -10vw auto -10vw; height:60vh;
-      pointer-events:none; z-index:-1; filter:blur(48px); opacity:var(--ambient-opacity);
+      pointer-events:none; z-index:-1; filter:blur(52px); opacity:var(--ambient-opacity);
     }
     .space::before{
       content:""; position:absolute; inset:0;
       background:
-        radial-gradient(42% 38% at calc(10% + 40% * var(--ambient-x)) calc(10% + 30% * var(--ambient-y)), rgba(200,164,75,.32) 0%, transparent 60%),
-        radial-gradient(36% 34% at calc(82% - 30% * var(--ambient-x)) calc(12% + 28% * var(--ambient-y)), rgba(120,150,255,.26) 0%, transparent 62%);
+        radial-gradient(44% 38% at calc(10% + 40% * var(--ambient-x)) calc(10% + 30% * var(--ambient-y)), rgba(200,164,75,.34) 0%, transparent 62%),
+        radial-gradient(38% 34% at calc(82% - 30% * var(--ambient-x)) calc(12% + 28% * var(--ambient-y)), rgba(120,150,255,.28) 0%, transparent 64%);
       mix-blend-mode:screen;
       transition:transform 1s linear;
       will-change:transform;
     }
 
-    .section{padding:clamp(48px,8vw,120px) 0}
-    .container{max-width:1140px;margin-inline:auto;padding-inline:clamp(16px,5vw,32px)}
-    .grid{display:grid;gap:clamp(.8rem,2.6vw,1.4rem)}
+    .section{padding:clamp(44px,8vw,120px) 0}
+    .container{
+      max-width:1140px;
+      margin-inline:auto;
+      padding-inline:clamp(16px,5vw,32px);
+    }
+    .grid{display:grid;gap:clamp(.85rem,2.8vw,1.45rem)}
     .stack{display:flex;flex-direction:column;gap:clamp(.6rem,2vw,1.05rem)}
     .auto-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
 
     h1,h2,h3{margin:0 0 .85rem;letter-spacing:-.02em;text-wrap:balance}
-    h1{font-size:clamp(2.8rem,6vw,4.9rem);font-weight:700;letter-spacing:-0.035em;line-height:1.04}
-    h2{font-size:clamp(2rem,3.8vw,2.8rem);font-weight:700;letter-spacing:-0.03em}
-    h3{font-size:clamp(1.08rem,2vw,1.26rem);font-weight:700}
-    p{margin:0 0 .6rem;color:var(--muted);font-size:clamp(1rem,1.1vw,1.08rem);line-height:1.7;max-width:64ch}
+    h1{font-size:clamp(2.55rem,8vw,4.9rem);font-weight:800;letter-spacing:-0.04em;line-height:1.02}
+    h2{font-size:clamp(1.85rem,5.8vw,2.8rem);font-weight:800;letter-spacing:-0.032em}
+    h3{font-size:clamp(1.08rem,2.8vw,1.26rem);font-weight:800}
+    p{margin:0 0 .65rem;color:var(--muted);font-size:clamp(1.02rem,1.1vw,1.08rem);line-height:1.75;max-width:64ch}
 
-    .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.02em}
-    .hero-sub{font-size:1.12rem;color:#d9deef;margin-top:.5rem}
-    .signature{font-family: "Canela","Tiempos Headline", serif; font-weight:400; letter-spacing:-0.01em}
+    .micro{font-size:.95rem;color:var(--muted2);letter-spacing:.01em;line-height:1.6}
+    .hero-sub{font-size:1.12rem;color:#d9deef;margin-top:.5rem;max-width:58ch}
+    .signature{font-family: ui-serif, "Canela","Tiempos Headline", Georgia, serif; font-weight:550; letter-spacing:-0.01em}
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      min-height:48px; padding:.95rem 1.45rem;
+      min-height:var(--tap); padding:.98rem 1.35rem;
       border-radius:999px; border:1px solid rgba(255,255,255,.14);
-      font-weight:800; background:rgba(255,255,255,.06); color:var(--text);
-      transition:transform .18s var(--ease), box-shadow .25s var(--ease), background .2s;
+      font-weight:900; letter-spacing:.01em;
+      background:rgba(255,255,255,.06); color:var(--text);
+      transition:transform .18s var(--ease), box-shadow .25s var(--ease), background .2s, filter .2s;
+      -webkit-tap-highlight-color: transparent;
+      user-select:none;
     }
-    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 28px rgba(0,0,0,.35); background:rgba(255,255,255,.08)}
-    .btn-primary{background:var(--gold);color:#111;border-color:rgba(230,208,138,.25)}
+    .btn:active{transform:translateY(1px) scale(.99)}
+    .btn:hover{filter:brightness(1.03)}
+    .btn-primary{background:var(--gold);color:#111;border-color:rgba(230,208,138,.28);box-shadow:0 18px 48px rgba(230,208,138,.12)}
     .btn-ghost{background:transparent;border-color:rgba(255,255,255,.16)}
-    .btn.small{min-height:42px;padding:.55rem 1rem}
-    .btn.secondary{opacity:.95;transform:none}
+    .btn.small{min-height:44px;padding:.6rem 1rem;font-weight:800}
     .btn[disabled]{opacity:.6;pointer-events:none}
-    @media (max-width:1023px){ .btn{width:100%} }
 
-    /* Focus visible */
-    a:focus-visible,button:focus-visible,[role="dialog"]:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:14px}
+    @media (max-width:1023px){
+      .btn{width:100%}
+    }
+
+    /* Focus */
+    a:focus-visible,button:focus-visible,[role="dialog"]:focus-visible,input:focus-visible,summary:focus-visible{
+      outline:3px solid var(--focus);outline-offset:3px;border-radius:14px
+    }
     label.btn.small:focus-within{outline:3px solid var(--focus);outline-offset:3px}
 
-    /* Selected-state for radio labels (WCAG clarity).
-       Primary: :has() for modern browsers. Fallback: .is-selected via JS. */
+    /* Selected-state for radio labels */
     label.btn.small:has(input:checked),
     label.btn.small.is-selected{
       border-color: rgba(230,208,138,.55);
@@ -224,74 +242,159 @@
       background: rgba(230,208,138,.08);
     }
 
-    header{position:sticky;top:0;z-index:70;background:rgba(5,8,22,.8);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:saturate(120%) blur(10px)}
-    .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:.85rem 0;gap:1rem}
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:900;
+      background:rgba(5,8,22,.82);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      backdrop-filter:saturate(120%) blur(12px);
+      padding-top: var(--safe-t);
+    }
+    .header-bar{display:flex;align-items:center;justify-content:space-between;min-height:70px;padding:.75rem 0;gap:1rem}
     .brand{display:flex;flex-direction:column}
-    .brand-top{display:flex;align-items:center;gap:.65rem;font-weight:800}
-    .brand-dot{width:.95rem;height:.95rem;border-radius:999px;background:conic-gradient(from 210deg,var(--gold),var(--gold));box-shadow:0 0 0 5px rgba(200,164,75,.25),0 0 26px rgba(200,164,75,.55); animation: pulse 2.4s ease-in-out infinite }
-    @keyframes pulse{0%,100%{filter:drop-shadow(0 0 0 rgba(230,208,138,.0))}50%{filter:drop-shadow(0 0 10px rgba(230,208,138,.5))}}
+    .brand-top{display:flex;align-items:center;gap:.65rem;font-weight:900}
+    .brand-dot{
+      width:.92rem;height:.92rem;border-radius:999px;
+      background:conic-gradient(from 210deg,var(--gold),#fff,var(--gold));
+      box-shadow:0 0 0 5px rgba(200,164,75,.22),0 0 28px rgba(200,164,75,.55);
+      animation:pulse 2.4s ease-in-out infinite
+    }
+    @keyframes pulse{
+      0%,100%{filter:drop-shadow(0 0 0 rgba(230,208,138,.0))}
+      50%{filter:drop-shadow(0 0 12px rgba(230,208,138,.55))}
+    }
 
-    .nav{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
-    .nav a.link{padding:.35rem .6rem;border-radius:999px;color:var(--muted2)}
+    .nav{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
+    .nav a.link{padding:.4rem .65rem;border-radius:999px;color:var(--muted2)}
     .nav a.link:hover,.nav a.link[aria-current="page"]{color:var(--text)}
-    @media (max-width:940px){ .nav a.link{display:none} }
+    @media (max-width:980px){ .nav a.link{display:none} }
 
-    .hero{position:relative;padding-top:clamp(64px,10vw,136px);padding-bottom:clamp(34px,5vw,60px)}
-    .hero-grid{display:grid;gap:clamp(1.6rem,3.6vw,3rem)}
+    /* Mobile menu button */
+    .menu-btn{
+      display:none;
+      min-width:var(--tap);
+      min-height:var(--tap);
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      align-items:center;justify-content:center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .menu-btn svg{width:22px;height:22px}
+    @media (max-width:980px){
+      .menu-btn{display:inline-flex}
+    }
+
+    /* Mobile nav drawer */
+    .mnav-backdrop{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.56);
+      backdrop-filter: blur(2px);
+      z-index:980;
+      display:none;
+    }
+    .mnav-backdrop.visible{display:block}
+    .mnav{
+      position:fixed; inset:calc(var(--safe-t) + 10px) 10px auto 10px;
+      border-radius:22px;
+      background:rgba(10,14,22,.98);
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow: var(--shadow);
+      z-index:981;
+      display:none;
+      overflow:hidden;
+      transform: translateY(-6px);
+    }
+    .mnav.visible{display:block}
+    .mnav .head{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .mnav .list{display:grid;gap:6px;padding:12px 12px 14px}
+    .mnav a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
+    .mnav a .t{font-weight:900}
+    .mnav a .s{color:var(--muted2);font-size:.9rem}
+    .mnav .cta{margin-top:8px}
+
+    /* Hero */
+    .hero{position:relative;padding-top:clamp(56px,10vw,120px);padding-bottom:clamp(28px,5vw,58px)}
+    .hero-grid{display:grid;gap:clamp(1.35rem,4vw,3rem)}
     @media (min-width:1024px){ .hero-grid{grid-template-columns:1.05fr .95fr;align-items:center} }
-    #hero h1{ max-width:16ch; }
-    .hero-figure{border-radius:28px;overflow:hidden; transform:translateZ(0); box-shadow:0 40px 120px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06)}
+    #hero h1{max-width:16ch}
+    .hero-figure{
+      border-radius:28px;overflow:hidden; transform:translateZ(0);
+      box-shadow:0 40px 120px rgba(0,0,0,.48), inset 0 0 0 1px rgba(255,255,255,.06)
+    }
     .hero-figure img{transition:transform 7s ease; filter:saturate(1.05) contrast(1.02)}
-    .hero-figure:hover img{transform:scale(1.045)}
+    @media (hover:hover){ .hero-figure:hover img{transform:scale(1.045)} }
 
+    /* Panels */
     .statement .container{max-width:980px}
-    .panel{border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:clamp(18px,2.4vw,28px);box-shadow:0 24px 60px rgba(0,0,0,.35);background:rgba(255,255,255,.02)}
+    .panel{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      padding:clamp(18px,2.4vw,28px);
+      box-shadow: var(--shadow);
+      background:rgba(255,255,255,.02);
+    }
 
-    .fade-up{opacity:0;transform:translateY(32px) scale(.985);filter:blur(2px)}
-    .fade-up.visible{opacity:1;transform:none;filter:none;transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1), filter .6s ease}
+    /* Fade-up */
+    .fade-up{opacity:0;transform:translateY(28px) scale(.988);filter:blur(2px)}
+    .fade-up.visible{opacity:1;transform:none;filter:none;transition:opacity .6s ease, transform .65s cubic-bezier(.2,.8,.2,1), filter .6s ease}
 
+    /* KPIs */
     .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem;margin-top:1rem}
-    .kpi{border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.9rem 1rem;background:rgba(255,255,255,.03);text-align:center}
-    .kpi strong{display:block;font-size:1.5rem;color:#fff}
+    .kpi{border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:.95rem 1rem;background:rgba(255,255,255,.03);text-align:center}
+    .kpi strong{display:block;font-size:1.55rem;color:#fff}
     .kpi span{font-size:.95rem;color:var(--muted2)}
 
-    .result-panel{border-radius:18px;padding:clamp(18px,2.4vw,28px);margin-top:1rem;box-shadow:0 24px 60px rgba(0,0,0,.35);border:1px solid transparent}
+    /* Results */
+    .result-panel{border-radius:18px;padding:clamp(18px,2.4vw,28px);margin-top:1rem;box-shadow: var(--shadow);border:1px solid transparent}
     .is-red{background:#2b1111;border-color:var(--danger)}
     .is-yellow{background:#2b2b11;border-color:var(--warn)}
     .is-green{background:#0f1b12;border-color:var(--ok)}
-    .result-title{font-size:clamp(1.2rem,2.2vw,1.5rem);font-weight:700;margin-bottom:.35rem;color:#fff}
+    .result-title{font-size:clamp(1.22rem,2.2vw,1.55rem);font-weight:900;margin-bottom:.35rem;color:#fff}
 
+    /* Sticky CTA */
     .sticky-cta{
-      position:fixed; left:0; right:0; bottom:18px; z-index:68;
+      position:fixed; left:0; right:0; bottom:calc(14px + var(--safe-b)); z-index:860;
       display:none; justify-content:center;
       transform:translateY(100%); opacity:0;
       transition:transform .25s var(--ease),opacity .25s var(--ease)
     }
-    .sticky-cta .inner{background:rgba(10,14,22,.98);border:1px solid rgba(233,211,148,.28);padding:.55rem;border-radius:999px;box-shadow:0 12px 38px rgba(0,0,0,.55)}
+    .sticky-cta .inner{
+      background:rgba(10,14,22,.98);
+      border:1px solid rgba(233,211,148,.28);
+      padding:.55rem;
+      border-radius:999px;
+      box-shadow:0 12px 40px rgba(0,0,0,.58)
+    }
     @media (max-width:1023px){ .sticky-cta{display:flex} }
-    @supports (bottom: env(safe-area-inset-bottom)){ .sticky-cta{padding-bottom:calc(env(safe-area-inset-bottom) + 6px)} }
 
     .visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
     dialog#zoom{width:min(92vw,1100px);border:none;padding:0;background:transparent}
-    dialog#zoom::backdrop{background:rgba(0,0,0,.75);backdrop-filter:blur(2px)}
-    .zoom-frame{position:relative;border-radius:18px;overflow:hidden}
+    dialog#zoom::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(2px)}
+    .zoom-frame{position:relative;border-radius:18px;overflow:hidden;box-shadow: var(--shadow)}
+    .zoom-close{touch-action:manipulation}
 
-    footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 60px}
+    footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0 64px}
     .footer-links{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center}
-    .footer-links a{padding:.35rem .6rem;border-radius:999px;color:var(--muted2)}
+    .footer-links a{padding:.38rem .65rem;border-radius:999px;color:var(--muted2)}
     .footer-links a:hover{color:var(--text)}
     .tiny{font-size:.9rem;color:var(--muted2);line-height:1.55}
 
-    .figure{border-radius:24px;overflow:hidden}
+    .figure{border-radius:24px;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.08)}
+    .portrait{max-width:560px;margin:16px auto 0;border-radius:18px;overflow:hidden;filter:grayscale(.85) contrast(1.05);border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 60px rgba(0,0,0,.32)}
 
     .brands{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
-    .badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .6rem;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.92rem;color:var(--muted2)}
-    .badge::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:conic-gradient(from 210deg,var(--gold),var(--gold));box-shadow:0 0 0 3px rgba(230,208,138,.15)}
-
+    .badge{display:inline-flex;align-items:center;gap:.45rem;padding:.38rem .7rem;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:.92rem;color:var(--muted2);background:rgba(255,255,255,.02)}
+    .badge::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:conic-gradient(from 210deg,var(--gold),#fff,var(--gold));box-shadow:0 0 0 3px rgba(230,208,138,.15)}
     .seal{background:#fff;border-radius:10px;padding:6px;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 0 rgba(255,255,255,.05), 0 8px 24px rgba(0,0,0,.28)}
 
-    .chapters{position:fixed;left:18px;top:120px;display:none;flex-direction:column;gap:12px;z-index:60}
+    .chapters{position:fixed;left:18px;top:120px;display:none;flex-direction:column;gap:12px;z-index:120}
     .chapters a{display:flex;align-items:center;gap:8px;color:var(--muted2);font-size:.9rem}
     .chapters a .dot{width:7px;height:7px;border-radius:999px;background:rgba(255,255,255,.22)}
     .chapters a[aria-current="true"] .dot{background:var(--gold)}
@@ -299,87 +402,113 @@
     .chapters:hover a span{opacity:.9;transform:none}
     @media (min-width:1200px){ .chapters{display:flex} }
 
-    @media (max-width:480px){ .section{padding:32px 0} p{font-size:1.02rem;line-height:1.75} .container{padding-inline:16px} }
+    @media (max-width:480px){
+      .section{padding:32px 0}
+      p{font-size:1.03rem;line-height:1.78}
+      .container{padding-inline:16px}
+      .panel{padding:18px}
+    }
 
-    .portrait{max-width:560px;margin:16px auto 0;border-radius:18px;overflow:hidden;filter:grayscale(.85) contrast(1.05)}
+    .personas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(.85rem,2.2vw,1.1rem);margin-top:.9rem}
+    .card{border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.02);box-shadow:0 16px 48px rgba(0,0,0,.28)}
+    .card img{aspect-ratio: 3/2; object-fit:cover}
+    .card .cap{padding:.75rem .9rem}
+    .card .cap strong{display:block;margin-bottom:.25rem;color:#fff}
 
-    .personas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(.8rem,2vw,1rem);margin-top:.8rem}
-    .card{border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;background:rgba(255,255,255,.02)}
-    .card .cap{padding:.6rem .8rem}
-    .card .cap strong{display:block;margin-bottom:.2rem;color:#fff}
-
-    .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(.8rem,2vw,1rem)}
-    .case{border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1rem;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02))}
+    .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(.85rem,2.2vw,1.1rem)}
+    .case{border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:1.05rem;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));box-shadow:0 16px 48px rgba(0,0,0,.28)}
     .case h3{margin-bottom:.35rem}
     .case p{margin:0}
 
     .faq{max-width:980px;margin-inline:auto}
-    .faq details{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:.85rem 1rem;background:rgba(255,255,255,.02)}
-    .faq details+details{margin-top:.6rem}
-    .faq summary{cursor:pointer;font-weight:700;color:#fff;list-style:none}
+    .faq details{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:.9rem 1rem;background:rgba(255,255,255,.02);box-shadow:0 14px 40px rgba(0,0,0,.22)}
+    .faq details+details{margin-top:.7rem}
+    .faq summary{cursor:pointer;font-weight:900;color:#fff;list-style:none}
     .faq summary::-webkit-details-marker{display:none}
-    .faq .answer{margin-top:.45rem}
+    .faq .answer{margin-top:.5rem}
 
-    /* A11y: legends */
     .legend-title{
-      font-size:clamp(1.08rem,2vw,1.26rem);
-      font-weight:700;
+      font-size:clamp(1.08rem,2.8vw,1.26rem);
+      font-weight:900;
       color:#fff;
       padding:0;
-      margin:0 0 .55rem;
+      margin:0 0 .6rem;
     }
 
-    /* CMP backdrop + card */
+    /* CMP */
     .cmp-backdrop{
       position:fixed; inset:0;
       background:rgba(0,0,0,.55);
       backdrop-filter:blur(2px);
-      z-index:999;
+      z-index:1000;
       display:none;
     }
     .cmp-backdrop.visible{display:block}
 
     .cmp-wrap{
-      position:fixed; inset:auto 12px 12px 12px; z-index:1000;
-      max-width:820px; margin-left:auto; margin-right:auto;
+      position:fixed; inset:auto 12px calc(12px + var(--safe-b)) 12px; z-index:1001;
+      max-width:860px; margin-left:auto; margin-right:auto;
       background:rgba(10,14,22,.98);
       border:1px solid rgba(255,255,255,.16);
-      border-radius:16px; padding:14px;
-      box-shadow:0 16px 48px rgba(0,0,0,.6);
+      border-radius:18px; padding:14px;
+      box-shadow:0 16px 52px rgba(0,0,0,.62);
       display:none
     }
     .cmp-wrap.visible{display:block}
-    .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.4rem}
-    .cmp-title{font-weight:700}
-    .cmp-text{font-size:.95rem;color:var(--muted);margin:.35rem 0}
-    .cmp-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
-    .cmp-actions .btn{min-height:42px}
-    .cmp-toggle{display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:.6rem .8rem;margin-top:.4rem;background:rgba(255,255,255,.02)}
+    .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-bottom:.35rem}
+    .cmp-title{font-weight:900}
+    .cmp-text{font-size:.95rem;color:var(--muted);margin:.4rem 0}
+    .cmp-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.7rem}
+    .cmp-actions .btn{min-height:44px}
+    .cmp-toggle{display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:.65rem .85rem;margin-top:.5rem;background:rgba(255,255,255,.02)}
     .cmp-toggle label{display:flex;flex-direction:column;gap:.15rem}
 
-    /* ✅ Switch contrast patch */
-    .switch{position:relative;width:46px;height:26px;background:rgba(255,255,255,.18);border-radius:999px}
+    /* Switch contrast patch */
+    .switch{position:relative;width:48px;height:28px;background:rgba(255,255,255,.18);border-radius:999px}
     .switch input{position:absolute;opacity:0}
-    .switch i{position:absolute;top:3px;left:3px;width:20px;height:20px;background:rgba(255,255,255,.7);border-radius:50%;transition:.2s}
-    .switch input:checked + i{left:23px;background:#111;box-shadow:0 0 0 2px rgba(230,208,138,.35)}
+    .switch i{position:absolute;top:3px;left:3px;width:22px;height:22px;background:rgba(255,255,255,.72);border-radius:50%;transition:.2s}
+    .switch input:checked + i{left:23px;background:#111;box-shadow:0 0 0 2px rgba(230,208,138,.38)}
 
-    .cmp-links{font-size:.9rem;color:var(--muted2);margin-top:.5rem}
+    .cmp-links{font-size:.9rem;color:var(--muted2);margin-top:.55rem}
     .cmp-links a{text-decoration:underline}
 
-    /* Decision chips (micro, non-funnel) */
-    .chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:.6rem}
+    /* Decision chips */
+    .chips{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin-top:.65rem}
     .chip{
-      display:inline-flex;align-items:center;gap:.4rem;
-      padding:.5rem .8rem;border-radius:999px;
+      display:inline-flex;align-items:center;gap:.45rem;
+      padding:.55rem .9rem;border-radius:999px;
       border:1px solid rgba(255,255,255,.16);
       background:rgba(255,255,255,.03);
-      color:var(--text); font-weight:800; cursor:pointer;
+      color:var(--text); font-weight:900; cursor:pointer;
+      min-height:44px;
+      -webkit-tap-highlight-color: transparent;
     }
     .chip[aria-pressed="true"]{
       border-color: rgba(230,208,138,.55);
       box-shadow: 0 0 0 3px rgba(230,208,138,.14);
       background: rgba(230,208,138,.08);
     }
+
+    /* Ampel UI */
+    .ampel-shell{max-width:980px;margin-inline:auto}
+    .ampel-head{display:flex;flex-direction:column;gap:.3rem}
+    .ampel-meta{display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;justify-content:space-between;margin-top:.6rem}
+    .ampel-controls{display:flex;gap:.5rem;flex-wrap:wrap}
+    .ampel-controls .btn{min-height:46px}
+    .ampel-progress{display:flex;gap:.8rem;align-items:center}
+    progress{width:100%;height:10px;border-radius:999px;overflow:hidden}
+    progress::-webkit-progress-bar{background:rgba(255,255,255,.10);border-radius:999px}
+    progress::-webkit-progress-value{background:linear-gradient(90deg,var(--gold),#fff)}
+    .ampel-stepper{display:flex;align-items:center;justify-content:space-between;gap:.7rem;margin-top:.6rem}
+    .ampel-stepper .btn{min-height:46px}
+
+    input[type="email"]{
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.16);
+      outline:none;
+    }
+    input[type="email"]::placeholder{color:rgba(210,220,245,.58)}
   </style>
 </head>
 
@@ -388,10 +517,10 @@
   <a href="#main" class="skip-link">Zum Inhalt springen</a>
   <div class="space" aria-hidden="true"></div>
 
+  <!-- Chapter dots (desktop) -->
   <nav class="chapters" aria-label="Kapitel">
     <a href="#hero" data-chapter="hero"><span>Eintritt</span><i class="dot" aria-hidden="true"></i></a>
-    <a href="#what-h" data-chapter="was"><span>Was</span><i class="dot"></i></a>
-    <a href="#proof" data-chapter="spiegel"><span>Spiegel</span><i class="dot"></i></a>
+    <a href="#proof" data-chapter="spiegel"><span>Lebenslagen</span><i class="dot"></i></a>
     <a href="#allfinanz" data-chapter="struktur"><span>Struktur</span><i class="dot"></i></a>
     <a href="#ablauf" data-chapter="ablauf"><span>Ablauf</span><i class="dot"></i></a>
     <a href="#ampel-check" data-chapter="check"><span>Check</span><i class="dot"></i></a>
@@ -404,11 +533,15 @@
         <div class="brand-top">
           <span class="brand-dot" aria-hidden="true"></span>
           Heiko Haerter
-          <img src="https://static.wixstatic.com/media/4e46cf_c2e98e1f192a448d95f2b8ae9bdd07ce~mv2.png"
-               alt="" width="96" height="22" style="height:22px;width:auto;opacity:.9" loading="lazy" decoding="async">
+          <img
+            src="https://static.wixstatic.com/media/4e46cf_c2e98e1f192a448d95f2b8ae9bdd07ce~mv2.png"
+            alt="" width="96" height="22"
+            style="height:22px;width:auto;opacity:.9"
+            loading="lazy" decoding="async">
         </div>
         <span class="micro">Allfinanz · Entscheidungslogik · Region Stuttgart</span>
       </a>
+
       <nav class="nav" aria-label="Hauptnavigation">
         <a class="link" href="#proof">Lebenslagen</a>
         <a class="link" href="#ablauf">Ablauf</a>
@@ -417,8 +550,37 @@
         <a class="link" href="/datenschutz">Datenschutz</a>
         <a class="btn btn-primary" href="#ampel-check" data-start>Eigene Lage einordnen (2 Min)</a>
       </nav>
+
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Menü öffnen" aria-controls="mnav" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
   </header>
+
+  <!-- Mobile menu -->
+  <div class="mnav-backdrop" id="mnavBackdrop" aria-hidden="true"></div>
+  <div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true">
+    <div class="head">
+      <div style="display:flex;flex-direction:column">
+        <div style="font-weight:900">Navigation</div>
+        <div class="micro">Schnell dorthin, wo’s wichtig ist.</div>
+      </div>
+      <button class="btn btn-ghost small" id="mnavClose" type="button" aria-label="Menü schließen">✕</button>
+    </div>
+    <div class="list">
+      <a href="#proof" data-mnav><span class="t">Lebenslagen</span><span class="s">Typische Situationen</span></a>
+      <a href="#ablauf" data-mnav><span class="t">Ablauf</span><span class="s">In 5 Schritten</span></a>
+      <a href="#firma" data-mnav><span class="t">Firmen</span><span class="s">Unternehmer-Themen</span></a>
+      <a href="#ampel-check" data-start data-mnav><span class="t">2-Minuten Check</span><span class="s">Ampel + nächster Schritt</span></a>
+      <a href="/impressum"><span class="t">Impressum</span><span class="s">Rechtliches</span></a>
+      <a href="/datenschutz"><span class="t">Datenschutz</span><span class="s">Transparenz</span></a>
+      <div class="cta">
+        <a class="btn btn-primary" href="#ampel-check" data-start data-mnav>Eigene Lage einordnen</a>
+      </div>
+    </div>
+  </div>
 
   <main id="main" role="main">
     <!-- HERO -->
@@ -438,10 +600,10 @@
             Zählweise: interne Beratungsdokumentationen (anonymisiert) seit 2016.
           </p>
 
-          <div class="stack" style="margin-top:.9rem">
-            <div class="grid" style="gap:.5rem">
+          <div class="stack" style="margin-top:.95rem">
+            <div class="grid" style="gap:.55rem">
               <button class="btn btn-primary" id="startCheckHero" type="button" data-start data-hero>Eigene Lage einordnen (2 Min)</button>
-              <a class="btn btn-ghost secondary" href="#transparenz">So läuft’s ab (mit Exit-Punkten)</a>
+              <a class="btn btn-ghost" href="#transparenz">So läuft’s ab (mit Exit-Punkten)</a>
             </div>
             <small class="micro" style="opacity:.9">Kein Verkauf im Erstgespräch. Wenn nichts zu tun ist, ist das das Ergebnis.</small>
           </div>
@@ -454,8 +616,10 @@
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=960 960w,
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=1400 1400w,
               https://static.wixstatic.com/media/4e46cf_3e28515e9da04a32857d0eb15a2a300a~mv2.png?width=2000 2000w
-            " sizes="(min-width:1024px) 56vw, 96vw"
-            alt="Ruhige, fokussierte Beratung im Büro" width="1400" height="840" loading="eager" decoding="async" fetchpriority="high">
+            "
+            sizes="(min-width:1024px) 56vw, 96vw"
+            alt="Ruhige, fokussierte Beratung im Büro" width="1400" height="840"
+            loading="eager" decoding="async" fetchpriority="high">
         </figure>
       </div>
     </section>
@@ -496,20 +660,7 @@
       </div>
     </section>
 
-    <!-- Was danach klarer ist -->
-    <section class="statement section fade-up" aria-labelledby="talk-out-h">
-      <div class="container">
-        <h2 id="talk-out-h">Was du danach nicht mehr im Kopf haben musst</h2>
-        <ul class="micro" style="margin:.2rem 0 .6rem; padding-left:1.2rem">
-          <li>Ob etwas Wichtiges fehlt</li>
-          <li>Was jetzt dran ist und was warten kann</li>
-          <li>Ob deine Absicherung zu eurem Leben passt</li>
-          <li>Ob ihr euch später Probleme einhandelt oder nicht</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Personas -->
+    <!-- Typische Situationen -->
     <section id="proof" class="section fade-up" aria-labelledby="proof-h">
       <div class="container">
         <h2 id="proof-h">Typische Situationen &amp; wer hier landet</h2>
@@ -537,7 +688,7 @@
         <p class="micro">Über viele Jahre begleitete Entscheidungen – öffentlich einsehbar.</p>
         <div class="brands" aria-label="Externe Vertrauenssignale">
           <a class="badge" href="/bewertungen" rel="nofollow">Bewertungen anschauen</a>
-          <span class="badge">📍 Region Stuttgart & Online</span>
+          <span class="badge">📍 Region Stuttgart &amp; Online</span>
           <span class="seal"><img src="https://static.wixstatic.com/shapes/4e46cf_077e599467a543daa505ac661e0366a2.svg" alt="Deutschlands Kundenchampions 2025 Siegel" width="120" height="36" loading="lazy" decoding="async"></span>
           <span class="seal"><img src="https://static.wixstatic.com/media/4e46cf_bb291e43f4e548aead72419e831d68cf~mv2.png" alt="Bundesverband Deutscher Vermögensberater Siegel" width="120" height="36" loading="lazy" decoding="async"></span>
         </div>
@@ -550,12 +701,14 @@
         <h2 id="value-h" class="signature">Finanzen sollten das Leben einfacher machen – nicht komplizierter.</h2>
         <p>Einkommen, Absicherung, Rücklagen, Familie, Vorsorge. Nicht als einzelne Themen, sondern so, dass sie zusammenpassen.</p>
         <p class="micro" style="margin-top:.2rem">Ich arbeite strukturiert – damit Entscheidungen ruhig getroffen werden können.</p>
-        <p class="micro" style="margin-top:.2rem">Die meisten Fehler entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge. Diese Seite ist aus genau diesem Grund entstanden.</p>
+        <p class="micro" style="margin-top:.2rem">Die meisten Fehler entstehen nicht durch falsche Produkte – sondern durch fehlende Reihenfolge.</p>
 
         <figure class="portrait">
-          <img src="https://static.wixstatic.com/media/4e46cf_e4d34f1837d445c7afee054525608197~mv2.png" alt="Heiko Haerter – ruhig im Gespräch, neutraler Hintergrund" width="1200" height="800" loading="lazy" decoding="async">
+          <img src="https://static.wixstatic.com/media/4e46cf_e4d34f1837d445c7afee054525608197~mv2.png"
+               alt="Heiko Haerter – ruhig im Gespräch, neutraler Hintergrund" width="1200" height="800" loading="lazy" decoding="async">
         </figure>
 
+        <!-- ✅ Grafik wieder drin -->
         <figure class="figure" style="max-width:900px;margin:1.2rem auto 0">
           <img data-zoom
             src="https://static.wixstatic.com/media/4e46cf_e325af7e02af4aba8f6eba246ff749f3~mv2.png?width=1400"
@@ -576,6 +729,7 @@
         <p><strong>Finanz-Überblick (90 Min.):</strong> Struktur aufsetzen – damit nichts Wichtiges liegen bleibt.</p>
         <p><strong>Laufende Entlastung:</strong> Umsetzung, Dokumentation, Ruhe im Alltag.</p>
 
+        <!-- ✅ Grafik wieder drin -->
         <figure class="figure" style="max-width:880px;margin:1rem auto 0">
           <img data-zoom
             src="https://static.wixstatic.com/media/4e46cf_c9c0dcdd4f3e47d9983ee35dab5e3563~mv2.png?width=1400"
@@ -614,6 +768,8 @@
       <div class="container">
         <h2 id="steps-h">Ablauf in fünf Schritten</h2>
         <p class="micro">Von Einordnung bis Begleitung – klar dokumentiert.</p>
+
+        <!-- ✅ Grafik wieder drin -->
         <figure class="figure" style="max-width:980px;margin:1rem auto 0">
           <img data-zoom
             src="https://static.wixstatic.com/media/4e46cf_31d73a6acca04e0cbd2f030d672ad4ce~mv2.png?width=1400"
@@ -634,7 +790,7 @@
         <p><strong>Firmensafe-Sprint:</strong> Ist-Analyse → Prioritäten → Sofortmaßnahmen → Roadmap.</p>
         <p><strong>Bausteine:</strong> GF-Absicherung, bAV/bKV, Haftung/Sach, Rechtsschutz, Benefits.</p>
         <p><strong>Unternehmer-Ampel:</strong> Krankheit, Ausfall, Wachstum – erst ordnen, dann entscheiden.</p>
-        <div style="margin-top:.6rem">
+        <div style="margin-top:.7rem">
           <a class="btn btn-ghost" href="#ampel-check" data-start>Eigene Lage einordnen (2 Min)</a>
         </div>
       </div>
@@ -650,133 +806,84 @@
       </div>
     </section>
 
-    <!-- Nicht für jeden -->
-    <section class="statement section fade-up" aria-labelledby="notfor-h">
-      <div class="container">
-        <h2 id="notfor-h" class="signature">Kein Angebot für jeden.</h2>
-        <p>Keine Renditeversprechen. Verantwortung bleibt bei dir. Entscheidungen triffst du – nicht ich.</p>
-      </div>
-    </section>
+    <!-- Ampel-Check -->
+    <section id="ampel-check" class="section fade-up" aria-labelledby="ampel-h">
+      <div class="container ampel-shell">
+        <div class="ampel-head">
+          <h2 id="ampel-h">2-Minuten-Check</h2>
+          <p class="micro">Drei Fragen. Danach: Ampel + nächster Schritt. Kein Terminzwang, kein Push.</p>
+        </div>
 
-    <!-- Wann Sinn macht -->
-    <section class="statement section fade-up" aria-labelledby="when-h">
-      <div class="container">
-        <h2 id="when-h">Wann ein Gespräch Sinn macht</h2>
-        <ul class="micro">
-          <li>Wenn du viel geregelt hast – aber kein gutes Gefühl</li>
-          <li>Wenn Verantwortung gewachsen ist (Familie, Firma)</li>
-          <li>Wenn du vermeiden willst, später teuer zu korrigieren</li>
-        </ul>
-        <p class="micro">Und auch wichtig: Wenn du merkst, dass aktuell nichts zu tun ist, ist das ein völlig korrektes Ergebnis.</p>
-      </div>
-    </section>
+        <div class="panel" style="margin-top:1rem">
+          <!-- Start -->
+          <div id="check-start">
+            <div class="stack" style="text-align:center;align-items:center">
+              <p class="micro" style="max-width:64ch">
+                Tipp: Nimm die Antwort, die sich <em>am ehesten</em> richtig anfühlt. Perfekt ist nicht nötig.
+              </p>
+              <button class="btn btn-primary" type="button" data-start id="checkStartBtn">Check starten</button>
+              <p class="micro" style="opacity:.9">Du kannst jederzeit abbrechen.</p>
+            </div>
+          </div>
 
-    <!-- Ampel-Check (Decision Archive signals + chips + archive form) -->
-<script>
-(function(){
-  /* === ALLES WIE BEI DIR, NUR DER FIX === */
+          <!-- Steps -->
+          <form id="check-steps" style="display:none" novalidate>
+            <div class="ampel-meta" aria-label="Check Status">
+              <div class="ampel-progress" style="width:min(520px,100%)">
+                <div class="micro" id="stepLabel" aria-live="polite" style="min-width:140px;font-weight:800">Schritt 1 von 3</div>
+                <progress id="progressBar" value="0" max="3" aria-label="Fortschritt"></progress>
+              </div>
+              <div class="ampel-controls">
+                <button class="btn btn-ghost small" type="button" id="checkCancel">Abbrechen</button>
+              </div>
+            </div>
 
-  function renderArchiveForm(status, score){
-    const returned30d = String(window.__decision?.state?.returned_visitor_30d || 'false');
-    const lastAmpel = window.__decision?.state?.last_ampel_at || new Date().toISOString();
-    const intent = status === 'rot' ? 'hoch' : status === 'gelb' ? 'mittel' : 'niedrig';
+            <div class="micro" id="stepHint" style="margin-top:.55rem;opacity:.95">Kurzer Eindruck reicht.</div>
 
-    const copy = {
-      rot:{title:'Entscheidungsarchiv (optional)',line:'2 E-Mails. Kein Newsletter.',consent:'Ich möchte mein Ergebnis + 1 Follow-up erhalten.'},
-      gelb:{title:'Entscheidungsarchiv (optional)',line:'3 E-Mails über 21 Tage.',consent:'Ich möchte mein Ergebnis + 2 Follow-ups erhalten.'},
-      gruen:{title:'Entscheidungsarchiv (optional)',line:'1 Mail + Erinnerung in 12 Monaten.',consent:'Ich möchte mein Ergebnis erhalten.'}
-    };
-    const c = copy[status];
-
-    /* ✅ FIX */
-    const LIST_ID = 'UmkUBm'; // <-- DEINE echte Klaviyo List-ID
-    if (!LIST_ID) {
-      return `<div class="panel"><p class="micro">Archiv ist aktuell nicht aktiv.</p></div>`;
-    }
-
-    return `
-    <div class="panel" style="margin-top:1rem">
-      <h3>${c.title}</h3>
-      <p class="micro">${c.line}</p>
-
-      <form action="https://manage.kmail-lists.com/subscriptions/subscribe"
-            method="POST"
-            style="display:grid;gap:.6rem;max-width:520px;margin:0 auto">
-
-        <input type="hidden" name="a" value="T7wryA">
-        <input type="hidden" name="g" value="${LIST_ID}">
-        <input type="hidden" name="redirect" value="https://heikohaerter.com/#ampel-check">
-
-        <input type="hidden" name="hh_ampel_status" value="${status}">
-        <input type="hidden" name="hh_ampel_score" value="${score}">
-        <input type="hidden" name="hh_decision_context" value="${window.__decision.state.decision_context}">
-        <input type="hidden" name="hh_intent_level" value="${intent}">
-        <input type="hidden" name="hh_last_ampel_at" value="${lastAmpel}">
-        <input type="hidden" name="archive_submitted" value="true">
-
-        <!-- Honeypot -->
-        <input type="text" name="company" tabindex="-1" class="visually-hidden">
-
-        <input type="email"
-               name="email"
-               required
-               placeholder="E-Mail für dein Archiv"
-               style="min-height:48px;border-radius:14px;padding:.8rem 1rem">
-
-        <label class="micro" style="display:flex;gap:.5rem">
-          <input type="checkbox" name="$consent" value="email" required>
-          <span>${c.consent}</span>
-        </label>
-
-        <button class="btn btn-primary" type="submit">Ergebnis ins Archiv senden</button>
-        <small class="micro">Double-Opt-In erforderlich</small>
-      </form>
-    </div>`;
-  }
-
-  /* === REST DES SCRIPTS BLEIBT IDENTISCH === */
-})();
-</script>
-
-            <!-- WCAG 3.2.2: Nutzer steuert Kontextwechsel -->
-            <label class="micro" style="display:flex;gap:.55rem;align-items:center;margin-top:.55rem">
+            <!-- WCAG 3.2.2 -->
+            <label class="micro" style="display:flex;gap:.55rem;align-items:center;margin-top:.65rem">
               <input type="checkbox" id="autoAdvance" checked>
               <span>Automatisch weiter nach Auswahl</span>
             </label>
-          </div>
 
-          <fieldset class="step" data-step="1" style="display:none">
-            <legend id="q1label" class="legend-title">1 · 6 Monate Ausfall – wie stabil wäre euer Einkommen?</legend>
-            <p class="visually-hidden" id="q1hint">Wähle eine Option.</p>
-            <div class="stack" role="radiogroup" aria-labelledby="q1label" aria-describedby="q1hint">
-              <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="1"> <span>Wir hätten ein echtes Problem</span></label>
-              <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="2"> <span>Wir kämen durch, aber eng</span></label>
-              <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="3"> <span>Stabil aufgestellt</span></label>
+            <fieldset class="step" data-step="1" style="display:none;margin-top:1rem">
+              <legend id="q1label" class="legend-title">1 · 6 Monate Ausfall – wie stabil wäre euer Einkommen?</legend>
+              <p class="visually-hidden" id="q1hint">Wähle eine Option.</p>
+              <div class="stack" role="radiogroup" aria-labelledby="q1label" aria-describedby="q1hint">
+                <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="1"> <span>Wir hätten ein echtes Problem</span></label>
+                <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="2"> <span>Wir kämen durch, aber eng</span></label>
+                <label class="btn small"><input class="visually-hidden" type="radio" name="q1" value="3"> <span>Stabil aufgestellt</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="step" data-step="2" style="display:none;margin-top:1rem">
+              <legend id="q2label" class="legend-title">2 · Wie <em>leicht</em> findest du wichtige Unterlagen?</legend>
+              <p class="visually-hidden" id="q2hint">Wähle eine Option.</p>
+              <div class="stack" role="radiogroup" aria-labelledby="q2label" aria-describedby="q2hint">
+                <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="1"> <span>Ich suche lange</span></label>
+                <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="2"> <span>Meistens</span></label>
+                <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="3"> <span>Zuverlässig</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="step" data-step="3" style="display:none;margin-top:1rem">
+              <legend id="q3label" class="legend-title">3 · „Zukunft &amp; Alter“ – wie fühlt es sich an?</legend>
+              <p class="visually-hidden" id="q3hint">Wähle eine Option.</p>
+              <div class="stack" role="radiogroup" aria-labelledby="q3label" aria-describedby="q3hint">
+                <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="1"> <span>Unsicher</span></label>
+                <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="2"> <span>Teilweise rund</span></label>
+                <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="3"> <span>Gut</span></label>
+              </div>
+            </fieldset>
+
+            <div class="ampel-stepper">
+              <button class="btn btn-ghost" type="button" id="checkBack" disabled>Zurück</button>
+              <button class="btn btn-primary" type="button" id="checkNext" disabled>Weiter</button>
             </div>
-          </fieldset>
+          </form>
 
-          <fieldset class="step" data-step="2" style="display:none">
-            <legend id="q2label" class="legend-title">2 · Wie <em>leicht</em> findest du wichtige Unterlagen?</legend>
-            <p class="visually-hidden" id="q2hint">Wähle eine Option.</p>
-            <div class="stack" role="radiogroup" aria-labelledby="q2label" aria-describedby="q2hint">
-              <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="1"> <span>Ich suche lange</span></label>
-              <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="2"> <span>Meistens</span></label>
-              <label class="btn small"><input class="visually-hidden" type="radio" name="q2" value="3"> <span>Zuverlässig</span></label>
-            </div>
-          </fieldset>
-
-          <fieldset class="step" data-step="3" style="display:none">
-            <legend id="q3label" class="legend-title">3 · „Zukunft &amp; Alter“ – wie fühlt es sich an?</legend>
-            <p class="visually-hidden" id="q3hint">Wähle eine Option.</p>
-            <div class="stack" role="radiogroup" aria-labelledby="q3label" aria-describedby="q3hint">
-              <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="1"> <span>Unsicher</span></label>
-              <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="2"> <span>Teilweise rund</span></label>
-              <label class="btn small"><input class="visually-hidden" type="radio" name="q3" value="3"> <span>Gut</span></label>
-            </div>
-          </fieldset>
-        </form>
-
-        <div id="check-result" style="display:none;margin-top:1.4rem" aria-live="polite"></div>
+          <div id="check-result" style="display:none;margin-top:1.4rem" aria-live="polite"></div>
+        </div>
       </div>
     </section>
 
@@ -811,12 +918,12 @@
       <div class="container" style="text-align:center;max-width:860px">
         <h2 id="final-h">Einmal sauber sortieren. Dann wieder Ruhe haben.</h2>
         <p>Einmal prüfen. Danach nicht mehr dran denken müssen.</p>
-        <div class="stack" style="align-items:center;margin-top:.4rem">
-          <div class="grid" style="gap:.5rem;max-width:520px;width:100%;margin-inline:auto">
+        <div class="stack" style="align-items:center;margin-top:.5rem">
+          <div class="grid" style="gap:.55rem;max-width:520px;width:100%;margin-inline:auto">
             <button class="btn btn-primary" id="ctaFinal" type="button" data-start>Eigene Lage einordnen (2 Min)</button>
             <a class="btn btn-ghost" href="https://wa.me/4917660408380?text=Hi%20Heiko%2C%20kurz%20pr%C3%BCfen%2C%20ob%20alles%20passt." target="_blank" rel="noopener noreferrer">WhatsApp (kurz)</a>
           </div>
-          <p class="micro" style="margin-top:.7rem">
+          <p class="micro" style="margin-top:.8rem">
             Ich arbeite im System der Deutschen Vermögensberatung. Für dich heißt das:
             Dokumentation, langfristige Betreuung, und <strong>Lösungen</strong>, die auch in 10 Jahren noch nachvollziehbar sind.
           </p>
@@ -832,7 +939,7 @@
         <p class="micro" style="margin-top:.35rem">Für dich heißt das: Entscheidungen werden nachvollziehbar dokumentiert – und Lösungen bleiben betreubar, auch in 10 oder 20 Jahren.</p>
         <p><strong>Verkauf?</strong> Nein. Ein Gespräch endet mit einer Entscheidung – auch mit der, nichts zu tun.</p>
         <p><strong>Skepsis?</strong> Willkommen. Skepsis ist kein Problem – Unklarheit schon.</p>
-        <p class="micro" style="margin-top:.6rem"><strong>Hinweis:</strong> Diese Seite ersetzt keine rechtliche oder steuerliche Beratung. Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.</p>
+        <p class="micro" style="margin-top:.7rem"><strong>Hinweis:</strong> Diese Seite ersetzt keine rechtliche oder steuerliche Beratung. Entscheidungen bitte erst nach vollständiger Datengrundlage treffen.</p>
       </div>
     </section>
   </main>
@@ -867,7 +974,7 @@
     </div>
   </footer>
 
-  <!-- Sticky Mobile CTA (shown only after Ampel result) -->
+  <!-- Sticky Mobile CTA (after Ampel result) -->
   <div class="sticky-cta" id="stickyCTA" aria-hidden="true">
     <div class="inner">
       <button class="btn btn-primary" type="button" id="stickyBtn" data-ctx="sticky" aria-label="Nächster Schritt" tabindex="-1">Nächster Schritt</button>
@@ -878,12 +985,14 @@
   <dialog id="zoom" aria-label="Bildanzeige" aria-modal="true" role="dialog">
     <div class="zoom-frame">
       <button class="zoom-close" type="button" autofocus aria-label="Schließen"
-        style="position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);color:#fff;border-radius:999px;padding:.4rem .7rem;cursor:pointer">Schließen ✕</button>
+        style="position:absolute;top:10px;right:10px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.45);color:#fff;border-radius:999px;padding:.45rem .75rem;cursor:pointer">
+        Schließen ✕
+      </button>
       <img class="zoom-img" alt="" />
     </div>
   </dialog>
 
-  <!-- CMP Backdrop (deterministischer Outside-Click) -->
+  <!-- CMP Backdrop -->
   <div class="cmp-backdrop" id="cmpBackdrop" aria-hidden="true"></div>
 
   <!-- CMP -->
@@ -919,13 +1028,13 @@
     </div>
   </div>
 
-  <!-- Consent-gated script loaders -->
+  <!-- ========= CONFIG + Consent-gated loader ========= -->
   <script>
-    // ====== CONFIG (replace before live) ======
-    const GA_ID = 'G-XXXXXXXXXX'; // <-- set real ID; stays inert if left as placeholder
+    // ====== CONFIG ======
+    const GA_ID = 'G-XXXXXXXXXX'; // set real ID; stays inert if placeholder
     const KLAVIYO_COMPANY_ID = 'T7wryA';
     const AMPEL_VERSION = 'v1';
-    const PAGE_VARIANT = 'decision-space-6.0';
+    const PAGE_VARIANT = 'decision-space-6.2';
 
     function loadScriptOnce(url, attrs = {}) {
       if (document.querySelector('script[data-src="'+url+'"], script[src="'+url+'"]')) return;
@@ -937,10 +1046,8 @@
     }
 
     function initGA() {
-      // Prevent useless requests if GA_ID not set
       if (!GA_ID || String(GA_ID).includes('XXXX')) return;
       if (window.__cmpState.src.ga) return;
-
       loadScriptOnce(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_ID)}`);
       gtag('js', new Date());
       gtag('config', GA_ID, { send_page_view: true, anonymize_ip: true });
@@ -973,7 +1080,7 @@
       try { localStorage.setItem('hh_cmp', JSON.stringify(window.__cmpState)); } catch(_) {}
     }
 
-    // CMP UI + focus mgmt (Esc, backdrop click, trap) + inert rest of page
+    // CMP UI
     (function(){
       const LS_KEY = 'hh_cmp';
       const cmp = document.getElementById('cmp');
@@ -996,11 +1103,9 @@
       let lastFocus = null;
 
       function setPageInert(on){
-        // Prevent navigating away while CMP is open (safer + clearer UX)
         try{ main?.toggleAttribute('inert', !!on); }catch(_){}
         try{ header?.toggleAttribute('inert', !!on); }catch(_){}
         try{ footer?.toggleAttribute('inert', !!on); }catch(_){}
-        // Keep CMP itself interactive
         try{ cmp?.removeAttribute('inert'); }catch(_){}
       }
 
@@ -1047,7 +1152,6 @@
         else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
       }
       document.addEventListener('keydown', trap);
-
       backdrop.addEventListener('click', closeAsNecessary);
 
       function read(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||''); }catch(_){ return null; } }
@@ -1071,9 +1175,41 @@
     })();
   </script>
 
+  <!-- ========= Base UX / Perf ========= -->
   <script>
     document.documentElement.classList.remove('no-js');
     document.querySelectorAll('#yearNow').forEach(el => el.textContent = new Date().getFullYear());
+
+    // Mobile menu
+    (function(){
+      const btn = document.getElementById('menuBtn');
+      const nav = document.getElementById('mnav');
+      const bd = document.getElementById('mnavBackdrop');
+      const close = document.getElementById('mnavClose');
+
+      if(!btn || !nav || !bd || !close) return;
+
+      function show(v){
+        const on = !!v;
+        nav.classList.toggle('visible', on);
+        nav.setAttribute('aria-hidden', on ? 'false' : 'true');
+        bd.classList.toggle('visible', on);
+        bd.setAttribute('aria-hidden', on ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+        document.body.style.overflow = on ? 'hidden' : '';
+        if(on){
+          try{ close.focus(); }catch(_){}
+        }else{
+          try{ btn.focus(); }catch(_){}
+        }
+      }
+
+      btn.addEventListener('click', ()=> show(true));
+      close.addEventListener('click', ()=> show(false));
+      bd.addEventListener('click', ()=> show(false));
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && nav.classList.contains('visible')) show(false); });
+      nav.querySelectorAll('[data-mnav]').forEach(a=> a.addEventListener('click', ()=> show(false)));
+    })();
 
     // Scroll progress
     (function(){
@@ -1112,7 +1248,7 @@
       els.forEach(el=>io.observe(el));
     })();
 
-    // Ambient movement (disabled in reduced motion)
+    // Ambient movement
     (function(){
       const space = document.querySelector('.space');
       if(!space) return;
@@ -1173,7 +1309,7 @@
       ids.forEach(el => io.observe(el));
     })();
 
-    /* Lightbox: inert + aria-hidden fallback */
+    // Lightbox: inert fallback
     (function(){
       const dlg = document.getElementById('zoom');
       if(!dlg) return;
@@ -1205,7 +1341,7 @@
       document.addEventListener('keydown', (e) => { if(e.key==='Escape' && dlg.open) dlg.close(); });
     })();
 
-    /* Sticky CTA plumbing (shown only after Ampel result) */
+    // Sticky CTA plumbing
     (function(){
       const el = document.getElementById('stickyCTA');
       const btn = document.getElementById('stickyBtn');
@@ -1239,7 +1375,7 @@
     })();
   </script>
 
-  <!-- UTM / Attribution + Decision Archive SSoT + Minimal Tracking Policy -->
+  <!-- ========= UTM / Attribution + Decision State (SSoT) + Tracking Policy ========= -->
   <script>
     (function(){
       function parseQS(qs){
@@ -1302,13 +1438,7 @@
       window.__appendUTM = appendUTM;
       window.__sendEvent = sendEvent;
 
-      /* ================================
-        DECISION STATE (SSoT / CRM-light)
-        Core fields (10):
-        ampel_status, ampel_score, decision_context, intent_level,
-        trust_entry, decision_stage, last_ampel_at, returned_visitor_30d,
-        ampel_version, page_variant
-      ================================= */
+      // Decision state SSoT
       const DECISION_LS = 'hh_decision_state_v2';
       const defaults = {
         ampel_status: '',
@@ -1343,7 +1473,6 @@
       function syncDecisionFields(){
         const s = window.__decision.state;
 
-        // Backwards-compatible + recommended prefixed names for Klaviyo segmentation
         setHidden('ampel_status', s.ampel_status || '');
         setHidden('ampel_score', s.ampel_score || '');
         setHidden('decision_context', s.decision_context || 'privat');
@@ -1382,11 +1511,7 @@
       };
       syncDecisionFields();
 
-      /* ================================
-        Tracking policy:
-        - GA events: ok (Consent Mode no-op if denied)
-        - Klaviyo onsite events: ONLY if marketing consent granted
-      ================================= */
+      // Tracking policy
       window.__track = (function(){
         const once = new Set();
 
@@ -1406,10 +1531,7 @@
           }, props || {});
         }
 
-        function ga(name, props){
-          sendEvent(name, base(props));
-        }
-
+        function ga(name, props){ sendEvent(name, base(props)); }
         function kv(name, props){
           if(!canKlaviyo()) return;
           try{ window.klaviyo.push(['track', name, base(props)]); }catch(_){}
@@ -1430,7 +1552,7 @@
         return { ga, kv, onceGA, onceKV, canKlaviyo };
       })();
 
-      /* CTA click tracking */
+      // CTA click tracking
       (function(){
         const ctas = new Set([ ...document.querySelectorAll('[data-start]'), document.getElementById('ctaFinal') ].filter(Boolean));
         ctas.forEach(el=>{
@@ -1443,22 +1565,18 @@
         });
       })();
 
-      /* WhatsApp / Booking click tracking (GA) */
+      // WhatsApp / Booking click tracking
       document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>{
-        a.addEventListener('click', ()=>{
-          window.__track.ga('WhatsApp_Click', { link: a.href });
-        }, { passive:true });
+        a.addEventListener('click', ()=> window.__track.ga('WhatsApp_Click', { link: a.href }), { passive:true });
       });
       document.querySelectorAll('a[href*="outlook.office.com/book/"]').forEach(a=>{
-        a.addEventListener('click', ()=>{
-          window.__track.ga('Booking_Click', { link: a.href });
-        }, { passive:true });
+        a.addEventListener('click', ()=> window.__track.ga('Booking_Click', { link: a.href }), { passive:true });
       });
 
     })();
   </script>
 
-  <!-- Returned Visitor 30d (stilles Signal -> SSoT: returned_visitor_30d) -->
+  <!-- Returned Visitor 30d (silent signal) -->
   <script>
     (function(){
       const FIRST = 'hh_first_visit';
@@ -1522,7 +1640,7 @@
     })();
   </script>
 
-  <!-- Lenis: optional, only after user interaction, disabled in reduced motion -->
+  <!-- Lenis: optional, after user interaction, disabled in reduced motion -->
   <script>
     (function(){
       const prefReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1532,7 +1650,7 @@
 
       // ✅ pinned / self-hosted
       const LENIS_URL = '/assets/lenis-1.0.42.min.js';
-      const LENIS_INTEGRITY = ''; // optional: 'sha384-...' (only set if you know the correct hash)
+      const LENIS_INTEGRITY = ''; // optional
 
       function loadLenis(){
         if(loaded) return;
@@ -1550,7 +1668,7 @@
         s.onload = () => {
           if(!window.Lenis) return;
           const lenis = new Lenis({
-            duration: 1.1,
+            duration: 1.05,
             easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
             smoothTouch: false
@@ -1571,7 +1689,7 @@
     })();
   </script>
 
-  <!-- Ampel-Check (Decision Archive signals + chips + archive form) -->
+  <!-- ========= Ampel-Check (single source of truth, single renderArchiveForm, ✅ LIST_ID fix) ========= -->
   <script>
     (function(){
       const startBtns = document.querySelectorAll('[data-start]');
@@ -1597,7 +1715,6 @@
       let step = 1;
       let score = 0;
 
-      // ✅ prevent double-finish
       let finished = false;
 
       // Decision context (SSoT)
@@ -1607,9 +1724,8 @@
         const el = typeof elOrId === 'string' ? document.querySelector(elOrId) : elOrId;
         if(!el) return;
 
-        // Avoid "double smooth" when Lenis is active
         if(window.__lenis && typeof window.__lenis.scrollTo === 'function'){
-          window.__lenis.scrollTo(el, { offset: 0, immediate: false });
+          window.__lenis.scrollTo(el, { offset: -6, immediate: false });
         }else{
           el.scrollIntoView({ behavior: 'smooth', block });
         }
@@ -1669,7 +1785,7 @@
 
       function openPrintSheet(status, score){
         const now = new Date();
-        const safeDate = now.toISOString().slice(0,10); // ✅ robust filename date
+        const safeDate = now.toISOString().slice(0,10);
         const date = now.toLocaleDateString('de-DE', { year:'numeric', month:'2-digit', day:'2-digit' });
 
         window.__track?.ga('Downloaded_Ampel_Sheet', {
@@ -1754,6 +1870,7 @@
         setTimeout(fire, 250);
       }
 
+      // ✅ SINGLE SOURCE OF TRUTH: renderArchiveForm (NO includes, no placeholder check)
       function renderArchiveForm(status, score){
         const returned30d = String(window.__decision?.state?.returned_visitor_30d || 'false');
         const lastAmpel = (window.__decision?.state?.last_ampel_at) || new Date().toISOString();
@@ -1766,9 +1883,8 @@
         };
         const c = copy[status] || copy.gruen;
 
-        // ✅ LIST_ID fail-closed
-        const LIST_ID = 'UmkUBm';
-        if (!LIST_ID || LIST_ID.includes('UmkUBm')) {
+        const LIST_ID = 'UmkUBm'; // ✅ echte Klaviyo List-ID
+        if (!LIST_ID) {
           return `<div class="panel" style="margin-top:1rem">
             <h3 style="margin-bottom:.25rem">${c.title}</h3>
             <p class="micro" style="margin:0">Archiv ist aktuell nicht aktiv.</p>
@@ -1784,14 +1900,13 @@
               action="https://manage.kmail-lists.com/subscriptions/subscribe"
               method="POST"
               target="_self"
-              style="display:grid;gap:.55rem;max-width:520px;margin:0 auto"
+              style="display:grid;gap:.6rem;max-width:520px;margin:0 auto"
               data-archive-form
             >
               <input type="hidden" name="a" value="${typeof KLAVIYO_COMPANY_ID !== 'undefined' ? KLAVIYO_COMPANY_ID : 'T7wryA'}">
               <input type="hidden" name="g" value="${LIST_ID}">
               <input type="hidden" name="redirect" value="https://heikohaerter.com/#ampel-check">
 
-              <!-- Backward-compatible names -->
               <input type="hidden" name="ampel_status" value="${status}">
               <input type="hidden" name="ampel_score" value="${score}">
               <input type="hidden" name="decision_context" value="${decisionContext}">
@@ -1803,7 +1918,6 @@
               <input type="hidden" name="ampel_version" value="${typeof AMPEL_VERSION !== 'undefined' ? AMPEL_VERSION : 'v1'}">
               <input type="hidden" name="page_variant" value="${typeof PAGE_VARIANT !== 'undefined' ? PAGE_VARIANT : 'decision-space'}">
 
-              <!-- Recommended prefixed names (cleaner segmentation in Klaviyo) -->
               <input type="hidden" name="hh_ampel_status" value="${status}">
               <input type="hidden" name="hh_ampel_score" value="${score}">
               <input type="hidden" name="hh_decision_context" value="${decisionContext}">
@@ -1815,10 +1929,9 @@
               <input type="hidden" name="hh_ampel_version" value="${typeof AMPEL_VERSION !== 'undefined' ? AMPEL_VERSION : 'v1'}">
               <input type="hidden" name="hh_page_variant" value="${typeof PAGE_VARIANT !== 'undefined' ? PAGE_VARIANT : 'decision-space'}">
 
-              <!-- helper for your Segment 3 -->
               <input type="hidden" name="archive_submitted" value="true">
 
-              <!-- ✅ honeypot -->
+              <!-- honeypot -->
               <input type="text" name="company" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true">
 
               <label class="visually-hidden" for="archiveEmail">E-Mail</label>
@@ -1831,11 +1944,11 @@
                 autocomplete="email"
                 inputmode="email"
                 placeholder="E-Mail für dein Archiv"
-                style="min-height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:var(--text);padding:.8rem 1rem"
+                style="min-height:52px;border-radius:14px;padding:.85rem 1rem"
               >
 
               <label class="micro" style="display:flex;gap:.55rem;align-items:flex-start;text-align:left">
-                <input type="checkbox" name="$consent" value="email" required style="margin-top:.2rem">
+                <input type="checkbox" name="$consent" value="email" required style="margin-top:.25rem">
                 <span>
                   ${c.consent}
                   Hinweise in der <a href="/datenschutz" target="_blank" rel="noopener noreferrer" style="text-decoration:underline">Datenschutzerklärung</a>.
@@ -1846,8 +1959,6 @@
               <div class="micro" style="opacity:.85;text-align:center">
                 Double-Opt-In: Du bestätigst die E-Mail anschließend einmal.
               </div>
-
-              <!-- If your Klaviyo endpoint rejects POST: use your own /subscribe endpoint server-side and forward to Klaviyo. -->
             </form>
           </div>`;
       }
@@ -1881,14 +1992,14 @@
             <div class="result-title">${c.title}</div>
             <p>${c.text}</p>
 
-            <div class="micro" style="text-align:center;opacity:.9;margin-top:.2rem">Worum geht’s bei dir eher?</div>
+            <div class="micro" style="text-align:center;opacity:.92;margin-top:.25rem">Worum geht’s bei dir eher?</div>
             <div class="chips" data-decision-chips>
               <button type="button" class="chip" data-dc="privat" aria-pressed="${decisionContext==='privat'}">Privat</button>
               <button type="button" class="chip" data-dc="unternehmerisch" aria-pressed="${decisionContext==='unternehmerisch'}">Unternehmerisch</button>
               <button type="button" class="chip" data-dc="beides" aria-pressed="${decisionContext==='beides'}">Beides</button>
             </div>
 
-            <div class="stack" style="text-align:center;margin-top:.8rem">
+            <div class="stack" style="text-align:center;margin-top:.85rem">
               ${
                 c.primary.kind === 'save'
                   ? `<button type="button" class="btn btn-primary" data-save-result>${c.primary.label}</button>`
@@ -1910,8 +2021,8 @@
       }
 
       function trackAmpelResult(status, score){
-        const perceived = status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig');
         const intent = status === 'rot' ? 'hoch' : (status === 'gelb' ? 'mittel' : 'niedrig');
+        const perceived = intent;
         const nowIso = new Date().toISOString();
 
         window.__decision?.set({
@@ -1952,7 +2063,6 @@
         // Thresholds: ROT 1–3, GELB 4–6, GRÜN 7–9
         if(score <= 3){ status = 'rot'; color = 'red'; }
         else if(score <= 6){ status = 'gelb'; color = 'yellow'; }
-        else { status = 'gruen'; color = 'green'; }
 
         resultBox.innerHTML = renderPanel(color, status, score);
 
@@ -2040,7 +2150,7 @@
         }
       }
 
-      // Arrow nav + selection styling fallback
+      // Arrow nav + selection fallback
       const bound = new WeakSet();
       function enableArrowNav(fs){
         if(bound.has(fs)) return;
@@ -2056,12 +2166,12 @@
           let idx = inputs.findIndex(x=>x.checked);
           if(idx < 0) idx = 0;
 
-          let next = idx + ((e.key==='ArrowRight'||e.key==='ArrowDown') ? 1 : -1);
-          if(next < 0) next = inputs.length - 1;
-          if(next >= inputs.length) next = 0;
+          let nxt = idx + ((e.key==='ArrowRight'||e.key==='ArrowDown') ? 1 : -1);
+          if(nxt < 0) nxt = inputs.length - 1;
+          if(nxt >= inputs.length) nxt = 0;
 
-          inputs[next].checked = true;
-          inputs[next].dispatchEvent(new Event('change',{bubbles:true}));
+          inputs[nxt].checked = true;
+          inputs[nxt].dispatchEvent(new Event('change',{bubbles:true}));
         });
       }
       steps.forEach(enableArrowNav);
@@ -2097,19 +2207,16 @@
           updateSelectedStyles(fs);
           updateNextState();
 
-          // Auto-advance is user-controlled (WCAG 3.2.2)
           if(autoAdvance.checked){
             if(idx+1 >= max) finish();
             else { step = idx+2; showStep(step); }
           }else{
-            // bring attention to the next action without forcing context change
             try{ nextBtn.focus({ preventScroll:true }); }catch(_){ nextBtn.focus(); }
           }
         });
       });
 
       autoAdvance.addEventListener('change', updateNextState);
-
       updateHead();
     })();
   </script>
